@@ -1,0 +1,5 @@
+name = Condor Traider MLS integration
+description = Provide integration with http://www.torontomls.net for synchronization XML data.
+core = 7.x
+package = Condor Traider
+version = 7.x-1.0
