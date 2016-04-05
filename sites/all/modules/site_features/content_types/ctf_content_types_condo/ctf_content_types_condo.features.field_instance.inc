@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * feature_for_content_type_condo.features.field_instance.inc
+ * ctf_content_types_condo.features.field_instance.inc
  */
 
 /**
  * Implements hook_field_default_field_instances().
  */
-function feature_for_content_type_condo_field_default_field_instances() {
+function ctf_content_types_condo_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance: 'node-condo-body'.

@@ -1,9 +1,10 @@
-name = Feature for result page view
+name = CT Features: Views: Result page
+description = View 'Result page' for project Condostrader
 core = 7.x
-package = Views
+package = CT Features: Views
+dependencies[] = ctools
 dependencies[] = leaflet_views
 dependencies[] = views
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
 features[views_view][] = result_page
-features_exclude[dependencies][ctools] = ctools

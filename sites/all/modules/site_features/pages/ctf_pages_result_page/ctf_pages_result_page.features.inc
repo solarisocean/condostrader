@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * feature_for_result_page_panel.features.inc
+ * ctf_pages_result_page.features.inc
  */
 
 /**
  * Implements hook_ctools_plugin_api().
  */
-function feature_for_result_page_panel_ctools_plugin_api($module = NULL, $api = NULL) {
+function ctf_pages_result_page_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "page_manager" && $api == "pages_default") {
     return array("version" => "1");
   }

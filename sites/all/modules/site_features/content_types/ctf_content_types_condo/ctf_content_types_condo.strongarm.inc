@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * feature_for_content_type_condo.strongarm.inc
+ * ctf_content_types_condo.strongarm.inc
  */
 
 /**
  * Implements hook_strongarm().
  */
-function feature_for_content_type_condo_strongarm() {
+function ctf_content_types_condo_strongarm() {
   $export = array();
 
   $strongarm = new stdClass();

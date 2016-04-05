@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * feature_for_content_type_condo.field_group.inc
+ * ctf_content_types_condo.field_group.inc
  */
 
 /**
  * Implements hook_field_group_info().
  */
-function feature_for_content_type_condo_field_group_info() {
+function ctf_content_types_condo_field_group_info() {
   $field_groups = array();
 
   $field_group = new stdClass();

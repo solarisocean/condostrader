@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * feature_for_result_page_panel.pages_default.inc
+ * ctf_pages_result_page.pages_default.inc
  */
 
 /**
  * Implements hook_default_page_manager_pages().
  */
-function feature_for_result_page_panel_default_page_manager_pages() {
+function ctf_pages_result_page_default_page_manager_pages() {
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
   $page->api_version = 1;

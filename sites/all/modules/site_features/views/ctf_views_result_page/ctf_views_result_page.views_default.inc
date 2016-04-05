@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * feature_for_result_page_view.views_default.inc
+ * ctf_views_result_page.views_default.inc
  */
 
 /**
  * Implements hook_views_default_views().
  */
-function feature_for_result_page_view_views_default_views() {
+function ctf_views_result_page_views_default_views() {
   $export = array();
 
   $view = new view();

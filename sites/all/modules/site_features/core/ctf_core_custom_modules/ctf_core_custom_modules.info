@@ -1,0 +1,9 @@
+name = CT Features: Core: Custom modules
+core = 7.x
+package = CT Features: Core
+dependencies[] = ctf_content_types_condo
+dependencies[] = ctf_core_field_bases
+dependencies[] = ctf_pages_result_page
+dependencies[] = ctf_views_result_page
+dependencies[] = ctrader_mls
+features[features_api][] = api:2

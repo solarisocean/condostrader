@@ -1,6 +1,7 @@
-name = Feature for result page panel
+name = CT Features: Pages: Result page
 core = 7.x
-package = Panels
+package = CT Features: Pages
+dependencies[] = ctf_views_result_page
 dependencies[] = ctools
 dependencies[] = page_manager
 features[ctools][] = page_manager:pages_default:1
