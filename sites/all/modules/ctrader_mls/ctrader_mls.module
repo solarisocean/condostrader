@@ -69,8 +69,10 @@ function ctrader_mls_rets_data_form($form, &$form_state) {
   );
 
   $form['rets_password'] = array(
-    '#type' => 'password',
+    '#type' => 'textfield',
     '#title' => t('RETS password'),
+    '#default_value' => variable_get('rets_password', ''),
+
   );
 
   $form['rets_user_agent'] = array(
@@ -80,8 +82,10 @@ function ctrader_mls_rets_data_form($form, &$form_state) {
   );
 
   $form['rets_user_agent_password'] = array(
-    '#type' => 'password',
+    '#type' => 'textfield',
     '#title' => t('RETS user agent password'),
+    '#default_value' => variable_get('rets_user_agent_password', ''),
+
   );
 
   return system_settings_form($form);

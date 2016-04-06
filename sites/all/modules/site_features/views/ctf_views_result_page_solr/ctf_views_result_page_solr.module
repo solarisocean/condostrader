@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CT Features: Views: Result page (solr) feature.
+ */
+
+include_once 'ctf_views_result_page_solr.features.inc';
