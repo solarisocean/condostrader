@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for the ctrader_mls module.
+ */
+
+/**
+ * Implements hook_requirements().
+ */
+function ctrader_mls_requirements($phase) {
+  $requirements = array();
+  $t = get_t();
+
+  // Verify the Leaflet library is installed correctly.
+  if (in_array($phase, array('runtime', 'update'))) {
+    $library = libraries_detect('torontomlsapi');
+    $requirements['torontomlsapi'] = array(
+      'title' => $t('Torontomlsapi'),
+    );
+
+    if ($library['installed']) {
+      $requirements['torontomlsapi'] += array(
+        'value' => $library['version'],
+        'description' => t('The Torontomlsapi library is installed correctly. RETS functionality available.'),
+        'severity' => REQUIREMENT_OK,
+      );
+    }
+    else {
+      $requirements['torontomlsapi'] += array(
+        'value' => $library['error'],
+        'description' => $library['error message'],
+        'severity' => REQUIREMENT_ERROR,
+      );
+    }
+  }
+
+  return $requirements;
+}

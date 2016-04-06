@@ -32,3 +32,27 @@ function ctrader_mls_form($form, &$form_state) {
 
   return $form;
 }
+
+/**
+ * Implements hook_libraries_info().
+ */
+function ctrader_mls_libraries_info() {
+  $libraries['torontomlsapi'] = array(
+    'name' => 'Torontomlsapi',
+    'vendor url' => 'https://github.com/tamtranvn2012/torontomlsapi',
+    'download url' => 'https://github.com/tamtranvn2012/torontomlsapi/archive/master.zip',
+    'version arguments' => array(
+      'file' => 'phrets.php',
+      'pattern' => '@version\s+([0-9a-zA-Z\.-]+)@',
+    ),
+    'files' => array(
+      'php' => array(
+        'phrets.php',
+        'test.php',
+        'test1.php',
+      ),
+    ),
+  );
+
+  return $libraries;
+}
