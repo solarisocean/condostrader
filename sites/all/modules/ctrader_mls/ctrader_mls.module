@@ -25,12 +25,18 @@ function ctrader_mls_menu() {
  * Form for configure integration drupal and mls.
  */
 function ctrader_mls_form($form, &$form_state) {
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => 'test',
+  $form['mls_username'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Username'),
+    '#default_value' => variable_get('mls_username', ''),
   );
 
-  return $form;
+  $form['mls_password'] = array(
+    '#type' => 'password',
+    '#title' => t('Password'),
+  );
+
+  return system_settings_form($form);
 }
 
 /**
@@ -56,3 +62,4 @@ function ctrader_mls_libraries_info() {
 
   return $libraries;
 }
+
