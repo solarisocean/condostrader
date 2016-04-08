@@ -1,0 +1,18 @@
+name = dRealty OpenHouse
+description = Provides the ability to import OpenHouse from a RETS Provider.
+core = 7.x
+package = Real Estate
+
+dependencies[] = drealty
+dependencies[] = entity
+
+files[] = includes/drealty.openhouse.admin.inc
+files[] = includes/drealty.openhouse.inc
+
+
+; Information added by Drupal.org packaging script on 2015-08-05
+version = "7.x-3.0-beta6+12-dev"
+core = "7.x"
+project = "drealty"
+datestamp = "1438775647"
+

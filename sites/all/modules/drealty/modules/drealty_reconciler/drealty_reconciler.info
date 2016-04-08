@@ -1,0 +1,16 @@
+name = dRealty Reconciler
+description = Periodically checks if a listing exists in RETS and if not, how to remove it from the local application.
+core = 7.x
+package = Real Estate
+
+dependencies[] = drealty
+dependencies[] = drealty_import
+dependencies[] = entity
+
+files[] = class/drealty_reconciler.reconciler.inc
+; Information added by Drupal.org packaging script on 2015-08-05
+version = "7.x-3.0-beta6+12-dev"
+core = "7.x"
+project = "drealty"
+datestamp = "1438775647"
+
