@@ -13,19 +13,9 @@ function _rets_xml_parser() {
   $xml = simplexml_load_file(drupal_get_path('module', 'ctrader_mls') . '/files/cnd_test_xml/test_condo.xml');
 //  $xml = simplexml_load_file(drupal_get_path('module', 'ctrader_mls') . '/files/cnd_test_xml/cnd.xml');
 
-
-//  print_r($xml->REData->REProperties->CondoProperty[2]);
-//  $ids = array(2, 3, 4);
-//  $condo_entity = entity_load('drealty_listing', $ids);
   $connection = entity_load('drealty_connection_entity', array('toronto_rets_connection'));
   $connection = end($connection);
   $field_mappings = $connection->FetchFieldMappings();
-
-
-//  $dc = new drealtyConnection();
-
-//  $resources = $connection->ResourceMappings();
-
 
   $rets = new phRETS;
   $rets->Connect($rets_login_url, $rets_username, $rets_password, $rets_user_agent_password);
@@ -58,6 +48,7 @@ function _rets_xml_parser() {
             if ($mapping->systemname == $field_data['SystemName']) {
               $field_standart_name = $field_data['StandardName'];
               $field_value = $condo->Listing->{$field_standart_name}->__toString();
+
               $item->{$mapping->field_name}[LANGUAGE_NONE][0]['value'] = isset($field_value) ? $field_value : NULL;
             }
           }
@@ -65,15 +56,25 @@ function _rets_xml_parser() {
         case 'number_integer':
         case 'number_decimal':
         case 'number_float':
-        foreach ($fields_metadata as $field_data) {
-          if ($mapping->systemname == $field_data['SystemName']) {
-            $field_standart_name = $field_data['StandardName'];
-            $field_value = $condo->Listing->{$field_standart_name}->__toString();
-//            $item->{$mapping->field_name}[LANGUAGE_NONE][0]['value'] = empty($rets_item[$mapping->systemname]) ? 0 : is_numeric($rets_item[$mapping->systemname]) ? $rets_item[$mapping->systemname] : NULL;
+          foreach ($fields_metadata as $field_data) {
+            if ($mapping->systemname == $field_data['SystemName']) {
+              $field_standart_name = $field_data['StandardName'];
+              $field_value = $condo->Listing->{$field_standart_name}->__toString();
 
-            $item->{$mapping->field_name}[LANGUAGE_NONE][0]['value'] = isset($field_value) ? $field_value : NULL;
+              $item->{$mapping->field_name}[LANGUAGE_NONE][0]['value'] = isset($field_value) ? $field_value : NULL;
+            }
           }
-        }
+          break;
+        case 'text_long':
+          foreach ($fields_metadata as $field_data) {
+            if ($mapping->systemname == $field_data['SystemName']) {
+              $field_standart_name = $field_data['StandardName'];
+              $field_value = $condo->Listing->{$field_standart_name}->__toString();
+
+              $item->{$mapping->field_name}[LANGUAGE_NONE][0]['value'] = isset($field_value) ? $field_value : NULL;
+              $item->{$mapping->field_name}[LANGUAGE_NONE][0]['format'] = 'plain_text';
+            }
+          }
           break;
       }
     }
@@ -82,10 +83,9 @@ function _rets_xml_parser() {
 
   $i = 0;
   foreach ($items as $entity_presave) {
-//    $entity_presave->save();
+    $entity_presave->save();
     $i++;
   }
-  $stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
 
   return "Saved entities: <b>{$i}</b>";
 }
