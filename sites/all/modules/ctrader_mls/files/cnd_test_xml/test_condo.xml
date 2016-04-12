@@ -1,0 +1,1182 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE RETS SYSTEM "RETS-20041001.dtd">
+<RETS ReplyCode="0" ReplyText="">
+  <REData>
+    <REProperties>
+      <CondoProperty>
+        <Listing>
+          <SharesPer>null</SharesPer>
+          <Address>85 The Donway Way W</Address>
+          <AirConditioning>Central Air</AirConditioning>
+          <AllInclusive>null</AllInclusive>
+          <ApproxAge>0-5</ApproxAge>
+          <ApproxSquareFootage>500-599</ApproxSquareFootage>
+          <AptUnit>203</AptUnit>
+          <Area>Toronto</Area>
+          <AreaCode>01</AreaCode>
+          <Assessment>null</Assessment>
+          <AssessmentYear>null</AssessmentYear>
+          <Balcony>Open</Balcony>
+          <Basement1>None</Basement1>
+          <Basement2>null</Basement2>
+          <Bedrooms>1</Bedrooms>
+          <BedroomsPlus>null</BedroomsPlus>
+          <BuildingInsuranceIncluded>Y</BuildingInsuranceIncluded>
+          <BuildingAmenities1>Bbqs Allowed</BuildingAmenities1>
+          <BuildingAmenities2>Concierge</BuildingAmenities2>
+          <BuildingAmenties3>Guest Suites</BuildingAmenties3>
+          <BuildingAmenities4>Gym</BuildingAmenities4>
+          <BuildingAmenities5>Party/Meeting Room</BuildingAmenities5>
+          <BuildingAmenities6>Visitor Parking</BuildingAmenities6>
+          <CableTVIncluded>N</CableTVIncluded>
+          <CacIncluded>Y</CacIncluded>
+          <CentralVac>null</CentralVac>
+          <CommonElementsIncluded>Y</CommonElementsIncluded>
+          <Community>Banbury-Don Mills</Community>
+          <CommunityCode>01.C13.0670</CommunityCode>
+          <CondoCorp>2360</CondoCorp>
+          <CondoRegistryOffice>TSCP</CondoRegistryOffice>
+          <CondoTaxesIncluded>N</CondoTaxesIncluded>
+          <DirectionsCrossStreets>Don Mills/Lawrence
+          </DirectionsCrossStreets>
+          <DisplayAddressOnInternet>Y</DisplayAddressOnInternet>
+          <Elevator>null</Elevator>
+          <EnsuiteLaundry>Y</EnsuiteLaundry>
+          <Exposure>Ne</Exposure>
+          <Exterior1>Concrete</Exterior1>
+          <Exterior2>null</Exterior2>
+          <Extras>S/S Fridge, Stove, Dishwasher, Microwave, Washer,
+            Dryer, Elfs. Lb For Easy Showings.
+          </Extras>
+          <FamilyRoom>N</FamilyRoom>
+          <FireplaceStove>N</FireplaceStove>
+          <Furnished>null</Furnished>
+          <GarageType>Undergrnd</GarageType>
+          <GarageParkSpaces>1.0</GarageParkSpaces>
+          <HeatIncluded>Y</HeatIncluded>
+          <HeatSource>Gas</HeatSource>
+          <HeatType>Forced Air</HeatType>
+          <HydroIncluded>N</HydroIncluded>
+          <IdxUpdtedDt>2014-03-06 04:57:45.0</IdxUpdtedDt>
+          <Kitchens>1</Kitchens>
+          <KitchensPlus>null</KitchensPlus>
+          <LaundryAccess>null</LaundryAccess>
+          <LaundryLevel>Main</LaundryLevel>
+          <LeaseTerm>null</LeaseTerm>
+          <Level>2</Level>
+          <Level1>Flat</Level1>
+          <Level10>null</Level10>
+          <Level11>null</Level11>
+          <Level12>null</Level12>
+          <Level2>Flat</Level2>
+          <Level3>Flat</Level3>
+          <Level4>Flat</Level4>
+          <Level5>null</Level5>
+          <Level6>null</Level6>
+          <Level7>null</Level7>
+          <Level8>null</Level8>
+          <Level9>null</Level9>
+          <ListBrokerage>HOMELIFE/VISION REALTY INC., BROKERAGE
+          </ListBrokerage>
+          <ListPrice>349000.00</ListPrice>
+          <Locker>Owned</Locker>
+          <LockerNum>null</LockerNum>
+          <Maintenance>416.04</Maintenance>
+          <Map>null</Map>
+          <MapColumn>null</MapColumn>
+          <MapRow></MapRow>
+          <MLS>C3410847</MLS>
+          <Municipality>Toronto</Municipality>
+          <MunicipalityDistrict>Toronto C13</MunicipalityDistrict>
+          <MunicipalityCode>01.C13</MunicipalityCode>
+          <OutofAreaMunicipality></OutofAreaMunicipality>
+          <ParkCostMo>null</ParkCostMo>
+          <ParkingIncluded>Y</ParkingIncluded>
+          <ParkingLegalDescription>P3</ParkingLegalDescription>
+          <ParkingLegalDescription2>null</ParkingLegalDescription2>
+          <ParkingSpaces>1</ParkingSpaces>
+          <ParkingSpot1>51</ParkingSpot1>
+          <ParkingSpot2>null</ParkingSpot2>
+          <ParkingType>Owned</ParkingType>
+          <ParkingType2>null</ParkingType2>
+          <ParkingDrive>Undergrnd</ParkingDrive>
+          <PetsPermitted>Restrict</PetsPermitted>
+          <ParcelId>null</ParcelId>
+          <PixUpdtedDt>2016-02-22 09:58:42.0</PixUpdtedDt>
+          <PostalCode>M3C0L9</PostalCode>
+          <PrivateEntrance>null</PrivateEntrance>
+          <PropertyFeatures1>null</PropertyFeatures1>
+          <PropertyFeatures2>null</PropertyFeatures2>
+          <PropertyFeatures3>null</PropertyFeatures3>
+          <PropertyFeatures4>null</PropertyFeatures4>
+          <PropertyFeatures5>null</PropertyFeatures5>
+          <PropertyFeatures6>null</PropertyFeatures6>
+          <Province>Ontario</Province>
+          <RemarksForClients>Luxury Living Across From The Shops At
+            Don Mills, Bright And Cozy 594 Sqft, 1 Bedroom Apt With
+            1 Parking And 1 Locker, 9&apos;10&apos; Loft Style
+            Ceiling, Modern Concept With Lots Of Upgrades, Laminate
+            Floors Throughout, S/S Appliances (Upgraded D/W And
+            Fridge), Under-Mount Sink, Kitchen Light Fixture (Approx
+            $3000 In Upgrades), Walkout From Living To A Very
+            Private Unobstructed View Balcony, Close To All
+            Amenities,Movie Theater,Fine Dinning,Cafe&apos;s,High
+            End Shops &amp; Mor
+          </RemarksForClients>
+          <Retirement>null</Retirement>
+          <Room1>Living</Room1>
+          <Room1Desc1>Laminate</Room1Desc1>
+          <Room1Desc2>Open Concept</Room1Desc2>
+          <Room1Desc3>Combined W/Dining</Room1Desc3>
+          <Room1Length>4.88</Room1Length>
+          <Room1Width>3.35</Room1Width>
+          <Room10>null</Room10>
+          <Room10Desc1>null</Room10Desc1>
+          <Room10Desc2>null</Room10Desc2>
+          <Room10Desc3>null</Room10Desc3>
+          <Room10Length>null</Room10Length>
+          <Room10Width>null</Room10Width>
+          <Room11>null</Room11>
+          <Room11Desc1>null</Room11Desc1>
+          <Room11Desc2>null</Room11Desc2>
+          <Room11Desc3>null</Room11Desc3>
+          <Room11Length>null</Room11Length>
+          <Room11Width>null</Room11Width>
+          <Room12>null</Room12>
+          <Room12Desc1>null</Room12Desc1>
+          <Room12Desc2>null</Room12Desc2>
+          <Room12Desc3>null</Room12Desc3>
+          <Room12Length>null</Room12Length>
+          <Room12Width>null</Room12Width>
+          <Room2>Dining</Room2>
+          <Room2Desc1>Laminate</Room2Desc1>
+          <Room2Desc2>Open Concept</Room2Desc2>
+          <Room2Desc3>Combined W/Living</Room2Desc3>
+          <Room2Length>4.88</Room2Length>
+          <Room2Width>3.35</Room2Width>
+          <Room3>Kitchen</Room3>
+          <Room3Desc1>Laminate</Room3Desc1>
+          <Room3Desc2>Granite Counter</Room3Desc2>
+          <Room3Desc3>Stainless Steel Appl</Room3Desc3>
+          <Room3Length>3.35</Room3Length>
+          <Room3Width>2.44</Room3Width>
+          <Room4>Master</Room4>
+          <Room4Desc1>Laminate</Room4Desc1>
+          <Room4Desc2>Mirrored Closet</Room4Desc2>
+          <Room4Desc3>null</Room4Desc3>
+          <Room4Length>4.00</Room4Length>
+          <Room4Width>3.05</Room4Width>
+          <Room5>null</Room5>
+          <Room5Desc1>null</Room5Desc1>
+          <Room5Desc2>null</Room5Desc2>
+          <Room5Desc3>null</Room5Desc3>
+          <Room5Length>null</Room5Length>
+          <Room5Width>null</Room5Width>
+          <Room6>null</Room6>
+          <Room6Desc1>null</Room6Desc1>
+          <Room6Desc2>null</Room6Desc2>
+          <Room6Desc3>null</Room6Desc3>
+          <Room6Length>null</Room6Length>
+          <Room6Width>null</Room6Width>
+          <Room7>null</Room7>
+          <Room7Desc1>null</Room7Desc1>
+          <Room7Desc2>null</Room7Desc2>
+          <Room7Desc3>null</Room7Desc3>
+          <Room7Length>null</Room7Length>
+          <Room7Width>null</Room7Width>
+          <Room8>null</Room8>
+          <Room8Desc1>null</Room8Desc1>
+          <Room8Desc2>null</Room8Desc2>
+          <Room8Desc3>null</Room8Desc3>
+          <Room8Length>null</Room8Length>
+          <Room8Width>null</Room8Width>
+          <Room9>null</Room9>
+          <Room9Desc1>null</Room9Desc1>
+          <Room9Desc2>null</Room9Desc2>
+          <Room9Desc3>null</Room9Desc3>
+          <Room9Length>null</Room9Length>
+          <Room9Width>null</Room9Width>
+          <Rooms>3</Rooms>
+          <RoomsPlus>null</RoomsPlus>
+          <SaleLease>Sale</SaleLease>
+          <SpecialDesignation1>Unknown</SpecialDesignation1>
+          <SpecialDesignation2>null</SpecialDesignation2>
+          <SpecialDesignation3>null</SpecialDesignation3>
+          <SpecialDesignation4>null</SpecialDesignation4>
+          <SpecialDesignation5>null</SpecialDesignation5>
+          <SpecialDesignation6>null</SpecialDesignation6>
+          <Status>A</Status>
+          <Street>85</Street>
+          <StreetAbbreviation>Way</StreetAbbreviation>
+          <StreetDirection>W</StreetDirection>
+          <StreetName>The Donway</StreetName>
+          <Style>Apartment</Style>
+          <TaxYear>2015</TaxYear>
+          <Taxes>1816.08</Taxes>
+          <TypeOwnSrch>C.</TypeOwnSrch>
+          <TypeOwn1Out>Condo Apt</TypeOwn1Out>
+          <Uffi>null</Uffi>
+          <Unit>3</Unit>
+          <TimestampSql>2016-02-22 09:58:41.0</TimestampSql>
+          <VirtualTourUploadDate>null</VirtualTourUploadDate>
+          <VirtualTourURL>null</VirtualTourURL>
+          <Washrooms>1</Washrooms>
+          <WashroomsType1>1</WashroomsType1>
+          <WashroomsType1Pcs>4</WashroomsType1Pcs>
+          <WashroomsType1Level>null</WashroomsType1Level>
+          <WashroomsType2>null</WashroomsType2>
+          <WashroomsType2Pcs>null</WashroomsType2Pcs>
+          <WashroomsType2Level>null</WashroomsType2Level>
+          <WashroomsType3>null</WashroomsType3>
+          <WashroomsType3Pcs>null</WashroomsType3Pcs>
+          <WashroomsType3Level>null</WashroomsType3Level>
+          <WashroomsType4>null</WashroomsType4>
+          <WashroomsType4Pcs>null</WashroomsType4Pcs>
+          <WashroomsType4Level>null</WashroomsType4Level>
+          <WashroomsType5>null</WashroomsType5>
+          <WashroomsType5Pcs>null</WashroomsType5Pcs>
+          <WashroomsType5Level>null</WashroomsType5Level>
+          <WaterIncluded>Y</WaterIncluded>
+          <Zoning>null</Zoning>
+        </Listing>
+      </CondoProperty>
+      <CondoProperty>
+        <Listing>
+          <SharesPer>null</SharesPer>
+          <Address>80 Harrison Garden Blvd</Address>
+          <AirConditioning>Central Air</AirConditioning>
+          <AllInclusive>N</AllInclusive>
+          <ApproxAge>null</ApproxAge>
+          <ApproxSquareFootage>900-999</ApproxSquareFootage>
+          <AptUnit>2716</AptUnit>
+          <Area>Toronto</Area>
+          <AreaCode>01</AreaCode>
+          <Assessment>null</Assessment>
+          <AssessmentYear>null</AssessmentYear>
+          <Balcony>Open</Balcony>
+          <Basement1>None</Basement1>
+          <Basement2>null</Basement2>
+          <Bedrooms>2</Bedrooms>
+          <BedroomsPlus>null</BedroomsPlus>
+          <BuildingInsuranceIncluded>Y</BuildingInsuranceIncluded>
+          <BuildingAmenities1>Exercise Room</BuildingAmenities1>
+          <BuildingAmenities2>Indoor Pool</BuildingAmenities2>
+          <BuildingAmenties3>Recreation Room</BuildingAmenties3>
+          <BuildingAmenities4>Sauna</BuildingAmenities4>
+          <BuildingAmenities5>Security Guard</BuildingAmenities5>
+          <BuildingAmenities6>Security System</BuildingAmenities6>
+          <CableTVIncluded>N</CableTVIncluded>
+          <CacIncluded>N</CacIncluded>
+          <CentralVac>null</CentralVac>
+          <CommonElementsIncluded>Y</CommonElementsIncluded>
+          <Community>Willowdale East</Community>
+          <CommunityCode>01.C14.0580</CommunityCode>
+          <CondoCorp>1600</CondoCorp>
+          <CondoRegistryOffice>TSCC</CondoRegistryOffice>
+          <CondoTaxesIncluded>null</CondoTaxesIncluded>
+          <DirectionsCrossStreets>Yonge/Sheppard
+          </DirectionsCrossStreets>
+          <DisplayAddressOnInternet>Y</DisplayAddressOnInternet>
+          <Elevator>null</Elevator>
+          <EnsuiteLaundry>null</EnsuiteLaundry>
+          <Exposure>Ne</Exposure>
+          <Exterior1>Concrete</Exterior1>
+          <Exterior2>null</Exterior2>
+          <Extras>Fridge, Stove, B/I Dishwasher, Washer And Dryer
+          </Extras>
+          <FamilyRoom>N</FamilyRoom>
+          <FireplaceStove>N</FireplaceStove>
+          <Furnished>N</Furnished>
+          <GarageType>Undergrnd</GarageType>
+          <GarageParkSpaces>1.0</GarageParkSpaces>
+          <HeatIncluded>N</HeatIncluded>
+          <HeatSource>Gas</HeatSource>
+          <HeatType>Forced Air</HeatType>
+          <HydroIncluded>N</HydroIncluded>
+          <IdxUpdtedDt>2013-05-30 08:25:43.0</IdxUpdtedDt>
+          <Kitchens>1</Kitchens>
+          <KitchensPlus>null</KitchensPlus>
+          <LaundryAccess>Ensuite</LaundryAccess>
+          <LaundryLevel>null</LaundryLevel>
+          <LeaseTerm>1 Year</LeaseTerm>
+          <Level>27</Level>
+          <Level1>Flat</Level1>
+          <Level10>null</Level10>
+          <Level11>null</Level11>
+          <Level12>null</Level12>
+          <Level2>Flat</Level2>
+          <Level3>Flat</Level3>
+          <Level4>Flat</Level4>
+          <Level5>Flat</Level5>
+          <Level6>Flat</Level6>
+          <Level7>null</Level7>
+          <Level8>null</Level8>
+          <Level9>null</Level9>
+          <ListBrokerage>TOP CANADIAN REALTY INC., BROKERAGE
+          </ListBrokerage>
+          <ListPrice>2200.00</ListPrice>
+          <Locker>Owned</Locker>
+          <LockerNum>null</LockerNum>
+          <Maintenance>null</Maintenance>
+          <Map>103</Map>
+          <MapColumn>21</MapColumn>
+          <MapRow>E</MapRow>
+          <MLS>C3453524</MLS>
+          <Municipality>Toronto</Municipality>
+          <MunicipalityDistrict>Toronto C14</MunicipalityDistrict>
+          <MunicipalityCode>01.C14</MunicipalityCode>
+          <OutofAreaMunicipality></OutofAreaMunicipality>
+          <ParkCostMo>null</ParkCostMo>
+          <ParkingIncluded>Y</ParkingIncluded>
+          <ParkingLegalDescription>null</ParkingLegalDescription>
+          <ParkingLegalDescription2>null</ParkingLegalDescription2>
+          <ParkingSpaces>1</ParkingSpaces>
+          <ParkingSpot1>null</ParkingSpot1>
+          <ParkingSpot2>null</ParkingSpot2>
+          <ParkingType>Owned</ParkingType>
+          <ParkingType2>null</ParkingType2>
+          <ParkingDrive>Undergrnd</ParkingDrive>
+          <PetsPermitted>Restrict</PetsPermitted>
+          <ParcelId>null</ParcelId>
+          <PixUpdtedDt>2016-04-01 16:29:20.0</PixUpdtedDt>
+          <PostalCode>M2N7E3</PostalCode>
+          <PrivateEntrance>Y</PrivateEntrance>
+          <PropertyFeatures1>null</PropertyFeatures1>
+          <PropertyFeatures2>null</PropertyFeatures2>
+          <PropertyFeatures3>null</PropertyFeatures3>
+          <PropertyFeatures4>null</PropertyFeatures4>
+          <PropertyFeatures5>null</PropertyFeatures5>
+          <PropertyFeatures6>null</PropertyFeatures6>
+          <Province>Ontario</Province>
+          <RemarksForClients>Luxury Tridel Build Condo! Spacious 2
+            Bdrms, 2 Baths, Rare Corner Unit, Excellent Layout,
+            Perfect Condition, 9&apos; Ceilings, Indoor Pool,
+            Virtual Golf, Bowling, Tennis Court, Steps To Ttc,
+            Restaurants And Shops.
+          </RemarksForClients>
+          <Retirement>null</Retirement>
+          <Room1>Living</Room1>
+          <Room1Desc1>Hardwood Floor</Room1Desc1>
+          <Room1Desc2>Combined W/Dining</Room1Desc2>
+          <Room1Desc3>null</Room1Desc3>
+          <Room1Length>5.40</Room1Length>
+          <Room1Width>3.24</Room1Width>
+          <Room10>null</Room10>
+          <Room10Desc1>null</Room10Desc1>
+          <Room10Desc2>null</Room10Desc2>
+          <Room10Desc3>null</Room10Desc3>
+          <Room10Length>null</Room10Length>
+          <Room10Width>null</Room10Width>
+          <Room11>null</Room11>
+          <Room11Desc1>null</Room11Desc1>
+          <Room11Desc2>null</Room11Desc2>
+          <Room11Desc3>null</Room11Desc3>
+          <Room11Length>null</Room11Length>
+          <Room11Width>null</Room11Width>
+          <Room12>null</Room12>
+          <Room12Desc1>null</Room12Desc1>
+          <Room12Desc2>null</Room12Desc2>
+          <Room12Desc3>null</Room12Desc3>
+          <Room12Length>null</Room12Length>
+          <Room12Width>null</Room12Width>
+          <Room2>Dining</Room2>
+          <Room2Desc1>Hardwood Floor</Room2Desc1>
+          <Room2Desc2>Combined W/Living</Room2Desc2>
+          <Room2Desc3>null</Room2Desc3>
+          <Room2Length>5.40</Room2Length>
+          <Room2Width>3.24</Room2Width>
+          <Room3>Breakfast</Room3>
+          <Room3Desc1>Ceramic Floor</Room3Desc1>
+          <Room3Desc2>Window</Room3Desc2>
+          <Room3Desc3>null</Room3Desc3>
+          <Room3Length>4.36</Room3Length>
+          <Room3Width>2.32</Room3Width>
+          <Room4>Kitchen</Room4>
+          <Room4Desc1>Ceramic Floor</Room4Desc1>
+          <Room4Desc2>Window</Room4Desc2>
+          <Room4Desc3>null</Room4Desc3>
+          <Room4Length>4.36</Room4Length>
+          <Room4Width>2.32</Room4Width>
+          <Room5>Master</Room5>
+          <Room5Desc1>4 Pc Ensuite</Room5Desc1>
+          <Room5Desc2>Broadloom</Room5Desc2>
+          <Room5Desc3>null</Room5Desc3>
+          <Room5Length>4.21</Room5Length>
+          <Room5Width>3.05</Room5Width>
+          <Room6>2nd Br</Room6>
+          <Room6Desc1>North View</Room6Desc1>
+          <Room6Desc2>Broadloom</Room6Desc2>
+          <Room6Desc3>null</Room6Desc3>
+          <Room6Length>3.66</Room6Length>
+          <Room6Width>2.74</Room6Width>
+          <Room7>null</Room7>
+          <Room7Desc1>null</Room7Desc1>
+          <Room7Desc2>null</Room7Desc2>
+          <Room7Desc3>null</Room7Desc3>
+          <Room7Length>null</Room7Length>
+          <Room7Width>null</Room7Width>
+          <Room8>null</Room8>
+          <Room8Desc1>null</Room8Desc1>
+          <Room8Desc2>null</Room8Desc2>
+          <Room8Desc3>null</Room8Desc3>
+          <Room8Length>null</Room8Length>
+          <Room8Width>null</Room8Width>
+          <Room9>null</Room9>
+          <Room9Desc1>null</Room9Desc1>
+          <Room9Desc2>null</Room9Desc2>
+          <Room9Desc3>null</Room9Desc3>
+          <Room9Length>null</Room9Length>
+          <Room9Width>null</Room9Width>
+          <Rooms>6</Rooms>
+          <RoomsPlus>null</RoomsPlus>
+          <SaleLease>Lease</SaleLease>
+          <SpecialDesignation1>Unknown</SpecialDesignation1>
+          <SpecialDesignation2>null</SpecialDesignation2>
+          <SpecialDesignation3>null</SpecialDesignation3>
+          <SpecialDesignation4>null</SpecialDesignation4>
+          <SpecialDesignation5>null</SpecialDesignation5>
+          <SpecialDesignation6>null</SpecialDesignation6>
+          <Status>A</Status>
+          <Street>80</Street>
+          <StreetAbbreviation>Blvd</StreetAbbreviation>
+          <StreetDirection>null</StreetDirection>
+          <StreetName>Harrison Garden</StreetName>
+          <Style>Apartment</Style>
+          <TaxYear>null</TaxYear>
+          <Taxes>null</Taxes>
+          <TypeOwnSrch>C.</TypeOwnSrch>
+          <TypeOwn1Out>Condo Apt</TypeOwn1Out>
+          <Uffi>null</Uffi>
+          <Unit>16</Unit>
+          <TimestampSql>2016-04-01 16:29:18.0</TimestampSql>
+          <VirtualTourUploadDate>null</VirtualTourUploadDate>
+          <VirtualTourURL>null</VirtualTourURL>
+          <Washrooms>2</Washrooms>
+          <WashroomsType1>1</WashroomsType1>
+          <WashroomsType1Pcs>4</WashroomsType1Pcs>
+          <WashroomsType1Level>null</WashroomsType1Level>
+          <WashroomsType2>1</WashroomsType2>
+          <WashroomsType2Pcs>3</WashroomsType2Pcs>
+          <WashroomsType2Level>null</WashroomsType2Level>
+          <WashroomsType3>null</WashroomsType3>
+          <WashroomsType3Pcs>null</WashroomsType3Pcs>
+          <WashroomsType3Level>null</WashroomsType3Level>
+          <WashroomsType4>null</WashroomsType4>
+          <WashroomsType4Pcs>null</WashroomsType4Pcs>
+          <WashroomsType4Level>null</WashroomsType4Level>
+          <WashroomsType5>null</WashroomsType5>
+          <WashroomsType5Pcs>null</WashroomsType5Pcs>
+          <WashroomsType5Level>null</WashroomsType5Level>
+          <WaterIncluded>Y</WaterIncluded>
+          <Zoning>null</Zoning>
+        </Listing>
+      </CondoProperty>
+      <CondoProperty>
+        <Listing>
+          <SharesPer>null</SharesPer>
+          <Address>117 Gerrard St E</Address>
+          <AirConditioning>Central Air</AirConditioning>
+          <AllInclusive>null</AllInclusive>
+          <ApproxAge>null</ApproxAge>
+          <ApproxSquareFootage>500-599</ApproxSquareFootage>
+          <AptUnit>504</AptUnit>
+          <Area>Toronto</Area>
+          <AreaCode>01</AreaCode>
+          <Assessment>null</Assessment>
+          <AssessmentYear>null</AssessmentYear>
+          <Balcony>None</Balcony>
+          <Basement1>None</Basement1>
+          <Basement2>null</Basement2>
+          <Bedrooms>0</Bedrooms>
+          <BedroomsPlus>1</BedroomsPlus>
+          <BuildingInsuranceIncluded>N</BuildingInsuranceIncluded>
+          <BuildingAmenities1>Bus Ctr (Wifi Bldg)</BuildingAmenities1>
+          <BuildingAmenities2>Concierge</BuildingAmenities2>
+          <BuildingAmenties3>Gym</BuildingAmenties3>
+          <BuildingAmenities4>Party/Meeting Room</BuildingAmenities4>
+          <BuildingAmenities5>Rooftop Deck/Garden</BuildingAmenities5>
+          <BuildingAmenities6>null</BuildingAmenities6>
+          <CableTVIncluded>Y</CableTVIncluded>
+          <CacIncluded>Y</CacIncluded>
+          <CentralVac>null</CentralVac>
+          <CommonElementsIncluded>Y</CommonElementsIncluded>
+          <Community>Church-Yonge Corridor</Community>
+          <CommunityCode>01.C08.0910</CommunityCode>
+          <CondoCorp>798</CondoCorp>
+          <CondoRegistryOffice>MTCC</CondoRegistryOffice>
+          <CondoTaxesIncluded>N</CondoTaxesIncluded>
+          <DirectionsCrossStreets>Gerrard St E./Jarvis
+          </DirectionsCrossStreets>
+          <DisplayAddressOnInternet>Y</DisplayAddressOnInternet>
+          <Elevator>Y</Elevator>
+          <EnsuiteLaundry>Y</EnsuiteLaundry>
+          <Exposure>E</Exposure>
+          <Exterior1>Brick</Exterior1>
+          <Exterior2>null</Exterior2>
+          <Extras>Fridge, Dishwasher, Stove, Vent Hood, Custom Glass
+            Shelves, Bathroom Renovated Jan 2016. Condo Fee
+            Includes: Heat, Hydro, Basic Cable Tv, Roof Terrace With
+            Bbq&apos;s And Hot Tub. Party Room, Gym/Exercise Room.
+          </Extras>
+          <FamilyRoom>N</FamilyRoom>
+          <FireplaceStove>N</FireplaceStove>
+          <Furnished>null</Furnished>
+          <GarageType>Undergrnd</GarageType>
+          <GarageParkSpaces>0.0</GarageParkSpaces>
+          <HeatIncluded>Y</HeatIncluded>
+          <HeatSource>Gas</HeatSource>
+          <HeatType>Forced Air</HeatType>
+          <HydroIncluded>Y</HydroIncluded>
+          <IdxUpdtedDt>2015-10-01 16:03:19.0</IdxUpdtedDt>
+          <Kitchens>1</Kitchens>
+          <KitchensPlus>null</KitchensPlus>
+          <LaundryAccess>null</LaundryAccess>
+          <LaundryLevel>null</LaundryLevel>
+          <LeaseTerm>null</LeaseTerm>
+          <Level>5</Level>
+          <Level1>Flat</Level1>
+          <Level10>null</Level10>
+          <Level11>null</Level11>
+          <Level12>null</Level12>
+          <Level2>Flat</Level2>
+          <Level3>Flat</Level3>
+          <Level4>Flat</Level4>
+          <Level5>Flat</Level5>
+          <Level6>Flat</Level6>
+          <Level7>null</Level7>
+          <Level8>null</Level8>
+          <Level9>null</Level9>
+          <ListBrokerage>FOREST HILL REAL ESTATE INC., BROKERAGE
+          </ListBrokerage>
+          <ListPrice>268900.00</ListPrice>
+          <Locker>None</Locker>
+          <LockerNum>null</LockerNum>
+          <Maintenance>470.83</Maintenance>
+          <Map>120</Map>
+          <MapColumn>20</MapColumn>
+          <MapRow>R</MapRow>
+          <MLS>C3453568</MLS>
+          <Municipality>Toronto</Municipality>
+          <MunicipalityDistrict>Toronto C08</MunicipalityDistrict>
+          <MunicipalityCode>01.C08</MunicipalityCode>
+          <OutofAreaMunicipality></OutofAreaMunicipality>
+          <ParkCostMo>null</ParkCostMo>
+          <ParkingIncluded>N</ParkingIncluded>
+          <ParkingLegalDescription>null</ParkingLegalDescription>
+          <ParkingLegalDescription2>null</ParkingLegalDescription2>
+          <ParkingSpaces>0</ParkingSpaces>
+          <ParkingSpot1>null</ParkingSpot1>
+          <ParkingSpot2>null</ParkingSpot2>
+          <ParkingType>None</ParkingType>
+          <ParkingType2>null</ParkingType2>
+          <ParkingDrive>None</ParkingDrive>
+          <PetsPermitted>Restrict</PetsPermitted>
+          <ParcelId>null</ParcelId>
+          <PixUpdtedDt>2016-04-01 17:03:55.0</PixUpdtedDt>
+          <PostalCode>M5B2L4</PostalCode>
+          <PrivateEntrance>null</PrivateEntrance>
+          <PropertyFeatures1>Library</PropertyFeatures1>
+          <PropertyFeatures2>Park</PropertyFeatures2>
+          <PropertyFeatures3>Place Of Worship</PropertyFeatures3>
+          <PropertyFeatures4>Public Transit</PropertyFeatures4>
+          <PropertyFeatures5>School</PropertyFeatures5>
+          <PropertyFeatures6>null</PropertyFeatures6>
+          <Province>Ontario</Province>
+          <RemarksForClients>Beat Value In The Area! Gorgeous Bright
+            Condo In The Heart Of Downtown A Short Walk To Ryerson
+            University, Yonge St Subway, Restaurants And Eaton
+            Centre. Ready For You To Move In And Enjoy! Condo Fees
+            Include Everything Except Taxes. No Parking. No Locker.
+            Newly Renovated Bathroom 2016. 24 Hour Concierge. Ttc At
+            Door,
+          </RemarksForClients>
+          <Retirement>null</Retirement>
+          <Room1>Solarium</Room1>
+          <Room1Desc1>Large Window</Room1Desc1>
+          <Room1Desc2>Sliding Doors</Room1Desc2>
+          <Room1Desc3>null</Room1Desc3>
+          <Room1Length>2.45</Room1Length>
+          <Room1Width>1.84</Room1Width>
+          <Room10>null</Room10>
+          <Room10Desc1>null</Room10Desc1>
+          <Room10Desc2>null</Room10Desc2>
+          <Room10Desc3>null</Room10Desc3>
+          <Room10Length>null</Room10Length>
+          <Room10Width>null</Room10Width>
+          <Room11>null</Room11>
+          <Room11Desc1>null</Room11Desc1>
+          <Room11Desc2>null</Room11Desc2>
+          <Room11Desc3>null</Room11Desc3>
+          <Room11Length>null</Room11Length>
+          <Room11Width>null</Room11Width>
+          <Room12>null</Room12>
+          <Room12Desc1>null</Room12Desc1>
+          <Room12Desc2>null</Room12Desc2>
+          <Room12Desc3>null</Room12Desc3>
+          <Room12Length>null</Room12Length>
+          <Room12Width>null</Room12Width>
+          <Room2>Living</Room2>
+          <Room2Desc1>Large Window</Room2Desc1>
+          <Room2Desc2>Open Concept</Room2Desc2>
+          <Room2Desc3>null</Room2Desc3>
+          <Room2Length>3.05</Room2Length>
+          <Room2Width>6.10</Room2Width>
+          <Room3>Dining</Room3>
+          <Room3Desc1>Pass Through</Room3Desc1>
+          <Room3Desc2>Open Concept</Room3Desc2>
+          <Room3Desc3>null</Room3Desc3>
+          <Room3Length>3.06</Room3Length>
+          <Room3Width>2.16</Room3Width>
+          <Room4>Bathroom</Room4>
+          <Room4Desc1>4 Pc Bath</Room4Desc1>
+          <Room4Desc2>Ceramic Floor</Room4Desc2>
+          <Room4Desc3>null</Room4Desc3>
+          <Room4Length>2.29</Room4Length>
+          <Room4Width>1.17</Room4Width>
+          <Room5>Foyer</Room5>
+          <Room5Desc1>Double Closet</Room5Desc1>
+          <Room5Desc2>Glass Doors</Room5Desc2>
+          <Room5Desc3>Ceramic Floor</Room5Desc3>
+          <Room5Length>2.21</Room5Length>
+          <Room5Width>1.17</Room5Width>
+          <Room6>Kitchen</Room6>
+          <Room6Desc1>Pass Through</Room6Desc1>
+          <Room6Desc2>Ceramic Floor</Room6Desc2>
+          <Room6Desc3>null</Room6Desc3>
+          <Room6Length>2.17</Room6Length>
+          <Room6Width>2.16</Room6Width>
+          <Room7>null</Room7>
+          <Room7Desc1>null</Room7Desc1>
+          <Room7Desc2>null</Room7Desc2>
+          <Room7Desc3>null</Room7Desc3>
+          <Room7Length>null</Room7Length>
+          <Room7Width>null</Room7Width>
+          <Room8>null</Room8>
+          <Room8Desc1>null</Room8Desc1>
+          <Room8Desc2>null</Room8Desc2>
+          <Room8Desc3>null</Room8Desc3>
+          <Room8Length>null</Room8Length>
+          <Room8Width>null</Room8Width>
+          <Room9>null</Room9>
+          <Room9Desc1>null</Room9Desc1>
+          <Room9Desc2>null</Room9Desc2>
+          <Room9Desc3>null</Room9Desc3>
+          <Room9Length>null</Room9Length>
+          <Room9Width>null</Room9Width>
+          <Rooms>1</Rooms>
+          <RoomsPlus>1</RoomsPlus>
+          <SaleLease>Sale</SaleLease>
+          <SpecialDesignation1>Unknown</SpecialDesignation1>
+          <SpecialDesignation2>null</SpecialDesignation2>
+          <SpecialDesignation3>null</SpecialDesignation3>
+          <SpecialDesignation4>null</SpecialDesignation4>
+          <SpecialDesignation5>null</SpecialDesignation5>
+          <SpecialDesignation6>null</SpecialDesignation6>
+          <Status>A</Status>
+          <Street>117</Street>
+          <StreetAbbreviation>St</StreetAbbreviation>
+          <StreetDirection>E</StreetDirection>
+          <StreetName>Gerrard</StreetName>
+          <Style>Apartment</Style>
+          <TaxYear>2015</TaxYear>
+          <Taxes>1572.61</Taxes>
+          <TypeOwnSrch>C.</TypeOwnSrch>
+          <TypeOwn1Out>Condo Apt</TypeOwn1Out>
+          <Uffi>null</Uffi>
+          <Unit>4</Unit>
+          <TimestampSql>2016-04-07 16:54:42.0</TimestampSql>
+          <VirtualTourUploadDate>null</VirtualTourUploadDate>
+          <VirtualTourURL>
+            http://www.digitalproperties.ca/20160122/index-mls.php
+          </VirtualTourURL>
+          <Washrooms>1</Washrooms>
+          <WashroomsType1>1</WashroomsType1>
+          <WashroomsType1Pcs>4</WashroomsType1Pcs>
+          <WashroomsType1Level>null</WashroomsType1Level>
+          <WashroomsType2>null</WashroomsType2>
+          <WashroomsType2Pcs>null</WashroomsType2Pcs>
+          <WashroomsType2Level>null</WashroomsType2Level>
+          <WashroomsType3>null</WashroomsType3>
+          <WashroomsType3Pcs>null</WashroomsType3Pcs>
+          <WashroomsType3Level>null</WashroomsType3Level>
+          <WashroomsType4>null</WashroomsType4>
+          <WashroomsType4Pcs>null</WashroomsType4Pcs>
+          <WashroomsType4Level>null</WashroomsType4Level>
+          <WashroomsType5>null</WashroomsType5>
+          <WashroomsType5Pcs>null</WashroomsType5Pcs>
+          <WashroomsType5Level>null</WashroomsType5Level>
+          <WaterIncluded>Y</WaterIncluded>
+          <Zoning>null</Zoning>
+        </Listing>
+      </CondoProperty>
+      <CondoProperty>
+        <Listing>
+          <SharesPer>null</SharesPer>
+          <Address>100 Wingarden Crt</Address>
+          <AirConditioning>None</AirConditioning>
+          <AllInclusive>null</AllInclusive>
+          <ApproxAge>null</ApproxAge>
+          <ApproxSquareFootage>1000-1199</ApproxSquareFootage>
+          <AptUnit>803</AptUnit>
+          <Area>Toronto</Area>
+          <AreaCode>01</AreaCode>
+          <Assessment>null</Assessment>
+          <AssessmentYear>null</AssessmentYear>
+          <Balcony>Open</Balcony>
+          <Basement1>None</Basement1>
+          <Basement2>null</Basement2>
+          <Bedrooms>2</Bedrooms>
+          <BedroomsPlus>null</BedroomsPlus>
+          <BuildingInsuranceIncluded>Y</BuildingInsuranceIncluded>
+          <BuildingAmenities1>null</BuildingAmenities1>
+          <BuildingAmenities2>null</BuildingAmenities2>
+          <BuildingAmenties3>null</BuildingAmenties3>
+          <BuildingAmenities4>null</BuildingAmenities4>
+          <BuildingAmenities5>null</BuildingAmenities5>
+          <BuildingAmenities6>null</BuildingAmenities6>
+          <CableTVIncluded>N</CableTVIncluded>
+          <CacIncluded>N</CacIncluded>
+          <CentralVac>null</CentralVac>
+          <CommonElementsIncluded>Y</CommonElementsIncluded>
+          <Community>Malvern</Community>
+          <CommunityCode>01.E11.1040</CommunityCode>
+          <CondoCorp>724</CondoCorp>
+          <CondoRegistryOffice>MTCC</CondoRegistryOffice>
+          <CondoTaxesIncluded>N</CondoTaxesIncluded>
+          <DirectionsCrossStreets>Neilson/Finch
+          </DirectionsCrossStreets>
+          <DisplayAddressOnInternet>Y</DisplayAddressOnInternet>
+          <Elevator>null</Elevator>
+          <EnsuiteLaundry>N</EnsuiteLaundry>
+          <Exposure>W</Exposure>
+          <Exterior1>Brick</Exterior1>
+          <Exterior2>null</Exterior2>
+          <Extras>null</Extras>
+          <FamilyRoom>N</FamilyRoom>
+          <FireplaceStove>N</FireplaceStove>
+          <Furnished>null</Furnished>
+          <GarageType>Undergrnd</GarageType>
+          <GarageParkSpaces>1.0</GarageParkSpaces>
+          <HeatIncluded>Y</HeatIncluded>
+          <HeatSource>Gas</HeatSource>
+          <HeatType>Other</HeatType>
+          <HydroIncluded>Y</HydroIncluded>
+          <IdxUpdtedDt>2012-01-21 07:03:15.0</IdxUpdtedDt>
+          <Kitchens>1</Kitchens>
+          <KitchensPlus>null</KitchensPlus>
+          <LaundryAccess>null</LaundryAccess>
+          <LaundryLevel>null</LaundryLevel>
+          <LeaseTerm>null</LeaseTerm>
+          <Level>8</Level>
+          <Level1>Flat</Level1>
+          <Level10>null</Level10>
+          <Level11>null</Level11>
+          <Level12>null</Level12>
+          <Level2>Flat</Level2>
+          <Level3>Flat</Level3>
+          <Level4>Flat</Level4>
+          <Level5>Flat</Level5>
+          <Level6>Flat</Level6>
+          <Level7>null</Level7>
+          <Level8>null</Level8>
+          <Level9>null</Level9>
+          <ListBrokerage>RE/MAX REALTRON REALTY INC., BROKERAGE
+          </ListBrokerage>
+          <ListPrice>124900.00</ListPrice>
+          <Locker>Ensuite</Locker>
+          <LockerNum>null</LockerNum>
+          <Maintenance>485.00</Maintenance>
+          <Map>105</Map>
+          <MapColumn>37</MapColumn>
+          <MapRow>D</MapRow>
+          <MLS>E3455291</MLS>
+          <Municipality>Toronto</Municipality>
+          <MunicipalityDistrict>Toronto E11</MunicipalityDistrict>
+          <MunicipalityCode>01.E11</MunicipalityCode>
+          <OutofAreaMunicipality></OutofAreaMunicipality>
+          <ParkCostMo>null</ParkCostMo>
+          <ParkingIncluded>Y</ParkingIncluded>
+          <ParkingLegalDescription>null</ParkingLegalDescription>
+          <ParkingLegalDescription2>null</ParkingLegalDescription2>
+          <ParkingSpaces>0</ParkingSpaces>
+          <ParkingSpot1>null</ParkingSpot1>
+          <ParkingSpot2>null</ParkingSpot2>
+          <ParkingType>Exclusive</ParkingType>
+          <ParkingType2>null</ParkingType2>
+          <ParkingDrive>Undergrnd</ParkingDrive>
+          <PetsPermitted>Restrict</PetsPermitted>
+          <ParcelId>null</ParcelId>
+          <PixUpdtedDt>2016-04-04 16:15:57.0</PixUpdtedDt>
+          <PostalCode>M1B2P4</PostalCode>
+          <PrivateEntrance>null</PrivateEntrance>
+          <PropertyFeatures1>null</PropertyFeatures1>
+          <PropertyFeatures2>null</PropertyFeatures2>
+          <PropertyFeatures3>null</PropertyFeatures3>
+          <PropertyFeatures4>null</PropertyFeatures4>
+          <PropertyFeatures5>null</PropertyFeatures5>
+          <PropertyFeatures6>null</PropertyFeatures6>
+          <Province>Ontario</Province>
+          <RemarksForClients>Great Opportunity To Own A Condo For Less
+            Than The Rent. Ideal For Owner Or An Investor. It Offers
+            Privacy And Wide Open Spaces, Spacious Front Hall Opens
+            To A Large Living Area, Walk Out To Balcony, And A Large
+            Kitchen, 2 Spacious Bedrooms Perfect For A Young Family.
+            Close To Schools, Parks, Malvern Town Centre, Easy To
+            Access To Ttc And Hwy 401. The Property Needs Work
+          </RemarksForClients>
+          <Retirement>null</Retirement>
+          <Room1>Living</Room1>
+          <Room1Desc1>Combined W/Dining</Room1Desc1>
+          <Room1Desc2>Parquet Floor</Room1Desc2>
+          <Room1Desc3>W/O To Balcony</Room1Desc3>
+          <Room1Length>5.02</Room1Length>
+          <Room1Width>5.26</Room1Width>
+          <Room10>null</Room10>
+          <Room10Desc1>null</Room10Desc1>
+          <Room10Desc2>null</Room10Desc2>
+          <Room10Desc3>null</Room10Desc3>
+          <Room10Length>null</Room10Length>
+          <Room10Width>null</Room10Width>
+          <Room11>null</Room11>
+          <Room11Desc1>null</Room11Desc1>
+          <Room11Desc2>null</Room11Desc2>
+          <Room11Desc3>null</Room11Desc3>
+          <Room11Length>null</Room11Length>
+          <Room11Width>null</Room11Width>
+          <Room12>null</Room12>
+          <Room12Desc1>null</Room12Desc1>
+          <Room12Desc2>null</Room12Desc2>
+          <Room12Desc3>null</Room12Desc3>
+          <Room12Length>null</Room12Length>
+          <Room12Width>null</Room12Width>
+          <Room2>Dining</Room2>
+          <Room2Desc1>Combined W/Living</Room2Desc1>
+          <Room2Desc2>Parquet Floor</Room2Desc2>
+          <Room2Desc3>null</Room2Desc3>
+          <Room2Length>5.02</Room2Length>
+          <Room2Width>5.26</Room2Width>
+          <Room3>Kitchen</Room3>
+          <Room3Desc1>Eat-In Kitchen</Room3Desc1>
+          <Room3Desc2>Ceramic Floor</Room3Desc2>
+          <Room3Desc3>null</Room3Desc3>
+          <Room3Length>3.05</Room3Length>
+          <Room3Width>2.80</Room3Width>
+          <Room4>Master</Room4>
+          <Room4Desc1>W/I Closet</Room4Desc1>
+          <Room4Desc2>Parquet Floor</Room4Desc2>
+          <Room4Desc3>4 Pc Ensuite</Room4Desc3>
+          <Room4Length>5.25</Room4Length>
+          <Room4Width>5.00</Room4Width>
+          <Room5>2nd Br</Room5>
+          <Room5Desc1>Closet</Room5Desc1>
+          <Room5Desc2>Parquet Floor</Room5Desc2>
+          <Room5Desc3>null</Room5Desc3>
+          <Room5Length>4.00</Room5Length>
+          <Room5Width>4.20</Room5Width>
+          <Room6>Utility</Room6>
+          <Room6Desc1>null</Room6Desc1>
+          <Room6Desc2>null</Room6Desc2>
+          <Room6Desc3>null</Room6Desc3>
+          <Room6Length>2.15</Room6Length>
+          <Room6Width>2.05</Room6Width>
+          <Room7>null</Room7>
+          <Room7Desc1>null</Room7Desc1>
+          <Room7Desc2>null</Room7Desc2>
+          <Room7Desc3>null</Room7Desc3>
+          <Room7Length>null</Room7Length>
+          <Room7Width>null</Room7Width>
+          <Room8>null</Room8>
+          <Room8Desc1>null</Room8Desc1>
+          <Room8Desc2>null</Room8Desc2>
+          <Room8Desc3>null</Room8Desc3>
+          <Room8Length>null</Room8Length>
+          <Room8Width>null</Room8Width>
+          <Room9>null</Room9>
+          <Room9Desc1>null</Room9Desc1>
+          <Room9Desc2>null</Room9Desc2>
+          <Room9Desc3>null</Room9Desc3>
+          <Room9Length>null</Room9Length>
+          <Room9Width>null</Room9Width>
+          <Rooms>6</Rooms>
+          <RoomsPlus>null</RoomsPlus>
+          <SaleLease>Sale</SaleLease>
+          <SpecialDesignation1>Unknown</SpecialDesignation1>
+          <SpecialDesignation2>null</SpecialDesignation2>
+          <SpecialDesignation3>null</SpecialDesignation3>
+          <SpecialDesignation4>null</SpecialDesignation4>
+          <SpecialDesignation5>null</SpecialDesignation5>
+          <SpecialDesignation6>null</SpecialDesignation6>
+          <Status>A</Status>
+          <Street>100</Street>
+          <StreetAbbreviation>Crt</StreetAbbreviation>
+          <StreetDirection>null</StreetDirection>
+          <StreetName>Wingarden</StreetName>
+          <Style>Apartment</Style>
+          <TaxYear>2015</TaxYear>
+          <Taxes>932.00</Taxes>
+          <TypeOwnSrch>C.</TypeOwnSrch>
+          <TypeOwn1Out>Condo Apt</TypeOwn1Out>
+          <Uffi>null</Uffi>
+          <Unit>3</Unit>
+          <TimestampSql>2016-04-06 10:46:46.0</TimestampSql>
+          <VirtualTourUploadDate>null</VirtualTourUploadDate>
+          <VirtualTourURL>null</VirtualTourURL>
+          <Washrooms>2</Washrooms>
+          <WashroomsType1>1</WashroomsType1>
+          <WashroomsType1Pcs>4</WashroomsType1Pcs>
+          <WashroomsType1Level>Flat</WashroomsType1Level>
+          <WashroomsType2>1</WashroomsType2>
+          <WashroomsType2Pcs>4</WashroomsType2Pcs>
+          <WashroomsType2Level>null</WashroomsType2Level>
+          <WashroomsType3>null</WashroomsType3>
+          <WashroomsType3Pcs>null</WashroomsType3Pcs>
+          <WashroomsType3Level>null</WashroomsType3Level>
+          <WashroomsType4>null</WashroomsType4>
+          <WashroomsType4Pcs>null</WashroomsType4Pcs>
+          <WashroomsType4Level>null</WashroomsType4Level>
+          <WashroomsType5>null</WashroomsType5>
+          <WashroomsType5Pcs>null</WashroomsType5Pcs>
+          <WashroomsType5Level>null</WashroomsType5Level>
+          <WaterIncluded>Y</WaterIncluded>
+          <Zoning>Residential</Zoning>
+        </Listing>
+      </CondoProperty>
+      <CondoProperty>
+        <Listing>
+          <SharesPer>null</SharesPer>
+          <Address>340 Dixon Rd</Address>
+          <AirConditioning>Window Unit</AirConditioning>
+          <AllInclusive>null</AllInclusive>
+          <ApproxAge>null</ApproxAge>
+          <ApproxSquareFootage>1000-1199</ApproxSquareFootage>
+          <AptUnit>1201</AptUnit>
+          <Area>Toronto</Area>
+          <AreaCode>01</AreaCode>
+          <Assessment>null</Assessment>
+          <AssessmentYear>null</AssessmentYear>
+          <Balcony>Open</Balcony>
+          <Basement1>None</Basement1>
+          <Basement2>null</Basement2>
+          <Bedrooms>2</Bedrooms>
+          <BedroomsPlus>null</BedroomsPlus>
+          <BuildingInsuranceIncluded>Y</BuildingInsuranceIncluded>
+          <BuildingAmenities1>Security Guard</BuildingAmenities1>
+          <BuildingAmenities2>Indoor Pool</BuildingAmenities2>
+          <BuildingAmenties3>Recreation Room</BuildingAmenties3>
+          <BuildingAmenities4>Exercise Room</BuildingAmenities4>
+          <BuildingAmenities5>Sauna</BuildingAmenities5>
+          <BuildingAmenities6>null</BuildingAmenities6>
+          <CableTVIncluded>Y</CableTVIncluded>
+          <CacIncluded>N</CacIncluded>
+          <CentralVac>null</CentralVac>
+          <CommonElementsIncluded>Y</CommonElementsIncluded>
+          <Community>Kingsview Village-The Westway</Community>
+          <CommunityCode>01.W09.0060</CommunityCode>
+          <CondoCorp>42</CondoCorp>
+          <CondoRegistryOffice>YCC</CondoRegistryOffice>
+          <CondoTaxesIncluded>N</CondoTaxesIncluded>
+          <DirectionsCrossStreets>Islington/Dixon
+          </DirectionsCrossStreets>
+          <DisplayAddressOnInternet>Y</DisplayAddressOnInternet>
+          <Elevator>null</Elevator>
+          <EnsuiteLaundry>Y</EnsuiteLaundry>
+          <Exposure>Sw</Exposure>
+          <Exterior1>Brick</Exterior1>
+          <Exterior2>null</Exterior2>
+          <Extras>Light Fixtures, Window Blinds,Appliances
+            Negotiable,
+          </Extras>
+          <FamilyRoom>N</FamilyRoom>
+          <FireplaceStove>N</FireplaceStove>
+          <Furnished>null</Furnished>
+          <GarageType>Undergrnd</GarageType>
+          <GarageParkSpaces>1.0</GarageParkSpaces>
+          <HeatIncluded>Y</HeatIncluded>
+          <HeatSource>Gas</HeatSource>
+          <HeatType>Water</HeatType>
+          <HydroIncluded>N</HydroIncluded>
+          <IdxUpdtedDt>null</IdxUpdtedDt>
+          <Kitchens>1</Kitchens>
+          <KitchensPlus>null</KitchensPlus>
+          <LaundryAccess>null</LaundryAccess>
+          <LaundryLevel>null</LaundryLevel>
+          <LeaseTerm>null</LeaseTerm>
+          <Level>12</Level>
+          <Level1>Flat</Level1>
+          <Level10>null</Level10>
+          <Level11>null</Level11>
+          <Level12>null</Level12>
+          <Level2>Flat</Level2>
+          <Level3>Flat</Level3>
+          <Level4>Flat</Level4>
+          <Level5>Flat</Level5>
+          <Level6>Flat</Level6>
+          <Level7>Flat</Level7>
+          <Level8>null</Level8>
+          <Level9>null</Level9>
+          <ListBrokerage>HOMELIFE/TREASURE REALTY LTD., BROKERAGE
+          </ListBrokerage>
+          <ListPrice>104900.00</ListPrice>
+          <Locker>None</Locker>
+          <LockerNum>null</LockerNum>
+          <Maintenance>525.00</Maintenance>
+          <Map>107</Map>
+          <MapColumn>7</MapColumn>
+          <MapRow>H</MapRow>
+          <MLS>W3425521</MLS>
+          <Municipality>Toronto</Municipality>
+          <MunicipalityDistrict>Toronto W09</MunicipalityDistrict>
+          <MunicipalityCode>01.W09</MunicipalityCode>
+          <OutofAreaMunicipality></OutofAreaMunicipality>
+          <ParkCostMo>null</ParkCostMo>
+          <ParkingIncluded>Y</ParkingIncluded>
+          <ParkingLegalDescription>P1</ParkingLegalDescription>
+          <ParkingLegalDescription2>null</ParkingLegalDescription2>
+          <ParkingSpaces>1</ParkingSpaces>
+          <ParkingSpot1>#1</ParkingSpot1>
+          <ParkingSpot2>null</ParkingSpot2>
+          <ParkingType>Owned</ParkingType>
+          <ParkingType2>null</ParkingType2>
+          <ParkingDrive>Undergrnd</ParkingDrive>
+          <PetsPermitted>Restrict</PetsPermitted>
+          <ParcelId>null</ParcelId>
+          <PixUpdtedDt>2016-02-29 09:34:39.0</PixUpdtedDt>
+          <PostalCode>M9R1T1</PostalCode>
+          <PrivateEntrance>null</PrivateEntrance>
+          <PropertyFeatures1>null</PropertyFeatures1>
+          <PropertyFeatures2>null</PropertyFeatures2>
+          <PropertyFeatures3>null</PropertyFeatures3>
+          <PropertyFeatures4>null</PropertyFeatures4>
+          <PropertyFeatures5>null</PropertyFeatures5>
+          <PropertyFeatures6>null</PropertyFeatures6>
+          <Province>Ontario</Province>
+          <RemarksForClients>***Attention***First Time Buyers, Value
+            For Your Money, Opportunity To Own For Less Than A Rent
+            And Build Equity. This South-West Facing Corner
+            Unit,2Bedroom,Living,Dining , Washroom,Open Balcony And
+            Lots Of Natural Light.Very Convenient Location With Easy
+            Access To Pearson Int&apos;l Airport, Hwys, And Steps
+            Away From T.T.C. Unit Shows Very Well, Updated And
+            Maintained.
+          </RemarksForClients>
+          <Retirement>null</Retirement>
+          <Room1>Living</Room1>
+          <Room1Desc1>Laminate</Room1Desc1>
+          <Room1Desc2>W/O To Balcony</Room1Desc2>
+          <Room1Desc3>Open Concept</Room1Desc3>
+          <Room1Length>4.90</Room1Length>
+          <Room1Width>3.60</Room1Width>
+          <Room10>null</Room10>
+          <Room10Desc1>null</Room10Desc1>
+          <Room10Desc2>null</Room10Desc2>
+          <Room10Desc3>null</Room10Desc3>
+          <Room10Length>null</Room10Length>
+          <Room10Width>null</Room10Width>
+          <Room11>null</Room11>
+          <Room11Desc1>null</Room11Desc1>
+          <Room11Desc2>null</Room11Desc2>
+          <Room11Desc3>null</Room11Desc3>
+          <Room11Length>null</Room11Length>
+          <Room11Width>null</Room11Width>
+          <Room12>null</Room12>
+          <Room12Desc1>null</Room12Desc1>
+          <Room12Desc2>null</Room12Desc2>
+          <Room12Desc3>null</Room12Desc3>
+          <Room12Length>null</Room12Length>
+          <Room12Width>null</Room12Width>
+          <Room2>Dining</Room2>
+          <Room2Desc1>Laminate</Room2Desc1>
+          <Room2Desc2>Open Concept</Room2Desc2>
+          <Room2Desc3>null</Room2Desc3>
+          <Room2Length>4.10</Room2Length>
+          <Room2Width>3.60</Room2Width>
+          <Room3>Kitchen</Room3>
+          <Room3Desc1>Ceramic Floor</Room3Desc1>
+          <Room3Desc2>Updated</Room3Desc2>
+          <Room3Desc3>Ceramic Back Splash</Room3Desc3>
+          <Room3Length>3.90</Room3Length>
+          <Room3Width>2.00</Room3Width>
+          <Room4>Breakfast</Room4>
+          <Room4Desc1>Combined W/Kitchen</Room4Desc1>
+          <Room4Desc2>Ceramic Floor</Room4Desc2>
+          <Room4Desc3>null</Room4Desc3>
+          <Room4Length>3.90</Room4Length>
+          <Room4Width>2.00</Room4Width>
+          <Room5>Master</Room5>
+          <Room5Desc1>Laminate</Room5Desc1>
+          <Room5Desc2>Double Closet</Room5Desc2>
+          <Room5Desc3>null</Room5Desc3>
+          <Room5Length>3.90</Room5Length>
+          <Room5Width>3.30</Room5Width>
+          <Room6>2nd Br</Room6>
+          <Room6Desc1>Laminate</Room6Desc1>
+          <Room6Desc2>Double Closet</Room6Desc2>
+          <Room6Desc3>null</Room6Desc3>
+          <Room6Length>3.90</Room6Length>
+          <Room6Width>3.30</Room6Width>
+          <Room7>Laundry</Room7>
+          <Room7Desc1>null</Room7Desc1>
+          <Room7Desc2>null</Room7Desc2>
+          <Room7Desc3>null</Room7Desc3>
+          <Room7Length>2.20</Room7Length>
+          <Room7Width>1.60</Room7Width>
+          <Room8>null</Room8>
+          <Room8Desc1>null</Room8Desc1>
+          <Room8Desc2>null</Room8Desc2>
+          <Room8Desc3>null</Room8Desc3>
+          <Room8Length>null</Room8Length>
+          <Room8Width>null</Room8Width>
+          <Room9>null</Room9>
+          <Room9Desc1>null</Room9Desc1>
+          <Room9Desc2>null</Room9Desc2>
+          <Room9Desc3>null</Room9Desc3>
+          <Room9Length>null</Room9Length>
+          <Room9Width>null</Room9Width>
+          <Rooms>5</Rooms>
+          <RoomsPlus>null</RoomsPlus>
+          <SaleLease>Sale</SaleLease>
+          <SpecialDesignation1>Unknown</SpecialDesignation1>
+          <SpecialDesignation2>null</SpecialDesignation2>
+          <SpecialDesignation3>null</SpecialDesignation3>
+          <SpecialDesignation4>null</SpecialDesignation4>
+          <SpecialDesignation5>null</SpecialDesignation5>
+          <SpecialDesignation6>null</SpecialDesignation6>
+          <Status>A</Status>
+          <Street>340</Street>
+          <StreetAbbreviation>Rd</StreetAbbreviation>
+          <StreetDirection>null</StreetDirection>
+          <StreetName>Dixon</StreetName>
+          <Style>Apartment</Style>
+          <TaxYear>2016</TaxYear>
+          <Taxes>352.00</Taxes>
+          <TypeOwnSrch>C.</TypeOwnSrch>
+          <TypeOwn1Out>Condo Apt</TypeOwn1Out>
+          <Uffi>null</Uffi>
+          <Unit>1</Unit>
+          <TimestampSql>2016-04-06 10:36:14.0</TimestampSql>
+          <VirtualTourUploadDate>null</VirtualTourUploadDate>
+          <VirtualTourURL>null</VirtualTourURL>
+          <Washrooms>1</Washrooms>
+          <WashroomsType1>1</WashroomsType1>
+          <WashroomsType1Pcs>4</WashroomsType1Pcs>
+          <WashroomsType1Level>null</WashroomsType1Level>
+          <WashroomsType2>null</WashroomsType2>
+          <WashroomsType2Pcs>null</WashroomsType2Pcs>
+          <WashroomsType2Level>null</WashroomsType2Level>
+          <WashroomsType3>null</WashroomsType3>
+          <WashroomsType3Pcs>null</WashroomsType3Pcs>
+          <WashroomsType3Level>null</WashroomsType3Level>
+          <WashroomsType4>null</WashroomsType4>
+          <WashroomsType4Pcs>null</WashroomsType4Pcs>
+          <WashroomsType4Level>null</WashroomsType4Level>
+          <WashroomsType5>null</WashroomsType5>
+          <WashroomsType5Pcs>null</WashroomsType5Pcs>
+          <WashroomsType5Level>null</WashroomsType5Level>
+          <WaterIncluded>Y</WaterIncluded>
+          <Zoning>Residential</Zoning>
+        </Listing>
+      </CondoProperty>
+    </REProperties>
+  </REData>
+  <MAXROWS/>
+</RETS>

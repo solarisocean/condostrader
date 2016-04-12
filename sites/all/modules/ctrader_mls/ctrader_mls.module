@@ -30,6 +30,13 @@ function ctrader_mls_menu() {
     'access arguments' => array('administer modules'),
     'file' => 'inc/ctrader_mls.rets_connection.inc',
   );
+  $items['rets-xml-parser'] = array(
+    'title' => 'RETS xml parser',
+    'page callback' => '_rets_xml_parser',
+    'access arguments' => array('administer modules'),
+    'file' => 'inc/ctrader_mls.rets_xml_parser.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
 
   return $items;
 }
