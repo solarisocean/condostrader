@@ -184,7 +184,8 @@ function large_xml_import_operation(&$context) {
 
   $condo_count = count($condos);
 
-  $items_per_pass = 6;
+  $items_per_pass = 4;
+
   if (!isset($context['sandbox']['progress'])) {
     $context['sandbox']['progress'] = 0;
     $context['sandbox']['current'] = 0;
@@ -273,7 +274,7 @@ function large_xml_import_operation(&$context) {
                 foreach ($fields_metadata as $field_data) {
                   if ($mapping->systemname == $field_data['SystemName']) {
                     $field_standart_name = $field_data['StandardName'];
-                    $field_value = $condo->Listing->{$field_standart_name}->__toString();
+                    $field_value = $condo->Listing->{$field_standart_name}->__toString() == 'null' ? '' : $condo->Listing->{$field_standart_name}->__toString();
 
                     $item->{$mapping->field_name}[LANGUAGE_NONE][0]['value'] = isset($field_value) ? $field_value : NULL;
                   }
@@ -321,7 +322,7 @@ function large_xml_import_operation(&$context) {
       unset($_SESSION['media_files']);
       $context['finished'] = 1;
     }
-    if ($context['sandbox']['progress'] > 17) {
+    if ($context['sandbox']['progress'] > 5) {
       unset($_SESSION['media_files']);
       $context['finished'] = 1;
     }
