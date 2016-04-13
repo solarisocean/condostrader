@@ -6,6 +6,14 @@
  * Time: 15:50
  */
 
+
+/**
+ * Implements hook_init().
+ */
+function ctrader_mls_init() {
+
+}
+
 /**
  * Implements hook_menu().
  */
@@ -166,16 +174,23 @@ function xml_import_form_submit($form, &$form_state) {
  * Large XML test operation.
  */
 function large_xml_import_operation(&$context) {
+  if (!$_SESSION['media_files']) {
+    $dir = 'public://import_data/06_04_16/cnd_data/condo_media';
+    $_SESSION['media_files'] = scandir($dir, 1);
+    $_SESSION['media_files']['dir'] = $dir;
+  }
 
   $condos = array();
-  $xml = simplexml_load_file(drupal_get_path('module', 'ctrader_mls') . '/files/cnd_test_xml/cnd.xml');
+  $xml = simplexml_load_file(drupal_get_path('module', 'ctrader_mls') . '/files/cnd_test_xml/test_condo.xml');
+//  $xml = simplexml_load_file(drupal_get_path('module', 'ctrader_mls') . '/files/cnd_test_xml/cnd.xml');
+
   foreach ($xml->REData->REProperties->CondoProperty as $condo) {
     $condos[] = $condo;
   }
 
   $condo_count = count($condos);
 
-  $items_per_pass = 10;
+  $items_per_pass = 1;
   if (!isset($context['sandbox']['progress'])) {
     $context['sandbox']['progress'] = 0;
     $context['sandbox']['current'] = 0;
@@ -185,96 +200,136 @@ function large_xml_import_operation(&$context) {
   $records = array_slice($condos, $context['sandbox']['current'], $items_per_pass);
 
   if (!empty($records)) {
-
-    $rets_login_url = variable_get('rets_login_url', '');
-    $rets_username = variable_get('rets_username', '');
-    $rets_password = variable_get('rets_password', '');
-    $rets_user_agent = variable_get('rets_user_agent', '');
-    $rets_user_agent_password = variable_get('rets_user_agent_password', '');
-
+    $last_item = -1;
 
     $connection = entity_load('drealty_connection_entity', array('toronto_rets_connection'));
     $connection = end($connection);
     $field_mappings = $connection->FetchFieldMappings();
 
-    $rets = new phRETS;
-    $rets->Connect($rets_login_url, $rets_username, $rets_password, $rets_user_agent_password);
-    $fields_metadata = $rets->GetMetadataTable("Property", "CondoProperty");
+    $dc = new drealtyConnection();
+    if ($dc->connect($connection->conid)) {
+      $fields_metadata = $dc->rets->GetMetadataTable("Property", "CondoProperty");
+      if ($fields_metadata) {
+        $items = array();
+        foreach ($records as $key => $condo) {
+          $last_item = $key;
+          $ml_num = $condo->Listing->MLS->__toString();
 
-    $items = array();
-    foreach ($records as $key => $condo) {
+          $item = entity_create('drealty_listing', array(
+            'id' => NULL,
+            'type' => 'toronto_condo',
+            'conid' => NULL,
+            'hash' => NULL,
+            'process_images' => NULL,
+            'rets_imported' => FALSE,
+            'status' => NULL,
+            'rets_key' => $ml_num,
+            'rets_id' => $ml_num,
+            'class' => NULL,
+            'active' => NULL,
+            'label' => $condo->Listing->Address->__toString(),
+            'created' => REQUEST_TIME,
+            'changed' => REQUEST_TIME,
+          ));
 
-      $item = entity_create('drealty_listing', array(
-        'id' => NULL,
-        'type' => 'toronto_condo',
-        'conid' => NULL,
-        'hash' => NULL,
-        'process_images' => NULL,
-        'rets_imported' => FALSE,
-        'status' => NULL,
-        'rets_key' => $condo->Listing->MLS->__toString(),
-        'rets_id' => $condo->Listing->MLS->__toString(),
-        'class' => NULL,
-        'active' => NULL,
-        'label' => $condo->Listing->Address->__toString(),
-        'created' => REQUEST_TIME,
-        'changed' => REQUEST_TIME,
-      ));
-      foreach ($field_mappings as $mapping) {
-        $ftype = $mapping->field_api_type;
-        switch ($ftype) {
-          case 'text':
-            foreach ($fields_metadata as $field_data) {
-              if ($mapping->systemname == $field_data['SystemName']) {
-                $field_standart_name = $field_data['StandardName'];
-                $field_value = $condo->Listing->{$field_standart_name}->__toString();
 
-                $item->{$mapping->field_name}[LANGUAGE_NONE][0]['value'] = isset($field_value) ? $field_value : NULL;
-              }
+          $aaa = entity_load('drealty_listing', array(262));
+
+
+          $item_media_files_list = array();
+          foreach ($_SESSION['media_files'] as $m_file) {
+            if (strpos($m_file, $ml_num)) {
+              $file_data = array(
+                'filename' => $m_file,
+                'filepath' => $_SESSION['media_files']['dir'] . '/' . $m_file,
+                'filemime' => file_get_mimetype($_SESSION['media_files']['dir'] . '/' . $m_file),
+              );
+              $item_media_files_list[] = $file_data;
             }
-            break;
-          case 'number_integer':
-          case 'number_decimal':
-          case 'number_float':
-            foreach ($fields_metadata as $field_data) {
-              if ($mapping->systemname == $field_data['SystemName']) {
-                $field_standart_name = $field_data['StandardName'];
-                $field_value = $condo->Listing->{$field_standart_name}->__toString();
+          }
+          $stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
 
-                $item->{$mapping->field_name}[LANGUAGE_NONE][0]['value'] = isset($field_value) ? $field_value : NULL;
-              }
-            }
-            break;
-          case 'text_long':
-            foreach ($fields_metadata as $field_data) {
-              if ($mapping->systemname == $field_data['SystemName']) {
-                $field_standart_name = $field_data['StandardName'];
-                $field_value = $condo->Listing->{$field_standart_name}->__toString();
+          if (!empty($item_media_files_list)) {
+            foreach ($item_media_files_list as $item_file) {
+              $image_info = image_get_info($item_file['filepath']);
+              $file = file_save_data(file_get_contents($item_file['filepath']), file_default_scheme() . '://condo_media/' . basename($item_file['filepath']));
+              $file->status = 1;
+              $file->filesize = $image_info['file_size'];
+              $file->height = $image_info['height'];
+              $file->width = $image_info['width'];
+              $file->timestamp = time();
+              $file->alt = $item_file['filename'] . t(' image');
+              $file->title = $item_file['filename'];
 
-                $item->{$mapping->field_name}[LANGUAGE_NONE][0]['value'] = isset($field_value) ? $field_value : NULL;
-                $item->{$mapping->field_name}[LANGUAGE_NONE][0]['format'] = 'plain_text';
-              }
+
+              $aaa[262]->field_toronto_gallery['und'][] = (array) $file;
             }
-            break;
+            $aaa[262]->save();
+
+          }
+
+          $stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
+
+          foreach ($field_mappings as $mapping) {
+            $ftype = $mapping->field_api_type;
+            switch ($ftype) {
+              case 'text':
+                foreach ($fields_metadata as $field_data) {
+                  if ($mapping->systemname == $field_data['SystemName']) {
+                    $field_standart_name = $field_data['StandardName'];
+                    $field_value = $condo->Listing->{$field_standart_name}->__toString();
+
+                    $item->{$mapping->field_name}[LANGUAGE_NONE][0]['value'] = isset($field_value) ? $field_value : NULL;
+                  }
+                }
+                break;
+              case 'number_integer':
+              case 'number_decimal':
+              case 'number_float':
+                foreach ($fields_metadata as $field_data) {
+                  if ($mapping->systemname == $field_data['SystemName']) {
+                    $field_standart_name = $field_data['StandardName'];
+                    $field_value = $condo->Listing->{$field_standart_name}->__toString();
+
+                    $item->{$mapping->field_name}[LANGUAGE_NONE][0]['value'] = isset($field_value) ? $field_value : NULL;
+                  }
+                }
+                break;
+              case 'text_long':
+                foreach ($fields_metadata as $field_data) {
+                  if ($mapping->systemname == $field_data['SystemName']) {
+                    $field_standart_name = $field_data['StandardName'];
+                    $field_value = $condo->Listing->{$field_standart_name}->__toString();
+
+                    $item->{$mapping->field_name}[LANGUAGE_NONE][0]['value'] = isset($field_value) ? $field_value : NULL;
+                    $item->{$mapping->field_name}[LANGUAGE_NONE][0]['format'] = 'plain_text';
+                  }
+                }
+                break;
+            }
+          }
+          $items[] = $item;
+        }
+
+        foreach ($items as $entity_presave) {
+//          $entity_presave->save();
         }
       }
-      $items[] = $item;
     }
 
-    foreach ($items as $entity_presave) {
-      $entity_presave->save();
-    }
 
-    $context['sandbox']['current'] = $context['sandbox']['progress'] + $key + 1;
+    $context['sandbox']['current'] = $context['sandbox']['progress'] + $last_item + 1;
     $context['sandbox']['progress'] += count($records);
 
     $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
     if ($context['finished'] >= 1) {
+      unset($_SESSION['media_files']);
       $context['finished'] = 1;
     }
-//    if ($context['sandbox']['progress'] > 200) {
-//      $context['finished'] = 1;
-//    }
+    if ($context['sandbox']['progress'] > 2) {
+      unset($_SESSION['media_files']);
+      $context['finished'] = 1;
+    }
   }
 }
 
