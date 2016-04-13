@@ -232,10 +232,6 @@ function large_xml_import_operation(&$context) {
             'changed' => REQUEST_TIME,
           ));
 
-
-          $aaa = entity_load('drealty_listing', array(262));
-
-
           $item_media_files_list = array();
           foreach ($_SESSION['media_files'] as $m_file) {
             if (strpos($m_file, $ml_num)) {
@@ -247,7 +243,6 @@ function large_xml_import_operation(&$context) {
               $item_media_files_list[] = $file_data;
             }
           }
-          $stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
 
           if (!empty($item_media_files_list)) {
             foreach ($item_media_files_list as $item_file) {
@@ -260,15 +255,9 @@ function large_xml_import_operation(&$context) {
               $file->timestamp = time();
               $file->alt = $item_file['filename'] . t(' image');
               $file->title = $item_file['filename'];
-
-
-              $aaa[262]->field_toronto_gallery['und'][] = (array) $file;
+              $item->field_toronto_gallery[LANGUAGE_NONE][] = (array) $file;
             }
-            $aaa[262]->save();
-
           }
-
-          $stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
 
           foreach ($field_mappings as $mapping) {
             $ftype = $mapping->field_api_type;
@@ -312,7 +301,7 @@ function large_xml_import_operation(&$context) {
         }
 
         foreach ($items as $entity_presave) {
-//          $entity_presave->save();
+          $entity_presave->save();
         }
       }
     }
@@ -326,10 +315,10 @@ function large_xml_import_operation(&$context) {
       unset($_SESSION['media_files']);
       $context['finished'] = 1;
     }
-    if ($context['sandbox']['progress'] > 2) {
-      unset($_SESSION['media_files']);
-      $context['finished'] = 1;
-    }
+//    if ($context['sandbox']['progress'] > 2) {
+//      unset($_SESSION['media_files']);
+//      $context['finished'] = 1;
+//    }
   }
 }
 
