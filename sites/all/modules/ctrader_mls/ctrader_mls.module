@@ -138,7 +138,6 @@ function ctrader_mls_libraries_info() {
   return $libraries;
 }
 
-
 /**
  * Large XML import form.
  */
@@ -174,15 +173,10 @@ function xml_import_form_submit($form, &$form_state) {
  * Large XML test operation.
  */
 function large_xml_import_operation(&$context) {
-  if (!$_SESSION['media_files']) {
-    $dir = 'public://import_data/06_04_16/cnd_data/condo_media';
-    $_SESSION['media_files'] = scandir($dir, 1);
-    $_SESSION['media_files']['dir'] = $dir;
-  }
-
+  $folder_with_data_to_import = file_default_scheme() . '://import_data/06_04_16/cnd_data';
   $condos = array();
-  $xml = simplexml_load_file(drupal_get_path('module', 'ctrader_mls') . '/files/cnd_test_xml/test_condo.xml');
-//  $xml = simplexml_load_file(drupal_get_path('module', 'ctrader_mls') . '/files/cnd_test_xml/cnd.xml');
+//  $xml = simplexml_load_file(drupal_get_path('module', 'ctrader_mls') . '/files/cnd_test_xml/test_condo.xml');
+  $xml = simplexml_load_file($folder_with_data_to_import . '/cnd.xml');
 
   foreach ($xml->REData->REProperties->CondoProperty as $condo) {
     $condos[] = $condo;
@@ -190,7 +184,7 @@ function large_xml_import_operation(&$context) {
 
   $condo_count = count($condos);
 
-  $items_per_pass = 1;
+  $items_per_pass = 6;
   if (!isset($context['sandbox']['progress'])) {
     $context['sandbox']['progress'] = 0;
     $context['sandbox']['current'] = 0;
@@ -227,23 +221,35 @@ function large_xml_import_operation(&$context) {
             'rets_id' => $ml_num,
             'class' => NULL,
             'active' => NULL,
-            'label' => $condo->Listing->Address->__toString(),
+            'label' => $condo->Listing->Address->__toString() ? $condo->Listing->Address->__toString() : $ml_num,
             'created' => REQUEST_TIME,
             'changed' => REQUEST_TIME,
           ));
 
-          $item_media_files_list = array();
+
+          // For photos import.
+          // Add data to image field.
+          if (!$_SESSION['media_files']) {
+            $dir = $folder_with_data_to_import . '/cnd_media';
+            $_SESSION['media_files'] = scandir($dir, 1);
+            $_SESSION['media_files']['dir'] = $dir;
+          }
+          $sort_filenames = array();
           foreach ($_SESSION['media_files'] as $m_file) {
             if (strpos($m_file, $ml_num)) {
-              $file_data = array(
-                'filename' => $m_file,
-                'filepath' => $_SESSION['media_files']['dir'] . '/' . $m_file,
-                'filemime' => file_get_mimetype($_SESSION['media_files']['dir'] . '/' . $m_file),
-              );
-              $item_media_files_list[] = $file_data;
+              $sort_filenames[] = $m_file;
             }
           }
-
+          sort($sort_filenames, SORT_NATURAL | SORT_FLAG_CASE);
+          $item_media_files_list = array();
+          foreach ($sort_filenames as $file_name) {
+            $file_data = array(
+              'filename' => $file_name,
+              'filepath' => $_SESSION['media_files']['dir'] . '/' . $file_name,
+              'filemime' => file_get_mimetype($_SESSION['media_files']['dir'] . '/' . $file_name),
+            );
+            $item_media_files_list[] = $file_data;
+          }
           if (!empty($item_media_files_list)) {
             foreach ($item_media_files_list as $item_file) {
               $image_info = image_get_info($item_file['filepath']);
@@ -253,11 +259,12 @@ function large_xml_import_operation(&$context) {
               $file->height = $image_info['height'];
               $file->width = $image_info['width'];
               $file->timestamp = time();
-              $file->alt = $item_file['filename'] . t(' image');
+              $file->alt = $ml_num . t(' image');
               $file->title = $item_file['filename'];
               $item->field_toronto_gallery[LANGUAGE_NONE][] = (array) $file;
             }
           }
+
 
           foreach ($field_mappings as $mapping) {
             $ftype = $mapping->field_api_type;
@@ -306,7 +313,6 @@ function large_xml_import_operation(&$context) {
       }
     }
 
-
     $context['sandbox']['current'] = $context['sandbox']['progress'] + $last_item + 1;
     $context['sandbox']['progress'] += count($records);
 
@@ -315,10 +321,10 @@ function large_xml_import_operation(&$context) {
       unset($_SESSION['media_files']);
       $context['finished'] = 1;
     }
-//    if ($context['sandbox']['progress'] > 2) {
-//      unset($_SESSION['media_files']);
-//      $context['finished'] = 1;
-//    }
+    if ($context['sandbox']['progress'] > 17) {
+      unset($_SESSION['media_files']);
+      $context['finished'] = 1;
+    }
   }
 }
 
