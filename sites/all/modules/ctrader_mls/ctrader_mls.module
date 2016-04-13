@@ -38,14 +38,13 @@ function ctrader_mls_menu() {
     'access arguments' => array('administer modules'),
     'file' => 'inc/ctrader_mls.rets_connection.inc',
   );
-  $items['rets-xml-parser'] = array(
-    'title' => 'RETS xml parser',
-    'page callback' => '_rets_xml_parser',
-    'access arguments' => array('administer modules'),
-    'file' => 'inc/ctrader_mls.rets_xml_parser.inc',
-    'type' => MENU_NORMAL_ITEM,
-  );
-  // создаем страницу с формой для запуска обработки
+//  $items['rets-xml-parser'] = array(
+//    'title' => 'RETS xml parser',
+//    'page callback' => '_rets_xml_parser',
+//    'access arguments' => array('administer modules'),
+//    'file' => 'inc/ctrader_mls.rets_xml_parser.inc',
+//    'type' => MENU_NORMAL_ITEM,
+//  );
   $items['import-condo-xml'] = array(
     'title' => 'Import data from XML file',
     'page callback' => 'drupal_get_form',
@@ -184,7 +183,7 @@ function large_xml_import_operation(&$context) {
 
   $condo_count = count($condos);
 
-  $items_per_pass = 4;
+  $items_per_pass = 100;
 
   if (!isset($context['sandbox']['progress'])) {
     $context['sandbox']['progress'] = 0;
@@ -222,7 +221,7 @@ function large_xml_import_operation(&$context) {
             'rets_id' => $ml_num,
             'class' => NULL,
             'active' => NULL,
-            'label' => $condo->Listing->Address->__toString() ? $condo->Listing->Address->__toString() : $ml_num,
+            'label' => $condo->Listing->Address->__toString() != 'null' ? $condo->Listing->Address->__toString() : $ml_num,
             'created' => REQUEST_TIME,
             'changed' => REQUEST_TIME,
           ));
@@ -322,10 +321,10 @@ function large_xml_import_operation(&$context) {
       unset($_SESSION['media_files']);
       $context['finished'] = 1;
     }
-    if ($context['sandbox']['progress'] > 5) {
-      unset($_SESSION['media_files']);
-      $context['finished'] = 1;
-    }
+//    if ($context['sandbox']['progress'] > 8) {
+//      unset($_SESSION['media_files']);
+//      $context['finished'] = 1;
+//    }
   }
 }
 
