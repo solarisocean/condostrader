@@ -1,0 +1,134 @@
+<?xml version="1.0" ?>
+<RETS ReplyCode="0" ReplyText="Operation successful">
+  <METADATA>
+    <Class>
+      <ClassName>CondoProperty</ClassName>
+      <StandardName>CondoProperty</StandardName>
+      <VisibleName>CND</VisibleName>
+
+      <Description/>
+      <TableVersion>1.1.77</TableVersion>
+      <TableDate>2015-10-27T22:34:24</TableDate>
+      <UpdateVersion>1.1.77</UpdateVersion>
+      <UpdateDate>2015-10-27T22:34:24</UpdateDate>
+      <ClassTimeStamp>MODTIMESTAMP</ClassTimeStamp>
+      <DeletedFlagField>DELETED</DeletedFlagField>
+      <DeletedFlagValue>1</DeletedFlagValue>
+
+      <METADATA-TABLE Class="CondoProperty" Date="2015-10-27T22:34:24"
+                      Resource="Property" Version="1.1.77">
+
+
+        <Field>
+          <SystemName>Vtour_updt</SystemName>
+          <StandardName>VirtualTourUploadDate</StandardName>
+          <LongName>Virtual Tour Upload Date</LongName>
+          <DBName>vtour_updt</DBName>
+          <ShortName>Virtual Tour Upload Date</ShortName>
+          <MaximumLength>10</MaximumLength>
+          <DataType>Date</DataType>
+          <Precision>23</Precision>
+          <Searchable>0</Searchable>
+          <Interpretation/>
+          <Alignment>0</Alignment>
+          <UseSeparator>0</UseSeparator>
+          <EditMaskID>0</EditMaskID>
+          <LookupName/>
+          <MaxSelect>0</MaxSelect>
+          <Units/>
+          <Index>0</Index>
+          <Minimum>0</Minimum>
+          <Maximum>0</Maximum>
+          <Default>0</Default>
+          <Required>0</Required>
+          <SearchHelpID>0</SearchHelpID>
+          <Unique>0</Unique>
+          <MetadataEntryID>Vtour_updt_1_0_0</MetadataEntryID>
+        </Field>
+
+        <Field>
+          <SystemName>Timestamp_sql</SystemName>
+          <StandardName>TimestampSql</StandardName>
+          <LongName>Updated timestamp</LongName>
+          <DBName>timestamp_sql</DBName>
+          <ShortName>Timestamp</ShortName>
+          <MaximumLength>10</MaximumLength>
+          <DataType>Date</DataType>
+          <Precision>0</Precision>
+          <Searchable>1</Searchable>
+          <Interpretation/>
+          <Alignment>0</Alignment>
+          <UseSeparator>0</UseSeparator>
+          <EditMaskID>0</EditMaskID>
+          <LookupName/>
+          <MaxSelect>0</MaxSelect>
+          <Units/>
+          <Index>0</Index>
+          <Minimum>0</Minimum>
+          <Maximum>0</Maximum>
+          <Default>0</Default>
+          <Required>0</Required>
+          <SearchHelpID>0</SearchHelpID>
+          <Unique>0</Unique>
+          <MetadataEntryID>Timestamp_sql_1_0_0</MetadataEntryID>
+        </Field>
+
+        <Field>
+          <SystemName>Idx_dt</SystemName>
+          <StandardName>IdxUpdtedDt</StandardName>
+          <LongName>IDX updated date</LongName>
+          <DBName>idx_dt</DBName>
+          <ShortName>IDX Dt</ShortName>
+          <MaximumLength>10</MaximumLength>
+          <DataType>Date</DataType>
+          <Precision>0</Precision>
+          <Searchable>0</Searchable>
+          <Interpretation/>
+          <Alignment>0</Alignment>
+          <UseSeparator>0</UseSeparator>
+          <EditMaskID>0</EditMaskID>
+          <LookupName/>
+          <MaxSelect>0</MaxSelect>
+          <Units/>
+          <Index>0</Index>
+          <Minimum>0</Minimum>
+          <Maximum>0</Maximum>
+          <Default>0</Default>
+          <Required>0</Required>
+          <SearchHelpID>0</SearchHelpID>
+          <Unique>0</Unique>
+          <MetadataEntryID>Idx_dt_1_0_0</MetadataEntryID>
+        </Field>
+        <Field>
+          <SystemName>Pix_updt</SystemName>
+          <StandardName>PixUpdtedDt</StandardName>
+          <LongName>Pix updated date</LongName>
+          <DBName>Ass_year</DBName>
+          <ShortName>Pix Dt</ShortName>
+          <MaximumLength>10</MaximumLength>
+          <DataType>Date</DataType>
+          <Precision>0</Precision>
+          <Searchable>1</Searchable>
+          <Interpretation/>
+          <Alignment>0</Alignment>
+          <UseSeparator>0</UseSeparator>
+          <EditMaskID>0</EditMaskID>
+          <LookupName/>
+          <MaxSelect>0</MaxSelect>
+          <Units/>
+          <Index>0</Index>
+          <Minimum>0</Minimum>
+          <Maximum>0</Maximum>
+          <Default>0</Default>
+          <Required>0</Required>
+          <SearchHelpID>0</SearchHelpID>
+          <Unique>0</Unique>
+          <MetadataEntryID>Pix_updt_1_0_0</MetadataEntryID>
+        </Field>
+
+      </METADATA-TABLE>
+
+
+    </Class>
+  </METADATA>
+</RETS>

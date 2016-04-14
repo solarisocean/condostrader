@@ -184,7 +184,7 @@ function large_xml_import_operation(&$context) {
 
   $condo_count = count($condos);
 
-  $items_per_pass = 100;
+  $items_per_pass = 36;
 
   if (!isset($context['sandbox']['progress'])) {
     $context['sandbox']['progress'] = 0;
@@ -287,8 +287,9 @@ function large_xml_import_operation(&$context) {
                   if ($mapping->systemname == $field_data['SystemName']) {
                     $field_standart_name = $field_data['StandardName'];
                     $field_value = $condo->Listing->{$field_standart_name}->__toString();
+                    $field_value = round(floatval($field_value), 2);
 
-                    $item->{$mapping->field_name}[LANGUAGE_NONE][0]['value'] = isset($field_value) ? $field_value : NULL;
+                    $item->{$mapping->field_name}[LANGUAGE_NONE][0]['value'] = (isset($field_value) && !empty($field_value)) ? $field_value : NULL;
                   }
                 }
                 break;
@@ -300,6 +301,16 @@ function large_xml_import_operation(&$context) {
 
                     $item->{$mapping->field_name}[LANGUAGE_NONE][0]['value'] = isset($field_value) ? $field_value : NULL;
                     $item->{$mapping->field_name}[LANGUAGE_NONE][0]['format'] = 'plain_text';
+                  }
+                }
+                break;
+              case 'datetime':
+                foreach ($fields_metadata as $field_data) {
+                  if ($mapping->systemname == $field_data['SystemName']) {
+                    $field_standart_name = $field_data['StandardName'];
+                    $field_value = $condo->Listing->{$field_standart_name}->__toString();
+
+                    $item->{$mapping->field_name}[LANGUAGE_NONE][0]['value'] = (isset($field_value) && !empty($field_value)) && $field_value != 'null' ? $field_value : '1960-01-01T00:00:00.000';
                   }
                 }
                 break;
@@ -322,10 +333,10 @@ function large_xml_import_operation(&$context) {
       unset($_SESSION['media_files']);
       $context['finished'] = 1;
     }
-//    if ($context['sandbox']['progress'] > 8) {
-//      unset($_SESSION['media_files']);
-//      $context['finished'] = 1;
-//    }
+    if ($context['sandbox']['progress'] > 100) {
+      unset($_SESSION['media_files']);
+      $context['finished'] = 1;
+    }
   }
 }
 
