@@ -146,6 +146,7 @@ function xml_import_form() {
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Start import'),
+    '#disabled' => TRUE,
   );
 
   return $form;
