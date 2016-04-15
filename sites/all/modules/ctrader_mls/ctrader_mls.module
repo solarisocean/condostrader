@@ -146,7 +146,7 @@ function xml_import_form() {
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Start import'),
-    '#disabled' => TRUE,
+//    '#disabled' => TRUE,
   );
 
   return $form;
@@ -184,7 +184,7 @@ function large_xml_import_operation(&$context) {
 
   $condo_count = count($condos);
 
-  $items_per_pass = 36;
+  $items_per_pass = 30;
 
   if (!isset($context['sandbox']['progress'])) {
     $context['sandbox']['progress'] = 0;
@@ -316,6 +316,7 @@ function large_xml_import_operation(&$context) {
                 break;
             }
           }
+
           $items[] = $item;
         }
 
@@ -333,7 +334,7 @@ function large_xml_import_operation(&$context) {
       unset($_SESSION['media_files']);
       $context['finished'] = 1;
     }
-    if ($context['sandbox']['progress'] > 100) {
+    if ($context['sandbox']['progress'] > 25) {
       unset($_SESSION['media_files']);
       $context['finished'] = 1;
     }
@@ -352,4 +353,17 @@ function large_xml_import_finished($success, $results, $operations) {
   }
 
   drupal_set_message($message);
+}
+
+/**
+ * Implements hook_field_attach_presave().
+ */
+function ctrader_mls_field_attach_presave($entity_type, $entity) {
+  switch ($entity_type) {
+    case 'drealty_listing':
+      if ($entity->type == 'toronto_condo' && isset($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'])) {
+        $entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'] = $entity->field_addr__torcond[LANGUAGE_NONE][0]['value'] . ' ' . $entity->field_area__torcond[LANGUAGE_NONE][0]['value'] . ', ' . $entity->field_county__torcond[LANGUAGE_NONE][0]['value'] . ', Canada';
+      }
+      break;
+  }
 }
