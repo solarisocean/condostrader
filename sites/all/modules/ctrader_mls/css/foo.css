@@ -1,0 +1,8 @@
+.panel-2col-stacked .panel-separator {
+  margin: 0 0 1em 0;
+  display: inline;
+}
+
+.contextual-links-region.panel-pane.pane-block[class*="pane-facetapi"] {
+  display: inline-block;
+}

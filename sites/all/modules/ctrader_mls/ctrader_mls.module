@@ -11,7 +11,10 @@
  * Implements hook_init().
  */
 function ctrader_mls_init() {
-
+  $alias = drupal_get_path_alias();
+  if ($alias == 'map-search') {
+    drupal_add_css(drupal_get_path('module', 'ctrader_mls') . "/css/foo.css");
+  }
 }
 
 /**
