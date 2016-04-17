@@ -370,3 +370,20 @@ function ctrader_mls_field_attach_presave($entity_type, $entity) {
       break;
   }
 }
+
+/**
+ * Implements hook_form_alter().
+ */
+function ctrader_mls_form_alter(&$form, &$form_state, $form_id) {
+  switch ($form_id) {
+    case 'drealty_resource_configure_form':
+      $add_image_chunk_size_options = array(
+        '75' => '75',
+        '100' => '100',
+      );
+      foreach ($add_image_chunk_size_options as $key => $value) {
+        $form['feed']['images']['image_chunk_size']['#options'][$key] = $value;
+      }
+      break;
+  }
+}
