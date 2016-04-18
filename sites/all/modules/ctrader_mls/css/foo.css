@@ -1,8 +1,12 @@
-.panel-2col-stacked .panel-separator {
+.pane-search-facets-toronto-condos .panel-separator {
   margin: 0 0 1em 0;
   display: inline;
 }
 
-.contextual-links-region.panel-pane.pane-block[class*="pane-facetapi"] {
+.pane-search-facets-toronto-condos .panel-separator {
+  display: inline;
+}
+
+.pane-search-facets-toronto-condos .pane-block[class*="pane-facetapi"] {
   display: inline-block;
 }

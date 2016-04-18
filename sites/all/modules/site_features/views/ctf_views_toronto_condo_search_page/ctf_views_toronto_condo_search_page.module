@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CT Features: Views: Toronto condo search page feature.
+ */
+
+include_once 'ctf_views_toronto_condo_search_page.features.inc';

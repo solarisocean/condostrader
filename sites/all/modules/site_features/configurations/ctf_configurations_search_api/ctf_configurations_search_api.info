@@ -1,0 +1,10 @@
+name = CT Features: Configurations: Search API
+description = Configuration for Search API
+core = 7.x
+package = CT Features: Configurations
+dependencies[] = entity
+dependencies[] = search_api
+dependencies[] = search_api_solr
+features[features_api][] = api:2
+features[search_api_index][] = toronto_condo_index
+features[search_api_server][] = solr_server

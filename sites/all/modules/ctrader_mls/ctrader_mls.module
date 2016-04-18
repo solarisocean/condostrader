@@ -12,7 +12,7 @@
  */
 function ctrader_mls_init() {
   $alias = drupal_get_path_alias();
-  if ($alias == 'map-search') {
+  if ($alias == 'search-condos' || drupal_is_front_page()) {
     drupal_add_css(drupal_get_path('module', 'ctrader_mls') . "/css/foo.css");
   }
 }
@@ -48,14 +48,14 @@ function ctrader_mls_menu() {
 //    'file' => 'inc/ctrader_mls.rets_xml_parser.inc',
 //    'type' => MENU_NORMAL_ITEM,
 //  );
-  $items['import-condo-xml'] = array(
-    'title' => 'Import data from XML file',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('xml_import_form'),
-    'access callback' => TRUE,
-    'type' => MENU_NORMAL_ITEM,
-    'menu_name' => 'main-menu',
-  );
+//  $items['import-condo-xml'] = array(
+//    'title' => 'Import data from XML file',
+//    'page callback' => 'drupal_get_form',
+//    'page arguments' => array('xml_import_form'),
+//    'access callback' => TRUE,
+//    'type' => MENU_NORMAL_ITEM,
+//    'menu_name' => 'main-menu',
+//  );
 
   return $items;
 }
@@ -149,7 +149,7 @@ function xml_import_form() {
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Start import'),
-//    '#disabled' => TRUE,
+    '#disabled' => TRUE,
   );
 
   return $form;
