@@ -1,0 +1,12 @@
+.pane-search-facets-toronto-condos .panel-separator {
+  margin: 0 0 1em 0;
+  display: inline;
+}
+
+.pane-search-facets-toronto-condos .panel-separator {
+  display: inline;
+}
+
+.pane-search-facets-toronto-condos .pane-block[class*="pane-facetapi"] {
+  display: inline-block;
+}

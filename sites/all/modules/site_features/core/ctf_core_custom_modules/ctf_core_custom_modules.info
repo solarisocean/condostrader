@@ -1,11 +1,15 @@
 name = CT Features: Core: Custom modules
 core = 7.x
 package = CT Features: Core
+dependencies[] = ctf_configurations_drealty
+dependencies[] = ctf_configurations_search_api
 dependencies[] = ctf_content_types_condo
 dependencies[] = ctf_core_field_bases
+dependencies[] = ctf_pages_main_page
 dependencies[] = ctf_pages_result_page
-dependencies[] = ctf_pages_solr_result_page
+dependencies[] = ctf_pages_toronto_condos_search_with_map
+dependencies[] = ctf_views_map
 dependencies[] = ctf_views_result_page
-dependencies[] = ctf_views_result_page_solr
+dependencies[] = ctf_views_toronto_condo_search_page
 dependencies[] = ctrader_mls
 features[features_api][] = api:2

@@ -11,7 +11,10 @@
  * Implements hook_init().
  */
 function ctrader_mls_init() {
-
+  $alias = drupal_get_path_alias();
+  if ($alias == 'search-condos' || drupal_is_front_page()) {
+    drupal_add_css(drupal_get_path('module', 'ctrader_mls') . "/css/foo.css");
+  }
 }
 
 /**
@@ -45,14 +48,14 @@ function ctrader_mls_menu() {
 //    'file' => 'inc/ctrader_mls.rets_xml_parser.inc',
 //    'type' => MENU_NORMAL_ITEM,
 //  );
-  $items['import-condo-xml'] = array(
-    'title' => 'Import data from XML file',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('xml_import_form'),
-    'access callback' => TRUE,
-    'type' => MENU_NORMAL_ITEM,
-    'menu_name' => 'main-menu',
-  );
+//  $items['import-condo-xml'] = array(
+//    'title' => 'Import data from XML file',
+//    'page callback' => 'drupal_get_form',
+//    'page arguments' => array('xml_import_form'),
+//    'access callback' => TRUE,
+//    'type' => MENU_NORMAL_ITEM,
+//    'menu_name' => 'main-menu',
+//  );
 
   return $items;
 }
@@ -184,7 +187,7 @@ function large_xml_import_operation(&$context) {
 
   $condo_count = count($condos);
 
-  $items_per_pass = 36;
+  $items_per_pass = 30;
 
   if (!isset($context['sandbox']['progress'])) {
     $context['sandbox']['progress'] = 0;
@@ -316,6 +319,7 @@ function large_xml_import_operation(&$context) {
                 break;
             }
           }
+
           $items[] = $item;
         }
 
@@ -333,7 +337,7 @@ function large_xml_import_operation(&$context) {
       unset($_SESSION['media_files']);
       $context['finished'] = 1;
     }
-    if ($context['sandbox']['progress'] > 100) {
+    if ($context['sandbox']['progress'] > 25) {
       unset($_SESSION['media_files']);
       $context['finished'] = 1;
     }
@@ -352,4 +356,34 @@ function large_xml_import_finished($success, $results, $operations) {
   }
 
   drupal_set_message($message);
+}
+
+/**
+ * Implements hook_field_attach_presave().
+ */
+function ctrader_mls_field_attach_presave($entity_type, $entity) {
+  switch ($entity_type) {
+    case 'drealty_listing':
+      if ($entity->type == 'toronto_condo' && isset($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'])) {
+        $entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'] = $entity->field_addr__torcond[LANGUAGE_NONE][0]['value'] . ' ' . $entity->field_area__torcond[LANGUAGE_NONE][0]['value'] . ', ' . $entity->field_county__torcond[LANGUAGE_NONE][0]['value'] . ', Canada';
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function ctrader_mls_form_alter(&$form, &$form_state, $form_id) {
+  switch ($form_id) {
+    case 'drealty_resource_configure_form':
+      $add_image_chunk_size_options = array(
+        '75' => '75',
+        '100' => '100',
+      );
+      foreach ($add_image_chunk_size_options as $key => $value) {
+        $form['feed']['images']['image_chunk_size']['#options'][$key] = $value;
+      }
+      break;
+  }
 }
