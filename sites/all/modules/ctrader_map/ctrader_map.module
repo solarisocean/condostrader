@@ -1,0 +1,162 @@
+<?php
+
+
+/**
+ * Implements hook_menu().
+ */
+function ctrader_map_menu() {
+  $items = array();
+  return $items;
+}
+
+
+/**
+ * Implements hook_init().
+ */
+function ctrader_map_init() {
+
+}
+
+
+/**
+ * Implements hook_search_api_solr_query_alter().
+ */
+function ctrader_map_search_api_solr_query_alter(array &$call_args, SearchApiQueryInterface $query) {
+  $options = $query->getOptions();
+  if (isset($options['query_label']) && $options['query_label'] == 'search_on_map') {
+    $call_args['params']['fl'] = 'item_id,score,tm_field_addr__torcond,tm_label,locs_field_test_geofilld$latlon';
+  }
+}
+
+
+/**
+ * Implements hook_block_info().
+ */
+function ctrader_map_block_info() {
+  $blocks = array();
+  $blocks['main_map'] = array(
+    'info' => t('Custom block: Main Map'),
+//    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function ctrader_map_block_view($delta = '') {
+  $server = search_api_server_load('solr_server');
+  $index = search_api_index_load('toronto_condo_index');
+
+  $query = new SearchApiQuery($index);
+  $query->setOption('query_label', 'search_on_map');
+//  $query->keys();
+//  $query->range(0, 150);
+  $query->fields(array());
+
+  $solr = new SearchApiSolrService($server);
+  $result = $solr->search($query);
+//  drupal_set_message(print_r($result, TRUE));
+
+  $array_json = array();
+  $i = 0;
+
+  foreach ($result['results'] as $key => $item) {
+//    if ($i < 100) {
+      if (!empty($item['fields']['field_test_geofilld:latlon'])) {
+        $coord = explode(',', $item['fields']['field_test_geofilld:latlon']);
+      }
+      else {
+        // Toronto city default coordinates.
+        $coord = array(
+          '43.76',
+          '-79.39'
+        );
+      }
+
+      $prepared = array(
+        'id' => $item['id'],
+        'type' => 'Feature',
+        'properties' => array(
+          'name' => !empty($item['fields']['field_addr__torcond'][0]) ? $item['fields']['field_addr__torcond'][0] : 'Condo',
+          'popupContent' => !empty($item['fields']['field_addr__torcond'][0]) ? $item['fields']['field_addr__torcond'][0] : '',
+        ),
+        'geometry' => array(
+          'type' => 'Point',
+          'coordinates' => is_array($coord) ? array(
+            (float) $coord[1],
+            (float) $coord[0]
+          ) : '',
+        ),
+      );
+      $array_json[] = $prepared;
+//    }
+    $i++;
+  }
+
+  drupal_add_js(array('condosMapData' => $array_json), 'setting');
+
+  $path = libraries_get_path('leaflet');
+  drupal_add_js($path . '/leaflet.js');
+  drupal_add_css($path . '/leaflet.css');
+
+  $path = libraries_get_path('Leaflet.draw');
+  drupal_add_js($path . '/dist/leaflet.draw.js');
+  drupal_add_css($path . '/dist/leaflet.draw.css');
+
+  drupal_add_js(drupal_get_path('module', 'ctrader_map') . '/js/custom_map.js');
+
+  $block = array();
+  $block['content'] = '<div id="mapid" style="height:500px;"></div>';
+  $block['subject'] = 'Block with main map';
+  return $block;
+}
+
+
+
+
+
+
+
+
+
+
+
+///**
+// * Implements hook_libraries_info().
+// */
+//function ctrader_map_libraries_info() {
+//
+//$stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
+//  $libraries['Leaflet.draw'] = array(
+//    'title' => 'Leaflet.draw',
+//    'version' => '1.x',
+//    'files' => array(
+//      'css' => array(
+//        'dist/leaflet.draw.css',
+//      ),
+//      'js' => array(
+//        'dist/leaflet.draw-src.js',
+//      ),
+//    ),
+//  );
+//
+//
+////  $libraries['torontomlsapi'] = array(
+////    'name' => 'Torontomlsapi',
+////    'vendor url' => 'https://github.com/tamtranvn2012/torontomlsapi',
+////    'download url' => 'https://github.com/tamtranvn2012/torontomlsapi/archive/master.zip',
+////    'version arguments' => array(
+////      'file' => 'phrets.php',
+////      'pattern' => '@version\s+([0-9a-zA-Z\.-]+)@',
+////    ),
+////    'files' => array(
+////      'php' => array(
+////        'phrets.php',
+////      ),
+////    ),
+////  );
+//
+//  return $libraries;
+//}
