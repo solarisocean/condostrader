@@ -52,7 +52,7 @@ function ctrader_map_block_view($delta = '') {
   $query = new SearchApiQuery($index);
   $query->setOption('query_label', 'search_on_map');
 //  $query->keys();
-//  $query->range(0, 150);
+  $query->range(0, 150);
   $query->fields(array());
 
   $solr = new SearchApiSolrService($server);
