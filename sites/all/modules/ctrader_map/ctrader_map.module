@@ -144,7 +144,8 @@ function _ctrader_map_prepare_neighbourhoods_json() {
     $is_polygon = TRUE;
     $coordinates = array();
     foreach ($item->json_polygon->element as $pair) {
-      if (empty(count($pair))) {
+      $count_pair = count($pair);
+      if (!$count_pair) {
         $point = explode(',', $pair);
         $point = array_reverse($point);
         $coordinates[] = $point;
@@ -179,6 +180,7 @@ function _ctrader_map_prepare_neighbourhoods_json() {
 
   }
   drupal_add_js(array('neighbourhoodsMapData' => $neighbourhoods), 'setting');
+//  return true;
 }
 
 
