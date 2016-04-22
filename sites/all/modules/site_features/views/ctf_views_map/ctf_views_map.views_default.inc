@@ -29,7 +29,7 @@ function ctf_views_map_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '250';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '150';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'leaflet';
   $handler->display->display_options['style_options']['entity_type'] = 'drealty_listing';
@@ -52,7 +52,7 @@ function ctf_views_map_views_default_views() {
   $handler->display->display_options['fields']['id']['label'] = '';
   $handler->display->display_options['fields']['id']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['id']['link_to_entity'] = 0;
-  /* Field: Indexed Drealty Listing: Geolocation */
+  /* Field: Indexed Drealty Listing: Location */
   $handler->display->display_options['fields']['field_test_geofilld']['id'] = 'field_test_geofilld';
   $handler->display->display_options['fields']['field_test_geofilld']['table'] = 'search_api_index_toronto_condo_index';
   $handler->display->display_options['fields']['field_test_geofilld']['field'] = 'field_test_geofilld';

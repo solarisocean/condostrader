@@ -1,0 +1,7 @@
+name = CT Features: Blocks: Main Map
+core = 7.x
+package = CT Features: Blocks
+dependencies[] = ctrader_map
+dependencies[] = fe_block
+features[fe_block_settings][] = ctrader_map-main_map
+features[features_api][] = api:2
