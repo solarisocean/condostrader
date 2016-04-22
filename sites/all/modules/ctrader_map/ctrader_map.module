@@ -24,7 +24,7 @@ function ctrader_map_init() {
 function ctrader_map_search_api_solr_query_alter(array &$call_args, SearchApiQueryInterface $query) {
   $options = $query->getOptions();
   if (isset($options['query_label']) && $options['query_label'] == 'search_on_map') {
-    $call_args['params']['fl'] = 'item_id,score,tm_field_addr__torcond,tm_label,locs_field_test_geofilld$latlon';
+    $call_args['params']['fl'] = 'item_id,score,tm_field_addr__torcond,tm_label,locs_field_test_geofilld$latlon,fs_field_lp_dol__torcond';
   }
 }
 
@@ -52,7 +52,7 @@ function ctrader_map_block_view($delta = '') {
   $query = new SearchApiQuery($index);
   $query->setOption('query_label', 'search_on_map');
 //  $query->keys();
-  $query->range(0, 150);
+//  $query->range(0, 150);
   $query->fields(array());
 
   $solr = new SearchApiSolrService($server);
@@ -64,33 +64,39 @@ function ctrader_map_block_view($delta = '') {
 
   foreach ($result['results'] as $key => $item) {
 //    if ($i < 100) {
-      if (!empty($item['fields']['field_test_geofilld:latlon'])) {
-        $coord = explode(',', $item['fields']['field_test_geofilld:latlon']);
-      }
-      else {
-        // Toronto city default coordinates.
-        $coord = array(
-          '43.76',
-          '-79.39'
-        );
-      }
-
-      $prepared = array(
-        'id' => $item['id'],
-        'type' => 'Feature',
-        'properties' => array(
-          'name' => !empty($item['fields']['field_addr__torcond'][0]) ? $item['fields']['field_addr__torcond'][0] : 'Condo',
-          'popupContent' => !empty($item['fields']['field_addr__torcond'][0]) ? $item['fields']['field_addr__torcond'][0] : '',
-        ),
-        'geometry' => array(
-          'type' => 'Point',
-          'coordinates' => is_array($coord) ? array(
-            (float) $coord[1],
-            (float) $coord[0]
-          ) : '',
-        ),
+    if (!empty($item['fields']['field_test_geofilld:latlon'])) {
+      $coord = explode(',', $item['fields']['field_test_geofilld:latlon']);
+    }
+    else {
+      // Toronto city default coordinates.
+      $coord = array(
+        '43.76',
+        '-79.39'
       );
-      $array_json[] = $prepared;
+    }
+    $popup_content = '';
+    if (!empty($item['fields']['field_addr__torcond'][0])) {
+      $popup_content .= $item['fields']['field_addr__torcond'][0] . '<br>';
+    }
+    if (!empty($item['fields']['field_lp_dol__torcond'])) {
+      $popup_content .= '$' . $item['fields']['field_lp_dol__torcond'];
+    }
+    $prepared = array(
+      'id' => $item['id'],
+      'type' => 'Feature',
+      'properties' => array(
+        'name' => !empty($item['fields']['field_addr__torcond'][0]) ? $item['fields']['field_addr__torcond'][0] : 'Condo',
+        'popupContent' => $popup_content,
+      ),
+      'geometry' => array(
+        'type' => 'Point',
+        'coordinates' => is_array($coord) ? array(
+          (float) $coord[1],
+          (float) $coord[0]
+        ) : '',
+      ),
+    );
+    $array_json[] = $prepared;
 //    }
     $i++;
   }
@@ -104,6 +110,12 @@ function ctrader_map_block_view($delta = '') {
   $path = libraries_get_path('Leaflet.draw');
   drupal_add_js($path . '/dist/leaflet.draw.js');
   drupal_add_css($path . '/dist/leaflet.draw.css');
+
+  $path = libraries_get_path('leaflet_markercluster');
+  drupal_add_css($path . '/dist//dist/MarkerCluster.css');
+  drupal_add_css($path . '/dist/MarkerCluster.Default.css');
+  drupal_add_js($path . '/dist/leaflet.markercluster.js');
+
 
   drupal_add_js(drupal_get_path('module', 'ctrader_map') . '/js/custom_map.js');
 

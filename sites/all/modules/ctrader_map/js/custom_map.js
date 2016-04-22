@@ -7,10 +7,9 @@
   Drupal.behaviors.addMap = {
     attach: function (context) {
       var mymap = L.map('mapid').setView([43.76, -79.39], 10);
-      L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+      L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(mymap);
-      //var marker = L.marker([43.76, -79.39]).addTo(mymap);
 
       function onEachFeature(feature, layer) {
         // does this feature have a property named popupContent?
@@ -21,16 +20,14 @@
 
       var condosDataGeojson = Drupal.settings.condosMapData;
 
-      L.geoJson(condosDataGeojson, {
-        onEachFeature: onEachFeature
-      }).addTo(mymap);
+      //L.geoJson(condosDataGeojson, {
+      //  onEachFeature: onEachFeature
+      //}).addTo(mymap);
 
 
-
-
+      // draw tools
       var drawnItems = new L.FeatureGroup();
       mymap.addLayer(drawnItems);
-
       var drawControl = new L.Control.Draw({
         position: 'topright',
         draw: {
@@ -64,25 +61,6 @@
         }
       });
       mymap.addControl(drawControl);
-
-
-      var LeafIcon = L.Icon.extend({
-        options: {
-          shadowUrl:
-            'http://leafletjs.com/docs/images/leaf-shadow.png',
-          iconSize:     [38, 95],
-          shadowSize:   [50, 64],
-          iconAnchor:   [22, 94],
-          shadowAnchor: [4, 62],
-          popupAnchor:  [-3, -76]
-        }
-      });
-
-      var greenIcon = new LeafIcon({
-        iconUrl: 'http://leafletjs.com/docs/images/leaf-green.png'
-      });
-
-
       mymap.on('draw:created', function (e) {
         var type = e.layerType,
           layer = e.layer;
@@ -90,6 +68,14 @@
       });
 
 
+      //markers clusters
+      var markers = L.markerClusterGroup({});
+      var geoJsonLayer = L.geoJson(condosDataGeojson, {
+        onEachFeature: onEachFeature
+      });
+      markers.addLayer(geoJsonLayer);
+      mymap.addLayer(markers);
+      //mymap.fitBounds(markers.getBounds());
 
     }
   };
