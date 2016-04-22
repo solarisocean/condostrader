@@ -52,7 +52,7 @@ function ctrader_map_block_view($delta = '') {
   $query = new SearchApiQuery($index);
   $query->setOption('query_label', 'search_on_map');
 //  $query->keys();
-//  $query->range(0, 150);
+  $query->range(0, 150);
   $query->fields(array());
 
   $solr = new SearchApiSolrService($server);
@@ -60,10 +60,7 @@ function ctrader_map_block_view($delta = '') {
 //  drupal_set_message(print_r($result, TRUE));
 
   $array_json = array();
-  $i = 0;
-
   foreach ($result['results'] as $key => $item) {
-//    if ($i < 100) {
     if (!empty($item['fields']['field_test_geofilld:latlon'])) {
       $coord = explode(',', $item['fields']['field_test_geofilld:latlon']);
     }
@@ -97,19 +94,31 @@ function ctrader_map_block_view($delta = '') {
       ),
     );
     $array_json[] = $prepared;
-//    }
-    $i++;
   }
 
   drupal_add_js(array('condosMapData' => $array_json), 'setting');
+  _ctrader_map_prepare_neighbourhoods_json();
 
   $path = libraries_get_path('leaflet');
-  drupal_add_js($path . '/leaflet.js');
+  drupal_add_js($path . '/leaflet-src.js');
   drupal_add_css($path . '/leaflet.css');
 
   $path = libraries_get_path('Leaflet.draw');
   drupal_add_js($path . '/dist/leaflet.draw.js');
   drupal_add_css($path . '/dist/leaflet.draw.css');
+
+  // another draw tools.
+
+  $path = libraries_get_path('d3');
+  drupal_add_js($path . '/d3.js');
+
+  $path = libraries_get_path('JsClipper');
+  drupal_add_js($path . '/clipper.js');
+  $path = libraries_get_path('Leaflet.FreeDraw');
+  drupal_add_js($path . '/dist/leaflet.freedraw-src.js');
+  $path = drupal_get_path('module', 'ctrader_map');
+  drupal_add_js($path . '/js/neighbourhood-json.js');
+
 
   $path = libraries_get_path('leaflet_markercluster');
   drupal_add_css($path . '/dist//dist/MarkerCluster.css');
@@ -125,9 +134,52 @@ function ctrader_map_block_view($delta = '') {
   return $block;
 }
 
+/**
+ * Create json with Toronto neighbourhoods coordinates.
+ */
+function _ctrader_map_prepare_neighbourhoods_json() {
+  $regions_xml = simplexml_load_file(drupal_get_path('module', 'ctrader_map') . '/inc/neigh_2.xml');
+  $neighbourhoods = array();
+  foreach ($regions_xml as $item) {
+    $is_polygon = TRUE;
+    $coordinates = array();
+    foreach ($item->json_polygon->element as $pair) {
+      if (empty(count($pair))) {
+        $point = explode(',', $pair);
+        $point = array_reverse($point);
+        $coordinates[] = $point;
+      }
+      // if multipolygon
+      else {
+        $is_polygon = FALSE;
+        $pre_coordinates = array();
+        foreach ((array) $pair->element as $value) {
+          $point = explode(',', $value);
+          $point = array_reverse($point);
+          $pre_coordinates[] = $point;
+        }
+        $coordinates[] = $pre_coordinates;
+      }
+    }
+    $prepared = array(
+      'id' => $item->id->__toString(),
+      'type' => 'Feature',
+      'properties' => array(
+        'name' => !empty($item['name']) ? $item['name'] : 'Neighbourhood',
+//        'popupContent' => $popup_content,
+      ),
+      'geometry' => array(
+        'type' => $is_polygon ? 'Polygon' : 'MultiPolygon',
+        'coordinates' => array(
+          $coordinates,
+        ),
+      ),
+    );
+    $neighbourhoods[] = $prepared;
 
-
-
+  }
+  drupal_add_js(array('neighbourhoodsMapData' => $neighbourhoods), 'setting');
+}
 
 
 

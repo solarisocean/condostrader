@@ -20,10 +20,10 @@
 
       var condosDataGeojson = Drupal.settings.condosMapData;
 
-      //L.geoJson(condosDataGeojson, {
-      //  onEachFeature: onEachFeature
-      //}).addTo(mymap);
-
+      var neighbourhoodsData = Drupal.settings.neighbourhoodsMapData;
+      L.geoJson(neighbourhoodsData, {
+        onEachFeature: onEachFeature
+      }).addTo(mymap);
 
       // draw tools
       var drawnItems = new L.FeatureGroup();
@@ -68,6 +68,13 @@
       });
 
 
+      // freeDraw tools.
+      //mymap.addLayer(new L.FreeDraw({
+      //  mode: L.FreeDraw.MODES.CREATE | L.FreeDraw.MODES.EDIT
+      //}));
+      //mymap.addLayer(new L.FreeDraw());
+
+
       //markers clusters
       var markers = L.markerClusterGroup({});
       var geoJsonLayer = L.geoJson(condosDataGeojson, {
@@ -75,7 +82,7 @@
       });
       markers.addLayer(geoJsonLayer);
       mymap.addLayer(markers);
-      //mymap.fitBounds(markers.getBounds());
+      mymap.fitBounds(markers.getBounds());
 
     }
   };
