@@ -6,7 +6,7 @@
 
   Drupal.behaviors.addMap = {
     attach: function (context) {
-      var mymap = L.map('mapid').setView([43.76, -79.39], 10);
+      var mymap = L.map('mapid').setView([43.73, -79.34], 6);
       L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(mymap);
@@ -18,10 +18,15 @@
         }
       }
 
-      var condosDataGeojson = Drupal.settings.condosMapData;
-
       var neighbourhoodsData = Drupal.settings.neighbourhoodsMapData;
+      var neighbourhoodsStyle = {
+        "color": "#B9760B",
+        "weight": 2,
+        "opacity": 1,
+        "fillOpacity": 0.3
+      };
       L.geoJson(neighbourhoodsData, {
+        style: neighbourhoodsStyle,
         onEachFeature: onEachFeature
       }).addTo(mymap);
 
@@ -33,28 +38,28 @@
         draw: {
           polygon: {
             shapeOptions: {
-              color: 'steelblue',
+              color: '#2DA56F',
               weight: 1,
               opacity: .7,
               dashArray: '20,3',
               lineJoin: 'round'
-            },
+            }
           },
           polyline: {
             shapeOptions: {
-              color: 'red'
-            },
+              color: 'green'
+            }
           },
           rect: {
             shapeOptions: {
-              color: 'green'
-            },
+              color: 'steelblue'
+            }
           },
           circle: {
             shapeOptions: {
-              color: 'steelblue'
-            },
-          },
+              color: 'green'
+            }
+          }
         },
         edit: {
           featureGroup: drawnItems
@@ -76,6 +81,7 @@
 
 
       //markers clusters
+      var condosDataGeojson = Drupal.settings.condosMapData;
       var markers = L.markerClusterGroup({});
       var geoJsonLayer = L.geoJson(condosDataGeojson, {
         onEachFeature: onEachFeature
