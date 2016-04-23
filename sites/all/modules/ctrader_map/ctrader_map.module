@@ -23,8 +23,12 @@ function ctrader_map_init() {
  */
 function ctrader_map_search_api_solr_query_alter(array &$call_args, SearchApiQueryInterface $query) {
   $options = $query->getOptions();
-  if (isset($options['query_label']) && $options['query_label'] == 'search_on_map') {
-    $call_args['params']['fl'] = 'item_id,score,tm_field_addr__torcond,tm_label,locs_field_test_geofilld$latlon,fs_field_lp_dol__torcond';
+  if (isset($options['query_label'])) {
+    switch ($options['query_label']) {
+      case 'search_on_map':
+        $call_args['params']['fl'] = 'item_id,score,tm_field_addr__torcond,tm_label,locs_field_test_geofilld$latlon,fs_field_lp_dol__torcond,tm_field_community__torcond,tm_field_community_code__torcond';
+        break;
+    }
   }
 }
 
@@ -52,13 +56,16 @@ function ctrader_map_block_view($delta = '') {
   $query = new SearchApiQuery($index);
   $query->setOption('query_label', 'search_on_map');
 //  $query->keys();
-  $query->range(0, 150);
+//  $query->range(0, 150);
   $query->fields(array());
 
   $solr = new SearchApiSolrService($server);
   $result = $solr->search($query);
+
+
 //  drupal_set_message(print_r($result, TRUE));
 
+  $condos_neighbourhood_names = array();
   $array_json = array();
   foreach ($result['results'] as $key => $item) {
     if (!empty($item['fields']['field_test_geofilld:latlon'])) {
@@ -94,10 +101,15 @@ function ctrader_map_block_view($delta = '') {
       ),
     );
     $array_json[] = $prepared;
-  }
 
+    if (!empty($item['fields']['field_community__torcond'][0]) && !in_array($item['fields']['field_community__torcond'][0], $condos_neighbourhood_names)) {
+      $condos_neighbourhood_names[] = $item['fields']['field_community__torcond'][0];
+    }
+    sort($condos_neighbourhood_names);
+  }
+$stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
   drupal_add_js(array('condosMapData' => $array_json), 'setting');
-  _ctrader_map_prepare_neighbourhoods_json();
+  _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names);
 
   $path = libraries_get_path('leaflet');
   drupal_add_js($path . '/leaflet-src.js');
@@ -129,7 +141,7 @@ function ctrader_map_block_view($delta = '') {
   drupal_add_js(drupal_get_path('module', 'ctrader_map') . '/js/custom_map.js');
 
   $block = array();
-  $block['content'] = '<div id="mapid" style="height:500px;"></div>';
+  $block['content'] = '<div id="mapid" style="height:600px;"></div>';
   $block['subject'] = 'Block with main map';
   return $block;
 }
@@ -137,50 +149,51 @@ function ctrader_map_block_view($delta = '') {
 /**
  * Create json with Toronto neighbourhoods coordinates.
  */
-function _ctrader_map_prepare_neighbourhoods_json() {
+function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = array()) {
   $regions_xml = simplexml_load_file(drupal_get_path('module', 'ctrader_map') . '/inc/neigh_2.xml');
   $neighbourhoods = array();
   foreach ($regions_xml as $item) {
-    $is_polygon = TRUE;
-    $coordinates = array();
-    foreach ($item->json_polygon->element as $pair) {
-      $count_pair = count($pair);
-      if (!$count_pair) {
-        $point = explode(',', $pair);
-        $point = array_reverse($point);
-        $coordinates[] = $point;
-      }
-      // if multipolygon
-      else {
-        $is_polygon = FALSE;
-        $pre_coordinates = array();
-        foreach ((array) $pair->element as $value) {
-          $point = explode(',', $value);
+    if(in_array($item->name, $condos_neighbourhood_names)) {
+      $is_polygon = TRUE;
+      $coordinates = array();
+      foreach ($item->json_polygon->element as $pair) {
+        $count_pair = count($pair);
+        if (!$count_pair) {
+          $point = explode(',', $pair);
           $point = array_reverse($point);
-          $pre_coordinates[] = $point;
+          $coordinates[] = $point;
         }
-        $coordinates[] = $pre_coordinates;
+        // if multipolygon
+        else {
+          $is_polygon = FALSE;
+          $pre_coordinates = array();
+          foreach ((array) $pair->element as $value) {
+            $point = explode(',', $value);
+            $point = array_reverse($point);
+            $pre_coordinates[] = $point;
+          }
+          $coordinates[] = $pre_coordinates;
+        }
       }
-    }
-    $prepared = array(
-      'id' => $item->id->__toString(),
-      'type' => 'Feature',
-      'properties' => array(
-        'name' => !empty($item['name']) ? $item['name'] : 'Neighbourhood',
+      $prepared = array(
+        'id' => $item->id->__toString(),
+        'type' => 'Feature',
+        'properties' => array(
+          'name' => !empty($item['name']) ? $item['name'] : 'Neighbourhood',
 //        'popupContent' => $popup_content,
-      ),
-      'geometry' => array(
-        'type' => $is_polygon ? 'Polygon' : 'MultiPolygon',
-        'coordinates' => array(
-          $coordinates,
         ),
-      ),
-    );
-    $neighbourhoods[] = $prepared;
+        'geometry' => array(
+          'type' => $is_polygon ? 'Polygon' : 'MultiPolygon',
+          'coordinates' => array(
+            $coordinates,
+          ),
+        ),
+      );
+      $neighbourhoods[] = $prepared;
+    }
 
   }
   drupal_add_js(array('neighbourhoodsMapData' => $neighbourhoods), 'setting');
-//  return true;
 }
 
 

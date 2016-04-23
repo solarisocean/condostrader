@@ -756,7 +756,7 @@
       <element>43.76130253723587,-79.44202626901671</element>
       <element>43.76150400168831,-79.44232667547311</element>
     </json_polygon>
-    <name>Westminister-Branson</name>
+    <name>Westminster-Branson</name>
     <parent_id>593</parent_id>
     <stats>
       <Assignments/>
@@ -6012,7 +6012,7 @@
       <element>43.6265724446,-79.5705577273</element>
       <element>43.625081337,-79.5746776003</element>
     </json_polygon>
-    <name>Markland Woods</name>
+    <name>Markland Wood</name>
     <parent_id>592</parent_id>
     <stats>
       <Assignments/>
@@ -6294,7 +6294,7 @@
       <element>43.6961163247,-79.5327922244</element>
       <element>43.6822139932,-79.52661241480001</element>
     </json_polygon>
-    <name>Willowridge | Martingrove | Richview</name>
+    <name>Willowridge-Martingrove-Richview</name>
     <parent_id>592</parent_id>
     <stats>
       <Assignments/>
@@ -6383,7 +6383,7 @@
       <element>43.6717851299,-79.5815440554</element>
       <element>43.6688051217,-79.5911570925</element>
     </json_polygon>
-    <name>West Humber-Claireville</name>
+    <name>West Humber-Clairville</name>
     <parent_id>592</parent_id>
     <stats>
       <Assignments/>
