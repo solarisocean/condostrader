@@ -14,7 +14,150 @@ function ctrader_map_menu() {
  * Implements hook_init().
  */
 function ctrader_map_init() {
-
+  $t_n_list = array(
+    0 => 'Agincourt North',
+    1 => 'Agincourt South-Malvern West',
+    2 => 'Alderwood',
+    3 => 'Annex',
+    4 => 'Banbury-Don Mills',
+    5 => 'Bathurst Manor',
+    6 => 'Bay Street Corridor',
+    7 => 'Bayview Village',
+    8 => 'Bayview Woods-Steeles',
+    9 => 'Bedford Park-Nortown',
+    10 => 'Beechborough-Greenbrook',
+    11 => 'Bendale',
+    12 => 'Birchcliffe-Cliffside',
+    13 => 'Black Creek',
+    14 => 'Blake-Jones',
+    15 => 'Briar Hill-Belgravia',
+    16 => 'Bridle Path-Sunnybrook-York Mills',
+    17 => 'Broadview North',
+    18 => 'Brookhaven-Amesbury',
+    19 => 'Cabbagetown-South St. James Town',
+    20 => 'Caledonia-Fairbank',
+    21 => 'Casa Loma',
+    22 => 'Centennial Scarborough',
+    23 => 'Church-Yonge Corridor',
+    24 => 'Clairlea-Birchmount',
+    25 => 'Clanton Park',
+    26 => 'Cliffcrest',
+    27 => 'Corso Italia-Davenport',
+    28 => 'Crescent Town',
+    29 => 'Danforth',
+    30 => 'Danforth Village-East York',
+    31 => 'Don Valley Village',
+    32 => 'Dorset Park',
+    33 => 'Dovercourt-Wallace Emerson-Junction',
+    34 => 'Downsview-Roding-CFB',
+    35 => 'Dufferin Grove',
+    36 => 'East End-Danforth',
+    37 => 'East York',
+    38 => 'Edenbridge-Humber Valley',
+    39 => 'Eglinton East',
+    40 => 'Elms-Old Rexdale',
+    41 => 'Englemount-Lawrence',
+    42 => 'Eringate-Centennial-West Deane',
+    43 => 'Etobicoke West Mall',
+    44 => 'Flemingdon Park',
+    45 => 'Forest Hill North',
+    46 => 'Forest Hill South',
+    47 => 'Glenfield-Jane Heights',
+    48 => 'Greenwood-Coxwell',
+    49 => 'Guildwood',
+    50 => 'Henry Farm',
+    51 => 'High Park North',
+    52 => 'High Park-Swansea',
+    53 => 'Highland Creek',
+    54 => 'Hillcrest Village',
+    55 => 'Humber Heights',
+    56 => 'Humber Summit',
+    57 => 'Humberlea-Pelmo Park W4',
+    58 => 'Humberlea-Pelmo Park W5',
+    59 => 'Humbermede',
+    60 => 'Humewood-Cedarvale',
+    61 => 'Ionview',
+    62 => 'Islington-City Centre West',
+    63 => 'Junction Area',
+    64 => 'Keelesdale-Eglinton West',
+    65 => 'Kennedy Park',
+    66 => 'Kensington-Chinatown',
+    67 => 'Kingsview Village-The Westway',
+    68 => 'Kingsway South',
+    69 => 'L\'Amoreaux',
+    70 => 'Lambton Baby Point',
+    71 => 'Lansing-Westgate',
+    72 => 'Lawrence Park North',
+    73 => 'Lawrence Park South',
+    74 => 'Leaside',
+    75 => 'Little Portugal',
+    76 => 'Long Branch',
+    77 => 'Malvern',
+    78 => 'Maple Leaf',
+    79 => 'Markland Wood',
+    80 => 'Milliken',
+    81 => 'Mimico',
+    82 => 'Morningside',
+    83 => 'Moss Park',
+    84 => 'Mount Dennis',
+    85 => 'Mount Olive-Silverstone-Jamestown',
+    86 => 'Mount Pleasant East',
+    87 => 'Mount Pleasant West',
+    88 => 'New Toronto',
+    89 => 'Newtonbrook East',
+    90 => 'Newtonbrook West',
+    91 => 'Niagara',
+    92 => 'North Riverdale',
+    93 => 'North St. James Town',
+    94 => 'O\'Connor-Parkview',
+    95 => 'Oakridge',
+    96 => 'Oakwood-Vaughan',
+    97 => 'Palmerston-Little Italy',
+    98 => 'Parkwoods-Donalda',
+    99 => 'Pleasant View',
+    100 => 'Princess-Rosethorn',
+    101 => 'Regent Park',
+    102 => 'Rexdale-Kipling',
+    103 => 'Rockcliffe-Smythe',
+    104 => 'Roncesvalles',
+    105 => 'Rosedale-Moore Park',
+    106 => 'Rouge E10',
+    107 => 'Rouge E11',
+    108 => 'Runnymede-Bloor West Village',
+    109 => 'Rustic',
+    110 => 'Scarborough Village',
+    111 => 'South Parkdale',
+    112 => 'South Riverdale',
+    113 => 'St. Andrew-Windfields',
+    114 => 'Steeles',
+    115 => 'Stonegate-Queensway',
+    116 => 'Tam O\'Shanter-Sullivan',
+    117 => 'The Beaches',
+    118 => 'Thorncliffe Park',
+    119 => 'Trinity-Bellwoods',
+    120 => 'University',
+    121 => 'Victoria Village',
+    122 => 'Waterfront Communities C1',
+    123 => 'Waterfront Communities C8',
+    124 => 'West Hill',
+    125 => 'West Humber-Clairville',
+    126 => 'Westminster-Branson',
+    127 => 'Weston',
+    128 => 'Weston-Pellam Park',
+    129 => 'Wexford-Maryvale',
+    130 => 'Willowdale East',
+    131 => 'Willowdale West',
+    132 => 'Willowridge-Martingrove-Richview',
+    133 => 'Woburn',
+    134 => 'Woodbine Corridor',
+    135 => 'Woodbine-Lumsden',
+    136 => 'Wychwood',
+    137 => 'Yonge-Eglinton',
+    138 => 'Yonge-St. Clair',
+    139 => 'York University Heights',
+    140 => 'Yorkdale-Glen Park',
+  );
+//  $kml_to_xml = _ctrader_map_kml_to_xml();
 }
 
 
@@ -26,7 +169,20 @@ function ctrader_map_search_api_solr_query_alter(array &$call_args, SearchApiQue
   if (isset($options['query_label'])) {
     switch ($options['query_label']) {
       case 'search_on_map':
-        $call_args['params']['fl'] = 'item_id,score,tm_field_addr__torcond,tm_label,locs_field_test_geofilld$latlon,fs_field_lp_dol__torcond,tm_field_community__torcond,tm_field_community_code__torcond';
+        $need_this_fields = array(
+          'item_id',
+          'score',
+          'tm_field_addr__torcond',
+          'tm_label',
+          'locs_field_test_geofilld$latlon',
+          'fs_field_lp_dol__torcond',
+          'tm_field_community__torcond',
+          'tm_field_community_code__torcond',
+          'tm_field_community__torcond',
+          'tm_field_ml_num__torcond',
+
+        );
+        $call_args['params']['fl'] = implode(',', $need_this_fields);
         break;
     }
   }
@@ -72,19 +228,24 @@ function ctrader_map_block_view($delta = '') {
       $coord = explode(',', $item['fields']['field_test_geofilld:latlon']);
     }
     else {
-      // Toronto city default coordinates.
+      // Toronto City default coordinates.
       $coord = array(
         '43.76',
         '-79.39'
       );
     }
     $popup_content = '';
+    $popup_content .= 'id: ' . $item['fields']['search_api_id'] . '<br>MLS #: ' . $item['fields']['field_ml_num__torcond'][0];
     if (!empty($item['fields']['field_addr__torcond'][0])) {
-      $popup_content .= $item['fields']['field_addr__torcond'][0] . '<br>';
+      $popup_content .= '<br>' . $item['fields']['field_addr__torcond'][0];
     }
     if (!empty($item['fields']['field_lp_dol__torcond'])) {
-      $popup_content .= '$' . $item['fields']['field_lp_dol__torcond'];
+      $popup_content .= '<br>$' . $item['fields']['field_lp_dol__torcond'];
     }
+    if (!empty($item['fields']['field_community__torcond'][0])) {
+      $popup_content .= '<br>' . $item['fields']['field_community__torcond'][0];
+    }
+
     $prepared = array(
       'id' => $item['id'],
       'type' => 'Feature',
@@ -107,7 +268,6 @@ function ctrader_map_block_view($delta = '') {
     }
     sort($condos_neighbourhood_names);
   }
-$stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
   drupal_add_js(array('condosMapData' => $array_json), 'setting');
   _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names);
 
@@ -153,7 +313,7 @@ function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = 
   $regions_xml = simplexml_load_file(drupal_get_path('module', 'ctrader_map') . '/inc/neigh_2.xml');
   $neighbourhoods = array();
   foreach ($regions_xml as $item) {
-    if(in_array($item->name, $condos_neighbourhood_names)) {
+    if (in_array($item->name, $condos_neighbourhood_names)) {
       $is_polygon = TRUE;
       $coordinates = array();
       foreach ($item->json_polygon->element as $pair) {
@@ -175,12 +335,13 @@ function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = 
           $coordinates[] = $pre_coordinates;
         }
       }
+      $polygon_popup_content = !empty($item->name) ? $item->name->__toString() : 'Neighbourhood';
       $prepared = array(
         'id' => $item->id->__toString(),
         'type' => 'Feature',
         'properties' => array(
-          'name' => !empty($item['name']) ? $item['name'] : 'Neighbourhood',
-//        'popupContent' => $popup_content,
+          'name' => !empty($item->name) ? $item->name->__toString() : 'Neighbourhood',
+          'popupContent' => $polygon_popup_content,
         ),
         'geometry' => array(
           'type' => $is_polygon ? 'Polygon' : 'MultiPolygon',
@@ -196,7 +357,27 @@ function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = 
   drupal_add_js(array('neighbourhoodsMapData' => $neighbourhoods), 'setting');
 }
 
-
+function _ctrader_map_kml_to_xml() {
+  $xml = simplexml_load_file(drupal_get_path('module', 'ctrader_map') . '/inc/toronto_neighbourhoods.kml');
+  $communities_array = array();
+  $converted_kml_to_xml_string = '';
+  foreach ($xml->Document->Folder->Placemark as $item) {
+    $communities_array[] = (array) $item;
+  }
+  foreach ($communities_array as $item) {
+    $coord_array = explode(';', $item['Polygon']->outerBoundaryIs->LinearRing->coordinates);
+    $coord_xml = '<json_polygon>';
+    foreach ($coord_array as $value) {
+      $coord_pair = explode(',', $value);
+      $coord_pair_string = '<element>' . trim($coord_pair[1]) . ',' . trim($coord_pair[0]) . '</element>';
+      $coord_xml .= $coord_pair_string;
+    }
+    $coord_xml .= '</json_polygon>';
+    $xml_string_item = '<element>' . $coord_xml . '<name>' . $item['name'] . '</name></element>';
+    $converted_kml_to_xml_string .= $xml_string_item;
+  }
+  return $converted_kml_to_xml_string;
+}
 
 
 
@@ -207,7 +388,6 @@ function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = 
 // */
 //function ctrader_map_libraries_info() {
 //
-//$stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
 //  $libraries['Leaflet.draw'] = array(
 //    'title' => 'Leaflet.draw',
 //    'version' => '1.x',
