@@ -18,8 +18,7 @@ function ctf_blocks_main_map_default_fe_block_settings() {
     'delta' => 'main_map',
     'module' => 'ctrader_map',
     'node_types' => array(),
-    'pages' => '<front>
-condo-search-page',
+    'pages' => 'condo-search-page',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
