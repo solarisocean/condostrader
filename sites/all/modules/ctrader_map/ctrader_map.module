@@ -165,6 +165,17 @@ function ctrader_map_init() {
  * Implements hook_search_api_solr_query_alter().
  */
 function ctrader_map_search_api_solr_query_alter(array &$call_args, SearchApiQueryInterface $query) {
+
+  switch ($query->getOption('search id')) {
+    case 'search_api_views:condo_search_page:page':
+        $query_string = serialize($query);
+        $_SESSION['query_from_view'] = $query_string;
+//      setcookie('query_from_view_1', $query_string);
+      break;
+    case 'search_api_views:map:page':
+      break;
+  }
+
   $options = $query->getOptions();
   if (isset($options['query_label'])) {
     switch ($options['query_label']) {
@@ -180,7 +191,6 @@ function ctrader_map_search_api_solr_query_alter(array &$call_args, SearchApiQue
           'tm_field_community_code__torcond',
           'tm_field_community__torcond',
           'tm_field_ml_num__torcond',
-
         );
         $call_args['params']['fl'] = implode(',', $need_this_fields);
         break;
@@ -202,24 +212,30 @@ function ctrader_map_block_info() {
   return $blocks;
 }
 
+
 /**
  * Implements hook_block_view().
  */
 function ctrader_map_block_view($delta = '') {
   $server = search_api_server_load('solr_server');
-  $index = search_api_index_load('toronto_condo_index');
 
-  $query = new SearchApiQuery($index);
-  $query->setOption('query_label', 'search_on_map');
-//  $query->keys();
-//  $query->range(0, 150);
-  $query->fields(array());
+  if (isset($_SESSION['query_from_view'])) {
+    $query = unserialize($_SESSION['query_from_view']);
+    $query->setOption('limit', NULL);
+    $query->setOption('query_label', 'search_on_map');
+    $query->fields(array());
+//    unset($_SESSION['query_from_view']);
+  }
+  else {
+    $index = search_api_index_load('toronto_condo_index');
+    $query = new SearchApiQuery($index);
+    $query->keys();
+    $query->fields(array());
+//    $query->range(0, 150);
+  }
 
   $solr = new SearchApiSolrService($server);
   $result = $solr->search($query);
-
-
-//  drupal_set_message(print_r($result, TRUE));
 
   $condos_neighbourhood_names = array();
   $array_json = array();
@@ -269,7 +285,7 @@ function ctrader_map_block_view($delta = '') {
     sort($condos_neighbourhood_names);
   }
   drupal_add_js(array('condosMapData' => $array_json), 'setting');
-  _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names);
+  _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names, $array_json);
 
   $path = libraries_get_path('leaflet');
   drupal_add_js($path . '/leaflet-src.js');
@@ -280,16 +296,16 @@ function ctrader_map_block_view($delta = '') {
   drupal_add_css($path . '/dist/leaflet.draw.css');
 
   // another draw tools.
-
-  $path = libraries_get_path('d3');
-  drupal_add_js($path . '/d3.js');
-
-  $path = libraries_get_path('JsClipper');
-  drupal_add_js($path . '/clipper.js');
-  $path = libraries_get_path('Leaflet.FreeDraw');
-  drupal_add_js($path . '/dist/leaflet.freedraw-src.js');
-  $path = drupal_get_path('module', 'ctrader_map');
-  drupal_add_js($path . '/js/neighbourhood-json.js');
+//  $path = libraries_get_path('ConcaveHull');
+//  drupal_add_js($path . '/dist/concavehull.js');
+//  $path = libraries_get_path('d3');
+//  drupal_add_js($path . '/d3.js');
+//  $path = libraries_get_path('JsClipper');
+//  drupal_add_js($path . '/clipper.js');
+//  $path = libraries_get_path('Leaflet.FreeDraw');
+//  drupal_add_js($path . '/dist/leaflet.freedraw-src.js');
+//  $path = drupal_get_path('module', 'ctrader_map');
+//  drupal_add_js($path . '/js/neighbourhood-json.js');
 
 
   $path = libraries_get_path('leaflet_markercluster');
@@ -306,10 +322,11 @@ function ctrader_map_block_view($delta = '') {
   return $block;
 }
 
+
 /**
  * Create json with Toronto neighbourhoods coordinates.
  */
-function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = array()) {
+function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = array(), $points_array = array()) {
   $regions_xml = simplexml_load_file(drupal_get_path('module', 'ctrader_map') . '/inc/neigh_2.xml');
   $neighbourhoods = array();
   foreach ($regions_xml as $item) {
@@ -352,9 +369,10 @@ function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = 
       );
       $neighbourhoods[] = $prepared;
     }
-
   }
   drupal_add_js(array('neighbourhoodsMapData' => $neighbourhoods), 'setting');
+
+  return $neighbourhoods;
 }
 
 function _ctrader_map_kml_to_xml() {
@@ -378,44 +396,3 @@ function _ctrader_map_kml_to_xml() {
   }
   return $converted_kml_to_xml_string;
 }
-
-
-
-
-
-///**
-// * Implements hook_libraries_info().
-// */
-//function ctrader_map_libraries_info() {
-//
-//  $libraries['Leaflet.draw'] = array(
-//    'title' => 'Leaflet.draw',
-//    'version' => '1.x',
-//    'files' => array(
-//      'css' => array(
-//        'dist/leaflet.draw.css',
-//      ),
-//      'js' => array(
-//        'dist/leaflet.draw-src.js',
-//      ),
-//    ),
-//  );
-//
-//
-////  $libraries['torontomlsapi'] = array(
-////    'name' => 'Torontomlsapi',
-////    'vendor url' => 'https://github.com/tamtranvn2012/torontomlsapi',
-////    'download url' => 'https://github.com/tamtranvn2012/torontomlsapi/archive/master.zip',
-////    'version arguments' => array(
-////      'file' => 'phrets.php',
-////      'pattern' => '@version\s+([0-9a-zA-Z\.-]+)@',
-////    ),
-////    'files' => array(
-////      'php' => array(
-////        'phrets.php',
-////      ),
-////    ),
-////  );
-//
-//  return $libraries;
-//}
