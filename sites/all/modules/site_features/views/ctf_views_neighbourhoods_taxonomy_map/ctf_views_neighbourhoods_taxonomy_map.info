@@ -1,0 +1,10 @@
+name = CT Features: Views: Neighbourhoods taxonomy map
+description = View 'Neighbourhoods taxonomy map' for project Condostrader
+core = 7.x
+package = CT Features: Views
+dependencies[] = leaflet_views
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[views_view][] = tax_regions
+features_exclude[dependencies][ctools] = ctools

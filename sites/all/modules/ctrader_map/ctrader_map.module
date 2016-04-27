@@ -6,6 +6,12 @@
  */
 function ctrader_map_menu() {
   $items = array();
+  $items['create-terms'] = array(
+    'title' => 'Create Toronto region terms',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('_ctrader_map_region_taxonomy_form'),
+    'access arguments' => array('administer modules'),
+  );
   return $items;
 }
 
@@ -165,17 +171,14 @@ function ctrader_map_init() {
  * Implements hook_search_api_solr_query_alter().
  */
 function ctrader_map_search_api_solr_query_alter(array &$call_args, SearchApiQueryInterface $query) {
-
   switch ($query->getOption('search id')) {
     case 'search_api_views:condo_search_page:page':
-        $query_string = serialize($query);
-        $_SESSION['query_from_view'] = $query_string;
-//      setcookie('query_from_view_1', $query_string);
+      $query_string = serialize($query);
+      $_SESSION['query_from_view'] = $query_string;
       break;
     case 'search_api_views:map:page':
       break;
   }
-
   $options = $query->getOptions();
   if (isset($options['query_label'])) {
     switch ($options['query_label']) {
@@ -208,7 +211,6 @@ function ctrader_map_block_info() {
     'info' => t('Custom block: Main Map'),
 //    'cache' => DRUPAL_NO_CACHE,
   );
-
   return $blocks;
 }
 
@@ -295,6 +297,7 @@ function ctrader_map_block_view($delta = '') {
   drupal_add_js($path . '/dist/leaflet.draw.js');
   drupal_add_css($path . '/dist/leaflet.draw.css');
 
+
   // another draw tools.
 //  $path = libraries_get_path('ConcaveHull');
 //  drupal_add_js($path . '/dist/concavehull.js');
@@ -313,13 +316,35 @@ function ctrader_map_block_view($delta = '') {
   drupal_add_css($path . '/dist/MarkerCluster.Default.css');
   drupal_add_js($path . '/dist/leaflet.markercluster.js');
 
-
   drupal_add_js(drupal_get_path('module', 'ctrader_map') . '/js/custom_map.js');
 
   $block = array();
   $block['content'] = '<div id="mapid" style="height:600px;"></div>';
   $block['subject'] = 'Block with main map';
   return $block;
+}
+
+
+/**
+ * Implements hook_entity_presave().
+ */
+function ctrader_map_entity_presave($entity, $type) {
+  switch ($type) {
+    case DREALTY_ENTITY_TYPE:
+      $terms_polygon = $_SESSION['neighbourhoods_terms_polygons_data'];
+      require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'ctrader_map') . '/classes/pointLocation.php';
+      $pointLocation = new pointLocation();
+      $point = $entity->field_test_geofilld[LANGUAGE_NONE][0]['lon'] . ' ' . $entity->field_test_geofilld[LANGUAGE_NONE][0]['lat'];
+      foreach ($terms_polygon as $term_id => $term_polygon) {
+        if (is_array($term_polygon)) {
+          $check = $pointLocation->pointInPolygon($point, $term_polygon);
+          if ($check == 'inside') {
+            $entity->field_city_region__torcond[LANGUAGE_NONE][0]['tid'] = $term_id;
+          }
+        }
+      }
+      break;
+  }
 }
 
 
@@ -395,4 +420,183 @@ function _ctrader_map_kml_to_xml() {
     $converted_kml_to_xml_string .= $xml_string_item;
   }
   return $converted_kml_to_xml_string;
+}
+
+
+function _ctrader_map_region_taxonomy_form($form, &$form_state) {
+  $form = array();
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Start terms creating'),
+//    '#disabled' => TRUE,
+  );
+  return $form;
+}
+
+
+function _ctrader_map_region_taxonomy_form_submit($form, &$form_state) {
+  _ctrader_map_taxonomy_create();
+}
+
+/**
+ * Creates taxonomy term for each Toronto region.
+ */
+function _ctrader_map_taxonomy_create() {
+  $vid = taxonomy_vocabulary_machine_name_load('neighbourhoods'); //Neighbourhoods vocabulary.
+  $vid = $vid->vid;
+
+  $select_list_condos_ca = array(
+    '1' => array(
+      'Toronto' => array(
+        '590' => 'Downtown',
+        '597' => 'Midtown',
+        '593' => 'North York',
+        '596' => 'East End',
+        '598' => 'East York',
+        '595' => 'West End',
+        '594' => 'York Crosstown',
+        '592' => 'Etobicoke',
+        '591' => 'Scarborough',
+      )
+    ),
+    '2' => array(
+      'Peel' => array(
+        '43' => 'Brampton',
+        '44' => 'Mississauga',
+      )
+    ),
+    '4' => array(
+      'York Region' => array(
+        '54' => 'Aurora',
+        '49' => 'King',
+        '51' => 'Markham',
+        '55' => 'Newmarket',
+        '52' => 'Richmond Hill',
+        '50' => 'Vaughan',
+      )
+    ),
+    '3' => array(
+      'Halton' => array(
+        '45' => 'Milton',
+        '46' => 'Burlington',
+        '47' => 'Halton Hills',
+        '48' => 'Oakville',
+      )
+    ),
+    '0' => array(
+      'grandparent_0' => array(
+        '599' => 'Hamilton',
+      ),
+    ),
+    '5' => array(
+      'grandparent_5' => array(
+        '59' => 'parent_59',
+        '60' => 'parent_60',
+        '61' => 'parent_61',
+        '62' => 'parent_62',
+        '63' => 'parent_63',
+        '64' => 'parent_64',
+        '65' => 'parent_65',
+        '66' => 'parent_66',
+        '67' => 'parent_67',
+      ),
+    ),
+  );
+
+  // Creates main items for vocabulary.
+  foreach ($select_list_condos_ca as $grand_id => $grand_parent) {
+    $grand_pa_name = array_keys($grand_parent);
+    $grand_pa_name = array_shift($grand_pa_name);
+    $grand_pa = new stdClass();
+    $grand_pa->name = $grand_pa_name;
+    $grand_pa->vid = $vid;
+    $grand_pa->field_id[LANGUAGE_NONE][0]['value'] = $grand_id;
+    taxonomy_term_save($grand_pa);
+    $grand_parent_just_created = taxonomy_get_term_by_name($grand_pa_name);
+    $grand_parent_just_created = reset($grand_parent_just_created);
+    $grand_parent_id = $grand_parent_just_created->tid;
+    foreach ($grand_parent[$grand_pa_name] as $child_term_id => $child_term_name) {
+      $child_term = new stdClass();
+      $child_term->name = $child_term_name;
+      $child_term->vid = $vid;
+      $child_term->field_id[LANGUAGE_NONE][0]['value'] = $child_term_id;
+      $child_term->parent = array($grand_parent_id => $grand_parent_id);
+      taxonomy_term_save($child_term);
+    }
+  }
+
+  $xml = simplexml_load_file(drupal_get_path('module', 'ctrader_map') . '/inc/condos-ca.xml');
+  $vocabulary_main_terms = taxonomy_get_tree($vid, 0, 2, TRUE);
+  foreach ($xml as $element) {
+    $term_name = $element->name->__toString();
+    $term_field_id_value = $element->id->__toString();
+    $xml_parent_id = $element->parent_id->__toString();
+
+    //Creates json for geofield.
+    $is_polygon = TRUE;
+    $coordinates = array();
+    foreach ($element->json_polygon->element as $pair) {
+      $count_pair = count($pair);
+      if (!$count_pair) {
+        $point = explode(',', $pair);
+        $point = array_reverse($point);
+        $coordinates[] = $point;
+      }
+      // if multipolygon
+      else {
+        $is_polygon = FALSE;
+        $pre_coordinates = array();
+        foreach ((array) $pair->element as $value) {
+          $point = explode(',', $value);
+          $point = array_reverse($point);
+          $pre_coordinates[] = $point;
+        }
+        $coordinates[] = $pre_coordinates;
+      }
+    }
+    $prepared = array(
+      'id' => $element->id->__toString(),
+      'type' => 'Feature',
+      'properties' => array(
+        'name' => !empty($element->name) ? $element->name->__toString() : 'Neighbourhood',
+      ),
+      'geometry' => array(
+        'type' => $is_polygon ? 'Polygon' : 'MultiPolygon',
+        'coordinates' => array(
+          $coordinates,
+        ),
+      ),
+    );
+    $polygon_json = json_encode($prepared);
+
+    // Finds which one of existed terms would be parent
+    // and create new parent term if not exist.
+    $parent_id = -1;
+    foreach ($vocabulary_main_terms as $parent_terms) {
+      if ($xml_parent_id == $parent_terms->field_id[LANGUAGE_NONE][0]['value']) {
+        $parent_id = $parent_terms->tid;
+      }
+    }
+    if ($parent_id == -1) {
+      $parent_term = new stdClass();
+      $parent_term->name = 'parent_' . $element->parent_id->__toString();
+      $parent_term->vid = $vid;
+      $parent_term->field_id[LANGUAGE_NONE][0]['value'] = $element->parent_id->__toString();
+      $parent_term->parent = array($element->grandparent_id->__toString() => $element->grandparent_id->__toString());
+      taxonomy_term_save($parent_term);
+      $parent_just_created = taxonomy_get_term_by_name('parent_' . $element->parent_id->__toString());
+      $parent_just_created = reset($parent_just_created);
+      $parent_id = $parent_just_created->tid;
+      $vocabulary_main_terms = taxonomy_get_tree($vid, 0, 2, TRUE);
+    }
+
+    $term = new stdClass();
+    $term->name = $term_name;
+    $term->vid = $vid;
+    $term->field_community_geolocation[LANGUAGE_NONE][0]['geom'] = $polygon_json;
+    $term->field_community_geolocation[LANGUAGE_NONE][0]['input_format'] = 'json';
+    $term->field_id[LANGUAGE_NONE][0]['value'] = $term_field_id_value;
+    $term->parent = array($parent_id => $parent_id);
+    taxonomy_term_save($term);
+  }
 }

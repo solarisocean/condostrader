@@ -44,6 +44,7 @@ function ctf_configurations_search_api_default_search_api_index() {
         "field_cable__torcond" : { "type" : "text" },
         "field_cac_inc__torcond" : { "type" : "text" },
         "field_central_vac__torcond" : { "type" : "text" },
+        "field_city_region__torcond" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_comel_inc__torcond" : { "type" : "text" },
         "field_community__torcond" : { "type" : "text" },
         "field_community_code__torcond" : { "type" : "text" },

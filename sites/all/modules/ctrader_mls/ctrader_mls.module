@@ -6,6 +6,8 @@
  * Time: 15:50
  */
 
+define('DREALTY_ENTITY_TYPE', 'drealty_listing');
+
 
 /**
  * Implements hook_init().
@@ -213,7 +215,7 @@ function large_xml_import_operation(&$context) {
           $last_item = $key;
           $ml_num = $condo->Listing->MLS->__toString();
 
-          $item = entity_create('drealty_listing', array(
+          $item = entity_create(DREALTY_ENTITY_TYPE, array(
             'id' => NULL,
             'type' => 'toronto_condo',
             'conid' => NULL,
@@ -363,7 +365,7 @@ function large_xml_import_finished($success, $results, $operations) {
  */
 function ctrader_mls_field_attach_presave($entity_type, $entity) {
   switch ($entity_type) {
-    case 'drealty_listing':
+    case DREALTY_ENTITY_TYPE:
       if ($entity->type == 'toronto_condo' && isset($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'])) {
         $community = $entity->field_community__torcond[LANGUAGE_NONE][0]['value'] . ',';
         $place = !empty($entity->field_addr__torcond[LANGUAGE_NONE][0]['value']) ? $entity->field_addr__torcond[LANGUAGE_NONE][0]['value'] : $community;
