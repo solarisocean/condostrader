@@ -1242,6 +1242,55 @@ function ctf_configurations_drealty_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'drealty_listing-toronto_condo-field_city_region__torcond'.
+  $field_instances['drealty_listing-toronto_condo-field_city_region__torcond'] = array(
+    'bundle' => 'toronto_condo',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 232,
+      ),
+      'gallery' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'search' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'drealty_listing',
+    'field_name' => 'field_city_region__torcond',
+    'label' => 'City region',
+    'required' => FALSE,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 233,
+    ),
+  );
+
+  // Exported field_instance:
   // 'drealty_listing-toronto_condo-field_comel_inc__torcond'.
   $field_instances['drealty_listing-toronto_condo-field_comel_inc__torcond'] = array(
     'bundle' => 'toronto_condo',
@@ -10311,17 +10360,17 @@ function ctf_configurations_drealty_field_default_field_instances() {
     'drealty' => array(
       'hash_exclude' => 0,
       'mappings' => array(
-        '3_3_CondoProperty' => array(
-          'class_id' => 9,
-          'conid' => 3,
+        '4_4_CondoProperty' => array(
+          'class_id' => 12,
+          'conid' => 4,
           'rets_field' => 1,
-          'rid' => 3,
+          'rid' => 4,
         ),
       ),
     ),
     'entity_type' => 'drealty_listing',
     'field_name' => 'field_test_geofilld',
-    'label' => 'Geolocation',
+    'label' => 'Location',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -12013,6 +12062,7 @@ function ctf_configurations_drealty_field_default_field_instances() {
   t('Cable');
   t('Cac_inc');
   t('Central_vac');
+  t('City region');
   t('Comel_inc');
   t('Community');
   t('Community_code');
@@ -12035,7 +12085,6 @@ function ctf_configurations_drealty_field_default_field_instances() {
   t('Furnished');
   t('Gar');
   t('Gar_type');
-  t('Geolocation');
   t('Heat_inc');
   t('Heating');
   t('Hydro_inc');
@@ -12057,6 +12106,7 @@ function ctf_configurations_drealty_field_default_field_instances() {
   t('Level7');
   t('Level8');
   t('Level9');
+  t('Location');
   t('Locker');
   t('Locker_num');
   t('Lp_dol');
