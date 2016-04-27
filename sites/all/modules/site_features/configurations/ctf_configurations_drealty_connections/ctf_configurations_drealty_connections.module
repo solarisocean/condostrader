@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CT Features: Configurations: Drealty connections feature.
+ */
+
+include_once 'ctf_configurations_drealty_connections.features.inc';

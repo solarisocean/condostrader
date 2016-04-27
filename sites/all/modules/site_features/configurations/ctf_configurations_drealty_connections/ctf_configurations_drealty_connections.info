@@ -1,0 +1,8 @@
+name = CT Features: Configurations: Drealty connections
+description = Connections configurations for module drealty
+core = 7.x
+package = CT Features: Configurations
+dependencies[] = drealty
+dependencies[] = entity
+features[drealty_connection_entity][] = toronto_rets_connection
+features[features_api][] = api:2

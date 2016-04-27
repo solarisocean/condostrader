@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * ctf_configurations_drealty.features.field_instance.inc
+ * ctf_content_types_toronto_condo.features.field_instance.inc
  */
 
 /**
  * Implements hook_field_default_field_instances().
  */
-function ctf_configurations_drealty_field_default_field_instances() {
+function ctf_content_types_toronto_condo_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:

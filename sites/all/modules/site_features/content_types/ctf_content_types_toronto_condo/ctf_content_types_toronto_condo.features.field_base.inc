@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * ctf_configurations_drealty.features.field_base.inc
+ * ctf_content_types_toronto_condo.features.field_base.inc
  */
 
 /**
  * Implements hook_field_default_field_bases().
  */
-function ctf_configurations_drealty_field_default_field_bases() {
+function ctf_content_types_toronto_condo_field_default_field_bases() {
   $field_bases = array();
 
   // Exported field_base: 'field_a_c__torcond'.
