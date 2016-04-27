@@ -1,0 +1,8 @@
+// @file
+// @import you own fonts here.
+// @example @include font-face("MyriadPro", normal, normal, "MyriadPro-Regular");
+
+@include font-face("OpenSans", normal, normal, "OpenSans-Regular");
+@include font-face("OpenSans", normal, bold, "OpenSans-Bold");
+@include font-face("OpenSans", normal, 100, "OpenSans-Light");
+@include font-face("OpenSans", italic, normal, "OpenSans-Italic");

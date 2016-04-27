@@ -1,0 +1,48 @@
+// @file
+// Place your mixins here. Feel free to roll your own mixins.
+@mixin pseudo-element($where, $width, $height, $src, $center) {
+  $path: "../images/" + $src;
+  &:#{$where} {
+    content: "";
+    display: inline-block;
+    width: $width;
+    height: $height;
+    background: url($path) 0 0 no-repeat;
+    vertical-align: middle;
+    @if $center == 'center' {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: calc(#{$width} / 2 * -1);
+      margin-top: calc(#{$height} / 2 * -1);
+    }
+  }
+}
+
+@mixin font-face($family, $style, $weight, $src) {
+  $filepath: "../fonts/" + $src + "/" + $src;
+  @font-face {
+    font-family: $family;
+    src: url($filepath + ".eot");
+    src: url($filepath + ".eot") format("embedded-opentype"),
+    url($filepath + ".woff") format("woff"),
+    url($filepath + ".ttf") format("truetype"),
+    url($filepath + ".svg") format("svg");
+    font-style: $style;
+    font-weight: $weight;
+  }
+}
+
+@mixin placeholder() {
+  &::-webkit-input-placeholder {@content}
+  &:-moz-placeholder           {@content}
+  &::-moz-placeholder          {@content}
+  &:-ms-input-placeholder      {@content}
+}
+
+@mixin transition($body) {
+  -webkit-transition: $body;
+  -moz-transition: $body;
+  -o-transition: $body;
+  transition: $body;
+}
