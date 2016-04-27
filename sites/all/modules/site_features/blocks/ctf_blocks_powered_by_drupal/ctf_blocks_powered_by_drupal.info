@@ -1,0 +1,7 @@
+name = CT Features: Blocks: Powered by Drupal
+core = 7.x
+package = CT Features: Blocks
+dependencies[] = fe_block
+features[fe_block_settings][] = system-powered-by
+features[features_api][] = api:2
+project path = sites/all/modules/site_features/blocks

@@ -1,0 +1,34 @@
+// Non-modular or client styles for .l-footer region.
+.l-footer,
+.footer-top {
+  color: $white;
+  font-size: rem-calc(13);
+  p {
+    line-height: 20px;
+    font-size: inherit;
+  }
+}
+
+.l-footer {
+  margin-bottom: 0;
+  border: none;
+  background: $flamingo;
+  padding: 1rem 1.5625rem;
+}
+
+.footer-top {
+  background: url(../images/footer-bg.jpg);
+  -webkit-background-size: cover;
+  background-size: cover;
+  padding: 4.5rem 1.5625rem 5.4rem;
+
+  .footer-top-block {
+    max-width: 340px;
+    width: 100%;
+    @include pseudo-element('before', 275px, 76px, 'logo-white.png', 'not-center');
+    &:before {
+      -webkit-background-size: 275px;
+      background-size: 275px;
+    }
+  }
+}
