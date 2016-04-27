@@ -17,6 +17,12 @@ function ctf_content_types_condo_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cta' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -62,6 +68,12 @@ function ctf_content_types_condo_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cta' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'addressfield',
@@ -119,6 +131,12 @@ function ctf_content_types_condo_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cta' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'number',
@@ -165,6 +183,12 @@ function ctf_content_types_condo_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cta' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -205,6 +229,12 @@ function ctf_content_types_condo_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cta' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -245,6 +275,12 @@ function ctf_content_types_condo_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cta' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -285,6 +321,12 @@ function ctf_content_types_condo_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cta' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -329,6 +371,12 @@ function ctf_content_types_condo_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cta' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -373,6 +421,12 @@ function ctf_content_types_condo_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cta' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'list',
@@ -412,6 +466,12 @@ function ctf_content_types_condo_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cta' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -452,6 +512,12 @@ function ctf_content_types_condo_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cta' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -498,6 +564,12 @@ function ctf_content_types_condo_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cta' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'list',
@@ -536,6 +608,12 @@ function ctf_content_types_condo_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cta' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'image',
@@ -595,6 +673,12 @@ function ctf_content_types_condo_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cta' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'leaflet',
@@ -687,6 +771,12 @@ function ctf_content_types_condo_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cta' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'list',
@@ -726,6 +816,12 @@ function ctf_content_types_condo_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cta' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'number',
@@ -772,6 +868,12 @@ function ctf_content_types_condo_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cta' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -816,6 +918,12 @@ function ctf_content_types_condo_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cta' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'list',
@@ -859,6 +967,12 @@ function ctf_content_types_condo_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cta' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'list',
@@ -898,6 +1012,12 @@ function ctf_content_types_condo_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cta' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -938,6 +1058,12 @@ function ctf_content_types_condo_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cta' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'list',
@@ -977,6 +1103,12 @@ function ctf_content_types_condo_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cta' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'number',
@@ -1027,6 +1159,12 @@ function ctf_content_types_condo_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cta' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'list',

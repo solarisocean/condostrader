@@ -18,7 +18,7 @@ function ctf_pages_toronto_condos_search_with_map_default_page_manager_pages() {
   $page->path = 'search-condos';
   $page->access = array();
   $page->menu = array(
-    'type' => 'normal',
+    'type' => 'none',
     'title' => 'Map',
     'name' => 'main-menu',
     'weight' => '0',
