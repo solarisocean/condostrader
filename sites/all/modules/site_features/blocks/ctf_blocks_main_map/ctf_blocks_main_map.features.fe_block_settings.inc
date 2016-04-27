@@ -14,17 +14,31 @@ function ctf_blocks_main_map_default_fe_block_settings() {
 
   $export['ctrader_map-main_map'] = array(
     'cache' => -1,
+    'css_class' => '',
     'custom' => 0,
     'delta' => 'main_map',
     'module' => 'ctrader_map',
     'node_types' => array(),
-    'pages' => 'condo-search-page',
+    'pages' => '<front>
+condo-search-page',
     'roles' => array(),
     'themes' => array(
+      'adminimal' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'adminimal',
+        'weight' => 0,
+      ),
       'bartik' => array(
         'region' => 'content',
         'status' => 1,
         'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'condor' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'condor',
         'weight' => 0,
       ),
       'seven' => array(
@@ -33,8 +47,14 @@ function ctf_blocks_main_map_default_fe_block_settings() {
         'theme' => 'seven',
         'weight' => 0,
       ),
+      'zurb_foundation' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'zurb_foundation',
+        'weight' => 0,
+      ),
     ),
-    'title' => '',
+    'title' => '<none>',
     'visibility' => 1,
   );
 

@@ -6,6 +6,7 @@ dependencies[] = addressfield
 dependencies[] = admin_menu
 dependencies[] = admin_menu_toolbar
 dependencies[] = block
+dependencies[] = block_class
 dependencies[] = boolean_formatter
 dependencies[] = clone
 dependencies[] = contextual
