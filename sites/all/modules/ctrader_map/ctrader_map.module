@@ -326,6 +326,29 @@ function ctrader_map_block_view($delta = '') {
 
 
 /**
+ * Implements hook_entity_presave().
+ */
+function ctrader_map_entity_presave($entity, $type) {
+  switch ($type) {
+    case DREALTY_ENTITY_TYPE:
+      $terms_polygon = $_SESSION['neighbourhoods_terms_polygons_data'];
+      require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'ctrader_map') . '/classes/pointLocation.php';
+      $pointLocation = new pointLocation();
+      $point = $entity->field_test_geofilld[LANGUAGE_NONE][0]['lon'] . ' ' . $entity->field_test_geofilld[LANGUAGE_NONE][0]['lat'];
+      foreach ($terms_polygon as $term_id => $term_polygon) {
+        if (is_array($term_polygon)) {
+          $check = $pointLocation->pointInPolygon($point, $term_polygon);
+          if ($check == 'inside') {
+            $entity->field_city_region__torcond[LANGUAGE_NONE][0]['tid'] = $term_id;
+          }
+        }
+      }
+      break;
+  }
+}
+
+
+/**
  * Create json with Toronto neighbourhoods coordinates.
  */
 function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = array(), $points_array = array()) {
