@@ -87,6 +87,7 @@ dependencies[] = search_api_solr
 dependencies[] = search_api_views
 dependencies[] = strongarm
 dependencies[] = taxonomy
+dependencies[] = taxonomy_manager
 dependencies[] = token
 dependencies[] = views
 dependencies[] = views_bulk_operations
