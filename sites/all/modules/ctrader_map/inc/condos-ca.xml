@@ -17441,3 +17441,36 @@
         </stats>
     </element>
 </root>
+
+
+
+<!--
+
+$select_list_condos_ca = array(
+'1' => 'Toronto',
+'590' => 'Downtown',
+'597' => 'Midtown',
+'593' => 'North York',
+'596' => 'East End',
+'598' => 'East York',
+'595' => 'West End',
+'594' => 'York Crosstown',
+'592' => 'Etobicoke',
+'591' => 'Scarborough',
+'2' => 'Peel',
+'43' => 'Brampton',
+'44' => 'Mississauga',
+'4' => 'York Region',
+'54' => 'Aurora',
+'49' => 'King',
+'51' => 'Markham',
+'55' => 'Newmarket',
+'52' => 'Richmond Hill',
+'50' => 'Vaughan',
+'3' => 'Halton',
+'45' => 'Milton',
+'46' => 'Burlington',
+'47' => 'Halton Hills',
+'48' => 'Oakville',
+);
+-->

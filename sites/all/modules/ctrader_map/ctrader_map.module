@@ -419,8 +419,90 @@ function _ctrader_map_region_taxonomy_form_submit($form, &$form_state) {
  * Creates taxonomy term for each Toronto region.
  */
 function _ctrader_map_taxonomy_create() {
+  $vid = taxonomy_vocabulary_machine_name_load('neighbourhoods'); //Neighbourhoods vocabulary.
+  $vid = $vid->vid;
+
+  $select_list_condos_ca = array(
+    '1' => array(
+      'Toronto' => array(
+        '590' => 'Downtown',
+        '597' => 'Midtown',
+        '593' => 'North York',
+        '596' => 'East End',
+        '598' => 'East York',
+        '595' => 'West End',
+        '594' => 'York Crosstown',
+        '592' => 'Etobicoke',
+        '591' => 'Scarborough',
+      )
+    ),
+    '2' => array(
+      'Peel' => array(
+        '43' => 'Brampton',
+        '44' => 'Mississauga',
+      )
+    ),
+    '4' => array(
+      'York Region' => array(
+        '54' => 'Aurora',
+        '49' => 'King',
+        '51' => 'Markham',
+        '55' => 'Newmarket',
+        '52' => 'Richmond Hill',
+        '50' => 'Vaughan',
+      )
+    ),
+    '3' => array(
+      'Halton' => array(
+        '45' => 'Milton',
+        '46' => 'Burlington',
+        '47' => 'Halton Hills',
+        '48' => 'Oakville',
+      )
+    ),
+    '0' => array(
+      'grandparent_0' => array(
+        '599' => 'Hamilton',
+      ),
+    ),
+    '5' => array(
+      'grandparent_5' => array(
+        '59' => 'parent_59',
+        '60' => 'parent_60',
+        '61' => 'parent_61',
+        '62' => 'parent_62',
+        '63' => 'parent_63',
+        '64' => 'parent_64',
+        '65' => 'parent_65',
+        '66' => 'parent_66',
+        '67' => 'parent_67',
+      ),
+    ),
+  );
+
+  // Creates main items for vocabulary.
+  foreach ($select_list_condos_ca as $grand_id => $grand_parent) {
+    $grand_pa_name = array_keys($grand_parent);
+    $grand_pa_name = array_shift($grand_pa_name);
+    $grand_pa = new stdClass();
+    $grand_pa->name = $grand_pa_name;
+    $grand_pa->vid = $vid;
+    $grand_pa->field_id[LANGUAGE_NONE][0]['value'] = $grand_id;
+    taxonomy_term_save($grand_pa);
+    $grand_parent_just_created = taxonomy_get_term_by_name($grand_pa_name);
+    $grand_parent_just_created = reset($grand_parent_just_created);
+    $grand_parent_id = $grand_parent_just_created->tid;
+    foreach ($grand_parent[$grand_pa_name] as $child_term_id => $child_term_name) {
+      $child_term = new stdClass();
+      $child_term->name = $child_term_name;
+      $child_term->vid = $vid;
+      $child_term->field_id[LANGUAGE_NONE][0]['value'] = $child_term_id;
+      $child_term->parent = array($grand_parent_id => $grand_parent_id);
+      taxonomy_term_save($child_term);
+    }
+  }
+
   $xml = simplexml_load_file(drupal_get_path('module', 'ctrader_map') . '/inc/condos-ca.xml');
-  $vid = 2; //Neighbourhoods vocabulary.
   $vocabulary_main_terms = taxonomy_get_tree($vid, 0, 2, TRUE);
   foreach ($xml as $element) {
     $term_name = $element->name->__toString();
