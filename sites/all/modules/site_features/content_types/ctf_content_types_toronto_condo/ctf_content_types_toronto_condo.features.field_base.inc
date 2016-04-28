@@ -598,7 +598,7 @@ function ctf_content_types_toronto_condo_field_default_field_bases() {
   // Exported field_base: 'field_city_region__torcond'.
   $field_bases['field_city_region__torcond'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(
       0 => 'drealty_listing',

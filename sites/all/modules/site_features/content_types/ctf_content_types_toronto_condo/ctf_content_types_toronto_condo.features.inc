@@ -5078,7 +5078,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
         "module" : "taxonomy",
         "active" : "1",
         "locked" : "0",
-        "cardinality" : "1",
+        "cardinality" : "-1",
         "deleted" : "0",
         "columns" : { "tid" : { "type" : "int", "unsigned" : true, "not null" : false } }
       }
@@ -12381,14 +12381,16 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "search" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 }
         },
         "label" : "City region",
-        "required" : false,
+        "required" : 0,
         "settings" : { "user_register_form" : false },
         "widget" : {
-          "module" : "options",
-          "settings" : [],
+          "weight" : 233,
           "type" : "options_select",
-          "weight" : 233
+          "module" : "options",
+          "active" : 1,
+          "settings" : []
         },
+        "drealty" : { "hash_exclude" : 0 },
         "id" : "532",
         "field_id" : "519",
         "field_name" : "field_city_region__torcond",
