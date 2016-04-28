@@ -1,0 +1,9 @@
+name = Facet API Example
+description = Example to show internals of Facet API
+package = Search Toolkit
+core = 7.x
+
+dependencies[] = facetapi
+
+files[] = facetapi/example_facetapi_select.inc
+files[] = facetapi/example_facetapi_filter_exclude_items.inc
