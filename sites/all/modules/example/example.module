@@ -1,0 +1,69 @@
+<?php
+
+/**
+ * Implements hook_facetapi_widgets().
+ */
+function example_facetapi_widgets() {
+  return array(
+    'example_facetapi_select' => array(
+      'handler' => array(
+        'label' => t('Select'),
+        'class' => 'ExampleFacetapiSelect',
+        'query types' => array('term', 'date'),
+      ),
+    ),
+  );
+}
+
+
+/**
+ * Implements hook_facetapi_sort_info().
+ */
+function example_facetapi_sort_info() {
+  $sorts = array();
+
+  $sorts['random'] = array(
+    'label' => t('Random'),
+    'callback' => 'example_facetapi_sort_random',
+    'description' => t('Random sorting.'),
+    'weight' => -50,
+  );
+
+  return $sorts;
+}
+
+/**
+ * Sort randomly.
+ */
+function example_facetapi_sort_random(array $a, array $b) {
+  return rand(-1, 1);
+}
+
+/**
+ * Implements hook_facetapi_filters().
+ */
+function example_facetapi_filters() {
+  return array(
+    'exclude_items' => array(
+      'handler' => array(
+        'label' => t('Exclude specified items'),
+        'class' => 'ExampleFacetapiFilterExcludeItems',
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_forms().
+ *
+ * Set callbacks for select facet forms.
+ */
+function example_forms() {
+  $forms = array();
+  foreach (facetapi_get_searcher_info() as $searcher => $searcher_info) {
+    foreach (facetapi_get_facet_info($searcher) as $facet) {
+      $forms['example_facetapi_select_' .  $facet['name']]['callback'] = 'example_facetapi_select';
+    }
+  }
+  return $forms;
+}
