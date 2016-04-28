@@ -1,0 +1,26 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: morzi
+ * Date: 28.04.2016
+ * Time: 12:48
+ */
+
+/**
+ * Build custom form for search menu.
+ */
+function searchmenu_form($form, &$form_state) {
+  $form['#attributes']['class'] = 'right';
+
+  $form['query'] = array(
+    '#type' => 'textfield',
+    '#attributes' => array(
+      'class' => array(
+        'test'
+      ),
+      'placeholder' => t('Type your search here...'),
+    ),
+  );
+  return $form;
+}
+

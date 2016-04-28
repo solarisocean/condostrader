@@ -6,3 +6,7 @@
 @include font-face("OpenSans", normal, bold, "OpenSans-Bold");
 @include font-face("OpenSans", normal, 100, "OpenSans-Light");
 @include font-face("OpenSans", italic, normal, "OpenSans-Italic");
+
+@include font-face("Raleway", normal, normal, "Raleway-Regular");
+@include font-face("Raleway", normal, 500, "Raleway-Semibold");
+@include font-face("Raleway", normal, bold, "Raleway-Bold");
