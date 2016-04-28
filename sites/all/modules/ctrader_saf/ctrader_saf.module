@@ -13,5 +13,71 @@ function ctrader_saf_init() {
  * Implements hook_search_api_solr_query_alter().
  */
 function ctrader_saf_search_api_solr_query_alter(array &$call_args, SearchApiQueryInterface $query) {
+  $facet_item = $query->getFilter()->getFilters();
+  if (!empty($facet_item) && isset($facet_item[0]) && is_object($facet_item[0])) {
+    $facet_item = $facet_item[0]->getFilters();
+    if (!empty($facet_item[0]) && is_array($facet_item[0]) && $facet_item[0][0] == 'field_locker__torcond') {
+      if (!empty($facet_item[0][1])) {
+        $facet_item = $facet_item[0][1];
+        if ($facet_item !== 'none') {
+//          $call_args['params']['fq'][0] = substr($call_args['params']['fq'][0], 0, -1) . '\+ensuit)';
+          $call_args['params']['fq'][0] = '{!tag=facet:field_locker__torcond}((tm_field_locker__torcond:(ensuiteown)) OR (tm_field_locker__torcond:(ensuite\+exclus)) OR (tm_field_locker__torcond:(common)) OR (tm_field_locker__torcond:(ensuiteexclus)) OR (tm_field_locker__torcond:(own)) OR (tm_field_locker__torcond:(exclus)) OR (tm_field_locker__torcond:(ensuite\+own)) OR (tm_field_locker__torcond:(ensuit)))';
+        }
+      }
+    }
+  }
 
+
+  $stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
+
+
+  // {!tag=facet:field_locker__torcond}((tm_field_locker__torcond:(common)) OR (tm_field_locker__torcond:(ensuit)) OR (tm_field_locker__torcond:(own)))
+}
+
+/**
+ * Implements hook_facet_items_alter().
+ */
+function ctrader_saf_facet_items_alter(&$build, &$settings) {
+  if ($settings->facet == "field_locker__torcond") {
+    $replace_this_facet = 'own';
+    $replaced_facet_count_number = 0;
+    foreach ($build as $key => $item) {
+      switch ($key) {
+        case $replace_this_facet:
+          $build[$replace_this_facet]["#markup"] = t('Require Locker');
+          $build[$replace_this_facet]['#indexed_value'] = t('Require Locker');
+          break;
+        // Remove this facet item.
+        default:
+          unset($build[$key]);
+          break;
+      }
+      if ($key != 'none' && strrpos($key, '+') === FALSE) {
+        $replaced_facet_count_number += isset($item['#count']) ? $item['#count'] : 0;
+      }
+    }
+    $build[$replace_this_facet]['#count'] = $replaced_facet_count_number;
+  }
+
+  if ($settings->facet == "field_pets__torcond") {
+    $replace_this_facet = '!';
+    $replaced_facet_count_number = 0;
+    foreach ($build as $key => $item) {
+      switch ($key) {
+        case $replace_this_facet:
+          $build[$replace_this_facet]["#markup"] = t('Pets Allowed');
+          break;
+        // Remove this facet item.
+        case 'restrict':
+          unset($build[$key]);
+          break;
+        default;
+      }
+      if ($key != 'none' && strrpos($key, '+') === FALSE) {
+        $replaced_facet_count_number += isset($item['#count']) ? $item['#count'] : 0;
+      }
+    }
+  }
+
+  $stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
 }
