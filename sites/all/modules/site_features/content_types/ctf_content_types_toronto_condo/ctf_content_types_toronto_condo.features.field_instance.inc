@@ -1275,14 +1275,18 @@ function ctf_content_types_toronto_condo_field_default_field_instances() {
         'weight' => 0,
       ),
     ),
+    'drealty' => array(
+      'hash_exclude' => 0,
+    ),
     'entity_type' => 'drealty_listing',
     'field_name' => 'field_city_region__torcond',
     'label' => 'City region',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',

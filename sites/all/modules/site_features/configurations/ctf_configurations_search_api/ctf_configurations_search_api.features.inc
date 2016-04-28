@@ -24,7 +24,6 @@ function ctf_configurations_search_api_default_search_api_index() {
         "field_a_c__torcond" : { "type" : "text" },
         "field_ad_text__torcond" : { "type" : "text" },
         "field_addr__torcond" : { "type" : "text" },
-        "field_address_full__torcond" : { "type" : "text" },
         "field_all_inc__torcond" : { "type" : "text" },
         "field_apt_num__torcond" : { "type" : "text" },
         "field_area__torcond" : { "type" : "text" },
@@ -44,7 +43,20 @@ function ctf_configurations_search_api_default_search_api_index() {
         "field_cable__torcond" : { "type" : "text" },
         "field_cac_inc__torcond" : { "type" : "text" },
         "field_central_vac__torcond" : { "type" : "text" },
-        "field_city_region__torcond" : { "type" : "integer", "entity_type" : "taxonomy_term" },
+        "field_city_region__torcond" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_city_region__torcond:parent" : {
+          "type" : "list\\u003Clist\\u003Cinteger\\u003E\\u003E",
+          "entity_type" : "taxonomy_term"
+        },
+        "field_city_region__torcond:parents_all" : {
+          "type" : "list\\u003Clist\\u003Cinteger\\u003E\\u003E",
+          "entity_type" : "taxonomy_term"
+        },
+        "field_city_region__torcond:vocabulary" : {
+          "type" : "list\\u003Cinteger\\u003E",
+          "entity_type" : "taxonomy_vocabulary"
+        },
+        "field_city_region__torcond:weight" : { "type" : "list\\u003Cinteger\\u003E" },
         "field_comel_inc__torcond" : { "type" : "text" },
         "field_community__torcond" : { "type" : "text" },
         "field_community_code__torcond" : { "type" : "text" },
@@ -216,7 +228,6 @@ function ctf_configurations_search_api_default_search_api_index() {
         "field_taxes__torcond" : { "type" : "decimal" },
         "field_test_geofilld:latlon" : { "type" : "string", "real_type" : "location" },
         "field_timestamp_sql__torcond" : { "type" : "date" },
-        "field_toronto_gallery:file" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "file" },
         "field_tour_url__torcond" : { "type" : "text" },
         "field_tv__torcond" : { "type" : "decimal" },
         "field_type_own1_out__torcond" : { "type" : "text" },
@@ -244,7 +255,6 @@ function ctf_configurations_search_api_default_search_api_index() {
         "field_yr_built__torcond" : { "type" : "text" },
         "field_zip__torcond" : { "type" : "text" },
         "field_zoning__torcond" : { "type" : "text" },
-        "hash" : { "type" : "text" },
         "id" : { "type" : "integer" },
         "inactive_date" : { "type" : "integer" },
         "label" : { "type" : "text" },
@@ -884,10 +894,10 @@ function ctf_configurations_search_api_default_search_api_server() {
       "http_user" : "",
       "http_pass" : "",
       "excerpt" : 0,
-      "retrieve_data" : 1,
+      "retrieve_data" : 0,
       "highlight_data" : 0,
       "skip_schema_check" : 0,
-      "solr_version" : "5",
+      "solr_version" : "",
       "http_method" : "AUTO",
       "log_query" : 0,
       "log_response" : 0
