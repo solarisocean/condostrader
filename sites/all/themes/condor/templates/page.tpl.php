@@ -9,19 +9,31 @@
       <?php if ($top_bar_classes): ?>
         <div class="<?php print $top_bar_classes; ?>">
       <?php endif; ?>
-      <nav class="top-bar" data-topbar <?php print $top_bar_options; ?>>
+      <nav class="top-bar row" data-topbar <?php print $top_bar_options; ?>>
         <ul class="title-area">
-          <li class="name"><h1><?php print $linked_site_name; ?></h1></li>
           <li class="toggle-topbar menu-icon">
             <a href="#"><span><?php print $top_bar_menu_text; ?></span></a></li>
         </ul>
         <section class="top-bar-section">
-          <?php if ($top_bar_main_menu) : ?>
-            <?php print $top_bar_main_menu; ?>
-          <?php endif; ?>
-          <?php if ($top_bar_secondary_menu) : ?>
-            <?php print $top_bar_secondary_menu; ?>
-          <?php endif; ?>
+          <div class="logo-container left">
+            <?php print $linked_logo; ?>
+          </div>
+          <div class="right">
+            <ul class="user-links">
+              <li><?php print $sign_in_link; ?></li>
+              <li><?php print $log_in_link; ?></li>
+            </ul>
+            <ul class="user-buttons">
+              <li><?php print $like_button; ?></li>
+              <li>
+                <div class="search-menu-box">
+                  <?php print $search_button; ?>
+                  <?php print $search_block?>
+                </div>
+              </li>
+              <li><?php print $menu_button; ?></li>
+            </ul>
+          </div>
         </section>
       </nav>
       <?php if ($top_bar_classes): ?>

@@ -1,1 +1,165 @@
 // Non-modular or client styles for .l-header region.
+.l-header {
+  .top-bar, .tes {
+    height: 3.75rem;
+    line-height: 3.75rem;
+    position: relative;
+
+    background: rgba(244,120,32,1);
+    background: -moz-linear-gradient(left, rgba(244,120,32,1) 0%, rgba(242,98,54,1) 73%, rgba(242,98,54,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(244,120,32,1)), color-stop(73%, rgba(242,98,54,1)), color-stop(100%, rgba(242,98,54,1)));
+    background: -webkit-linear-gradient(left, rgba(244,120,32,1) 0%, rgba(242,98,54,1) 73%, rgba(242,98,54,1) 100%);
+    background: -o-linear-gradient(left, rgba(244,120,32,1) 0%, rgba(242,98,54,1) 73%, rgba(242,98,54,1) 100%);
+    background: -ms-linear-gradient(left, rgba(244,120,32,1) 0%, rgba(242,98,54,1) 73%, rgba(242,98,54,1) 100%);
+    background: linear-gradient(to right, rgba(244,120,32,1) 0%, rgba(242,98,54,1) 73%, rgba(242,98,54,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f47820', endColorstr='#f26236', GradientType=1 );
+
+    .top-bar-section {
+      padding-right: 25px;
+
+      ul {
+        li {
+          background: transparent;
+          @include transition(background .2s ease-in-out);
+
+          &:hover {
+            background: lighten($flamingo, 5);
+            @include transition(background .2s ease-in-out);
+          }
+        }
+      }
+
+      .user-buttons {
+        li {
+          a {
+            background-color: $flamingo;
+            height: 60px;
+            border-left: 1px solid rgba($white, .3);
+            padding: 0 28px;
+            position: relative;
+            @include transition(background-color .2s ease-in-out);
+
+            &:hover {
+              background-color: lighten($flamingo, 5);
+              @include transition(background-color .2s ease-in-out);
+            }
+
+            &:last-child {
+              border-right: 1px solid rgba($white, .3);
+            }
+
+            &.wishlist {
+              @include pseudo-element('before', 22px, 19px, 'wishlist.png', 'center');
+            }
+
+            &.search {
+              @include pseudo-element('before', 19px, 19px, 'search-icon.png', 'center');
+            }
+
+            &.menu-button {
+              @include pseudo-element('before', 20px, 19px, 'menu-icon.png', 'center');
+            }
+
+          }
+        }
+
+        #searchmenu-form {
+          width: 0;
+          max-width: 260px;
+          @include transition(all .3s ease-in-out);
+
+          &.search-visible {
+            width: 100%;
+            @include transition(all .3s ease-in-out);
+          }
+
+          .form-item-query {
+            margin: 0;
+            padding-right: 20px;
+
+            input[type="text"] {
+              max-width: 260px;
+              width: 100%;
+              background: transparent;
+              outline: none;
+              border: none;
+              box-shadow: none;
+              color: white;
+              font-size: rem-calc(13);
+              @include placeholder {
+                color: $white;
+              }
+            }
+          }
+        }
+
+      }
+
+      .logo-container {
+        background: $white;
+        padding: 0 40px 0 25px;
+        position: relative;
+
+        &:after {
+          content: '';
+          width: 0;
+          height: 0;
+          border-top: 60px solid $white;
+          border-right: 37px solid transparent;
+          position: absolute;
+          right: -37px;
+          top: 0;
+        }
+
+        .logo {
+          max-width: 262px;
+          width: 100%;
+          margin-top: -8px;
+        }
+      }
+
+      .user-links {
+        li {
+          &:last-child {
+            margin-right: 30px;
+          }
+
+          a {
+            font-family: "Raleway", sans-serif;
+            font-weight: 500;
+            text-transform: uppercase;
+            padding: 0 18px;
+            background-color: inherit;
+            color: $white;
+          }
+        }
+
+      }
+
+      .main-nav-tree {
+        display: block;
+        width: 240px;
+        position: absolute;
+        right: 0;
+        top: 105px;
+
+        li {
+          float: none;
+          a {
+            border-bottom: 1px solid rgba($white, .3);
+            background: $mirage;
+            line-height: 19px;
+            font-size: rem-calc(14);
+            padding: 8px 25px;
+          }
+        }
+
+        li {
+          ul {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

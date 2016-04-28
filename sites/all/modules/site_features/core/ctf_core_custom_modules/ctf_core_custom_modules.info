@@ -20,4 +20,5 @@ dependencies[] = ctf_views_neighbourhoods_taxonomy_map
 dependencies[] = ctf_views_result_page
 dependencies[] = ctf_views_toronto_condo_search_page
 dependencies[] = ctrader_mls
+dependencies[] = ctrader_searchmenu
 features[features_api][] = api:2
