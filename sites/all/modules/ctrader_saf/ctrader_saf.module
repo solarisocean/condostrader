@@ -24,6 +24,21 @@ function ctrader_saf_search_api_solr_query_alter(array &$call_args, SearchApiQue
         }
       }
     }
+
+    // Changes query for 'lease' like 'all minus sale' (because of 'leas' query unknown solr error).
+    if (!empty($facet_item[0]) && is_array($facet_item[0]) && $facet_item[0][0] == 'field_s_r__torcond') {
+      if (!empty($facet_item[0][1])) {
+        $leas_query_needs_to_replace = 'tm_field_s_r__torcond:(leas)';
+        $leas_fixed_query = '*:* AND -(tm_field_s_r__torcond:(sale))';
+        foreach ($call_args['params']['fq'] as $key => $value) {
+          if (strrpos($value, $leas_query_needs_to_replace) !== FALSE) {
+            $call_args['params']['fq'][$key] = str_replace($leas_query_needs_to_replace, $leas_fixed_query, $call_args['params']['fq'][$key]);
+          }
+        }
+        //  {!tag=facet:field_s_r__torcond}*:* AND -(tm_field_s_r__torcond:(sale))
+        //  {!tag=facet:field_s_r__torcond}((tm_field_s_r__torcond:(leas)) OR (tm_field_s_r__torcond:(sale)))
+      }
+    }
   }
 }
 
@@ -72,4 +87,36 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
       }
     }
   }
+
+  if ($settings->facet == "field_br__torcond") {
+    $adapter = facetapi_adapter_load($settings->searcher);
+    $facet = facetapi_facet_load($settings->facet, $settings->searcher);
+    $items = $adapter->getActiveItems($facet);
+    $item_values = array();
+    foreach ($items as $item) {
+      $item_values[] = $item['value'];
+    }
+    $is_all_link_active = count($items) == 0;
+    $all_link_path = $adapter->getFacetPath($facet, $item_values, TRUE);
+    $all_link_query = $adapter->getQueryString($facet, $item_values, TRUE);
+    $build['any'] = array(
+      '#markup' => t('Any'),
+      '#path' => $all_link_path,
+      '#html' => FALSE,
+      '#count' => NULL,
+      '#indexed_value' => 0,
+      '#active' => $is_all_link_active,
+      '#item_parents' => array(),
+      '#item_children' => array(),
+      '#query' => $all_link_query,
+    );
+  }
+}
+
+
+/**
+ * Implements hook_current_search_items().
+ */
+function ctrader_saf_current_search_items() {
+
 }

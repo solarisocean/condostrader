@@ -1,9 +1,11 @@
 name = CT Features: Pages: Result page
+description = Page '/result' for project Condostrader
 core = 7.x
 package = CT Features: Pages
-dependencies[] = ctf_views_result_page
+dependencies[] = ctf_blocks_main_map
+dependencies[] = ctf_views_toronto_condo_search_page
 dependencies[] = ctools
 dependencies[] = page_manager
 features[ctools][] = page_manager:pages_default:1
 features[features_api][] = api:2
-features[page_manager_pages][] = result_page_panel
+features[page_manager_pages][] = search_with_jsmap

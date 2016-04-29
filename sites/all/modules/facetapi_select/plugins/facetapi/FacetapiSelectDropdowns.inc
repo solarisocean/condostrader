@@ -20,27 +20,8 @@ class FacetapiSelectDropdowns extends FacetapiWidgetLinks {
     $count++;
 
     $element = &$this->build[$this->facet['field alias']];
-    $settings = $this->settings;
-
     $variables = $this->buildItems($element);
-
-    if (!empty($variables['options'])) {
-      $reset_option_label = !empty($settings->settings['reset_option_label']) ? filter_xss_admin($settings->settings['reset_option_label']) : t('--Reset--');
-
-      if (!empty($variables['facet_reset_url'])) {
-        $variables['options'] = array_merge(
-          array($variables['facet_reset_url'] => $reset_option_label),
-          $variables['options']
-        );
-      }
-      else {
-        $default_option_label = !empty($settings->settings['default_option_label']) ? filter_xss_admin($settings->settings['default_option_label']) : t('--Choose--');
-        $variables['default_option_label'] = theme('facetapi_select_select_option', array(
-          'facet_text' => $default_option_label,
-          'show_count' => FALSE
-        ));
-      }
-    }
+    $variables = $this->appendDefaultOrResetOptions($variables);
 
     $element = drupal_get_form("facetapi_select_facet_form_$count", $variables);
 
@@ -96,6 +77,67 @@ class FacetapiSelectDropdowns extends FacetapiWidgetLinks {
     }
 
     return $variables;
+  }
+
+  /**
+   * Append either the Default option or the Reset option to the available options.
+   *
+   * @param array $variables
+   *   The variables array of built items to be modified that will be passed as
+   *   to the facet form.
+   *
+   * @return array
+   *   The modified variables array.
+   */
+  protected function appendDefaultOrResetOptions(&$variables) {
+    if (!empty($variables['options'])) {
+      if (!empty($variables['facet_reset_url'])) {
+        $variables['options'] = array_merge(
+          array($variables['facet_reset_url'] => $this->getResetOptionLabel()),
+          $variables['options']
+        );
+      }
+      else {
+        $variables['default_option_label'] = theme('facetapi_select_select_option', array(
+          'facet_text' => $this->getDefaultOptionLabel(),
+          'show_count' => FALSE
+        ));
+      }
+    }
+
+    return $variables;
+  }
+
+  /**
+   * Retrieve the facet reset option label.
+   *
+   * @return string
+   *   The reset option label.
+   */
+  protected function getResetOptionLabel() {
+    $reset_option_label = t('--Reset--');
+
+    if (!empty($this->settings->settings['reset_option_label'])) {
+      $reset_option_label = self::translateLabel('reset_option_label', $this->settings->settings['reset_option_label'], $this->key);
+    }
+
+    return $reset_option_label;
+  }
+
+  /**
+   * Retrieve the facet default option label.
+   *
+   * @return string
+   *   The default option label.
+   */
+  protected function getDefaultOptionLabel() {
+    $default_option_label = t('--Choose--');
+
+    if (!empty($this->settings->settings['default_option_label'])) {
+      $default_option_label = self::translateLabel('default_option_label', $this->settings->settings['default_option_label'], $this->key);
+    }
+
+    return $default_option_label;
   }
 
   /**
@@ -197,6 +239,47 @@ class FacetapiSelectDropdowns extends FacetapiWidgetLinks {
       '#default_value' => !empty($this->settings->settings['hide_facet_count']) ? $this->settings->settings['hide_facet_count'] : FALSE,
       '#states' => $states,
     );
+
+    $form['#submit'] = empty($form['#submit']) ? array() : $form['#submit'];
+    $form['#submit'][] = 'facetapi_select_facet_settings_form_submit';
+  }
+
+  /**
+   * Helper function to integrate with the i18n_string_translate function.
+   *
+   * @param string $name
+   *   Translation context.
+   * @param string $string
+   *   The raw db value for the given property.
+   *
+   * @return string
+   *   If i18n_string is available the translated string is returned, otherwise,
+   *   the supplied string is returned.
+   */
+  public static function translateLabel($name, $string, $key) {
+    if (!function_exists('i18n_string_translate')) {
+      return $string;
+    }
+
+    $i18n_name = array('facetapi_select', $name, str_replace(':', '_', $key), 'label');
+    return i18n_string_translate($i18n_name, $string);
+  }
+
+  /**
+   * Helper function to integrate with the i18n_string_update function.
+   *
+   * @param string $name
+   *   Translation context.
+   * @param string $string
+   *   The raw db value for the given property.
+   *
+   * @return void
+   */
+  public static function updateLabelTranslation($name, $string, $key) {
+    if (function_exists('i18n_string_update')) {
+      $i18n_name = array('facetapi_select', $name, str_replace(':', '_', $key), 'label');
+      i18n_string_update($i18n_name, $string);
+    }
   }
 
 }
