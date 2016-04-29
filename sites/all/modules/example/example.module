@@ -7,7 +7,7 @@ function example_facetapi_widgets() {
   return array(
     'example_facetapi_select' => array(
       'handler' => array(
-        'label' => t('Select'),
+        'label' => t('Select -- example'),
         'class' => 'ExampleFacetapiSelect',
         'query types' => array('term', 'date'),
       ),

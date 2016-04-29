@@ -319,7 +319,7 @@ function ctrader_map_block_view($delta = '') {
   drupal_add_js(drupal_get_path('module', 'ctrader_map') . '/js/custom_map.js');
 
   $block = array();
-  $block['content'] = '<div id="mapid" style="height:600px;"></div>';
+  $block['content'] = '<div id="mapid" style="height:750px;"></div>';
   $block['subject'] = 'Block with main map';
   return $block;
 }

@@ -97,3 +97,38 @@ function theme_facetapi_select_select_option($variables) {
 
   return $output;
 }
+
+/**
+ * Implements hook_i18n_string_info().
+ */
+function facetapi_select_i18n_string_info() {
+  $groups['facetapi_select'] = array(
+    'title' => t('FacetAPI Select'),
+    'description' => t('Translatable FacetAPI- Select default labels.'),
+    'format' => FALSE, // This group doesn't have strings with format.
+    'list' => TRUE, // This group can list all strings.
+  );
+  return $groups;
+}
+
+/**
+ * Submit handlers for settings form of facet filters.
+ */
+function facetapi_select_facet_settings_form_submit($form, $form_state) {
+  $values = $form_state['values'];
+
+  if (empty($values['widget']) || $values['widget'] != 'facetapi_select_dropdowns') {
+    return;
+  }
+
+  // Getting the Facet identifier.
+  $key = $form['#facetapi']['facet']['name'];
+
+  // Update the i18n string for the "Default Option" label.
+  $string = $values['default_option_label'];
+  FacetapiSelectDropdowns::updateLabelTranslation('default_option_label', $string, $key);
+
+  // Update the i18n string for the "Reset Option" label.
+  $string = $values['reset_option_label'];
+  FacetapiSelectDropdowns::updateLabelTranslation('reset_option_label', $string, $key);
+}
