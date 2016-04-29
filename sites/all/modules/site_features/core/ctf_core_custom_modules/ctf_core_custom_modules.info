@@ -1,6 +1,7 @@
 name = CT Features: Core: Custom modules
 core = 7.x
 package = CT Features: Core
+dependencies[] = ctf_blocks_facet_api
 dependencies[] = ctf_blocks_footer_top
 dependencies[] = ctf_blocks_main_map
 dependencies[] = ctf_blocks_navigation
@@ -19,6 +20,8 @@ dependencies[] = ctf_views_map
 dependencies[] = ctf_views_neighbourhoods_taxonomy_map
 dependencies[] = ctf_views_result_page
 dependencies[] = ctf_views_toronto_condo_search_page
+dependencies[] = ctrader_map
 dependencies[] = ctrader_mls
+dependencies[] = ctrader_saf
 dependencies[] = ctrader_searchmenu
 features[features_api][] = api:2

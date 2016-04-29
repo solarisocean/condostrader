@@ -20,19 +20,13 @@ function ctrader_saf_search_api_solr_query_alter(array &$call_args, SearchApiQue
       if (!empty($facet_item[0][1])) {
         $facet_item = $facet_item[0][1];
         if ($facet_item !== 'none') {
-//          $call_args['params']['fq'][0] = substr($call_args['params']['fq'][0], 0, -1) . '\+ensuit)';
           $call_args['params']['fq'][0] = '{!tag=facet:field_locker__torcond}((tm_field_locker__torcond:(ensuiteown)) OR (tm_field_locker__torcond:(ensuite\+exclus)) OR (tm_field_locker__torcond:(common)) OR (tm_field_locker__torcond:(ensuiteexclus)) OR (tm_field_locker__torcond:(own)) OR (tm_field_locker__torcond:(exclus)) OR (tm_field_locker__torcond:(ensuite\+own)) OR (tm_field_locker__torcond:(ensuit)))';
         }
       }
     }
   }
-
-
-  $stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
-
-
-  // {!tag=facet:field_locker__torcond}((tm_field_locker__torcond:(common)) OR (tm_field_locker__torcond:(ensuit)) OR (tm_field_locker__torcond:(own)))
 }
+
 
 /**
  * Implements hook_facet_items_alter().
@@ -78,6 +72,4 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
       }
     }
   }
-
-  $stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
 }

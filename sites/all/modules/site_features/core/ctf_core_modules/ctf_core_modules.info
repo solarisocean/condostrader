@@ -30,6 +30,7 @@ dependencies[] = elysia_cron
 dependencies[] = entity
 dependencies[] = entity_panels
 dependencies[] = facetapi
+dependencies[] = facetapi_bonus
 dependencies[] = facetapi_collapsible
 dependencies[] = facetapi_select
 dependencies[] = fe_block
