@@ -173,6 +173,7 @@ function ctrader_map_init() {
 function ctrader_map_search_api_solr_query_alter(array &$call_args, SearchApiQueryInterface $query) {
   switch ($query->getOption('search id')) {
     case 'search_api_views:condo_search_page:page':
+    case 'search_api_views:condo_search_page:block_1':
       $query_string = serialize($query);
       $_SESSION['query_from_view'] = $query_string;
       break;
@@ -286,37 +287,37 @@ function ctrader_map_block_view($delta = '') {
     }
     sort($condos_neighbourhood_names);
   }
-  drupal_add_js(array('condosMapData' => $array_json), 'setting');
-  _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names, $array_json);
-
-  $path = libraries_get_path('leaflet');
-  drupal_add_js($path . '/leaflet-src.js');
-  drupal_add_css($path . '/leaflet.css');
-
-  $path = libraries_get_path('Leaflet.draw');
-  drupal_add_js($path . '/dist/leaflet.draw.js');
-  drupal_add_css($path . '/dist/leaflet.draw.css');
-
-
-  // another draw tools.
-//  $path = libraries_get_path('ConcaveHull');
-//  drupal_add_js($path . '/dist/concavehull.js');
-//  $path = libraries_get_path('d3');
-//  drupal_add_js($path . '/d3.js');
-//  $path = libraries_get_path('JsClipper');
-//  drupal_add_js($path . '/clipper.js');
-//  $path = libraries_get_path('Leaflet.FreeDraw');
-//  drupal_add_js($path . '/dist/leaflet.freedraw-src.js');
-//  $path = drupal_get_path('module', 'ctrader_map');
-//  drupal_add_js($path . '/js/neighbourhood-json.js');
-
-
-  $path = libraries_get_path('leaflet_markercluster');
-  drupal_add_css($path . '/dist//dist/MarkerCluster.css');
-  drupal_add_css($path . '/dist/MarkerCluster.Default.css');
-  drupal_add_js($path . '/dist/leaflet.markercluster.js');
-
-  drupal_add_js(drupal_get_path('module', 'ctrader_map') . '/js/custom_map.js');
+//  drupal_add_js(array('condosMapData' => $array_json), 'setting');
+//  _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names, $array_json);
+//
+//  $path = libraries_get_path('leaflet');
+//  drupal_add_js($path . '/leaflet-src.js');
+//  drupal_add_css($path . '/leaflet.css');
+//
+//  $path = libraries_get_path('Leaflet.draw');
+//  drupal_add_js($path . '/dist/leaflet.draw.js');
+//  drupal_add_css($path . '/dist/leaflet.draw.css');
+//
+//
+//  // another draw tools.
+////  $path = libraries_get_path('ConcaveHull');
+////  drupal_add_js($path . '/dist/concavehull.js');
+////  $path = libraries_get_path('d3');
+////  drupal_add_js($path . '/d3.js');
+////  $path = libraries_get_path('JsClipper');
+////  drupal_add_js($path . '/clipper.js');
+////  $path = libraries_get_path('Leaflet.FreeDraw');
+////  drupal_add_js($path . '/dist/leaflet.freedraw-src.js');
+////  $path = drupal_get_path('module', 'ctrader_map');
+////  drupal_add_js($path . '/js/neighbourhood-json.js');
+//
+//
+//  $path = libraries_get_path('leaflet_markercluster');
+//  drupal_add_css($path . '/dist//dist/MarkerCluster.css');
+//  drupal_add_css($path . '/dist/MarkerCluster.Default.css');
+//  drupal_add_js($path . '/dist/leaflet.markercluster.js');
+//
+//  drupal_add_js(drupal_get_path('module', 'ctrader_map') . '/js/custom_map.js');
 
   $block = array();
   $block['content'] = '<div id="mapid" style="height:750px;"></div>';
@@ -331,6 +332,30 @@ function ctrader_map_block_view($delta = '') {
 function ctrader_map_entity_presave($entity, $type) {
   switch ($type) {
     case DREALTY_ENTITY_TYPE:
+
+      if (!isset($_SESSION['neighbourhoods_terms_polygons_data'])) {
+        $vid = taxonomy_vocabulary_machine_name_load('neighbourhoods'); //Neighbourhoods vocabulary.
+        $vid = $vid->vid;
+        $vocabulary_term_entities = taxonomy_get_tree($vid, 0, 3, TRUE);
+        $terms_polygon = array();
+        foreach ($vocabulary_term_entities as $tax_term) {
+          $tax_term_id = $tax_term->tid;
+          $polygon = isset($tax_term->field_community_geolocation[LANGUAGE_NONE][0]['geom']) ? $tax_term->field_community_geolocation[LANGUAGE_NONE][0]['geom'] : NULL;
+          if ($polygon !== NULL && $polygon != 'GEOMETRYCOLLECTION EMPTY') {
+            if (strrpos($tax_term->field_community_geolocation[LANGUAGE_NONE][0]['geom'], 'MULTIPOLYGON') === FALSE) {
+              $polygon = $tax_term->field_community_geolocation[LANGUAGE_NONE][0]['geom'];
+              $polygon = str_replace(array('POLYGON ', '(', ')'), '', $polygon);
+              $polygon = explode(', ', $polygon);
+            }
+          }
+          $terms_polygon[$tax_term_id] = $polygon;
+
+          $polygon = NULL;
+          $tax_term_id = NULL;
+        }
+        $_SESSION['neighbourhoods_terms_polygons_data'] = $terms_polygon;
+      }
+
       $terms_polygon = $_SESSION['neighbourhoods_terms_polygons_data'];
       require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'ctrader_map') . '/classes/pointLocation.php';
       $pointLocation = new pointLocation();
@@ -554,7 +579,7 @@ function _ctrader_map_taxonomy_create() {
         $coordinates[] = $pre_coordinates;
       }
     }
-    if($is_polygon == TRUE && implode('_', $coordinates[0]) != implode('_', end($coordinates))) {
+    if ($is_polygon == TRUE && implode('_', $coordinates[0]) != implode('_', end($coordinates))) {
       $coordinates[] = $coordinates[0];
     }
     $prepared = array(

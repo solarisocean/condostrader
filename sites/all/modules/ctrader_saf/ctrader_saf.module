@@ -29,24 +29,39 @@ function ctrader_saf_search_api_solr_query_alter(array &$call_args, SearchApiQue
     if (!empty($facet_item[0]) && is_array($facet_item[0]) && $facet_item[0][0] == 'field_locker__torcond') {
       if (!empty($facet_item[0][1])) {
         $facet_item = $facet_item[0][1];
-        if ($facet_item !== 'none') {
-          $call_args['params']['fq'][0] = '{!tag=facet:field_locker__torcond}((tm_field_locker__torcond:(ensuiteown)) OR (tm_field_locker__torcond:(ensuite\+exclus)) OR (tm_field_locker__torcond:(common)) OR (tm_field_locker__torcond:(ensuiteexclus)) OR (tm_field_locker__torcond:(own)) OR (tm_field_locker__torcond:(exclus)) OR (tm_field_locker__torcond:(ensuite\+own)) OR (tm_field_locker__torcond:(ensuit)))';
+        if ($facet_item !== 'None') {
+          $call_args['params']['fq'][0] = '{!tag=facet:field_locker__torcond}((ss_field_locker__torcond:"Owned") OR (ss_field_locker__torcond:"Exclusive") OR (ss_field_locker__torcond:"Ensuite") OR (ss_field_locker__torcond:"Ensuite+Owned") OR (ss_field_locker__torcond:"Common") OR (ss_field_locker__torcond:"Ensuite+Exclusive"))';
         }
       }
     }
 
-    // Changes query for 'lease' like 'all minus sale' (because of 'leas' query unknown solr error).
-    if (!empty($facet_item[0]) && is_array($facet_item[0]) && $facet_item[0][0] == 'field_s_r__torcond') {
+    $sqft_rage_field_name = 'field_test_range_max';
+    $sqft_rage_field_name_hidden_secondary = 'field_test_range_min';
+    $key_to_write_custom_query = '';
+    $min_range_value = $max_range_value = '*';
+    if (!empty($facet_item[0]) && is_array($facet_item[0]) && $facet_item[0][0] == $sqft_rage_field_name) {
       if (!empty($facet_item[0][1])) {
-        $leas_query_needs_to_replace = 'tm_field_s_r__torcond:(leas)';
-        $leas_fixed_query = '*:* AND -(tm_field_s_r__torcond:(sale))';
-        foreach ($call_args['params']['fq'] as $key => $value) {
-          if (strrpos($value, $leas_query_needs_to_replace) !== FALSE) {
-            $call_args['params']['fq'][$key] = str_replace($leas_query_needs_to_replace, $leas_fixed_query, $call_args['params']['fq'][$key]);
+        foreach ($facet_item as $value) {
+          if ($value[0] == $sqft_rage_field_name) {
+            if ($value[2] == '>=') {
+              $min_range_value = $value[1];
+            }
+            if ($value[2] == '<=') {
+              $max_range_value = $value[1];
+            }
           }
         }
-        //  {!tag=facet:field_s_r__torcond}*:* AND -(tm_field_s_r__torcond:(sale))
-        //  {!tag=facet:field_s_r__torcond}((tm_field_s_r__torcond:(leas)) OR (tm_field_s_r__torcond:(sale)))
+
+        foreach ($call_args['params']['fq'] as $key => $value) {
+          if (strpos($value, '{!tag=facet:field_test_range_max}') !== FALSE) {
+            unset($call_args['params']['fq'][$key]);
+            $key_to_write_custom_query = $key;
+          }
+        }
+        $call_args['params']['fq'][$key_to_write_custom_query] = 'is_' . $sqft_rage_field_name . ':["' . $min_range_value . '" TO "' . $max_range_value . '"] OR is_' . $sqft_rage_field_name_hidden_secondary . ':["' . $min_range_value . '" TO "' . $max_range_value . '"]';
+//        $call_args['params']['fq'][0] = 'is_field_test_range_max:["700" TO "700"] OR is_field_test_range_min:["550" TO "700"]';
+//        $call_args['params']['fq'][0] = '{!tag=facet:field_test_range_max}is_field_test_range_max:["700" TO *] OR is_field_test_range_min:["350" TO *]';
+//        $call_args['params']['fq'][1] = '{!tag=facet:field_test_range_max}is_field_test_range_max:[* TO "800"] OR is_field_test_range_min:[* TO "550"]';
       }
     }
   }
@@ -57,69 +72,73 @@ function ctrader_saf_search_api_solr_query_alter(array &$call_args, SearchApiQue
  * Implements hook_facet_items_alter().
  */
 function ctrader_saf_facet_items_alter(&$build, &$settings) {
-  if ($settings->facet == "field_locker__torcond") {
-    $replace_this_facet = 'own';
-    $replaced_facet_count_number = 0;
-    foreach ($build as $key => $item) {
-      switch ($key) {
-        case $replace_this_facet:
-          $build[$replace_this_facet]["#markup"] = t('Require Locker');
-          $build[$replace_this_facet]['#indexed_value'] = t('Require Locker');
-          break;
-        // Remove this facet item.
-        default:
-          unset($build[$key]);
-          break;
+  switch ($settings->facet) {
+    case 'field_locker__torcond':
+      $replace_this_facet = 'Owned';
+      $replaced_facet_count_number = 0;
+      foreach ($build as $key => $item) {
+        switch ($key) {
+          case $replace_this_facet:
+            $build[$replace_this_facet]["#markup"] = t('Require Locker');
+            $build[$replace_this_facet]['#indexed_value'] = t('Require Locker');
+            break;
+          // Remove this facet item.
+          default:
+            unset($build[$key]);
+            break;
+        }
+        if ($key != 'None') {
+          $replaced_facet_count_number += isset($item['#count']) ? $item['#count'] : 0;
+        }
       }
-      if ($key != 'none' && strrpos($key, '+') === FALSE) {
-        $replaced_facet_count_number += isset($item['#count']) ? $item['#count'] : 0;
+      $build[$replace_this_facet]['#count'] = $replaced_facet_count_number;
+      break;
+    case 'field_pets__torcond':
+      $replace_this_facet = '!';
+      $replaced_facet_count_number = 0;
+      foreach ($build as $key => $item) {
+        switch ($key) {
+          case $replace_this_facet:
+            $build[$replace_this_facet]["#markup"] = t('Pets Allowed');
+            break;
+          // Remove this facet item.
+          case 'restrict':
+            unset($build[$key]);
+            break;
+          default;
+        }
+        if ($key != 'none' && strrpos($key, '+') === FALSE) {
+          $replaced_facet_count_number += isset($item['#count']) ? $item['#count'] : 0;
+        }
       }
-    }
-    $build[$replace_this_facet]['#count'] = $replaced_facet_count_number;
-  }
-
-  if ($settings->facet == "field_pets__torcond") {
-    $replace_this_facet = '!';
-    $replaced_facet_count_number = 0;
-    foreach ($build as $key => $item) {
-      switch ($key) {
-        case $replace_this_facet:
-          $build[$replace_this_facet]["#markup"] = t('Pets Allowed');
-          break;
-        // Remove this facet item.
-        case 'restrict':
-          unset($build[$key]);
-          break;
-        default;
+      break;
+    case 'field_br__torcond':
+      $adapter = facetapi_adapter_load($settings->searcher);
+      $facet = facetapi_facet_load($settings->facet, $settings->searcher);
+      $items = $adapter->getActiveItems($facet);
+      $item_values = array();
+      foreach ($items as $item) {
+        $item_values[] = $item['value'];
       }
-      if ($key != 'none' && strrpos($key, '+') === FALSE) {
-        $replaced_facet_count_number += isset($item['#count']) ? $item['#count'] : 0;
-      }
-    }
-  }
-
-  if ($settings->facet == "field_br__torcond") {
-    $adapter = facetapi_adapter_load($settings->searcher);
-    $facet = facetapi_facet_load($settings->facet, $settings->searcher);
-    $items = $adapter->getActiveItems($facet);
-    $item_values = array();
-    foreach ($items as $item) {
-      $item_values[] = $item['value'];
-    }
-    $is_all_link_active = count($items) == 0;
-    $all_link_path = $adapter->getFacetPath($facet, $item_values, TRUE);
-    $all_link_query = $adapter->getQueryString($facet, $item_values, TRUE);
-    $build['any'] = array(
-      '#markup' => t('Any'),
-      '#path' => $all_link_path,
-      '#html' => FALSE,
-      '#count' => NULL,
-      '#indexed_value' => 0,
-      '#active' => $is_all_link_active,
-      '#item_parents' => array(),
-      '#item_children' => array(),
-      '#query' => $all_link_query,
-    );
+      $is_all_link_active = count($items) == 0;
+      $all_link_path = $adapter->getFacetPath($facet, $item_values, TRUE);
+      $all_link_query = $adapter->getQueryString($facet, $item_values, TRUE);
+      $build['any'] = array(
+        '#markup' => t('Any'),
+        '#path' => $all_link_path,
+        '#html' => FALSE,
+        '#count' => NULL,
+        '#indexed_value' => 0,
+        '#active' => $is_all_link_active,
+        '#item_parents' => array(),
+        '#item_children' => array(),
+        '#query' => $all_link_query,
+      );
+      break;
+    case 'field_prkg_inc__torcond':
+      unset($build['N']);
+      $build['Y']['#markup'] = 'Require Parking';
+      break;
   }
 }
 

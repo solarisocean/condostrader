@@ -1425,7 +1425,32 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
   $facet->settings = array(
     'weight' => 0,
     'widget' => 'facetapi_select_dropdowns',
-    'filters' => array(),
+    'filters' => array(
+      'exclude_items' => array(
+        'status' => 0,
+        'weight' => '-50',
+      ),
+      'active_items' => array(
+        'status' => 0,
+        'weight' => '-49',
+      ),
+      'rewrite_items' => array(
+        'status' => 1,
+        'weight' => '-48',
+      ),
+      'narrow_results' => array(
+        'status' => 0,
+        'weight' => '-47',
+      ),
+      'show_if_minimum_items' => array(
+        'status' => 0,
+        'weight' => '-46',
+      ),
+      'deepest_level_items' => array(
+        'status' => 0,
+        'weight' => '-45',
+      ),
+    ),
     'active_sorts' => array(
       'active' => 'active',
       'count' => 'count',
@@ -1534,6 +1559,10 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
     'keep_open' => 0,
     'expand' => 1,
     'collapsible_children' => 0,
+    'exclude' => '',
+    'regex' => 0,
+    'show_minimum_items' => 2,
+    'rewrite_items' => 1,
   );
   $export['search_api@toronto_condo_index:block:field_sqft__torcond'] = $facet;
 

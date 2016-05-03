@@ -10420,6 +10420,130 @@ function ctf_content_types_toronto_condo_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'drealty_listing-toronto_condo-field_test_range_max'.
+  $field_instances['drealty_listing-toronto_condo-field_test_range_max'] = array(
+    'bundle' => 'toronto_condo',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 234,
+      ),
+      'gallery' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'search' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'drealty' => array(
+      'hash_exclude' => 0,
+    ),
+    'entity_type' => 'drealty_listing',
+    'field_name' => 'field_test_range_max',
+    'label' => 'Test_range_max',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 235,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'drealty_listing-toronto_condo-field_test_range_min'.
+  $field_instances['drealty_listing-toronto_condo-field_test_range_min'] = array(
+    'bundle' => 'toronto_condo',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 233,
+      ),
+      'gallery' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'search' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'drealty' => array(
+      'hash_exclude' => 0,
+    ),
+    'entity_type' => 'drealty_listing',
+    'field_name' => 'field_test_range_min',
+    'label' => 'Test_range_min',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 234,
+    ),
+  );
+
+  // Exported field_instance:
   // 'drealty_listing-toronto_condo-field_timestamp_sql__torcond'.
   $field_instances['drealty_listing-toronto_condo-field_timestamp_sql__torcond'] = array(
     'bundle' => 'toronto_condo',
@@ -12238,6 +12362,8 @@ function ctf_content_types_toronto_condo_field_default_field_instances() {
   t('Stories');
   t('Style');
   t('Taxes');
+  t('Test_range_max');
+  t('Test_range_min');
   t('Timestamp_sql');
   t('Toronto gallery');
   t('Tour_url');
