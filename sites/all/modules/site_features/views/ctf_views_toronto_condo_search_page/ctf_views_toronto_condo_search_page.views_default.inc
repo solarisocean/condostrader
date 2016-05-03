@@ -27,11 +27,48 @@ function ctf_views_toronto_condo_search_page_views_default_views() {
   $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
-  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
+  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sort by:';
+  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Asc_test';
+  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Desc_test';
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
+  $handler->display->display_options['exposed_form']['options']['bef'] = array(
+    'general' => array(
+      'allow_secondary' => 0,
+      'secondary_label' => 'Advanced options',
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+    ),
+    'sort' => array(
+      'bef_format' => 'default',
+      'advanced' => array(
+        'collapsible' => 0,
+        'collapsible_label' => 'Sort options',
+        'combine' => 1,
+        'combine_param' => 'sort_bef_combine',
+        'combine_rewrite' => '',
+        'reset' => 1,
+        'reset_label' => ' ',
+        'is_secondary' => 0,
+        'secondary_label' => NULL,
+      ),
+      'secondary_label' => NULL,
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+    ),
+    'secondary_label' => NULL,
+    'collapsible_label' => NULL,
+    'combine_rewrite' => NULL,
+    'reset_label' => NULL,
+  );
+  $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
+  $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'filtered_html';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '12';
   $handler->display->display_options['style_plugin'] = 'grid';
-  $handler->display->display_options['style_options']['columns'] = '2';
+  $handler->display->display_options['style_options']['columns'] = '3';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Field: Indexed Drealty Listing: Drealty Listing Id */
   $handler->display->display_options['fields']['id']['id'] = 'id';
@@ -104,6 +141,18 @@ function ctf_views_toronto_condo_search_page_views_default_views() {
   $handler->display->display_options['fields']['field_yr_built_torcond']['field'] = 'field_yr_built_torcond';
   $handler->display->display_options['fields']['field_yr_built_torcond']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_yr_built_torcond']['empty_zero'] = TRUE;
+  /* Sort criterion: Indexed Drealty Listing: Timestamp_sql */
+  $handler->display->display_options['sorts']['field_timestamp_sql_torcond']['id'] = 'field_timestamp_sql_torcond';
+  $handler->display->display_options['sorts']['field_timestamp_sql_torcond']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['sorts']['field_timestamp_sql_torcond']['field'] = 'field_timestamp_sql_torcond';
+  $handler->display->display_options['sorts']['field_timestamp_sql_torcond']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['field_timestamp_sql_torcond']['expose']['label'] = 'Time';
+  /* Sort criterion: Indexed Drealty Listing: Br */
+  $handler->display->display_options['sorts']['field_br_torcond']['id'] = 'field_br_torcond';
+  $handler->display->display_options['sorts']['field_br_torcond']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['sorts']['field_br_torcond']['field'] = 'field_br_torcond';
+  $handler->display->display_options['sorts']['field_br_torcond']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['field_br_torcond']['expose']['label'] = 'Beds';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -295,6 +344,11 @@ function ctf_views_toronto_condo_search_page_views_default_views() {
   $handler->display->display_options['menu']['name'] = 'main-menu';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Search results block */
+  $handler = $view->new_display('block', 'Search results block', 'block_1');
+  $handler->display->display_options['defaults']['use_ajax'] = FALSE;
+  $handler->display->display_options['use_ajax'] = TRUE;
   $export['condo_search_page'] = $view;
 
   return $export;

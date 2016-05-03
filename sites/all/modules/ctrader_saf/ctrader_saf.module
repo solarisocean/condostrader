@@ -10,6 +10,16 @@ function ctrader_saf_init() {
 
 
 /**
+ * Implements hook_form_alter().
+ */
+function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-condo-search-page-block-1') {
+    $form['sort_bef_combine']['#default_value'] = '';
+  }
+}
+
+
+/**
  * Implements hook_search_api_solr_query_alter().
  */
 function ctrader_saf_search_api_solr_query_alter(array &$call_args, SearchApiQueryInterface $query) {
