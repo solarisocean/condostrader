@@ -62,6 +62,7 @@ dependencies[] = location_entity
 dependencies[] = location_node
 dependencies[] = location_search
 dependencies[] = menu
+dependencies[] = menu_import
 dependencies[] = module_filter
 dependencies[] = multiupload_filefield_widget
 dependencies[] = multiupload_imagefield_widget
