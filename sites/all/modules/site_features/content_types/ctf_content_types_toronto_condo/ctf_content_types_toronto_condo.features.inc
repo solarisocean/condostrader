@@ -5082,13 +5082,13 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
         "deleted" : "0",
         "columns" : { "tid" : { "type" : "int", "unsigned" : true, "not null" : false } }
       },
-      "field_test_range_min" : {
+      "field_sqft_range_min__torcond" : {
         "translatable" : "0",
         "entity_types" : [ "drealty_listing" ],
         "settings" : [],
         "foreign keys" : [],
         "indexes" : [],
-        "field_name" : "field_test_range_min",
+        "field_name" : "field_sqft_range_min__torcond",
         "type" : "number_integer",
         "module" : "number",
         "active" : "1",
@@ -5097,13 +5097,13 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
         "deleted" : "0",
         "columns" : { "value" : { "type" : "int", "not null" : false } }
       },
-      "field_test_range_max" : {
+      "field_sqft_range_max__torcond" : {
         "translatable" : "0",
         "entity_types" : [ "drealty_listing" ],
         "settings" : [],
         "foreign keys" : [],
         "indexes" : [],
-        "field_name" : "field_test_range_max",
+        "field_name" : "field_sqft_range_max__torcond",
         "type" : "number_integer",
         "module" : "number",
         "active" : "1",
@@ -5111,6 +5111,27 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
         "cardinality" : "1",
         "deleted" : "0",
         "columns" : { "value" : { "type" : "int", "not null" : false } }
+      },
+      "field_price_per_sqft__torcond" : {
+        "translatable" : "0",
+        "entity_types" : [ "drealty_listing" ],
+        "settings" : { "precision" : "10", "scale" : "2", "decimal_separator" : "." },
+        "foreign keys" : [],
+        "indexes" : [],
+        "field_name" : "field_price_per_sqft__torcond",
+        "type" : "number_decimal",
+        "module" : "number",
+        "active" : "1",
+        "locked" : "0",
+        "cardinality" : "1",
+        "deleted" : "0",
+        "columns" : { "value" : {
+            "type" : "numeric",
+            "precision" : "10",
+            "scale" : "2",
+            "not null" : false
+          }
+        }
       }
     },
     "field_instances" : {
@@ -12507,10 +12528,10 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
         "entity_type" : "drealty_listing",
         "deleted" : "0"
       },
-      "field_test_range_min" : {
-        "label" : "Test_range_min",
+      "field_sqft_range_min__torcond" : {
+        "label" : "Sqft range min",
         "widget" : {
-          "weight" : "234",
+          "weight" : "236",
           "type" : "number",
           "module" : "number",
           "active" : 0,
@@ -12534,7 +12555,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
               "prefix_suffix" : true
             },
             "module" : "number",
-            "weight" : 233
+            "weight" : 235
           },
           "search" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 },
           "list" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 },
@@ -12543,21 +12564,20 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
         "required" : 0,
         "description" : "",
         "drealty" : { "hash_exclude" : 0 },
-        "default_value" : null,
-        "id" : "535",
-        "field_id" : "522",
-        "field_name" : "field_test_range_min",
+        "default_value" : [ { "value" : "0" } ],
+        "id" : "537",
+        "field_id" : "524",
+        "field_name" : "field_sqft_range_min__torcond",
         "entity_type" : "drealty_listing",
         "deleted" : "0"
       },
-      "field_test_range_max" : {
-        "label" : "Test_range_max",
+      "field_sqft_range_max__torcond" : {
+        "label" : "Sqft range max",
         "widget" : {
-          "weight" : "235",
           "type" : "number",
-          "module" : "number",
-          "active" : 0,
-          "settings" : []
+          "weight" : "237",
+          "settings" : [],
+          "module" : "number"
         },
         "settings" : {
           "min" : "",
@@ -12577,7 +12597,49 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
               "prefix_suffix" : true
             },
             "module" : "number",
-            "weight" : 234
+            "weight" : 236
+          },
+          "search" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 },
+          "list" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 },
+          "gallery" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 }
+        },
+        "required" : false,
+        "description" : "",
+        "id" : "538",
+        "field_id" : "525",
+        "field_name" : "field_sqft_range_max__torcond",
+        "entity_type" : "drealty_listing",
+        "deleted" : "0",
+        "default_value" : null
+      },
+      "field_price_per_sqft__torcond" : {
+        "label" : "Price per sqft",
+        "widget" : {
+          "weight" : "238",
+          "type" : "number",
+          "module" : "number",
+          "active" : 0,
+          "settings" : []
+        },
+        "settings" : {
+          "min" : "",
+          "max" : "",
+          "prefix" : "",
+          "suffix" : "",
+          "user_register_form" : false
+        },
+        "display" : {
+          "default" : {
+            "label" : "above",
+            "type" : "number_decimal",
+            "settings" : {
+              "thousand_separator" : "",
+              "decimal_separator" : ".",
+              "scale" : 2,
+              "prefix_suffix" : true
+            },
+            "module" : "number",
+            "weight" : 237
           },
           "search" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 },
           "list" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 },
@@ -12586,10 +12648,10 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
         "required" : 0,
         "description" : "",
         "drealty" : { "hash_exclude" : 0 },
-        "default_value" : null,
-        "id" : "536",
-        "field_id" : "523",
-        "field_name" : "field_test_range_max",
+        "default_value" : [ { "value" : "0" } ],
+        "id" : "539",
+        "field_id" : "526",
+        "field_name" : "field_price_per_sqft__torcond",
         "entity_type" : "drealty_listing",
         "deleted" : "0"
       }

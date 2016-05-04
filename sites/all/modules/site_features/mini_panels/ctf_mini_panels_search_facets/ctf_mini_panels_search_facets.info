@@ -1,0 +1,9 @@
+name = CT Features: Mini panels: Search facets
+description = Mini panel with search facet blocks.
+core = 7.x
+package = CT Features: Mini panels
+dependencies[] = ctools
+dependencies[] = panels_mini
+features[ctools][] = panels_mini:panels_default:1
+features[features_api][] = api:2
+features[panels_mini][] = search_facets_toronto_condos_

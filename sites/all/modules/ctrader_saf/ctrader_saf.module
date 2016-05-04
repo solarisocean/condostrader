@@ -19,7 +19,6 @@ function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'search_api_ranges_block_slider_view_form_field_sqft_range_max__torcond') {
     $form['range-min']['#value'] = 0;
     $form_state['build_info']['args'][0]['min'] = 0;
-    $stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
   }
 }
 
@@ -54,6 +53,9 @@ function ctrader_saf_entity_presave($entity, $type) {
       }
       $entity->field_sqft_range_min__torcond[LANGUAGE_NONE][0]['value'] = $sqft_min;
       $entity->field_sqft_range_max__torcond[LANGUAGE_NONE][0]['value'] = $sqft_max;
+
+      $price = isset($entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value']) ? intval($entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value']) : 0;
+      $entity->field_price_per_sqft__torcond[LANGUAGE_NONE][0]['value'] = $sqft_max != 0 ? round(($price / $sqft_min), 2) : 0;
       break;
   }
 }

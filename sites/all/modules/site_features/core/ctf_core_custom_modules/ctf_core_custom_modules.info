@@ -11,6 +11,7 @@ dependencies[] = ctf_configurations_search_api
 dependencies[] = ctf_content_types_condo
 dependencies[] = ctf_content_types_toronto_condo
 dependencies[] = ctf_core_field_bases
+dependencies[] = ctf_mini_panels_search_facets
 dependencies[] = ctf_pages_main_page
 dependencies[] = ctf_pages_result_page
 dependencies[] = ctf_pages_toronto_condos_search_with_map

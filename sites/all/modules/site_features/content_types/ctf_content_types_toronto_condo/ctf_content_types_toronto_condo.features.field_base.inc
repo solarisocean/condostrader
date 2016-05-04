@@ -2385,6 +2385,27 @@ function ctf_content_types_toronto_condo_field_default_field_bases() {
     'type' => 'datetime',
   );
 
+  // Exported field_base: 'field_price_per_sqft__torcond'.
+  $field_bases['field_price_per_sqft__torcond'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(
+      0 => 'drealty_listing',
+    ),
+    'field_name' => 'field_price_per_sqft__torcond',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(
+      'decimal_separator' => '.',
+      'precision' => 10,
+      'scale' => 2,
+    ),
+    'translatable' => 0,
+    'type' => 'number_decimal',
+  );
+
   // Exported field_base: 'field_prkg_inc__torcond'.
   $field_bases['field_prkg_inc__torcond'] = array(
     'active' => 1,
@@ -4749,6 +4770,40 @@ function ctf_content_types_toronto_condo_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_sqft_range_max__torcond'.
+  $field_bases['field_sqft_range_max__torcond'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(
+      0 => 'drealty_listing',
+    ),
+    'field_name' => 'field_sqft_range_max__torcond',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'number_integer',
+  );
+
+  // Exported field_base: 'field_sqft_range_min__torcond'.
+  $field_bases['field_sqft_range_min__torcond'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(
+      0 => 'drealty_listing',
+    ),
+    'field_name' => 'field_sqft_range_min__torcond',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'number_integer',
+  );
+
   // Exported field_base: 'field_st__torcond'.
   $field_bases['field_st__torcond'] = array(
     'active' => 1,
@@ -5005,40 +5060,6 @@ function ctf_content_types_toronto_condo_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'geofield',
-  );
-
-  // Exported field_base: 'field_test_range_max'.
-  $field_bases['field_test_range_max'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(
-      0 => 'drealty_listing',
-    ),
-    'field_name' => 'field_test_range_max',
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'number',
-    'settings' => array(),
-    'translatable' => 0,
-    'type' => 'number_integer',
-  );
-
-  // Exported field_base: 'field_test_range_min'.
-  $field_bases['field_test_range_min'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(
-      0 => 'drealty_listing',
-    ),
-    'field_name' => 'field_test_range_min',
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'number',
-    'settings' => array(),
-    'translatable' => 0,
-    'type' => 'number_integer',
   );
 
   // Exported field_base: 'field_timestamp_sql__torcond'.
