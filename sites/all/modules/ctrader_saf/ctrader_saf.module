@@ -16,6 +16,46 @@ function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-condo-search-page-block-1') {
     $form['sort_bef_combine']['#default_value'] = '';
   }
+  if ($form_id == 'search_api_ranges_block_slider_view_form_field_sqft_range_max__torcond') {
+    $form['range-min']['#value'] = 0;
+    $form_state['build_info']['args'][0]['min'] = 0;
+    $stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
+  }
+}
+
+
+/**
+ * Implements hook_search_api_ranges_minmax_alter().
+ */
+function ctrader_saf_search_api_ranges_minmax_alter(&$variables, &$order) {
+  if ($variables['range_field'] == 'field_sqft_range_max__torcond') {
+    $stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
+  }
+}
+
+
+/**
+ * Implements hook_entity_presave().
+ */
+function ctrader_saf_entity_presave($entity, $type) {
+  switch ($type) {
+    case DREALTY_ENTITY_TYPE:
+      $sqft_min = $sqft_max = 0;
+      if (isset($entity->field_sqft__torcond[LANGUAGE_NONE][0]['value'])) {
+        $sqft = $entity->field_sqft__torcond[LANGUAGE_NONE][0]['value'];
+        if (strrpos($sqft, '-')) {
+          $sqft = explode('-', $sqft);
+          $sqft_min = intval($sqft[0]);
+          $sqft_max = intval($sqft[1]);
+        }
+        else {
+          $sqft_min = $sqft_max = intval($sqft);
+        }
+      }
+      $entity->field_sqft_range_min__torcond[LANGUAGE_NONE][0]['value'] = $sqft_min;
+      $entity->field_sqft_range_max__torcond[LANGUAGE_NONE][0]['value'] = $sqft_max;
+      break;
+  }
 }
 
 
@@ -24,44 +64,60 @@ function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
  */
 function ctrader_saf_search_api_solr_query_alter(array &$call_args, SearchApiQueryInterface $query) {
   $facet_item = $query->getFilter()->getFilters();
+  foreach ($facet_item as $item) {
+    if (is_object($item) && is_object(reset($item->getFilters()))) {
+      $filters = $item->getFilters()[0]->getFilters();
+
+      // Changes query for range facet (field: sqft).
+      // Makes one range form for two fields.
+      $sqft_rage_field_name = 'field_sqft_range_max__torcond';
+      $sqft_rage_field_name_hidden_secondary = 'field_sqft_range_min__torcond';
+      $key_to_write_custom_query = '';
+      $min_range_value = $max_range_value = '*';
+      if (!empty($filters[0]) && is_array($filters[0]) && $filters[0][0] == $sqft_rage_field_name) {
+        if (!empty($filters[0][1])) {
+          foreach ($filters as $value) {
+            if ($value[0] == $sqft_rage_field_name) {
+              if ($value[2] == '>=') {
+                $min_range_value = $value[1];
+              }
+              if ($value[2] == '<=') {
+                $max_range_value = $value[1];
+              }
+            }
+          }
+          foreach ($call_args['params']['fq'] as $key => $value) {
+            if (strpos($value, '{!tag=facet:' . $sqft_rage_field_name . '}') !== FALSE) {
+              unset($call_args['params']['fq'][$key]);
+              $key_to_write_custom_query = $key;
+            }
+          }
+          $call_args['params']['fq'][$key_to_write_custom_query] = 'is_' . $sqft_rage_field_name . ':[' . $min_range_value . ' TO ' . $max_range_value . '] OR is_' . $sqft_rage_field_name_hidden_secondary . ':[' . $min_range_value . ' TO ' . $max_range_value . ']';
+
+          /**
+           * Query examples for range facet.
+           *
+           * $call_args['params']['fq'][0] = 'is_field_test_range_max:["300" TO "700"] OR is_field_test_range_min:["300" TO "700"]';
+           *
+           * $call_args['params']['fq'][0] = '{!tag=facet:field_test_range_max}is_field_test_range_max:["300" TO *]';
+           * $call_args['params']['fq'][1] = '{!tag=facet:field_test_range_max}is_field_test_range_max:[* TO "700"]';
+           */
+        }
+      }
+    }
+  }
+
   if (!empty($facet_item) && isset($facet_item[0]) && is_object($facet_item[0])) {
     $facet_item = $facet_item[0]->getFilters();
+
+    // Changes query for item 'Owned' in field:locker facet.
+    // Makes one checkbox for all possible options (except 'None').
     if (!empty($facet_item[0]) && is_array($facet_item[0]) && $facet_item[0][0] == 'field_locker__torcond') {
       if (!empty($facet_item[0][1])) {
         $facet_item = $facet_item[0][1];
         if ($facet_item !== 'None') {
           $call_args['params']['fq'][0] = '{!tag=facet:field_locker__torcond}((ss_field_locker__torcond:"Owned") OR (ss_field_locker__torcond:"Exclusive") OR (ss_field_locker__torcond:"Ensuite") OR (ss_field_locker__torcond:"Ensuite+Owned") OR (ss_field_locker__torcond:"Common") OR (ss_field_locker__torcond:"Ensuite+Exclusive"))';
         }
-      }
-    }
-
-    $sqft_rage_field_name = 'field_test_range_max';
-    $sqft_rage_field_name_hidden_secondary = 'field_test_range_min';
-    $key_to_write_custom_query = '';
-    $min_range_value = $max_range_value = '*';
-    if (!empty($facet_item[0]) && is_array($facet_item[0]) && $facet_item[0][0] == $sqft_rage_field_name) {
-      if (!empty($facet_item[0][1])) {
-        foreach ($facet_item as $value) {
-          if ($value[0] == $sqft_rage_field_name) {
-            if ($value[2] == '>=') {
-              $min_range_value = $value[1];
-            }
-            if ($value[2] == '<=') {
-              $max_range_value = $value[1];
-            }
-          }
-        }
-
-        foreach ($call_args['params']['fq'] as $key => $value) {
-          if (strpos($value, '{!tag=facet:field_test_range_max}') !== FALSE) {
-            unset($call_args['params']['fq'][$key]);
-            $key_to_write_custom_query = $key;
-          }
-        }
-        $call_args['params']['fq'][$key_to_write_custom_query] = 'is_' . $sqft_rage_field_name . ':["' . $min_range_value . '" TO "' . $max_range_value . '"] OR is_' . $sqft_rage_field_name_hidden_secondary . ':["' . $min_range_value . '" TO "' . $max_range_value . '"]';
-//        $call_args['params']['fq'][0] = 'is_field_test_range_max:["700" TO "700"] OR is_field_test_range_min:["550" TO "700"]';
-//        $call_args['params']['fq'][0] = '{!tag=facet:field_test_range_max}is_field_test_range_max:["700" TO *] OR is_field_test_range_min:["350" TO *]';
-//        $call_args['params']['fq'][1] = '{!tag=facet:field_test_range_max}is_field_test_range_max:[* TO "800"] OR is_field_test_range_min:[* TO "550"]';
       }
     }
   }
