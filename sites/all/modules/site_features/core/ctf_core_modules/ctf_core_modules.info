@@ -5,6 +5,7 @@ package = CT Features: Core
 dependencies[] = addressfield
 dependencies[] = admin_menu
 dependencies[] = admin_menu_toolbar
+dependencies[] = better_exposed_filters
 dependencies[] = block
 dependencies[] = block_class
 dependencies[] = boolean_formatter

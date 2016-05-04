@@ -99,7 +99,7 @@ function ctf_configurations_search_api_default_search_api_index() {
         "field_level7__torcond" : { "type" : "text" },
         "field_level8__torcond" : { "type" : "text" },
         "field_level9__torcond" : { "type" : "text" },
-        "field_locker__torcond" : { "type" : "text" },
+        "field_locker__torcond" : { "type" : "string" },
         "field_locker_num__torcond" : { "type" : "text" },
         "field_lp_dol__torcond" : { "type" : "decimal" },
         "field_maint__torcond" : { "type" : "decimal" },
@@ -125,7 +125,8 @@ function ctf_configurations_search_api_default_search_api_index() {
         "field_patio_ter__torcond" : { "type" : "text" },
         "field_pets__torcond" : { "type" : "text" },
         "field_pix_updt__torcond" : { "type" : "date" },
-        "field_prkg_inc__torcond" : { "type" : "text" },
+        "field_price_per_sqft__torcond" : { "type" : "decimal" },
+        "field_prkg_inc__torcond" : { "type" : "string" },
         "field_prop_feat1_out__torcond" : { "type" : "text" },
         "field_prop_feat2_out__torcond" : { "type" : "text" },
         "field_prop_feat3_out__torcond" : { "type" : "text" },
@@ -209,7 +210,7 @@ function ctf_configurations_search_api_default_search_api_index() {
         "field_rm9_wth__torcond" : { "type" : "decimal" },
         "field_rms__torcond" : { "type" : "decimal" },
         "field_rooms_plus__torcond" : { "type" : "decimal" },
-        "field_s_r__torcond" : { "type" : "text" },
+        "field_s_r__torcond" : { "type" : "string" },
         "field_share_perc__torcond" : { "type" : "text" },
         "field_spec_des1_out__torcond" : { "type" : "text" },
         "field_spec_des2_out__torcond" : { "type" : "text" },
@@ -217,14 +218,16 @@ function ctf_configurations_search_api_default_search_api_index() {
         "field_spec_des4_out__torcond" : { "type" : "text" },
         "field_spec_des5_out__torcond" : { "type" : "text" },
         "field_spec_des6_out__torcond" : { "type" : "text" },
-        "field_sqft__torcond" : { "type" : "text" },
-        "field_st__torcond" : { "type" : "text" },
-        "field_st_dir__torcond" : { "type" : "text" },
-        "field_st_num__torcond" : { "type" : "text" },
+        "field_sqft__torcond" : { "type" : "string" },
+        "field_sqft_range_max__torcond" : { "type" : "integer" },
+        "field_sqft_range_min__torcond" : { "type" : "integer" },
+        "field_st__torcond" : { "type" : "string" },
+        "field_st_dir__torcond" : { "type" : "string" },
+        "field_st_num__torcond" : { "type" : "integer" },
         "field_st_sfx__torcond" : { "type" : "text" },
         "field_status__torcond" : { "type" : "text" },
         "field_stories__torcond" : { "type" : "text" },
-        "field_style__torcond" : { "type" : "text" },
+        "field_style__torcond" : { "type" : "string" },
         "field_taxes__torcond" : { "type" : "decimal" },
         "field_test_geofilld:latlon" : { "type" : "string", "real_type" : "location" },
         "field_timestamp_sql__torcond" : { "type" : "date" },
@@ -265,15 +268,38 @@ function ctf_configurations_search_api_default_search_api_index() {
         "type" : { "type" : "text" }
       },
       "data_alter_callbacks" : {
-        "search_api_ranges_alter" : { "status" : 0, "weight" : "-50", "settings" : [] },
+        "search_api_ranges_alter" : { "status" : 0, "weight" : "-50", "settings" : { "fields" : [] } },
         "search_api_alter_bundle_filter" : {
           "status" : 0,
           "weight" : "-10",
           "settings" : { "default" : "1", "bundles" : [] }
         },
+        "search_api_alter_add_combined" : {
+          "status" : 0,
+          "weight" : "0",
+          "settings" : { "fields" : { "search_api_combined_1" : {
+                "name" : "test_combined_field",
+                "multivalue" : "0",
+                "type" : "string",
+                "imitate" : "",
+                "fields" : [ "field_test_range_min", "field_test_range_max" ],
+                "description" : "A @type combined of the following fields: Test_range_min, Test_range_max."
+              }
+            }
+          }
+        },
+        "search_api_alter_add_hierarchy" : {
+          "status" : 1,
+          "weight" : "0",
+          "settings" : { "fields" : {
+              "field_city_region__torcond:parent" : "field_city_region__torcond:parent",
+              "field_city_region__torcond:parents_all" : "field_city_region__torcond:parents_all"
+            }
+          }
+        },
         "search_api_alter_add_viewed_entity" : { "status" : 0, "weight" : "0", "settings" : { "mode" : "full" } },
-        "search_api_alter_add_aggregation" : { "status" : 0, "weight" : "0", "settings" : [] },
-        "search_api_alter_add_url" : { "status" : 0, "weight" : "0", "settings" : [] }
+        "search_api_alter_add_url" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_add_aggregation" : { "status" : 0, "weight" : "0", "settings" : [] }
       },
       "processors" : {
         "search_api_case_ignore" : {
@@ -584,7 +610,6 @@ function ctf_configurations_search_api_default_search_api_index() {
               "field_level7__torcond" : true,
               "field_level8__torcond" : true,
               "field_level9__torcond" : true,
-              "field_locker__torcond" : true,
               "field_locker_num__torcond" : true,
               "field_comel_inc__torcond" : true,
               "field_cond_txinc__torcond" : true,
@@ -620,7 +645,6 @@ function ctf_configurations_search_api_default_search_api_index() {
               "field_prop_feat5_out__torcond" : true,
               "field_prop_feat6_out__torcond" : true,
               "field_pets__torcond" : true,
-              "field_prkg_inc__torcond" : true,
               "field_prop_feat1_out__torcond" : true,
               "field_prop_feat2_out__torcond" : true,
               "field_pvt_ent__torcond" : true,
@@ -638,7 +662,6 @@ function ctf_configurations_search_api_default_search_api_index() {
               "field_rm11_dc1_out__torcond" : true,
               "field_rm11_dc2_out__torcond" : true,
               "field_spec_des6_out__torcond" : true,
-              "field_sqft__torcond" : true,
               "field_st__torcond" : true,
               "field_st_dir__torcond" : true,
               "field_st_num__torcond" : true,
@@ -673,7 +696,6 @@ function ctf_configurations_search_api_default_search_api_index() {
               "field_rm9_dc1_out__torcond" : true,
               "field_rm9_dc3_out__torcond" : true,
               "field_rm9_out__torcond" : true,
-              "field_s_r__torcond" : true,
               "field_share_perc__torcond" : true,
               "field_spec_des1_out__torcond" : true,
               "field_spec_des2_out__torcond" : true,
