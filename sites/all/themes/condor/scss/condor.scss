@@ -72,11 +72,13 @@
 @import "../../zurb_foundation/scss/foundation/components/tabs";
 @import "../../zurb_foundation/scss/foundation/components/thumbs";
 @import "../../zurb_foundation/scss/foundation/components/tooltips";
-@import "../../zurb_foundation/scss/foundation/components/top-bar";
+//@import "../../zurb_foundation/scss/foundation/components/top-bar";
 @import "../../zurb_foundation/scss/foundation/components/type";
 @import "../../zurb_foundation/scss/foundation/components/offcanvas";
 @import "../../zurb_foundation/scss/foundation/components/visibility";
 
+
+@import "components/top-bar";
 // Comment out this import if you don't want to use Bourbon, a replacement for Compass mixins.
 //@import "bourbon";
 

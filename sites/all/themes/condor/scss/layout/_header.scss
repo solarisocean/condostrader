@@ -1,6 +1,6 @@
 // Non-modular or client styles for .l-header region.
 .l-header {
-  .top-bar, .tes {
+  .top-bar {
     height: 3.75rem;
     line-height: 3.75rem;
     position: relative;
@@ -136,27 +136,81 @@
 
       }
 
-      .main-nav-tree {
-        display: block;
+      #main-menu-nav-tree {
+        display: none;
         width: 240px;
+        height: 300px;
         position: absolute;
         right: 0;
-        top: 105px;
-
-        li {
-          float: none;
-          a {
-            border-bottom: 1px solid rgba($white, .3);
-            background: $mirage;
-            line-height: 19px;
-            font-size: rem-calc(14);
-            padding: 8px 25px;
-          }
+        top: 60px;
+        z-index: 99;
+      }
+      
+      #main-menu-nav-tree ul:first-child {
+        ul {
+          display: none;
         }
 
         li {
-          ul {
-            display: none;
+          float: none;
+
+          &.first-menu-nav {
+            a {
+              border-bottom: 1px solid rgba($white, .3);
+              line-height: 19px;
+              font-size: rem-calc(14);
+              padding: 8px 20px 8px 25px;
+              background: $mirage;
+              -webkit-transition: padding .3s ease-in-out, background .3s ease-in-out;
+              -moz-transition: padding .3s ease-in-out, background .3s ease-in-out;
+              -o-transition: padding .3s ease-in-out, background .3s ease-in-out;
+              transition: padding .3s ease-in-out, background .3s ease-in-out;
+              font-weight: 100;
+
+              &.menu-expanded {
+                padding-bottom: 13px;
+              }
+
+              &.menu-expanded-next {
+                padding-top: 13px;
+              }
+
+              &:hover {
+                background: lighten($mirage, 6);
+                @include transition(background .2s ease-in-out);
+              }
+            }
+          }
+
+          &.second-menu-nav {
+            a {
+              font-size: rem-calc(13);
+              padding-left: 35px;
+              @include hover-background($tango, .2s, ease-in-out);
+            }
+          }
+
+          &.third-menu-nav {
+            a {
+              padding-left: 47px;
+              border-bottom: none;
+              @include hover-background($flamingo, .2s, ease-in-out);
+            }
+          }
+
+          &.fourth-menu-nav {
+            a {
+              padding-left: 60px;
+              background: $tango;
+              @include hover-background($tango, .2s, ease-in-out);
+              border-bottom: 1px solid rgba($white, .3);
+            }
+
+            &:last-child {
+              a {
+                border-bottom: none;
+              }
+            }
           }
         }
       }

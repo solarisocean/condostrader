@@ -61,7 +61,39 @@ function condor_preprocess_node(&$variables) {
 /**
  * Implements template_menu_tree.
  */
-function condor_menu_tree($variables) {
+function condor_menu_tree__main_menu($variables) {
   // Add custom class to main menu.
   return '<ul class="menu-menu main-nav-tree">' . $variables['tree'] . '</ul>';
+}
+
+/**
+ * Implements template_menu_link.
+ */
+function condor_menu_link(array $variables) {
+  // Add classes with depth level to menu link.
+  $element = $variables['element'];
+  $sub_menu = '';
+  switch ($element['#original_link']['depth']) {
+    case "1":
+      $element['#attributes']['class'][] = 'first-menu-nav';
+      break;
+    case "2":
+      $element['#attributes']['class'][] = 'second-menu-nav';
+      break;
+    case "3":
+      $element['#attributes']['class'][] = 'third-menu-nav';
+      break;
+    case "4":
+      $element['#attributes']['class'][] = 'fourth-menu-nav';
+      break;
+    case "5":
+      $element['#attributes']['class'][] = 'fifth-menu-nav';
+      break;
+  }
+
+  if ($element['#below']) {
+    $sub_menu = drupal_render($element['#below']);
+  }
+  $output = l($element['#title'], $element['#href'], $element['#localized_options']);
+  return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
 }
