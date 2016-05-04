@@ -46,3 +46,12 @@
   -o-transition: $body;
   transition: $body;
 }
+
+@mixin hover-background($color, $time, $animation) {
+  background: $color;
+  @include transition(background $time $animation);
+  &:hover {
+    background: lighten($color, 6);
+    @include transition(background $time $animation);
+  }
+}
