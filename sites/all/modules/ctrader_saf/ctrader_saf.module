@@ -152,7 +152,7 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
       $build[$replace_this_facet]['#count'] = $replaced_facet_count_number;
       break;
     case 'field_pets__torcond':
-      $replace_this_facet = '!';
+      $replace_this_facet = 'Restrict';
       $replaced_facet_count_number = 0;
       foreach ($build as $key => $item) {
         switch ($key) {
@@ -160,14 +160,16 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
             $build[$replace_this_facet]["#markup"] = t('Pets Allowed');
             break;
           // Remove this facet item.
-          case 'restrict':
+//          case 'restrict':
+//            unset($build[$key]);
+//            break;
+          case 'N':
             unset($build[$key]);
-            break;
           default;
         }
-        if ($key != 'none' && strrpos($key, '+') === FALSE) {
-          $replaced_facet_count_number += isset($item['#count']) ? $item['#count'] : 0;
-        }
+//        if ($key != 'none' && strrpos($key, '+') === FALSE) {
+//          $replaced_facet_count_number += isset($item['#count']) ? $item['#count'] : 0;
+//        }
       }
       break;
     case 'field_br__torcond':

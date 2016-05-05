@@ -1,0 +1,11 @@
+name = CT Features: Views: Homepage view blocks
+description = Provides views for home page.
+core = 7.x
+package = CT Features: Views
+dependencies[] = better_exposed_filters
+dependencies[] = search_api_views
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[views_view][] = homepage_view_blocks
+features_exclude[dependencies][ctools] = ctools
