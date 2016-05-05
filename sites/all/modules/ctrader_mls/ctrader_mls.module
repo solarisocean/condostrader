@@ -13,10 +13,10 @@ define('DREALTY_ENTITY_TYPE', 'drealty_listing');
  * Implements hook_init().
  */
 function ctrader_mls_init() {
-  $alias = drupal_get_path_alias();
-  if ($alias == 'search-condos' || drupal_is_front_page()) {
-    drupal_add_css(drupal_get_path('module', 'ctrader_mls') . "/css/foo.css");
-  }
+//  $alias = drupal_get_path_alias();
+//  if ($alias == 'search-condos' || drupal_is_front_page()) {
+//    drupal_add_css(drupal_get_path('module', 'ctrader_mls') . "/css/foo.css");
+//  }
 }
 
 /**
@@ -271,7 +271,6 @@ function large_xml_import_operation(&$context) {
             }
           }
 
-
           foreach ($field_mappings as $mapping) {
             $ftype = $mapping->field_api_type;
             switch ($ftype) {
@@ -321,7 +320,6 @@ function large_xml_import_operation(&$context) {
                 break;
             }
           }
-
           $items[] = $item;
         }
 
