@@ -185,41 +185,6 @@ function ctf_pages_main_page_default_page_manager_pages() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-3d940d14-c69a-4f13-b005-815830acc684';
-    $pane->panel = 'center';
-    $pane->type = 'views';
-    $pane->subtype = 'condo_search_page';
-    $pane->shown = FALSE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'override_pager_settings' => 1,
-      'use_pager' => 1,
-      'nodes_per_page' => '8',
-      'pager_id' => '0',
-      'offset' => '0',
-      'more_link' => 0,
-      'feed_icons' => 0,
-      'panel_args' => 0,
-      'link_to_view' => 0,
-      'args' => '',
-      'url' => '',
-      'display' => 'page_1',
-      'override_title' => 0,
-      'override_title_text' => '',
-      'override_title_heading' => 'h2',
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 0;
-    $pane->locks = array();
-    $pane->uuid = '3d940d14-c69a-4f13-b005-815830acc684';
-    $display->content['new-3d940d14-c69a-4f13-b005-815830acc684'] = $pane;
-    $display->panels['center'][0] = 'new-3d940d14-c69a-4f13-b005-815830acc684';
-    $pane = new stdClass();
     $pane->pid = 'new-8d1038b3-92d9-4531-ac75-2ba5f63aa294';
     $pane->panel = 'center';
     $pane->type = 'views';
@@ -249,11 +214,11 @@ function ctf_pages_main_page_default_page_manager_pages() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 1;
+    $pane->position = 0;
     $pane->locks = array();
     $pane->uuid = '8d1038b3-92d9-4531-ac75-2ba5f63aa294';
     $display->content['new-8d1038b3-92d9-4531-ac75-2ba5f63aa294'] = $pane;
-    $display->panels['center'][1] = 'new-8d1038b3-92d9-4531-ac75-2ba5f63aa294';
+    $display->panels['center'][0] = 'new-8d1038b3-92d9-4531-ac75-2ba5f63aa294';
     $pane = new stdClass();
     $pane->pid = 'new-8daaa5c6-59bc-4aa7-a87d-bf55e7cceec1';
     $pane->panel = 'center_';
