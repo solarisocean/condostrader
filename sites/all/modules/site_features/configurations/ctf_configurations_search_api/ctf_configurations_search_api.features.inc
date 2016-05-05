@@ -123,7 +123,7 @@ function ctf_configurations_search_api_default_search_api_index() {
         "field_park_spc2__torcond" : { "type" : "text" },
         "field_park_spcs__torcond" : { "type" : "decimal" },
         "field_patio_ter__torcond" : { "type" : "text" },
-        "field_pets__torcond" : { "type" : "text" },
+        "field_pets__torcond" : { "type" : "string" },
         "field_pix_updt__torcond" : { "type" : "date" },
         "field_price_per_sqft__torcond" : { "type" : "decimal" },
         "field_prkg_inc__torcond" : { "type" : "string" },
