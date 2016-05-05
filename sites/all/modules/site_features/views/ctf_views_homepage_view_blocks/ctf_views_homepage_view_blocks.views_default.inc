@@ -166,7 +166,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['use_more_text'] = 'view all';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '40';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '20';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
@@ -192,7 +192,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_toronto_gallery']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_toronto_gallery']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_toronto_gallery']['settings'] = array(
-    'image_style' => '',
+    'image_style' => 'large',
     'image_link' => '',
   );
   $handler->display->display_options['fields']['field_toronto_gallery']['delta_limit'] = '1';
@@ -500,7 +500,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_toronto_gallery']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_toronto_gallery']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_toronto_gallery']['settings'] = array(
-    'image_style' => '',
+    'image_style' => 'large',
     'image_link' => '',
   );
   $handler->display->display_options['fields']['field_toronto_gallery']['delta_limit'] = '1';
@@ -808,7 +808,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_toronto_gallery']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_toronto_gallery']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_toronto_gallery']['settings'] = array(
-    'image_style' => '',
+    'image_style' => 'large',
     'image_link' => '',
   );
   $handler->display->display_options['fields']['field_toronto_gallery']['delta_limit'] = '1';
@@ -1121,7 +1121,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_toronto_gallery']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_toronto_gallery']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_toronto_gallery']['settings'] = array(
-    'image_style' => '',
+    'image_style' => 'large',
     'image_link' => '',
   );
   $handler->display->display_options['fields']['field_toronto_gallery']['delta_limit'] = '1';
