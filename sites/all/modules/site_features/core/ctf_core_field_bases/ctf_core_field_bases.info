@@ -18,6 +18,7 @@ features[field_base][] = field_asking_price
 features[field_base][] = field_balcony
 features[field_base][] = field_baths
 features[field_base][] = field_beds
+features[field_base][] = field_blog_image
 features[field_base][] = field_broker
 features[field_base][] = field_days_on_market
 features[field_base][] = field_european_style_kitchen
