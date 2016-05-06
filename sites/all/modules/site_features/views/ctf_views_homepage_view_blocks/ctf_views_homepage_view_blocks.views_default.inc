@@ -351,6 +351,8 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler = $view->new_display('page', 'newly listed', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = '<span>Newly</span> listed';
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'newly-listed-slider swiper-container';
   $handler->display->display_options['defaults']['use_ajax'] = FALSE;
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['defaults']['use_more'] = FALSE;
@@ -365,10 +367,12 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_options']['row_class'] = 'swiper-slide';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['footer'] = FALSE;
   /* Footer: view all link */
   $handler->display->display_options['footer']['area']['id'] = 'area';
@@ -387,8 +391,8 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_toronto_gallery']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_toronto_gallery']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_toronto_gallery']['settings'] = array(
-    'image_style' => 'large',
-    'image_link' => '',
+    'image_style' => '365x203',
+    'image_link' => 'content',
   );
   $handler->display->display_options['fields']['field_toronto_gallery']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_toronto_gallery']['delta_offset'] = '0';
@@ -616,6 +620,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_maint_torcond']['label'] = 'Maint Fees';
   $handler->display->display_options['fields']['field_maint_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_maint_torcond']['alter']['text'] = '$[field_maint_torcond]';
+  $handler->display->display_options['fields']['field_maint_torcond']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_maint_torcond']['empty'] = 'no results text';
   $handler->display->display_options['fields']['field_maint_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_maint_torcond']['settings'] = array(

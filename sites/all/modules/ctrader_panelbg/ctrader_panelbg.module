@@ -1,0 +1,16 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: morzi
+ * Date: 05.05.2016
+ * Time: 13:38
+ */
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function ctrader_panelbg_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'panels' && $plugin == 'styles') {
+    return 'plugins/' . $plugin;
+  }
+}
