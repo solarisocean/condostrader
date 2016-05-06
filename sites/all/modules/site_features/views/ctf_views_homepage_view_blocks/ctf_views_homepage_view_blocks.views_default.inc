@@ -377,7 +377,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['ui_name'] = 'Photo with price';
   $handler->display->display_options['fields']['nothing_1']['label'] = '';
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '[field_toronto_gallery]
-[field_lp_dol_torcond]';
+<span class="price">[field_lp_dol_torcond]</span>';
   $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
   /* Field: Global: Fieldset */
   $handler->display->display_options['fields']['fieldset']['id'] = 'fieldset';
@@ -685,7 +685,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['ui_name'] = 'Photo with price';
   $handler->display->display_options['fields']['nothing_1']['label'] = '';
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '[field_toronto_gallery]
-[field_lp_dol_torcond]';
+<span class="price">[field_lp_dol_torcond]</span>';
   $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
   /* Field: Global: Fieldset */
   $handler->display->display_options['fields']['fieldset']['id'] = 'fieldset';
@@ -993,7 +993,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['ui_name'] = 'Photo with price';
   $handler->display->display_options['fields']['nothing_1']['label'] = '';
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '[field_toronto_gallery]
-[field_lp_dol_torcond]';
+<span class="price">[field_lp_dol_torcond]</span>';
   $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
   /* Field: Global: Fieldset */
   $handler->display->display_options['fields']['fieldset']['id'] = 'fieldset';
@@ -1306,7 +1306,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['ui_name'] = 'Photo with price';
   $handler->display->display_options['fields']['nothing_1']['label'] = '';
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '[field_toronto_gallery]
-[field_lp_dol_torcond]';
+<span class="price">[field_lp_dol_torcond]</span>';
   $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
   /* Field: Global: Fieldset */
   $handler->display->display_options['fields']['fieldset']['id'] = 'fieldset';
