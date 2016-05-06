@@ -105,10 +105,13 @@
 @import "layout/main";
 @import "layout/aside";
 @import "layout/footer";
+@import "layout/front";
 
 // Modules
 // @import "modules/block";
 // @import "modules/button";
+ @import "modules/panels_background_image";
+ @import "modules/slider";
 
 // States
 // @import "states/collapse";

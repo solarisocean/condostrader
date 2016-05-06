@@ -5,3 +5,192 @@
 // %font-FONTNAME   {}
 // %font-sans-serif { font-family: sans-serif; }
 // %font-serif      { font-family: serif; }
+.centering {
+  padding: 0 rem-calc(25) !important;
+}
+
+%gradient-background {
+  background: rgba(244,120,32,1);
+  background: -moz-linear-gradient(left, rgba(244,120,32,1) 0%, rgba(242,98,54,1) 73%, rgba(242,98,54,1) 100%);
+  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(244,120,32,1)), color-stop(73%, rgba(242,98,54,1)), color-stop(100%, rgba(242,98,54,1)));
+  background: -webkit-linear-gradient(left, rgba(244,120,32,1) 0%, rgba(242,98,54,1) 73%, rgba(242,98,54,1) 100%);
+  background: -o-linear-gradient(left, rgba(244,120,32,1) 0%, rgba(242,98,54,1) 73%, rgba(242,98,54,1) 100%);
+  background: -ms-linear-gradient(left, rgba(244,120,32,1) 0%, rgba(242,98,54,1) 73%, rgba(242,98,54,1) 100%);
+  background: linear-gradient(to right, rgba(244,120,32,1) 0%, rgba(242,98,54,1) 73%, rgba(242,98,54,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f47820', endColorstr='#f26236', GradientType=1 );
+}
+
+
+%condos-item {
+  display: inline-block;
+  width: calc((100% / 4) - 22px);
+  margin-right: 25px;
+  color: $mirage;
+
+  &:nth-child(4n) {
+    margin-right: 0;
+  }
+
+  .views-field-nothing-1 {
+    .field-content {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+
+      img {
+        min-width: 100%;
+      }
+      
+      .price {
+        position: absolute;
+        left: 0;
+        bottom: 13px;
+        font-size: rem-calc(14);
+        color: $white;
+        display: inline-block;
+        max-width: 100px;
+        width: 100%;
+        padding: 7px 12px;
+        text-align: center;
+        @extend %gradient-background;
+
+        &:after {
+          content: '';
+          width: 0;
+          height: 0;
+          border-top: 36px solid $flamingo;
+          border-right: 22px solid transparent;
+          position: absolute;
+          top: 0;
+          right: -22px;
+        }
+      }
+    }
+
+  }
+
+  .views-fieldset {
+    padding: 11px 12px;
+    font-size: rem-calc(12);
+    border: 1px solid darken($athens-gray, 1);
+    border-top: none;
+    background-color: $white;
+
+    .views-field-field-community-torcond {
+      font-family: "Raleway", sans-serif;
+      font-weight: bold;
+      font-size: rem-calc(14);
+      margin-bottom: 1px;
+    }
+
+    .views-field-nothing {
+      line-height: 0;
+
+      .field-content {
+        @include pseudo-element("before", 7px, 12px , "map-marker.png", "not-center");
+
+        &:before {
+          margin-right: 4px;
+        }
+
+        font-size: rem-calc(12);
+        color: $gray;
+      }
+    }
+
+    .views-field-field-maint-torcond {
+      border-bottom: 1px solid $athens-gray;
+      border-top: 1px solid $athens-gray;
+      margin: 8px 0 3px;
+      padding: 6px 0;
+
+      .views-label-field-maint-torcond {
+        color: $gray;
+
+        @include pseudo-element("after", 7px, 7px, 'question-symbol.png', 'not-center');
+
+        &:after {
+          margin: 0 4px;
+        }
+      }
+
+      .field-content {
+        color: $mirage;
+      }
+    }
+
+    .views-field-nothing-2 {
+      font-size: rem-calc(11);
+
+      .condo-info-line {
+        .condo-info-element {
+          margin-right: 10px;
+        }
+
+        &:first-child {
+          .condo-info-element {
+            margin-right: 25px;
+          }
+        }
+      }
+
+      .sqft {
+        @include pseudo-element("before", 14px, 11px, "area-icon.png", "not-center");
+      }
+
+      .bed {
+        @include pseudo-element("before", 16px, 11px, "bed-icon.png", "not-center");
+      }
+
+      .bath {
+        @include pseudo-element("before", 9px, 11px, "bath-icon.png", "not-center");
+      }
+
+      .pets {
+        @include pseudo-element("before", 13px, 12px, "pets-icon.png", "not-center");
+      }
+
+      .locker {
+        @include pseudo-element("before", 12px, 11px, "locker-icon.png", "not-center");
+      }
+
+      .parking {
+        @include pseudo-element("before", 15px, 10px, "car-icon.png", "not-center");
+      }
+    }
+  }
+
+}
+
+%condo-heading {
+  font-weight: 100;
+  text-transform: uppercase;
+  font-size: 18px;
+  color: $mirage;
+
+  span {
+    font-weight: bold;
+  }
+}
+
+%condo-more {
+  text-align: center;
+
+  a {
+    padding: 10px 32px;
+    margin: 50px 0 30px;
+    display: inline-block;
+    font-weight: bold;
+    color: $white;
+    text-transform: uppercase;
+    font-size: rem-calc(14);
+    @include transition(box-shadow .2s ease-in-out);
+    @extend %gradient-background;
+
+    &:hover {
+      @include transition(box-shadow .2s ease-in-out);
+      box-shadow: 0 0 10px rgba(0,0,0,.2);
+    }
+
+  }
+}

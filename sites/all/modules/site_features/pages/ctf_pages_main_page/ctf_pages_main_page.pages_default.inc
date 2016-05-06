@@ -54,6 +54,16 @@ function ctf_pages_main_page_default_page_manager_pages() {
           0 => 'main',
         ),
         'parent' => NULL,
+        'class' => '',
+        'column_class' => '',
+        'row_class' => '',
+        'region_class' => '',
+        'no_scale' => TRUE,
+        'fixed_width' => '',
+        'column_separation' => '0.5em',
+        'region_separation' => '0.5em',
+        'row_separation' => '0.5em',
+        'hide_empty' => 0,
       ),
       'main' => array(
         'type' => 'column',
@@ -81,6 +91,8 @@ function ctf_pages_main_page_default_page_manager_pages() {
         'width' => 100,
         'width_type' => '%',
         'parent' => 'main-row',
+        'class' => '',
+        'hide_empty' => 0,
       ),
       1 => array(
         'type' => 'row',
@@ -172,11 +184,18 @@ function ctf_pages_main_page_default_page_manager_pages() {
       'right_below' => NULL,
       'bottom' => NULL,
       'center' => NULL,
-      'search_facets' => NULL,
+      'search_facets' => array(
+        'image' => '/sites/default/files/header-picture_0.jpg',
+        'image_style' => '',
+        'class' => 'panels-background-image',
+      ),
       'left' => NULL,
       'center_' => NULL,
       'right' => NULL,
       'blog' => NULL,
+    ),
+    'search_facets' => array(
+      'style' => 'background_picture',
     ),
   );
   $display->cache = array();
@@ -247,7 +266,10 @@ function ctf_pages_main_page_default_page_manager_pages() {
     $pane->style = array(
       'settings' => NULL,
     );
-    $pane->css = array();
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'centering newly-listed',
+    );
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();

@@ -1,0 +1,43 @@
+.front {
+  .panels-flexible-row {
+    padding: 0;
+  }
+
+  .newly-listed {
+    background-color: $alabaster;
+    border-top: 1px solid darken($athens-gray, 1);
+    border-bottom: 1px solid darken($athens-gray, 1);
+    position: relative;
+
+    .newly-listed-slider-button-next,
+    .newly-listed-slider-button-prev {
+      top: 2% !important;
+    }
+
+    .newly-listed-slider-button-next {
+      right: 25px !important;
+    }
+
+    .newly-listed-slider-button-prev {
+      right: 60px !important;
+      left: inherit;
+    }
+
+    .pane-title {
+      padding: 22px 0 25px;
+      margin-top: 0;
+
+      @extend %condo-heading;
+    }
+
+    .view-homepage-view-blocks {
+      .views-row {
+        @extend %condos-item;
+      }
+
+      .view-footer {
+        @extend %condo-more;
+      }
+    }
+  }
+}

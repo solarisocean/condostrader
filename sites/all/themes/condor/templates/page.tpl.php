@@ -88,7 +88,7 @@
     <?php if (!empty($page['header'])): ?>
       <!--.l-header-region -->
       <section class="l-header-region row">
-        <div class="columns">
+        <div>
           <?php print render($page['header']); ?>
         </div>
       </section>
@@ -131,7 +131,7 @@
   <!--.l-main -->
   <main role="main" class="row l-main">
     <!-- .l-main region -->
-    <div class="<?php print $main_grid; ?> main columns">
+    <div class="<?php print $main_grid; ?> main">
       <?php if (!empty($page['highlighted'])): ?>
         <div class="highlight panel callout">
           <?php print render($page['highlighted']); ?>
@@ -144,7 +144,7 @@
 
       <?php if ($title): ?>
         <?php print render($title_prefix); ?>
-        <h1 id="page-title" class="title"><?php print $title; ?></h1>
+        <h1 id="page-title" class="title element-invisible"><?php print $title; ?></h1>
         <?php print render($title_suffix); ?>
       <?php endif; ?>
 
