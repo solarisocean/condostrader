@@ -382,52 +382,115 @@ function ctrader_map_entity_presave($entity, $type) {
  * Create json with Toronto neighbourhoods coordinates.
  */
 function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = array(), $points_array = array()) {
-  $regions_xml = simplexml_load_file(drupal_get_path('module', 'ctrader_map') . '/inc/neigh_2.xml');
-  $neighbourhoods = array();
-  foreach ($regions_xml as $item) {
-    if (in_array($item->name, $condos_neighbourhood_names)) {
-      $is_polygon = TRUE;
-      $coordinates = array();
-      foreach ($item->json_polygon->element as $pair) {
-        $count_pair = count($pair);
-        if (!$count_pair) {
-          $point = explode(',', $pair);
-          $point = array_reverse($point);
-          $coordinates[] = $point;
-        }
-        // if multipolygon
-        else {
-          $is_polygon = FALSE;
+//  $regions_xml = simplexml_load_file(drupal_get_path('module', 'ctrader_map') . '/inc/neigh_2.xml');
+//  $neighbourhoods = array();
+//  foreach ($regions_xml as $item) {
+//    if (in_array($item->name, $condos_neighbourhood_names)) {
+////    if (TRUE) {
+//      $is_polygon = TRUE;
+//      $coordinates = array();
+//      foreach ($item->json_polygon->element as $pair) {
+//        $count_pair = count($pair);
+//        if (!$count_pair) {
+//          $point = explode(',', $pair);
+//          $point = array_reverse($point);
+//          $coordinates[] = $point;
+//        }
+//        // if multipolygon
+//        else {
+//          $is_polygon = FALSE;
+//          $pre_coordinates = array();
+//          foreach ((array) $pair->element as $value) {
+//            $point = explode(',', $value);
+//            $point = array_reverse($point);
+//            $pre_coordinates[] = $point;
+//          }
+//          $coordinates[] = $pre_coordinates;
+//        }
+//      }
+//      $polygon_popup_content = !empty($item->name) ? $item->name->__toString() : 'Neighbourhood';
+//      $prepared = array(
+//        'id' => $item->id->__toString(),
+//        'type' => 'Feature',
+//        'properties' => array(
+//          'name' => !empty($item->name) ? $item->name->__toString() : 'Neighbourhood',
+//          'popupContent' => $polygon_popup_content,
+//        ),
+//        'geometry' => array(
+//          'type' => $is_polygon ? 'Polygon' : 'MultiPolygon',
+//          'coordinates' => array(
+//            $coordinates,
+//          ),
+//        ),
+//      );
+//      $neighbourhoods[] = $prepared;
+//    }
+//
+//  drupal_add_js(array('neighbourhoodsMapData' => $neighbourhoods), 'setting');
+
+
+  if (!isset($_SESSION['neighbourhood_json'])) {
+    $vid = taxonomy_vocabulary_machine_name_load('neighbourhoods'); //Neighbourhoods vocabulary.
+    $vid = $vid->vid;
+    $vocabulary_term_entities = taxonomy_get_tree($vid, 0, 3, TRUE);
+    $terms_polygon_prejson = array();
+    foreach ($vocabulary_term_entities as $tax_term) {
+      $polygon = isset($tax_term->field_community_geolocation[LANGUAGE_NONE][0]['geom']) ? $tax_term->field_community_geolocation[LANGUAGE_NONE][0]['geom'] : NULL;
+      if ($polygon !== NULL && $polygon != 'GEOMETRYCOLLECTION EMPTY') {
+        $tax_term_id = $tax_term->tid;
+        $tax_term_name = $tax_term->name;
+        $polygon_popup_content = $tax_term_name;
+        $coordinates = array();
+        if (strrpos($tax_term->field_community_geolocation[LANGUAGE_NONE][0]['geom'], 'MULTIPOLYGON') === FALSE) {
+          $type = 'Polygon';
+          $polygon = str_replace(array('POLYGON ', '(', ')'), '', $polygon);
+          $polygon = explode(', ', $polygon);
           $pre_coordinates = array();
-          foreach ((array) $pair->element as $value) {
-            $point = explode(',', $value);
-            $point = array_reverse($point);
-            $pre_coordinates[] = $point;
+          foreach ($polygon as $value) {
+            $pre_coordinates[] = explode(' ', $value);
           }
           $coordinates[] = $pre_coordinates;
         }
-      }
-      $polygon_popup_content = !empty($item->name) ? $item->name->__toString() : 'Neighbourhood';
-      $prepared = array(
-        'id' => $item->id->__toString(),
-        'type' => 'Feature',
-        'properties' => array(
-          'name' => !empty($item->name) ? $item->name->__toString() : 'Neighbourhood',
-          'popupContent' => $polygon_popup_content,
-        ),
-        'geometry' => array(
-          'type' => $is_polygon ? 'Polygon' : 'MultiPolygon',
-          'coordinates' => array(
-            $coordinates,
+        else {
+          $type = 'MultiPolygon';
+          $pre_coordinates = array();
+          $polygon = str_replace(array(
+            'MULTIPOLYGON ',
+            '(((',
+            ')))'
+          ), '', $polygon);
+          $pre_multi = explode('), (', $polygon);
+          $pre_multi_coordinates = array();
+          foreach ($pre_multi as $value) {
+            $pre_points = explode(',', $value);
+            $points = array();
+            foreach ($pre_points as $pre_point) {
+              $pre_point = trim($pre_point);
+              $points[] = explode(' ', $pre_point);
+            }
+            $pre_multi_coordinates[] = $points;
+          }
+          $coordinates[] = $pre_multi_coordinates;
+        }
+        $terms_polygon_prejson[] = array(
+          'geometry' => array(
+            'coordinates' => $coordinates,
+            'type' => $type,
           ),
-        ),
-      );
-      $neighbourhoods[] = $prepared;
+          'properties' => array(
+            'name' => $tax_term_name,
+            'popupContent' => $polygon_popup_content,
+          ),
+          'id' => $tax_term_id,
+          'type' => 'Feature',
+        );
+      }
     }
+    $_SESSION['neighbourhood_json'] = $terms_polygon_prejson;
   }
-  drupal_add_js(array('neighbourhoodsMapData' => $neighbourhoods), 'setting');
+  drupal_add_js(array('neighbourhoodsMapData' => $_SESSION['neighbourhood_json']), 'setting');
 
-  return $neighbourhoods;
+  return $_SESSION['neighbourhood_json'];
 }
 
 function _ctrader_map_kml_to_xml() {
