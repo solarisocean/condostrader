@@ -663,7 +663,9 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   /* Display: Most viewed */
   $handler = $view->new_display('page', 'Most viewed', 'page_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'TESTtestTESTtestTEST';
+  $handler->display->display_options['title'] = '<span>Most</span> viewed';
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'view-most-viewed-block';
   $handler->display->display_options['defaults']['use_ajax'] = FALSE;
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['defaults']['use_more'] = FALSE;
@@ -700,8 +702,8 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_toronto_gallery']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_toronto_gallery']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_toronto_gallery']['settings'] = array(
-    'image_style' => 'large',
-    'image_link' => '',
+    'image_style' => '190x120',
+    'image_link' => 'content',
   );
   $handler->display->display_options['fields']['field_toronto_gallery']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_toronto_gallery']['delta_offset'] = '0';
@@ -907,7 +909,8 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_community_torcond']['ui_name'] = 'Condo title (community or area)';
   $handler->display->display_options['fields']['field_community_torcond']['label'] = '';
   $handler->display->display_options['fields']['field_community_torcond']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_community_torcond']['alter']['text'] = '[field_community_torcond] Condo';
+  $handler->display->display_options['fields']['field_community_torcond']['alter']['text'] = '[field_community_torcond] Condo
+';
   $handler->display->display_options['fields']['field_community_torcond']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_community_torcond']['empty'] = '[field_area_torcond] Condo';
   $handler->display->display_options['fields']['field_community_torcond']['hide_alter_empty'] = FALSE;
@@ -972,6 +975,8 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler = $view->new_display('page', 'Highest price', 'page_3');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = '<span>Highest</span> price';
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'view-highest-price-block';
   $handler->display->display_options['defaults']['use_ajax'] = FALSE;
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['defaults']['use_more'] = FALSE;
@@ -1008,8 +1013,8 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_toronto_gallery']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_toronto_gallery']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_toronto_gallery']['settings'] = array(
-    'image_style' => 'large',
-    'image_link' => '',
+    'image_style' => '190x120',
+    'image_link' => 'content',
   );
   $handler->display->display_options['fields']['field_toronto_gallery']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_toronto_gallery']['delta_offset'] = '0';
@@ -1285,6 +1290,8 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler = $view->new_display('page', 'Lowest price', 'page_4');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = '<span>Lowest</span> price';
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'view-lowest-price-block';
   $handler->display->display_options['defaults']['use_ajax'] = FALSE;
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['defaults']['use_more'] = FALSE;
@@ -1321,8 +1328,8 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_toronto_gallery']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_toronto_gallery']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_toronto_gallery']['settings'] = array(
-    'image_style' => 'large',
-    'image_link' => '',
+    'image_style' => '190x120',
+    'image_link' => 'content',
   );
   $handler->display->display_options['fields']['field_toronto_gallery']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_toronto_gallery']['delta_offset'] = '0';
