@@ -20,7 +20,6 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f47820', endColorstr='#f26236', GradientType=1 );
 }
 
-
 %condos-item {
   display: inline-block;
   width: calc((100% / 4) - 22px);
@@ -160,6 +159,145 @@
     }
   }
 
+}
+
+%condos-item-small {
+  margin-bottom: 20px;
+
+  .views-field-nothing-1 {
+    float: left;
+    margin-right: 10px;
+
+    .field-content {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+
+      .price {
+        position: absolute;
+        left: 0;
+        bottom: 13px;
+        font-size: rem-calc(12);
+        color: $white;
+        display: inline-block;
+        max-width: 82px;
+        width: 100%;
+        padding: 2px 10px;
+        text-align: center;
+        @extend %gradient-background;
+
+        &:after {
+          content: '';
+          width: 0;
+          height: 0;
+          border-top: 23px solid $flamingo;
+          border-right: 22px solid transparent;
+          position: absolute;
+          top: 0;
+          right: -22px;
+        }
+      }
+    }
+  }
+
+  .views-fieldset {
+    padding-top: 6px;
+    font-size: rem-calc(11);
+    border: 1px solid darken($athens-gray, 1);
+    border-left: none;
+    background-color: $white;
+
+    &:after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    .views-field-field-community-torcond {
+      font-family: "Raleway", sans-serif;
+      font-weight: bold;
+      font-size: rem-calc(13);
+      margin-bottom: 5px;
+    }
+
+    .views-field-nothing {
+      line-height: 0;
+
+      .field-content {
+        @include pseudo-element("before", 7px, 12px , "map-marker.png", "not-center");
+
+        &:before {
+          margin-right: 4px;
+        }
+
+        font-size: rem-calc(12);
+        color: $gray;
+      }
+    }
+
+    .views-field-field-maint-torcond {
+      border-bottom: 1px solid $athens-gray;
+      border-top: 1px solid $athens-gray;
+      margin: 6px 0 5px;
+      padding: 4px 0;
+      display: inline-block;
+      width: 56%;
+
+      .views-label-field-maint-torcond {
+        color: $gray;
+
+        @include pseudo-element("after", 7px, 7px, 'question-symbol.png', 'not-center');
+
+        &:after {
+          margin: 0 4px;
+        }
+      }
+
+      .field-content {
+        color: $mirage;
+      }
+    }
+
+    .views-field-nothing-2 {
+      font-size: rem-calc(11);
+
+      .condo-info-line {
+        .condo-info-element {
+          margin-right: 10px;
+        }
+
+        &:first-child {
+          .condo-info-element {
+            margin-right: 25px;
+          }
+        }
+      }
+
+      .sqft {
+        @include pseudo-element("before", 14px, 11px, "area-icon.png", "not-center");
+      }
+
+      .bed {
+        @include pseudo-element("before", 16px, 11px, "bed-icon.png", "not-center");
+      }
+
+      .bath {
+        @include pseudo-element("before", 9px, 11px, "bath-icon.png", "not-center");
+      }
+
+      .pets {
+        @include pseudo-element("before", 13px, 12px, "pets-icon.png", "not-center");
+      }
+
+      .locker {
+        @include pseudo-element("before", 12px, 11px, "locker-icon.png", "not-center");
+      }
+
+      .parking {
+        @include pseudo-element("before", 15px, 10px, "car-icon.png", "not-center");
+      }
+    }
+  }
 }
 
 %condo-heading {
