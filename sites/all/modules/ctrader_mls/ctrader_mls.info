@@ -3,3 +3,5 @@ description = Provide integration with http://www.torontomls.net for synchroniza
 core = 7.x
 package = Condos Traider
 version = 7.x-1.0
+
+files[]=views/handlers/views_handler_field_ctrader_discount.inc
