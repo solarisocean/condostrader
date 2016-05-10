@@ -1,5 +1,29 @@
 <?php
 
+
+/**
+ * Implements hook_views_data().
+ */
+function ctrader_mls_views_data() {
+  $data['ctrader']['table']['group'] = t('CTrader Flag integration');
+  $data['ctrader']['table']['join'] = array(
+    // #global is a special flag which let's a table appear all the time.
+    '#global' => array(),
+  );
+
+  $data['ctrader']['ctrader_flag_handler'] = array(
+    'title' => t('CTrader Flag'),
+    'help' => t('flag integration'),
+    'field' => array(
+      'handler' => 'views_handler_ctrader_flag_int',
+      'click sortable' => TRUE,
+    ),
+  );
+$stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
+  return $data;
+}
+
+
 /**
  * Implements hook_views_data_alter().
  */
