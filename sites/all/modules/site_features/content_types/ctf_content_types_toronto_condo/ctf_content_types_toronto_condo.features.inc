@@ -5132,6 +5132,27 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
             "not null" : false
           }
         }
+      },
+      "field_old_price_value__torcond" : {
+        "translatable" : "0",
+        "entity_types" : [ "drealty_listing" ],
+        "settings" : { "precision" : "10", "scale" : "2", "decimal_separator" : "." },
+        "foreign keys" : [],
+        "indexes" : [],
+        "field_name" : "field_old_price_value__torcond",
+        "type" : "number_decimal",
+        "module" : "number",
+        "active" : "1",
+        "locked" : "0",
+        "cardinality" : "-1",
+        "deleted" : "0",
+        "columns" : { "value" : {
+            "type" : "numeric",
+            "precision" : "10",
+            "scale" : "2",
+            "not null" : false
+          }
+        }
       }
     },
     "field_instances" : {
@@ -12652,6 +12673,49 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
         "id" : "539",
         "field_id" : "526",
         "field_name" : "field_price_per_sqft__torcond",
+        "entity_type" : "drealty_listing",
+        "deleted" : "0"
+      },
+      "field_old_price_value__torcond" : {
+        "label" : "Old price value",
+        "widget" : {
+          "weight" : "239",
+          "type" : "number",
+          "module" : "number",
+          "active" : 0,
+          "settings" : []
+        },
+        "settings" : {
+          "min" : "",
+          "max" : "",
+          "prefix" : "",
+          "suffix" : "",
+          "user_register_form" : false
+        },
+        "display" : {
+          "default" : {
+            "label" : "above",
+            "type" : "number_decimal",
+            "settings" : {
+              "thousand_separator" : "",
+              "decimal_separator" : ".",
+              "scale" : 2,
+              "prefix_suffix" : true
+            },
+            "module" : "number",
+            "weight" : 238
+          },
+          "search" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 },
+          "list" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 },
+          "gallery" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 }
+        },
+        "required" : 0,
+        "description" : "",
+        "drealty" : { "hash_exclude" : 0 },
+        "default_value" : null,
+        "id" : "542",
+        "field_id" : "528",
+        "field_name" : "field_old_price_value__torcond",
         "entity_type" : "drealty_listing",
         "deleted" : "0"
       }

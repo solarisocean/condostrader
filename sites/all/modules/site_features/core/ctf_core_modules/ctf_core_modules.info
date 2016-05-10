@@ -35,6 +35,7 @@ dependencies[] = entity_panels
 dependencies[] = facetapi
 dependencies[] = facetapi_bonus
 dependencies[] = facetapi_collapsible
+dependencies[] = facetapi_pretty_paths
 dependencies[] = facetapi_select
 dependencies[] = fe_block
 dependencies[] = fe_date
