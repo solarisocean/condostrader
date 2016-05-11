@@ -1,0 +1,9 @@
+name = CT Features: Core: Image Styles
+core = 7.x
+package = CT Features: Core
+dependencies[] = image
+features[features_api][] = api:2
+features[image][] = 190x120
+features[image][] = 333x176
+features[image][] = 365x203
+project path = sites/all/modules/site_features/core
