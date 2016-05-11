@@ -5,7 +5,21 @@
  * Implements hook_init().
  */
 function ctrader_saf_init() {
+$stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
+}
 
+
+/**
+ * Implements hook_menu().
+ */
+function ctrader_saf_menu() {
+  $items = array();
+  $items['search-link-calculate'] = array(
+    'title' => 'Search link calculating page',
+    'page callback' => '_ctrader_saf_search_link_calculate_page_callback',
+    'access arguments' => array('administer modules'),
+  );
+  return $items;
 }
 
 
@@ -197,7 +211,7 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
       break;
     case 'field_prkg_inc__torcond':
       unset($build['N']);
-      $build['Y']['#markup'] = 'Require Parking';
+      $build['Y']['#markup'] = t('Require Parking');
       break;
   }
 }
@@ -208,4 +222,68 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
  */
 function ctrader_saf_current_search_items() {
 
+}
+
+
+/**
+ * Implements hook_block_info().
+ */
+function ctrader_saf_block_info() {
+  $blocks = array();
+  $blocks['search_button'] = array(
+    'info' => t('Custom block: Search button form'),
+//    'cache' => DRUPAL_NO_CACHE,
+  );
+  return $blocks;
+}
+
+
+/**
+ * Implements hook_block_view().
+ */
+function ctrader_saf_block_view($delta = '') {
+  $block = array();
+  $block['content'] = drupal_get_form('_ctrader_saf_search_button_form');
+  $block['subject'] = t('Block with search button for facet search');
+  return $block;
+}
+
+
+function _ctrader_saf_search_button_form($form, &$form_state) {
+//  $form = array();
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Search'),
+//    '#disabled' => TRUE,
+  );
+  return $form;
+}
+
+
+function _ctrader_saf_search_button_form_submit($form, &$form_state) {
+//  $query = drupal_http_build_query($_SESSION['search_link_calculate']['f'],'f');
+  $path = '/results';
+  $url = url($path, array('query' => $_SESSION['search_link_calculate'], 'absolute' => TRUE));
+  unset($_SESSION['search_link_calculate']);
+  $form_state['redirect'] = $url;
+}
+
+
+function _ctrader_saf_search_link_calculate_page_callback() {
+//  unset($_SESSION['search_link_calculate']);
+  if (!isset($_SESSION['search_link_calculate']['f'])) {
+    $_SESSION['search_link_calculate']['f'] = array();
+  }
+  $set_search_option = TRUE;
+  foreach ($_SESSION['search_link_calculate']['f'] as $key => $value) {
+    if ($value == $_POST['/main-page?f'][0]) {
+      unset($_SESSION['search_link_calculate']['f'][$key]);
+      $set_search_option = FALSE;
+    }
+  }
+  if ($set_search_option) {
+    $_SESSION['search_link_calculate']['f'][] = $_POST['/main-page?f'][0];
+  }
+  sort($_SESSION['search_link_calculate']['f']);
+  return t('page not for viewing');
 }
