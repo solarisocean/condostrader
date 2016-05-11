@@ -1,0 +1,12 @@
+.mCSB_scrollTools {
+  border: 1px solid $athens-gray;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+
+  .mCSB_dragger_bar {
+    width: 6px !important;
+    margin: 3px auto !important;
+    background-color: $ecstasy !important;
+  }
+}
