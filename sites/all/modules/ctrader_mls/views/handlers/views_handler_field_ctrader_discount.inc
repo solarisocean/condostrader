@@ -6,6 +6,9 @@
 class views_handler_field_ctrader_discount extends views_handler_field {
   public function query() {
     // do nothing -- to override the parent query.
+
+    $this->field_alias = $this->query->addField('field_old_price_value__torcond');
+    $this->field_alias = $this->query->addField('field_lp_dol__torcond');
   }
 
   public function option_definition() {

@@ -5082,27 +5082,27 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
         "deleted" : "0",
         "columns" : { "tid" : { "type" : "int", "unsigned" : true, "not null" : false } }
       },
-      "field_sqft_range_min__torcond" : {
-        "translatable" : "0",
+      "field_price_per_sqft__torcond" : {
         "entity_types" : [ "drealty_listing" ],
-        "settings" : [],
-        "foreign keys" : [],
         "indexes" : [],
-        "field_name" : "field_sqft_range_min__torcond",
-        "type" : "number_integer",
+        "settings" : { "decimal_separator" : ".", "precision" : 10, "scale" : 2 },
+        "translatable" : "0",
+        "foreign keys" : [],
+        "field_name" : "field_price_per_sqft__torcond",
+        "type" : "number_decimal",
         "module" : "number",
         "active" : "1",
         "locked" : "0",
         "cardinality" : "1",
         "deleted" : "0",
-        "columns" : { "value" : { "type" : "int", "not null" : false } }
+        "columns" : { "value" : { "type" : "numeric", "precision" : 10, "scale" : 2, "not null" : false } }
       },
       "field_sqft_range_max__torcond" : {
-        "translatable" : "0",
         "entity_types" : [ "drealty_listing" ],
-        "settings" : [],
-        "foreign keys" : [],
         "indexes" : [],
+        "settings" : [],
+        "translatable" : "0",
+        "foreign keys" : [],
         "field_name" : "field_sqft_range_max__torcond",
         "type" : "number_integer",
         "module" : "number",
@@ -5112,34 +5112,28 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
         "deleted" : "0",
         "columns" : { "value" : { "type" : "int", "not null" : false } }
       },
-      "field_price_per_sqft__torcond" : {
-        "translatable" : "0",
+      "field_sqft_range_min__torcond" : {
         "entity_types" : [ "drealty_listing" ],
-        "settings" : { "precision" : "10", "scale" : "2", "decimal_separator" : "." },
-        "foreign keys" : [],
         "indexes" : [],
-        "field_name" : "field_price_per_sqft__torcond",
-        "type" : "number_decimal",
+        "settings" : [],
+        "translatable" : "0",
+        "foreign keys" : [],
+        "field_name" : "field_sqft_range_min__torcond",
+        "type" : "number_integer",
         "module" : "number",
         "active" : "1",
         "locked" : "0",
         "cardinality" : "1",
         "deleted" : "0",
-        "columns" : { "value" : {
-            "type" : "numeric",
-            "precision" : "10",
-            "scale" : "2",
-            "not null" : false
-          }
-        }
+        "columns" : { "value" : { "type" : "int", "not null" : false } }
       },
-      "field_old_price_value__torcond" : {
+      "field_old_price_value_torcond" : {
         "translatable" : "0",
         "entity_types" : [ "drealty_listing" ],
         "settings" : { "precision" : "10", "scale" : "2", "decimal_separator" : "." },
         "foreign keys" : [],
         "indexes" : [],
-        "field_name" : "field_old_price_value__torcond",
+        "field_name" : "field_old_price_value_torcond",
         "type" : "number_decimal",
         "module" : "number",
         "active" : "1",
@@ -5153,6 +5147,21 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
             "not null" : false
           }
         }
+      },
+      "field_old_price_value__torcond" : {
+        "entity_types" : [ "drealty_listing" ],
+        "indexes" : [],
+        "settings" : { "decimal_separator" : ".", "precision" : 10, "scale" : 2 },
+        "translatable" : "0",
+        "foreign keys" : [],
+        "field_name" : "field_old_price_value__torcond",
+        "type" : "number_decimal",
+        "module" : "number",
+        "active" : "1",
+        "locked" : "0",
+        "cardinality" : "-1",
+        "deleted" : "0",
+        "columns" : { "value" : { "type" : "numeric", "precision" : 10, "scale" : 2, "not null" : false } }
       }
     },
     "field_instances" : {
@@ -5218,7 +5227,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "2"
+          "weight" : 2
         },
         "id" : "300",
         "field_id" : "292",
@@ -5248,7 +5257,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "3"
+          "weight" : 3
         },
         "id" : "301",
         "field_id" : "293",
@@ -5278,7 +5287,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "4"
+          "weight" : 4
         },
         "id" : "302",
         "field_id" : "294",
@@ -5308,7 +5317,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "5"
+          "weight" : 5
         },
         "id" : "303",
         "field_id" : "295",
@@ -5338,7 +5347,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "6"
+          "weight" : 6
         },
         "id" : "304",
         "field_id" : "296",
@@ -5368,7 +5377,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "7"
+          "weight" : 7
         },
         "id" : "305",
         "field_id" : "297",
@@ -5398,7 +5407,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "8"
+          "weight" : 8
         },
         "id" : "306",
         "field_id" : "298",
@@ -5428,7 +5437,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "9"
+          "weight" : 9
         },
         "id" : "307",
         "field_id" : "299",
@@ -5458,7 +5467,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "10"
+          "weight" : 10
         },
         "id" : "308",
         "field_id" : "300",
@@ -5488,7 +5497,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "11"
+          "weight" : 11
         },
         "id" : "309",
         "field_id" : "301",
@@ -5518,7 +5527,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "12"
+          "weight" : 12
         },
         "id" : "310",
         "field_id" : "302",
@@ -5548,7 +5557,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "13"
+          "weight" : 13
         },
         "id" : "311",
         "field_id" : "303",
@@ -5578,7 +5587,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "14"
+          "weight" : 14
         },
         "id" : "312",
         "field_id" : "304",
@@ -5608,7 +5617,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "15"
+          "weight" : 15
         },
         "id" : "313",
         "field_id" : "305",
@@ -5638,7 +5647,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "16"
+          "weight" : 16
         },
         "id" : "314",
         "field_id" : "306",
@@ -5668,7 +5677,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "17"
+          "weight" : 17
         },
         "id" : "315",
         "field_id" : "307",
@@ -5698,7 +5707,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "18"
+          "weight" : 18
         },
         "id" : "316",
         "field_id" : "308",
@@ -5735,12 +5744,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "suffix" : "",
           "user_register_form" : false
         },
-        "widget" : {
-          "module" : "number",
-          "settings" : [],
-          "type" : "number",
-          "weight" : "19"
-        },
+        "widget" : { "module" : "number", "settings" : [], "type" : "number", "weight" : 19 },
         "id" : "317",
         "field_id" : "309",
         "field_name" : "field_lp_dol__torcond",
@@ -5776,12 +5780,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "suffix" : "",
           "user_register_form" : false
         },
-        "widget" : {
-          "module" : "number",
-          "settings" : [],
-          "type" : "number",
-          "weight" : "20"
-        },
+        "widget" : { "module" : "number", "settings" : [], "type" : "number", "weight" : 20 },
         "id" : "318",
         "field_id" : "310",
         "field_name" : "field_maint__torcond",
@@ -5810,7 +5809,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "22"
+          "weight" : 22
         },
         "id" : "320",
         "field_id" : "311",
@@ -5840,7 +5839,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "23"
+          "weight" : 23
         },
         "id" : "321",
         "field_id" : "312",
@@ -5870,7 +5869,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "24"
+          "weight" : 24
         },
         "id" : "322",
         "field_id" : "313",
@@ -5900,7 +5899,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "25"
+          "weight" : 25
         },
         "id" : "323",
         "field_id" : "314",
@@ -5930,7 +5929,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "26"
+          "weight" : 26
         },
         "id" : "324",
         "field_id" : "315",
@@ -5960,7 +5959,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "27"
+          "weight" : 27
         },
         "id" : "325",
         "field_id" : "316",
@@ -5997,12 +5996,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "suffix" : "",
           "user_register_form" : false
         },
-        "widget" : {
-          "module" : "number",
-          "settings" : [],
-          "type" : "number",
-          "weight" : "28"
-        },
+        "widget" : { "module" : "number", "settings" : [], "type" : "number", "weight" : 28 },
         "id" : "326",
         "field_id" : "317",
         "field_name" : "field_corp_num__torcond",
@@ -6031,7 +6025,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "29"
+          "weight" : 29
         },
         "id" : "327",
         "field_id" : "318",
@@ -6061,7 +6055,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "30"
+          "weight" : 30
         },
         "id" : "328",
         "field_id" : "319",
@@ -6091,7 +6085,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "31"
+          "weight" : 31
         },
         "id" : "329",
         "field_id" : "320",
@@ -6121,7 +6115,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "32"
+          "weight" : 32
         },
         "id" : "330",
         "field_id" : "321",
@@ -6151,7 +6145,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "33"
+          "weight" : 33
         },
         "id" : "331",
         "field_id" : "322",
@@ -6181,7 +6175,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "34"
+          "weight" : 34
         },
         "id" : "332",
         "field_id" : "323",
@@ -6211,7 +6205,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "35"
+          "weight" : 35
         },
         "id" : "333",
         "field_id" : "324",
@@ -6241,7 +6235,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "36"
+          "weight" : 36
         },
         "id" : "334",
         "field_id" : "325",
@@ -6278,12 +6272,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "suffix" : "",
           "user_register_form" : false
         },
-        "widget" : {
-          "module" : "number",
-          "settings" : [],
-          "type" : "number",
-          "weight" : "37"
-        },
+        "widget" : { "module" : "number", "settings" : [], "type" : "number", "weight" : 37 },
         "id" : "335",
         "field_id" : "326",
         "field_name" : "field_gar__torcond",
@@ -6312,7 +6301,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "39"
+          "weight" : 39
         },
         "id" : "337",
         "field_id" : "327",
@@ -6342,7 +6331,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "40"
+          "weight" : 40
         },
         "id" : "338",
         "field_id" : "328",
@@ -6372,7 +6361,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "41"
+          "weight" : 41
         },
         "id" : "339",
         "field_id" : "329",
@@ -6402,7 +6391,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "42"
+          "weight" : 42
         },
         "id" : "340",
         "field_id" : "330",
@@ -6432,7 +6421,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "43"
+          "weight" : 43
         },
         "id" : "341",
         "field_id" : "331",
@@ -6462,7 +6451,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "44"
+          "weight" : 44
         },
         "id" : "342",
         "field_id" : "332",
@@ -6896,7 +6885,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "57"
+          "weight" : 57
         },
         "id" : "355",
         "field_id" : "345",
@@ -6926,7 +6915,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "58"
+          "weight" : 58
         },
         "id" : "356",
         "field_id" : "346",
@@ -6956,7 +6945,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "59"
+          "weight" : 59
         },
         "id" : "357",
         "field_id" : "347",
@@ -6986,7 +6975,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "60"
+          "weight" : 60
         },
         "id" : "358",
         "field_id" : "348",
@@ -7016,7 +7005,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "61"
+          "weight" : 61
         },
         "id" : "359",
         "field_id" : "349",
@@ -7128,7 +7117,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "64"
+          "weight" : 64
         },
         "id" : "362",
         "field_id" : "352",
@@ -7158,7 +7147,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "65"
+          "weight" : 65
         },
         "id" : "363",
         "field_id" : "353",
@@ -7188,7 +7177,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "66"
+          "weight" : 66
         },
         "id" : "364",
         "field_id" : "354",
@@ -7218,7 +7207,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "67"
+          "weight" : 67
         },
         "id" : "365",
         "field_id" : "355",
@@ -7248,7 +7237,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "68"
+          "weight" : 68
         },
         "id" : "366",
         "field_id" : "356",
@@ -7278,7 +7267,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "69"
+          "weight" : 69
         },
         "id" : "367",
         "field_id" : "357",
@@ -7308,7 +7297,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "70"
+          "weight" : 70
         },
         "id" : "368",
         "field_id" : "358",
@@ -7338,7 +7327,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "71"
+          "weight" : 71
         },
         "id" : "369",
         "field_id" : "359",
@@ -7368,7 +7357,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "72"
+          "weight" : 72
         },
         "id" : "370",
         "field_id" : "360",
@@ -7398,7 +7387,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "73"
+          "weight" : 73
         },
         "id" : "371",
         "field_id" : "361",
@@ -7428,7 +7417,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "74"
+          "weight" : 74
         },
         "id" : "372",
         "field_id" : "362",
@@ -7465,12 +7454,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "suffix" : "",
           "user_register_form" : false
         },
-        "widget" : {
-          "module" : "number",
-          "settings" : [],
-          "type" : "number",
-          "weight" : "75"
-        },
+        "widget" : { "module" : "number", "settings" : [], "type" : "number", "weight" : 75 },
         "id" : "373",
         "field_id" : "363",
         "field_name" : "field_rm1_len__torcond",
@@ -7499,7 +7483,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "76"
+          "weight" : 76
         },
         "id" : "374",
         "field_id" : "364",
@@ -7536,12 +7520,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "suffix" : "",
           "user_register_form" : false
         },
-        "widget" : {
-          "module" : "number",
-          "settings" : [],
-          "type" : "number",
-          "weight" : "77"
-        },
+        "widget" : { "module" : "number", "settings" : [], "type" : "number", "weight" : 77 },
         "id" : "375",
         "field_id" : "365",
         "field_name" : "field_rm1_wth__torcond",
@@ -7570,7 +7549,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "78"
+          "weight" : 78
         },
         "id" : "376",
         "field_id" : "366",
@@ -7600,7 +7579,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "79"
+          "weight" : 79
         },
         "id" : "377",
         "field_id" : "367",
@@ -7630,7 +7609,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "80"
+          "weight" : 80
         },
         "id" : "378",
         "field_id" : "368",
@@ -7667,12 +7646,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "suffix" : "",
           "user_register_form" : false
         },
-        "widget" : {
-          "module" : "number",
-          "settings" : [],
-          "type" : "number",
-          "weight" : "81"
-        },
+        "widget" : { "module" : "number", "settings" : [], "type" : "number", "weight" : 81 },
         "id" : "379",
         "field_id" : "369",
         "field_name" : "field_rm10_len__torcond",
@@ -7701,7 +7675,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "82"
+          "weight" : 82
         },
         "id" : "380",
         "field_id" : "370",
@@ -7738,12 +7712,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "suffix" : "",
           "user_register_form" : false
         },
-        "widget" : {
-          "module" : "number",
-          "settings" : [],
-          "type" : "number",
-          "weight" : "83"
-        },
+        "widget" : { "module" : "number", "settings" : [], "type" : "number", "weight" : 83 },
         "id" : "381",
         "field_id" : "371",
         "field_name" : "field_rm10_wth__torcond",
@@ -7772,7 +7741,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "84"
+          "weight" : 84
         },
         "id" : "382",
         "field_id" : "372",
@@ -7802,7 +7771,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "85"
+          "weight" : 85
         },
         "id" : "383",
         "field_id" : "373",
@@ -8173,7 +8142,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "97"
+          "weight" : 97
         },
         "id" : "395",
         "field_id" : "385",
@@ -8203,7 +8172,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "98"
+          "weight" : 98
         },
         "id" : "396",
         "field_id" : "386",
@@ -8711,7 +8680,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "113"
+          "weight" : 113
         },
         "id" : "411",
         "field_id" : "401",
@@ -8752,7 +8721,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "number",
           "settings" : [],
           "type" : "number",
-          "weight" : "114"
+          "weight" : 114
         },
         "id" : "412",
         "field_id" : "402",
@@ -8782,7 +8751,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "116"
+          "weight" : 116
         },
         "id" : "414",
         "field_id" : "403",
@@ -8823,7 +8792,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "number",
           "settings" : [],
           "type" : "number",
-          "weight" : "117"
+          "weight" : 117
         },
         "id" : "415",
         "field_id" : "404",
@@ -8853,7 +8822,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "118"
+          "weight" : 118
         },
         "id" : "416",
         "field_id" : "405",
@@ -8883,7 +8852,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "119"
+          "weight" : 119
         },
         "id" : "417",
         "field_id" : "406",
@@ -8913,7 +8882,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "120"
+          "weight" : 120
         },
         "id" : "418",
         "field_id" : "407",
@@ -8943,7 +8912,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "121"
+          "weight" : 121
         },
         "id" : "419",
         "field_id" : "408",
@@ -8973,7 +8942,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "122"
+          "weight" : 122
         },
         "id" : "420",
         "field_id" : "409",
@@ -9003,7 +8972,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "123"
+          "weight" : 123
         },
         "id" : "421",
         "field_id" : "410",
@@ -9044,7 +9013,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "number",
           "settings" : [],
           "type" : "number",
-          "weight" : "125"
+          "weight" : 125
         },
         "id" : "423",
         "field_id" : "411",
@@ -9074,7 +9043,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "126"
+          "weight" : 126
         },
         "id" : "424",
         "field_id" : "412",
@@ -9871,7 +9840,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "150"
+          "weight" : 150
         },
         "id" : "448",
         "field_id" : "436",
@@ -9901,7 +9870,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "151"
+          "weight" : 151
         },
         "id" : "449",
         "field_id" : "437",
@@ -9931,7 +9900,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "152"
+          "weight" : 152
         },
         "id" : "450",
         "field_id" : "438",
@@ -9972,7 +9941,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "number",
           "settings" : [],
           "type" : "number",
-          "weight" : "153"
+          "weight" : 153
         },
         "id" : "451",
         "field_id" : "439",
@@ -10002,7 +9971,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "154"
+          "weight" : 154
         },
         "id" : "452",
         "field_id" : "440",
@@ -10043,7 +10012,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "number",
           "settings" : [],
           "type" : "number",
-          "weight" : "155"
+          "weight" : 155
         },
         "id" : "453",
         "field_id" : "441",
@@ -10073,7 +10042,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "156"
+          "weight" : 156
         },
         "id" : "454",
         "field_id" : "442",
@@ -10103,7 +10072,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "157"
+          "weight" : 157
         },
         "id" : "455",
         "field_id" : "443",
@@ -10133,7 +10102,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "158"
+          "weight" : 158
         },
         "id" : "456",
         "field_id" : "444",
@@ -10174,7 +10143,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "number",
           "settings" : [],
           "type" : "number",
-          "weight" : "159"
+          "weight" : 159
         },
         "id" : "457",
         "field_id" : "445",
@@ -10204,7 +10173,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "160"
+          "weight" : 160
         },
         "id" : "458",
         "field_id" : "446",
@@ -10245,7 +10214,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "number",
           "settings" : [],
           "type" : "number",
-          "weight" : "161"
+          "weight" : 161
         },
         "id" : "459",
         "field_id" : "447",
@@ -10275,7 +10244,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "163"
+          "weight" : 163
         },
         "id" : "461",
         "field_id" : "448",
@@ -10305,7 +10274,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "164"
+          "weight" : 164
         },
         "id" : "462",
         "field_id" : "449",
@@ -10346,7 +10315,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "number",
           "settings" : [],
           "type" : "number",
-          "weight" : "165"
+          "weight" : 165
         },
         "id" : "463",
         "field_id" : "450",
@@ -10376,7 +10345,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "166"
+          "weight" : 166
         },
         "id" : "464",
         "field_id" : "451",
@@ -10417,7 +10386,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "number",
           "settings" : [],
           "type" : "number",
-          "weight" : "167"
+          "weight" : 167
         },
         "id" : "465",
         "field_id" : "452",
@@ -10447,7 +10416,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "168"
+          "weight" : 168
         },
         "id" : "466",
         "field_id" : "453",
@@ -11315,7 +11284,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "194"
+          "weight" : 194
         },
         "id" : "492",
         "field_id" : "479",
@@ -11345,7 +11314,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "195"
+          "weight" : 195
         },
         "id" : "493",
         "field_id" : "480",
@@ -11375,7 +11344,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "197"
+          "weight" : 197
         },
         "id" : "495",
         "field_id" : "482",
@@ -11405,7 +11374,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "198"
+          "weight" : 198
         },
         "id" : "496",
         "field_id" : "483",
@@ -11435,7 +11404,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "199"
+          "weight" : 199
         },
         "id" : "497",
         "field_id" : "484",
@@ -11465,7 +11434,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "200"
+          "weight" : 200
         },
         "id" : "498",
         "field_id" : "485",
@@ -11495,7 +11464,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "201"
+          "weight" : 201
         },
         "id" : "499",
         "field_id" : "486",
@@ -11525,7 +11494,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "205"
+          "weight" : 205
         },
         "id" : "503",
         "field_id" : "490",
@@ -11555,7 +11524,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "206"
+          "weight" : 206
         },
         "id" : "504",
         "field_id" : "491",
@@ -11585,7 +11554,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "207"
+          "weight" : 207
         },
         "id" : "505",
         "field_id" : "492",
@@ -11626,7 +11595,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "number",
           "settings" : [],
           "type" : "number",
-          "weight" : "208"
+          "weight" : 208
         },
         "id" : "506",
         "field_id" : "493",
@@ -11667,7 +11636,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "number",
           "settings" : [],
           "type" : "number",
-          "weight" : "209"
+          "weight" : 209
         },
         "id" : "507",
         "field_id" : "494",
@@ -11697,7 +11666,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "210"
+          "weight" : 210
         },
         "id" : "508",
         "field_id" : "495",
@@ -11727,7 +11696,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "211"
+          "weight" : 211
         },
         "id" : "509",
         "field_id" : "496",
@@ -11757,7 +11726,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "212"
+          "weight" : 212
         },
         "id" : "510",
         "field_id" : "497",
@@ -11787,7 +11756,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "213"
+          "weight" : 213
         },
         "id" : "511",
         "field_id" : "498",
@@ -11817,7 +11786,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "214"
+          "weight" : 214
         },
         "id" : "512",
         "field_id" : "499",
@@ -11847,7 +11816,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "215"
+          "weight" : 215
         },
         "id" : "513",
         "field_id" : "500",
@@ -11888,7 +11857,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "number",
           "settings" : [],
           "type" : "number",
-          "weight" : "216"
+          "weight" : 216
         },
         "id" : "514",
         "field_id" : "501",
@@ -11929,7 +11898,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "number",
           "settings" : [],
           "type" : "number",
-          "weight" : "217"
+          "weight" : 217
         },
         "id" : "515",
         "field_id" : "502",
@@ -11959,7 +11928,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "218"
+          "weight" : 218
         },
         "id" : "516",
         "field_id" : "503",
@@ -11989,7 +11958,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "219"
+          "weight" : 219
         },
         "id" : "517",
         "field_id" : "504",
@@ -12019,7 +11988,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "220"
+          "weight" : 220
         },
         "id" : "518",
         "field_id" : "505",
@@ -12049,7 +12018,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "221"
+          "weight" : 221
         },
         "id" : "519",
         "field_id" : "506",
@@ -12090,7 +12059,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "number",
           "settings" : [],
           "type" : "number",
-          "weight" : "222"
+          "weight" : 222
         },
         "id" : "520",
         "field_id" : "507",
@@ -12120,7 +12089,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "223"
+          "weight" : 223
         },
         "id" : "521",
         "field_id" : "508",
@@ -12150,7 +12119,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "224"
+          "weight" : 224
         },
         "id" : "522",
         "field_id" : "509",
@@ -12180,7 +12149,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "225"
+          "weight" : 225
         },
         "id" : "523",
         "field_id" : "510",
@@ -12210,7 +12179,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "rows" : 5 },
           "type" : "text_textarea",
-          "weight" : "226"
+          "weight" : 226
         },
         "id" : "524",
         "field_id" : "511",
@@ -12357,7 +12326,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
             "year_range" : "-3:+3"
           },
           "type" : "date_select",
-          "weight" : "229"
+          "weight" : 229
         },
         "id" : "527",
         "field_id" : "514",
@@ -12406,7 +12375,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
             "year_range" : "-3:+3"
           },
           "type" : "date_select",
-          "weight" : "230"
+          "weight" : 230
         },
         "id" : "528",
         "field_id" : "515",
@@ -12509,7 +12478,7 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "232"
+          "weight" : 232
         },
         "id" : "531",
         "field_id" : "518",
@@ -12532,151 +12501,151 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
           "list" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 },
           "search" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 }
         },
+        "drealty" : { "hash_exclude" : 0 },
         "label" : "City region",
         "required" : 0,
         "settings" : { "user_register_form" : false },
         "widget" : {
-          "weight" : "233",
-          "type" : "options_select",
-          "module" : "options",
           "active" : 1,
-          "settings" : []
+          "module" : "options",
+          "settings" : [],
+          "type" : "options_select",
+          "weight" : 233
         },
-        "drealty" : { "hash_exclude" : 0 },
         "id" : "532",
         "field_id" : "519",
         "field_name" : "field_city_region__torcond",
         "entity_type" : "drealty_listing",
         "deleted" : "0"
       },
-      "field_sqft_range_min__torcond" : {
-        "label" : "Sqft range min",
-        "widget" : {
-          "weight" : "236",
-          "type" : "number",
-          "module" : "number",
-          "active" : 0,
-          "settings" : []
+      "field_price_per_sqft__torcond" : {
+        "default_value" : [ { "value" : 0 } ],
+        "description" : "",
+        "display" : {
+          "default" : {
+            "label" : "above",
+            "module" : "number",
+            "settings" : {
+              "decimal_separator" : ".",
+              "prefix_suffix" : true,
+              "scale" : 2,
+              "thousand_separator" : ""
+            },
+            "type" : "number_decimal",
+            "weight" : 237
+          },
+          "gallery" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 },
+          "list" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 },
+          "search" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 }
         },
+        "drealty" : { "hash_exclude" : 0 },
+        "label" : "Price per sqft",
+        "required" : 0,
         "settings" : {
-          "min" : "",
           "max" : "",
+          "min" : "",
           "prefix" : "",
           "suffix" : "",
           "user_register_form" : false
         },
+        "widget" : {
+          "active" : 0,
+          "module" : "number",
+          "settings" : [],
+          "type" : "number",
+          "weight" : 238
+        },
+        "id" : "535",
+        "field_id" : "522",
+        "field_name" : "field_price_per_sqft__torcond",
+        "entity_type" : "drealty_listing",
+        "deleted" : "0"
+      },
+      "field_sqft_range_max__torcond" : {
+        "default_value" : null,
+        "description" : "",
         "display" : {
           "default" : {
             "label" : "above",
-            "type" : "number_integer",
-            "settings" : {
-              "thousand_separator" : "",
-              "decimal_separator" : ".",
-              "scale" : 0,
-              "prefix_suffix" : true
-            },
             "module" : "number",
+            "settings" : {
+              "decimal_separator" : ".",
+              "prefix_suffix" : true,
+              "scale" : 0,
+              "thousand_separator" : ""
+            },
+            "type" : "number_integer",
+            "weight" : 236
+          },
+          "gallery" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 },
+          "list" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 },
+          "search" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 }
+        },
+        "label" : "Sqft range max",
+        "required" : false,
+        "settings" : {
+          "max" : "",
+          "min" : "",
+          "prefix" : "",
+          "suffix" : "",
+          "user_register_form" : false
+        },
+        "widget" : {
+          "module" : "number",
+          "settings" : [],
+          "type" : "number",
+          "weight" : "237"
+        },
+        "id" : "536",
+        "field_id" : "523",
+        "field_name" : "field_sqft_range_max__torcond",
+        "entity_type" : "drealty_listing",
+        "deleted" : "0"
+      },
+      "field_sqft_range_min__torcond" : {
+        "default_value" : [ { "value" : 0 } ],
+        "description" : "",
+        "display" : {
+          "default" : {
+            "label" : "above",
+            "module" : "number",
+            "settings" : {
+              "decimal_separator" : ".",
+              "prefix_suffix" : true,
+              "scale" : 0,
+              "thousand_separator" : ""
+            },
+            "type" : "number_integer",
             "weight" : 235
           },
-          "search" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 },
-          "list" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 },
-          "gallery" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 }
+          "gallery" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 },
+          "list" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 },
+          "search" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 }
         },
-        "required" : 0,
-        "description" : "",
         "drealty" : { "hash_exclude" : 0 },
-        "default_value" : [ { "value" : "0" } ],
+        "label" : "Sqft range min",
+        "required" : 0,
+        "settings" : {
+          "max" : "",
+          "min" : "",
+          "prefix" : "",
+          "suffix" : "",
+          "user_register_form" : false
+        },
+        "widget" : {
+          "active" : 0,
+          "module" : "number",
+          "settings" : [],
+          "type" : "number",
+          "weight" : "236"
+        },
         "id" : "537",
         "field_id" : "524",
         "field_name" : "field_sqft_range_min__torcond",
         "entity_type" : "drealty_listing",
         "deleted" : "0"
       },
-      "field_sqft_range_max__torcond" : {
-        "label" : "Sqft range max",
-        "widget" : {
-          "type" : "number",
-          "weight" : "237",
-          "settings" : [],
-          "module" : "number"
-        },
-        "settings" : {
-          "min" : "",
-          "max" : "",
-          "prefix" : "",
-          "suffix" : "",
-          "user_register_form" : false
-        },
-        "display" : {
-          "default" : {
-            "label" : "above",
-            "type" : "number_integer",
-            "settings" : {
-              "thousand_separator" : "",
-              "decimal_separator" : ".",
-              "scale" : 0,
-              "prefix_suffix" : true
-            },
-            "module" : "number",
-            "weight" : 236
-          },
-          "search" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 },
-          "list" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 },
-          "gallery" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 }
-        },
-        "required" : false,
-        "description" : "",
-        "id" : "538",
-        "field_id" : "525",
-        "field_name" : "field_sqft_range_max__torcond",
-        "entity_type" : "drealty_listing",
-        "deleted" : "0",
-        "default_value" : null
-      },
-      "field_price_per_sqft__torcond" : {
-        "label" : "Price per sqft",
-        "widget" : {
-          "weight" : "238",
-          "type" : "number",
-          "module" : "number",
-          "active" : 0,
-          "settings" : []
-        },
-        "settings" : {
-          "min" : "",
-          "max" : "",
-          "prefix" : "",
-          "suffix" : "",
-          "user_register_form" : false
-        },
-        "display" : {
-          "default" : {
-            "label" : "above",
-            "type" : "number_decimal",
-            "settings" : {
-              "thousand_separator" : "",
-              "decimal_separator" : ".",
-              "scale" : 2,
-              "prefix_suffix" : true
-            },
-            "module" : "number",
-            "weight" : 237
-          },
-          "search" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 },
-          "list" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 },
-          "gallery" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 }
-        },
-        "required" : 0,
-        "description" : "",
-        "drealty" : { "hash_exclude" : 0 },
-        "default_value" : [ { "value" : "0" } ],
-        "id" : "539",
-        "field_id" : "526",
-        "field_name" : "field_price_per_sqft__torcond",
-        "entity_type" : "drealty_listing",
-        "deleted" : "0"
-      },
-      "field_old_price_value__torcond" : {
+      "field_old_price_value_torcond" : {
         "label" : "Old price value",
         "widget" : {
           "weight" : "239",
@@ -12713,8 +12682,51 @@ function ctf_content_types_toronto_condo_default_drealty_listing_type() {
         "description" : "",
         "drealty" : { "hash_exclude" : 0 },
         "default_value" : null,
-        "id" : "542",
-        "field_id" : "528",
+        "id" : "540",
+        "field_id" : "526",
+        "field_name" : "field_old_price_value_torcond",
+        "entity_type" : "drealty_listing",
+        "deleted" : "0"
+      },
+      "field_old_price_value__torcond" : {
+        "default_value" : null,
+        "description" : "",
+        "display" : {
+          "default" : {
+            "label" : "above",
+            "module" : "number",
+            "settings" : {
+              "decimal_separator" : ".",
+              "prefix_suffix" : true,
+              "scale" : 2,
+              "thousand_separator" : ""
+            },
+            "type" : "number_decimal",
+            "weight" : 238
+          },
+          "gallery" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 },
+          "list" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 },
+          "search" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 }
+        },
+        "drealty" : { "hash_exclude" : 0 },
+        "label" : "Old price value",
+        "required" : 0,
+        "settings" : {
+          "max" : "",
+          "min" : "",
+          "prefix" : "",
+          "suffix" : "",
+          "user_register_form" : false
+        },
+        "widget" : {
+          "active" : 0,
+          "module" : "number",
+          "settings" : [],
+          "type" : "number",
+          "weight" : 239
+        },
+        "id" : "541",
+        "field_id" : "527",
         "field_name" : "field_old_price_value__torcond",
         "entity_type" : "drealty_listing",
         "deleted" : "0"

@@ -6,9 +6,6 @@
 class views_handler_ctrader_flag_int extends views_handler_field {
   public function query() {
     // do nothing -- to override the parent query.
-
-    $this->field_alias = $this->query->addField('field_old_price_value__torcond');
-    $this->field_alias = $this->query->addField('field_lp_dol__torcond');
   }
 
   public function option_definition() {
@@ -29,12 +26,15 @@ class views_handler_ctrader_flag_int extends views_handler_field {
   }
 
   public function render($values) {
-    // Render your content.
-    $flag = flag_get_flag('bookmarks');
-    if ( $flag->is_flagged($values->_entity_properties['search_api_id'], $GLOBALS['user']->uid) ) {
-      return FALSE;
-    } else {
-      return 'aaaaaaaaa';
+    global $user;
+
+    $flag = flag_get_flag('drealty_flag');
+    $flag_link = flag_create_link('drealty_flag', $values->_entity_properties['search_api_id']);
+    if ($flag->is_flagged($values->_entity_properties['search_api_id'], $user->uid)) {
+      return $flag_link;
+    }
+    else {
+      return $flag_link;
     }
   }
 }

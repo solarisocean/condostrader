@@ -7,6 +7,7 @@ dependencies[] = ctf_blocks_navigation
 dependencies[] = ctf_blocks_powered_by_drupal
 dependencies[] = ctf_configurations_drealty_connections
 dependencies[] = ctf_configurations_facet_api
+dependencies[] = ctf_configurations_flag
 dependencies[] = ctf_configurations_search_api
 dependencies[] = ctf_content_types_blog_post
 dependencies[] = ctf_content_types_condo

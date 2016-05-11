@@ -111,7 +111,6 @@ function ctf_configurations_search_api_default_search_api_index() {
         "field_municipality_code__torcond" : { "type" : "text" },
         "field_municipality_district__tor" : { "type" : "text" },
         "field_num_kit__torcond" : { "type" : "decimal" },
-        "field_old_price_value__torcond" : { "type" : "list\\u003Cdecimal\\u003E" },
         "field_outof_area__torcond" : { "type" : "text" },
         "field_parcel_id__torcond" : { "type" : "text" },
         "field_park_chgs__torcond" : { "type" : "decimal" },

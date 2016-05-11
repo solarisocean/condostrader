@@ -4215,6 +4215,68 @@ function ctf_content_types_toronto_condo_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'drealty_listing-toronto_condo-field_old_price_value_torcond'.
+  $field_instances['drealty_listing-toronto_condo-field_old_price_value_torcond'] = array(
+    'bundle' => 'toronto_condo',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 2,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_decimal',
+        'weight' => 238,
+      ),
+      'gallery' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'search' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'drealty' => array(
+      'hash_exclude' => 0,
+    ),
+    'entity_type' => 'drealty_listing',
+    'field_name' => 'field_old_price_value_torcond',
+    'label' => 'Old price value',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 239,
+    ),
+  );
+
+  // Exported field_instance:
   // 'drealty_listing-toronto_condo-field_outof_area__torcond'.
   $field_instances['drealty_listing-toronto_condo-field_outof_area__torcond'] = array(
     'bundle' => 'toronto_condo',

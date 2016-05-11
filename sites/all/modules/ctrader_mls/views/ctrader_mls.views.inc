@@ -19,7 +19,7 @@ function ctrader_mls_views_data() {
       'click sortable' => TRUE,
     ),
   );
-$stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
+
   return $data;
 }
 
