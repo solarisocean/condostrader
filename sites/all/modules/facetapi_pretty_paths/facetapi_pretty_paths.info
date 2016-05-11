@@ -18,4 +18,3 @@ version = "7.x-1.4"
 core = "7.x"
 project = "facetapi_pretty_paths"
 datestamp = "1427560985"
-

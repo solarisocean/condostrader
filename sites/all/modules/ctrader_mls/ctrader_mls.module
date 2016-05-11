@@ -334,14 +334,36 @@ function large_xml_import_finished($success, $results, $operations) {
 function ctrader_mls_field_attach_presave($entity_type, $entity) {
   switch ($entity_type) {
     case DREALTY_ENTITY_TYPE:
-      if ($entity->type == 'toronto_condo' && isset($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'])) {
-        $community = $entity->field_community__torcond[LANGUAGE_NONE][0]['value'] . ',';
-        $place = !empty($entity->field_addr__torcond[LANGUAGE_NONE][0]['value']) ? $entity->field_addr__torcond[LANGUAGE_NONE][0]['value'] : $community;
-        $entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'] = $place . ' ' . $entity->field_area__torcond[LANGUAGE_NONE][0]['value'] . ', ' . $entity->field_county__torcond[LANGUAGE_NONE][0]['value'] . ', Canada';
+      if ($entity->type == 'toronto_condo') {
+        if (isset($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'])) {
+          $community = $entity->field_community__torcond[LANGUAGE_NONE][0]['value'] . ',';
+          $place = !empty($entity->field_addr__torcond[LANGUAGE_NONE][0]['value']) ? $entity->field_addr__torcond[LANGUAGE_NONE][0]['value'] : $community;
+          $entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'] = $place . ' ' . $entity->field_area__torcond[LANGUAGE_NONE][0]['value'] . ', ' . $entity->field_county__torcond[LANGUAGE_NONE][0]['value'] . ', Canada';
+        }
       }
       break;
   }
 }
+
+
+/**
+ * Implements hook_entity_presave().
+ */
+function ctrader_mls_entity_presave($entity, $type) {
+  switch ($type) {
+    case DREALTY_ENTITY_TYPE:
+      if ($entity->type == 'toronto_condo') {
+        if (isset($entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value'])) {
+          $key = count($entity->field_old_price_value__torcond[LANGUAGE_NONE]);
+          if (empty($key) || $entity->field_old_price_value__torcond[LANGUAGE_NONE][$key - 1]['value'] != $entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value']) {
+            $entity->field_old_price_value__torcond[LANGUAGE_NONE][$key]['value'] = $entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value'];
+          }
+        }
+      }
+      break;
+  }
+}
+
 
 /**
  * Implements hook_form_alter().
@@ -358,4 +380,15 @@ function ctrader_mls_form_alter(&$form, &$form_state, $form_id) {
       }
       break;
   }
+}
+
+
+/**
+ * Implements hook_views_api().
+ */
+function ctrader_mls_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'ctrader_mls') . '/views',
+  );
 }
