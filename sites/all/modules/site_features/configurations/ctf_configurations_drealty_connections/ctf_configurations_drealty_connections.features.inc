@@ -7969,50 +7969,6 @@ function ctf_configurations_drealty_connections_default_drealty_connection_entit
           "bundle" : "toronto_condo",
           "deleted" : "0"
         },
-        "field_old_price_value_torcond" : {
-          "label" : "Old price value",
-          "widget" : {
-            "weight" : "239",
-            "type" : "number",
-            "module" : "number",
-            "active" : 0,
-            "settings" : []
-          },
-          "settings" : {
-            "min" : "",
-            "max" : "",
-            "prefix" : "",
-            "suffix" : "",
-            "user_register_form" : false
-          },
-          "display" : {
-            "default" : {
-              "label" : "above",
-              "type" : "number_decimal",
-              "settings" : {
-                "thousand_separator" : "",
-                "decimal_separator" : ".",
-                "scale" : 2,
-                "prefix_suffix" : true
-              },
-              "module" : "number",
-              "weight" : 238
-            },
-            "search" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 },
-            "list" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 },
-            "gallery" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 }
-          },
-          "required" : 0,
-          "description" : "",
-          "drealty" : { "hash_exclude" : 0 },
-          "default_value" : null,
-          "id" : "540",
-          "field_id" : "526",
-          "field_name" : "field_old_price_value_torcond",
-          "entity_type" : "drealty_listing",
-          "bundle" : "toronto_condo",
-          "deleted" : "0"
-        },
         "field_old_price_value__torcond" : {
           "default_value" : null,
           "description" : "",
@@ -13172,27 +13128,6 @@ function ctf_configurations_drealty_connections_default_drealty_connection_entit
         "cardinality" : "1",
         "deleted" : "0",
         "columns" : { "value" : { "type" : "int", "not null" : false } }
-      },
-      "field_old_price_value_torcond" : {
-        "translatable" : "0",
-        "entity_types" : [ "drealty_listing" ],
-        "settings" : { "precision" : "10", "scale" : "2", "decimal_separator" : "." },
-        "foreign keys" : [],
-        "indexes" : [],
-        "field_name" : "field_old_price_value_torcond",
-        "type" : "number_decimal",
-        "module" : "number",
-        "active" : "1",
-        "locked" : "0",
-        "cardinality" : "-1",
-        "deleted" : "0",
-        "columns" : { "value" : {
-            "type" : "numeric",
-            "precision" : "10",
-            "scale" : "2",
-            "not null" : false
-          }
-        }
       },
       "field_old_price_value__torcond" : {
         "entity_types" : [ "drealty_listing" ],
