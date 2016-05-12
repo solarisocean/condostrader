@@ -5,7 +5,15 @@
  * Implements hook_init().
  */
 function ctrader_saf_init() {
-$stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
+
+}
+
+
+/**
+ * Implements hook_js_alter().
+ */
+function ctrader_saf_js_alter(&$javascript) {
+
 }
 
 
@@ -31,8 +39,104 @@ function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
     $form['sort_bef_combine']['#default_value'] = '';
   }
   if ($form_id == 'search_api_ranges_block_slider_view_form_field_sqft_range_max__torcond') {
-    $form['range-min']['#value'] = 0;
-    $form_state['build_info']['args'][0]['min'] = 0;
+//    $form['range-min']['#value'] = 0;
+//    $form_state['build_info']['args'][0]['min'] = 0;
+  }
+  if ($form_id == 'search_api_ranges_block_slider_view_form_field_lp_dol__torcond' || $form_id == 'search_api_ranges_block_slider_view_form_field_sqft_range_max__torcond') {
+    $form['#submit'] = array();
+    $form['submit']['#ajax'] = array(
+      'callback' => '_ctrader_saf_range_ajax_form_submit',
+      'effect' => 'fade',
+    );
+    foreach ($form['#attached']['js'] as $key => $value) {
+      if (is_string($value) && strpos($value, '/search_api_ranges/search_api_ranges.js')) {
+        $form['#attached']['js'][$key] = drupal_get_path('module', 'ctrader_saf') . '/js/rewritten_search_api_ranges.js';
+      }
+    }
+  }
+}
+
+
+/**
+ * Rewrites default submit function for facet range form (field_lp_dol__torcond).
+ *
+ * @param $form
+ * @param $form_state
+ */
+function _ctrader_saf_range_ajax_form_submit($form, &$form_state) {
+  $values = $form_state['values'];
+  $range_field = $form_state['input']['range-field'];
+
+  // Prepare params and existing filter $pos (if any)
+  $params = drupal_get_query_parameters($_GET, array('q', 'page'));
+
+  // Get pretty path path and goto()
+  if (drupal_multilingual() && variable_get('locale_language_negotiation_url_part') == LOCALE_LANGUAGE_NEGOTIATION_URL_PREFIX) {
+    list($language, $path) = language_url_split_prefix(request_path(), language_list());
+    $language = $language ? $language : NULL;
+  }
+  else {
+    $path = request_path();
+    $language = NULL;
+  }
+  if (module_exists('facetapi_pretty_paths')) {
+    $exists = FALSE;
+    $split_path = explode('/', $path);
+    foreach ($split_path as $key => $value) {
+      if ($value == $range_field) {
+        $exists = $split_path[$key + 1];
+      }
+    }
+
+    // Decision: replace existing range or add new
+    $new_range = '[' . $values['range-from'] . ' TO ' . $values['range-to'] . ']';
+    if ($exists) {
+      $path = str_replace($exists, $new_range, $path);
+    }
+    else {
+      $path .= '/' . $range_field . '/' . $new_range;
+    }
+
+    // Unset non-pretty query
+    unset($params['f']);
+  }
+  else {
+    // Not pretty path logic
+    $query = $range_field . ':' . '[' . $values['range-from'] . ' TO ' . $values['range-to'] . ']';
+
+    $pos = -1;
+    if (isset($params['f'])) {
+      foreach ($params['f'] as $key => $param) {
+        if (strpos($param, $range_field . ':') !== FALSE) {
+          $pos = $key;
+        }
+      }
+    }
+
+    if ($pos != -1) {
+      $params['f'][$pos] = $query;
+    }
+    else {
+      $params['f'][] = $query;
+    }
+  }
+
+  /************************* added code ************************************/
+//  unset($_SESSION['search_link_calculate']);
+  if (isset($_SESSION['search_link_calculate']['f'])) {
+    $not_in_search_query = TRUE;
+    foreach ($_SESSION['search_link_calculate']['f'] as $key => $value) {
+      if (strpos($value, $range_field) !== FALSE) {
+        $_SESSION['search_link_calculate']['f'][$key] = $query;
+        $not_in_search_query = FALSE;
+      }
+    }
+    if ($not_in_search_query) {
+      $_SESSION['search_link_calculate']['f'][] = $query;
+    }
+  }
+  else {
+    $_SESSION['search_link_calculate']['f'][] = $query;
   }
 }
 
@@ -42,7 +146,7 @@ function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
  */
 function ctrader_saf_search_api_ranges_minmax_alter(&$variables, &$order) {
   if ($variables['range_field'] == 'field_sqft_range_max__torcond') {
-    $stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
+
   }
 }
 
@@ -232,7 +336,6 @@ function ctrader_saf_block_info() {
   $blocks = array();
   $blocks['search_button'] = array(
     'info' => t('Custom block: Search button form'),
-//    'cache' => DRUPAL_NO_CACHE,
   );
   return $blocks;
 }
@@ -250,7 +353,6 @@ function ctrader_saf_block_view($delta = '') {
 
 
 function _ctrader_saf_search_button_form($form, &$form_state) {
-//  $form = array();
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Search'),
@@ -263,7 +365,10 @@ function _ctrader_saf_search_button_form($form, &$form_state) {
 function _ctrader_saf_search_button_form_submit($form, &$form_state) {
 //  $query = drupal_http_build_query($_SESSION['search_link_calculate']['f'],'f');
   $path = '/results';
-  $url = url($path, array('query' => $_SESSION['search_link_calculate'], 'absolute' => TRUE));
+  $url = url($path, array(
+    'query' => $_SESSION['search_link_calculate'],
+    'absolute' => TRUE
+  ));
   unset($_SESSION['search_link_calculate']);
   $form_state['redirect'] = $url;
 }

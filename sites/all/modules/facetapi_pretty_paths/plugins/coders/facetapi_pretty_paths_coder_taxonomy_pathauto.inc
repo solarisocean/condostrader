@@ -46,7 +46,7 @@ class FacetApiPrettyPathsCoderTaxonomyPathauto extends FacetApiPrettyPathsCoderD
    */
   public function decodePathSegmentValue(array $args) {
     $voc_alias = $this->getVocabularyPathAlias($args['facet'], $args['adapter']);
-    if ($voc_alias) {
+    if ($voc_alias && $args['value'] != '!') {
       // Rebuild the term alias, get the source (taxonomy/term/[term:tid]) and
       // extract the term id.
       $source = drupal_lookup_path('source', $voc_alias . '/' . $args['value']);
