@@ -334,6 +334,10 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
       unset($build['N']);
       $build['Y']['#markup'] = t('Require Parking');
       break;
+    case 'field_s_r__torcond':
+      $build['Lease']['#markup'] = t('For rent');
+      $build['Sale']['#markup'] = t('For sale');
+      break;
   }
 }
 
