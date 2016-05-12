@@ -39,6 +39,7 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
     'default_true' => '1',
     'facet_search_ids' => array(),
     'exclude' => 0,
+    'pretty_paths_alias' => 'field_br__torcond',
   );
   $export['search_api@toronto_condo_index::field_br__torcond'] = $facet;
 
@@ -271,6 +272,7 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
     'default_true' => '1',
     'facet_search_ids' => array(),
     'exclude' => 0,
+    'pretty_paths_alias' => 'field_lp_dol__torcond',
   );
   $export['search_api@toronto_condo_index::field_lp_dol__torcond'] = $facet;
 
@@ -1299,7 +1301,7 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
   $facet->enabled = TRUE;
   $facet->settings = array(
     'weight' => 0,
-    'widget' => 'facetapi_links',
+    'widget' => 'facetapi_checkbox_links',
     'filters' => array(
       'exclude_items' => array(
         'status' => 0,
@@ -1332,7 +1334,6 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
       'count' => 0,
       'display' => 0,
       'natural' => 0,
-      'random' => 0,
     ),
     'sort_weight' => array(
       'active' => '-50',
@@ -1340,7 +1341,6 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
       'display' => '-48',
       'natural' => '0',
       'indexed' => '0',
-      'random' => '0',
     ),
     'sort_order' => array(
       'active' => '3',
@@ -1348,7 +1348,6 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
       'display' => '4',
       'natural' => '4',
       'indexed' => '4',
-      'random' => '4',
     ),
     'empty_behavior' => 'none',
     'facet_more_text' => 'Show more',
@@ -1446,6 +1445,16 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
     'regex' => 0,
     'show_minimum_items' => 2,
     'rewrite_items' => 1,
+    'checkboxes_update_results' => 1,
+    'checkboxes_show_reset_link' => 0,
+    'selectbox_update_results' => 1,
+    'selectbox_show_reset_link' => 0,
+    'links_update_results' => 1,
+    'links_show_reset_link' => 0,
+    'ranges_update_results' => 1,
+    'ranges_show_reset_link' => 0,
+    'update_results' => 0,
+    'show_reset_link' => 0,
   );
   $export['search_api@toronto_condo_index:block:field_br__torcond'] = $facet;
 
@@ -4017,7 +4026,6 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
       'display' => 'display',
       'natural' => 0,
       'indexed' => 0,
-      'random' => 0,
     ),
     'sort_weight' => array(
       'active' => '-50',
@@ -4025,7 +4033,6 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
       'display' => '-48',
       'natural' => '0',
       'indexed' => '0',
-      'random' => '0',
     ),
     'sort_order' => array(
       'active' => '3',
@@ -4033,7 +4040,6 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
       'display' => '4',
       'natural' => '4',
       'indexed' => '4',
-      'random' => '4',
     ),
     'empty_behavior' => 'none',
     'facet_more_text' => 'Show more',
@@ -4041,11 +4047,11 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
     'soft_limit' => '20',
     'nofollow' => 1,
     'show_expanded' => 0,
-    'name' => 'test',
+    'name' => 'Price',
     'prefix' => '$',
     'suffix' => '',
-    'auto-submit-delay' => '1500',
-    'slider-step' => '1000',
+    'auto-submit-delay' => '10',
+    'slider-step' => '100',
     'round-precision' => '100',
     'range_simple' => 10,
     'range_advanced' => '',
@@ -4127,6 +4133,16 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
     'keep_open' => 0,
     'expand' => 1,
     'collapsible_children' => 0,
+    'checkboxes_update_results' => 1,
+    'checkboxes_show_reset_link' => 0,
+    'selectbox_update_results' => 1,
+    'selectbox_show_reset_link' => 0,
+    'links_update_results' => 1,
+    'links_show_reset_link' => 0,
+    'ranges_update_results' => 1,
+    'ranges_show_reset_link' => 0,
+    'update_results' => 0,
+    'show_reset_link' => 0,
   );
   $export['search_api@toronto_condo_index:block:field_lp_dol__torcond'] = $facet;
 
@@ -8274,7 +8290,7 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
   $facet->enabled = TRUE;
   $facet->settings = array(
     'weight' => 0,
-    'widget' => 'facetapi_links',
+    'widget' => 'facetapi_checkbox_links',
     'filters' => array(
       'exclude_items' => array(
         'status' => 0,
@@ -8307,7 +8323,6 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
       'count' => 0,
       'display' => 0,
       'natural' => 0,
-      'random' => 0,
     ),
     'sort_weight' => array(
       'active' => '-50',
@@ -8315,7 +8330,6 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
       'display' => '-48',
       'natural' => '0',
       'indexed' => '0',
-      'random' => '0',
     ),
     'sort_order' => array(
       'active' => '3',
@@ -8323,7 +8337,6 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
       'display' => '4',
       'natural' => '4',
       'indexed' => '3',
-      'random' => '4',
     ),
     'empty_behavior' => 'none',
     'facet_more_text' => 'Show more',
@@ -8421,6 +8434,16 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
     'regex' => 0,
     'show_minimum_items' => 2,
     'rewrite_items' => 1,
+    'checkboxes_update_results' => 1,
+    'checkboxes_show_reset_link' => 0,
+    'selectbox_update_results' => 1,
+    'selectbox_show_reset_link' => 0,
+    'links_update_results' => 1,
+    'links_show_reset_link' => 0,
+    'ranges_update_results' => 1,
+    'ranges_show_reset_link' => 0,
+    'update_results' => 0,
+    'show_reset_link' => 0,
   );
   $export['search_api@toronto_condo_index:block:field_s_r__torcond'] = $facet;
 
@@ -8846,7 +8869,6 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
       'display' => 'display',
       'natural' => 0,
       'indexed' => 0,
-      'random' => 0,
     ),
     'sort_weight' => array(
       'active' => '-50',
@@ -8854,7 +8876,6 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
       'display' => '-48',
       'natural' => '0',
       'indexed' => '0',
-      'random' => '0',
     ),
     'sort_order' => array(
       'active' => '3',
@@ -8862,7 +8883,6 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
       'display' => '4',
       'natural' => '4',
       'indexed' => '4',
-      'random' => '4',
     ),
     'empty_behavior' => 'none',
     'facet_more_text' => 'Show more',
@@ -8936,8 +8956,8 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
     'suffix' => '',
     'precision' => '0',
     'step' => '1',
-    'name' => '',
-    'auto-submit-delay' => '2500',
+    'name' => 'test_sqft',
+    'auto-submit-delay' => '50',
     'slider-step' => '50',
     'round-precision' => '0',
     'range_simple' => 10,
@@ -8956,6 +8976,16 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
       'value' => '',
       'format' => 'filtered_html',
     ),
+    'checkboxes_update_results' => 1,
+    'checkboxes_show_reset_link' => 0,
+    'selectbox_update_results' => 1,
+    'selectbox_show_reset_link' => 0,
+    'links_update_results' => 1,
+    'links_show_reset_link' => 0,
+    'ranges_update_results' => 1,
+    'ranges_show_reset_link' => 0,
+    'update_results' => 0,
+    'show_reset_link' => 0,
   );
   $export['search_api@toronto_condo_index:block:field_sqft_range_max__torcond'] = $facet;
 
