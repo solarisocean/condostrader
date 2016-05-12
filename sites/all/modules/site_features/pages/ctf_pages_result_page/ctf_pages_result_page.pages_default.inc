@@ -479,6 +479,29 @@ function ctf_pages_result_page_default_page_manager_pages() {
     $display->content['new-c0124519-b023-4272-89b7-df48f5d11a05'] = $pane;
     $display->panels['one'][3] = 'new-c0124519-b023-4272-89b7-df48f5d11a05';
     $pane = new stdClass();
+    $pane->pid = 'new-d9fdae34-4eb7-4362-88d8-4467edfc86c3';
+    $pane->panel = 'one';
+    $pane->type = 'block';
+    $pane->subtype = 'ctrader_saf-ctrader_search_button';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 4;
+    $pane->locks = array();
+    $pane->uuid = 'd9fdae34-4eb7-4362-88d8-4467edfc86c3';
+    $display->content['new-d9fdae34-4eb7-4362-88d8-4467edfc86c3'] = $pane;
+    $display->panels['one'][4] = 'new-d9fdae34-4eb7-4362-88d8-4467edfc86c3';
+    $pane = new stdClass();
     $pane->pid = 'new-becfc96e-e43e-4943-9152-626b61c8bb95';
     $pane->panel = 'status';
     $pane->type = 'block';
