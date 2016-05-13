@@ -126,16 +126,8 @@ Drupal.facetapi.makeCheckbox = function() {
       redirect = new Drupal.facetapi.Redirect(href);
 
   checkbox.click(function (e) {
-    jQuery.ajax({
-      type: "POST",
-      url: "/search-link-calculate",
-      data: href,
-      success: function(msg){
-        //alert( "Data Saved: " + msg );
-      }
-    });
-    //Drupal.facetapi.disableFacet($link.parents('ul.facetapi-facetapi-checkbox-links'));
-    //redirect.gotoHref();
+    Drupal.facetapi.disableFacet($link.parents('ul.facetapi-facetapi-checkbox-links'));
+    redirect.gotoHref();
   });
 
   if (active) {

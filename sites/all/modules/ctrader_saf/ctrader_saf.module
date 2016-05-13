@@ -13,7 +13,12 @@ function ctrader_saf_init() {
  * Implements hook_js_alter().
  */
 function ctrader_saf_js_alter(&$javascript) {
-
+  $current_path = current_path();
+  if ($current_path == 'main-page' || $current_path == '' || $current_path == 'results') {
+    if (isset($javascript['sites/all/modules/facetapi/facetapi.js']) && isset($javascript['sites/all/modules/ctrader_saf/js/rewritten_search_api_ranges.js'])) {
+      unset($javascript['sites/all/modules/facetapi/facetapi.js']);
+    }
+  }
 }
 
 
@@ -367,6 +372,9 @@ function _ctrader_saf_search_button_form($form, &$form_state) {
     '#type' => 'submit',
     '#value' => t('Search'),
 //    '#disabled' => TRUE,
+  );
+  $form['#attached']['js'] = array(
+    drupal_get_path('module', 'ctrader_saf') . '/js/rewritten_facetapi.js',
   );
   return $form;
 }
