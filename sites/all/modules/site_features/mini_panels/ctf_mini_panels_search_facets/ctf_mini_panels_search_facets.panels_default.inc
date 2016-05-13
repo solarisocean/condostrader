@@ -167,8 +167,8 @@ function ctf_mini_panels_search_facets_default_panels_mini() {
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 1,
-      'override_title_text' => 'Locker:',
-      'override_title_heading' => 'h5',
+      'override_title_text' => '',
+      'override_title_heading' => 'span',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -282,7 +282,7 @@ function ctf_mini_panels_search_facets_default_panels_mini() {
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 1,
-      'override_title_text' => 'City region',
+      'override_title_text' => 'Region:',
       'override_title_heading' => 'h5',
     );
     $pane->cache = array();
@@ -396,7 +396,7 @@ function ctf_mini_panels_search_facets_default_panels_mini() {
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'override_title' => 0,
+      'override_title' => 1,
       'override_title_text' => '',
       'override_title_heading' => 'h2',
     );
