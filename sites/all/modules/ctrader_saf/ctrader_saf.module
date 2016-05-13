@@ -5,7 +5,7 @@
  * Implements hook_init().
  */
 function ctrader_saf_init() {
-
+  drupal_add_css(drupal_get_path('module', 'ctrader_saf') . '/css/ctrader_saf.css');
 }
 
 
@@ -307,9 +307,9 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
       $all_link_path = $adapter->getFacetPath($facet, $item_values, TRUE);
       $all_link_query = $adapter->getQueryString($facet, $item_values, TRUE);
       $build['any'] = array(
-        '#markup' => t('Any'),
+        '#markup' => l(t('Any'), ''),
         '#path' => $all_link_path,
-        '#html' => FALSE,
+        '#html' => TRUE,
         '#count' => NULL,
         '#indexed_value' => 0,
         '#active' => $is_all_link_active,
@@ -325,6 +325,9 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
     case 'field_s_r__torcond':
       $build['Lease']['#markup'] = t('For rent');
       $build['Sale']['#markup'] = t('For sale');
+
+      // Makes this item active on page load.
+      $build['Sale']['#active'] = TRUE;
       break;
   }
 }
@@ -359,6 +362,7 @@ function ctrader_saf_block_view($delta = '') {
     $block['subject'] = t('Block with search button for facet search');
     if (isset($_SESSION['search_link_calculate'])) {
       unset($_SESSION['search_link_calculate']);
+      $_SESSION['search_link_calculate']['f'][] = 'field_s_r__torcond:Sale';
     }
   }
   return $block;
@@ -393,6 +397,9 @@ function _ctrader_saf_search_button_form_submit($form, &$form_state) {
 
 
 function _ctrader_saf_search_link_calculate_page_callback() {
+
+  // todo Normal logic for sale-lease facet and for beds facet
+
 //  unset($_SESSION['search_link_calculate']);
   if (!isset($_SESSION['search_link_calculate']['f'])) {
     $_SESSION['search_link_calculate']['f'] = array();
