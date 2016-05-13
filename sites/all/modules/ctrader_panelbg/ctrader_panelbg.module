@@ -14,10 +14,3 @@ function ctrader_panelbg_ctools_plugin_directory($module, $plugin) {
     return 'plugins/' . $plugin;
   }
 }
-
-/**
- * Implements hook_js_alter().
- */
-function ctrader_panelbg_js_alter(&$javascript) {
-//  unset($javascript['sites/all/modules/facetapi_select/js/facetapi_select.js']);
-}

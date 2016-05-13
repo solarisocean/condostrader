@@ -100,4 +100,53 @@
         }
     };
 
+    /**
+     * Make facets checkboxes like radiobutton.
+     */
+    Drupal.behaviors.facetFix = {
+        attach: function (context, settings) {
+
+            var checkRadio = function(elem) {
+                elem.each(function () {
+                   if($(this).attr('checked')) {
+                       $(this).parent().addClass('active-region-facet');
+                   }
+                });
+
+                elem.on('click', function() {
+                    elem.attr("checked", false).parent().removeClass('active-region-facet');
+                    $(this).attr("checked", true).parent().addClass('active-region-facet');
+                });
+
+                elem.parent().find('a').on('click', function(e) {
+                    e.preventDefault();
+                    elem.attr('disabled', false).parent().removeClass('facetapi-inactive');
+                    elem.closest('ul').removeClass('facetapi-disabled');
+                    elem.attr("checked", false).parent().removeClass('active-region-facet');
+                    $(this).parent().find('input:checkbox').attr("checked", true).parent().addClass('active-region-facet');
+                });
+            };
+
+            checkRadio($('#facetapi-facet-search-apitoronto-condo-index-block-field-s-r-torcond input:checkbox'));
+            checkRadio($('#facetapi-facet-search-apitoronto-condo-index-block-field-br-torcond input:checkbox'));
+
+            $('.facetapi-facet-field-locker--torcond a, .facetapi-facet-field-prkg-inc--torcond a, .facetapi-facet-field-pets--torcond a').on('click', function (e) {
+                var chbxInput = $(this).parent().find('input');
+
+                e.preventDefault();
+                var _this = $(this);
+                $(this).closest('.facetapi-facetapi-checkbox-links').removeClass('facetapi-disabled');
+                chbxInput.attr('disabled', false).parent();
+                if (chbxInput.attr('checked')) {
+                    _this.removeClass('checked-facet');
+                    chbxInput.removeAttr('checked');
+                }
+                else {
+                    _this.addClass('checked-facet');
+                    chbxInput.attr('checked', true);
+                }
+            })
+        }
+    };
+
 })(jQuery, Drupal);
