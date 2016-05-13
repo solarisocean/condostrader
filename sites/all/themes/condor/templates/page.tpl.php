@@ -140,8 +140,6 @@
 
       <a id="main-content"></a>
 
-      <?php if ($breadcrumb): print $breadcrumb; endif; ?>
-
       <?php if ($title): ?>
         <?php print render($title_prefix); ?>
         <h1 id="page-title" class="title element-invisible"><?php print $title; ?></h1>
