@@ -30,7 +30,7 @@ function ctrader_saf_menu() {
   $items['search-link-calculate'] = array(
     'title' => 'Search link calculating page',
     'page callback' => '_ctrader_saf_search_link_calculate_page_callback',
-    'access arguments' => array('administer modules'),
+    'access callback' => TRUE,
   );
   return $items;
 }
@@ -405,7 +405,12 @@ function _ctrader_saf_search_link_calculate_page_callback() {
     }
   }
   if ($set_search_option) {
-    $_SESSION['search_link_calculate']['f'][] = $_POST['/main-page?f'][0];
+    if (isset($_POST['/main-page?f'][0])) {
+      $_SESSION['search_link_calculate']['f'][] = $_POST['/main-page?f'][0];
+    }
+    elseif (isset($_POST['/results?f'][0])) {
+      $_SESSION['search_link_calculate']['f'][] = $_POST['/results?f'][0];
+    }
   }
   sort($_SESSION['search_link_calculate']['f']);
   return t('page not for viewing');
