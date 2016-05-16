@@ -220,86 +220,90 @@ function ctrader_map_block_info() {
  * Implements hook_block_view().
  */
 function ctrader_map_block_view($delta = '') {
-  $server = search_api_server_load('solr_server');
+  $block = array();
 
-  if (isset($_SESSION['query_from_view'])) {
-    $query = unserialize($_SESSION['query_from_view']);
-    $query->setOption('limit', NULL);
-    $query->setOption('query_label', 'search_on_map');
-    $query->fields(array());
+  switch ($delta) {
+    case 'main_map':
+      $server = search_api_server_load('solr_server');
+
+      if (isset($_SESSION['query_from_view'])) {
+        $query = unserialize($_SESSION['query_from_view']);
+        $query->setOption('limit', NULL);
+        $query->setOption('query_label', 'search_on_map');
+        $query->fields(array());
 //    unset($_SESSION['query_from_view']);
-  }
-  else {
-    $index = search_api_index_load('toronto_condo_index');
-    $query = new SearchApiQuery($index);
-    $query->keys();
-    $query->fields(array());
+      }
+      else {
+        $index = search_api_index_load('toronto_condo_index');
+        $query = new SearchApiQuery($index);
+        $query->keys();
+        $query->fields(array());
 //    $query->range(0, 150);
-  }
+      }
 
-  $solr = new SearchApiSolrService($server);
-  $result = $solr->search($query);
+      $solr = new SearchApiSolrService($server);
+      $result = $solr->search($query);
 
-  $condos_neighbourhood_names = array();
-  $array_json = array();
-  foreach ($result['results'] as $key => $item) {
-    if (!empty($item['fields']['field_test_geofilld:latlon'])) {
-      $coord = explode(',', $item['fields']['field_test_geofilld:latlon']);
-    }
-    else {
-      // Toronto City default coordinates.
-      $coord = array(
-        '43.76',
-        '-79.39'
-      );
-    }
-    $popup_content = '';
-    $popup_content .= 'id: ' . $item['fields']['search_api_id'] . '<br>MLS #: ' . $item['fields']['field_ml_num__torcond'][0];
-    if (!empty($item['fields']['field_addr__torcond'][0])) {
-      $popup_content .= '<br>' . $item['fields']['field_addr__torcond'][0];
-    }
-    if (!empty($item['fields']['field_lp_dol__torcond'])) {
-      $popup_content .= '<br>$' . $item['fields']['field_lp_dol__torcond'];
-    }
-    if (!empty($item['fields']['field_community__torcond'][0])) {
-      $popup_content .= '<br>' . $item['fields']['field_community__torcond'][0];
-    }
+      $condos_neighbourhood_names = array();
+      $array_json = array();
+      foreach ($result['results'] as $key => $item) {
+        if (!empty($item['fields']['field_test_geofilld:latlon'])) {
+          $coord = explode(',', $item['fields']['field_test_geofilld:latlon']);
+        }
+        else {
+          // Toronto City default coordinates.
+          $coord = array(
+            '43.76',
+            '-79.39'
+          );
+        }
+        $popup_content = '';
+        $popup_content .= 'id: ' . $item['fields']['search_api_id'] . '<br>MLS #: ' . $item['fields']['field_ml_num__torcond'][0];
+        if (!empty($item['fields']['field_addr__torcond'][0])) {
+          $popup_content .= '<br>' . $item['fields']['field_addr__torcond'][0];
+        }
+        if (!empty($item['fields']['field_lp_dol__torcond'])) {
+          $popup_content .= '<br>$' . $item['fields']['field_lp_dol__torcond'];
+        }
+        if (!empty($item['fields']['field_community__torcond'][0])) {
+          $popup_content .= '<br>' . $item['fields']['field_community__torcond'][0];
+        }
 
-    $prepared = array(
-      'id' => $item['id'],
-      'type' => 'Feature',
-      'properties' => array(
-        'name' => !empty($item['fields']['field_addr__torcond'][0]) ? $item['fields']['field_addr__torcond'][0] : 'Condo',
-        'popupContent' => $popup_content,
-      ),
-      'geometry' => array(
-        'type' => 'Point',
-        'coordinates' => is_array($coord) ? array(
-          (float) $coord[1],
-          (float) $coord[0]
-        ) : '',
-      ),
-    );
-    $array_json[] = $prepared;
+        $prepared = array(
+          'id' => $item['id'],
+          'type' => 'Feature',
+          'properties' => array(
+            'name' => !empty($item['fields']['field_addr__torcond'][0]) ? $item['fields']['field_addr__torcond'][0] : 'Condo',
+            'popupContent' => $popup_content,
+          ),
+          'geometry' => array(
+            'type' => 'Point',
+            'coordinates' => is_array($coord) ? array(
+              (float) $coord[1],
+              (float) $coord[0]
+            ) : '',
+          ),
+        );
+        $array_json[] = $prepared;
 
-    if (!empty($item['fields']['field_community__torcond'][0]) && !in_array($item['fields']['field_community__torcond'][0], $condos_neighbourhood_names)) {
-      $condos_neighbourhood_names[] = $item['fields']['field_community__torcond'][0];
-    }
-    sort($condos_neighbourhood_names);
-  }
-  drupal_add_js(array('condosMapData' => $array_json), 'setting');
-  _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names, $array_json);
+        if (!empty($item['fields']['field_community__torcond'][0]) && !in_array($item['fields']['field_community__torcond'][0], $condos_neighbourhood_names)) {
+          $condos_neighbourhood_names[] = $item['fields']['field_community__torcond'][0];
+        }
+        sort($condos_neighbourhood_names);
+      }
+      drupal_add_js(array('condosMapData' => $array_json), 'setting');
+      _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names, $array_json);
 
-  $path = libraries_get_path('leaflet');
-  drupal_add_js($path . '/leaflet-src.js');
-  drupal_add_css($path . '/leaflet.css');
+      $path = libraries_get_path('leaflet');
+      drupal_add_js($path . '/leaflet-src.js');
+      drupal_add_css($path . '/leaflet.css');
 
-  $path = libraries_get_path('Leaflet.draw');
-  drupal_add_js($path . '/dist/leaflet.draw.js');
-  drupal_add_css($path . '/dist/leaflet.draw.css');
+      $path = libraries_get_path('Leaflet.draw');
+      drupal_add_js($path . '/dist/leaflet.draw.js');
+      drupal_add_css($path . '/dist/leaflet.draw.css');
 
 
-  // another draw tools.
+      // another draw tools.
 //  $path = libraries_get_path('ConcaveHull');
 //  drupal_add_js($path . '/dist/concavehull.js');
 //  $path = libraries_get_path('d3');
@@ -312,16 +316,17 @@ function ctrader_map_block_view($delta = '') {
 //  drupal_add_js($path . '/js/neighbourhood-json.js');
 
 
-  $path = libraries_get_path('leaflet_markercluster');
-  drupal_add_css($path . '/dist//dist/MarkerCluster.css');
-  drupal_add_css($path . '/dist/MarkerCluster.Default.css');
-  drupal_add_js($path . '/dist/leaflet.markercluster.js');
+      $path = libraries_get_path('leaflet_markercluster');
+      drupal_add_css($path . '/dist//dist/MarkerCluster.css');
+      drupal_add_css($path . '/dist/MarkerCluster.Default.css');
+      drupal_add_js($path . '/dist/leaflet.markercluster.js');
 
-  drupal_add_js(drupal_get_path('module', 'ctrader_map') . '/js/custom_map.js');
+      drupal_add_js(drupal_get_path('module', 'ctrader_map') . '/js/custom_map.js');
 
-  $block = array();
-  $block['content'] = '<div id="mapid" style="height:750px;"></div>';
-  $block['subject'] = 'Block with main map';
+      $block['subject'] = 'Block with main map';
+      $block['content'] = '<div id="mapid" style="height:750px;"></div>';
+      break;
+  }
   return $block;
 }
 
