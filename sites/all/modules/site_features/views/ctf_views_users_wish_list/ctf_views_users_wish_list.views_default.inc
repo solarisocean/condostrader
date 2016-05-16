@@ -30,6 +30,12 @@ function ctf_views_users_wish_list_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
+  /* No results behavior: Global: Unfiltered text */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = 'You are not authorized to view this page (users wishlist)';
   /* Relationship: Flags: drealty_flag */
   $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
   $handler->display->display_options['relationships']['flag_content_rel']['table'] = 'drealty_listing';
@@ -78,10 +84,17 @@ function ctf_views_users_wish_list_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'drealty_listing';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = 'toronto_condo';
+  /* Filter criterion: Flags: User uid */
+  $handler->display->display_options['filters']['uid']['id'] = 'uid';
+  $handler->display->display_options['filters']['uid']['table'] = 'flagging';
+  $handler->display->display_options['filters']['uid']['field'] = 'uid';
+  $handler->display->display_options['filters']['uid']['relationship'] = 'flag_content_rel';
+  $handler->display->display_options['filters']['uid']['operator'] = 'not empty';
+  $handler->display->display_options['filters']['uid']['value'] = '';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page_1');
-  $handler->display->display_options['path'] = 'user/%/wish-list';
+  $handler->display->display_options['path'] = 'user/wishlist';
   $export['flaged_condos_'] = $view;
 
   return $export;

@@ -33,6 +33,10 @@ class views_handler_ctrader_flag_int extends views_handler_field {
     if ($flag->is_flagged($values->_entity_properties['search_api_id'], $user->uid)) {
       return $flag_link;
     }
+    elseif (user_is_anonymous()) {
+//      return '<a class="colorbox-inline flag-anonymous" href="?width=500&height=500&inline=true#user-login-form">Anonymous</a>';
+      return NULL;
+    }
     else {
       return $flag_link;
     }
