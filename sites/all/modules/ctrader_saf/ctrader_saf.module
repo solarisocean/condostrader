@@ -282,17 +282,10 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
           case $replace_this_facet:
             $build[$replace_this_facet]["#markup"] = t('Pets Allowed');
             break;
-          // Remove this facet item.
-//          case 'restrict':
-//            unset($build[$key]);
-//            break;
           case 'N':
             unset($build[$key]);
           default;
         }
-//        if ($key != 'none' && strrpos($key, '+') === FALSE) {
-//          $replaced_facet_count_number += isset($item['#count']) ? $item['#count'] : 0;
-//        }
       }
       break;
     case 'field_br__torcond':
@@ -357,15 +350,28 @@ function ctrader_saf_block_info() {
  */
 function ctrader_saf_block_view($delta = '') {
   $block = array();
-  if ($delta == 'ctrader_search_button') {
-    $block['content'] = drupal_get_form('_ctrader_saf_search_button_form');
-    $block['subject'] = t('Block with search button for facet search');
-    if (isset($_SESSION['search_link_calculate'])) {
-      unset($_SESSION['search_link_calculate']);
-      $_SESSION['search_link_calculate']['f'][] = 'field_s_r__torcond:Sale';
-    }
+  switch ($delta) {
+    case 'ctrader_search_button':
+      $block['subject'] = t('Block with search button for facet search');
+      $block['content'] = _ctrader_saf_blocks_content_function($delta);
+
+      break;
   }
   return $block;
+}
+
+function _ctrader_saf_blocks_content_function($delta) {
+  switch ($delta) {
+    case 'ctrader_search_button':
+      $alias = drupal_get_path_alias();
+      if ($alias == 'main-page') {
+        if (isset($_SESSION['search_link_calculate'])) {
+          unset($_SESSION['search_link_calculate']);
+        }
+        $_SESSION['search_link_calculate']['f'][] = 'field_s_r__torcond:Sale';
+      }
+      return drupal_get_form('_ctrader_saf_search_button_form');
+  }
 }
 
 /**
@@ -396,19 +402,31 @@ function _ctrader_saf_search_button_form_submit($form, &$form_state) {
 }
 
 
+/**
+ * @return null|string
+ */
 function _ctrader_saf_search_link_calculate_page_callback() {
-
-  // todo Normal logic for sale-lease facet and for beds facet
-
-//  unset($_SESSION['search_link_calculate']);
   if (!isset($_SESSION['search_link_calculate']['f'])) {
     $_SESSION['search_link_calculate']['f'] = array();
   }
+
   $set_search_option = TRUE;
   foreach ($_SESSION['search_link_calculate']['f'] as $key => $value) {
     if ($value == $_POST['/main-page?f'][0]) {
       unset($_SESSION['search_link_calculate']['f'][$key]);
       $set_search_option = FALSE;
+    }
+
+    // For sale-lease facet.
+    if (strpos($value, 'field_s_r__torcond') !== FALSE && strpos($_POST['/main-page?f'][0], 'field_s_r__torcond') !== FALSE) {
+      $_SESSION['search_link_calculate']['f'][$key] = $_POST['/main-page?f'][0];
+      return t('page not for viewing');
+    }
+
+    // For beds facet.
+    if (strpos($value, 'field_br__torcond') !== FALSE && strpos($_POST['/main-page?f'][0], 'field_br__torcond') !== FALSE) {
+      $_SESSION['search_link_calculate']['f'][$key] = $_POST['/main-page?f'][0];
+      return t('page not for viewing');
     }
   }
   if ($set_search_option) {
