@@ -185,7 +185,7 @@ function ctf_pages_main_page_default_page_manager_pages() {
       'bottom' => NULL,
       'center' => NULL,
       'search_facets' => array(
-        'image' => '/sites/default/files/header-picture_0.jpg',
+        'image' => 'sites/all/themes/condor/images/header-picture.jpg',
         'image_style' => '',
         'class' => 'panels-background-image',
       ),
@@ -385,14 +385,14 @@ function ctf_pages_main_page_default_page_manager_pages() {
     $display->content['new-7a14b39d-90fc-46fe-b593-4bd56b7f0c38'] = $pane;
     $display->panels['right'][0] = 'new-7a14b39d-90fc-46fe-b593-4bd56b7f0c38';
     $pane = new stdClass();
-    $pane->pid = 'new-c8617e19-72e7-4a8d-ac62-70ccf2b11de0';
+    $pane->pid = 'new-5ae0e700-4c76-48d4-ad71-7588e660e902';
     $pane->panel = 'search_facets';
     $pane->type = 'block';
     $pane->subtype = 'block-3';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'override_title' => 1,
+      'override_title' => 0,
       'override_title_text' => 'Welcome text goes here',
       'override_title_heading' => 'h2',
     );
@@ -404,9 +404,9 @@ function ctf_pages_main_page_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $pane->uuid = 'c8617e19-72e7-4a8d-ac62-70ccf2b11de0';
-    $display->content['new-c8617e19-72e7-4a8d-ac62-70ccf2b11de0'] = $pane;
-    $display->panels['search_facets'][0] = 'new-c8617e19-72e7-4a8d-ac62-70ccf2b11de0';
+    $pane->uuid = '5ae0e700-4c76-48d4-ad71-7588e660e902';
+    $display->content['new-5ae0e700-4c76-48d4-ad71-7588e660e902'] = $pane;
+    $display->panels['search_facets'][0] = 'new-5ae0e700-4c76-48d4-ad71-7588e660e902';
     $pane = new stdClass();
     $pane->pid = 'new-24ca7d81-0361-4af6-82ed-b4ecf1440037';
     $pane->panel = 'search_facets';
