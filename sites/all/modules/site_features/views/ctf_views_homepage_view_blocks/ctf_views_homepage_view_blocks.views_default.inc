@@ -88,7 +88,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_toronto_gallery']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_toronto_gallery']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_toronto_gallery']['settings'] = array(
-    'image_style' => 'large',
+    'image_style' => '365x203',
     'image_link' => '',
   );
   $handler->display->display_options['fields']['field_toronto_gallery']['delta_limit'] = '1';
