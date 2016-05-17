@@ -2,6 +2,7 @@ name = CT Features: Core: Custom modules
 core = 7.x
 package = CT Features: Core
 dependencies[] = ctf_blocks_footer_top
+dependencies[] = ctf_blocks_header_block
 dependencies[] = ctf_blocks_main_map
 dependencies[] = ctf_blocks_navigation
 dependencies[] = ctf_blocks_powered_by_drupal
