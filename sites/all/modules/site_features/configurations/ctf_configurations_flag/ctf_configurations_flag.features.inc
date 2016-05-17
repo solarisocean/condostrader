@@ -49,10 +49,10 @@ function ctf_configurations_flag_flag_default_flags() {
     'types' => array(
       0 => 'toronto_condo',
     ),
-    'flag_short' => 'Flag condo',
+    'flag_short' => '&#13;',
     'flag_long' => '',
     'flag_message' => '',
-    'unflag_short' => 'Unflag condo',
+    'unflag_short' => '&#13;',
     'unflag_long' => '',
     'unflag_message' => '',
     'unflag_denied_text' => '',
