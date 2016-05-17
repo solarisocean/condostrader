@@ -113,17 +113,12 @@
                    }
                 });
 
-                elem.on('click', function() {
-                    elem.attr("checked", false).parent().removeClass('active-region-facet');
-                    $(this).attr("checked", true).parent().addClass('active-region-facet');
-                });
-
                 elem.parent().find('a').on('click', function(e) {
                     e.preventDefault();
                     elem.attr('disabled', false).parent().removeClass('facetapi-inactive');
                     elem.closest('ul').removeClass('facetapi-disabled');
-                    elem.attr("checked", false).parent().removeClass('active-region-facet');
-                    $(this).parent().find('input:checkbox').attr("checked", true).parent().addClass('active-region-facet');
+                    elem.trigger('click').parent().removeClass('active-region-facet');
+                    $(this).parent().find('input:checkbox').trigger('click').parent().addClass('active-region-facet');
                 });
             };
 
@@ -139,11 +134,11 @@
                 chbxInput.attr('disabled', false).parent();
                 if (chbxInput.attr('checked')) {
                     _this.removeClass('checked-facet');
-                    chbxInput.removeAttr('checked');
+                    chbxInput.trigger('click');
                 }
                 else {
                     _this.addClass('checked-facet');
-                    chbxInput.attr('checked', true);
+                    chbxInput.trigger('click');
                 }
             })
         }
