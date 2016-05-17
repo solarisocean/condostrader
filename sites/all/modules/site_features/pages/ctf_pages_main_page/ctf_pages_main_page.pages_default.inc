@@ -385,6 +385,29 @@ function ctf_pages_main_page_default_page_manager_pages() {
     $display->content['new-7a14b39d-90fc-46fe-b593-4bd56b7f0c38'] = $pane;
     $display->panels['right'][0] = 'new-7a14b39d-90fc-46fe-b593-4bd56b7f0c38';
     $pane = new stdClass();
+    $pane->pid = 'new-c8617e19-72e7-4a8d-ac62-70ccf2b11de0';
+    $pane->panel = 'search_facets';
+    $pane->type = 'block';
+    $pane->subtype = 'block-3';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => 'Welcome text goes here',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'c8617e19-72e7-4a8d-ac62-70ccf2b11de0';
+    $display->content['new-c8617e19-72e7-4a8d-ac62-70ccf2b11de0'] = $pane;
+    $display->panels['search_facets'][0] = 'new-c8617e19-72e7-4a8d-ac62-70ccf2b11de0';
+    $pane = new stdClass();
     $pane->pid = 'new-24ca7d81-0361-4af6-82ed-b4ecf1440037';
     $pane->panel = 'search_facets';
     $pane->type = 'panels_mini';
@@ -405,11 +428,11 @@ function ctf_pages_main_page_default_page_manager_pages() {
       'css_class' => 'front-facet-search',
     );
     $pane->extras = array();
-    $pane->position = 0;
+    $pane->position = 1;
     $pane->locks = array();
     $pane->uuid = '24ca7d81-0361-4af6-82ed-b4ecf1440037';
     $display->content['new-24ca7d81-0361-4af6-82ed-b4ecf1440037'] = $pane;
-    $display->panels['search_facets'][0] = 'new-24ca7d81-0361-4af6-82ed-b4ecf1440037';
+    $display->panels['search_facets'][1] = 'new-24ca7d81-0361-4af6-82ed-b4ecf1440037';
   $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = 'new-24ca7d81-0361-4af6-82ed-b4ecf1440037';
   $handler->conf['display'] = $display;
