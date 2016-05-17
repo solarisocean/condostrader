@@ -389,15 +389,15 @@ function ctf_mini_panels_search_facets_default_panels_mini() {
     $display->content['new-0e982622-5e2b-4897-9b93-392e81363abe'] = $pane;
     $display->panels['right'][2] = 'new-0e982622-5e2b-4897-9b93-392e81363abe';
     $pane = new stdClass();
-    $pane->pid = 'new-4de8512b-caf0-413c-ba38-a104ba2ece3f';
+    $pane->pid = 'new-d0c29e59-f17e-4a90-9b95-1a0ecd298fd4';
     $pane->panel = 'right';
     $pane->type = 'block';
-    $pane->subtype = 'ctrader_saf-search_button';
+    $pane->subtype = 'ctrader_saf-ctrader_search_button';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 1,
-      'override_title_text' => '',
+      'override_title_text' => ' ',
       'override_title_heading' => 'h2',
     );
     $pane->cache = array();
@@ -408,32 +408,9 @@ function ctf_mini_panels_search_facets_default_panels_mini() {
     $pane->extras = array();
     $pane->position = 3;
     $pane->locks = array();
-    $pane->uuid = '4de8512b-caf0-413c-ba38-a104ba2ece3f';
-    $display->content['new-4de8512b-caf0-413c-ba38-a104ba2ece3f'] = $pane;
-    $display->panels['right'][3] = 'new-4de8512b-caf0-413c-ba38-a104ba2ece3f';
-    $pane = new stdClass();
-    $pane->pid = 'new-d0c29e59-f17e-4a90-9b95-1a0ecd298fd4';
-    $pane->panel = 'right';
-    $pane->type = 'block';
-    $pane->subtype = 'ctrader_saf-ctrader_search_button';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'override_title' => 1,
-      'override_title_text' => '',
-      'override_title_heading' => 'h2',
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 4;
-    $pane->locks = array();
     $pane->uuid = 'd0c29e59-f17e-4a90-9b95-1a0ecd298fd4';
     $display->content['new-d0c29e59-f17e-4a90-9b95-1a0ecd298fd4'] = $pane;
-    $display->panels['right'][4] = 'new-d0c29e59-f17e-4a90-9b95-1a0ecd298fd4';
+    $display->panels['right'][3] = 'new-d0c29e59-f17e-4a90-9b95-1a0ecd298fd4';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-ba1bb8e6-64d4-45e2-9955-4e03fb241e5e';
   $mini->display = $display;
