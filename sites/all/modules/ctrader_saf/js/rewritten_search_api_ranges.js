@@ -33,12 +33,18 @@
           change: function(event, ui) {
             widget.find('input[name=range-from]').val(ui.values[0]);
             widget.find('input[name=range-to]').val(ui.values[1]);
+
+            widget.find('.facet-helper span:first-child span').html(ui.values[0]);
+            widget.find('.facet-helper span:nth-child(2) span').html(ui.values[1]);
           },
 
           // on slide: when sliding with the controls
           slide: function(event, ui) {
             widget.find('input[name=range-from]').val(ui.values[0]);
             widget.find('input[name=range-to]').val(ui.values[1]);
+
+            widget.find('.facet-helper span:first-child span').html(ui.values[0]);
+            widget.find('.facet-helper span:nth-child(2) span').html(ui.values[1]);
           }
         });
 
