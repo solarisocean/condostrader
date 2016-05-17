@@ -7,11 +7,11 @@ function ctrader_fct_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     //Change price facet markup text.
     case 'search_api_ranges_block_slider_view_form_field_lp_dol__torcond':
-      $form['text-range']['#markup'] = "<div class='facet-helper'><span id='price-min-value'>&#36;" . $form['range-min']['#value'] . "</span> - <span id='price-max-value'>&#36;"  . $form['range-max']['#value'] . "</span></div>";
+      $form['text-range']['#markup'] = "<div class='facet-helper'><span id='price-min-value'>&#36;<span>" . $form['range-min']['#value'] . "</span></span> - <span id='price-max-value'>&#36;<span>"  . $form['range-max']['#value'] . "</span></span></div>";
       break;
     //Change price size facet markup text.
     case 'search_api_ranges_block_slider_view_form_field_sqft_range_max__torcond':
-      $form['text-range']['#markup'] = "<div class='facet-helper'><span id='sqft-min-value'>" . $form['range-min']['#value'] . "</span> - <span id='sqft-max-value'>"  . $form['range-max']['#value'] . "</span>" . " " . t("SQFT") . "</div>";
+      $form['text-range']['#markup'] = "<div class='facet-helper'><span id='sqft-min-value'><span>" . $form['range-min']['#value'] . "</span></span> - <span id='sqft-max-value'><span>"  . $form['range-max']['#value'] . "</span></span>" . " " . t("SQFT") . "</div>";
       break;
   }
 }

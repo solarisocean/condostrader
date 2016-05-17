@@ -3,7 +3,6 @@ description = Page '/result' for project Condostrader
 core = 7.x
 package = CT Features: Pages
 dependencies[] = ctf_blocks_main_map
-dependencies[] = ctf_views_toronto_condo_search_page
 dependencies[] = ctools
 dependencies[] = page_manager
 features[ctools][] = page_manager:pages_default:1

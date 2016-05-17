@@ -24,6 +24,7 @@ dependencies[] = ctf_views_homepage_view_blocks
 dependencies[] = ctf_views_map
 dependencies[] = ctf_views_neighbourhoods_taxonomy_map
 dependencies[] = ctf_views_result_page
+dependencies[] = ctf_views_search_results_ctrader
 dependencies[] = ctf_views_toronto_condo_search_page
 dependencies[] = ctf_views_users_wish_list
 dependencies[] = ctrader_fct

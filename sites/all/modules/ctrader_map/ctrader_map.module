@@ -174,6 +174,7 @@ function ctrader_map_search_api_solr_query_alter(array &$call_args, SearchApiQue
   switch ($query->getOption('search id')) {
     case 'search_api_views:condo_search_page:page':
     case 'search_api_views:condo_search_page:block_1':
+    case 'search_api_views:search_results_ctrader:block_1':
       $query_string = serialize($query);
       $_SESSION['query_from_view'] = $query_string;
       break;
@@ -324,7 +325,7 @@ function ctrader_map_block_view($delta = '') {
       drupal_add_js(drupal_get_path('module', 'ctrader_map') . '/js/custom_map.js');
 
       $block['subject'] = 'Block with main map';
-      $block['content'] = '<div id="mapid" style="height:750px;"></div>';
+      $block['content'] = '<div id="mapid"></div>';
       break;
   }
   return $block;
