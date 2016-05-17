@@ -4,8 +4,10 @@ body {
   text-shadow: 1px 1px 1px rgba(255,255,255,.4);
 }
 
+html .ajax-progress,
 html .ajax-progress .throbber,
 html .ajax-progress-throbber .throbber,
-html .ajax-progress-throbber{
+html .ajax-progress-throbber {
   display: none !important;
+  visibility: hidden !important;
 }

@@ -106,24 +106,32 @@
     Drupal.behaviors.facetFix = {
         attach: function (context, settings) {
 
-            var checkRadio = function(elem) {
-                elem.each(function () {
-                   if($(this).attr('checked')) {
-                       $(this).parent().addClass('active-region-facet');
-                   }
+            var radioCheck = function(elem){
+                elem.each(function() {
+                    if($(this).attr('checked')) {
+                        $(this).parent().addClass('active-region-facet');
+                    }
                 });
 
                 elem.parent().find('a').on('click', function(e) {
                     e.preventDefault();
-                    elem.attr('disabled', false).parent().removeClass('facetapi-inactive');
-                    elem.closest('ul').removeClass('facetapi-disabled');
-                    elem.trigger('click').parent().removeClass('active-region-facet');
-                    $(this).parent().find('input:checkbox').trigger('click').parent().addClass('active-region-facet');
+                    $(this).closest('ul').removeClass('facetapi-disabled');
+                    $(this).parent().removeClass('facetapi-inactive');
+                    $(this).parent().find('input:checkbox').attr('disabled', false);
+                    elem.parent().removeClass('active-region-facet');
+                    $(this).parent().addClass('active-region-facet').find('input:checkbox').trigger('click');
                 });
+
+                elem.on('change', function() {
+                    elem.not(this).prop('checked', false);
+                });
+
             };
 
-            checkRadio($('#facetapi-facet-search-apitoronto-condo-index-block-field-s-r-torcond input:checkbox'));
-            checkRadio($('#facetapi-facet-search-apitoronto-condo-index-block-field-br-torcond input:checkbox'));
+
+            radioCheck($('.facetapi-facet-field-br--torcond input:checkbox'));
+            radioCheck($('.facetapi-facet-field-s-r--torcond input:checkbox'));
+
 
             $('.facetapi-facet-field-locker--torcond a, .facetapi-facet-field-prkg-inc--torcond a, .facetapi-facet-field-pets--torcond a').on('click', function (e) {
                 var chbxInput = $(this).parent().find('input');
@@ -141,6 +149,10 @@
                     chbxInput.trigger('click');
                 }
             })
+
+            $('.facetapi-facetapi-select-dropdowns select').chosen({
+                "disable_search": true
+            });
         }
     };
 

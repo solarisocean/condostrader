@@ -64,6 +64,26 @@
           right: -22px;
         }
       }
+
+      .flag {
+        position: absolute;
+        right: 6px;
+        top: 3px;
+
+        a {
+          @include pseudo-element('before', 24px, 20px, 'like.png', "not-center");
+          &:before {
+            @include transition(opacity .3s ease-in-out);
+          }
+
+          &.unflag-action {
+            &:before {
+              opacity: .4;
+              @include transition(opacity .3s ease-in-out);
+            }
+          }
+        }
+      }
     }
 
   }
@@ -195,6 +215,26 @@
           position: absolute;
           top: 0;
           right: -22px;
+        }
+      }
+
+      .flag {
+        position: absolute;
+        right: 6px;
+        top: 3px;
+
+        a {
+          @include pseudo-element('before', 24px, 20px, 'like.png', "not-center");
+          &:before {
+            @include transition(opacity .3s ease-in-out);
+          }
+
+          &.unflag-action {
+            &:before {
+              opacity: .4;
+              @include transition(opacity .3s ease-in-out);
+            }
+          }
         }
       }
     }

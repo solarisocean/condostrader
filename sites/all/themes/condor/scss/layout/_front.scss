@@ -75,16 +75,16 @@
     }
 
     .panels-flexible-region-inside {
-      padding-left: 1.5em;
-      padding-right: 1.5em;
+      padding-left: 0.9em;
+      padding-right: 0.9em;
     }
 
     .panels-flexible-region-inside-first {
-      padding-left: 1.5em;
+      padding-left: 1.9em;
     }
 
     .panels-flexible-region-inside-last {
-      padding-right: 1.5em;
+      padding-right: 1.3em;
     }
 
     .facet-helper {
@@ -408,5 +408,45 @@
     }
   }
 
+  .front-header-block {
+    color: $white;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+
+    h2,
+    p {
+      display: inline-block;
+      background: rgba($mirage, .8);
+      padding: 8px 15px;
+    }
+
+    h2 {
+      margin-top: 40px;
+      margin-bottom: 3px;
+      color: $white;
+      font-size: rem-calc(30);
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    p {
+      font-size: rem-calc(14);
+      padding: 5px 15px;
+
+      &:before {
+        content: "/";
+        color: $ecstasy;
+        margin-right: 5px;
+      }
+
+      &:after {
+        content: "/";
+        color: $ecstasy;
+        margin-left: 5px;
+      }
+    }
+  }
 
 }
