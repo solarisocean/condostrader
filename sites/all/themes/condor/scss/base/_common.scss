@@ -72,14 +72,17 @@
 
         a {
           @include pseudo-element('before', 24px, 20px, 'like.png', "not-center");
-          &:before {
-            @include transition(opacity .3s ease-in-out);
+          opacity: 1;
+          @include transition(opacity .2s ease-in-out);
+
+          &:hover {
+            opacity: .7;
+            @include transition(opacity .2s ease-in-out);
           }
 
           &.unflag-action {
             &:before {
               opacity: .4;
-              @include transition(opacity .3s ease-in-out);
             }
           }
         }
@@ -225,14 +228,17 @@
 
         a {
           @include pseudo-element('before', 24px, 20px, 'like.png', "not-center");
-          &:before {
-            @include transition(opacity .3s ease-in-out);
+          opacity: 1;
+          @include transition(opacity .2s ease-in-out);
+
+          &:hover {
+            opacity: .7;
+            @include transition(opacity .2s ease-in-out);
           }
 
           &.unflag-action {
             &:before {
               opacity: .4;
-              @include transition(opacity .3s ease-in-out);
             }
           }
         }
