@@ -3,5 +3,6 @@ core = 7.x
 package = CT Features: Blocks
 dependencies[] = fe_block
 features[fe_block_boxes][] = header_block
+features[fe_block_settings][] = block-header_block
 features[features_api][] = api:2
 project path = sites/all/modules/site_features/blocks
