@@ -1,0 +1,32 @@
+.page-search-results {
+  .panels-flexible-column-inside {
+    padding: 0;
+  }
+
+  .view-search-results-ctrader {
+    background: $alabaster;
+
+    .view-content {
+      padding: 0 0 0 25px;
+
+      .views-row {
+        @extend %condos-item;
+        width: calc((100% / 3) - 35px);
+        margin-bottom: 30px;
+        margin-right: 30px;
+
+        &:nth-child(3n) {
+          margin-right: 0;
+        }
+
+        &:nth-child(4n) {
+          margin-right: 30px;
+        }
+      }
+
+      .mCSB_container {
+        margin-right: 0;
+      }
+    }
+  }
+}
