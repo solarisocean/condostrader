@@ -3,3 +3,7 @@ description = Provide custom SearchApi facets.
 core = 7.x
 package = Condos Traider
 version = 7.x-1.0
+
+
+files[] = inc/ctrader_facet_empty_behaviors.inc
+files[] = inc/ctrader_facet_range_widget.inc
