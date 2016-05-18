@@ -1,0 +1,260 @@
+.facet-search-block {
+  max-width: 830px;
+  width: 100%;
+  margin: 0 auto;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background: $white;
+
+  h5.pane-title {
+    font-family: "Raleway", sans-serif;
+    font-size: rem-calc(11);
+    -webkit-font-smoothing: antialiased;
+    text-shadow: 1px 1px 1px rgba(0,0,0,.2);
+    display: inline-block;
+    float: left;
+  }
+
+  .panels-flexible-region-inside {
+    padding-left: 0.9em;
+    padding-right: 0.9em;
+  }
+
+  .panels-flexible-region-inside-first {
+    padding-left: 1.9em;
+  }
+
+  .panels-flexible-region-inside-last {
+    padding-right: 1.3em;
+  }
+
+  .facet-helper {
+    font-size: rem-calc(10);
+    color: $ecstasy;
+    text-align: right;
+  }
+
+  .search-api-ranges-widget {
+    .range-box,
+    .form-submit {
+      display: none;
+      visibility: hidden;
+    }
+
+    .range-slider {
+      height: 4px;
+      border: none;
+      background: $athens-gray;
+
+      .ui-slider-range {
+        @extend %gradient-background;
+        height: 6px;
+      }
+
+      .ui-slider-handle {
+        top: -5px;
+        background: $white;
+        box-shadow: 0 0 10px rgba(0,0,0,.2);
+        outline: none;
+        border: 1px solid $mirage;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .facetapi-facetapi-checkbox-links {
+    list-style: none;
+
+    &.facetapi-facet-field-s-r--torcond {
+      list-style: none;
+      max-width: 300px;
+      width: 100%;
+      margin: 20px auto;
+      padding-bottom: 50px;
+
+      li {
+        width: 50%;
+        display: inline-block;
+        margin: 0;
+
+        &.first {
+          float: left;
+        }
+
+        &.last {
+          float: right;
+        }
+
+        .facetapi-facet {
+          a {
+            text-transform: uppercase;
+            color: white;
+            font-family: "Raleway", sans-serif;
+            font-weight: bold;
+            background: $mirage;
+            display: block;
+            margin-right: 0;
+            text-align: center;
+            font-size: rem-calc(12);
+            padding: 10px 0;
+            @include transition(box-shadow .2s ease-in-out);
+
+            &:hover {
+              box-shadow: 0 0 10px rgba(0,0,0,.3);
+              @include transition(box-shadow .2s ease-in-out);
+            }
+          }
+
+          &.active-region-facet {
+            a {
+              @extend %gradient-background;
+            }
+          }
+        }
+      }
+
+      input {
+        display: none;
+      }
+    }
+  }
+
+  .facetapi-facet-field-locker--torcond,
+  .facetapi-facet-field-prkg-inc--torcond,
+  .facetapi-facet-field-pets--torcond {
+    li {
+      margin: 0;
+
+      input[type="checkbox"] {
+        display: none;
+      }
+
+      a {
+        color: $mirage;
+        font-size: rem-calc(12);
+        background: $athens-gray;
+        display: block;
+        margin: 0;
+        border: 1px solid darken($athens-gray, 7);
+        padding: 5px 10px;
+        position: relative;
+
+        &:before {
+          margin-right: 6px;
+        }
+
+        &.checked-facet {
+          &:after {
+            background: url('../images/checkbox-check.png') 2px 3px no-repeat white;
+          }
+        }
+
+        &:after {
+          content: '';
+          width: 15px;
+          height: 15px;
+          background: $white;
+          border: 1px solid darken($athens-gray, 7);
+          display: inline-block;
+          position: absolute;
+          right: 10px;
+          top: 7px;
+        }
+      }
+    }
+
+  }
+
+  .facetapi-facet-field-prkg-inc--torcond {
+    a {
+      @include pseudo-element('before', 15px, 11px, 'black-car-icon.png', 'not-center');
+    }
+  }
+
+  .facetapi-facet-field-locker--torcond {
+    a {
+      @include pseudo-element('before', 10px, 11px, 'black-locker.png', 'not-center');
+    }
+  }
+
+  .facetapi-facet-field-pets--torcond {
+    a {
+      @include pseudo-element('before', 12px, 11px, 'black-pats.png', 'not-center');
+    }
+  }
+
+  #-ctrader-saf-search-button-form {
+    .form-submit {
+      @extend %gradient-background;
+      display: block;
+      width: 100%;
+      padding: 13px 0;
+      @include pseudo-element('before', 11px, 11px, 'search-icon-little.png', 'not-center');
+      font-family: "Raleway", sans-serif;
+      font-weight: bold;
+      font-size: rem-calc(12);
+      text-transform: uppercase;
+      @include transition(box-shadow .2s ease-in-out);
+      outline: none;
+
+      &:before {
+        margin-right: 2px;
+      }
+
+      &:hover {
+        box-shadow: 0 0 10px rgba(0,0,0,.2);
+        @include transition(box-shadow .2s ease-in-out);
+      }
+    }
+  }
+
+  .facetapi-facet-field-br--torcond {
+    clear: both;
+
+    li {
+      margin: 0;
+      width: calc((100% / 4.96));
+      display: inline-block;
+      text-align: center;
+      margin-right: -5px;
+
+      .facetapi-facet {
+        border: 1px solid $ecstasy;
+
+        &.active-region-facet {
+          background: $ecstasy;
+
+          a {
+            color: $white;
+          }
+        }
+      }
+
+      &:not(:first-child) {
+        .facetapi-facet {
+          border-left: none;
+        }
+
+        a {
+          &:after {
+            content: "+";
+          }
+        }
+      }
+
+      a {
+        display: block;
+        margin: 0;
+        font-size: rem-calc(12);
+        padding: 4px 0;
+        color: $ecstasy;
+      }
+
+      input {
+        display: none;
+      }
+    }
+  }
+}

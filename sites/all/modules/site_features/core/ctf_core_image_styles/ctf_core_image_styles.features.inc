@@ -25,6 +25,21 @@ function ctf_core_image_styles_image_default_styles() {
     ),
   );
 
+  // Exported image style: 286x160.
+  $styles['286x160'] = array(
+    'label' => '286x160',
+    'effects' => array(
+      4 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 286,
+          'height' => 160,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: 333x176.
   $styles['333x176'] = array(
     'label' => '333x176',

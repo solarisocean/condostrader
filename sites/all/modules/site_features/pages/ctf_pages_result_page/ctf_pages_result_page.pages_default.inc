@@ -66,10 +66,20 @@ function ctf_pages_result_page_default_page_manager_pages() {
           1 => 4,
         ),
         'parent' => NULL,
+        'class' => '',
+        'column_class' => '',
+        'row_class' => '',
+        'region_class' => '',
+        'no_scale' => TRUE,
+        'fixed_width' => '',
+        'column_separation' => '0.5em',
+        'region_separation' => '0.5em',
+        'row_separation' => '0.5em',
+        'hide_empty' => 0,
       ),
       1 => array(
         'type' => 'column',
-        'width' => '47.542216053666436',
+        'width' => '46.01825458855669',
         'width_type' => '%',
         'parent' => 'canvas',
         'children' => array(
@@ -100,7 +110,7 @@ function ctf_pages_result_page_default_page_manager_pages() {
       ),
       4 => array(
         'type' => 'column',
-        'width' => '27.45778394633356',
+        'width' => '28.981745411443306',
         'width_type' => '%',
         'parent' => 'canvas',
         'children' => array(
@@ -272,7 +282,10 @@ function ctf_pages_result_page_default_page_manager_pages() {
     $pane->style = array(
       'settings' => NULL,
     );
-    $pane->css = array();
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'facet-search-block',
+    );
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();

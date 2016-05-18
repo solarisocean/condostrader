@@ -97,6 +97,11 @@
                 theme: "inset-2"
             });
 
+            $('.page-search-results .view-search-results-ctrader .view-content').mCustomScrollbar({
+                setHeight: "612px",
+                theme: "inset-2"
+            });
+
         }
     };
 
