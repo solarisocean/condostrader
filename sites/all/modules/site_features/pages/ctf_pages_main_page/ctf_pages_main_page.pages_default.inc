@@ -431,7 +431,7 @@ function ctf_pages_main_page_default_page_manager_pages() {
     );
     $pane->css = array(
       'css_id' => '',
-      'css_class' => 'front-facet-search',
+      'css_class' => 'facet-search-block',
     );
     $pane->extras = array();
     $pane->position = 1;
