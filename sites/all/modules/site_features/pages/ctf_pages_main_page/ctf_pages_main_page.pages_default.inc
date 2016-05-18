@@ -385,28 +385,34 @@ function ctf_pages_main_page_default_page_manager_pages() {
     $display->content['new-7a14b39d-90fc-46fe-b593-4bd56b7f0c38'] = $pane;
     $display->panels['right'][0] = 'new-7a14b39d-90fc-46fe-b593-4bd56b7f0c38';
     $pane = new stdClass();
-    $pane->pid = 'new-5ae0e700-4c76-48d4-ad71-7588e660e902';
+    $pane->pid = 'new-6a911481-856e-4bf4-97e5-cbebdaffad30';
     $pane->panel = 'search_facets';
-    $pane->type = 'block';
-    $pane->subtype = 'block-3';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'override_title' => 0,
-      'override_title_text' => 'Welcome text goes here',
-      'override_title_heading' => 'h2',
+      'admin_title' => 'Header Block',
+      'title' => 'Welcome text goes here',
+      'title_heading' => 'h2',
+      'body' => 'Lorem ipsum is simply dummy text of printing',
+      'format' => 'filtered_html',
+      'substitute' => TRUE,
     );
     $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
     );
-    $pane->css = array();
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'front-header-block',
+    );
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $pane->uuid = '5ae0e700-4c76-48d4-ad71-7588e660e902';
-    $display->content['new-5ae0e700-4c76-48d4-ad71-7588e660e902'] = $pane;
-    $display->panels['search_facets'][0] = 'new-5ae0e700-4c76-48d4-ad71-7588e660e902';
+    $pane->uuid = '6a911481-856e-4bf4-97e5-cbebdaffad30';
+    $display->content['new-6a911481-856e-4bf4-97e5-cbebdaffad30'] = $pane;
+    $display->panels['search_facets'][0] = 'new-6a911481-856e-4bf4-97e5-cbebdaffad30';
     $pane = new stdClass();
     $pane->pid = 'new-24ca7d81-0361-4af6-82ed-b4ecf1440037';
     $pane->panel = 'search_facets';
