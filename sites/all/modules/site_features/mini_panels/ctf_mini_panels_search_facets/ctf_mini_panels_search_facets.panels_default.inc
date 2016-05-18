@@ -186,7 +186,7 @@ function ctf_mini_panels_search_facets_default_panels_mini() {
     $pane->panel = 'center_';
     $pane->type = 'block';
     $pane->subtype = 'current_search-standard';
-    $pane->shown = TRUE;
+    $pane->shown = FALSE;
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 1,
