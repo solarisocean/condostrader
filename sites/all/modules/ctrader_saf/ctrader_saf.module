@@ -64,7 +64,7 @@ function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
     }
   }
   if ($form_id == 'facetapi_select_facet_form_3') {
-    $stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
+
   }
 }
 
@@ -240,10 +240,11 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
       break;
     case 'field_s_r__torcond':
       $build['Lease']['#markup'] = t('For rent');
-      $build['Sale']['#markup'] = t('For sale');
+      $build['Sale']['#markup'] = l(t('For sale'), '');
+      $build['Sale']['#html'] = TRUE;
 
       // Makes this item active on homepage load.
-      if (isset($_SESSION['search_link_calculate']['f'])  && drupal_get_path_alias() != 'results') {
+      if (isset($_SESSION['search_link_calculate']['f']) && drupal_get_path_alias() != 'results') {
         foreach ($_SESSION['search_link_calculate']['f'] as $value) {
           if (strpos($value, 'field_s_r__torcond') !== FALSE) {
             $field_search_data = explode(':', $value);
@@ -251,6 +252,9 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
           }
         }
       }
+      break;
+    case 'field_sqft_range_max__torcond':
+
       break;
   }
 }
@@ -303,7 +307,15 @@ function _ctrader_saf_blocks_content_function($delta) {
           if (isset($_SESSION['search_link_calculate'])) {
             unset($_SESSION['search_link_calculate']);
           }
-          $_SESSION['search_link_calculate']['f'][] = 'field_s_r__torcond:Sale';
+          $min_value_sqft = db_query('SELECT MIN(field_sqft_range_min__torcond_value) FROM {field_data_field_sqft_range_min__torcond}')->fetchField();
+          $max_value_sqft = db_query('SELECT MAX(field_sqft_range_max__torcond_value) FROM {field_data_field_sqft_range_max__torcond}')->fetchField();
+          $min_value_price = round(db_query('SELECT MIN(field_lp_dol__torcond_value) FROM {field_data_field_lp_dol__torcond}')->fetchField());
+          $max_value_price = round(db_query('SELECT MAX(field_lp_dol__torcond_value) FROM {field_data_field_lp_dol__torcond}')->fetchField());
+          $_SESSION['search_link_calculate']['f'] = array(
+            'field_s_r__torcond:Sale',
+            'field_sqft_range_max__torcond:[' . $min_value_sqft . ' TO ' . $max_value_sqft . ']',
+            'field_lp_dol__torcond:[' . $min_value_price . ' TO ' . $max_value_price . ']',
+          );
         }
       }
       return drupal_get_form('_ctrader_saf_search_button_form');
@@ -372,12 +384,12 @@ function _ctrader_saf_search_link_calculate_page_callback() {
       $_SESSION['search_link_calculate']['f'][] = $_POST['/main-page?f'][0];
       unset($_POST['/main-page?f']);
     }
-    elseif (isset($_POST['/' . CTRADER_SEARCH_RESULT_PAGE . '?f'][0])) {
+    if (isset($_POST['/' . CTRADER_SEARCH_RESULT_PAGE . '?f'][0])) {
       $_SESSION['search_link_calculate']['f'][] = $_POST['/' . CTRADER_SEARCH_RESULT_PAGE . '?f'][0];
       unset($_POST['/' . CTRADER_SEARCH_RESULT_PAGE . '?f']);
     }
-    elseif (isset($_POST['f'])) {
-      $_SESSION['search_link_calculate']['f'][] = $_POST['f'][0];
+    if (isset($_POST['f'])) {
+      $_SESSION['search_link_calculate']['f'][] = $_POST['f'][1];
       unset($_POST['f']);
     }
   }
@@ -471,8 +483,47 @@ function _ctrader_saf_range_ajax_form_submit($form, &$form_state) {
 
 
 /**
- * Implements hook_facetapi_facet_info_alter().
+ * Implements hook_search_api_solr_search_results_alter().
  */
-function ctrader_saf_facetapi_facet_info_alter(array &$facet_info, array $searcher_info) {
+function ctrader_saf_search_api_solr_search_results_alter(array &$results, SearchApiQueryInterface $query, $response) {
+  $alias = drupal_get_path_alias();
+  if (($alias == 'main-page' || $alias == '')) {
+//    unset($_SESSION['default_solrsearch_results']);
+//    $_SESSION['default_solrsearch_results'] = $results;
+  }
+  if ($results['result count'] == 0) {
 
+  }
+}
+
+
+/**
+ * Implements hook_facetapi_empty_behaviors().
+ */
+function ctrader_saf_facetapi_empty_behaviors() {
+  $stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
+  return array(
+    'ctrader_facet_empty_behaviors' => array(
+      'handler' => array(
+        'label' => t('@ctrader facet empty behavior', array('@ctrader' => 'CTrader')),
+        'class' => 'FacetapiEmptyBehaviorCtrader',
+      ),
+    ),
+  );
+}
+
+
+/**
+ * Implements hook_facetapi_widgets().
+ */
+function ctrader_saf_facetapi_widgets() {
+  return array(
+    'ctrader_range_widget' => array(
+      'handler' => array(
+        'label' => t('@ctrader range', array('@ctrader' => 'CondosTrader')),
+        'class' => 'SearchApiCtraderRangesWidgetUISlider',
+        'query types' => array('term', 'numeric_range'),
+      ),
+    ),
+  );
 }
