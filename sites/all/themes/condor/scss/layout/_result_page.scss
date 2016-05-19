@@ -1,10 +1,122 @@
 .page-search-results {
+  .mCSB_scrollTools {
+    .mCSB_dragger_bar {
+      background-color: darken($athens-gray, 4) !important;
+    }
+  }
+
+  .logo-container {
+    &:before {
+      content: "";
+      border-bottom: 1px solid $athens-gray;
+      position: absolute;
+      bottom: 0;
+      display: inline-block;
+      height: 1px;
+      width: 92.5%;
+    }
+  }
+
+  .facet-search-block {
+    max-width: 982px;
+    padding: 0 28px 0 25px;
+    margin: 0;
+
+    .panels-flexible-region-inside {
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+
+    .panels-flexible-region-inside-first {
+      padding-left: 0;
+    }
+
+    .panels-flexible-region-inside-last {
+      padding-right: 0;
+    }
+
+
+    .facet-top {
+      float: left;
+
+      .facetapi-facetapi-checkbox-links {
+        &.facetapi-facet-field-s-r--torcond {
+          max-width: 120px;
+          margin: 16px auto;
+          padding-bottom: 0;
+
+          li {
+            &.first,
+            &.last {
+              float: none;
+            }
+
+            &.first {
+              a {
+                @include pseudo-element("before", 35px, 23px, "for-sale-icon.png", "not-center");
+                &:before {
+                  display: block;
+                  margin: 0 auto;
+                  margin-bottom: 3px;
+                }
+              }
+            }
+
+            &.last {
+              a {
+                @include pseudo-element("before", 35px, 23px, "for-rent-icon.png", "not-center");
+                &:before {
+                  display: block;
+                  margin: 0 auto;
+                  margin-bottom: 3px;
+                }
+              }
+            }
+
+            a {
+              max-width: 118px;
+              width: 118px;
+              padding: 18px 0;
+            }
+          }
+        }
+      }
+    }
+
+    .facet-bottom {
+      float: right;
+      max-width: 780px;
+      width: 100%;
+      padding: 6px 0;
+    }
+  }
+
   .panels-flexible-column-inside {
     padding: 0;
   }
 
   .view-search-results-ctrader {
     background: $alabaster;
+    border-top: 1px solid darken($athens-gray, 4);
+
+    .view-filters {
+      .views-exposed-form .views-exposed-widget {
+        float: right;
+        padding: 17px 37px;
+      }
+
+      .form-type-select {
+        .chosen-single {
+          height: 34px;
+          background: $white;
+        }
+
+        label {
+          display: none;
+          visibility: hidden;
+        }
+      }
+    }
 
     .view-content {
       padding: 0 0 0 25px;
