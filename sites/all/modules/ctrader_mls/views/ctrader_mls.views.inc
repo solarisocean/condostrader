@@ -20,6 +20,15 @@ function ctrader_mls_views_data() {
     ),
   );
 
+  $data['drealty_listing']['days_on_market'] = array(
+    'title' => t('Days on market'),
+    'help' => t('Days on market'),
+    'field' => array(
+      'handler' => 'views_handler_field_ctrader_daysonmarket',
+      'click sortable' => TRUE,
+    ),
+  );
+
   return $data;
 }
 
