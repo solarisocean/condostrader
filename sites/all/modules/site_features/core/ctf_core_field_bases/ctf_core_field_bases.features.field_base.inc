@@ -420,6 +420,34 @@ function ctf_core_field_bases_field_default_field_bases() {
     'type' => 'list_boolean',
   );
 
+  // Exported field_base: 'field_looking_to'.
+  $field_bases['field_looking_to'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_looking_to',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'buy_condo' => 'Buy a condo',
+        'sell_condo' => 'Sell a condo',
+        'buy_sell_condo' => 'Buy and sell a condo',
+        'sell_condo_buy_house' => 'Sell a condo and buy a house',
+        'sell_house_buy_condo' => 'Sell a house and buy a condo',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_maint_fees'.
   $field_bases['field_maint_fees'] = array(
     'active' => 1,
@@ -518,6 +546,31 @@ function ctf_core_field_bases_field_default_field_bases() {
       'allowed_values' => array(
         0 => '',
         1 => 'Pets Allowed',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
+  );
+
+  // Exported field_base: 'field_receive_newsletters'.
+  $field_bases['field_receive_newsletters'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_receive_newsletters',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => '',
+        1 => '',
       ),
       'allowed_values_function' => '',
     ),
