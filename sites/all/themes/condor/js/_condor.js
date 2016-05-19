@@ -158,6 +158,11 @@
             $('.facetapi-facetapi-select-dropdowns select').chosen({
                 "disable_search": true
             });
+
+            $('.view-search-results-ctrader .view-filters select').chosen({
+                "disable_search": true,
+                "placeholder_text_single": Drupal.t("Sort by: ")
+            });
         }
     };
 

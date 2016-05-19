@@ -67,12 +67,6 @@
   .facetapi-facetapi-checkbox-links {
     list-style: none;
 
-    a {
-      &.facetapi-checkbox {
-        display: none;
-      }
-    }
-
     &.facetapi-facet-field-s-r--torcond {
       list-style: none;
       max-width: 300px;
@@ -128,6 +122,14 @@
 
       input {
         display: none;
+      }
+    }
+
+    &.facetapi-facet-field-br--torcond {
+      a {
+        &.facetapi-checkbox {
+          display: none;
+        }
       }
     }
   }

@@ -51,6 +51,8 @@ function ctf_mini_panels_search_facets_default_panels_mini() {
           2 => 'right',
         ),
         'parent' => 'main',
+        'class' => 'facet-bottom',
+        'hide_empty' => 0,
       ),
       'center' => array(
         'type' => 'region',
@@ -84,7 +86,7 @@ function ctf_mini_panels_search_facets_default_panels_mini() {
           0 => 'center_',
         ),
         'parent' => 'main',
-        'class' => '',
+        'class' => 'facet-top',
         'hide_empty' => 0,
       ),
       'center_' => array(
