@@ -67,6 +67,12 @@
   .facetapi-facetapi-checkbox-links {
     list-style: none;
 
+    a {
+      &.facetapi-checkbox {
+        display: none;
+      }
+    }
+
     &.facetapi-facet-field-s-r--torcond {
       list-style: none;
       max-width: 300px;
@@ -99,6 +105,11 @@
             text-align: center;
             font-size: rem-calc(12);
             padding: 10px 0;
+
+            &.facetapi-checkbox {
+              display: none;
+            }
+            
             @include transition(box-shadow .2s ease-in-out);
 
             &:hover {
