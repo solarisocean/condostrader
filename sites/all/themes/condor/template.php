@@ -52,6 +52,12 @@ function condor_preprocess_page(&$variables) {
   // Build custom menu tree.
   $menu = menu_build_tree('main-menu');
   $variables['menu_tree'] = $menu_items = menu_tree_output($menu);
+
+  // rewrites title for user/register page.
+  $path = $_GET['q'];
+  if (strpos($path,'user/register') !== false) {
+    drupal_set_title(t('Sing up for free'));
+  }
 }
 
 /**

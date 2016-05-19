@@ -77,7 +77,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['footer']['area']['table'] = 'views';
   $handler->display->display_options['footer']['area']['field'] = 'area';
   $handler->display->display_options['footer']['area']['ui_name'] = 'view all link';
-  $handler->display->display_options['footer']['area']['content'] = '<a href="/results">view all</a>';
+  $handler->display->display_options['footer']['area']['content'] = '<a href="/search-results">view all</a>';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
   /* Field: Indexed Drealty Listing: Toronto gallery */
   $handler->display->display_options['fields']['field_toronto_gallery']['id'] = 'field_toronto_gallery';
@@ -400,7 +400,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['footer']['area']['table'] = 'views';
   $handler->display->display_options['footer']['area']['field'] = 'area';
   $handler->display->display_options['footer']['area']['ui_name'] = 'view all link';
-  $handler->display->display_options['footer']['area']['content'] = '<a href="/results">view all</a>';
+  $handler->display->display_options['footer']['area']['content'] = '<a href="/search-results">view all</a>';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Indexed Drealty Listing: Timestamp_sql */
@@ -454,7 +454,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['footer']['area']['table'] = 'views';
   $handler->display->display_options['footer']['area']['field'] = 'area';
   $handler->display->display_options['footer']['area']['ui_name'] = 'view all link';
-  $handler->display->display_options['footer']['area']['content'] = '<a href="/results">view all</a>';
+  $handler->display->display_options['footer']['area']['content'] = '<a href="/search-results">view all</a>';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Indexed Drealty Listing: Toronto gallery */
@@ -787,7 +787,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['footer']['area']['table'] = 'views';
   $handler->display->display_options['footer']['area']['field'] = 'area';
   $handler->display->display_options['footer']['area']['ui_name'] = 'view all link';
-  $handler->display->display_options['footer']['area']['content'] = '<a href="/results">view all</a>';
+  $handler->display->display_options['footer']['area']['content'] = '<a href="/search-results">view all</a>';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Indexed Drealty Listing: Toronto gallery */
@@ -1118,14 +1118,6 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
-  $handler->display->display_options['defaults']['footer'] = FALSE;
-  /* Footer: view all link */
-  $handler->display->display_options['footer']['area']['id'] = 'area';
-  $handler->display->display_options['footer']['area']['table'] = 'views';
-  $handler->display->display_options['footer']['area']['field'] = 'area';
-  $handler->display->display_options['footer']['area']['ui_name'] = 'view all link';
-  $handler->display->display_options['footer']['area']['content'] = '<a href="/results">view all</a>';
-  $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Indexed Drealty Listing: Toronto gallery */
   $handler->display->display_options['fields']['field_toronto_gallery']['id'] = 'field_toronto_gallery';

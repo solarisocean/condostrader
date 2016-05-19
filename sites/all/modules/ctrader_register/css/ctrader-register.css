@@ -1,0 +1,11 @@
+form[id*=user-register-form] > div {
+  width: 350px;
+}
+
+.register-form-title {
+  text-align: center;
+}
+
+.register-form-title h1 {
+  text-transform: uppercase;
+}

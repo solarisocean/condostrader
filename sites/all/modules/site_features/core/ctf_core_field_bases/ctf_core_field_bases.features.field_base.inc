@@ -458,6 +458,23 @@ function ctf_core_field_bases_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_mobile_phone_number'.
+  $field_bases['field_mobile_phone_number'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_mobile_phone_number',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'phone',
+    'settings' => array(
+      'country' => 'ca',
+    ),
+    'translatable' => 0,
+    'type' => 'phone',
+  );
+
   // Exported field_base: 'field_parking'.
   $field_bases['field_parking'] = array(
     'active' => 1,
@@ -599,6 +616,74 @@ function ctf_core_field_bases_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'number_float',
+  );
+
+  // Exported field_base: 'field_user_first_name'.
+  $field_bases['field_user_first_name'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_user_first_name',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 100,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_user_last_name'.
+  $field_bases['field_user_last_name'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_user_last_name',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 100,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_user_region'.
+  $field_bases['field_user_region'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_user_region',
+    'indexes' => array(
+      'tid' => array(
+        0 => 'tid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'taxonomy',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => array(
+          'vocabulary' => 'neighbourhoods',
+          'parent' => 0,
+        ),
+      ),
+    ),
+    'translatable' => 0,
+    'type' => 'taxonomy_term_reference',
   );
 
   // Exported field_base: 'field_washer_dryer'.

@@ -1,0 +1,7 @@
+name = CT Features: Configurations: Hierarchical select configs
+core = 7.x
+package = CT Features: Configurations
+dependencies[] = hierarchical_select
+dependencies[] = hs_taxonomy
+features[features_api][] = api:2
+features[hierarchical_select][] = taxonomy-field_user_region

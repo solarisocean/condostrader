@@ -1,0 +1,15 @@
+name = CT Features: Configurations: Registration form
+description = Fields for user registration form.
+core = 7.x
+package = CT Features: Configurations
+dependencies[] = ctf_core_field_bases
+dependencies[] = features
+dependencies[] = hs_taxonomy
+dependencies[] = phone
+dependencies[] = taxonomy
+dependencies[] = text
+features[features_api][] = api:2
+features[field_instance][] = user-user-field_mobile_phone_number
+features[field_instance][] = user-user-field_user_first_name
+features[field_instance][] = user-user-field_user_last_name
+features[field_instance][] = user-user-field_user_region
