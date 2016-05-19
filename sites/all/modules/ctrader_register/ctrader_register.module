@@ -7,14 +7,14 @@
  * In this case needs for set ctrader_register form_alter after all others form_alters.
  */
 function ctrader_register_module_implements_alter(&$implementations, $hook) {
-  // Name of the hook.
-  if ($hook != 'form_alter') {
-    return;
+  if ($hook == 'form_alter') {
+    // Move our hook implementation to the bottom.
+    if (isset($implementations['ctrader_register'])) {
+      $group = $implementations['ctrader_register'];
+      unset($implementations['ctrader_register']);
+      $implementations['ctrader_register'] = $group;
+    }
   }
-  $module = 'ctrader_register';
-  $group = $implementations[$module];
-  unset($implementations[$module]);
-  $implementations[$module] = $group;
 }
 
 
@@ -47,6 +47,7 @@ function ctrader_register_form_user_register_form_alter(&$form, &$form_state) {
   $form['#attached']['css'][] = libraries_get_path('leaflet_markercluster') . '/dist/MarkerCluster.Default.css';
 
   $form['account']['mail']['#title'] = t('E-mail address');
+  $form['field_looking_to'][LANGUAGE_NONE]['#options']['_none'] = t('Choose @dots', array('@dots' => '...'));
   $form['field_mobile_phone_number'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = t('example: @number', array('@number' => '555-777-9999'));
   $form['actions']['submit']['#value'] = t('Sign up');
   unset($form['account']['mail']['#description']);
@@ -56,11 +57,17 @@ function ctrader_register_form_user_register_form_alter(&$form, &$form_state) {
     '#markup' => '<div id="mapid"></div>',
     '#weight' => 1,
   );
-  $form['#prefix'] = '<div class="register-form-title"><h1><span>sign up</span> for free</h1>
-    <p>Etiam suscipit tellus condimentum purus blandit, sed porttitor justo tristique.
-    Maecenas eleifend lorem porta, placerat elit non, auctor nulla! Suspendisse et mi vel tellus fermentum dapibus.
-    Vivamus ullamcorper nibh nec neque malesuada placerat?
-    </p></div>';
+  $form['#prefix'] = "<div class='register-form-title''>
+                          <h1><span>sign up</span> for free</h1>
+                          <p>
+                            Etiam suscipit tellus condimentum purus blandit, sed porttitor justo tristique.
+                            Maecenas eleifend lorem porta, placerat elit non, auctor nulla!
+                            Suspendisse et mi vel tellus fermentum dapibus.
+                            Vivamus ullamcorper nibh nec neque malesuada placerat?
+                          </p>
+                      </div>";
+
+
 //  $form['terms'] = array(
 //    '#type' => 'checkbox',
 //    '#title' => t("I agree with the website's terms and conditions."),
