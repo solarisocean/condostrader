@@ -1,0 +1,90 @@
+<?php
+
+
+/**
+ * Implements hook_module_implements_alter()
+ *
+ * In this case needs for set ctrader_register form_alter after all others form_alters.
+ */
+function ctrader_register_module_implements_alter(&$implementations, $hook) {
+  // Name of the hook.
+  if ($hook != 'form_alter') {
+    return;
+  }
+  $module = 'ctrader_register';
+  $group = $implementations[$module];
+  unset($implementations[$module]);
+  $implementations[$module] = $group;
+}
+
+
+/**
+ * Implements hook_init().
+ */
+function ctrader_register_init() {
+  $path = $_GET['q'];
+  if (strpos($path, 'user/register') !== FALSE) {
+    drupal_add_css(drupal_get_path('module', 'ctrader_register') . '/css/ctrader-register.css');
+    _ctrader_map_prepare_neighbourhoods_json();
+  }
+}
+
+
+/**
+ * Implements hook_form_FORM_ID_alter() for the registration form.
+ */
+function ctrader_register_form_user_register_form_alter(&$form, &$form_state) {
+  $form['#attached']['js'][] = drupal_get_path('module', 'ctrader_register') . '/js/ctrader-register.js';
+
+  $form['#attached']['js'][] = libraries_get_path('leaflet') . '/leaflet-src.js';
+  $form['#attached']['css'][] = libraries_get_path('leaflet') . '/leaflet.css';
+
+  $form['#attached']['js'][] = libraries_get_path('Leaflet.draw') . '/dist/leaflet.draw.js';
+  $form['#attached']['css'][] = libraries_get_path('Leaflet.draw') . '/dist/leaflet.draw.css';
+
+  $form['#attached']['js'][] = libraries_get_path('leaflet_markercluster') . '/dist/leaflet.markercluster.js';
+  $form['#attached']['css'][] = libraries_get_path('leaflet_markercluster') . '/dist//dist/MarkerCluster.css';
+  $form['#attached']['css'][] = libraries_get_path('leaflet_markercluster') . '/dist/MarkerCluster.Default.css';
+
+  $form['account']['mail']['#title'] = t('E-mail address');
+  $form['field_mobile_phone_number'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = t('example: @number', array('@number' => '555-777-9999'));
+  $form['actions']['submit']['#value'] = t('Sign up');
+  unset($form['account']['mail']['#description']);
+  unset($form['account']['pass']['#description']);
+  $form['form_map'] = array(
+    '#type' => 'item',
+    '#markup' => '<div id="mapid"></div>',
+    '#weight' => 1,
+  );
+  $form['#prefix'] = '<div class="register-form-title"><h1><span>sign up</span> for free</h1>
+    <p>Etiam suscipit tellus condimentum purus blandit, sed porttitor justo tristique.
+    Maecenas eleifend lorem porta, placerat elit non, auctor nulla! Suspendisse et mi vel tellus fermentum dapibus.
+    Vivamus ullamcorper nibh nec neque malesuada placerat?
+    </p></div>';
+//  $form['terms'] = array(
+//    '#type' => 'checkbox',
+//    '#title' => t("I agree with the website's terms and conditions."),
+//    '#required' => TRUE,
+//    '#weight' => 20,
+//  );
+}
+
+
+/**
+ * Implements hook_element_info_alter().
+ *
+ *
+ * Disable password strength checker.
+ * Disable Drupal's built in password strength checker on the user
+ * registration and user edit forms. Coder originally taken from
+ * http://www.drupalcoder.com/story/409-disabling-password-check-in-drupal-6
+ * https://www.drupal.org/project/disablepwstrength
+ *
+ */
+function ctrader_register_element_info_alter(&$types) {
+  if (isset($types['password_confirm']['#process']) && (($position = array_search('user_form_process_password_confirm', $types['password_confirm']['#process'])) !== FALSE)) {
+    unset($types['password_confirm']['#process'][$position]);
+  }
+}
+
+
