@@ -10,6 +10,37 @@
 function ctf_configurations_registration_form_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'user-user-field_looking_to'.
+  $field_instances['user-user-field_looking_to'] = array(
+    'bundle' => 'user',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 5,
+      ),
+    ),
+    'entity_type' => 'user',
+    'field_name' => 'field_looking_to',
+    'label' => ' I am looking To:',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => 1,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 7,
+    ),
+  );
+
   // Exported field_instance: 'user-user-field_mobile_phone_number'.
   $field_instances['user-user-field_mobile_phone_number'] = array(
     'bundle' => 'user',
@@ -43,6 +74,43 @@ function ctf_configurations_registration_form_field_default_field_instances() {
       'settings' => array(),
       'type' => 'phone_textfield',
       'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'user-user-field_receive_newsletters'.
+  $field_instances['user-user-field_receive_newsletters'] = array(
+    'bundle' => 'user',
+    'default_value' => array(
+      0 => array(
+        'value' => 1,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 4,
+      ),
+    ),
+    'entity_type' => 'user',
+    'field_name' => 'field_receive_newsletters',
+    'label' => 'Receive newsletters and exclusive sales reports from condostrader.ca',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => 1,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 8,
     ),
   );
 
@@ -147,9 +215,11 @@ function ctf_configurations_registration_form_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t(' I am looking To:');
   t('First name');
   t('Last name');
   t('Mobile phone number');
+  t('Receive newsletters and exclusive sales reports from condostrader.ca');
   t('Select your search area:');
 
   return $field_instances;
