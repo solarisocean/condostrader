@@ -72,13 +72,6 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Footer: view all link */
-  $handler->display->display_options['footer']['area']['id'] = 'area';
-  $handler->display->display_options['footer']['area']['table'] = 'views';
-  $handler->display->display_options['footer']['area']['field'] = 'area';
-  $handler->display->display_options['footer']['area']['ui_name'] = 'view all link';
-  $handler->display->display_options['footer']['area']['content'] = '<a href="/results">view all</a>';
-  $handler->display->display_options['footer']['area']['format'] = 'full_html';
   /* Field: Indexed Drealty Listing: Toronto gallery */
   $handler->display->display_options['fields']['field_toronto_gallery']['id'] = 'field_toronto_gallery';
   $handler->display->display_options['fields']['field_toronto_gallery']['table'] = 'search_api_index_toronto_condo_index';
@@ -582,7 +575,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['field_old_price_value_torcond']['label'] = '';
   $handler->display->display_options['fields']['field_old_price_value_torcond']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_old_price_value_torcond']['alter']['alter_text'] = 1;
-  $handler->display->display_options['fields']['field_old_price_value_torcond']['alter']['text'] = 'Price -[field_old_price_value_torcond]%';
+  $handler->display->display_options['fields']['field_old_price_value_torcond']['alter']['text'] = '<span class="discount">Price -[field_old_price_value_torcond]%</span>';
   $handler->display->display_options['fields']['field_old_price_value_torcond']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_old_price_value_torcond']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_old_price_value_torcond']['empty_zero'] = TRUE;
@@ -594,7 +587,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['label'] = '';
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '[field_toronto_gallery]
 <span class="price">[field_lp_dol_torcond]</span>
-<span class="discount">[field_old_price_value_torcond]</span>
+[field_old_price_value_torcond]
 <span class="flag">[ctrader_flag_handler] </span>';
   $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
   /* Field: Global: Fieldset */
