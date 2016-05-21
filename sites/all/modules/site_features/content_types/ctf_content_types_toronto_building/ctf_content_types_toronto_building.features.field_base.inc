@@ -10,30 +10,41 @@
 function ctf_content_types_toronto_building_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_bldg_amen4_out__torcond'.
-  $field_bases['field_bldg_amen4_out__torcond'] = array(
+  // Exported field_base: 'field_reference_to_condo'.
+  $field_bases['field_reference_to_condo'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(
       0 => 'drealty_listing',
-      1 => 'drealty_office',
-      2 => 'drealty_agent',
-      3 => 'drealty_openhouse',
     ),
-    'field_name' => 'field_bldg_amen4_out__torcond',
+    'field_name' => 'field_reference_to_condo',
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'target_id' => array(
+        0 => 'target_id',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'entityreference',
     'settings' => array(
-      'max_length' => 255,
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'toronto_condo' => 'toronto_condo',
+        ),
+      ),
+      'target_type' => 'drealty_listing',
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'entityreference',
   );
 
   return $field_bases;
