@@ -16,7 +16,7 @@ function ctf_configurations_search_api_default_search_api_index() {
     "server" : "solr_server",
     "item_type" : "drealty_listing",
     "options" : {
-      "datasource" : { "bundles" : [ "toronto_condo" ] },
+      "datasource" : { "bundles" : [ "toronto_condo", "toronto_building" ] },
       "index_directly" : 0,
       "cron_limit" : "50",
       "fields" : {
@@ -265,26 +265,18 @@ function ctf_configurations_search_api_default_search_api_index() {
         "rets_id" : { "type" : "text" },
         "rets_key" : { "type" : "text" },
         "search_api_language" : { "type" : "string" },
-        "type" : { "type" : "text" }
+        "type" : { "type" : "string" }
       },
       "data_alter_callbacks" : {
         "search_api_ranges_alter" : { "status" : 0, "weight" : "-50", "settings" : { "fields" : [] } },
         "search_api_alter_bundle_filter" : {
-          "status" : 0,
+          "status" : 1,
           "weight" : "-10",
-          "settings" : { "default" : "1", "bundles" : [] }
-        },
-        "search_api_alter_add_combined" : {
-          "status" : 0,
-          "weight" : "0",
-          "settings" : { "fields" : { "search_api_combined_1" : {
-                "name" : "test_combined_field",
-                "multivalue" : "0",
-                "type" : "string",
-                "imitate" : "",
-                "fields" : [ "field_test_range_min", "field_test_range_max" ],
-                "description" : "A @type combined of the following fields: Test_range_min, Test_range_max."
-              }
+          "settings" : {
+            "default" : "0",
+            "bundles" : {
+              "toronto_condo" : "toronto_condo",
+              "toronto_building" : "toronto_building"
             }
           }
         },
@@ -297,9 +289,9 @@ function ctf_configurations_search_api_default_search_api_index() {
             }
           }
         },
-        "search_api_alter_add_viewed_entity" : { "status" : 0, "weight" : "0", "settings" : { "mode" : "full" } },
+        "search_api_alter_add_aggregation" : { "status" : 0, "weight" : "0", "settings" : [] },
         "search_api_alter_add_url" : { "status" : 0, "weight" : "0", "settings" : [] },
-        "search_api_alter_add_aggregation" : { "status" : 0, "weight" : "0", "settings" : [] }
+        "search_api_alter_add_viewed_entity" : { "status" : 0, "weight" : "0", "settings" : { "mode" : "full" } }
       },
       "processors" : {
         "search_api_case_ignore" : {
@@ -644,7 +636,6 @@ function ctf_configurations_search_api_default_search_api_index() {
               "field_prop_feat4_out__torcond" : true,
               "field_prop_feat5_out__torcond" : true,
               "field_prop_feat6_out__torcond" : true,
-              "field_pets__torcond" : true,
               "field_prop_feat1_out__torcond" : true,
               "field_prop_feat2_out__torcond" : true,
               "field_pvt_ent__torcond" : true,
@@ -662,13 +653,9 @@ function ctf_configurations_search_api_default_search_api_index() {
               "field_rm11_dc1_out__torcond" : true,
               "field_rm11_dc2_out__torcond" : true,
               "field_spec_des6_out__torcond" : true,
-              "field_st__torcond" : true,
-              "field_st_dir__torcond" : true,
-              "field_st_num__torcond" : true,
               "field_st_sfx__torcond" : true,
               "field_status__torcond" : true,
               "field_stories__torcond" : true,
-              "field_style__torcond" : true,
               "field_tour_url__torcond" : true,
               "field_community_code__torcond" : true,
               "field_area_code__torcond" : true,
