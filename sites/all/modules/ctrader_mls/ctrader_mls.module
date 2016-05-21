@@ -196,7 +196,7 @@ function large_xml_import_operation(&$context) {
 
           $item = entity_create(DREALTY_ENTITY_TYPE, array(
             'id' => NULL,
-            'type' => 'toronto_condo',
+            'type' => TORONTO_CONDO,
             'conid' => NULL,
             'hash' => NULL,
             'process_images' => NULL,
@@ -336,7 +336,7 @@ function large_xml_import_finished($success, $results, $operations) {
 function ctrader_mls_field_attach_presave($entity_type, $entity) {
   switch ($entity_type) {
     case DREALTY_ENTITY_TYPE:
-      if ($entity->type == 'toronto_condo') {
+      if ($entity->type == TORONTO_CONDO) {
         if (isset($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'])) {
           $community = $entity->field_community__torcond[LANGUAGE_NONE][0]['value'] . ',';
           $place = !empty($entity->field_addr__torcond[LANGUAGE_NONE][0]['value']) ? $entity->field_addr__torcond[LANGUAGE_NONE][0]['value'] : $community;
@@ -380,12 +380,12 @@ function ctrader_mls_entity_insert($entity, $type) {
  *  Creates new building entity or if already created makes reference to condo.
  */
 function _ctrader_mls_create_building_and_reference($entity, $type) {
-  if ($type == DREALTY_ENTITY_TYPE) {
+  if ($type == DREALTY_ENTITY_TYPE && $entity->type == TORONTO_CONDO) {
     // Creates reference to condo marked as building.
     if (!empty($entity->field_addr__torcond[LANGUAGE_NONE][0]['value'])) {
 
       // todo Have to change field name!!!!!
-      $reference_field_name = 'field_reference_to_building';
+      $reference_field_name = 'field_reference_to_condo';
 
       $building_with_this_addr = db_select('field_data_field_addr__torcond', 'ad')
         ->fields('ad', array('entity_id',))
@@ -399,8 +399,8 @@ function _ctrader_mls_create_building_and_reference($entity, $type) {
         $entity_building->id = NULL;
         $entity_building->type = TORONTO_BUILDING;
         $entity_building->{$reference_field_name}[LANGUAGE_NONE][] = array('target_id' => $entity->id);
+        $entity_building->created = time();
         unset($entity_building->is_new);
-        unset($entity_building->created);
         unset($entity_building->original);
         entity_save(DREALTY_ENTITY_TYPE, $entity_building);
       }
