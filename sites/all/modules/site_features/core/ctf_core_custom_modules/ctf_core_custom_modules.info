@@ -12,7 +12,6 @@ dependencies[] = ctf_configurations_registration_form
 dependencies[] = ctf_configurations_search_api
 dependencies[] = ctf_content_types_blog_post
 dependencies[] = ctf_content_types_condo
-dependencies[] = ctf_content_types_toronto_building
 dependencies[] = ctf_core_field_bases
 dependencies[] = ctf_core_image_styles
 dependencies[] = ctf_mini_panels_search_facets
