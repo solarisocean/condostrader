@@ -7,6 +7,8 @@
  */
 
 define('DREALTY_ENTITY_TYPE', 'drealty_listing');
+define('TORONTO_BUILDING', 'toronto_building');
+define('TORONTO_CONDO', 'toronto_condo');
 
 
 /**
@@ -352,18 +354,76 @@ function ctrader_mls_field_attach_presave($entity_type, $entity) {
 function ctrader_mls_entity_presave($entity, $type) {
   switch ($type) {
     case DREALTY_ENTITY_TYPE:
-      if ($entity->type == 'toronto_condo') {
+      if ($entity->type == TORONTO_CONDO) {
         if (isset($entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value'])) {
           $key = count($entity->field_old_price_value__torcond[LANGUAGE_NONE]);
           if (empty($key) || $entity->field_old_price_value__torcond[LANGUAGE_NONE][$key - 1]['value'] != $entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value']) {
             $entity->field_old_price_value__torcond[LANGUAGE_NONE][$key]['value'] = $entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value'];
           }
         }
+        _ctrader_mls_create_building_and_reference($entity, $type);
       }
       break;
   }
 }
 
+
+/**
+ * Implements hook_entity_insert().
+ */
+function ctrader_mls_entity_insert($entity, $type) {
+  _ctrader_mls_create_building_and_reference($entity, $type);
+}
+
+
+/**
+ *  Creates new building entity or if already created makes reference to condo.
+ */
+function _ctrader_mls_create_building_and_reference($entity, $type) {
+  if ($type == DREALTY_ENTITY_TYPE) {
+    // Creates reference to condo marked as building.
+    if (!empty($entity->field_addr__torcond[LANGUAGE_NONE][0]['value'])) {
+
+      // todo Have to change field name!!!!!
+      $reference_field_name = 'field_reference_to_building';
+
+      $building_with_this_addr = db_select('field_data_field_addr__torcond', 'ad')
+        ->fields('ad', array('entity_id',))
+        ->condition('bundle', TORONTO_BUILDING)
+        ->condition('field_addr__torcond_value', $entity->field_addr__torcond[LANGUAGE_NONE][0]['value'], '=')
+        ->orderBy('entity_id')
+        ->execute()
+        ->fetchCol();
+      if (empty($building_with_this_addr)) {
+        $entity_building = clone $entity;
+        $entity_building->id = NULL;
+        $entity_building->type = TORONTO_BUILDING;
+        $entity_building->{$reference_field_name}[LANGUAGE_NONE][] = array('target_id' => $entity->id);
+        unset($entity_building->is_new);
+        unset($entity_building->created);
+        unset($entity_building->original);
+        entity_save(DREALTY_ENTITY_TYPE, $entity_building);
+      }
+      else {
+        $building = entity_load_single(DREALTY_ENTITY_TYPE, reset($building_with_this_addr));
+
+        // Checks if this building has reference with this condo.
+        $not_have_reference = TRUE;
+        if (isset($building->{$reference_field_name}[LANGUAGE_NONE][0])) {
+          foreach ($building->{$reference_field_name}[LANGUAGE_NONE] as $key => $value) {
+            if ($value['target_id'] == $entity->id) {
+              $not_have_reference = FALSE;
+            }
+          }
+        }
+        if ($not_have_reference) {
+          $building->{$reference_field_name}[LANGUAGE_NONE][] = array('target_id' => $entity->id);
+          entity_save(DREALTY_ENTITY_TYPE, $building);
+        }
+      }
+    }
+  }
+}
 
 /**
  * Implements hook_form_alter().
