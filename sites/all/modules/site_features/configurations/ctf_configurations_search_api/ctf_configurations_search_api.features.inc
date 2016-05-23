@@ -86,7 +86,7 @@ function ctf_configurations_search_api_default_search_api_index() {
         "field_idx_dt__torcond" : { "type" : "date" },
         "field_insur_bldg__torcond" : { "type" : "string" },
         "field_kit_plus__torcond" : { "type" : "string" },
-        "field_laundry__torcond" : { "type" : "text" },
+        "field_laundry__torcond" : { "type" : "string" },
         "field_laundry_lev__torcond" : { "type" : "string" },
         "field_lease_term__torcond" : { "type" : "string" },
         "field_level10__torcond" : { "type" : "string" },

@@ -196,6 +196,7 @@ function ctrader_map_search_api_solr_query_alter(array &$call_args, SearchApiQue
           'ss_field_community_code__torcond',
           'ss_field_community__torcond',
           'tm_field_ml_num__torcond',
+          'ss_field_ml_num__torcond',
         );
         $call_args['params']['fl'] = implode(',', $need_this_fields);
         break;
@@ -259,7 +260,8 @@ function ctrader_map_block_view($delta = '') {
           );
         }
         $popup_content = '';
-        $popup_content .= 'id: ' . $item['fields']['search_api_id'] . '<br>MLS #: ' . $item['fields']['field_ml_num__torcond'][0];
+        $mls_num = isset($item['fields']['field_ml_num__torcond'][0]) ? '<br>MLS #: ' . $item['fields']['field_ml_num__torcond'][0] : '';
+        $popup_content .= 'id: ' . $item['fields']['search_api_id'] . $mls_num;
         if (!empty($item['fields']['field_addr__torcond'][0])) {
           $popup_content .= '<br>' . $item['fields']['field_addr__torcond'][0];
         }
