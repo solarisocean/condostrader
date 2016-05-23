@@ -142,3 +142,17 @@ function condor_facetapi_link_inactive($variables) {
   $variables['options']['html'] = TRUE;
   return theme_link($variables);
 }
+
+
+/**
+ * Implementation theme_form_views_exposed_form_alter().
+ * @param $form
+ * @param $form_state
+ */
+function condor_form_views_exposed_form_alter(&$form, &$form_state) {
+
+  //Have changed views-exposed-form-search-results-ctrader-block-1 default value.
+  if ($form['#id'] == 'views-exposed-form-search-results-ctrader-block-1') {
+    $form['sort_bef_combine']['#default_value'] = 'field_timestamp_sql_torcond ASC';
+  }
+}
