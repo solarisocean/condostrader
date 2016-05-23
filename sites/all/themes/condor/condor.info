@@ -60,8 +60,6 @@ scripts[] = js/jquery-ui.min.js
 scripts[] = js/swiper.min.js
 scripts[] = js/jquery.mCustomScrollbar.min.js
 scripts[] = js/chosen.jquery.min.js
-scripts[] = js/jquery.infinitescroll.min.js
-
 ; This section lists the regions defined in the page.tpl.php. The name in
 ; brackets is the machine name of the region. The text after the equals sign is
 ; a descriptive text used on the admin/structure/blocks page.
