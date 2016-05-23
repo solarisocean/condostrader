@@ -398,3 +398,21 @@
 
   }
 }
+
+%condo-more-button {
+  outline: none;
+  padding: 10px 32px;
+  margin: 50px 0 30px;
+  display: inline-block;
+  font-weight: bold;
+  color: $white;
+  text-transform: uppercase;
+  font-size: rem-calc(14);
+  @include transition(box-shadow .2s ease-in-out);
+  @extend %gradient-background;
+
+  &:hover {
+    @include transition(box-shadow .2s ease-in-out);
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+  }
+}

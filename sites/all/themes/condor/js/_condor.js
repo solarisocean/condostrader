@@ -98,7 +98,7 @@
             });
 
             $('.page-search-results .view-search-results-ctrader .view-content').mCustomScrollbar({
-                setHeight: "612px",
+                setHeight: "690px",
                 theme: "inset-2"
             });
 
@@ -163,6 +163,55 @@
                 "disable_search": true,
                 "placeholder_text_single": Drupal.t("Sort by: ")
             });
+        }
+    };
+
+    /**
+     * Make view search results ajax load. 
+     */
+    Drupal.behaviors.viewsAuto = {
+        attach: function (context, settings) {
+
+            var $container = $('div.mCSB_container');
+            var pager = '.view-search-results-ctrader .item-list .pager';
+
+            $('#search-results-ctrader-load-more', context).click(function () {
+                var nextPage = $('.pager .pager-next a').attr('href');
+
+                $.ajax({
+                    url: nextPage,
+                    context: context,
+                    beforeSend: function(){
+                        $('#search-results-ctrader-load-more').addClass('load');
+                    },
+                    success: function(){
+                        $('#search-results-ctrader-load-more').removeClass('load');
+                    }
+                }).done(function(data) {
+                    $(data).find('.views-row').appendTo($container).hide().fadeIn("slow");
+                    $(pager).replaceWith($(data).find(pager));
+                    if ($(data).find(pager).find('.pager-next a').attr('href') !== undefined) {
+                        $('#search-results-ctrader-load-more').appendTo($container);
+                    } else {
+                        $('#search-results-ctrader-load-more').remove();
+                    }
+                });
+
+            });
+        }
+    };
+
+    /**
+     * Set map block height in result page.
+     */
+    Drupal.behaviors.mapHeight = {
+        attach: function (context, settings) {
+
+            var mainHeight = $('.main').height();
+            if(mainHeight !== 0) {
+                $("#mapid").height(mainHeight);
+            }
+
         }
     };
 
