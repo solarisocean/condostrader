@@ -63,8 +63,27 @@ function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
       }
     }
   }
-  if ($form_id == 'facetapi_select_facet_form_3') {
-    $stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
+  if ($form_id == 'search_api_admin_index_fields') {
+    foreach ($form['fields'] as $key => $field) {
+      if (strpos($key, 'field_reference_to_condo:') !== FALSE) {
+        $needs_referenced_fields = array(
+          ':field_lp_dol__torcond',
+          ':field_s_r__torcond',
+          ':field_price_per_sqft__torcond',
+          ':field_sqft__torcond',
+          ':field_reference_to_condo',
+        );
+        $delete_field = TRUE;
+        foreach ($needs_referenced_fields as $value) {
+          if (strpos($key, $value) !== FALSE) {
+            $delete_field = FALSE;
+          }
+        }
+        if ($delete_field) {
+          unset($form['fields'][$key]);
+        }
+      }
+    }
   }
 }
 
@@ -183,7 +202,8 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
       foreach ($build as $key => $item) {
         switch ($key) {
           case $replace_this_facet:
-            $build[$replace_this_facet]["#markup"] = t('Require Locker');
+            $build[$replace_this_facet]['#markup'] = l(t('Require Locker'), '');
+            $build[$replace_this_facet]['#html'] = TRUE;
             $build[$replace_this_facet]['#indexed_value'] = t('Require Locker');
             break;
           // Remove this facet item.
@@ -203,7 +223,8 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
       foreach ($build as $key => $item) {
         switch ($key) {
           case $replace_this_facet:
-            $build[$replace_this_facet]["#markup"] = t('Pets Allowed');
+            $build[$replace_this_facet]['#markup'] = l(t('Pets Allowed'), '');
+            $build[$replace_this_facet]['#html'] = TRUE;
             break;
           case 'N':
             unset($build[$key]);
@@ -217,9 +238,9 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
       $items = $adapter->getActiveItems($facet);
       $item_values = array();
 
-      foreach($build as $key => $build_item) {
+      foreach ($build as $key => $build_item) {
         $build[$key]['#html'] = TRUE;
-        $build[$key]['#markup'] = l(t($build_item['#markup']), '#');
+        $build[$key]['#markup'] = l(t($build_item['#markup']), '');
       }
 
       foreach ($items as $item) {
@@ -242,7 +263,8 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
       break;
     case 'field_prkg_inc__torcond':
       unset($build['N']);
-      $build['Y']['#markup'] = t('Require Parking');
+      $build['Y']['#markup'] = l(t('Require Parking'), '');
+      $build['Y']['#html'] = TRUE;
       break;
     case 'field_s_r__torcond':
       $build['Lease']['#markup'] = l(t('For rent'), '');
