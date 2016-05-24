@@ -5,6 +5,30 @@
  */
 
 /**
+ * Implements hook_default_search_api_autocomplete_search().
+ */
+function ctf_configurations_search_api_default_search_api_autocomplete_search() {
+  $items = array();
+  $items['search_api_views_search_results_ctrader'] = entity_import('search_api_autocomplete_search', '{
+    "machine_name" : "search_api_views_search_results_ctrader",
+    "name" : "Search results ctrader",
+    "index_id" : "toronto_condo_index",
+    "suggester_id" : "server",
+    "type" : "search_api_views",
+    "enabled" : "1",
+    "options" : {
+      "suggester_configuration" : { "fields" : [ "search_api_aggregation_1" ] },
+      "min_length" : "1",
+      "results" : 1,
+      "custom" : { "display" : "page_1" },
+      "submit_button_selector" : ":submit",
+      "autosubmit" : 1
+    }
+  }');
+  return $items;
+}
+
+/**
  * Implements hook_default_search_api_index().
  */
 function ctf_configurations_search_api_default_search_api_index() {
