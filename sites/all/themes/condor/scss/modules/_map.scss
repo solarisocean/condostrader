@@ -1,0 +1,41 @@
+.leaflet-container {
+  svg.tracer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2001;
+    pointer-events: none;
+  }
+
+  div.polygon-elbow {
+    -webkit-transition: opacity .25s;
+    box-shadow: 0 0 0 2px white, 0 0 10px rgba(0, 0, 0, .35);
+    border: 5px solid $ecstasy;
+    border-radius: 10px;
+    transition: opacity 0.25s;
+    cursor: move;
+    opacity: 1;
+    pointer-events: all;
+    box-sizing: border-box;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  .tracer.leaflet-clickable {
+    transition: all 0.25s;
+    stroke-width: 4px;
+    stroke-opacity: 1;
+    stroke: #F47523;
+    position: absolute;
+    z-index: 1001;
+    fill: #F47523;
+    fill-opacity: .75;
+    -webkit-filter: none;
+  }
+
+  .drawing-line {
+    stroke: $ecstasy;
+  }
+}
