@@ -45,7 +45,7 @@ function ctrader_saf_menu() {
  */
 function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-search-results-ctrader-block-1') {
-    $form['sort_bef_combine']['#default_value'] = '';
+//    $form['sort_bef_combine']['#default_value'] = '';
   }
   if ($form_id == 'search_api_ranges_block_slider_view_form_field_sqft_range_max__torcond') {
 //    $form['range-min']['#value'] = 0;
@@ -63,6 +63,28 @@ function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
       }
     }
   }
+  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-search-results-ctrader-page-1') {
+    $form['#action'] = '/' . CTRADER_SEARCH_RESULT_PAGE;
+    if (drupal_get_path_alias() == CTRADER_SEARCH_RESULT_PAGE) {
+
+      // Needs for notice error disabling.
+      if (!isset($form_state['#combine_param'])) {
+        $form_state['#combine_param'] = 'del';
+        $form_state['values']['del'] = '';
+        $form_state['values']['sorting'] = '';
+      }
+
+      $form['search_api_aggregation_1']['#type'] = 'hidden';
+      $form['#info']['filter-search_api_aggregation_1']['label'] = '';
+    }
+    elseif (drupal_is_front_page()) {
+      $form['sorting']['#type'] = 'hidden';
+      $form['search_api_aggregation_1']['#attributes']['placeholder'] = t('Search by Neighbourhood, Condo Address or Name ...');
+      $form['search_api_aggregation_1']['#size'] = 70;
+    }
+  }
+
+  // Show only needed fields in index field form (problem with large data in POST).
   if ($form_id == 'search_api_admin_index_fields') {
     foreach ($form['fields'] as $key => $field) {
       if (strpos($key, 'field_reference_to_condo:') !== FALSE) {

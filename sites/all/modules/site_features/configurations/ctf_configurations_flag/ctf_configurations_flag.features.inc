@@ -48,6 +48,7 @@ function ctf_configurations_flag_flag_default_flags() {
     'global' => 0,
     'types' => array(
       0 => 'toronto_condo',
+      1 => 'toronto_building',
     ),
     'flag_short' => '&#13;',
     'flag_long' => '',

@@ -152,7 +152,10 @@ function condor_facetapi_link_inactive($variables) {
 function condor_form_views_exposed_form_alter(&$form, &$form_state) {
 
   //Have changed views-exposed-form-search-results-ctrader-block-1 default value.
-  if ($form['#id'] == 'views-exposed-form-search-results-ctrader-block-1') {
-    $form['sort_bef_combine']['#default_value'] = 'field_timestamp_sql_torcond ASC';
+  switch ($form['#id']) {
+    case 'views-exposed-form-search-results-ctrader-block-1':
+    case 'views-exposed-form-search-results-ctrader-page-1':
+      $form['sorting']['#default_value'] = 'field_timestamp_sql_torcond ASC';
+      break;
   }
 }

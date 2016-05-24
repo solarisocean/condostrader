@@ -37,7 +37,11 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
     'query_type' => 'term',
     'limit_active_items' => 0,
     'default_true' => '1',
-    'facet_search_ids' => array(),
+    'facet_search_ids' => array(
+      'search_api_views:search_results_ctrader:page_2' => 'search_api_views:search_results_ctrader:page_2',
+      'search_api_views:search_results_ctrader:page_3' => 'search_api_views:search_results_ctrader:page_3',
+      'search_api_views:search_results_ctrader:page_4' => 'search_api_views:search_results_ctrader:page_4',
+    ),
     'exclude' => 0,
     'pretty_paths_alias' => 'field_br__torcond',
   );
@@ -238,7 +242,11 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
     'query_type' => 'term',
     'limit_active_items' => 0,
     'default_true' => '1',
-    'facet_search_ids' => array(),
+    'facet_search_ids' => array(
+      'search_api_views:search_results_ctrader:page_2' => 'search_api_views:search_results_ctrader:page_2',
+      'search_api_views:search_results_ctrader:page_3' => 'search_api_views:search_results_ctrader:page_3',
+      'search_api_views:search_results_ctrader:page_4' => 'search_api_views:search_results_ctrader:page_4',
+    ),
     'exclude' => 0,
   );
   $export['search_api@toronto_condo_index::field_locker__torcond'] = $facet;
@@ -263,14 +271,18 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
       'force_deactivation' => TRUE,
       'regex' => FALSE,
     ),
-    'facet_mincount' => '1',
+    'facet_mincount' => '0',
     'facet_missing' => '0',
     'flatten' => 0,
     'individual_parent' => 0,
     'query_type' => 'term',
     'limit_active_items' => 0,
     'default_true' => '1',
-    'facet_search_ids' => array(),
+    'facet_search_ids' => array(
+      'search_api_views:search_results_ctrader:page_2' => 'search_api_views:search_results_ctrader:page_2',
+      'search_api_views:search_results_ctrader:page_3' => 'search_api_views:search_results_ctrader:page_3',
+      'search_api_views:search_results_ctrader:page_4' => 'search_api_views:search_results_ctrader:page_4',
+    ),
     'exclude' => 0,
     'pretty_paths_alias' => 'field_lp_dol__torcond',
   );
@@ -303,7 +315,11 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
     'query_type' => 'term',
     'limit_active_items' => 0,
     'default_true' => '1',
-    'facet_search_ids' => array(),
+    'facet_search_ids' => array(
+      'search_api_views:search_results_ctrader:page_2' => 'search_api_views:search_results_ctrader:page_2',
+      'search_api_views:search_results_ctrader:page_3' => 'search_api_views:search_results_ctrader:page_3',
+      'search_api_views:search_results_ctrader:page_4' => 'search_api_views:search_results_ctrader:page_4',
+    ),
     'exclude' => 0,
   );
   $export['search_api@toronto_condo_index::field_pets__torcond'] = $facet;
@@ -367,7 +383,11 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
     'query_type' => 'term',
     'limit_active_items' => 0,
     'default_true' => '1',
-    'facet_search_ids' => array(),
+    'facet_search_ids' => array(
+      'search_api_views:search_results_ctrader:page_2' => 'search_api_views:search_results_ctrader:page_2',
+      'search_api_views:search_results_ctrader:page_3' => 'search_api_views:search_results_ctrader:page_3',
+      'search_api_views:search_results_ctrader:page_4' => 'search_api_views:search_results_ctrader:page_4',
+    ),
     'exclude' => 0,
   );
   $export['search_api@toronto_condo_index::field_s_r__torcond'] = $facet;
@@ -420,14 +440,18 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
       'bundle' => 'none',
       'bundle_selected' => array(),
     ),
-    'facet_mincount' => '1',
+    'facet_mincount' => '0',
     'facet_missing' => '0',
     'flatten' => 0,
     'individual_parent' => 0,
     'query_type' => 'term',
     'limit_active_items' => 0,
     'default_true' => '1',
-    'facet_search_ids' => array(),
+    'facet_search_ids' => array(
+      'search_api_views:search_results_ctrader:page_2' => 'search_api_views:search_results_ctrader:page_2',
+      'search_api_views:search_results_ctrader:page_3' => 'search_api_views:search_results_ctrader:page_3',
+      'search_api_views:search_results_ctrader:page_4' => 'search_api_views:search_results_ctrader:page_4',
+    ),
     'exclude' => 0,
   );
   $export['search_api@toronto_condo_index::field_sqft_range_max__torcond'] = $facet;

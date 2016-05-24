@@ -175,6 +175,7 @@ function ctrader_map_search_api_solr_query_alter(array &$call_args, SearchApiQue
     case 'search_api_views:condo_search_page:page':
     case 'search_api_views:condo_search_page:block_1':
     case 'search_api_views:search_results_ctrader:block_1':
+    case 'search_api_views:search_results_ctrader:page_1':
       $query_string = serialize($query);
       $_SESSION['query_from_view'] = $query_string;
       break;

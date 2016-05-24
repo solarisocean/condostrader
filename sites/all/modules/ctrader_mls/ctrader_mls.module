@@ -402,6 +402,7 @@ function _ctrader_mls_create_building_and_reference($entity, $type) {
         $entity_building->created = time();
         unset($entity_building->is_new);
         unset($entity_building->original);
+        $entity_building->label = 'Building (' . $entity_building->label . ')';
         entity_save(DREALTY_ENTITY_TYPE, $entity_building);
       }
       else {
