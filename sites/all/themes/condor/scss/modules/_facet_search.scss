@@ -13,6 +13,8 @@
     text-shadow: 1px 1px 1px rgba(0,0,0,.2);
     display: inline-block;
     float: left;
+    font-weight: 100;
+    text-transform: uppercase;
   }
 
   .panels-flexible-region-inside {
@@ -154,6 +156,10 @@
         padding: 5px 10px;
         position: relative;
 
+        &.facetapi-checkbox {
+          display: none;
+        }
+
         &:before {
           margin-right: 6px;
         }
@@ -267,6 +273,52 @@
 
       input {
         display: none;
+      }
+    }
+  }
+
+  .facet-map-block {
+    clear: both;
+
+    button {
+      font-size: rem-calc(12);
+      color: $ecstasy;
+      padding: 5px 10px;
+      background: none;
+      border-width: 1px;
+      border-style: solid;
+      outline: none;
+      margin-bottom: 0;
+
+      &.facet-map-block-neighbourhood {
+        border-color: $ecstasy;
+        margin-right: 10px;
+        @include transition(all .3s ease-in-out);
+
+        &:hover,
+        &.active {
+          background: $ecstasy;
+          color: $white;
+          @include transition(all .3s ease-in-out);
+        }
+      }
+
+      &.facet-map-block-map-search {
+        color: $mirage;
+        border-color: darken($athens-gray, 6);
+        @include transition(background .3s ease-in-out);
+        @include pseudo-element("before", 14px, 16px, "map-icon.png", "not-center");
+
+        &:before {
+          margin-top: -1px;
+          margin-right: 5px;
+        }
+
+        &:hover,
+        &.active {
+          background: $athens-gray;
+          @include transition(background .3s ease-in-out);
+        }
       }
     }
   }

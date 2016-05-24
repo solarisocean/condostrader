@@ -305,6 +305,17 @@ function ctrader_map_block_view($delta = '') {
       drupal_add_js($path . '/dist/leaflet.draw.js');
       drupal_add_css($path . '/dist/leaflet.draw.css');
 
+      //Leaflet Free Draw tool.
+      $path = libraries_get_path('leafletFreeDraw');
+
+      drupal_add_js($path . '/d3.min.js');
+      drupal_add_js($path . '/clipper.js');
+      drupal_add_js($path . '/concavehull.min.js');
+      drupal_add_js($path . '/FreeDraw.js');
+      drupal_add_js($path . '/Options.js');
+      drupal_add_js($path . '/Utilities.js');
+      drupal_add_js($path . '/Memory.js');
+      drupal_add_js($path . '/Hull.js');
 
       // another draw tools.
 //  $path = libraries_get_path('ConcaveHull');
