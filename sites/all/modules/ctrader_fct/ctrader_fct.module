@@ -15,3 +15,35 @@ function ctrader_fct_form_alter(&$form, &$form_state, $form_id) {
       break;
   }
 }
+
+/**
+ * Implements hook_block_info().
+ */
+function ctrader_fct_block_info() {
+  //Create block to toggle map mode.
+  $blocks['facet_map'] = array(
+    'info' => t('Facet Map Block'),
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function ctrader_fct_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    //Create block to toggle map mode.
+    case 'facet_map':
+      $block['subject'] = '<h5 class="pane-title">' . t('Search by: ') . '</h5>';
+      $block['content'] = '<div class="facet-map-block">';
+      $block['content'] .= '<button class="facet-map-block-neighbourhood">' . t('Neighbourhood') . '</button>';
+      $block['content'] .= '<button class="facet-map-block-map-search">' . t('Map Search') . '</button>';
+      $block['content'] .= '</div>';
+      break;
+  }
+
+  return $block;
+}

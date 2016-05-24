@@ -35,7 +35,6 @@
       padding-right: 0;
     }
 
-
     .facet-top {
       float: left;
 
@@ -88,6 +87,14 @@
       max-width: 780px;
       width: 100%;
       padding: 6px 0;
+    }
+
+    .facet-map-block {
+      button {
+        &.facet-map-block-neighbourhood {
+          margin-right: 22px;
+        }
+      }
     }
   }
 
@@ -183,7 +190,10 @@
         border-top-color: transparent;
         border-bottom-color: transparent;
         border-radius: 50%;
-        animation: rotate 1s ease-in-out infinite;
+        -webkit-animation: ld 1s ease-in-out infinite;
+        -moz-animation: ld 1s ease-in-out infinite;
+        -o-animation: ld 1s ease-in-out infinite;
+        animation: ld 1s ease-in-out infinite;
       }
     }
   }
