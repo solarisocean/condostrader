@@ -33,7 +33,6 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sort by:';
   $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'ASC';
   $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'DESC';
-  $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['bef'] = array(
     'general' => array(
       'allow_secondary' => 0,
@@ -42,18 +41,94 @@ function ctf_views_homepage_view_blocks_views_default_views() {
       'combine_rewrite' => NULL,
       'reset_label' => NULL,
     ),
-    'sort' => array(
+    'field_addr_torcond' => array(
       'bef_format' => 'default',
-      'advanced' => array(
-        'collapsible' => 0,
-        'collapsible_label' => 'Sort options',
-        'combine' => 1,
-        'combine_param' => 'sort_bef_combine',
-        'combine_rewrite' => '',
-        'reset' => 1,
-        'reset_label' => ' ',
-        'is_secondary' => 0,
+      'slider_options' => array(
+        'bef_slider_min' => '0',
+        'bef_slider_max' => '99999',
+        'bef_slider_step' => '1',
+        'bef_slider_animate' => '',
+        'bef_slider_orientation' => 'horizontal',
         'secondary_label' => NULL,
+        'collapsible_label' => NULL,
+        'combine_rewrite' => NULL,
+        'reset_label' => NULL,
+      ),
+      'more_options' => array(
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+            'secondary_label' => NULL,
+            'collapsible_label' => NULL,
+            'combine_rewrite' => NULL,
+            'reset_label' => NULL,
+          ),
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+        ),
+        'secondary_label' => NULL,
+        'collapsible_label' => NULL,
+        'combine_rewrite' => NULL,
+        'reset_label' => NULL,
+      ),
+      'secondary_label' => NULL,
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+    ),
+    'search_api_aggregation_1' => array(
+      'bef_format' => 'default',
+      'slider_options' => array(
+        'bef_slider_min' => '0',
+        'bef_slider_max' => '99999',
+        'bef_slider_step' => '1',
+        'bef_slider_animate' => '',
+        'bef_slider_orientation' => 'horizontal',
+        'secondary_label' => NULL,
+        'collapsible_label' => NULL,
+        'combine_rewrite' => NULL,
+        'reset_label' => NULL,
+      ),
+      'more_options' => array(
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+            'secondary_label' => NULL,
+            'collapsible_label' => NULL,
+            'combine_rewrite' => NULL,
+            'reset_label' => NULL,
+          ),
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+        ),
+        'secondary_label' => NULL,
+        'collapsible_label' => NULL,
+        'combine_rewrite' => NULL,
+        'reset_label' => NULL,
       ),
       'secondary_label' => NULL,
       'collapsible_label' => NULL,
@@ -158,7 +233,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_br_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_br_torcond']['alter']['text'] = '[field_br_torcond][field_br_plus_torcond]';
   $handler->display->display_options['fields']['field_br_torcond']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_br_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_br_torcond']['empty'] = '<span class="no-results-text">-</span>';
   $handler->display->display_options['fields']['field_br_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_br_torcond']['settings'] = array(
     'thousand_separator' => '',
@@ -193,7 +268,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_bath_tot_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['alter']['text'] = '[field_bath_tot_torcond] Bath';
   $handler->display->display_options['fields']['field_bath_tot_torcond']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_bath_tot_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_bath_tot_torcond']['empty'] = '<span class="no-results-text">-</span>';
   $handler->display->display_options['fields']['field_bath_tot_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['settings'] = array(
@@ -338,7 +413,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_maint_torcond']['label'] = 'Maint Fees';
   $handler->display->display_options['fields']['field_maint_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_maint_torcond']['alter']['text'] = '$[field_maint_torcond]';
-  $handler->display->display_options['fields']['field_maint_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_maint_torcond']['empty'] = '<span class="no-results-text">-</span>';
   $handler->display->display_options['fields']['field_maint_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_maint_torcond']['settings'] = array(
     'thousand_separator' => ',',
@@ -482,7 +557,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_br_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_br_torcond']['alter']['text'] = '[field_br_torcond][field_br_plus_torcond]';
   $handler->display->display_options['fields']['field_br_torcond']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_br_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_br_torcond']['empty'] = '<span class="no-results-text">-</span>';
   $handler->display->display_options['fields']['field_br_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_br_torcond']['settings'] = array(
     'thousand_separator' => '',
@@ -517,7 +592,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_bath_tot_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['alter']['text'] = '[field_bath_tot_torcond] Bath';
   $handler->display->display_options['fields']['field_bath_tot_torcond']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_bath_tot_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_bath_tot_torcond']['empty'] = '<span class="no-results-text">-</span>';
   $handler->display->display_options['fields']['field_bath_tot_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['settings'] = array(
@@ -662,7 +737,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_maint_torcond']['label'] = 'Maint Fees';
   $handler->display->display_options['fields']['field_maint_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_maint_torcond']['alter']['text'] = '$[field_maint_torcond]';
-  $handler->display->display_options['fields']['field_maint_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_maint_torcond']['empty'] = '<span class="no-results-text">-</span>';
   $handler->display->display_options['fields']['field_maint_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_maint_torcond']['settings'] = array(
     'thousand_separator' => ',',
@@ -819,7 +894,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_br_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_br_torcond']['alter']['text'] = '[field_br_torcond][field_br_plus_torcond]';
   $handler->display->display_options['fields']['field_br_torcond']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_br_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_br_torcond']['empty'] = '<span class="no-results-text">-</span>';
   $handler->display->display_options['fields']['field_br_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_br_torcond']['settings'] = array(
     'thousand_separator' => '',
@@ -854,7 +929,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_bath_tot_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['alter']['text'] = '[field_bath_tot_torcond] Bath';
   $handler->display->display_options['fields']['field_bath_tot_torcond']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_bath_tot_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_bath_tot_torcond']['empty'] = '<span class="no-results-text">-</span>';
   $handler->display->display_options['fields']['field_bath_tot_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['settings'] = array(
@@ -1001,7 +1076,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_maint_torcond']['label'] = 'Maint Fees';
   $handler->display->display_options['fields']['field_maint_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_maint_torcond']['alter']['text'] = '$[field_maint_torcond]';
-  $handler->display->display_options['fields']['field_maint_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_maint_torcond']['empty'] = '<span class="no-results-text">-</span>';
   $handler->display->display_options['fields']['field_maint_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_maint_torcond']['settings'] = array(
     'thousand_separator' => ',',
@@ -1152,7 +1227,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_br_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_br_torcond']['alter']['text'] = '[field_br_torcond][field_br_plus_torcond]';
   $handler->display->display_options['fields']['field_br_torcond']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_br_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_br_torcond']['empty'] = '<span class="no-results-text">-</span>';
   $handler->display->display_options['fields']['field_br_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_br_torcond']['settings'] = array(
     'thousand_separator' => '',
@@ -1187,7 +1262,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_bath_tot_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['alter']['text'] = '[field_bath_tot_torcond] Bath';
   $handler->display->display_options['fields']['field_bath_tot_torcond']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_bath_tot_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_bath_tot_torcond']['empty'] = '<span class="no-results-text">-</span>';
   $handler->display->display_options['fields']['field_bath_tot_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['settings'] = array(
@@ -1332,7 +1407,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_maint_torcond']['label'] = 'Maint Fees';
   $handler->display->display_options['fields']['field_maint_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_maint_torcond']['alter']['text'] = '$[field_maint_torcond]';
-  $handler->display->display_options['fields']['field_maint_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_maint_torcond']['empty'] = '<span class="no-results-text">-</span>';
   $handler->display->display_options['fields']['field_maint_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_maint_torcond']['settings'] = array(
     'thousand_separator' => ',',
@@ -1480,7 +1555,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_br_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_br_torcond']['alter']['text'] = '[field_br_torcond][field_br_plus_torcond]';
   $handler->display->display_options['fields']['field_br_torcond']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_br_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_br_torcond']['empty'] = '<span class="no-results-text">-</span>';
   $handler->display->display_options['fields']['field_br_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_br_torcond']['settings'] = array(
     'thousand_separator' => '',
@@ -1515,7 +1590,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_bath_tot_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['alter']['text'] = '[field_bath_tot_torcond] Bath';
   $handler->display->display_options['fields']['field_bath_tot_torcond']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_bath_tot_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_bath_tot_torcond']['empty'] = '<span class="no-results-text">-</span>';
   $handler->display->display_options['fields']['field_bath_tot_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['settings'] = array(
@@ -1660,7 +1735,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_maint_torcond']['label'] = 'Maint Fees';
   $handler->display->display_options['fields']['field_maint_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_maint_torcond']['alter']['text'] = '$[field_maint_torcond]';
-  $handler->display->display_options['fields']['field_maint_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_maint_torcond']['empty'] = '<span class="no-results-text">-</span>';
   $handler->display->display_options['fields']['field_maint_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_maint_torcond']['settings'] = array(
     'thousand_separator' => ',',

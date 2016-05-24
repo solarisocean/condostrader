@@ -23,7 +23,7 @@ function ctf_configurations_search_api_default_search_api_index() {
         "active" : { "type" : "integer" },
         "field_a_c__torcond" : { "type" : "string" },
         "field_ad_text__torcond" : { "type" : "text" },
-        "field_addr__torcond" : { "type" : "string" },
+        "field_addr__torcond" : { "type" : "text" },
         "field_all_inc__torcond" : { "type" : "string" },
         "field_apt_num__torcond" : { "type" : "string" },
         "field_area__torcond" : { "type" : "string" },
@@ -105,7 +105,7 @@ function ctf_configurations_search_api_default_search_api_index() {
         "field_locker_num__torcond" : { "type" : "string" },
         "field_lp_dol__torcond" : { "type" : "decimal" },
         "field_maint__torcond" : { "type" : "decimal" },
-        "field_ml_num__torcond" : { "type" : "string" },
+        "field_ml_num__torcond" : { "type" : "text" },
         "field_mmap_col__torcond" : { "type" : "decimal" },
         "field_mmap_page__torcond" : { "type" : "string" },
         "field_mmap_row__torcond" : { "type" : "text" },
@@ -271,10 +271,11 @@ function ctf_configurations_search_api_default_search_api_index() {
         "field_zoning__torcond" : { "type" : "string" },
         "id" : { "type" : "integer" },
         "inactive_date" : { "type" : "integer" },
-        "label" : { "type" : "string" },
+        "label" : { "type" : "text" },
         "last_reconciled" : { "type" : "integer" },
         "rets_id" : { "type" : "string" },
         "rets_key" : { "type" : "string" },
+        "search_api_aggregation_1" : { "type" : "text" },
         "search_api_language" : { "type" : "string" },
         "type" : { "type" : "string" }
       },
@@ -295,15 +296,35 @@ function ctf_configurations_search_api_default_search_api_index() {
             }
           }
         },
-        "search_api_alter_add_aggregation" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_add_aggregation" : {
+          "status" : 1,
+          "weight" : "0",
+          "settings" : { "fields" : { "search_api_aggregation_1" : {
+                "name" : "text search field",
+                "type" : "fulltext",
+                "fields" : [
+                  "field_ml_num__torcond",
+                  "field_addr__torcond",
+                  "field_city_region__torcond:name"
+                ],
+                "description" : "A Fulltext aggregation of the following fields: Ml_num, Addr, City region \\u00bb Name."
+              }
+            }
+          }
+        },
         "search_api_alter_add_url" : { "status" : 0, "weight" : "0", "settings" : [] },
         "search_api_alter_add_viewed_entity" : { "status" : 0, "weight" : "0", "settings" : { "mode" : "full" } }
       },
       "processors" : {
         "search_api_case_ignore" : {
-          "status" : 0,
+          "status" : 1,
           "weight" : "0",
-          "settings" : { "fields" : { "field_extras__torcond" : true, "field_stories__torcond" : true } }
+          "settings" : { "fields" : {
+              "field_extras__torcond" : true,
+              "field_stories__torcond" : true,
+              "search_api_aggregation_1" : true
+            }
+          }
         },
         "search_api_html_filter" : {
           "status" : 0,

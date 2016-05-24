@@ -230,11 +230,48 @@ function ctf_mini_panels_search_facets_default_panels_mini() {
     $display->content['new-a3b29ff8-9720-4cb4-9fde-fd7739a9d33e'] = $pane;
     $display->panels['center_'][1] = 'new-a3b29ff8-9720-4cb4-9fde-fd7739a9d33e';
     $pane = new stdClass();
+    $pane->pid = 'new-97f6c741-e7e8-428b-b9f3-e17ea9c640bc';
+    $pane->panel = 'center_';
+    $pane->type = 'block';
+    $pane->subtype = 'views-41247aa790e39013d6fa3ea38cc70fd4';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'path_visibility',
+          'settings' => array(
+            'visibility_setting' => '1',
+            'paths' => '<front>
+main-page',
+          ),
+          'context' => 'empty',
+          'not' => FALSE,
+        ),
+      ),
+    );
+    $pane->configuration = array(
+      'inherit_path' => 1,
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $pane->uuid = '97f6c741-e7e8-428b-b9f3-e17ea9c640bc';
+    $display->content['new-97f6c741-e7e8-428b-b9f3-e17ea9c640bc'] = $pane;
+    $display->panels['center_'][2] = 'new-97f6c741-e7e8-428b-b9f3-e17ea9c640bc';
+    $pane = new stdClass();
     $pane->pid = 'new-9df01984-7f1d-4c12-92b3-54bd864a0152';
     $pane->panel = 'left';
     $pane->type = 'block';
     $pane->subtype = 'facetapi-xsNCDexPjpywTBiuQytW9Uh5vJzcVXhL';
-    $pane->shown = TRUE;
+    $pane->shown = FALSE;
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 1,
@@ -261,7 +298,7 @@ function ctf_mini_panels_search_facets_default_panels_mini() {
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 1,
-      'override_title_text' => '',
+      'override_title_text' => 'Region:',
       'override_title_heading' => 'h5',
     );
     $pane->cache = array();
@@ -280,7 +317,7 @@ function ctf_mini_panels_search_facets_default_panels_mini() {
     $pane->panel = 'left';
     $pane->type = 'block';
     $pane->subtype = 'facetapi-Nx6OMKmCFit0duct5Bl4O5Da0Z95ay4v';
-    $pane->shown = TRUE;
+    $pane->shown = FALSE;
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 1,
@@ -304,7 +341,19 @@ function ctf_mini_panels_search_facets_default_panels_mini() {
     $pane->type = 'block';
     $pane->subtype = 'ctrader_fct-facet_map';
     $pane->shown = TRUE;
-    $pane->access = array();
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'path_visibility',
+          'settings' => array(
+            'visibility_setting' => '1',
+            'paths' => 'search-results',
+          ),
+          'context' => 'empty',
+          'not' => FALSE,
+        ),
+      ),
+    );
     $pane->configuration = array(
       'override_title' => 0,
       'override_title_text' => '',

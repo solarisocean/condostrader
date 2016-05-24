@@ -5,6 +5,7 @@ dependencies[] = ctf_blocks_footer_top
 dependencies[] = ctf_blocks_main_map
 dependencies[] = ctf_blocks_navigation
 dependencies[] = ctf_blocks_powered_by_drupal
+dependencies[] = ctf_configurations_drealty_connections
 dependencies[] = ctf_configurations_facet_api
 dependencies[] = ctf_configurations_flag
 dependencies[] = ctf_configurations_hierarchical_select_configs

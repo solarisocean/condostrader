@@ -51,6 +51,6 @@ class FacetapiEmptyBehaviorCtrader extends FacetapiEmptyBehavior {
 
 
 
-    return array('#markup' => 'empty behaviorempty behaviorempty behavior');
+    return array('#markup' => '-*-');
   }
 }
