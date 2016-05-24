@@ -98,7 +98,7 @@
             });
 
             $('.page-search-results .view-search-results-ctrader .view-content').mCustomScrollbar({
-                setHeight: "690px",
+                setHeight: "675px",
                 theme: "inset-2"
             });
 
@@ -132,11 +132,22 @@
                 });
 
             };
-
-
+            
             radioCheck($('.facetapi-facet-field-br--torcond input:checkbox'));
             radioCheck($('.facetapi-facet-field-s-r--torcond input:checkbox'));
 
+            var checkboxes = [
+                '.facetapi-facet-field-locker--torcond input:checkbox',
+                '.facetapi-facet-field-prkg-inc--torcond input:checkbox',
+                '.facetapi-facet-field-pets--torcond input:checkbox'
+            ];
+
+            for (var i = 0; i < checkboxes.length; i++) {
+                if ($(checkboxes[i]).attr('checked')) {
+                    //Added class to checked checkbox.
+                    $(checkboxes[i]).parent().find('a').addClass('checked-facet');
+                }
+            }
 
             $('.facetapi-facet-field-locker--torcond a, .facetapi-facet-field-prkg-inc--torcond a, .facetapi-facet-field-pets--torcond a').on('click', function (e) {
                 var chbxInput = $(this).parent().find('input');
@@ -153,7 +164,7 @@
                     _this.addClass('checked-facet');
                     chbxInput.trigger('click');
                 }
-            })
+            });
 
             $('.facetapi-facetapi-select-dropdowns select').chosen({
                 "disable_search": true
@@ -198,20 +209,6 @@
                 });
 
             });
-        }
-    };
-
-    /**
-     * Set map block height in result page.
-     */
-    Drupal.behaviors.mapHeight = {
-        attach: function (context, settings) {
-
-            var mainHeight = $('.main').height();
-            if(mainHeight !== 0) {
-                $("#mapid").height(mainHeight);
-            }
-
         }
     };
 
