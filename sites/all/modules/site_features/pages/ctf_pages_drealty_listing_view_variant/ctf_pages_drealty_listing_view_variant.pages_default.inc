@@ -45,6 +45,43 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
+    $pane->pid = 'new-2f4dba51-1fa3-4293-abed-ccfeeb6553b6';
+    $pane->panel = 'center';
+    $pane->type = 'views';
+    $pane->subtype = 'nearby_listings_view';
+    $pane->shown = FALSE;
+    $pane->access = array(
+      'logic' => 'and',
+    );
+    $pane->configuration = array(
+      'override_pager_settings' => 0,
+      'use_pager' => 1,
+      'nodes_per_page' => '5',
+      'pager_id' => '0',
+      'offset' => '0',
+      'more_link' => 0,
+      'feed_icons' => 0,
+      'panel_args' => 1,
+      'link_to_view' => 0,
+      'args' => '',
+      'url' => '',
+      'display' => 'page_1',
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '2f4dba51-1fa3-4293-abed-ccfeeb6553b6';
+    $display->content['new-2f4dba51-1fa3-4293-abed-ccfeeb6553b6'] = $pane;
+    $display->panels['center'][0] = 'new-2f4dba51-1fa3-4293-abed-ccfeeb6553b6';
+    $pane = new stdClass();
     $pane->pid = 'new-a0e4d69c-b27a-458b-929f-94be1f752088';
     $pane->panel = 'center';
     $pane->type = 'entity_field';
@@ -96,11 +133,11 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 0;
+    $pane->position = 1;
     $pane->locks = array();
     $pane->uuid = 'a0e4d69c-b27a-458b-929f-94be1f752088';
     $display->content['new-a0e4d69c-b27a-458b-929f-94be1f752088'] = $pane;
-    $display->panels['center'][0] = 'new-a0e4d69c-b27a-458b-929f-94be1f752088';
+    $display->panels['center'][1] = 'new-a0e4d69c-b27a-458b-929f-94be1f752088';
     $pane = new stdClass();
     $pane->pid = 'new-5069fa9a-845e-4b26-97d7-be9f80e94062';
     $pane->panel = 'center';
@@ -131,11 +168,11 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 1;
+    $pane->position = 2;
     $pane->locks = array();
     $pane->uuid = '5069fa9a-845e-4b26-97d7-be9f80e94062';
     $display->content['new-5069fa9a-845e-4b26-97d7-be9f80e94062'] = $pane;
-    $display->panels['center'][1] = 'new-5069fa9a-845e-4b26-97d7-be9f80e94062';
+    $display->panels['center'][2] = 'new-5069fa9a-845e-4b26-97d7-be9f80e94062';
     $pane = new stdClass();
     $pane->pid = 'new-ad3746d3-f914-486b-9ae6-29de200f60fa';
     $pane->panel = 'center';
@@ -241,11 +278,34 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 2;
+    $pane->position = 3;
     $pane->locks = array();
     $pane->uuid = 'ad3746d3-f914-486b-9ae6-29de200f60fa';
     $display->content['new-ad3746d3-f914-486b-9ae6-29de200f60fa'] = $pane;
-    $display->panels['center'][2] = 'new-ad3746d3-f914-486b-9ae6-29de200f60fa';
+    $display->panels['center'][3] = 'new-ad3746d3-f914-486b-9ae6-29de200f60fa';
+    $pane = new stdClass();
+    $pane->pid = 'new-04518e64-9b3d-43c9-bd74-139a1fbb554d';
+    $pane->panel = 'center';
+    $pane->type = 'block';
+    $pane->subtype = 'ctrader_mls-nearby_view';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 4;
+    $pane->locks = array();
+    $pane->uuid = '04518e64-9b3d-43c9-bd74-139a1fbb554d';
+    $display->content['new-04518e64-9b3d-43c9-bd74-139a1fbb554d'] = $pane;
+    $display->panels['center'][4] = 'new-04518e64-9b3d-43c9-bd74-139a1fbb554d';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-a0e4d69c-b27a-458b-929f-94be1f752088';
   $handler->conf['display'] = $display;

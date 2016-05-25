@@ -28,6 +28,14 @@ function ctrader_mls_views_data() {
       'click sortable' => TRUE,
     ),
   );
+  $data['drealty_listing']['mortgage_calculator'] = array(
+    'title' => t('Mortgage calculator'),
+    'help' => t('Mortgage calculator'),
+    'field' => array(
+      'handler' => 'views_handler_field_ctrader_mortgage_calculator',
+      'click sortable' => TRUE,
+    ),
+  );
 
   return $data;
 }

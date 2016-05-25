@@ -76,6 +76,7 @@ dependencies[] = location_search
 dependencies[] = menu
 dependencies[] = menu_import
 dependencies[] = module_filter
+dependencies[] = mortgage_calculator
 dependencies[] = multiupload_filefield_widget
 dependencies[] = multiupload_imagefield_widget
 dependencies[] = number

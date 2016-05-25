@@ -357,11 +357,17 @@ function ctrader_mls_entity_presave($entity, $type) {
       if ($entity->type == TORONTO_CONDO) {
         if (isset($entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value'])) {
           $key = count($entity->field_old_price_value__torcond[LANGUAGE_NONE]);
-          if (empty($key) || $entity->field_old_price_value__torcond[LANGUAGE_NONE][$key - 1]['value'] != $entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value']) {
+//          drush_log(dt('$key'));
+          if (empty($key)) {
+            $entity->field_old_price_value__torcond[LANGUAGE_NONE][$key]['value'] = $entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value'];
+          }
+          elseif ($entity->field_old_price_value__torcond[LANGUAGE_NONE][$key - 1]['value'] != $entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value']) {
             $entity->field_old_price_value__torcond[LANGUAGE_NONE][$key]['value'] = $entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value'];
           }
         }
-        _ctrader_mls_create_building_and_reference($entity, $type);
+        if (!$entity->is_new) {
+          _ctrader_mls_create_building_and_reference($entity, $type);
+        }
       }
       break;
   }
@@ -440,6 +446,9 @@ function ctrader_mls_form_alter(&$form, &$form_state, $form_id) {
         $form['feed']['images']['image_chunk_size']['#options'][$key] = $value;
       }
       break;
+    case 'mortgage_calculator_js_form':
+      $form['mortgage_rate_2']['#weight'] = 0.002;
+      break;
   }
 }
 
@@ -453,3 +462,42 @@ function ctrader_mls_views_api() {
     'path' => drupal_get_path('module', 'ctrader_mls') . '/views',
   );
 }
+
+
+/**
+ * Implements hook_block_info().
+ */
+function ctrader_mls_block_info() {
+  $blocks = array();
+  $blocks['nearby_view'] = array(
+    'info' => t('Nearby view'),
+  );
+  return $blocks;
+}
+
+
+/**
+ * Implements hook_block_view().
+ */
+function ctrader_mls_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    case 'nearby_view':
+//      $view = views_embed_view('nearby_listings_view', 'page_1', array('43.70635259304132','-79.42205429077148'));
+      $block['subject'] = 'test nearby';
+//      $block['content'] = $view;
+      $block['content'] = 'empty';
+
+      break;
+  }
+  return $block;
+}
+
+
+/**
+ * Implements hook_views_pre_view().
+ */
+function ctrader_mls_views_pre_view(&$view, &$display_id, &$args) {
+  $stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
+}
+

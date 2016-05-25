@@ -248,7 +248,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_sqft_torcond']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_sqft_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_sqft_torcond']['alter']['text'] = '[field_sqft_torcond] sqft';
-  $handler->display->display_options['fields']['field_sqft_torcond']['empty'] = 'no results text ';
+  $handler->display->display_options['fields']['field_sqft_torcond']['empty'] = '-';
   $handler->display->display_options['fields']['field_sqft_torcond']['empty_zero'] = TRUE;
   /* Field: Beds */
   $handler->display->display_options['fields']['nothing_3']['id'] = 'nothing_3';
@@ -572,7 +572,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_sqft_torcond']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_sqft_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_sqft_torcond']['alter']['text'] = '[field_sqft_torcond] sqft';
-  $handler->display->display_options['fields']['field_sqft_torcond']['empty'] = 'no results text ';
+  $handler->display->display_options['fields']['field_sqft_torcond']['empty'] = '-';
   $handler->display->display_options['fields']['field_sqft_torcond']['empty_zero'] = TRUE;
   /* Field: Beds */
   $handler->display->display_options['fields']['nothing_3']['id'] = 'nothing_3';
@@ -909,7 +909,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_sqft_torcond']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_sqft_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_sqft_torcond']['alter']['text'] = '[field_sqft_torcond] sqft';
-  $handler->display->display_options['fields']['field_sqft_torcond']['empty'] = 'no results text ';
+  $handler->display->display_options['fields']['field_sqft_torcond']['empty'] = '-';
   $handler->display->display_options['fields']['field_sqft_torcond']['empty_zero'] = TRUE;
   /* Field: Beds */
   $handler->display->display_options['fields']['nothing_3']['id'] = 'nothing_3';
@@ -1242,7 +1242,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_sqft_torcond']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_sqft_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_sqft_torcond']['alter']['text'] = '[field_sqft_torcond] sqft';
-  $handler->display->display_options['fields']['field_sqft_torcond']['empty'] = 'no results text ';
+  $handler->display->display_options['fields']['field_sqft_torcond']['empty'] = '-';
   $handler->display->display_options['fields']['field_sqft_torcond']['empty_zero'] = TRUE;
   /* Field: Beds */
   $handler->display->display_options['fields']['nothing_3']['id'] = 'nothing_3';
@@ -1570,7 +1570,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_sqft_torcond']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_sqft_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_sqft_torcond']['alter']['text'] = '[field_sqft_torcond] sqft';
-  $handler->display->display_options['fields']['field_sqft_torcond']['empty'] = 'no results text ';
+  $handler->display->display_options['fields']['field_sqft_torcond']['empty'] = '-';
   $handler->display->display_options['fields']['field_sqft_torcond']['empty_zero'] = TRUE;
   /* Field: Beds */
   $handler->display->display_options['fields']['nothing_3']['id'] = 'nothing_3';

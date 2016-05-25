@@ -142,7 +142,7 @@ function ctrader_saf_entity_presave($entity, $type) {
       $entity->field_sqft_range_max__torcond[LANGUAGE_NONE][0]['value'] = $sqft_max;
 
       $price = isset($entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value']) ? intval($entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value']) : 0;
-      $entity->field_price_per_sqft__torcond[LANGUAGE_NONE][0]['value'] = $sqft_max != 0 ? round(($price / $sqft_min), 2) : 0;
+      $entity->field_price_per_sqft__torcond[LANGUAGE_NONE][0]['value'] = $sqft_max != 0 ? round(($price / $sqft_max), 2) : 0;
       break;
   }
 }

@@ -1,0 +1,15 @@
+name = RE Mortgage Calculator
+description = Real Estate Mortgage Calculator
+package = Real Estate
+
+version = 7.x-1.x-dev
+core = 7.x
+project = mortgage_calculator
+
+
+; Information added by Drupal.org packaging script on 2015-07-20
+version = "7.x-1.5+2-dev"
+core = "7.x"
+project = "mortgage_calculator"
+datestamp = "1437382741"
+
