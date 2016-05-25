@@ -183,32 +183,67 @@
     Drupal.behaviors.viewsAuto = {
         attach: function (context, settings) {
 
-            var $container = $('div.mCSB_container');
-            var pager = '.view-search-results-ctrader .item-list .pager';
+            var loadMore = function(block, quantity) {
 
-            $('#search-results-ctrader-load-more', context).click(function () {
-                var nextPage = $('.pager .pager-next a').attr('href');
+                var container = $(block).find('.mCSB_container'),
+                            pager = block + ' .item-list .pager',
+                          button = $(block).find('.search-results-load-more');
 
-                $.ajax({
-                    url: nextPage,
-                    context: context,
-                    beforeSend: function(){
-                        $('#search-results-ctrader-load-more').addClass('load');
-                    },
-                    success: function(){
-                        $('#search-results-ctrader-load-more').removeClass('load');
-                    }
-                }).done(function(data) {
-                    $(data).find('.views-row').appendTo($container).hide().fadeIn("slow");
-                    $(pager).replaceWith($(data).find(pager));
-                    if ($(data).find(pager).find('.pager-next a').attr('href') !== undefined) {
-                        $('#search-results-ctrader-load-more').appendTo($container);
-                    } else {
-                        $('#search-results-ctrader-load-more').remove();
-                    }
+                button.on('click', function() {
+                    var nextPage = $(block + ' .pager-next a').attr('href');
+
+                    $.ajax({
+                        url: nextPage,
+                        context: context,
+                        beforeSend: function() {
+                            button.addClass('load');
+                        },
+                        success: function () {
+                            button.removeClass('load');
+                        }
+                    }).done(function(data) {
+                        $(data).find(block + ' .views-row').appendTo(container).hide().fadeIn("slow");
+                        $(pager).replaceWith($(data).find(pager));
+                        if ($(data).find(pager).find('.pager-next a').attr('href') !== undefined) {
+                            button.appendTo(container);
+                        } else {
+                            button.remove();
+                        }
+                    });
                 });
 
+                if (quantity) {
+                    console.log($(block + ' '+ quantity).text());
+                }
+            };
+
+            loadMore('.listing-result-page', '.total-quantity');
+
+        }
+    };
+
+    /**
+     * Make autosubmit in exposed filter on result page.
+     */
+    Drupal.behaviors.exposedAuto = {
+        attach: function (context, settings) {
+
+            $('.views-widget-sort-sort_bef_combine .form-select').change(function() {
+                if ($(this).val().length != 1) {
+                    $(this).closest('.views-exposed-form').find('.form-submit').trigger('click');
+                }
             });
+        }
+    };
+
+    /**
+     * Fixed total building and listing quantity in tab title.
+     */
+    Drupal.behaviors.tabsTotal = {
+        attach: function (context, settings) {
+
+
+
         }
     };
 

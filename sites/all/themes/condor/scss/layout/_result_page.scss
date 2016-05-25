@@ -96,6 +96,10 @@
         }
       }
     }
+
+    .search-api-ranges-widget {
+      margin-bottom: 32px;
+    }
   }
 
   .panels-flexible-column-inside {
@@ -165,7 +169,7 @@
     }
   }
 
-  #search-results-ctrader-load-more {
+  .search-results-load-more {
     position: absolute;
     bottom: 0;
     left: calc(50% - (148px / 2));
@@ -190,10 +194,10 @@
         border-top-color: transparent;
         border-bottom-color: transparent;
         border-radius: 50%;
-        -webkit-animation: ld 1s ease-in-out infinite;
-        -moz-animation: ld 1s ease-in-out infinite;
-        -o-animation: ld 1s ease-in-out infinite;
-        animation: ld 1s ease-in-out infinite;
+        -webkit-animation: rotate 1s ease-in-out infinite;
+        -moz-animation: rotate 1s ease-in-out infinite;
+        -o-animation: rotate 1s ease-in-out infinite;
+        animation: rotate 1s ease-in-out infinite;
       }
     }
   }

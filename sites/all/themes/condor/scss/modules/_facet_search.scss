@@ -5,7 +5,63 @@
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   background: $white;
-  padding-bottom: 6px; 
+  padding-bottom: 6px;
+
+  #views-exposed-form-search-results-ctrader-page-1 {
+    .views-exposed-widget {
+      float: none;
+      padding: 0;
+    }
+
+    .form-type-textfield {
+      input[type="text"] {
+        background: none;
+        box-shadow: none;
+        border-color: darken($athens-gray, 6);
+        font-size: rem-calc(12);
+        color: $mirage;
+        padding: 0 15px;
+        margin-bottom: 8px;
+
+        &:focus {
+          border-color: darken($athens-gray, 15);
+        }
+
+        @include placeholder {
+          color: $mirage;
+        }
+      }
+    }
+
+    label {
+      @extend h5.pane-title;
+    }
+
+    #autocomplete {
+      border-color: darken($athens-gray, 6);
+      border-top: none;
+
+      .search-api-autocomplete-suggestion {
+        padding: 0 15px;
+        font-size: rem-calc(14);
+        color: $mirage;
+
+        .autocomplete-user-input {
+          color: darken($mirage, 5);
+        }
+
+        .autocomplete-suggestion-results {
+          right: 10px;
+        }
+      }
+    }
+
+  }
+
+  #edit-submit-search-results-ctrader {
+    display: none;
+    visibility: hidden;
+  }
 
   h5.pane-title {
     font-family: "Raleway", sans-serif;
@@ -16,6 +72,10 @@
     float: left;
     font-weight: 100;
     text-transform: uppercase;
+  }
+
+  .form-item {
+    margin-top: 0;
   }
 
   .panels-flexible-region-inside {
@@ -75,7 +135,7 @@
       max-width: 300px;
       width: 100%;
       margin: 20px auto;
-      padding-bottom: 50px;
+      padding-bottom: 40px;
 
       li {
         width: 50%;
