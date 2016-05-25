@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CT Features: Views: Nearby listings feature.
+ */
+
+include_once 'ctf_views_nearby_listings.features.inc';
