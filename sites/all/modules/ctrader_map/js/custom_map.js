@@ -19,6 +19,22 @@
             if (feature.properties && feature.properties.popupContent) {
               layer.bindPopup(feature.properties.popupContent);
             }
+            layer.on({
+              click: function() {
+                // console.log(layer);
+                if (!layer.selected) {
+                  layer.selected = true;
+                  layer.setStyle({
+                    color: "#FF5000"
+                  });
+                } else {
+                  layer.selected = false;
+                  layer.setStyle({
+                    color: "#B9760B"
+                  });
+                }
+              }
+            })
           }
 
           var neighbourhoodsData = Drupal.settings.neighbourhoodsMapData;
@@ -28,10 +44,47 @@
             "opacity": 1,
             "fillOpacity": 0.3
           };
-          L.geoJson(neighbourhoodsData, {
+
+          var neighbourhoodsLayer = L.geoJson(neighbourhoodsData, {
             style: neighbourhoodsStyle,
             onEachFeature: onEachFeature
-          }).addTo(mymap);
+          });
+
+
+          // freeDraw tools.
+          var freeDrawLayer = new L.FreeDraw({
+            mode: L.FreeDraw.MODES.CREATE
+          });
+
+          // mymap.addLayer(freeDrawLayer);
+
+
+          var neigButton = $('.facet-map-block-neighbourhood'),
+              mapButton = $('.facet-map-block-map-search');
+
+          neighbourhoodsLayer.addTo(mymap);
+          neigButton.addClass('active');
+
+          mapButton.on('click', function() {
+            $(this).addClass('active');
+            neigButton.removeClass('active');
+            freeDrawLayer.addTo(mymap);
+            freeDrawLayer.mode = 2;
+            mymap.removeLayer(neighbourhoodsLayer);
+          });
+
+          neigButton.on('click', function() {
+            $(this).addClass('active');
+            mapButton.removeClass('active');
+            mymap.removeLayer(freeDrawLayer);
+            neighbourhoodsLayer.addTo(mymap);
+          });
+
+          freeDrawLayer.on('markers', function getMarkers(eventData) {
+            var latLngs = eventData.latLngs;
+            // console.log(L.FreeDraw.Utilities.getMySQLMultiPolygon(eventData.latLngs));
+            // console.log(L.FreeDraw.Utilities.getMySQLPolygons(eventData.latLngs)[0]);
+          });
 
           // draw tools
           var drawnItems = new L.FeatureGroup();
@@ -75,17 +128,6 @@
             drawnItems.addLayer(layer);
           });
 
-
-          // freeDraw tools.
-          var freeDrawLayer = new L.FreeDraw({
-            mode: L.FreeDraw.MODES.CREATE
-          });
-          mymap.addLayer(freeDrawLayer);
-
-          freeDrawLayer.on('markers', function getMarkers(eventData) {
-            var latLngs = eventData.latLngs;
-            console.log(L.FreeDraw.Utilities.getMySQLMultiPolygon(eventData.latLngs));
-          });
 
           //markers clusters
           var condosDataGeojson = Drupal.settings.condosMapData;
