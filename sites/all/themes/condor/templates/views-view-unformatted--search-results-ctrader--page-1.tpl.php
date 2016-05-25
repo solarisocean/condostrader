@@ -15,4 +15,4 @@
     <?php print $row; ?>
   </div>
 <?php endforeach; ?>
-<button id='search-results-ctrader-load-more'> <?php print t('Load More'); ?> </button>
+<button class='search-results-load-more'> <?php print t('Load More'); ?> </button>
