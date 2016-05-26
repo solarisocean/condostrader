@@ -39,3 +39,36 @@
     stroke: $ecstasy;
   }
 }
+
+
+.free-draw-tools {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+
+  .map-draw-icon {
+    background: url(../images/pencil.svg) center center no-repeat $white;
+
+    &.active {
+      background-color: #7FCB26;
+    }
+  }
+
+  .map-delete-icon {
+    background: url(../images/remove.svg) center center no-repeat $white;
+
+    &.active {
+      background-color: #CC0909;
+    }
+  }
+
+  .map-draw-icon,
+  .map-delete-icon {
+    height: 26px;
+    width: 26px;
+    background-size: 13px;
+  }
+
+}

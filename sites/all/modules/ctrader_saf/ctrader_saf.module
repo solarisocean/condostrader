@@ -381,6 +381,10 @@ function _ctrader_saf_search_button_form($form, &$form_state) {
     '#value' => t('Search'),
 //    '#disabled' => TRUE,
   );
+  $form['geo_loc'] = array(
+    '#type' => 'hidden',
+  );
+
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'ctrader_saf') . '/js/rewritten_facetapi.js',
   );
