@@ -947,13 +947,8 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['header']['result']['id'] = 'result';
   $handler->display->display_options['header']['result']['table'] = 'views';
   $handler->display->display_options['header']['result']['field'] = 'result';
-<<<<<<< HEAD
-  $handler->display->display_options['header']['result']['content'] = '<div class="search-result-tab">Listings <span class="total-view-count">@total</span></div>
-Showing <span class="bold">@start</span> - <span class="bold">@end</span> of <span class="bold>@total</span>';
-=======
   $handler->display->display_options['header']['result']['content'] = '<span class="total-quantity">@total</span>
 <div>Showing <span class="start"><b>@start</b></span> - <span class="end"><b>@end</b></span> of <span class="sum><b>@total</b></span> Results</div>';
->>>>>>> local-dev
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Indexed Drealty Listing: Toronto gallery */
   $handler->display->display_options['fields']['field_toronto_gallery']['id'] = 'field_toronto_gallery';
@@ -964,11 +959,7 @@ Showing <span class="bold">@start</span> - <span class="bold">@end</span> of <sp
   $handler->display->display_options['fields']['field_toronto_gallery']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_toronto_gallery']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_toronto_gallery']['settings'] = array(
-<<<<<<< HEAD
-    'image_style' => 'large',
-=======
     'image_style' => '286x160',
->>>>>>> local-dev
     'image_link' => 'content',
   );
   $handler->display->display_options['fields']['field_toronto_gallery']['delta_limit'] = '1';
@@ -1407,11 +1398,7 @@ Showing <span class="bold">@start</span> - <span class="bold">@end</span> of <sp
   $handler->display->display_options['fields']['field_toronto_gallery']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_toronto_gallery']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_toronto_gallery']['settings'] = array(
-<<<<<<< HEAD
-    'image_style' => 'large',
-=======
     'image_style' => '286x160',
->>>>>>> local-dev
     'image_link' => 'content',
   );
   $handler->display->display_options['fields']['field_toronto_gallery']['delta_limit'] = '1';
