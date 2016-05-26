@@ -25,6 +25,10 @@ function ctrader_fct_block_info() {
     'info' => t('Facet Map Block'),
   );
 
+  $blocks['result_tabs'] = array(
+    'info' => t('Result Page Tabs Block'),
+  );
+
   return $blocks;
 }
 
@@ -41,6 +45,14 @@ function ctrader_fct_block_view($delta = '') {
       $block['content'] = '<div class="facet-map-block">';
       $block['content'] .= '<button class="facet-map-block-neighbourhood">' . t('Neighbourhood') . '</button>';
       $block['content'] .= '<button class="facet-map-block-map-search">' . t('Map Search') . '</button>';
+      $block['content'] .= '</div>';
+      break;
+
+    //Create Result Page Tabs Block.
+    case 'result_tabs':
+      $block['content'] = '<div id="result-page-tabs">';
+      $block['content'] .= l(t('Listings') . '<span></span>', '/', array('html' => TRUE, 'attributes' => array('id' => array('listing-result-page'), 'class' => array('listing-result-page-tab'))));
+      $block['content'] .= l(t('Buildings') . '<span></span>', '/', array('html' => TRUE, 'attributes' => array('id' => array('building-result-page'), 'class' => array('building-result-page-tab'))));
       $block['content'] .= '</div>';
       break;
   }
