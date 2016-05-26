@@ -399,6 +399,16 @@ function ctrader_map_entity_presave($entity, $type) {
 
 
 /**
+ * Implements hook_ctools_plugin_directory().
+ */
+function ctrader_map_ctools_plugin_directory($owner, $plugin_type) {
+  if ($owner == 'ctools' && !empty($plugin_type)) {
+    return "plugins/{$plugin_type}";
+  }
+}
+
+
+/**
  * Create json with Toronto neighbourhoods coordinates.
  */
 function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = array(), $points_array = array()) {

@@ -83,7 +83,7 @@
           freeDrawLayer.on('markers', function getMarkers(eventData) {
             var latLngs = eventData.latLngs;
             // console.log(L.FreeDraw.Utilities.getMySQLMultiPolygon(eventData.latLngs));
-            // console.log(L.FreeDraw.Utilities.getMySQLPolygons(eventData.latLngs)[0]);
+             console.log(L.FreeDraw.Utilities.getMySQLPolygons(eventData.latLngs)[0]);
           });
 
           // draw tools

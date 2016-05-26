@@ -22,7 +22,7 @@ function ctf_views_nearby_listings_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = '<span>Homepage</span> blocks';
+  $handler->display->display_options['title'] = 'Nearby listings';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'view all';
@@ -164,7 +164,7 @@ function ctf_views_nearby_listings_views_default_views() {
   $handler->display->display_options['fields']['field_toronto_gallery']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_toronto_gallery']['settings'] = array(
     'image_style' => '365x203',
-    'image_link' => '',
+    'image_link' => 'content',
   );
   $handler->display->display_options['fields']['field_toronto_gallery']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_toronto_gallery']['delta_offset'] = '0';
@@ -453,6 +453,11 @@ function ctf_views_nearby_listings_views_default_views() {
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['operator'] = 'not empty';
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['value'] = 'now + 1 day';
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['year_range'] = '-0:+0';
+  /* Filter criterion: Indexed Drealty Listing: Drealty Listing Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = 'toronto_condo';
 
   /* Display: Comparable nearby listings */
   $handler = $view->new_display('page', 'Comparable nearby listings', 'page_1');
@@ -810,6 +815,14 @@ function ctf_views_nearby_listings_views_default_views() {
   /* Display: Facets block */
   $handler = $view->new_display('search_api_views_facets_block', 'Facets block', 'search_api_views_facets_block_1');
   $handler->display->display_options['pager']['type'] = 'some';
+
+  /* Display: Block */
+  $handler = $view->new_display('block', 'Block', 'block_1');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'mini';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
   $export['nearby_listings_view'] = $view;
 
   return $export;
