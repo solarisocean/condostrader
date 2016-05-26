@@ -465,39 +465,10 @@ function ctrader_mls_views_api() {
 
 
 /**
- * Implements hook_block_info().
+ * Implements hook_ctools_plugin_directory().
  */
-function ctrader_mls_block_info() {
-  $blocks = array();
-  $blocks['nearby_view'] = array(
-    'info' => t('Nearby view'),
-  );
-  return $blocks;
-}
-
-
-/**
- * Implements hook_block_view().
- */
-function ctrader_mls_block_view($delta = '') {
-  $block = array();
-  switch ($delta) {
-    case 'nearby_view':
-//      $view = views_embed_view('nearby_listings_view', 'page_1', array('43.70635259304132','-79.42205429077148'));
-      $block['subject'] = 'test nearby';
-//      $block['content'] = $view;
-      $block['content'] = 'empty';
-
-      break;
+function ctrader_mls_ctools_plugin_directory($owner, $plugin_type) {
+  if ($owner == 'ctools' && !empty($plugin_type)) {
+    return "plugins/{$plugin_type}";
   }
-  return $block;
 }
-
-
-/**
- * Implements hook_views_pre_view().
- */
-function ctrader_mls_views_pre_view(&$view, &$display_id, &$args) {
-  $stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
-}
-

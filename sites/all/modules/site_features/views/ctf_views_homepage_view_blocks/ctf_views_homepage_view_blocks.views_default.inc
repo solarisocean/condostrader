@@ -442,6 +442,11 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['operator'] = 'not empty';
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['value'] = 'now + 1 day';
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['year_range'] = '-0:+0';
+  /* Filter criterion: Indexed Drealty Listing: Drealty Listing Type */
+  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
+  $handler->display->display_options['filters']['type_1']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['filters']['type_1']['field'] = 'type';
+  $handler->display->display_options['filters']['type_1']['value'] = 'toronto_condo';
 
   /* Display: newly listed */
   $handler = $view->new_display('page', 'newly listed', 'page_1');
@@ -775,6 +780,11 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['operator'] = 'not empty';
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['value'] = 'now + 1 day';
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['year_range'] = '-0:+0';
+  /* Filter criterion: Indexed Drealty Listing: Drealty Listing Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = 'toronto_condo';
   $handler->display->display_options['path'] = 'newly-listed-condos';
   $handler->display->display_options['menu']['title'] = 'Search page';
   $handler->display->display_options['menu']['weight'] = '0';
@@ -1108,6 +1118,11 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['operator'] = 'not empty';
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['value'] = 'now + 1 day';
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['year_range'] = '-0:+0';
+  /* Filter criterion: Indexed Drealty Listing: Drealty Listing Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = 'toronto_condo';
   $handler->display->display_options['path'] = 'newly-listed-condos';
   $handler->display->display_options['menu']['title'] = 'Search page';
   $handler->display->display_options['menu']['weight'] = '0';
@@ -1435,15 +1450,6 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['sorts']['field_timestamp_sql_torcond']['table'] = 'search_api_index_toronto_condo_index';
   $handler->display->display_options['sorts']['field_timestamp_sql_torcond']['field'] = 'field_timestamp_sql_torcond';
   $handler->display->display_options['sorts']['field_timestamp_sql_torcond']['order'] = 'DESC';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Indexed Drealty Listing: Timestamp_sql */
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['id'] = 'field_timestamp_sql_torcond';
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['table'] = 'search_api_index_toronto_condo_index';
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['field'] = 'field_timestamp_sql_torcond';
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['operator'] = 'not empty';
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['value'] = 'now + 1 day';
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['year_range'] = '-0:+0';
   $handler->display->display_options['path'] = 'newly-listed-condos';
   $handler->display->display_options['menu']['title'] = 'Search page';
   $handler->display->display_options['menu']['weight'] = '0';
@@ -1771,6 +1777,11 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['operator'] = 'not empty';
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['value'] = 'now + 1 day';
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['year_range'] = '-0:+0';
+  /* Filter criterion: Indexed Drealty Listing: Drealty Listing Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = 'toronto_condo';
   $handler->display->display_options['path'] = 'newly-listed-condos';
   $handler->display->display_options['menu']['title'] = 'Search page';
   $handler->display->display_options['menu']['weight'] = '0';
