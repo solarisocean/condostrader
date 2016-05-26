@@ -166,14 +166,10 @@
                 }
             });
 
-            $('.facetapi-facetapi-select-dropdowns select').chosen({
+            $('.facetapi-facetapi-select-dropdowns select, .result-filter-block select').chosen({
                 "disable_search": true
             });
 
-            $('.view-search-results-ctrader .view-filters select').chosen({
-                "disable_search": true,
-                "placeholder_text_single": Drupal.t("Sort by: ")
-            });
         }
     };
 
@@ -183,11 +179,12 @@
     Drupal.behaviors.viewsAuto = {
         attach: function (context, settings) {
 
-            var loadMore = function(block, quantity) {
+            var loadMore = function(block) {
 
                 var container = $(block).find('.mCSB_container'),
                             pager = block + ' .item-list .pager',
-                          button = $(block).find('.search-results-load-more');
+                          button = $(block).find('.search-results-load-more'),
+                   numberEnd = block + ' .view-header .end';
 
                 button.on('click', function() {
                     var nextPage = $(block + ' .pager-next a').attr('href');
@@ -204,6 +201,15 @@
                     }).done(function(data) {
                         $(data).find(block + ' .views-row').appendTo(container).hide().fadeIn("slow");
                         $(pager).replaceWith($(data).find(pager));
+
+                        $({Counter: $(numberEnd + ' b').text()}).animate({Counter: $(data).find(numberEnd).text()}, {
+                            duration: 1500,
+                            easing: 'swing',
+                            step: function () {
+                                $(numberEnd + ' b').text(Math.ceil(this.Counter));
+                            }
+                        });
+
                         if ($(data).find(pager).find('.pager-next a').attr('href') !== undefined) {
                             button.appendTo(container);
                         } else {
@@ -211,13 +217,10 @@
                         }
                     });
                 });
-
-                if (quantity) {
-                    console.log($(block + ' '+ quantity).text());
-                }
             };
 
-            loadMore('.listing-result-page', '.total-quantity');
+            loadMore('.listing-result-page');
+            loadMore('.building-result-page');
 
         }
     };
@@ -242,7 +245,40 @@
     Drupal.behaviors.tabsTotal = {
         attach: function (context, settings) {
 
+            /**
+             * Implementing tabs functionality.
+             *
+             * @param {array} tabs This is param with array of tab pages.
+             * @param {string} pager This is param with string selector tabs pager.
+             */
+            var tabs = function (tabs, pager) {
+                for (var i = 0; i < tabs.length; i++) {
+                    $(pager).find('a' + tabs[i] + '-tab span').text($(tabs[i] + ' .total-quantity').text());
+                    $(tabs[i]).not(tabs[0]).hide();
+                }
 
+                $(pager + ' ' + tabs[0] + '-tab').addClass('active');
+
+                $(pager + ' a').on('click', function(e) {
+                    e.preventDefault();
+                    $(pager + ' a').removeClass('active');
+                    $(this).addClass('active');
+
+                    var activePage = $(this)[0].id;
+
+                    for (var it = 0; it < tabs.length; it++) {
+                        $(tabs[it]).not('.' + activePage).hide();
+                        $('.' + activePage).fadeIn(500);
+                    }
+                });
+                
+            };
+
+            var resultPageTabs = [
+                '.listing-result-page',
+                '.building-result-page'
+            ];
+            tabs(resultPageTabs, '#result-page-tabs');
 
         }
     };

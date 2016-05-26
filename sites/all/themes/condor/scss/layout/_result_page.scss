@@ -106,27 +106,97 @@
     padding: 0;
   }
 
-  .view-search-results-ctrader {
+  .results-page-result {
     background: $alabaster;
     border-top: 1px solid darken($athens-gray, 4);
 
-    .view-filters {
-      .views-exposed-form .views-exposed-widget {
-        float: right;
-        padding: 17px 37px;
+    .panel-separator {
+      display: none;
+      visibility: hidden;
+    }
+  }
+
+  .result-tab-block,
+  .result-filter-block {
+    display: inline-block;
+  }
+
+  .result-tab-block {
+    width: 69.5%;
+    background: $white;
+    margin-right: -5px;
+    border: 1px solid darken($athens-gray, 6);
+    margin-left: 25px;
+    padding: 2px 0 6px 0;
+
+    a {
+      color: $mirage;
+      font-size: rem-calc(12);
+      padding: 8px 8px;
+
+      border-right: 1px solid darken($athens-gray, 6);
+      @include transition(all .3s ease-in-out);
+
+      &.active {
+        background: $ecstasy;
+        color: $white;
+        border-right-color: $ecstasy;
+        @include transition(all .3s ease-in-out);
+
+        span {
+          background: $ebony-clay;
+        }
       }
 
-      .form-type-select {
-        .chosen-single {
-          height: 34px;
-          background: $white;
-        }
-
-        label {
-          display: none;
-          visibility: hidden;
-        }
+      span {
+        color: $white;
+        background: $ecstasy;
+        font-size: rem-calc(10);
+        padding: 0 3px;
+        line-height: 0;
+        border-radius: 4px;
+        margin-left: 3px
       }
+    }
+  }
+  
+  .result-filter-block {
+    width: 27.5%;
+    padding-right: 32px;
+    padding-top: 17px;
+
+    .views-exposed-widget {
+      float: none;
+      padding: 0;
+
+      label {
+        display: none;
+        visibility: hidden;
+      }
+
+      .form-submit {
+        display: none;
+      }
+
+      .chosen-single {
+        height: 34px;
+        background: $white;
+        line-height: 31px;
+      }
+    }
+
+  }
+
+  .view-search-results-ctrader {
+    .total-quantity {
+      display: none;
+      visibility: hidden;
+    }
+
+    .view-header {
+      text-align: right;
+      padding: 9px 39px 17px;
+      font-size: rem-calc(14);
     }
 
     .view-content {

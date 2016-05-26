@@ -820,6 +820,8 @@ function ctf_views_search_results_ctrader_views_default_views() {
 
   /* Display: Condo results page */
   $handler = $view->new_display('page', 'Condo results page', 'page_1');
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'listing-result-page';
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Go';
@@ -935,17 +937,23 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
   $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'filtered_html';
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '20';
+  $handler->display->display_options['pager']['type'] = 'mini';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '21';
   $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Header: Global: Result summary */
   $handler->display->display_options['header']['result']['id'] = 'result';
   $handler->display->display_options['header']['result']['table'] = 'views';
   $handler->display->display_options['header']['result']['field'] = 'result';
+<<<<<<< HEAD
   $handler->display->display_options['header']['result']['content'] = '<div class="search-result-tab">Listings <span class="total-view-count">@total</span></div>
 Showing <span class="bold">@start</span> - <span class="bold">@end</span> of <span class="bold>@total</span>';
+=======
+  $handler->display->display_options['header']['result']['content'] = '<span class="total-quantity">@total</span>
+<div>Showing <span class="start"><b>@start</b></span> - <span class="end"><b>@end</b></span> of <span class="sum><b>@total</b></span> Results</div>';
+>>>>>>> local-dev
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Indexed Drealty Listing: Toronto gallery */
   $handler->display->display_options['fields']['field_toronto_gallery']['id'] = 'field_toronto_gallery';
@@ -956,7 +964,11 @@ Showing <span class="bold">@start</span> - <span class="bold">@end</span> of <sp
   $handler->display->display_options['fields']['field_toronto_gallery']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_toronto_gallery']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_toronto_gallery']['settings'] = array(
+<<<<<<< HEAD
     'image_style' => 'large',
+=======
+    'image_style' => '286x160',
+>>>>>>> local-dev
     'image_link' => 'content',
   );
   $handler->display->display_options['fields']['field_toronto_gallery']['delta_limit'] = '1';
@@ -1257,6 +1269,8 @@ Showing <span class="bold">@start</span> - <span class="bold">@end</span> of <sp
   $handler = $view->new_display('page', 'Building results page', 'page_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = '<span>buildings</span>';
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'building-result-page';
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sort by:';
@@ -1371,17 +1385,18 @@ Showing <span class="bold">@start</span> - <span class="bold">@end</span> of <sp
   $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
   $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'filtered_html';
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '20';
+  $handler->display->display_options['pager']['type'] = 'mini';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '21';
   $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Header: Global: Result summary */
   $handler->display->display_options['header']['result']['id'] = 'result';
   $handler->display->display_options['header']['result']['table'] = 'views';
   $handler->display->display_options['header']['result']['field'] = 'result';
-  $handler->display->display_options['header']['result']['content'] = '<div class="search-result-tab">Buildings <span class="total-view-count">@total</span></div>
-Showing <span class="bold">@start</span> - <span class="bold">@end</span> of <span class="bold>@total</span>';
+  $handler->display->display_options['header']['result']['content'] = '<span class="total-quantity">@total</span>
+<div>Showing <span class="start"><b>@start</b></span> - <span class="end"><b>@end</b></span> of <span class="sum><b>@total</b></span> Results</div>';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Indexed Drealty Listing: Toronto gallery */
   $handler->display->display_options['fields']['field_toronto_gallery']['id'] = 'field_toronto_gallery';
@@ -1392,7 +1407,11 @@ Showing <span class="bold">@start</span> - <span class="bold">@end</span> of <sp
   $handler->display->display_options['fields']['field_toronto_gallery']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_toronto_gallery']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_toronto_gallery']['settings'] = array(
+<<<<<<< HEAD
     'image_style' => 'large',
+=======
+    'image_style' => '286x160',
+>>>>>>> local-dev
     'image_link' => 'content',
   );
   $handler->display->display_options['fields']['field_toronto_gallery']['delta_limit'] = '1';
