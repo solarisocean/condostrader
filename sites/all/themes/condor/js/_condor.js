@@ -20,37 +20,39 @@
     Drupal.behaviors.mainMenu = {
         attach: function (context, settings) {
 
-            $(".menu-button").click(function(e) {
-                e.preventDefault();
+            $('body').once(function() {
+                $(".menu-button").click(function(e) {
+                    e.preventDefault();
 
-                if ($(this).hasClass('menu-open')) {
-                    $("#main-menu-nav-tree").hide("drop", { direction: "right" }, "easeInQuad");
-                    $(this).removeClass('menu-open');
-                }
-                else {
-                    $(this).addClass('menu-open');
-                    $("#main-menu-nav-tree").show("drop", { direction: "right" }, "easeInQuad");
-                }
-            });
+                    if ($(this).hasClass('menu-open')) {
+                        $("#main-menu-nav-tree").hide("drop", { direction: "right" }, "easeInQuad");
+                        $(this).removeClass('menu-open');
+                    }
+                    else {
+                        $(this).addClass('menu-open');
+                        $("#main-menu-nav-tree").show("drop", { direction: "right" }, "easeInQuad");
+                    }
+                });
 
-            $('.main-nav-tree').first().find('a').each(function() {
-                if ($(this).parent().find('ul').length > 0) {
-                    $(this).on('click', function(e) {
-                        e.preventDefault();
-                        var target = e.target;
-                        var subItem = $(target).next();
-                        var depth = $(subItem).parents().length;
-                        var allAtDepth = $('.main-nav-tree').first().find('ul').filter(function() {
-                            if ($(this).parents().length >= depth && this !== subItem.get(0)) {
-                                return true;
-                            }
+                $('.main-nav-tree').first().find('a').each(function() {
+                    if ($(this).parent().find('ul').length > 0) {
+                        $(this).on('click', function(e) {
+                            e.preventDefault();
+                            var target = e.target;
+                            var subItem = $(target).next();
+                            var depth = $(subItem).parents().length;
+                            var allAtDepth = $('.main-nav-tree').first().find('ul').filter(function() {
+                                if ($(this).parents().length >= depth && this !== subItem.get(0)) {
+                                    return true;
+                                }
+                            });
+
+                            $(allAtDepth).slideUp(300, "easeInQuad");
+                            subItem.slideToggle(300, "easeInQuad");
+
                         });
-                        
-                        $(allAtDepth).slideUp(300, "easeInQuad");
-                        subItem.slideToggle(300, "easeInQuad");
-
-                    });
-                }
+                    }
+                });
             });
 
         }
@@ -245,40 +247,43 @@
     Drupal.behaviors.tabsTotal = {
         attach: function (context, settings) {
 
-            /**
-             * Implementing tabs functionality.
-             *
-             * @param {array} tabs This is param with array of tab pages.
-             * @param {string} pager This is param with string selector tabs pager.
-             */
-            var tabs = function (tabs, pager) {
-                for (var i = 0; i < tabs.length; i++) {
-                    $(pager).find('a' + tabs[i] + '-tab span').text($(tabs[i] + ' .total-quantity').text());
-                    $(tabs[i]).not(tabs[0]).hide();
-                }
-
-                $(pager + ' ' + tabs[0] + '-tab').addClass('active');
-
-                $(pager + ' a').on('click', function(e) {
-                    e.preventDefault();
-                    $(pager + ' a').removeClass('active');
-                    $(this).addClass('active');
-
-                    var activePage = $(this)[0].id;
-
-                    for (var it = 0; it < tabs.length; it++) {
-                        $(tabs[it]).not('.' + activePage).hide();
-                        $('.' + activePage).fadeIn(500);
+            $('body').once(function() {
+                /**
+                 * Implementing tabs functionality.
+                 *
+                 * @param {array} tabs This is param with array of tab pages.
+                 * @param {string} pager This is param with string selector tabs pager.
+                 */
+                var tabs = function (tabs, pager) {
+                    for (var i = 0; i < tabs.length; i++) {
+                        $(pager).find('a' + tabs[i] + '-tab span').text($(tabs[i] + ' .total-quantity').text());
+                        $(tabs[i]).not(tabs[0]).hide();
                     }
-                });
-                
-            };
 
-            var resultPageTabs = [
-                '.listing-result-page',
-                '.building-result-page'
-            ];
-            tabs(resultPageTabs, '#result-page-tabs');
+                    $(pager + ' ' + tabs[0] + '-tab').addClass('active');
+
+                    $(pager + ' a').on('click', function(e) {
+                        e.preventDefault();
+                        $(pager + ' a').removeClass('active');
+                        $(this).addClass('active');
+
+                        var activePage = $(this)[0].id;
+
+                        for (var it = 0; it < tabs.length; it++) {
+                            $(tabs[it]).not('.' + activePage).hide();
+                            $('.' + activePage).fadeIn(500);
+                        }
+                    });
+
+                };
+
+                var resultPageTabs = [
+                    '.listing-result-page',
+                    '.building-result-page'
+                ];
+                tabs(resultPageTabs, '#result-page-tabs');
+            });
+
 
         }
     };
