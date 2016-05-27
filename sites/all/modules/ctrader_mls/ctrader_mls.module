@@ -449,6 +449,14 @@ function ctrader_mls_form_alter(&$form, &$form_state, $form_id) {
     case 'mortgage_calculator_js_form':
       $form['mortgage_rate_2']['#weight'] = 0.002;
       break;
+    case 'book_a_viewing_entityform_edit_form':
+      $form['field_e_mail'][LANGUAGE_NONE][0]['email']['#attributes']['placeholder'] = 'example@mail.com';
+      $form['field_extra_notes'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = 'Integer ante arcu accumsan a ...';
+      $form['field_phone_number'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = t('example: @number', array('@number' => '555-777-9999'));
+      $form['field_buy_now_button']['#weight'] ='401';
+      $arg = arg();
+      $form['field_buy_now_button']['und'][0]['markup']['#markup'] = l(t('buy now'), "{$arg[1]}/buy-now");
+      break;
   }
 }
 
@@ -472,3 +480,24 @@ function ctrader_mls_ctools_plugin_directory($owner, $plugin_type) {
     return "plugins/{$plugin_type}";
   }
 }
+
+
+/**
+ * Implements hook_flag_alter().
+ */
+function ctrader_mls_flag_alter(&$flag) {
+//  $path = drupal_get_path_alias();
+//  if ($flag->name == 'drealty_flag' && $flag->entity_type == 'drealty_listing' && strpos(drupal_get_path_alias(), 'drealty_listing/') == 0) {
+//    $flag->unflag_short = t('Remove this listing from my favourites');
+//    $flag->flag_short = t('Add this listing to my favourites');
+//  }
+}
+
+
+/**
+ * Implements hook_panels_pane_content_alter().
+ */
+function ctrader_mls_panels_pane_content_alter($content, $pane, $args, $contexts) {
+  $stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
+}
+

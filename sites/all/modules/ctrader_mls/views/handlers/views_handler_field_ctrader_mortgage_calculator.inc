@@ -29,7 +29,9 @@ class views_handler_field_ctrader_mortgage_calculator extends views_handler_fiel
       else {
         $price = 'no result';
       }
-      $mortgage_calculator_js_form['loan_amount_2']['#value'] = $price;
+      if ($values->_field_data['id']['entity']->field_s_r__torcond[LANGUAGE_NONE][0]['value'] == 'Sale') {
+        $mortgage_calculator_js_form['loan_amount_2']['#value'] = $price;
+      }
       $mortgage_calculator_js_form['loan_amount_2']['#title'] = t('Principal:');
       $mortgage_calculator_js_form['years_to_pay_2']['#value'] = 25;
       $mortgage_calculator_js_form['years_to_pay_2']['#title'] = t('Amort. (Years):');
