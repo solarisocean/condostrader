@@ -9,25 +9,56 @@
 
             setTimeout(function () {
                 $('body').once(function () {
-                    var mymap = L.map('mapid').setView([43.73, -79.34], 9);
+                    var mymap = L.map('mapid',  {
+                        doubleClickZoom: true,
+                        scrollWheelZoom: false
+                    }).setView([43.73, -79.34], 9);
+
                     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
                         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     }).addTo(mymap);
+
+                    var inputRes = $('#-ctrader-saf-search-button-form input[name="geo_loc"]');
 
                     function onEachFeature(feature, layer) {
                         // does this feature have a property named popupContent?
                         if (feature.properties && feature.properties.popupContent) {
                             layer.bindPopup(feature.properties.popupContent);
                         }
+
                         layer.on({
                             click: function () {
-                                // console.log(layer);
                                 if (!layer.selected) {
-                                    layer.selected = true;
-                                    layer.setStyle({
-                                        color: "#FF5000"
+                                    inputRes.val(function(i, val) {
+                                        return val + (!val ? '' : ', ') + 'tid' + layer._leaflet_id;
                                     });
+
+                                    layer.selected = true;
+
+                                    if (layer._spiderLeg === undefined) {
+                                        layer.setStyle({
+                                            color: "#FF5000"
+                                        });
+                                    }
                                 } else {
+                                    String.prototype.replaceBetween = function(start, end, what) {
+                                        return this.substring(0, start) + what + this.substring(end);
+                                    };
+
+                                    inputRes.val(function(i, val){
+                                        var regId = 'tid' + layer._leaflet_id;
+                                        var start = val.search(regId);
+                                        var end = val.search(regId) +regId.length;
+                                        if (val.charAt(start - 2) === ',') {
+                                            return val.replaceBetween(start - 2, end, '');
+                                        } else if (val.charAt(end) == ',') {
+                                            return val.replaceBetween(start, end +2, '');
+                                        } else {
+                                            return val.replaceBetween(start, end, '');
+                                        }
+
+                                    });
+
                                     layer.selected = false;
                                     layer.setStyle({
                                         color: "#B9760B"
@@ -54,7 +85,10 @@
                     // freeDraw tools.
                     var freeDrawLayer = new L.FreeDraw();
 
-                    freeDrawLayer.options.createExitMode = false;
+                    freeDrawLayer.options.exitModeAfterCreate(false);
+                    freeDrawLayer.options.destroyPreviousPolygon(true);
+                    freeDrawLayer.options.allowMultiplePolygons(false);
+
 
                     var customControl = L.Control.extend({
 
@@ -74,10 +108,10 @@
 
                                 if (this.classList.contains('active')) {
                                     this.classList.remove('active');
-                                    freeDrawLayer.mode = 1;
+                                    freeDrawLayer.setMode(L.FreeDraw.MODES.VIEW);
                                 } else {
                                     this.classList.add('active');
-                                    freeDrawLayer.mode = 2;
+                                    freeDrawLayer.setMode(L.FreeDraw.MODES.CREATE);
                                 }
                             };
 
@@ -88,10 +122,10 @@
 
                                 if (this.classList.contains('active')) {
                                     this.classList.remove('active');
-                                    freeDrawLayer.mode = 1;
+                                    freeDrawLayer.setMode(L.FreeDraw.MODES.VIEW);
                                 } else {
                                     this.classList.add('active');
-                                    freeDrawLayer.mode = 8;
+                                    freeDrawLayer.setMode(L.FreeDraw.MODES.DELETE);
                                 }
                             };
 
@@ -108,14 +142,24 @@
                     neigButton.addClass('active');
 
                     mapButton.on('click', function () {
+                        inputRes.val('');
                         $(this).addClass('active');
                         $('.free-draw-tools').addClass('active');
                         neigButton.removeClass('active');
                         freeDrawLayer.addTo(mymap);
                         mymap.removeLayer(neighbourhoodsLayer);
+                        neighbourhoodsLayer.eachLayer(function(layer) {
+                            if (layer.selected) {
+                                layer.selected = false;
+                                layer.setStyle({
+                                    color: "#B9760B"
+                                });
+                            }
+                        });
                     });
 
                     neigButton.on('click', function () {
+                        inputRes.val('');
                         $(this).addClass('active');
                         $('.free-draw-tools').removeClass('active');
                         mapButton.removeClass('active');
@@ -123,61 +167,14 @@
                         neighbourhoodsLayer.addTo(mymap);
                     });
 
-                    freeDrawLayer.on('markers', function getMarkers(eventData) {
-                        var latLngs = eventData.latLngs;
-                        // console.log(L.FreeDraw.Utilities.getMySQLMultiPolygon(eventData.latLngs));
-                        // console.log(L.FreeDraw.Utilities.getMySQLPolygons(eventData.latLngs)[0]);
-                    });
-
-                    // draw tools
-                    var drawnItems = new L.FeatureGroup();
-                    mymap.addLayer(drawnItems);
-                    var drawControl = new L.Control.Draw({
-                        position: 'topright',
-                        draw: {
-                            polygon: {
-                                shapeOptions: {
-                                    color: '#2DA56F',
-                                    weight: 1,
-                                    opacity: .7,
-                                    dashArray: '20,3',
-                                    lineJoin: 'round'
-                                }
-                            },
-                            polyline: {
-                                shapeOptions: {
-                                    color: 'green'
-                                }
-                            },
-                            rect: {
-                                shapeOptions: {
-                                    color: 'steelblue'
-                                }
-                            },
-                            circle: {
-                                shapeOptions: {
-                                    color: 'green'
-                                }
-                            }
-                        },
-                        edit: {
-                            featureGroup: drawnItems
-                        }
-                    });
-
-
-                    // mymap.addControl(drawControl);
-                    mymap.on('draw:created', function (e) {
-                        var type = e.layerType,
-                            layer = e.layer;
-                        drawnItems.addLayer(layer);
-                    });
-
-
                     //markers clusters
                     var condosDataGeojson = Drupal.settings.condosMapData;
                     if (condosDataGeojson.length != 0) {
-                        var markers = L.markerClusterGroup({});
+                        var markers = L.markerClusterGroup({
+                            spiderfyOnMaxZoom: true,
+                            showCoverageOnHover: false,
+                            zoomToBoundsOnClick: true
+                        });
                         var geoJsonLayer = L.geoJson(condosDataGeojson, {
                             onEachFeature: onEachFeature
                         });
@@ -185,6 +182,15 @@
                         mymap.addLayer(markers);
                         mymap.fitBounds(markers.getBounds());
                     }
+                    
+
+                    freeDrawLayer.on('markers', function getMarkers(eventData) {
+                        var latLngs = eventData.latLngs;
+                        inputRes.val(L.FreeDraw.Utilities.getMySQLPolygons(eventData.latLngs));
+                        // console.log(L.FreeDraw.Utilities.getMySQLMultiPolygon(eventData.latLngs));
+                        // console.log(L.FreeDraw.Utilities.getMySQLPolygons(eventData.latLngs)[0]);
+                    });
+                    
                 });
             }, 1);
 
