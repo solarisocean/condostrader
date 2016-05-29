@@ -246,6 +246,7 @@ function ctf_configurations_search_api_default_search_api_index() {
         "field_rms__torcond" : { "type" : "decimal" },
         "field_rooms_plus__torcond" : { "type" : "decimal" },
         "field_s_r__torcond" : { "type" : "string" },
+        "field_search_point_string" : { "type" : "string" },
         "field_share_perc__torcond" : { "type" : "string" },
         "field_spec_des1_out__torcond" : { "type" : "string" },
         "field_spec_des2_out__torcond" : { "type" : "string" },

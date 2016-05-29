@@ -7,9 +7,9 @@ dependencies[] = drealty
 dependencies[] = entity
 
 files[] = class/drealty_import.import.inc
-; Information added by Drupal.org packaging script on 2015-08-05
-version = "7.x-3.0-beta6+12-dev"
+; Information added by Drupal.org packaging script on 2016-04-25
+version = "7.x-3.0-beta6+25-dev"
 core = "7.x"
 project = "drealty"
-datestamp = "1438775647"
+datestamp = "1461549242"
 

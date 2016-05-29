@@ -996,11 +996,16 @@ function drealty_resource_configure_form($form, &$form_state, drealtyConnectionE
   }
 
   $skip_status = FALSE;
-  $query_types = array(0 => 'Default (Server must support offset. Relies on RETS Status Field.)', 1 => 'Offset <strong>Not</strong> Supported (Query based on price field)', 3 => 'Offset <strong>Not</strong> Supported (Query based on RETS Key)', 2 => 'Manually supplied Query (Server must support offset)');
+  $query_types = array(
+    DREALTY_QUERY_TYPE_DEFAULT => 'Default (Server must support offset. Relies on RETS Status Field.)', 
+    DREALTY_QUERY_TYPE_PRICE => 'Offset <strong>Not</strong> Supported (Query based on price field)',
+    DREALTY_QUERY_TYPE_RETS_KEY => 'Offset <strong>Not</strong> Supported (Query based on RETS Key)', 
+    DREALTY_QUERY_TYPE_MANUAL => 'Manually supplied Query (Server must support offset)'
+  );
 
   if ($query_field === FALSE || !isset($field_mappings[$query_field])) {
     $skip_status = TRUE;
-    unset($query_types[0]);
+    unset($query_types[DREALTY_QUERY_TYPE_DEFAULT]);
   }
 
   $opts = array();
@@ -1008,7 +1013,14 @@ function drealty_resource_configure_form($form, &$form_state, drealtyConnectionE
   $has_images = FALSE;
 
   if (!$skip_status) {
+    $field_form = !empty($form_state['input']['rets_status']) ? $form_state['input']['rets_status'] : !empty($form['required']['rets_status']['#default_value']) ? $form['required']['rets_status']['#default_value'] : null;
+    if(!empty($field_form)) {
+      $rets_status_selected = explode(' - ', $field_form);
+    }
     $lookup_table = $fields[$field_mappings[$query_field]->systemname]->lookupname;
+
+    if(empty($lookup_table) && $fields[$field_mappings[$query_field]->systemname]->datatype == 'Boolean' && $fields[$rets_status_selected[0]]->datatype == 'Boolean')
+      $lookup_table = TRUE;
 
     if (empty($lookup_table)) {
       drupal_set_message(t('There was an error in your selection of the status field. Please ensure you have selected the correct MLS field. The <strong>@fieldname</strong> is not a valid type for the status.', array("@fieldname" => $field_mappings['rets_status']->systemname)), 'error');
@@ -1019,9 +1031,13 @@ function drealty_resource_configure_form($form, &$form_state, drealtyConnectionE
 
   if ($dc->connect($connection->conid)) {
     if (!$skip_status) {
-      $values = $dc->rets->GetLookupValues($resource->systemname, $lookup_table);
-      foreach ($values as $val) {
-        $opts[$val['Value']] = check_plain($val['LongValue']);
+      if($lookup_table === TRUE) {
+        $opts = array(0 => 'Inactive', 1 => 'Active');
+      } else if (!empty($lookup_table)) {
+        $values = $dc->rets->GetLookupValues($resource->systemname, $lookup_table);
+        foreach ($values as $val) {
+          $opts[$val['Value']] = check_plain($val['LongValue']);
+        }
       }
     }
     if (empty($connection->nomap_mode)) {
@@ -1044,12 +1060,12 @@ function drealty_resource_configure_form($form, &$form_state, drealtyConnectionE
   $form['feed']['query_options']['query_type'] = array(
     '#type' => 'radios',
     '#title' => t('Query Type'),
-    '#default_value' => isset($class->query_type) ? $class->query_type : 0,
+    '#default_value' => isset($class->query_type) ? $class->query_type : DREALTY_QUERY_TYPE_DEFAULT,
     '#options' => $query_types,
     '#description' => t('Please select the type of query operation to use.'),
   );
 
-  if (!$skip_status) {
+  if (!$skip_status && !empty($opts)) {
     $form['feed']['query_options']['status'] = array(
       '#type' => 'select',
       '#title' => t('Status Field'),
@@ -1058,8 +1074,8 @@ function drealty_resource_configure_form($form, &$form_state, drealtyConnectionE
       '#description' => t('Select the appropriate values to limit the search query.'),
       '#multiple' => TRUE,
       '#states' => array(
-        'visible' => array(':input[name="query_type"]' => array('value' => '0')),
-        'required' => array(':input[name="query_type"]' => array('value' => '0')),
+        'visible' => array(':input[name="query_type"]' => array('value' => DREALTY_QUERY_TYPE_DEFAULT)),
+        'required' => array(':input[name="query_type"]' => array('value' => DREALTY_QUERY_TYPE_DEFAULT)),
       ),
     );
   } else {
@@ -1067,8 +1083,8 @@ function drealty_resource_configure_form($form, &$form_state, drealtyConnectionE
 //    $form['query_options']['no_status'] = array(
 //        '#markup' => '<div>You must configure the status field</div>',
 //        '#states' => array(
-//            'visible' => array(':input[name="query_type"]' => array('value' => '0')),
-//            'required' => array(':input[name="query_type"]' => array('value' => '0')),
+//            'visible' => array(':input[name="query_type"]' => array('value' => DREALTY_QUERY_TYPE_DEFAULT)),
+//            'required' => array(':input[name="query_type"]' => array('value' => DREALTY_QUERY_TYPE_DEFAULT)),
 //        ),
 //    );
   }
@@ -1080,8 +1096,8 @@ function drealty_resource_configure_form($form, &$form_state, drealtyConnectionE
     '#description' => t('Must be a valid DMQL query. (specs found <a href="http://retsdoc.onconfluence.com/display/rets172/7.7+Query+language" target="_blank">here.</a> A good tutorial can be found <a href="http://www.flexmls.com/support/rets/tutorials/dmql/" target="_blank">here.</a> You may also find that <a href="http://www.retsmd.com" target="_blank">www.retsmd.com</a> is a valuable resource in helping write the query.'),
     '#default_value' => $class->override_status_query_text,
     '#states' => array(
-      'visible' => array(':input[name="query_type"]' => array('value' => '2')),
-      'required' => array(':input[name="query_type"]' => array('value' => '2')),
+      'visible' => array(':input[name="query_type"]' => array('value' => DREALTY_QUERY_TYPE_MANUAL)),
+      'required' => array(':input[name="query_type"]' => array('value' => DREALTY_QUERY_TYPE_MANUAL)),
     ),
   );
   $form['feed']['query_options']['total_query'] = array(
@@ -1092,8 +1108,8 @@ function drealty_resource_configure_form($form, &$form_state, drealtyConnectionE
     '#description' => t('Must be a valid DMQL query. (specs found <a href="http://retsdoc.onconfluence.com/display/rets172/7.7+Query+language" target="_blank">here.</a> A good tutorial can be found <a href="http://www.flexmls.com/support/rets/tutorials/dmql/" target="_blank">here.</a> You may also find that <a href="http://www.retsmd.com" target="_blank">www.retsmd.com</a> is a valuable resource in helping write the query.'),
     '#default_value' => $class->override_status_query_text,
     '#states' => array(
-      'visible' => array(':input[name="query_type"]' => array('value' => '1')),
-      'required' => array(':input[name="query_type"]' => array('value' => '1')),
+      'visible' => array(':input[name="query_type"]' => array('value' => DREALTY_QUERY_TYPE_PRICE)),
+      'required' => array(':input[name="query_type"]' => array('value' => DREALTY_QUERY_TYPE_PRICE)),
     ),
   );
   if (module_exists('token')) {
@@ -1104,7 +1120,7 @@ function drealty_resource_configure_form($form, &$form_state, drealtyConnectionE
       '#collapsed' => TRUE,
       '#description' => t('Available tokens for this class'),
       '#states' => array(
-        'visible' => array(':input[name="query_type"]' => array('value' => '1')),
+        'visible' => array(':input[name="query_type"]' => array('value' => DREALTY_QUERY_TYPE_PRICE)),
       ),
     );
     $form['feed']['query_options']['token_help1']['help'] = array(
@@ -1119,7 +1135,7 @@ function drealty_resource_configure_form($form, &$form_state, drealtyConnectionE
       '#collapsed' => TRUE,
       '#description' => t('Available tokens for this class'),
       '#states' => array(
-        'visible' => array(':input[name="query_type"]' => array('value' => '2')),
+        'visible' => array(':input[name="query_type"]' => array('value' => DREALTY_QUERY_TYPE_MANUAL)),
       ),
     );
     $form['feed']['query_options']['token_help2']['help'] = array(
@@ -1133,7 +1149,7 @@ function drealty_resource_configure_form($form, &$form_state, drealtyConnectionE
     '#description' => t('This process my take several minutes.'),
     '#submit' => array('drealty_test_manual_query'),
     '#states' => array(
-      'visible' => array(':input[name="query_type"]' => array('value' => '1')),
+      'visible' => array(':input[name="query_type"]' => array('value' => DREALTY_QUERY_TYPE_PRICE)),
     ),
   );
   $form['feed']['query_options']['check_query'] = array(
@@ -1142,7 +1158,7 @@ function drealty_resource_configure_form($form, &$form_state, drealtyConnectionE
     '#description' => t('This process my take several minutes.'),
     '#submit' => array('drealty_test_manual_query'),
     '#states' => array(
-      'visible' => array(':input[name="query_type"]' => array('value' => '2')),
+      'visible' => array(':input[name="query_type"]' => array('value' => DREALTY_QUERY_TYPE_MANUAL)),
     ),
   );
 
@@ -1153,8 +1169,8 @@ function drealty_resource_configure_form($form, &$form_state, drealtyConnectionE
     '#default_value' => $class->offset_field,
     '#autocomplete_path' => "admin/drealty/fields_autocomplete/$connection->conid/$class->systemname",
     '#states' => array(
-      'visible' => array(':input[name="query_type"]' => array('value' => '1')),
-      'required' => array(':input[name="query_type"]' => array('value' => '1')),
+      'visible' => array(':input[name="query_type"]' => array('value' => DREALTY_QUERY_TYPE_PRICE)),
+      'required' => array(':input[name="query_type"]' => array('value' => DREALTY_QUERY_TYPE_PRICE)),
     ),
   );
 
@@ -1164,8 +1180,8 @@ function drealty_resource_configure_form($form, &$form_state, drealtyConnectionE
     '#default_value' => $class->offset_amount,
     '#options' => array(10000 => '$10,000', 25000 => '$25,000', 50000 => '$50,000', 75000 => '$75,000', 100000 => '$100,000', 200000 => '$200,000'),
     '#states' => array(
-      'visible' => array(':input[name="query_type"]' => array('value' => '1')),
-      'required' => array(':input[name="query_type"]' => array('value' => '1')),
+      'visible' => array(':input[name="query_type"]' => array('value' => DREALTY_QUERY_TYPE_PRICE)),
+      'required' => array(':input[name="query_type"]' => array('value' => DREALTY_QUERY_TYPE_PRICE)),
     ),
   );
 
@@ -1175,8 +1191,8 @@ function drealty_resource_configure_form($form, &$form_state, drealtyConnectionE
     '#default_value' => $class->offset_max,
     '#options' => array(1000000 => '$1m', 1500000 => '$1.5m', 2000000 => '$2m', 5000000 => '$5m', 7500000 => '$7.5m', 10000000 => '$10m', 999000000 => '$999m'),
     '#states' => array(
-      'visible' => array(':input[name="query_type"]' => array('value' => '1')),
-      'required' => array(':input[name="query_type"]' => array('value' => '1')),
+      'visible' => array(':input[name="query_type"]' => array('value' => DREALTY_QUERY_TYPE_PRICE)),
+      'required' => array(':input[name="query_type"]' => array('value' => DREALTY_QUERY_TYPE_PRICE)),
     ),
   );
 
@@ -1189,7 +1205,7 @@ function drealty_resource_configure_form($form, &$form_state, drealtyConnectionE
       and cache the rest for later. If updating listings is often failing due to out of memory errors and increasing PHP&rsquo;s memory allocation is not an option,
       try decreasing this value. However, decreasing this value increases the amount of time it will take to update listings. The RETS server may override this value (MAXROWS).'),
     '#states' => array(
-      'invisible' => array(':input[name="query_type"]' => array('value' => '1')),
+      'invisible' => array(':input[name="query_type"]' => array('value' => DREALTY_QUERY_TYPE_PRICE)),
     ),
   );
 
@@ -1351,7 +1367,7 @@ function drealty_resource_configure_form_submit($form, &$form_state) {
   $class->chunk_size = $form_state['values']['chunk'];
   $class->query_type = $form_state['values']['query_type'];
   switch ($class->query_type) {
-    case 1:
+    case DREALTY_QUERY_TYPE_PRICE:
       $class->override_status_query_text = $form_state['values']['total_query'];
       break;
     default:

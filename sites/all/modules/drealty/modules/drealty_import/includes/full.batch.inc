@@ -67,6 +67,9 @@ function drealty_import_full_import_form_submit($form, &$form_state) {
           case 'Office':
             $entity_type = 'drealty_office';
             break;
+          case 'OpenHouse':
+            $entity_type = 'drealty_openhouse';
+            break;
           default:
             $entity_type = 'drealty_listing';
             break;

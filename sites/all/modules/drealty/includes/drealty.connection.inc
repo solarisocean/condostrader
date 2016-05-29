@@ -158,10 +158,10 @@ class drealtyConnection {
     if ($this->rets && $this->connected) {
       if ($this->rets->Disconnect()) {
         $this->connected = FALSE;
+        $this->current_connection = NULL;
         if (function_exists('drush_log')) {
           drush_log("Disconnected from RETS server.");
         }
-        watchdog('drealty', 'Connection to server successfully terminated.');
         return TRUE;
       } else {
         $error = $this->rets->Error();

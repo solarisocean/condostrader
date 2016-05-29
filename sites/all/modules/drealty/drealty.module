@@ -1,5 +1,10 @@
 <?php
 
+define('DREALTY_QUERY_TYPE_DEFAULT', 0);
+define('DREALTY_QUERY_TYPE_PRICE', 1);
+define('DREALTY_QUERY_TYPE_MANUAL', 2);
+define('DREALTY_QUERY_TYPE_RETS_KEY', 3);
+
 function drealty_entity_info() {
   $entities = array();
   $entities['drealty_listing'] = array(
@@ -473,7 +478,7 @@ function drealty_access($op, $entity = NULL, $type = NULL, $account = NULL) {
         return TRUE;
       }
     case 'edit':
-      if (user_access("endit any $type_name")) {
+      if (user_access("edit any $type_name")) {
         $rights[$account->uid][$cid][$op] = TRUE;
         return TRUE;
       } elseif (user_access("edit own $type_name")) {
@@ -567,20 +572,6 @@ function drealty_listing_view($listing, $view_mode = 'full', $langcode = NULL, $
   return entity_get_controller('drealty_listing')->view(array($listing), $view_mode, $langcode, $page);
 }
 
-/* @todo: tbd in a future commit. other loaders have to change a bit for this to work without error.
-function drealty_listing_view_multiple($entities, $view_mode = 'teaser', $weight = 0, $langcode = NULL) {
-  field_attach_prepare_view('drealty_listing', $entities, $view_mode, $langcode);
-  entity_prepare_view('drealty_listing', $entities, $langcode);
-  $build = array();
-  foreach ($entities as $entity) {
-    $build['drealty_listings'][$entity->id] = drealty_listing_view($entity, $view_mode, $langcode);
-    $build['drealty_listings'][$entity->id]['#weight'] = $weight;
-    $weight++;
-  }
-  $build['drealty_listings']['#sorted'] = TRUE;
-  return $build;
-}*/
-
 function drealty_listing_create($values = array()) {
   return entity_get_controller('drealty_listing')->create($values);
 }
@@ -611,14 +602,8 @@ function drealty_listing_access($op, $listing = NULL, $account = NULL) {
 }
 
 function drealty_drealty_listing_access($op, $listing = NULL, $account = NULL) {
-  if (isset($listing) && ($type_name = $listing->type) && $op != 'delete') {
-    if (user_access("$op any $type_name drealty_listing", $account)) {
-      return TRUE;
-    }
-    $account = isset($account) ? $account : $GLOBALS['user'];
-    if (isset($listing->uid) && $listing->uid == $account->uid && user_access("$op own $type_name drealty_listing", $account)) {
-      return TRUE;
-    }
+  if (drealty_access($op, $listing)) {
+    return TRUE;
   }
   // Do not explicitly deny access so others may still grant access.
 }
@@ -1377,6 +1362,7 @@ function theme_drealty_fields_table($variables) {
     t('Standard Name'),
     t('Long Name'),
     t('Data Type'),
+    t('Length'),
   );
   $rows = array();
   foreach ($fields as $f) {
@@ -1385,6 +1371,7 @@ function theme_drealty_fields_table($variables) {
       $f->standardname,
       $f->longname,
       $f->datatype,
+      $f->max_length,
     );
   }
 

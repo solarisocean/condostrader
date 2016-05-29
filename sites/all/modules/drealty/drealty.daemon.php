@@ -217,22 +217,22 @@ class drealtyDaemon {
     $key_field = $fieldmappings['rets_key']->systemname;
 
     switch ($class->query_type) {
-      case 1:
+      case DREALTY_QUERY_TYPE_PRICE:
         $this->fetch_listings_offset_not_supported_price($connection, $resource, $class, $key_field);
         $process = TRUE;
         break;
-      case 2:
+      case DREALTY_QUERY_TYPE_MANUAL:
         $query = array();
         $custom_query = token_replace($class->override_status_query_text, array('drealty-class' => $class));
         drush_log(dt("Using query: @var", array("@var" => $custom_query)));
         $query[] = $custom_query;
         $process = $this->fetch_listings_offset_supported_default($connection, $resource, $class, $query);
         break;
-      case 3:
+      case DREALTY_QUERY_TYPE_RETS_KEY:
         $this->fetch_listings_offset_not_supported_key($connection, $resource, $class, $key_field);
         $process = TRUE;
         break;
-      case 0:
+      case DREALTY_QUERY_TYPE_DEFAULT:
       default:
         //build the query
         $statuses = $class->status_values;

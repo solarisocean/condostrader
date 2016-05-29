@@ -188,7 +188,7 @@
                         var latLngs = eventData.latLngs;
                         inputRes.val(L.FreeDraw.Utilities.getMySQLPolygons(eventData.latLngs));
                         // console.log(L.FreeDraw.Utilities.getMySQLMultiPolygon(eventData.latLngs));
-                        // console.log(L.FreeDraw.Utilities.getMySQLPolygons(eventData.latLngs)[0]);
+                         console.log(L.FreeDraw.Utilities.getMySQLPolygons(eventData.latLngs)[0]);
                     });
                     
                 });

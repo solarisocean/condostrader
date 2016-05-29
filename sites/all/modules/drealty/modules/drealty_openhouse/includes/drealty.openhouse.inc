@@ -160,7 +160,7 @@ class DrealtyOpenHouseTypeUIController extends EntityDefaultUIController {
    */
   public function hook_menu() {
     $items = parent::hook_menu();
-    $items[$this->path]['description'] = 'Manage drealty agents, including fields.';
+    $items[$this->path]['description'] = 'Manage drealty open houses, including fields.';
     return $items;
   }
 
@@ -282,21 +282,21 @@ function drealty_openhouse_type_form($form, &$form_state, DrealtyOpenHouseType $
       'exists' => 'drealty_listings_get_types',
       'source' => array('label'),
     ),
-    '#description' => t('A unique machine-readable name for this drealty agent type. It must only contain lowercase letters, numbers, and underscores.'),
+    '#description' => t('A unique machine-readable name for this drealty open house type. It must only contain lowercase letters, numbers, and underscores.'),
   );
 
 
   $form['actions'] = array('#type' => 'actions');
   $form['actions']['submit'] = array(
     '#type' => 'submit',
-    '#value' => t('Save drealty agent type'),
+    '#value' => t('Save drealty open house type'),
     '#weight' => 40,
   );
 
   if (!$drealty_openhouse_type->isLocked() && $op != 'add' && $op != 'clone') {
     $form['actions']['delete'] = array(
       '#type' => 'submit',
-      '#value' => t('Delete agent type'),
+      '#value' => t('Delete open house type'),
       '#weight' => 45,
       '#limit_validation_errors' => array(),
       '#submit' => array('drealty_openhouse_type_form_submit_delete')
