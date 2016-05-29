@@ -209,7 +209,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['field_br_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_br_torcond']['alter']['text'] = '[field_br_torcond][field_br_plus_torcond]';
   $handler->display->display_options['fields']['field_br_torcond']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_br_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_br_torcond']['empty'] = '-';
   $handler->display->display_options['fields']['field_br_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_br_torcond']['settings'] = array(
     'thousand_separator' => '',
@@ -244,7 +244,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['field_bath_tot_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['alter']['text'] = '[field_bath_tot_torcond] Bath';
   $handler->display->display_options['fields']['field_bath_tot_torcond']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_bath_tot_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_bath_tot_torcond']['empty'] = '-';
   $handler->display->display_options['fields']['field_bath_tot_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['settings'] = array(
@@ -389,7 +389,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['field_maint_torcond']['label'] = 'Maint Fees';
   $handler->display->display_options['fields']['field_maint_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_maint_torcond']['alter']['text'] = '$[field_maint_torcond]';
-  $handler->display->display_options['fields']['field_maint_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_maint_torcond']['empty'] = '-';
   $handler->display->display_options['fields']['field_maint_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_maint_torcond']['settings'] = array(
     'thousand_separator' => ',',
@@ -563,7 +563,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['field_br_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_br_torcond']['alter']['text'] = '[field_br_torcond][field_br_plus_torcond]';
   $handler->display->display_options['fields']['field_br_torcond']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_br_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_br_torcond']['empty'] = '-';
   $handler->display->display_options['fields']['field_br_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_br_torcond']['settings'] = array(
     'thousand_separator' => '',
@@ -598,7 +598,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['field_bath_tot_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['alter']['text'] = '[field_bath_tot_torcond] Bath';
   $handler->display->display_options['fields']['field_bath_tot_torcond']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_bath_tot_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_bath_tot_torcond']['empty'] = '-';
   $handler->display->display_options['fields']['field_bath_tot_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['settings'] = array(
@@ -743,7 +743,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['field_maint_torcond']['label'] = 'Maint Fees';
   $handler->display->display_options['fields']['field_maint_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_maint_torcond']['alter']['text'] = '$[field_maint_torcond]';
-  $handler->display->display_options['fields']['field_maint_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_maint_torcond']['empty'] = '-';
   $handler->display->display_options['fields']['field_maint_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_maint_torcond']['settings'] = array(
     'thousand_separator' => ',',
@@ -1029,7 +1029,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['field_br_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_br_torcond']['alter']['text'] = '[field_br_torcond][field_br_plus_torcond]';
   $handler->display->display_options['fields']['field_br_torcond']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_br_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_br_torcond']['empty'] = '-';
   $handler->display->display_options['fields']['field_br_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_br_torcond']['settings'] = array(
     'thousand_separator' => '',
@@ -1064,7 +1064,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['field_bath_tot_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['alter']['text'] = '[field_bath_tot_torcond] Bath';
   $handler->display->display_options['fields']['field_bath_tot_torcond']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_bath_tot_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_bath_tot_torcond']['empty'] = '-';
   $handler->display->display_options['fields']['field_bath_tot_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['settings'] = array(
@@ -1209,7 +1209,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['field_maint_torcond']['label'] = 'Maint Fees';
   $handler->display->display_options['fields']['field_maint_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_maint_torcond']['alter']['text'] = '$[field_maint_torcond]';
-  $handler->display->display_options['fields']['field_maint_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_maint_torcond']['empty'] = '-';
   $handler->display->display_options['fields']['field_maint_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_maint_torcond']['settings'] = array(
     'thousand_separator' => ',',
@@ -1468,7 +1468,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['field_br_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_br_torcond']['alter']['text'] = '[field_br_torcond][field_br_plus_torcond]';
   $handler->display->display_options['fields']['field_br_torcond']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_br_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_br_torcond']['empty'] = '-';
   $handler->display->display_options['fields']['field_br_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_br_torcond']['settings'] = array(
     'thousand_separator' => '',
@@ -1503,7 +1503,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['field_bath_tot_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['alter']['text'] = '[field_bath_tot_torcond] Bath';
   $handler->display->display_options['fields']['field_bath_tot_torcond']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_bath_tot_torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_bath_tot_torcond']['empty'] = '-';
   $handler->display->display_options['fields']['field_bath_tot_torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_bath_tot_torcond']['settings'] = array(
