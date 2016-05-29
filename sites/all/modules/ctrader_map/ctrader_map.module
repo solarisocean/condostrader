@@ -302,13 +302,16 @@ function ctrader_map_block_view($delta = '') {
       drupal_add_js($path . '/leaflet-src.js');
       drupal_add_css($path . '/leaflet.css');
 
+      $path = libraries_get_path('leaflet_label');
+      drupal_add_js($path . '/dist/leaflet.label.js');
+      drupal_add_css($path . '/dist/leaflet.label.css');
+
       $path = libraries_get_path('Leaflet.draw');
       drupal_add_js($path . '/dist/leaflet.draw.js');
       drupal_add_css($path . '/dist/leaflet.draw.css');
 
       //Leaflet Free Draw tool.
       $path = libraries_get_path('leafletFreeDraw');
-
       drupal_add_js($path . '/d3.min.js');
       drupal_add_js($path . '/clipper.js');
       drupal_add_js($path . '/concavehull.min.js');
@@ -317,19 +320,6 @@ function ctrader_map_block_view($delta = '') {
       drupal_add_js($path . '/Utilities.js');
       drupal_add_js($path . '/Memory.js');
       drupal_add_js($path . '/Hull.js');
-
-      // another draw tools.
-//  $path = libraries_get_path('ConcaveHull');
-//  drupal_add_js($path . '/dist/concavehull.js');
-//  $path = libraries_get_path('d3');
-//  drupal_add_js($path . '/d3.js');
-//  $path = libraries_get_path('JsClipper');
-//  drupal_add_js($path . '/clipper.js');
-//  $path = libraries_get_path('Leaflet.FreeDraw');
-//  drupal_add_js($path . '/dist/leaflet.freedraw-src.js');
-//  $path = drupal_get_path('module', 'ctrader_map');
-//  drupal_add_js($path . '/js/neighbourhood-json.js');
-
 
       $path = libraries_get_path('leaflet_markercluster');
       drupal_add_css($path . '/dist//dist/MarkerCluster.css');
