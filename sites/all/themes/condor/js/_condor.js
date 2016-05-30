@@ -288,4 +288,33 @@
         }
     };
 
+    /**
+     *
+     */
+    Drupal.behaviors.gallery = {
+        attach: function (context, settings) {
+
+            $('body').once(function() {
+                $('.condo-page-gallery .pane-content, .condo-page-pagination .pane-content').addClass('swiper-container');
+                $('.condo-page-gallery .field-name-field-toronto-gallery, .condo-page-pagination .field-name-field-toronto-gallery').addClass('swiper-wrapper');
+                $('.condo-page-gallery .field-name-field-toronto-gallery img, .condo-page-pagination .field-name-field-toronto-gallery img').addClass('swiper-slide');
+
+                var gallery = new Swiper('.condo-page-gallery .pane-content', {});
+                var pagination = new Swiper('.condo-page-pagination .pane-content', {
+                    direction: 'vertical',
+                    slidesPerView: 3.5,
+                    spaceBetween: 30,
+                    slideToClickedSlide: true
+                });
+
+                gallery.params.control = pagination;
+                pagination.params.control = gallery;
+                
+
+            });
+
+
+        }
+    };
+
 })(jQuery, Drupal);
