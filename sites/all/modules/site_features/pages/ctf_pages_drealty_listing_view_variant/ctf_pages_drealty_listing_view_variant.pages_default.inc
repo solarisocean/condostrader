@@ -56,6 +56,16 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
           0 => 'main',
         ),
         'parent' => NULL,
+        'class' => '',
+        'column_class' => '',
+        'row_class' => '',
+        'region_class' => '',
+        'no_scale' => TRUE,
+        'fixed_width' => '',
+        'column_separation' => '0.5em',
+        'region_separation' => '0.5em',
+        'row_separation' => '0.5em',
+        'hide_empty' => 0,
       ),
       'main' => array(
         'type' => 'column',
@@ -108,7 +118,7 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
         'width' => 100,
         'width_type' => '%',
         'parent' => '1',
-        'class' => '',
+        'class' => 'condo-gallery',
         'hide_empty' => 0,
       ),
     ),
@@ -126,6 +136,44 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
   $display->uuid = 'a3718024-880a-44d9-8664-d7fa10608286';
   $display->content = array();
   $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-e6f5c2fe-4a28-424a-87cf-c7f6139f164d';
+    $pane->panel = 'center';
+    $pane->type = 'entity_field';
+    $pane->subtype = 'drealty_listing:field_lp_dol__torcond';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'label' => 'hidden',
+      'formatter' => 'number_decimal',
+      'delta_limit' => 0,
+      'delta_offset' => '0',
+      'delta_reversed' => FALSE,
+      'formatter_settings' => array(
+        'thousand_separator' => ',',
+        'decimal_separator' => '.',
+        'scale' => '0',
+        'prefix_suffix' => 1,
+      ),
+      'context' => 'argument_entity_id:drealty_listing_1',
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'condo-price',
+    );
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'e6f5c2fe-4a28-424a-87cf-c7f6139f164d';
+    $display->content['new-e6f5c2fe-4a28-424a-87cf-c7f6139f164d'] = $pane;
+    $display->panels['center'][0] = 'new-e6f5c2fe-4a28-424a-87cf-c7f6139f164d';
     $pane = new stdClass();
     $pane->pid = 'new-5069fa9a-845e-4b26-97d7-be9f80e94062';
     $pane->panel = 'center';
@@ -156,11 +204,11 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 0;
+    $pane->position = 1;
     $pane->locks = array();
     $pane->uuid = '5069fa9a-845e-4b26-97d7-be9f80e94062';
     $display->content['new-5069fa9a-845e-4b26-97d7-be9f80e94062'] = $pane;
-    $display->panels['center'][0] = 'new-5069fa9a-845e-4b26-97d7-be9f80e94062';
+    $display->panels['center'][1] = 'new-5069fa9a-845e-4b26-97d7-be9f80e94062';
     $pane = new stdClass();
     $pane->pid = 'new-b3792005-5fa8-41ce-834d-295a27971553';
     $pane->panel = 'center';
@@ -175,11 +223,11 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 1;
+    $pane->position = 2;
     $pane->locks = array();
     $pane->uuid = 'b3792005-5fa8-41ce-834d-295a27971553';
     $display->content['new-b3792005-5fa8-41ce-834d-295a27971553'] = $pane;
-    $display->panels['center'][1] = 'new-b3792005-5fa8-41ce-834d-295a27971553';
+    $display->panels['center'][2] = 'new-b3792005-5fa8-41ce-834d-295a27971553';
     $pane = new stdClass();
     $pane->pid = 'new-8db1911e-c935-47be-b269-3dd928f21aff';
     $pane->panel = 'center';
@@ -196,11 +244,11 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 2;
+    $pane->position = 3;
     $pane->locks = array();
     $pane->uuid = '8db1911e-c935-47be-b269-3dd928f21aff';
     $display->content['new-8db1911e-c935-47be-b269-3dd928f21aff'] = $pane;
-    $display->panels['center'][2] = 'new-8db1911e-c935-47be-b269-3dd928f21aff';
+    $display->panels['center'][3] = 'new-8db1911e-c935-47be-b269-3dd928f21aff';
     $pane = new stdClass();
     $pane->pid = 'new-4fd6280e-2267-4762-8900-a0240b2d666d';
     $pane->panel = 'gallery';
@@ -210,7 +258,7 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
     $pane->access = array();
     $pane->configuration = array(
       'label' => 'title',
-      'formatter' => 'slideshow',
+      'formatter' => 'image',
       'delta_limit' => '0',
       'delta_offset' => '0',
       'delta_reversed' => 0,
@@ -244,6 +292,15 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
         'slideshow_carousel_circular' => 0,
         'slideshow_carousel_follow' => 0,
         'slideshow_carousel_skin' => '',
+        'colorbox_node_style' => '',
+        'colorbox_node_style_first' => '',
+        'colorbox_image_style' => '',
+        'colorbox_gallery' => 'post',
+        'colorbox_gallery_custom' => '',
+        'colorbox_caption' => 'auto',
+        'colorbox_caption_custom' => '',
+        'image_style' => '',
+        'image_link' => '',
       ),
       'context' => 'argument_entity_id:drealty_listing_1',
       'override_title' => 1,
@@ -254,13 +311,59 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
     $pane->style = array(
       'settings' => NULL,
     );
-    $pane->css = array();
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'condo-page-gallery',
+    );
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
     $pane->uuid = '4fd6280e-2267-4762-8900-a0240b2d666d';
     $display->content['new-4fd6280e-2267-4762-8900-a0240b2d666d'] = $pane;
     $display->panels['gallery'][0] = 'new-4fd6280e-2267-4762-8900-a0240b2d666d';
+    $pane = new stdClass();
+    $pane->pid = 'new-398fe4b9-283c-4c2b-ba30-b7a7d56114fd';
+    $pane->panel = 'gallery';
+    $pane->type = 'entity_field';
+    $pane->subtype = 'drealty_listing:field_toronto_gallery';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'label' => 'title',
+      'formatter' => 'image',
+      'delta_limit' => '0',
+      'delta_offset' => '0',
+      'delta_reversed' => 0,
+      'formatter_settings' => array(
+        'colorbox_node_style' => '',
+        'colorbox_node_style_first' => '',
+        'colorbox_image_style' => '',
+        'colorbox_gallery' => 'post',
+        'colorbox_gallery_custom' => '',
+        'colorbox_caption' => 'auto',
+        'colorbox_caption_custom' => '',
+        'image_style' => '',
+        'image_link' => '',
+      ),
+      'context' => 'argument_entity_id:drealty_listing_1',
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'condo-page-pagination',
+    );
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '398fe4b9-283c-4c2b-ba30-b7a7d56114fd';
+    $display->content['new-398fe4b9-283c-4c2b-ba30-b7a7d56114fd'] = $pane;
+    $display->panels['gallery'][1] = 'new-398fe4b9-283c-4c2b-ba30-b7a7d56114fd';
     $pane = new stdClass();
     $pane->pid = 'new-15807c17-317e-444a-8cd3-ad212ace10f1';
     $pane->panel = 'right_side';
