@@ -1,0 +1,76 @@
+.page-drealty-listing {
+  .panels-flexible-row {
+    padding: 0;
+  }
+
+  .condo-price {
+    padding-left: 25px;
+
+    .field {
+      font-weight: bold;
+      color: $white;
+      background: $ecstasy;
+      padding: 6px 15px;
+      display: inline-block;
+      font-size: rem-calc(18);
+
+      &:before {
+        content: "$";
+        font-size: rem-calc(19);
+      }
+    }
+  }
+
+  .view-single-condo-view {
+    .info-fieldset {
+      @extend .centering;
+      margin-top: 10px;
+
+      .condo-title {
+        font-size: rem-calc(30);
+        color: $ebony-clay;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.button-group {
+  display: none;
+}
+
+.panel-flexible .panel-separator {
+  display: none;
+  visibility: hidden;
+}
+
+.condo-gallery {
+  margin-bottom: -6px;
+}
+
+.condo-page-gallery {
+  width: 78.5%;
+  display: inline-block;
+
+  .pane-content {
+    height: 700px;
+  }
+}
+
+.condo-page-pagination {
+  width: 21.553%;
+  display: inline-block;
+  margin-left: -5px;
+  padding: 0 25px;
+  background: $ebony-clay;
+
+  .pane-content {
+    height: 700px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  img {
+    //height: 160px !important;
+  }
+}
