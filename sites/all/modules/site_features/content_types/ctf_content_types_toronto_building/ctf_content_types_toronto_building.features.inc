@@ -2417,19 +2417,19 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
         }
       },
       "field_reference_to_condo" : {
-        "translatable" : "0",
         "entity_types" : [ "drealty_listing" ],
+        "indexes" : { "target_id" : [ "target_id" ] },
         "settings" : {
-          "target_type" : "drealty_listing",
           "handler" : "base",
           "handler_settings" : {
-            "target_bundles" : { "toronto_condo" : "toronto_condo" },
+            "behaviors" : { "views-select-list" : { "status" : 0 } },
             "sort" : { "type" : "none" },
-            "behaviors" : { "views-select-list" : { "status" : 0 } }
-          }
+            "target_bundles" : { "toronto_condo" : "toronto_condo" }
+          },
+          "target_type" : "drealty_listing"
         },
+        "translatable" : "0",
         "foreign keys" : { "drealty_listing" : { "table" : "drealty_listing", "columns" : { "target_id" : "id" } } },
-        "indexes" : { "target_id" : [ "target_id" ] },
         "field_name" : "field_reference_to_condo",
         "type" : "entityreference",
         "module" : "entityreference",
@@ -2443,6 +2443,24 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
             "unsigned" : true,
             "not null" : true
           }
+        }
+      },
+      "field_search_point_string" : {
+        "entity_types" : [ "drealty_listing" ],
+        "indexes" : { "format" : [ "format" ] },
+        "settings" : { "max_length" : 50 },
+        "translatable" : "0",
+        "foreign keys" : { "format" : { "table" : "filter_format", "columns" : { "format" : "format" } } },
+        "field_name" : "field_search_point_string",
+        "type" : "text",
+        "module" : "text",
+        "active" : "1",
+        "locked" : "0",
+        "cardinality" : "1",
+        "deleted" : "0",
+        "columns" : {
+          "value" : { "type" : "varchar", "length" : 50, "not null" : false },
+          "format" : { "type" : "varchar", "length" : 255, "not null" : false }
         }
       }
     },
@@ -5775,6 +5793,38 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
         "id" : "752",
         "field_id" : "535",
         "field_name" : "field_reference_to_condo",
+        "entity_type" : "drealty_listing",
+        "deleted" : "0"
+      },
+      "field_search_point_string" : {
+        "default_value" : null,
+        "description" : "",
+        "display" : {
+          "default" : {
+            "label" : "above",
+            "module" : "text",
+            "settings" : [],
+            "type" : "text_default",
+            "weight" : 234
+          },
+          "gallery" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 },
+          "list" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 },
+          "search" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 }
+        },
+        "drealty" : { "hash_exclude" : 0 },
+        "label" : "Search point string",
+        "required" : 0,
+        "settings" : { "text_processing" : 0, "user_register_form" : false },
+        "widget" : {
+          "active" : 1,
+          "module" : "text",
+          "settings" : { "size" : 60 },
+          "type" : "text_textfield",
+          "weight" : 236
+        },
+        "id" : "761",
+        "field_id" : "542",
+        "field_name" : "field_search_point_string",
         "entity_type" : "drealty_listing",
         "deleted" : "0"
       }

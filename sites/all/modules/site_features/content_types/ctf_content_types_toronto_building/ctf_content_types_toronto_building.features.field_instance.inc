@@ -4497,6 +4497,62 @@ function ctf_content_types_toronto_building_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'drealty_listing-toronto_building-field_search_point_string'.
+  $field_instances['drealty_listing-toronto_building-field_search_point_string'] = array(
+    'bundle' => 'toronto_building',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 234,
+      ),
+      'gallery' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'search' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'drealty' => array(
+      'hash_exclude' => 0,
+    ),
+    'entity_type' => 'drealty_listing',
+    'field_name' => 'field_search_point_string',
+    'label' => 'Search point string',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 236,
+    ),
+  );
+
+  // Exported field_instance:
   // 'drealty_listing-toronto_building-field_spec_des6_out__torcond'.
   $field_instances['drealty_listing-toronto_building-field_spec_des6_out__torcond'] = array(
     'bundle' => 'toronto_building',
@@ -5658,6 +5714,7 @@ function ctf_content_types_toronto_building_field_default_field_instances() {
   t('Rm2_dc1_out');
   t('Rm9_len');
   t('Rm9_wth');
+  t('Search point string');
   t('Spec_des6_out');
   t('St');
   t('St_dir');
