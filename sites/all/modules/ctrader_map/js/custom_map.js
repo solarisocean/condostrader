@@ -41,7 +41,7 @@
                             click: function () {
                                 if (!layer.selected) {
                                     inputRes.val(function(i, val) {
-                                        return val + (!val ? '' : ', ') + 'tid' + layer._leaflet_id;
+                                        return val + (!val ? '' : ', ') + 'tid' + layer.feature.id;
                                     });
 
                                     layer.selected = true;
@@ -57,7 +57,7 @@
                                     };
 
                                     inputRes.val(function(i, val){
-                                        var regId = 'tid' + layer._leaflet_id;
+                                        var regId = 'tid' + layer.feature.id;
                                         var start = val.search(regId);
                                         var end = val.search(regId) +regId.length;
                                         if (val.charAt(start - 2) === ',') {
