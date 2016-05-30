@@ -92,6 +92,8 @@ function drealty_uninstall() {
   }
 
   variable_del('drealty_drealty_listing_disabled');
+  variable_del('drealty_drealty_office_disabled');
+  variable_del('drealty_drealty_agent_disabled');
 
   cache_clear_all();
   menu_rebuild();
@@ -161,7 +163,7 @@ function drealty_schema() {
       'image_dir' => array('type' => 'varchar', 'length' => 50, 'not null' => FALSE),
       'object_type' => array('type' => 'varchar', 'length' => 255, 'not null' => FALSE),
       'image_chunk_size' => array('type' => 'int', 'unsigned' => TRUE, 'size' => 'normal', 'not null' => TRUE, 'default' => 25),
-      'query_type' => array('type' => 'int', 'unsigned' => TRUE, 'size' => 'tiny', 'not null' => TRUE, 'default' => 0),
+      'query_type' => array('type' => 'int', 'unsigned' => TRUE, 'size' => 'tiny', 'not null' => TRUE, 'default' => DREALTY_QUERY_TYPE_DEFAULT),
       'chunk_size' => array('type' => 'int', 'unsigned' => TRUE, 'size' => 'normal', 'not null' => TRUE, 'default' => 500),
       'override_status_query_text' => array('type' => 'varchar', 'length' => 255, 'not null' => FALSE, 'default' => ''),
       'do_geocoding' => array('type' => 'int', 'size' => 'tiny', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),

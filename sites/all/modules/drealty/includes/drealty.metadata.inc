@@ -422,7 +422,7 @@ class drealtyRetsClass {
   public $image_dir;
   public $object_type;
   public $image_chunk_size = 25;
-  public $query_type = 0;
+  public $query_type = DREALTY_QUERY_TYPE_DEFAULT;
   public $chunk_size = 500;
   public $override_status_query_text;
   public $do_geocoding = FALSE;

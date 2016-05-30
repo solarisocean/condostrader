@@ -171,18 +171,27 @@ function drealty_import_cron() {
               case 'Office':
                 $entity_type = 'drealty_office';
                 break;
+              case 'OpenHouse':
+                $entity_type = 'drealty_openhouse';
+                break;
               default:
                 $entity_type = 'drealty_listing';
                 break;
             }
 
+            $orig_query = '';
             if(in_array($class->query_type, array(0,2))) {
               $orig_query = $class->override_status_query_text;
               $dc->rets->SetParam("offset_support", TRUE);
             }
 
-            $date = format_date(strtotime('-' . variable_get('drealty_import_modified_span', 3) . ' days'), 'custom', 'Y-m-d');
-            $pointer = $dc->rets->SearchQuery($resource->systemname, $class->systemname, '(ModificationTimestamp=' . $date .'\T00:00:00+)', $params);
+            if(variable_get('drealty_import_modified_span', 0) != 0) {
+              $date = format_date(strtotime('-' . variable_get('drealty_import_modified_span', 3) . ' days'), 'custom', 'Y-m-d');
+              $pointer = $dc->rets->SearchQuery($resource->systemname, $class->systemname, $orig_query . ',(ModificationTimestamp=' . $date .'T00:00:00+)', $params);
+            }
+            else {
+              $pointer = $dc->rets->SearchQuery($resource->systemname, $class->systemname, $orig_query, $params);
+            }
 
             // loop through the results
             // check hash values, class lifetime

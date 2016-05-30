@@ -286,6 +286,9 @@ class DrealtyImport {
         case 'Office':
           $entity_type = 'drealty_office';
           break;
+        case 'OpenHouse':
+          $entity_type = 'drealty_openhouse';
+          break;
         default:
           $entity_type = 'drealty_listing';
           break;

@@ -369,6 +369,11 @@ function ctrader_mls_entity_presave($entity, $type) {
           _ctrader_mls_create_building_and_reference($entity, $type);
         }
       }
+
+      if ($entity->type == TORONTO_CONDO || $entity->type == TORONTO_BUILDING) {
+        $entity->field_search_point_string[LANGUAGE_NONE][0]['value'] = $entity->field_test_geofilld[LANGUAGE_NONE][0]['lat'] . ',' . $entity->field_test_geofilld[LANGUAGE_NONE][0]['lon'];
+//        drush_log(dt("Info string (ubuntu terminal)"), "warning");
+      }
       break;
   }
 }
@@ -408,7 +413,7 @@ function _ctrader_mls_create_building_and_reference($entity, $type) {
         $entity_building->created = time();
         unset($entity_building->is_new);
         unset($entity_building->original);
-        $entity_building->label = 'Building (' . $entity_building->label . ')';
+        $entity_building->label = $entity_building->label . '--building';
         entity_save(DREALTY_ENTITY_TYPE, $entity_building);
       }
       else {
@@ -445,6 +450,14 @@ function ctrader_mls_form_alter(&$form, &$form_state, $form_id) {
       foreach ($add_image_chunk_size_options as $key => $value) {
         $form['feed']['images']['image_chunk_size']['#options'][$key] = $value;
       }
+
+      $add_query_chunk_size_options = array(
+        15 => 15,
+        30 => 30,
+        60 => 60,
+        120 => 120
+      );
+      $form['feed']['query_options']['chunk']['#options'] = $add_query_chunk_size_options + $form['feed']['query_options']['chunk']['#options'];
       break;
     case 'mortgage_calculator_js_form':
       $form['mortgage_rate_2']['#weight'] = 0.002;
@@ -453,11 +466,30 @@ function ctrader_mls_form_alter(&$form, &$form_state, $form_id) {
       $form['field_e_mail'][LANGUAGE_NONE][0]['email']['#attributes']['placeholder'] = 'example@mail.com';
       $form['field_extra_notes'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = 'Integer ante arcu accumsan a ...';
       $form['field_phone_number'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = t('example: @number', array('@number' => '555-777-9999'));
-      $form['field_buy_now_button']['#weight'] ='401';
+      $form['field_buy_now_button']['#weight'] = '401';
       $arg = arg();
       $form['field_buy_now_button']['und'][0]['markup']['#markup'] = l(t('buy now'), "{$arg[1]}/buy-now");
       break;
+    case 'drealty_listing_edit_form':
+      $form['actions']['delete']['#submit'][0] = '_ctrader_mls_drealty_listing_delete';
+      break;
   }
+}
+
+/**
+ * Function for deleting drealty listing entity.
+ */
+function _ctrader_mls_drealty_listing_delete($form, &$form_state) {
+  //grab the listing
+  $listing = $form_state['listing'];
+
+  $listing_info = $listing->entityInfo();
+
+  // redirect back to the content list
+  $form_state['redirect'] = $listing_info['admin ui']['path'];
+
+  //delete the listing
+  $listing->delete();
 }
 
 
@@ -500,4 +532,3 @@ function ctrader_mls_flag_alter(&$flag) {
 function ctrader_mls_panels_pane_content_alter($content, $pane, $args, $contexts) {
   $stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
 }
-

@@ -256,8 +256,8 @@ function ctrader_map_block_view($delta = '') {
         else {
           // Toronto City default coordinates.
           $coord = array(
-            '43.76',
-            '-79.39'
+            '43.760' . rand(0, 9),
+            '-79.390' . rand(0, 9),
           );
         }
         $popup_content = '';
