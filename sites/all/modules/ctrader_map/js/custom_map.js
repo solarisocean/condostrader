@@ -19,11 +19,22 @@
                     }).addTo(mymap);
 
                     var inputRes = $('#-ctrader-saf-search-button-form input[name="geo_loc"]');
+                    var labelOptions = {
+                      className: 'leaflet-label-other',
+                      direction: 'auto',
+                    };
+                    labelOptions.noHide = false;
+                    labelOptions.pane = 'popupPane';
 
                     function onEachFeature(feature, layer) {
                         // does this feature have a property named popupContent?
                         if (feature.properties && feature.properties.popupContent) {
+                          if (feature.geometry.type == 'Point') {
                             layer.bindPopup(feature.properties.popupContent);
+                          }
+                          else {
+                            layer.bindLabel(feature.properties.popupContent, labelOptions);
+                          }
                         }
 
                         layer.on({
