@@ -74,6 +74,7 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
         'children' => array(
           0 => 1,
           1 => 'main-row',
+          2 => 2,
         ),
         'parent' => 'canvas',
       ),
@@ -121,6 +122,25 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
         'class' => 'condo-gallery',
         'hide_empty' => 0,
       ),
+      2 => array(
+        'type' => 'row',
+        'contains' => 'region',
+        'children' => array(
+          0 => 'bottom',
+        ),
+        'parent' => 'main',
+        'class' => '',
+        'hide_empty' => 0,
+      ),
+      'bottom' => array(
+        'type' => 'region',
+        'title' => 'Bottom',
+        'width' => 100,
+        'width_type' => '%',
+        'parent' => '2',
+        'class' => '',
+        'hide_empty' => 0,
+      ),
     ),
   );
   $display->panel_settings = array(
@@ -129,6 +149,7 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
       'center' => NULL,
       'right_side' => NULL,
       'gallery' => NULL,
+      'bottom' => NULL,
     ),
   );
   $display->cache = array();
@@ -136,6 +157,49 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
   $display->uuid = 'a3718024-880a-44d9-8664-d7fa10608286';
   $display->content = array();
   $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-b3792005-5fa8-41ce-834d-295a27971553';
+    $pane->panel = 'bottom';
+    $pane->type = 'single_condo_map';
+    $pane->subtype = 'single_condo_map';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'b3792005-5fa8-41ce-834d-295a27971553';
+    $display->content['new-b3792005-5fa8-41ce-834d-295a27971553'] = $pane;
+    $display->panels['bottom'][0] = 'new-b3792005-5fa8-41ce-834d-295a27971553';
+    $pane = new stdClass();
+    $pane->pid = 'new-8db1911e-c935-47be-b269-3dd928f21aff';
+    $pane->panel = 'bottom';
+    $pane->type = 'nearby_listings';
+    $pane->subtype = 'nearby_listings';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(),
+    );
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'centering',
+    );
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '8db1911e-c935-47be-b269-3dd928f21aff';
+    $display->content['new-8db1911e-c935-47be-b269-3dd928f21aff'] = $pane;
+    $display->panels['bottom'][1] = 'new-8db1911e-c935-47be-b269-3dd928f21aff';
     $pane = new stdClass();
     $pane->pid = 'new-e6f5c2fe-4a28-424a-87cf-c7f6139f164d';
     $pane->panel = 'center';
@@ -209,46 +273,6 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
     $pane->uuid = '5069fa9a-845e-4b26-97d7-be9f80e94062';
     $display->content['new-5069fa9a-845e-4b26-97d7-be9f80e94062'] = $pane;
     $display->panels['center'][1] = 'new-5069fa9a-845e-4b26-97d7-be9f80e94062';
-    $pane = new stdClass();
-    $pane->pid = 'new-b3792005-5fa8-41ce-834d-295a27971553';
-    $pane->panel = 'center';
-    $pane->type = 'single_condo_map';
-    $pane->subtype = 'single_condo_map';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array();
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 2;
-    $pane->locks = array();
-    $pane->uuid = 'b3792005-5fa8-41ce-834d-295a27971553';
-    $display->content['new-b3792005-5fa8-41ce-834d-295a27971553'] = $pane;
-    $display->panels['center'][2] = 'new-b3792005-5fa8-41ce-834d-295a27971553';
-    $pane = new stdClass();
-    $pane->pid = 'new-8db1911e-c935-47be-b269-3dd928f21aff';
-    $pane->panel = 'center';
-    $pane->type = 'nearby_listings';
-    $pane->subtype = 'nearby_listings';
-    $pane->shown = TRUE;
-    $pane->access = array(
-      'plugins' => array(),
-    );
-    $pane->configuration = array();
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 3;
-    $pane->locks = array();
-    $pane->uuid = '8db1911e-c935-47be-b269-3dd928f21aff';
-    $display->content['new-8db1911e-c935-47be-b269-3dd928f21aff'] = $pane;
-    $display->panels['center'][3] = 'new-8db1911e-c935-47be-b269-3dd928f21aff';
     $pane = new stdClass();
     $pane->pid = 'new-4fd6280e-2267-4762-8900-a0240b2d666d';
     $pane->panel = 'gallery';
