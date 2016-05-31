@@ -289,12 +289,25 @@
     };
 
     /**
-     *
+     * Nearby listed page slider and gallery.
      */
-    Drupal.behaviors.gallery = {
+    Drupal.behaviors.nearbyListedPage = {
         attach: function (context, settings) {
 
             $('body').once(function() {
+                $('.nearby-listed-slider .view-content').addClass('swiper-wrapper');
+
+                $('.pane-nearby-listings').prepend('<div class="nearby-listed-slider-button-next swiper-button-next"></div><div class="nearby-listed-slider-button-prev swiper-button-prev"></div>');
+
+                var nearbyListedSlider = new Swiper('.nearby-listed-slider', {
+                    slidesPerView: 5,
+                    slidesPerColumn: 1,
+                    paginationClickable: true,
+                    spaceBetween: 25,
+                    nextButton: '.nearby-listed-slider-button-next',
+                    prevButton: '.nearby-listed-slider-button-prev'
+                });
+
                 $('.condo-page-gallery .pane-content, .condo-page-pagination .pane-content').addClass('swiper-container');
                 $('.condo-page-gallery .field-name-field-toronto-gallery, .condo-page-pagination .field-name-field-toronto-gallery').addClass('swiper-wrapper');
                 $('.condo-page-gallery .field-name-field-toronto-gallery img, .condo-page-pagination .field-name-field-toronto-gallery img').addClass('swiper-slide');
