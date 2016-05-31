@@ -211,8 +211,16 @@ function ctrader_saf_search_api_solr_query_alter(array &$call_args, SearchApiQue
     }
   }
 
-  if(isset($_GET['polygon'])) {
-    $call_args['params']['fq'][] = 'rpts_field_search_point_string:"Intersects(' . $_GET['polygon'] . ')"';
+  if (isset($_GET['polygon'])) {
+    foreach ($call_args['params']['fq'] as $key => $value) {
+      if (strpos($value, 'rpts_field_search_point_string:"Intersects(') === 0) {
+        $call_args['params']['fq'][$key] = 'rpts_field_search_point_string:"Intersects(' . $_GET['polygon'] . ')"';
+        $changed_polygon_query = TRUE;
+      }
+    }
+    if (isset($changed_polygon_query)) {
+      $call_args['params']['fq'][] = 'rpts_field_search_point_string:"Intersects(' . $_GET['polygon'] . ')"';
+    }
   }
   elseif (isset($_GET['neighbourhoods'])) {
     $call_args['params']['fq'][] = 'im_field_city_region__torcond:' . $_GET['neighbourhoods'];
@@ -332,6 +340,9 @@ function ctrader_saf_block_info() {
   $blocks['ctrader_search_button'] = array(
     'info' => t('Custom block: Search button form'),
   );
+  $blocks['neighbourhoods_hs'] = array(
+    'info' => t('Hierarchical select for neighbourhoods vocabulary.'),
+  );
   return $blocks;
 }
 
@@ -345,7 +356,10 @@ function ctrader_saf_block_view($delta = '') {
     case 'ctrader_search_button':
       $block['subject'] = t('Block with search button for facet search');
       $block['content'] = _ctrader_saf_blocks_content_function($delta);
-
+      break;
+    case 'neighbourhoods_hs':
+      $block['subject'] = t('Neighbourhoods hierarchical select.');
+      $block['content'] = drupal_get_form('hierarchical_select_neighbourhoods_vocabulary_form');
       break;
   }
   return $block;
@@ -425,6 +439,69 @@ function _ctrader_saf_search_button_form_submit($form, &$form_state) {
 
 
 /**
+ * Form with hierarchical select for neighbourhoods vocabulary.
+ */
+function hierarchical_select_neighbourhoods_vocabulary_form($form, &$form_state) {
+  $form['hierarchical_select'] = array(
+    '#type' => 'fieldset',
+    '#prefix' => '<div id="hierarchical_select" class="hierarchical_select_wrapper">',
+    '#suffix' => '</div>',
+    '#attributes' => array(
+      'class' => array(
+        'hierarchical-select',
+        'neighbourhoods-hierarchical',
+      ),
+    ),
+  );
+
+  $vocab = taxonomy_vocabulary_machine_name_load('neighbourhoods');
+  $vid = $vocab->vid;
+
+  $form['hierarchical_select']['select_subject'] = array(
+    '#type' => 'hierarchical_select',
+    '#title' => t('Region:'),
+    '#size' => 1,
+    '#config' => array(
+      'module' => 'hs_taxonomy',
+      'params' => array(
+        'vid' => $vid //The vocab id
+      ),
+      'save_lineage' => 1,
+      'enforce_deepest' => 0,
+      'entity_count' => 0,
+      'require_entity' => 0,
+      'resizable' => 0,
+      'level_labels' => array(
+        'status' => 1,
+        'labels' => array(
+          0 => t('-- city --'),
+          1 => t('-- region --'),
+          2 => t('-- neighbourhood --'),
+        ),
+      ),
+      'dropbox' => array(
+        'status' => 0,
+        'title' => t('All selections'),
+        'limit' => 0,
+        'reset_hs' => 1,
+      ),
+      'editability' => array(
+        'status' => 0,
+        'item_types' => array(),
+        'max_levels' => 3,
+      ),
+      'animation_delay' => 600,
+      'special_items' => array(),
+      'render_flat_select' => 1,
+      'path' => 'hierarchical_select_json',
+    ),
+    '#default_value' => 0,
+  );
+  return $form;
+}
+
+
+  /**
  * @return null|string
  */
 function _ctrader_saf_search_link_calculate_page_callback() {
