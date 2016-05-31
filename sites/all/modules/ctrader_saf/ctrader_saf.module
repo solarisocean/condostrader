@@ -124,27 +124,7 @@ function ctrader_saf_search_api_ranges_minmax_alter(&$variables, &$order) {
  * Implements hook_entity_presave().
  */
 function ctrader_saf_entity_presave($entity, $type) {
-  switch ($type) {
-    case DREALTY_ENTITY_TYPE:
-      $sqft_min = $sqft_max = 0;
-      if (isset($entity->field_sqft__torcond[LANGUAGE_NONE][0]['value'])) {
-        $sqft = $entity->field_sqft__torcond[LANGUAGE_NONE][0]['value'];
-        if (strrpos($sqft, '-')) {
-          $sqft = explode('-', $sqft);
-          $sqft_min = intval($sqft[0]);
-          $sqft_max = intval($sqft[1]);
-        }
-        else {
-          $sqft_min = $sqft_max = intval($sqft);
-        }
-      }
-      $entity->field_sqft_range_min__torcond[LANGUAGE_NONE][0]['value'] = $sqft_min;
-      $entity->field_sqft_range_max__torcond[LANGUAGE_NONE][0]['value'] = $sqft_max;
 
-      $price = isset($entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value']) ? intval($entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value']) : 0;
-      $entity->field_price_per_sqft__torcond[LANGUAGE_NONE][0]['value'] = $sqft_max != 0 ? round(($price / $sqft_max), 2) : 0;
-      break;
-  }
 }
 
 

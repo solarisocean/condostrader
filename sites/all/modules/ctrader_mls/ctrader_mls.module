@@ -365,6 +365,25 @@ function ctrader_mls_entity_presave($entity, $type) {
             $entity->field_old_price_value__torcond[LANGUAGE_NONE][$key]['value'] = $entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value'];
           }
         }
+
+        $sqft_min = $sqft_max = 0;
+        if (isset($entity->field_sqft__torcond[LANGUAGE_NONE][0]['value'])) {
+          $sqft = $entity->field_sqft__torcond[LANGUAGE_NONE][0]['value'];
+          if (strrpos($sqft, '-')) {
+            $sqft = explode('-', $sqft);
+            $sqft_min = intval($sqft[0]);
+            $sqft_max = intval($sqft[1]);
+          }
+          else {
+            $sqft_min = $sqft_max = intval($sqft);
+          }
+        }
+        $entity->field_sqft_range_min__torcond[LANGUAGE_NONE][0]['value'] = $sqft_min;
+        $entity->field_sqft_range_max__torcond[LANGUAGE_NONE][0]['value'] = $sqft_max;
+
+        $price = isset($entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value']) ? intval($entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value']) : 0;
+        $entity->field_price_per_sqft__torcond[LANGUAGE_NONE][0]['value'] = $sqft_max != 0 ? round(($price / $sqft_max), 2) : 0;
+
         if (!$entity->is_new) {
           _ctrader_mls_create_building_and_reference($entity, $type);
         }
@@ -413,7 +432,9 @@ function _ctrader_mls_create_building_and_reference($entity, $type) {
         $entity_building->created = time();
         unset($entity_building->is_new);
         unset($entity_building->original);
-        $entity_building->label = $entity_building->label . '--building';
+        $entity_building->label = $entity->field_addr__torcond[LANGUAGE_NONE][0]['value'] . ' ' . $entity->field_area__torcond[LANGUAGE_NONE][0]['value'];
+//        $entity_building->label = $entity_building->label . '--building';
+        _ctrader_mls_count_average_pricepersqft($entity_building, $entity);
         entity_save(DREALTY_ENTITY_TYPE, $entity_building);
       }
       else {
@@ -430,12 +451,80 @@ function _ctrader_mls_create_building_and_reference($entity, $type) {
         }
         if ($not_have_reference) {
           $building->{$reference_field_name}[LANGUAGE_NONE][] = array('target_id' => $entity->id);
-          entity_save(DREALTY_ENTITY_TYPE, $building);
         }
+        if (empty($building->field_toronto_gallery)) {
+          $building->field_toronto_gallery = $entity->field_toronto_gallery;
+        }
+        _ctrader_mls_count_average_pricepersqft($building, $entity);
+
+        entity_save(DREALTY_ENTITY_TYPE, $building);
       }
     }
   }
 }
+
+
+/**
+ * Calculates average price per sqft in building.
+ *
+ * @param $building - building entity.
+ * @param $condo - listing entity.
+ */
+function _ctrader_mls_count_average_pricepersqft(&$building, &$condo) {
+  $building_condos = array();
+  if (!empty($building->field_reference_to_condo)) {
+    $condo_ids = array();
+    foreach ($building->field_reference_to_condo[LANGUAGE_NONE] as $key => $value) {
+      $condo_ids[] = $value['target_id'];
+    }
+    $building_condos = entity_load(DREALTY_ENTITY_TYPE, $condo_ids, array('active' => 1));
+  }
+
+  if ($condo->active == 1) {
+    $building_condos[] = $condo;
+  }
+
+  // There we have all active condos in this building.
+  // And now try to calculate avarage price per sqft for lease and sale.
+  if (!empty($building_condos)) {
+    $lease_prices = array();
+    $sale_prices = array();
+    foreach ($building_condos as $value) {
+      if (stripos($value->field_s_r__torcond[LANGUAGE_NONE][0]['value'], 'sale') !== FALSE) {
+        if (isset($value->field_price_per_sqft__torcond[LANGUAGE_NONE][0]['value']) && $value->field_price_per_sqft__torcond[LANGUAGE_NONE][0]['value'] != 0) {
+          $sale_prices[] = $value->field_price_per_sqft__torcond[LANGUAGE_NONE][0]['value'];
+        }
+      }
+      elseif (stripos($value->field_s_r__torcond[LANGUAGE_NONE][0]['value'], 'lease') !== FALSE) {
+        if (isset($value->field_price_per_sqft__torcond[LANGUAGE_NONE][0]['value']) && $value->field_price_per_sqft__torcond[LANGUAGE_NONE][0]['value'] != 0) {
+          $lease_prices[] = $value->field_price_per_sqft__torcond[LANGUAGE_NONE][0]['value'];
+        }
+      }
+    }
+
+    if (!empty($lease_prices)) {
+      $summ = array_sum($lease_prices);
+      $count = count($lease_prices);
+      if ($summ != 0 && $count != 0) {
+        $building->field_price_per_sqft_lease[LANGUAGE_NONE][0]['value'] = $summ / $count;
+      }
+      else {
+        $building->field_price_per_sqft_lease[LANGUAGE_NONE][0]['value'] = 0;
+      }
+    }
+    if (!empty($sale_prices)) {
+      $summ = array_sum($sale_prices);
+      $count = count($sale_prices);
+      if ($summ != 0 && $count != 0) {
+        $building->field_price_per_sqft_sale[LANGUAGE_NONE][0]['value'] = $summ / $count;
+      }
+      else {
+        $building->field_price_per_sqft_sale[LANGUAGE_NONE][0]['value'] = 0;
+      }
+    }
+  }
+}
+
 
 /**
  * Implements hook_form_alter().
@@ -468,7 +557,7 @@ function ctrader_mls_form_alter(&$form, &$form_state, $form_id) {
       $form['field_phone_number'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = t('example: @number', array('@number' => '555-777-9999'));
       $form['field_buy_now_button']['#weight'] = '401';
       $arg = arg();
-      $form['field_buy_now_button']['und'][0]['markup']['#markup'] = l(t('buy now'), "{$arg[1]}/buy-now");
+      $form['field_buy_now_button'][LANGUAGE_NONE][0]['markup']['#markup'] = l(t('buy now'), "{$arg[1]}/buy-now");
       break;
     case 'drealty_listing_edit_form':
       $form['actions']['delete']['#submit'][0] = '_ctrader_mls_drealty_listing_delete';
@@ -482,7 +571,6 @@ function ctrader_mls_form_alter(&$form, &$form_state, $form_id) {
 function _ctrader_mls_drealty_listing_delete($form, &$form_state) {
   //grab the listing
   $listing = $form_state['listing'];
-
   $listing_info = $listing->entityInfo();
 
   // redirect back to the content list
@@ -518,17 +606,5 @@ function ctrader_mls_ctools_plugin_directory($owner, $plugin_type) {
  * Implements hook_flag_alter().
  */
 function ctrader_mls_flag_alter(&$flag) {
-//  $path = drupal_get_path_alias();
-//  if ($flag->name == 'drealty_flag' && $flag->entity_type == 'drealty_listing' && strpos(drupal_get_path_alias(), 'drealty_listing/') == 0) {
-//    $flag->unflag_short = t('Remove this listing from my favourites');
-//    $flag->flag_short = t('Add this listing to my favourites');
-//  }
-}
 
-
-/**
- * Implements hook_panels_pane_content_alter().
- */
-function ctrader_mls_panels_pane_content_alter($content, $pane, $args, $contexts) {
-  $stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
 }
