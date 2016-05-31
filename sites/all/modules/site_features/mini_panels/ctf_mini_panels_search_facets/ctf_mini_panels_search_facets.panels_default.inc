@@ -317,7 +317,7 @@ main-page',
     $pane->panel = 'left';
     $pane->type = 'block';
     $pane->subtype = 'facetapi-ae5s4uH2x1Bw3sdrLrNLnF5yKdamKxR4';
-    $pane->shown = TRUE;
+    $pane->shown = FALSE;
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 1,
