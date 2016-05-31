@@ -130,6 +130,43 @@
       float: right;
     }
   }
+
+  .pane-nearby-listings {
+    background: $alabaster;
+    position: relative;
+
+    .pane-title {
+      padding: 41px 0 25px;
+      margin-top: 0;
+      @extend %condo-heading;
+    }
+
+    .views-row {
+      @extend %condos-item;
+    }
+
+    .view-footer {
+      @extend %condo-more;
+
+      a {
+        margin: 25px 0 60px;
+      }
+    }
+
+    .nearby-listed-slider-button-next,
+    .nearby-listed-slider-button-prev {
+      top: 7% !important;
+    }
+
+    .nearby-listed-slider-button-next {
+      right: 25px !important;
+    }
+
+    .nearby-listed-slider-button-prev {
+      right: 60px !important;
+      left: inherit;
+    }
+  }
 }
 
 .button-group {
