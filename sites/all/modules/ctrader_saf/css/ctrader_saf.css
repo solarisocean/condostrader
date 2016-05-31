@@ -1,3 +1,27 @@
-/*.facetapi-checkbox {*/
-  /*display: block !important;*/
-/*}*/
+.neighbourhoods-hierarchical {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+.neighbourhoods-hierarchical .selects {
+  width: 100%;
+
+}
+
+.neighbourhoods-hierarchical select {
+  margin: 0;
+  height: 30px;
+  width: 100%;
+  padding: 0 0 0 5px;
+  font-size: 12px;
+}
+
+#mini-panel-search_facets_toronto_condos_ .form-type-hierarchical-select button,
+#mini-panel-search_facets_toronto_condos_ .facetapi-facetapi-select-dropdowns button {
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  margin: 0;
+  line-height: 1px;
+}

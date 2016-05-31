@@ -24,8 +24,8 @@ function single_condo_map_content_type_render($subtype, $conf, $args, $context) 
 
   $entity = entity_load_single(DREALTY_ENTITY_TYPE, $args[0]);
   $geo_point = array(
-    $entity->field_test_geofilld['und'][0]['lat'],
-    $entity->field_test_geofilld['und'][0]['lon']
+    $entity->field_test_geofilld[LANGUAGE_NONE][0]['lat'],
+    $entity->field_test_geofilld[LANGUAGE_NONE][0]['lon'],
   );
   drupal_add_js(array('singleCondoPoint' => $geo_point), 'setting');
 
@@ -33,14 +33,14 @@ function single_condo_map_content_type_render($subtype, $conf, $args, $context) 
     _ctrader_map_prepare_neighbourhoods_json();
   }
   foreach ($_SESSION['neighbourhood_json'] as $key => $value) {
-    if ($value['id'] == $entity->field_city_region__torcond['und'][0]['tid']) {
+    if ($value['id'] == $entity->field_city_region__torcond[LANGUAGE_NONE][0]['tid']) {
       $term_polygon = $value;
       drupal_add_js(array('singleCondoNeighbourhood' => $term_polygon), 'setting');
     }
   }
 
   $block = new stdClass();
-  $block->title = t('Single condo map');
+  $block->title = '';
   $block->content = '<div id="condo-map"></div>';
 
   return $block;
