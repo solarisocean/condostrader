@@ -304,11 +304,42 @@
                     direction: 'vertical',
                     slidesPerView: 3.5,
                     spaceBetween: 30,
-                    slideToClickedSlide: true
+                    slideToClickedSlide: true,
+                    touchRatio: 0.2,
+                    centeredSlides: false
                 });
 
                 gallery.params.control = pagination;
                 pagination.params.control = gallery;
+
+                // var galleryTop = new Swiper('.condo-page-gallery .pane-content', {
+                //     nextButton: '.swiper-button-next',
+                //     prevButton: '.swiper-button-prev',
+                //     onSlideChangeEnd: function(swiper){
+                //         var activeIndex = swiper.activeIndex;
+                //         $(galleryThumbs.slides).removeClass('is-selected');
+                //         $(galleryThumbs.slides).eq(activeIndex).addClass('is-selected');
+                //         galleryThumbs.slideTo(activeIndex,1, false);
+                //     }
+                // });
+                //
+                // var galleryThumbs = new Swiper('.condo-page-pagination .pane-content', {
+                //     spaceBetween: 30,
+                //     freeMode: false,
+                //     centeredSlides: false,
+                //     slidesPerView: 3.5,
+                //     touchRatio: 0.2,
+                //     direction: 'vertical',
+                //     onClick: function (swiper, event){
+                //         var clicked = swiper.clickedIndex
+                //         swiper.activeIndex = clicked; //don't need this
+                //         swiper.updateClasses() //don't need this
+                //         $(swiper.slides).removeClass('is-selected');
+                //         $(swiper.clickedSlide).addClass('is-selected');
+                //         galleryTop.slideTo(clicked,1, false);
+                //
+                //     }
+                // });
                 
 
             });
