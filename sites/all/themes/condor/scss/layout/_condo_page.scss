@@ -1,4 +1,6 @@
 .page-drealty-listing {
+  color: $ebony-clay;
+
   .panels-flexible-row {
     padding: 0;
   }
@@ -25,12 +27,107 @@
     .info-fieldset {
       @extend .centering;
       margin-top: 10px;
+      clear: both;
 
       .condo-title {
         font-size: rem-calc(30);
         color: $ebony-clay;
         font-weight: bold;
+        margin-bottom: 0;
       }
+    }
+
+    .views-field-nothing-8 {
+      .field-content {
+        @include pseudo-element("before", 9px, 17px, 'map-icon-big.png', 'not-center');
+        font-size: rem-calc(16);
+
+        &:before {
+          margin-right: 5px;
+        }
+      }
+    }
+
+    .views-field-nothing {
+      font-size: rem-calc(11);
+      margin-top: 15px;
+
+      .condo-info-element {
+        margin-right: 12px;
+
+        &:before {
+          margin-right: 5px;
+        }
+      }
+
+      .sqft {
+        @include pseudo-element('before', 9px, 12px, 'area-icon.png', 'not-center');
+      }
+
+      .bed {
+        @include pseudo-element('before', 13px, 12px, 'bed-icon.png', 'not-center');
+      }
+
+      .bath {
+        @include pseudo-element('before', 6px, 12px, 'bath-icon.png', 'not-center');
+      }
+
+      .pets {
+        @include pseudo-element('before', 9px, 12px, 'pets-icon.png', 'not-center');
+      }
+
+      .locker {
+        @include pseudo-element('before', 8px, 12px, 'locker-icon.png', 'not-center');
+      }
+
+      .parking {
+        @include pseudo-element('before', 11px, 10px, 'car-icon.png', 'not-center');
+      }
+
+    }
+
+    .views-field-field-ad-text--torcond {
+      margin-top: 32px;
+
+      .views-label {
+        font-size: rem-calc(18);
+        font-weight: bold;
+        display: block;
+        border-bottom: 1px solid darken($athens-gray, 6);
+        padding-bottom: 7px;
+        margin-bottom: 16px;
+      }
+
+      .field-content {
+        font-size: rem-calc(13);
+        color: $manatee;
+        line-height: rem-calc(24);
+      }
+    }
+
+    .views-field-field-extras--torcond,
+    .views-field-field-rltr--torcond,
+    .views-field-field-ml-num--torcond {
+      font-size: rem-calc(13);
+      color: $manatee;
+      line-height: rem-calc(24);
+
+      .views-label {
+        font-weight: bold;
+        color: $ecstasy;
+        float: left;
+        text-transform: uppercase;
+        margin-right: 3px;
+      }
+    }
+
+    .views-field-field-rltr--torcond {
+      float: left;
+      white-space: nowrap;
+    }
+
+    .views-field-field-ml-num--torcond {
+      float: right;
     }
   }
 }
@@ -72,5 +169,6 @@
 
   img {
     //height: 160px !important;
+    //margin-top: calc(-79% - 5px);
   }
 }
