@@ -198,12 +198,13 @@ function ctrader_saf_search_api_solr_query_alter(array &$call_args, SearchApiQue
         $changed_polygon_query = TRUE;
       }
     }
-    if (isset($changed_polygon_query)) {
+    if (!isset($changed_polygon_query)) {
       $call_args['params']['fq'][] = 'rpts_field_search_point_string:"Intersects(' . $_GET['polygon'] . ')"';
     }
   }
   elseif (isset($_GET['neighbourhoods'])) {
-    $call_args['params']['fq'][] = 'im_field_city_region__torcond:' . $_GET['neighbourhoods'];
+    $neib_query = '(' . str_replace('-', ' OR ', $_GET['neighbourhoods']) . ')';
+    $call_args['params']['fq'][] = 'im_field_city_region__torcond:' . $neib_query;
   }
 }
 
@@ -399,11 +400,24 @@ function _ctrader_saf_search_button_form_submit($form, &$form_state) {
   $query = $_SESSION['search_link_calculate'];
 
   if (strpos($form_state['values']['geo_loc'], 'POLYGON') === 0) {
-    $query['polygon'] = $form_state['values']['geo_loc'];
+    $polygon_string = str_replace(array(
+      'POLYGON((',
+      '))',
+    ), '', $form_state['values']['geo_loc']);
+    $polygon_array = explode(',', $polygon_string);
+    foreach ($polygon_array as $key => $value) {
+      $value_array = explode(' ', $value);
+      foreach ($value_array as $c_key => $c_value) {
+        $value_array[$c_key] = round($c_value, 5);
+      }
+      $polygon_array[$key] = implode(' ', $value_array);
+    }
+    $polygon_string = 'POLYGON((' . implode(',', $polygon_array) . '))';
+    $query['polygon'] = $polygon_string;
   }
   elseif (strpos($form_state['values']['geo_loc'], 'tid') === 0) {
     $tids = str_replace('tid', '', $form_state['values']['geo_loc']);
-    $tids = '('. str_replace(', ', ' OR ', $tids) . ')';
+    $tids = str_replace(', ', '-', $tids);
     $query['neighbourhoods'] = $tids;
   }
 
@@ -481,7 +495,7 @@ function hierarchical_select_neighbourhoods_vocabulary_form($form, &$form_state)
 }
 
 
-  /**
+/**
  * @return null|string
  */
 function _ctrader_saf_search_link_calculate_page_callback() {
