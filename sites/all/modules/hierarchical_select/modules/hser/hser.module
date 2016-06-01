@@ -69,8 +69,6 @@ function hser_field_widget_form(&$form, &$form_state, $field, $instance, $langco
           ),
           'save_lineage' => FALSE,
           'enforce_deepest' => FALSE,
-          'entity_count' => FALSE,
-          'require_entity' => FALSE,
           'resizable' => FALSE,
           'level_labels' => array('status' => FALSE),
           'dropbox' => array(
@@ -81,6 +79,14 @@ function hser_field_widget_form(&$form, &$form_state, $field, $instance, $langco
             'status' => $instance['widget']['settings']['editable'],
             'allow_new_levels' => TRUE,
             'max_levels' => 0,
+          ),
+          'entity_count'    => array(
+            'enabled' => 0,
+            'require_entity' => 0,
+            'settings' => array(
+              'count_children' => 0,
+              'entity_types' => array(),
+            ),
           ),
           'render_flat_select' => FALSE,
         ),

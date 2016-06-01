@@ -6,9 +6,9 @@ package = Form Elements
 
 core = 7.x
 
-; Information added by Drupal.org packaging script on 2016-04-27
-version = "7.x-3.0-beta4"
+; Information added by Drupal.org packaging script on 2016-05-18
+version = "7.x-3.0-beta6"
 core = "7.x"
 project = "hierarchical_select"
-datestamp = "1461754475"
+datestamp = "1463583256"
 

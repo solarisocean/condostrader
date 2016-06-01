@@ -1,4 +1,4 @@
-name = CT Features: Configurations: Hierarchical select configs
+name = CT Features: Configurations: Hierarchical Select Configs
 core = 7.x
 package = CT Features: Configurations
 dependencies[] = hierarchical_select

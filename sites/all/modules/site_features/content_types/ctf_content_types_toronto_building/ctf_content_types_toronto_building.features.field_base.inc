@@ -10,6 +10,48 @@
 function ctf_content_types_toronto_building_field_default_field_bases() {
   $field_bases = array();
 
+  // Exported field_base: 'field_price_per_sqft_lease'.
+  $field_bases['field_price_per_sqft_lease'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(
+      0 => 'drealty_listing',
+    ),
+    'field_name' => 'field_price_per_sqft_lease',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(
+      'decimal_separator' => '.',
+      'precision' => 10,
+      'scale' => 2,
+    ),
+    'translatable' => 0,
+    'type' => 'number_decimal',
+  );
+
+  // Exported field_base: 'field_price_per_sqft_sale'.
+  $field_bases['field_price_per_sqft_sale'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(
+      0 => 'drealty_listing',
+    ),
+    'field_name' => 'field_price_per_sqft_sale',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(
+      'decimal_separator' => '.',
+      'precision' => 10,
+      'scale' => 2,
+    ),
+    'translatable' => 0,
+    'type' => 'number_decimal',
+  );
+
   // Exported field_base: 'field_reference_to_condo'.
   $field_bases['field_reference_to_condo'] = array(
     'active' => 1,

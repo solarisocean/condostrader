@@ -13,8 +13,6 @@ $config = array(
   'config_id'       => 'taxonomy-field_user_region',
   'save_lineage'    => 1,
   'enforce_deepest' => 0,
-  'entity_count'    => 0,
-  'require_entity'  => 0,
   'resizable'       => 0,
   'level_labels' => array(
     'status' => 1,
@@ -45,6 +43,14 @@ $config = array(
     ),
     'allow_new_levels' => 0,
     'max_levels'       => 2,
+  ),
+  'entity_count' => array(
+    'enabled' => ,
+    'require_entity' => ,
+    'settings' => array(
+      'count_children' => ,
+      ),
+    ),
   ),
 );
 

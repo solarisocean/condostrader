@@ -23,7 +23,7 @@ function nearby_listings_content_type_render($subtype, $conf, $args, $context) {
   $view = views_embed_view('nearby_listings_view', 'block_1', $latlon);
 
   $block = new stdClass();
-  $block->title = t('Comparable nearby listings');
+  $block->title = t('<span>Comparable</span> nearby listings');
   $block->content = $view;
 
   return $block;

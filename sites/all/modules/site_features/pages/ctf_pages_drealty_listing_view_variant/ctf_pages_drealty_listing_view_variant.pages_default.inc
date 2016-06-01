@@ -56,6 +56,16 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
           0 => 'main',
         ),
         'parent' => NULL,
+        'class' => '',
+        'column_class' => '',
+        'row_class' => '',
+        'region_class' => '',
+        'no_scale' => TRUE,
+        'fixed_width' => '',
+        'column_separation' => '0.5em',
+        'region_separation' => '0.5em',
+        'row_separation' => '0.5em',
+        'hide_empty' => 0,
       ),
       'main' => array(
         'type' => 'column',
@@ -64,6 +74,7 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
         'children' => array(
           0 => 1,
           1 => 'main-row',
+          2 => 2,
         ),
         'parent' => 'canvas',
       ),
@@ -73,20 +84,21 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
         'children' => array(
           0 => 'center',
           1 => 'right_side',
+          2 => 'details',
         ),
         'parent' => 'main',
       ),
       'center' => array(
         'type' => 'region',
         'title' => 'Center',
-        'width' => '79.41215003471814',
+        'width' => '36.96458440570255',
         'width_type' => '%',
         'parent' => 'main-row',
       ),
       'right_side' => array(
         'type' => 'region',
-        'title' => 'right side',
-        'width' => '20.58784996528187',
+        'title' => 'details',
+        'width' => '35.6423342762973',
         'width_type' => '%',
         'parent' => 'main-row',
         'class' => '',
@@ -108,6 +120,34 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
         'width' => 100,
         'width_type' => '%',
         'parent' => '1',
+        'class' => 'condo-gallery',
+        'hide_empty' => 0,
+      ),
+      2 => array(
+        'type' => 'row',
+        'contains' => 'region',
+        'children' => array(
+          0 => 'bottom',
+        ),
+        'parent' => 'main',
+        'class' => '',
+        'hide_empty' => 0,
+      ),
+      'bottom' => array(
+        'type' => 'region',
+        'title' => 'Bottom',
+        'width' => 100,
+        'width_type' => '%',
+        'parent' => '2',
+        'class' => '',
+        'hide_empty' => 0,
+      ),
+      'details' => array(
+        'type' => 'region',
+        'title' => 'right side',
+        'width' => '27.393081318000277',
+        'width_type' => '%',
+        'parent' => 'main-row',
         'class' => '',
         'hide_empty' => 0,
       ),
@@ -119,6 +159,8 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
       'center' => NULL,
       'right_side' => NULL,
       'gallery' => NULL,
+      'bottom' => NULL,
+      'details' => NULL,
     ),
   );
   $display->cache = array();
@@ -126,6 +168,87 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
   $display->uuid = 'a3718024-880a-44d9-8664-d7fa10608286';
   $display->content = array();
   $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-b3792005-5fa8-41ce-834d-295a27971553';
+    $pane->panel = 'bottom';
+    $pane->type = 'single_condo_map';
+    $pane->subtype = 'single_condo_map';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'b3792005-5fa8-41ce-834d-295a27971553';
+    $display->content['new-b3792005-5fa8-41ce-834d-295a27971553'] = $pane;
+    $display->panels['bottom'][0] = 'new-b3792005-5fa8-41ce-834d-295a27971553';
+    $pane = new stdClass();
+    $pane->pid = 'new-8db1911e-c935-47be-b269-3dd928f21aff';
+    $pane->panel = 'bottom';
+    $pane->type = 'nearby_listings';
+    $pane->subtype = 'nearby_listings';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(),
+    );
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'centering',
+    );
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '8db1911e-c935-47be-b269-3dd928f21aff';
+    $display->content['new-8db1911e-c935-47be-b269-3dd928f21aff'] = $pane;
+    $display->panels['bottom'][1] = 'new-8db1911e-c935-47be-b269-3dd928f21aff';
+    $pane = new stdClass();
+    $pane->pid = 'new-e6f5c2fe-4a28-424a-87cf-c7f6139f164d';
+    $pane->panel = 'center';
+    $pane->type = 'entity_field';
+    $pane->subtype = 'drealty_listing:field_lp_dol__torcond';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'label' => 'hidden',
+      'formatter' => 'number_decimal',
+      'delta_limit' => 0,
+      'delta_offset' => '0',
+      'delta_reversed' => FALSE,
+      'formatter_settings' => array(
+        'thousand_separator' => ',',
+        'decimal_separator' => '.',
+        'scale' => '0',
+        'prefix_suffix' => 1,
+      ),
+      'context' => 'argument_entity_id:drealty_listing_1',
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'condo-price',
+    );
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'e6f5c2fe-4a28-424a-87cf-c7f6139f164d';
+    $display->content['new-e6f5c2fe-4a28-424a-87cf-c7f6139f164d'] = $pane;
+    $display->panels['center'][0] = 'new-e6f5c2fe-4a28-424a-87cf-c7f6139f164d';
     $pane = new stdClass();
     $pane->pid = 'new-5069fa9a-845e-4b26-97d7-be9f80e94062';
     $pane->panel = 'center';
@@ -156,16 +279,52 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 0;
+    $pane->position = 1;
     $pane->locks = array();
     $pane->uuid = '5069fa9a-845e-4b26-97d7-be9f80e94062';
     $display->content['new-5069fa9a-845e-4b26-97d7-be9f80e94062'] = $pane;
-    $display->panels['center'][0] = 'new-5069fa9a-845e-4b26-97d7-be9f80e94062';
+    $display->panels['center'][1] = 'new-5069fa9a-845e-4b26-97d7-be9f80e94062';
     $pane = new stdClass();
-    $pane->pid = 'new-b3792005-5fa8-41ce-834d-295a27971553';
-    $pane->panel = 'center';
-    $pane->type = 'single_condo_map';
-    $pane->subtype = 'single_condo_map';
+    $pane->pid = 'new-15807c17-317e-444a-8cd3-ad212ace10f1';
+    $pane->panel = 'details';
+    $pane->type = 'entity_field';
+    $pane->subtype = 'drealty_listing:field_lp_dol__torcond';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'label' => 'inline',
+      'formatter' => 'number_decimal',
+      'delta_limit' => 0,
+      'delta_offset' => '0',
+      'delta_reversed' => FALSE,
+      'formatter_settings' => array(
+        'thousand_separator' => ',',
+        'decimal_separator' => '.',
+        'scale' => '0',
+        'prefix_suffix' => 1,
+      ),
+      'context' => 'argument_entity_id:drealty_listing_1',
+      'override_title' => 1,
+      'override_title_text' => 'Asking price',
+      'override_title_heading' => 'h5',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+      'style' => 'default',
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '15807c17-317e-444a-8cd3-ad212ace10f1';
+    $display->content['new-15807c17-317e-444a-8cd3-ad212ace10f1'] = $pane;
+    $display->panels['details'][0] = 'new-15807c17-317e-444a-8cd3-ad212ace10f1';
+    $pane = new stdClass();
+    $pane->pid = 'new-64c7be43-c6fc-4de3-89e3-8db4c2e67b39';
+    $pane->panel = 'details';
+    $pane->type = 'book_a_viewing_form';
+    $pane->subtype = 'book_a_viewing_form';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array();
@@ -177,19 +336,23 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
-    $pane->uuid = 'b3792005-5fa8-41ce-834d-295a27971553';
-    $display->content['new-b3792005-5fa8-41ce-834d-295a27971553'] = $pane;
-    $display->panels['center'][1] = 'new-b3792005-5fa8-41ce-834d-295a27971553';
+    $pane->uuid = '64c7be43-c6fc-4de3-89e3-8db4c2e67b39';
+    $display->content['new-64c7be43-c6fc-4de3-89e3-8db4c2e67b39'] = $pane;
+    $display->panels['details'][1] = 'new-64c7be43-c6fc-4de3-89e3-8db4c2e67b39';
     $pane = new stdClass();
-    $pane->pid = 'new-8db1911e-c935-47be-b269-3dd928f21aff';
-    $pane->panel = 'center';
-    $pane->type = 'nearby_listings';
-    $pane->subtype = 'nearby_listings';
+    $pane->pid = 'new-fb25227e-3584-47e5-b098-7e7689fc43c2';
+    $pane->panel = 'details';
+    $pane->type = 'flag_link';
+    $pane->subtype = 'drealty_listing';
     $pane->shown = TRUE;
-    $pane->access = array(
-      'plugins' => array(),
+    $pane->access = array();
+    $pane->configuration = array(
+      'flag_name' => 'drealty_flag',
+      'context' => 'argument_entity_id:drealty_listing_1',
+      'override_title' => 1,
+      'override_title_text' => 'Flag (need to change link text)',
+      'override_title_heading' => 'span',
     );
-    $pane->configuration = array();
     $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
@@ -198,9 +361,32 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
     $pane->extras = array();
     $pane->position = 2;
     $pane->locks = array();
-    $pane->uuid = '8db1911e-c935-47be-b269-3dd928f21aff';
-    $display->content['new-8db1911e-c935-47be-b269-3dd928f21aff'] = $pane;
-    $display->panels['center'][2] = 'new-8db1911e-c935-47be-b269-3dd928f21aff';
+    $pane->uuid = 'fb25227e-3584-47e5-b098-7e7689fc43c2';
+    $display->content['new-fb25227e-3584-47e5-b098-7e7689fc43c2'] = $pane;
+    $display->panels['details'][2] = 'new-fb25227e-3584-47e5-b098-7e7689fc43c2';
+    $pane = new stdClass();
+    $pane->pid = 'new-c1100748-64f3-47ea-9e47-032a3fb2e682';
+    $pane->panel = 'details';
+    $pane->type = 'block';
+    $pane->subtype = 'addtoany-addtoany_button';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => 'Share:',
+      'override_title_heading' => 'h5',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 3;
+    $pane->locks = array();
+    $pane->uuid = 'c1100748-64f3-47ea-9e47-032a3fb2e682';
+    $display->content['new-c1100748-64f3-47ea-9e47-032a3fb2e682'] = $pane;
+    $display->panels['details'][3] = 'new-c1100748-64f3-47ea-9e47-032a3fb2e682';
     $pane = new stdClass();
     $pane->pid = 'new-4fd6280e-2267-4762-8900-a0240b2d666d';
     $pane->panel = 'gallery';
@@ -210,7 +396,7 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
     $pane->access = array();
     $pane->configuration = array(
       'label' => 'title',
-      'formatter' => 'slideshow',
+      'formatter' => 'image',
       'delta_limit' => '0',
       'delta_offset' => '0',
       'delta_reversed' => 0,
@@ -244,8 +430,98 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
         'slideshow_carousel_circular' => 0,
         'slideshow_carousel_follow' => 0,
         'slideshow_carousel_skin' => '',
+        'colorbox_node_style' => '',
+        'colorbox_node_style_first' => '',
+        'colorbox_image_style' => '',
+        'colorbox_gallery' => 'post',
+        'colorbox_gallery_custom' => '',
+        'colorbox_caption' => 'auto',
+        'colorbox_caption_custom' => '',
+        'image_style' => '',
+        'image_link' => '',
       ),
       'context' => 'argument_entity_id:drealty_listing_1',
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'condo-page-gallery',
+    );
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '4fd6280e-2267-4762-8900-a0240b2d666d';
+    $display->content['new-4fd6280e-2267-4762-8900-a0240b2d666d'] = $pane;
+    $display->panels['gallery'][0] = 'new-4fd6280e-2267-4762-8900-a0240b2d666d';
+    $pane = new stdClass();
+    $pane->pid = 'new-398fe4b9-283c-4c2b-ba30-b7a7d56114fd';
+    $pane->panel = 'gallery';
+    $pane->type = 'entity_field';
+    $pane->subtype = 'drealty_listing:field_toronto_gallery';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'label' => 'title',
+      'formatter' => 'image',
+      'delta_limit' => '0',
+      'delta_offset' => '0',
+      'delta_reversed' => 0,
+      'formatter_settings' => array(
+        'colorbox_node_style' => '',
+        'colorbox_node_style_first' => '',
+        'colorbox_image_style' => '',
+        'colorbox_gallery' => 'post',
+        'colorbox_gallery_custom' => '',
+        'colorbox_caption' => 'auto',
+        'colorbox_caption_custom' => '',
+        'image_style' => '',
+        'image_link' => '',
+      ),
+      'context' => 'argument_entity_id:drealty_listing_1',
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'condo-page-pagination',
+    );
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '398fe4b9-283c-4c2b-ba30-b7a7d56114fd';
+    $display->content['new-398fe4b9-283c-4c2b-ba30-b7a7d56114fd'] = $pane;
+    $display->panels['gallery'][1] = 'new-398fe4b9-283c-4c2b-ba30-b7a7d56114fd';
+    $pane = new stdClass();
+    $pane->pid = 'new-e0de6759-ae32-47a2-a343-9593bfe7136b';
+    $pane->panel = 'right_side';
+    $pane->type = 'views';
+    $pane->subtype = 'single_condo_view';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_pager_settings' => 0,
+      'use_pager' => 0,
+      'nodes_per_page' => '1',
+      'pager_id' => '0',
+      'offset' => '0',
+      'more_link' => 0,
+      'feed_icons' => 0,
+      'panel_args' => 1,
+      'link_to_view' => 0,
+      'args' => 'arg2',
+      'url' => '',
+      'display' => 'page_1',
       'override_title' => 1,
       'override_title_text' => '',
       'override_title_heading' => 'h2',
@@ -258,53 +534,33 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $pane->uuid = '4fd6280e-2267-4762-8900-a0240b2d666d';
-    $display->content['new-4fd6280e-2267-4762-8900-a0240b2d666d'] = $pane;
-    $display->panels['gallery'][0] = 'new-4fd6280e-2267-4762-8900-a0240b2d666d';
+    $pane->uuid = 'e0de6759-ae32-47a2-a343-9593bfe7136b';
+    $display->content['new-e0de6759-ae32-47a2-a343-9593bfe7136b'] = $pane;
+    $display->panels['right_side'][0] = 'new-e0de6759-ae32-47a2-a343-9593bfe7136b';
     $pane = new stdClass();
-    $pane->pid = 'new-15807c17-317e-444a-8cd3-ad212ace10f1';
+    $pane->pid = 'new-668f4450-c603-489a-b7cf-858f02c6b166';
     $pane->panel = 'right_side';
-    $pane->type = 'entity_field';
-    $pane->subtype = 'drealty_listing:field_lp_dol__torcond';
+    $pane->type = 'views';
+    $pane->subtype = 'single_condo_view';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'label' => 'inline',
-      'formatter' => 'number_decimal',
-      'delta_limit' => 0,
-      'delta_offset' => '0',
-      'delta_reversed' => FALSE,
-      'formatter_settings' => array(
-        'thousand_separator' => ',',
-        'decimal_separator' => '.',
-        'scale' => '0',
-        'prefix_suffix' => 1,
-      ),
-      'context' => 'argument_entity_id:drealty_listing_1',
+      'override_pager_settings' => 0,
+      'use_pager' => 0,
+      'nodes_per_page' => '1',
+      'pager_id' => '0',
+      'offset' => '0',
+      'more_link' => 0,
+      'feed_icons' => 0,
+      'panel_args' => 1,
+      'link_to_view' => 0,
+      'args' => 'arg2',
+      'url' => '',
+      'display' => 'page_2',
       'override_title' => 1,
-      'override_title_text' => 'Asking price',
-      'override_title_heading' => 'h5',
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
     );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-      'style' => 'default',
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 0;
-    $pane->locks = array();
-    $pane->uuid = '15807c17-317e-444a-8cd3-ad212ace10f1';
-    $display->content['new-15807c17-317e-444a-8cd3-ad212ace10f1'] = $pane;
-    $display->panels['right_side'][0] = 'new-15807c17-317e-444a-8cd3-ad212ace10f1';
-    $pane = new stdClass();
-    $pane->pid = 'new-64c7be43-c6fc-4de3-89e3-8db4c2e67b39';
-    $pane->panel = 'right_side';
-    $pane->type = 'book_a_viewing_form';
-    $pane->subtype = 'book_a_viewing_form';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array();
     $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
@@ -313,57 +569,9 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
-    $pane->uuid = '64c7be43-c6fc-4de3-89e3-8db4c2e67b39';
-    $display->content['new-64c7be43-c6fc-4de3-89e3-8db4c2e67b39'] = $pane;
-    $display->panels['right_side'][1] = 'new-64c7be43-c6fc-4de3-89e3-8db4c2e67b39';
-    $pane = new stdClass();
-    $pane->pid = 'new-fb25227e-3584-47e5-b098-7e7689fc43c2';
-    $pane->panel = 'right_side';
-    $pane->type = 'flag_link';
-    $pane->subtype = 'drealty_listing';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'flag_name' => 'drealty_flag',
-      'context' => 'argument_entity_id:drealty_listing_1',
-      'override_title' => 1,
-      'override_title_text' => 'Flag (need to change link text)',
-      'override_title_heading' => 'span',
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 2;
-    $pane->locks = array();
-    $pane->uuid = 'fb25227e-3584-47e5-b098-7e7689fc43c2';
-    $display->content['new-fb25227e-3584-47e5-b098-7e7689fc43c2'] = $pane;
-    $display->panels['right_side'][2] = 'new-fb25227e-3584-47e5-b098-7e7689fc43c2';
-    $pane = new stdClass();
-    $pane->pid = 'new-c1100748-64f3-47ea-9e47-032a3fb2e682';
-    $pane->panel = 'right_side';
-    $pane->type = 'block';
-    $pane->subtype = 'addtoany-addtoany_button';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'override_title' => 1,
-      'override_title_text' => 'Share:',
-      'override_title_heading' => 'h5',
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 3;
-    $pane->locks = array();
-    $pane->uuid = 'c1100748-64f3-47ea-9e47-032a3fb2e682';
-    $display->content['new-c1100748-64f3-47ea-9e47-032a3fb2e682'] = $pane;
-    $display->panels['right_side'][3] = 'new-c1100748-64f3-47ea-9e47-032a3fb2e682';
+    $pane->uuid = '668f4450-c603-489a-b7cf-858f02c6b166';
+    $display->content['new-668f4450-c603-489a-b7cf-858f02c6b166'] = $pane;
+    $display->panels['right_side'][1] = 'new-668f4450-c603-489a-b7cf-858f02c6b166';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

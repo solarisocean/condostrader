@@ -1,0 +1,211 @@
+.page-drealty-listing {
+  color: $ebony-clay;
+
+  .panels-flexible-row {
+    padding: 0;
+  }
+
+  .condo-price {
+    padding-left: 25px;
+
+    .field {
+      font-weight: bold;
+      color: $white;
+      background: $ecstasy;
+      padding: 6px 15px;
+      display: inline-block;
+      font-size: rem-calc(18);
+
+      &:before {
+        content: "$";
+        font-size: rem-calc(19);
+      }
+    }
+  }
+
+  .view-single-condo-view {
+    .info-fieldset {
+      @extend .centering;
+      margin-top: 10px;
+      clear: both;
+
+      .condo-title {
+        font-size: rem-calc(30);
+        color: $ebony-clay;
+        font-weight: bold;
+        margin-bottom: 0;
+      }
+    }
+
+    .views-field-nothing-8 {
+      .field-content {
+        @include pseudo-element("before", 9px, 17px, 'map-icon-big.png', 'not-center');
+        font-size: rem-calc(16);
+
+        &:before {
+          margin-right: 5px;
+        }
+      }
+    }
+
+    .views-field-nothing {
+      font-size: rem-calc(11);
+      margin-top: 15px;
+
+      .condo-info-element {
+        margin-right: 12px;
+
+        &:before {
+          margin-right: 5px;
+        }
+      }
+
+      .sqft {
+        @include pseudo-element('before', 9px, 12px, 'area-icon.png', 'not-center');
+      }
+
+      .bed {
+        @include pseudo-element('before', 13px, 12px, 'bed-icon.png', 'not-center');
+      }
+
+      .bath {
+        @include pseudo-element('before', 6px, 12px, 'bath-icon.png', 'not-center');
+      }
+
+      .pets {
+        @include pseudo-element('before', 9px, 12px, 'pets-icon.png', 'not-center');
+      }
+
+      .locker {
+        @include pseudo-element('before', 8px, 12px, 'locker-icon.png', 'not-center');
+      }
+
+      .parking {
+        @include pseudo-element('before', 11px, 10px, 'car-icon.png', 'not-center');
+      }
+
+    }
+
+    .views-field-field-ad-text--torcond {
+      margin-top: 32px;
+
+      .views-label {
+        font-size: rem-calc(18);
+        font-weight: bold;
+        display: block;
+        border-bottom: 1px solid darken($athens-gray, 6);
+        padding-bottom: 7px;
+        margin-bottom: 16px;
+      }
+
+      .field-content {
+        font-size: rem-calc(13);
+        color: $manatee;
+        line-height: rem-calc(24);
+      }
+    }
+
+    .views-field-field-extras--torcond,
+    .views-field-field-rltr--torcond,
+    .views-field-field-ml-num--torcond {
+      font-size: rem-calc(13);
+      color: $manatee;
+      line-height: rem-calc(24);
+
+      .views-label {
+        font-weight: bold;
+        color: $ecstasy;
+        float: left;
+        text-transform: uppercase;
+        margin-right: 3px;
+      }
+    }
+
+    .views-field-field-rltr--torcond {
+      float: left;
+      white-space: nowrap;
+    }
+
+    .views-field-field-ml-num--torcond {
+      float: right;
+    }
+  }
+
+  .pane-nearby-listings {
+    background: $alabaster;
+    position: relative;
+
+    .pane-title {
+      padding: 41px 0 25px;
+      margin-top: 0;
+      @extend %condo-heading;
+    }
+
+    .views-row {
+      @extend %condos-item;
+    }
+
+    .view-footer {
+      @extend %condo-more;
+
+      a {
+        margin: 25px 0 60px;
+      }
+    }
+
+    .nearby-listed-slider-button-next,
+    .nearby-listed-slider-button-prev {
+      top: 7% !important;
+    }
+
+    .nearby-listed-slider-button-next {
+      right: 25px !important;
+    }
+
+    .nearby-listed-slider-button-prev {
+      right: 60px !important;
+      left: inherit;
+    }
+  }
+}
+
+.button-group {
+  display: none;
+}
+
+.panel-flexible .panel-separator {
+  display: none;
+  visibility: hidden;
+}
+
+.condo-gallery {
+  margin-bottom: -6px;
+}
+
+.condo-page-gallery {
+  width: 78.5%;
+  display: inline-block;
+
+  .pane-content {
+    height: 700px;
+  }
+}
+
+.condo-page-pagination {
+  width: 21.553%;
+  display: inline-block;
+  margin-left: -5px;
+  padding: 0 25px;
+  background: $ebony-clay;
+
+  .pane-content {
+    height: 700px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  img {
+    //height: 160px !important;
+    //margin-top: calc(-79% - 5px);
+  }
+}

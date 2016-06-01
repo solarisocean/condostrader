@@ -369,7 +369,7 @@
 %condo-heading {
   font-weight: 100;
   text-transform: uppercase;
-  font-size: 18px;
+  font-size: rem-calc(18);
   color: $mirage;
 
   span {

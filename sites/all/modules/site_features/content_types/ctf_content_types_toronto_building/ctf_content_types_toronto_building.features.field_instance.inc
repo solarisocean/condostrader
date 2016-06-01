@@ -3746,6 +3746,130 @@ function ctf_content_types_toronto_building_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'drealty_listing-toronto_building-field_price_per_sqft_lease'.
+  $field_instances['drealty_listing-toronto_building-field_price_per_sqft_lease'] = array(
+    'bundle' => 'toronto_building',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 2,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_decimal',
+        'weight' => 236,
+      ),
+      'gallery' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'search' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'drealty' => array(
+      'hash_exclude' => 0,
+    ),
+    'entity_type' => 'drealty_listing',
+    'field_name' => 'field_price_per_sqft_lease',
+    'label' => 'Price per sqft lease',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 238,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'drealty_listing-toronto_building-field_price_per_sqft_sale'.
+  $field_instances['drealty_listing-toronto_building-field_price_per_sqft_sale'] = array(
+    'bundle' => 'toronto_building',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 2,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_decimal',
+        'weight' => 235,
+      ),
+      'gallery' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'search' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'drealty' => array(
+      'hash_exclude' => 0,
+    ),
+    'entity_type' => 'drealty_listing',
+    'field_name' => 'field_price_per_sqft_sale',
+    'label' => 'Price per sqft sale',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 237,
+    ),
+  );
+
+  // Exported field_instance:
   // 'drealty_listing-toronto_building-field_prkg_inc__torcond'.
   $field_instances['drealty_listing-toronto_building-field_prkg_inc__torcond'] = array(
     'bundle' => 'toronto_building',
@@ -5700,6 +5824,8 @@ function ctf_content_types_toronto_building_field_default_field_instances() {
   t('Park_spcs');
   t('Pets');
   t('Pix_updt');
+  t('Price per sqft lease');
+  t('Price per sqft sale');
   t('Prkg_inc');
   t('Prop_feat1_out');
   t('Prop_feat2_out');
