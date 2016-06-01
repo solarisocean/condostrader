@@ -194,16 +194,17 @@ function ctrader_saf_search_api_solr_query_alter(array &$call_args, SearchApiQue
   if (isset($_GET['polygon'])) {
     foreach ($call_args['params']['fq'] as $key => $value) {
       if (strpos($value, 'rpts_field_search_point_string:"Intersects(') === 0) {
-        $call_args['params']['fq'][$key] = 'rpts_field_search_point_string:"Intersects(' . $_GET['polygon'] . ')"';
+        $call_args['params']['fq'][$key] = 'rpts_field_search_point_string:"Intersects(POLYGON((' . $_GET['polygon'] . ')))"';
         $changed_polygon_query = TRUE;
       }
     }
-    if (isset($changed_polygon_query)) {
-      $call_args['params']['fq'][] = 'rpts_field_search_point_string:"Intersects(' . $_GET['polygon'] . ')"';
+    if (!isset($changed_polygon_query)) {
+      $call_args['params']['fq'][] = 'rpts_field_search_point_string:"Intersects(POLYGON((' . $_GET['polygon'] . ')))"';
     }
   }
   elseif (isset($_GET['neighbourhoods'])) {
-    $call_args['params']['fq'][] = 'im_field_city_region__torcond:' . $_GET['neighbourhoods'];
+    $neib_query = '(' . str_replace('-', ' OR ', $_GET['neighbourhoods']) . ')';
+    $call_args['params']['fq'][] = 'im_field_city_region__torcond:' . $neib_query;
   }
 }
 
@@ -299,6 +300,9 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
       }
       break;
     case 'field_sqft_range_max__torcond':
+
+      break;
+    case 'field_style__torcond':
 
       break;
   }
@@ -399,11 +403,24 @@ function _ctrader_saf_search_button_form_submit($form, &$form_state) {
   $query = $_SESSION['search_link_calculate'];
 
   if (strpos($form_state['values']['geo_loc'], 'POLYGON') === 0) {
-    $query['polygon'] = $form_state['values']['geo_loc'];
+    $polygon_string = str_replace(array(
+      'POLYGON((',
+      '))',
+    ), '', $form_state['values']['geo_loc']);
+    $polygon_array = explode(',', $polygon_string);
+    foreach ($polygon_array as $key => $value) {
+      $value_array = explode(' ', $value);
+      foreach ($value_array as $c_key => $c_value) {
+        $value_array[$c_key] = round($c_value, 5);
+      }
+      $polygon_array[$key] = implode(' ', $value_array);
+    }
+    $polygon_string = implode(',', $polygon_array);
+    $query['polygon'] = $polygon_string;
   }
   elseif (strpos($form_state['values']['geo_loc'], 'tid') === 0) {
     $tids = str_replace('tid', '', $form_state['values']['geo_loc']);
-    $tids = '('. str_replace(', ', ' OR ', $tids) . ')';
+    $tids = str_replace(', ', '-', $tids);
     $query['neighbourhoods'] = $tids;
   }
 
@@ -481,7 +498,7 @@ function hierarchical_select_neighbourhoods_vocabulary_form($form, &$form_state)
 }
 
 
-  /**
+/**
  * @return null|string
  */
 function _ctrader_saf_search_link_calculate_page_callback() {
@@ -654,7 +671,65 @@ function ctrader_saf_facetapi_widgets() {
         'query types' => array('term', 'numeric_range'),
       ),
     ),
+    'ctrader_facetapi_select_dropdowns' => array(
+      'handler' => array(
+        'label' => t('Ctrader Select Field (Dropdowns)'),
+        'class' => 'CtraderFacetapiSelectDropdowns',
+        'query types' => array('term', 'date'),
+      ),
+    ),
   );
+}
+
+
+/**
+ * Implements hook_forms().
+ */
+function ctrader_saf_forms($form_id) {
+  // Build all multiselect facet forms on the page using the same form
+  // callback.
+  $forms = array();
+  if (strpos($form_id, '_ctrader_saf_facetapi_select_facet_form_') === 0) {
+    $forms[$form_id]['callback'] = '_ctrader_saf_facetapi_select_facet_form';
+  }
+  return $forms;
+}
+
+function _ctrader_saf_facetapi_select_facet_form($form, &$form_state, $variables) {
+  if (!empty($variables['options'])) {
+    $form['facets'] = array(
+      '#type' => 'select',
+      '#default_value' => '',
+      '#options' => $variables['options'],
+      '#attributes' => array(
+        'class' => array('ctrader-facetapi-select'),
+      ),
+      '#attached' => array(
+        'js' => array(
+          drupal_get_path('module', 'ctrader_saf') . '/js/rewritten_facetapi_select.js',
+        ),
+      ),
+    );
+    $form['submit'] = array(
+      '#type' => 'submit',
+      '#attributes' => array('class' => array('ctrader-facetapi-select-submit')),
+      '#value' => t('Submit'),
+    );
+  }
+
+  if (!empty($variables['default_option_label'])) {
+    $form['facets']['#empty_option'] = $variables['default_option_label'];
+  }
+
+  return $form;
+}
+
+/**
+ * Submit function for facetapi_select_form().
+ */
+function _ctrader_saf_facetapi_select_facet_form_submit($form, &$form_state) {
+  $parsed_url = drupal_parse_url($form_state['values']['facets']);
+  drupal_goto($parsed_url['path'], array('query' => $parsed_url['query']));
 }
 
 

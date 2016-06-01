@@ -492,7 +492,7 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
   $facet->facet = 'field_style__torcond';
   $facet->enabled = FALSE;
   $facet->settings = array(
-    'operator' => 'or',
+    'operator' => 'and',
     'hard_limit' => '50',
     'dependencies' => array(
       'facets' => array(),
@@ -508,7 +508,7 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
     'flatten' => 0,
     'individual_parent' => 0,
     'query_type' => 'term',
-    'limit_active_items' => 0,
+    'limit_active_items' => 1,
     'default_true' => '1',
     'facet_search_ids' => array(),
     'exclude' => 0,
@@ -9390,8 +9390,33 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
   $facet->enabled = TRUE;
   $facet->settings = array(
     'weight' => 0,
-    'widget' => 'facetapi_select_dropdowns',
-    'filters' => array(),
+    'widget' => 'ctrader_facetapi_select_dropdowns',
+    'filters' => array(
+      'active_items' => array(
+        'status' => 0,
+        'weight' => '-50',
+      ),
+      'exclude_items' => array(
+        'status' => 0,
+        'weight' => '-49',
+      ),
+      'rewrite_items' => array(
+        'status' => 1,
+        'weight' => '-48',
+      ),
+      'narrow_results' => array(
+        'status' => 0,
+        'weight' => '-47',
+      ),
+      'show_if_minimum_items' => array(
+        'status' => 0,
+        'weight' => '-46',
+      ),
+      'deepest_level_items' => array(
+        'status' => 0,
+        'weight' => '-45',
+      ),
+    ),
     'active_sorts' => array(
       'active' => 'active',
       'count' => 'count',
@@ -9494,7 +9519,7 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
     'default_option_label' => '',
     'reset_option_label' => '',
     'submit_page' => '',
-    'hide_facet_count' => 0,
+    'hide_facet_count' => 1,
     'date_ranges' => array(
       'add_range' => 'Add a new date range',
     ),
@@ -9515,6 +9540,10 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
     'ranges_show_reset_link' => 0,
     'update_results' => 0,
     'show_reset_link' => 0,
+    'exclude' => '',
+    'regex' => 0,
+    'show_minimum_items' => 2,
+    'rewrite_items' => 1,
   );
   $export['search_api@toronto_condo_index:block:field_style__torcond'] = $facet;
 
