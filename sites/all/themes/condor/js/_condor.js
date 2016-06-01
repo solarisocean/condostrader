@@ -337,11 +337,14 @@
                         $(swiper.slides).removeClass('is-selected');
                         $(swiper.clickedSlide).addClass('is-selected');
                         galleryTop.slideTo(clicked,300, false);
-
                     }
                 });
 
+                $('#edit-field-time-to-contact-und').chosen({
+                    'disable_search': true
+                });
 
+                $('.page-drealty-listing .condo-right-side').height($('.page-drealty-listing .condo-center').height());
             });
 
 
