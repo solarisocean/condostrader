@@ -391,7 +391,8 @@ function _ctrader_map_taxonomy_create($vocab_machine_name) {
   }
 
   // Checks if vocabulary is empty.
-  if (!empty(taxonomy_get_tree($vid, 0, 1))) {
+  $check_vocab = taxonomy_get_tree($vid, 0, 1);
+  if (!empty($check_vocab)) {
     drupal_set_message(t('Vocabulary is not empty.'), 'warning');
     drupal_set_message(t('You should clear Neighbourhoods vocabulary before creating new taxonomy tree.'), 'warning');
     return;
