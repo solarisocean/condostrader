@@ -194,12 +194,12 @@ function ctrader_saf_search_api_solr_query_alter(array &$call_args, SearchApiQue
   if (isset($_GET['polygon'])) {
     foreach ($call_args['params']['fq'] as $key => $value) {
       if (strpos($value, 'rpts_field_search_point_string:"Intersects(') === 0) {
-        $call_args['params']['fq'][$key] = 'rpts_field_search_point_string:"Intersects(' . $_GET['polygon'] . ')"';
+        $call_args['params']['fq'][$key] = 'rpts_field_search_point_string:"Intersects(POLYGON((' . $_GET['polygon'] . ')))"';
         $changed_polygon_query = TRUE;
       }
     }
     if (!isset($changed_polygon_query)) {
-      $call_args['params']['fq'][] = 'rpts_field_search_point_string:"Intersects(' . $_GET['polygon'] . ')"';
+      $call_args['params']['fq'][] = 'rpts_field_search_point_string:"Intersects(POLYGON((' . $_GET['polygon'] . ')))"';
     }
   }
   elseif (isset($_GET['neighbourhoods'])) {
@@ -412,7 +412,7 @@ function _ctrader_saf_search_button_form_submit($form, &$form_state) {
       }
       $polygon_array[$key] = implode(' ', $value_array);
     }
-    $polygon_string = 'POLYGON((' . implode(',', $polygon_array) . '))';
+    $polygon_string = implode(',', $polygon_array);
     $query['polygon'] = $polygon_string;
   }
   elseif (strpos($form_state['values']['geo_loc'], 'tid') === 0) {
