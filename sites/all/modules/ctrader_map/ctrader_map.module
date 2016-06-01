@@ -20,149 +20,7 @@ function ctrader_map_menu() {
  * Implements hook_init().
  */
 function ctrader_map_init() {
-  $t_n_list = array(
-    0 => 'Agincourt North',
-    1 => 'Agincourt South-Malvern West',
-    2 => 'Alderwood',
-    3 => 'Annex',
-    4 => 'Banbury-Don Mills',
-    5 => 'Bathurst Manor',
-    6 => 'Bay Street Corridor',
-    7 => 'Bayview Village',
-    8 => 'Bayview Woods-Steeles',
-    9 => 'Bedford Park-Nortown',
-    10 => 'Beechborough-Greenbrook',
-    11 => 'Bendale',
-    12 => 'Birchcliffe-Cliffside',
-    13 => 'Black Creek',
-    14 => 'Blake-Jones',
-    15 => 'Briar Hill-Belgravia',
-    16 => 'Bridle Path-Sunnybrook-York Mills',
-    17 => 'Broadview North',
-    18 => 'Brookhaven-Amesbury',
-    19 => 'Cabbagetown-South St. James Town',
-    20 => 'Caledonia-Fairbank',
-    21 => 'Casa Loma',
-    22 => 'Centennial Scarborough',
-    23 => 'Church-Yonge Corridor',
-    24 => 'Clairlea-Birchmount',
-    25 => 'Clanton Park',
-    26 => 'Cliffcrest',
-    27 => 'Corso Italia-Davenport',
-    28 => 'Crescent Town',
-    29 => 'Danforth',
-    30 => 'Danforth Village-East York',
-    31 => 'Don Valley Village',
-    32 => 'Dorset Park',
-    33 => 'Dovercourt-Wallace Emerson-Junction',
-    34 => 'Downsview-Roding-CFB',
-    35 => 'Dufferin Grove',
-    36 => 'East End-Danforth',
-    37 => 'East York',
-    38 => 'Edenbridge-Humber Valley',
-    39 => 'Eglinton East',
-    40 => 'Elms-Old Rexdale',
-    41 => 'Englemount-Lawrence',
-    42 => 'Eringate-Centennial-West Deane',
-    43 => 'Etobicoke West Mall',
-    44 => 'Flemingdon Park',
-    45 => 'Forest Hill North',
-    46 => 'Forest Hill South',
-    47 => 'Glenfield-Jane Heights',
-    48 => 'Greenwood-Coxwell',
-    49 => 'Guildwood',
-    50 => 'Henry Farm',
-    51 => 'High Park North',
-    52 => 'High Park-Swansea',
-    53 => 'Highland Creek',
-    54 => 'Hillcrest Village',
-    55 => 'Humber Heights',
-    56 => 'Humber Summit',
-    57 => 'Humberlea-Pelmo Park W4',
-    58 => 'Humberlea-Pelmo Park W5',
-    59 => 'Humbermede',
-    60 => 'Humewood-Cedarvale',
-    61 => 'Ionview',
-    62 => 'Islington-City Centre West',
-    63 => 'Junction Area',
-    64 => 'Keelesdale-Eglinton West',
-    65 => 'Kennedy Park',
-    66 => 'Kensington-Chinatown',
-    67 => 'Kingsview Village-The Westway',
-    68 => 'Kingsway South',
-    69 => 'L\'Amoreaux',
-    70 => 'Lambton Baby Point',
-    71 => 'Lansing-Westgate',
-    72 => 'Lawrence Park North',
-    73 => 'Lawrence Park South',
-    74 => 'Leaside',
-    75 => 'Little Portugal',
-    76 => 'Long Branch',
-    77 => 'Malvern',
-    78 => 'Maple Leaf',
-    79 => 'Markland Wood',
-    80 => 'Milliken',
-    81 => 'Mimico',
-    82 => 'Morningside',
-    83 => 'Moss Park',
-    84 => 'Mount Dennis',
-    85 => 'Mount Olive-Silverstone-Jamestown',
-    86 => 'Mount Pleasant East',
-    87 => 'Mount Pleasant West',
-    88 => 'New Toronto',
-    89 => 'Newtonbrook East',
-    90 => 'Newtonbrook West',
-    91 => 'Niagara',
-    92 => 'North Riverdale',
-    93 => 'North St. James Town',
-    94 => 'O\'Connor-Parkview',
-    95 => 'Oakridge',
-    96 => 'Oakwood-Vaughan',
-    97 => 'Palmerston-Little Italy',
-    98 => 'Parkwoods-Donalda',
-    99 => 'Pleasant View',
-    100 => 'Princess-Rosethorn',
-    101 => 'Regent Park',
-    102 => 'Rexdale-Kipling',
-    103 => 'Rockcliffe-Smythe',
-    104 => 'Roncesvalles',
-    105 => 'Rosedale-Moore Park',
-    106 => 'Rouge E10',
-    107 => 'Rouge E11',
-    108 => 'Runnymede-Bloor West Village',
-    109 => 'Rustic',
-    110 => 'Scarborough Village',
-    111 => 'South Parkdale',
-    112 => 'South Riverdale',
-    113 => 'St. Andrew-Windfields',
-    114 => 'Steeles',
-    115 => 'Stonegate-Queensway',
-    116 => 'Tam O\'Shanter-Sullivan',
-    117 => 'The Beaches',
-    118 => 'Thorncliffe Park',
-    119 => 'Trinity-Bellwoods',
-    120 => 'University',
-    121 => 'Victoria Village',
-    122 => 'Waterfront Communities C1',
-    123 => 'Waterfront Communities C8',
-    124 => 'West Hill',
-    125 => 'West Humber-Clairville',
-    126 => 'Westminster-Branson',
-    127 => 'Weston',
-    128 => 'Weston-Pellam Park',
-    129 => 'Wexford-Maryvale',
-    130 => 'Willowdale East',
-    131 => 'Willowdale West',
-    132 => 'Willowridge-Martingrove-Richview',
-    133 => 'Woburn',
-    134 => 'Woodbine Corridor',
-    135 => 'Woodbine-Lumsden',
-    136 => 'Wychwood',
-    137 => 'Yonge-Eglinton',
-    138 => 'Yonge-St. Clair',
-    139 => 'York University Heights',
-    140 => 'Yorkdale-Glen Park',
-  );
+//  unset($_SESSION['neighbourhood_json']);
 //  $kml_to_xml = _ctrader_map_kml_to_xml();
 }
 
@@ -399,56 +257,9 @@ function ctrader_map_ctools_plugin_directory($owner, $plugin_type) {
 
 
 /**
- * Create json with Toronto neighbourhoods coordinates.
+ * Creates json with Toronto neighbourhoods coordinates.
  */
 function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = array(), $points_array = array()) {
-//  $regions_xml = simplexml_load_file(drupal_get_path('module', 'ctrader_map') . '/inc/neigh_2.xml');
-//  $neighbourhoods = array();
-//  foreach ($regions_xml as $item) {
-//    if (in_array($item->name, $condos_neighbourhood_names)) {
-////    if (TRUE) {
-//      $is_polygon = TRUE;
-//      $coordinates = array();
-//      foreach ($item->json_polygon->element as $pair) {
-//        $count_pair = count($pair);
-//        if (!$count_pair) {
-//          $point = explode(',', $pair);
-//          $point = array_reverse($point);
-//          $coordinates[] = $point;
-//        }
-//        // if multipolygon
-//        else {
-//          $is_polygon = FALSE;
-//          $pre_coordinates = array();
-//          foreach ((array) $pair->element as $value) {
-//            $point = explode(',', $value);
-//            $point = array_reverse($point);
-//            $pre_coordinates[] = $point;
-//          }
-//          $coordinates[] = $pre_coordinates;
-//        }
-//      }
-//      $polygon_popup_content = !empty($item->name) ? $item->name->__toString() : 'Neighbourhood';
-//      $prepared = array(
-//        'id' => $item->id->__toString(),
-//        'type' => 'Feature',
-//        'properties' => array(
-//          'name' => !empty($item->name) ? $item->name->__toString() : 'Neighbourhood',
-//          'popupContent' => $polygon_popup_content,
-//        ),
-//        'geometry' => array(
-//          'type' => $is_polygon ? 'Polygon' : 'MultiPolygon',
-//          'coordinates' => array(
-//            $coordinates,
-//          ),
-//        ),
-//      );
-//      $neighbourhoods[] = $prepared;
-//    }
-//
-//  drupal_add_js(array('neighbourhoodsMapData' => $neighbourhoods), 'setting');
-
-
   if (!isset($_SESSION['neighbourhood_json'])) {
     $vid = taxonomy_vocabulary_machine_name_load('neighbourhoods'); //Neighbourhoods vocabulary.
     $vid = $vid->vid;
@@ -536,8 +347,19 @@ function _ctrader_map_kml_to_xml() {
 }
 
 
+/**
+ * Provides button for creating taxonomy tree in Neighbourhoods vocabulary.
+ */
 function _ctrader_map_region_taxonomy_form($form, &$form_state) {
   $form = array();
+  $form['vocab_name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Vocabulary machine name'),
+    '#default_value' => 'neighbourhoods',
+    '#size' => 42,
+    '#maxlength' => 42,
+    '#required' => TRUE,
+  );
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Start terms creating'),
@@ -546,173 +368,307 @@ function _ctrader_map_region_taxonomy_form($form, &$form_state) {
   return $form;
 }
 
-
+/**
+ * _ctrader_map_region_taxonomy_form submit function.
+ */
 function _ctrader_map_region_taxonomy_form_submit($form, &$form_state) {
-  _ctrader_map_taxonomy_create();
+  _ctrader_map_taxonomy_create($form_state['values']['vocab_name']);
 }
+
 
 /**
  * Creates taxonomy term for each Toronto region.
  */
-function _ctrader_map_taxonomy_create() {
-  $vid = taxonomy_vocabulary_machine_name_load('neighbourhoods'); //Neighbourhoods vocabulary.
-  $vid = $vid->vid;
+function _ctrader_map_taxonomy_create($vocab_machine_name) {
+  $vid = taxonomy_vocabulary_machine_name_load($vocab_machine_name); //Neighbourhoods vocabulary.
+  if ($vid == FALSE) {
+    drupal_set_message(t('Vocabulary does not exist.'), 'error');
+    return;
+  }
+  else {
+    $vid = $vid->vid;
+  }
 
-  $select_list_condos_ca = array(
-    '1' => array(
-      'Toronto' => array(
-        '590' => 'Downtown',
-        '597' => 'Midtown',
-        '593' => 'North York',
-        '596' => 'East End',
-        '598' => 'East York',
-        '595' => 'West End',
-        '594' => 'York Crosstown',
-        '592' => 'Etobicoke',
-        '591' => 'Scarborough',
-      )
+  // Checks if vocabulary is empty.
+  if (!empty(taxonomy_get_tree($vid, 0, 1))) {
+    drupal_set_message(t('Vocabulary is not empty.'), 'warning');
+    drupal_set_message(t('You should clear Neighbourhoods vocabulary before creating new taxonomy tree.'), 'warning');
+    return;
+  }
+
+  $condos_ca = simplexml_load_file(drupal_get_path('module', 'ctrader_map') . '/inc/condos-ca-01-06-16.xml');
+  $elements = reset($condos_ca->tax);
+
+  $grand_parent_ids = array();
+  $parent_ids = array();
+  foreach ($elements as $element) {
+    if ($element->parent_id->__toString() == 0) {
+      $grand_parent_ids[] = $element->id->__toString();
+    }
+  }
+  foreach ($elements as $element) {
+    if ($element->grandparent_id->__toString() !== 0 && in_array($element->parent_id->__toString(), $grand_parent_ids)) {
+      $parent_ids[] = $element->id->__toString();
+    }
+  }
+
+  // Creates first level terms.
+  $tree = taxonomy_get_tree($vid, 0, NULL, TRUE);
+  foreach ($elements as $key => $element) {
+    if (in_array($element->id->__toString(), $grand_parent_ids)) {
+      _prepare_taxonomy_term($element, $vid, $tree);
+      unset($elements[$key]);
+    }
+  }
+
+  // Creates second level terms.
+  $tree = taxonomy_get_tree($vid, 0, NULL, TRUE);
+  foreach ($elements as $key => $element) {
+    if (in_array($element->id->__toString(), $parent_ids)) {
+      _prepare_taxonomy_term($element, $vid, $tree);
+      unset($elements[$key]);
+    }
+  }
+
+  // Creates third level terms.
+  $tree = taxonomy_get_tree($vid, 0, NULL, TRUE);
+  foreach ($elements as $key => $element) {
+    _prepare_taxonomy_term($element, $vid, $tree);
+    unset($elements[$key]);
+  }
+
+  /**
+   * $vid = taxonomy_vocabulary_machine_name_load('neighbourhoods'); //Neighbourhoods vocabulary.
+   * $vid = $vid->vid;
+   *
+   * $select_list_condos_ca = array(
+   * '1' => array(
+   * 'Toronto' => array(
+   * '590' => 'Downtown',
+   * '597' => 'Midtown',
+   * '593' => 'North York',
+   * '596' => 'East End',
+   * '598' => 'East York',
+   * '595' => 'West End',
+   * '594' => 'York Crosstown',
+   * '592' => 'Etobicoke',
+   * '591' => 'Scarborough',
+   * )
+   * ),
+   * '2' => array(
+   * 'Peel' => array(
+   * '43' => 'Brampton',
+   * '44' => 'Mississauga',
+   * )
+   * ),
+   * '4' => array(
+   * 'York Region' => array(
+   * '54' => 'Aurora',
+   * '49' => 'King',
+   * '51' => 'Markham',
+   * '55' => 'Newmarket',
+   * '52' => 'Richmond Hill',
+   * '50' => 'Vaughan',
+   * )
+   * ),
+   * '3' => array(
+   * 'Halton' => array(
+   * '45' => 'Milton',
+   * '46' => 'Burlington',
+   * '47' => 'Halton Hills',
+   * '48' => 'Oakville',
+   * )
+   * ),
+   * '0' => array(
+   * 'grandparent_0' => array(
+   * '599' => 'Hamilton',
+   * ),
+   * ),
+   * '5' => array(
+   * 'grandparent_5' => array(
+   * '59' => 'parent_59',
+   * '60' => 'parent_60',
+   * '61' => 'parent_61',
+   * '62' => 'parent_62',
+   * '63' => 'parent_63',
+   * '64' => 'parent_64',
+   * '65' => 'parent_65',
+   * '66' => 'parent_66',
+   * '67' => 'parent_67',
+   * ),
+   * ),
+   * );
+   *
+   * // Creates main items for vocabulary.
+   * foreach ($select_list_condos_ca as $grand_id => $grand_parent) {
+   * $grand_pa_name = array_keys($grand_parent);
+   * $grand_pa_name = array_shift($grand_pa_name);
+   * $grand_pa = new stdClass();
+   * $grand_pa->name = $grand_pa_name;
+   * $grand_pa->vid = $vid;
+   * $grand_pa->field_id[LANGUAGE_NONE][0]['value'] = $grand_id;
+   * taxonomy_term_save($grand_pa);
+   * $grand_parent_just_created = taxonomy_get_term_by_name($grand_pa_name);
+   * $grand_parent_just_created = reset($grand_parent_just_created);
+   * $grand_parent_id = $grand_parent_just_created->tid;
+   * foreach ($grand_parent[$grand_pa_name] as $child_term_id => $child_term_name) {
+   * $child_term = new stdClass();
+   * $child_term->name = $child_term_name;
+   * $child_term->vid = $vid;
+   * $child_term->field_id[LANGUAGE_NONE][0]['value'] = $child_term_id;
+   * $child_term->parent = array($grand_parent_id => $grand_parent_id);
+   * taxonomy_term_save($child_term);
+   * }
+   * }
+   *
+   * $xml = simplexml_load_file(drupal_get_path('module', 'ctrader_map') . '/inc/condos-ca.xml');
+   * $vocabulary_main_terms = taxonomy_get_tree($vid, 0, 2, TRUE);
+   * foreach ($xml as $element) {
+   * $term_name = $element->name->__toString();
+   * $term_field_id_value = $element->id->__toString();
+   * $xml_parent_id = $element->parent_id->__toString();
+   *
+   * //Creates json for geofield.
+   * $is_polygon = TRUE;
+   * $coordinates = array();
+   * foreach ($element->json_polygon->element as $pair) {
+   * $count_pair = count($pair);
+   * if (!$count_pair) {
+   * $point = explode(',', $pair);
+   * $point = array_reverse($point);
+   * $coordinates[] = $point;
+   * }
+   * // if multipolygon
+   * else {
+   * $is_polygon = FALSE;
+   * $pre_coordinates = array();
+   * foreach ((array) $pair->element as $value) {
+   * $point = explode(',', $value);
+   * $point = array_reverse($point);
+   * $pre_coordinates[] = $point;
+   * }
+   * $coordinates[] = $pre_coordinates;
+   * }
+   * }
+   * if ($is_polygon == TRUE && implode('_', $coordinates[0]) != implode('_', end($coordinates))) {
+   * $coordinates[] = $coordinates[0];
+   * }
+   * $prepared = array(
+   * 'id' => $element->id->__toString(),
+   * 'type' => 'Feature',
+   * 'properties' => array(
+   * 'name' => !empty($element->name) ? $element->name->__toString() : 'Neighbourhood',
+   * ),
+   * 'geometry' => array(
+   * 'type' => $is_polygon ? 'Polygon' : 'MultiPolygon',
+   * 'coordinates' => array(
+   * $coordinates,
+   * ),
+   * ),
+   * );
+   * $polygon_json = json_encode($prepared);
+   *
+   * // Finds which one of existed terms would be parent
+   * // and create new parent term if not exist.
+   * $parent_id = -1;
+   * foreach ($vocabulary_main_terms as $parent_terms) {
+   * if ($xml_parent_id == $parent_terms->field_id[LANGUAGE_NONE][0]['value']) {
+   * $parent_id = $parent_terms->tid;
+   * }
+   * }
+   * if ($parent_id == -1) {
+   * $parent_term = new stdClass();
+   * $parent_term->name = 'parent_' . $element->parent_id->__toString();
+   * $parent_term->vid = $vid;
+   * $parent_term->field_id[LANGUAGE_NONE][0]['value'] = $element->parent_id->__toString();
+   * $parent_term->parent = array($element->grandparent_id->__toString() => $element->grandparent_id->__toString());
+   * taxonomy_term_save($parent_term);
+   * $parent_just_created = taxonomy_get_term_by_name('parent_' . $element->parent_id->__toString());
+   * $parent_just_created = reset($parent_just_created);
+   * $parent_id = $parent_just_created->tid;
+   * $vocabulary_main_terms = taxonomy_get_tree($vid, 0, 2, TRUE);
+   * }
+   *
+   * $term = new stdClass();
+   * $term->name = $term_name;
+   * $term->vid = $vid;
+   * $term->field_community_geolocation[LANGUAGE_NONE][0]['geom'] = $polygon_json;
+   * $term->field_community_geolocation[LANGUAGE_NONE][0]['input_format'] = 'json';
+   * $term->field_id[LANGUAGE_NONE][0]['value'] = $term_field_id_value;
+   * $term->parent = array($parent_id => $parent_id);
+   * taxonomy_term_save($term);
+   * }
+   */
+}
+
+
+/**
+ * Prepares term object and saves taxonomy term.
+ *
+ * @param $element - item from xml file.
+ * @param $vid - Neighbourhoods vocabulary id.
+ * @param $tree - tree of existed Neighbourhoods vocabulary taxonomy terms.
+ */
+function _prepare_taxonomy_term($element, $vid, $tree) {
+  $term = new stdClass();
+  $term->name = $element->name->__toString();
+  $term->vid = $vid;
+  $term->field_id[LANGUAGE_NONE][0]['value'] = $element->id->__toString();
+
+  //Creates json for geofield.
+  $is_polygon = TRUE;
+  $coordinates = array();
+  foreach ($element->json_polygon->element as $pair) {
+    $count_pair = count($pair);
+    if (!$count_pair) {
+      $point = explode(',', $pair);
+      $point = array_reverse($point);
+      $coordinates[] = $point;
+    }
+    // if multipolygon
+    else {
+      $is_polygon = FALSE;
+      $pre_coordinates = array();
+      foreach ((array) $pair->element as $value) {
+        $point = explode(',', $value);
+        $point = array_reverse($point);
+        $pre_coordinates[] = $point;
+      }
+      $coordinates[] = $pre_coordinates;
+    }
+  }
+  if ($is_polygon == TRUE && implode('_', $coordinates[0]) != implode('_', end($coordinates))) {
+    $coordinates[] = $coordinates[0];
+  }
+  $prepared = array(
+    'id' => $element->id->__toString(),
+    'type' => 'Feature',
+    'properties' => array(
+      'name' => !empty($element->name) ? $element->name->__toString() : 'Neighbourhood',
     ),
-    '2' => array(
-      'Peel' => array(
-        '43' => 'Brampton',
-        '44' => 'Mississauga',
-      )
-    ),
-    '4' => array(
-      'York Region' => array(
-        '54' => 'Aurora',
-        '49' => 'King',
-        '51' => 'Markham',
-        '55' => 'Newmarket',
-        '52' => 'Richmond Hill',
-        '50' => 'Vaughan',
-      )
-    ),
-    '3' => array(
-      'Halton' => array(
-        '45' => 'Milton',
-        '46' => 'Burlington',
-        '47' => 'Halton Hills',
-        '48' => 'Oakville',
-      )
-    ),
-    '0' => array(
-      'grandparent_0' => array(
-        '599' => 'Hamilton',
-      ),
-    ),
-    '5' => array(
-      'grandparent_5' => array(
-        '59' => 'parent_59',
-        '60' => 'parent_60',
-        '61' => 'parent_61',
-        '62' => 'parent_62',
-        '63' => 'parent_63',
-        '64' => 'parent_64',
-        '65' => 'parent_65',
-        '66' => 'parent_66',
-        '67' => 'parent_67',
+    'geometry' => array(
+      'type' => $is_polygon ? 'Polygon' : 'MultiPolygon',
+      'coordinates' => array(
+        $coordinates,
       ),
     ),
   );
+  $polygon_json = json_encode($prepared);
+  $term->field_community_geolocation[LANGUAGE_NONE][0]['geom'] = $polygon_json;
+  $term->field_community_geolocation[LANGUAGE_NONE][0]['input_format'] = 'json';
 
-  // Creates main items for vocabulary.
-  foreach ($select_list_condos_ca as $grand_id => $grand_parent) {
-    $grand_pa_name = array_keys($grand_parent);
-    $grand_pa_name = array_shift($grand_pa_name);
-    $grand_pa = new stdClass();
-    $grand_pa->name = $grand_pa_name;
-    $grand_pa->vid = $vid;
-    $grand_pa->field_id[LANGUAGE_NONE][0]['value'] = $grand_id;
-    taxonomy_term_save($grand_pa);
-    $grand_parent_just_created = taxonomy_get_term_by_name($grand_pa_name);
-    $grand_parent_just_created = reset($grand_parent_just_created);
-    $grand_parent_id = $grand_parent_just_created->tid;
-    foreach ($grand_parent[$grand_pa_name] as $child_term_id => $child_term_name) {
-      $child_term = new stdClass();
-      $child_term->name = $child_term_name;
-      $child_term->vid = $vid;
-      $child_term->field_id[LANGUAGE_NONE][0]['value'] = $child_term_id;
-      $child_term->parent = array($grand_parent_id => $grand_parent_id);
-      taxonomy_term_save($child_term);
-    }
-  }
-
-  $xml = simplexml_load_file(drupal_get_path('module', 'ctrader_map') . '/inc/condos-ca.xml');
-  $vocabulary_main_terms = taxonomy_get_tree($vid, 0, 2, TRUE);
-  foreach ($xml as $element) {
-    $term_name = $element->name->__toString();
-    $term_field_id_value = $element->id->__toString();
-    $xml_parent_id = $element->parent_id->__toString();
-
-    //Creates json for geofield.
-    $is_polygon = TRUE;
-    $coordinates = array();
-    foreach ($element->json_polygon->element as $pair) {
-      $count_pair = count($pair);
-      if (!$count_pair) {
-        $point = explode(',', $pair);
-        $point = array_reverse($point);
-        $coordinates[] = $point;
+  // Added parents if exists.
+  foreach ($tree as $value) {
+    if (isset($value->field_id[LANGUAGE_NONE][0]['value']) && $value->field_id[LANGUAGE_NONE][0]['value'] == $element->parent_id->__toString()) {
+      if (!empty($value->parents)) {
+        $term->parent = $value->parents;
+        $term->parent[$value->tid] = $value->tid;
+        unset($term->parent[0]);
       }
-      // if multipolygon
       else {
-        $is_polygon = FALSE;
-        $pre_coordinates = array();
-        foreach ((array) $pair->element as $value) {
-          $point = explode(',', $value);
-          $point = array_reverse($point);
-          $pre_coordinates[] = $point;
-        }
-        $coordinates[] = $pre_coordinates;
+        $term->parent[$value->tid] = $value->tid;
       }
     }
-    if ($is_polygon == TRUE && implode('_', $coordinates[0]) != implode('_', end($coordinates))) {
-      $coordinates[] = $coordinates[0];
-    }
-    $prepared = array(
-      'id' => $element->id->__toString(),
-      'type' => 'Feature',
-      'properties' => array(
-        'name' => !empty($element->name) ? $element->name->__toString() : 'Neighbourhood',
-      ),
-      'geometry' => array(
-        'type' => $is_polygon ? 'Polygon' : 'MultiPolygon',
-        'coordinates' => array(
-          $coordinates,
-        ),
-      ),
-    );
-    $polygon_json = json_encode($prepared);
-
-    // Finds which one of existed terms would be parent
-    // and create new parent term if not exist.
-    $parent_id = -1;
-    foreach ($vocabulary_main_terms as $parent_terms) {
-      if ($xml_parent_id == $parent_terms->field_id[LANGUAGE_NONE][0]['value']) {
-        $parent_id = $parent_terms->tid;
-      }
-    }
-    if ($parent_id == -1) {
-      $parent_term = new stdClass();
-      $parent_term->name = 'parent_' . $element->parent_id->__toString();
-      $parent_term->vid = $vid;
-      $parent_term->field_id[LANGUAGE_NONE][0]['value'] = $element->parent_id->__toString();
-      $parent_term->parent = array($element->grandparent_id->__toString() => $element->grandparent_id->__toString());
-      taxonomy_term_save($parent_term);
-      $parent_just_created = taxonomy_get_term_by_name('parent_' . $element->parent_id->__toString());
-      $parent_just_created = reset($parent_just_created);
-      $parent_id = $parent_just_created->tid;
-      $vocabulary_main_terms = taxonomy_get_tree($vid, 0, 2, TRUE);
-    }
-
-    $term = new stdClass();
-    $term->name = $term_name;
-    $term->vid = $vid;
-    $term->field_community_geolocation[LANGUAGE_NONE][0]['geom'] = $polygon_json;
-    $term->field_community_geolocation[LANGUAGE_NONE][0]['input_format'] = 'json';
-    $term->field_id[LANGUAGE_NONE][0]['value'] = $term_field_id_value;
-    $term->parent = array($parent_id => $parent_id);
-    taxonomy_term_save($term);
   }
+  taxonomy_term_save($term);
 }
