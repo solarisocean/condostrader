@@ -1,6 +1,43 @@
 .page-drealty-listing {
   color: $ebony-clay;
 
+  .panel-flexible .panel-separator {
+    display: none;
+    visibility: hidden;
+  }
+
+  .condo-center-row {
+    border-bottom: 1px solid darken($athens-gray, 6);
+  }
+
+  .condo-gallery {
+    margin-bottom: -6px;
+  }
+
+  .condo-page-gallery {
+    width: 78.5%;
+    display: inline-block;
+    float: left;
+
+    .pane-content {
+      height: 700px;
+    }
+  }
+
+  .condo-page-pagination {
+    width: 21.5%;
+    display: inline-block;
+    padding: 0 25px;
+    background: $ebony-clay;
+
+    .pane-content {
+      height: 700px;
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+
+  }
+
   .panels-flexible-row {
     padding: 0;
   }
@@ -15,119 +52,116 @@
       padding: 6px 15px;
       display: inline-block;
       font-size: rem-calc(18);
-
-      &:before {
-        content: "$";
-        font-size: rem-calc(19);
-      }
     }
   }
 
-  .view-single-condo-view {
-    .info-fieldset {
-      @extend .centering;
-      margin-top: 10px;
-      clear: both;
+  .condo-left-side {
+    .view-single-condo-view {
+      .info-fieldset {
+        @extend .centering;
+        margin-top: 10px;
+        clear: both;
 
-      .condo-title {
-        font-size: rem-calc(30);
-        color: $ebony-clay;
-        font-weight: bold;
-        margin-bottom: 0;
-      }
-    }
-
-    .views-field-nothing-8 {
-      .field-content {
-        @include pseudo-element("before", 9px, 17px, 'map-icon-big.png', 'not-center');
-        font-size: rem-calc(16);
-
-        &:before {
-          margin-right: 5px;
-        }
-      }
-    }
-
-    .views-field-nothing {
-      font-size: rem-calc(11);
-      margin-top: 15px;
-
-      .condo-info-element {
-        margin-right: 12px;
-
-        &:before {
-          margin-right: 5px;
+        .condo-title {
+          font-size: rem-calc(30);
+          color: $ebony-clay;
+          font-weight: bold;
+          margin-bottom: 0;
         }
       }
 
-      .sqft {
-        @include pseudo-element('before', 9px, 12px, 'area-icon.png', 'not-center');
+      .views-field-nothing-8 {
+        .field-content {
+          @include pseudo-element("before", 9px, 17px, 'map-icon-big.png', 'not-center');
+          font-size: rem-calc(16);
+
+          &:before {
+            margin-right: 5px;
+          }
+        }
       }
 
-      .bed {
-        @include pseudo-element('before', 13px, 12px, 'bed-icon.png', 'not-center');
+      .views-field-nothing {
+        font-size: rem-calc(11);
+        margin-top: 15px;
+
+        .condo-info-element {
+          margin-right: 12px;
+
+          &:before {
+            margin-right: 5px;
+          }
+        }
+
+        .sqft {
+          @include pseudo-element('before', 9px, 12px, 'area-icon.png', 'not-center');
+        }
+
+        .bed {
+          @include pseudo-element('before', 13px, 12px, 'bed-icon.png', 'not-center');
+        }
+
+        .bath {
+          @include pseudo-element('before', 6px, 12px, 'bath-icon.png', 'not-center');
+        }
+
+        .pets {
+          @include pseudo-element('before', 9px, 12px, 'pets-icon.png', 'not-center');
+        }
+
+        .locker {
+          @include pseudo-element('before', 8px, 12px, 'locker-icon.png', 'not-center');
+        }
+
+        .parking {
+          @include pseudo-element('before', 11px, 10px, 'car-icon.png', 'not-center');
+        }
+
       }
 
-      .bath {
-        @include pseudo-element('before', 6px, 12px, 'bath-icon.png', 'not-center');
+      .views-field-field-ad-text--torcond {
+        margin-top: 32px;
+
+        .views-label {
+          font-size: rem-calc(18);
+          font-weight: bold;
+          display: block;
+          border-bottom: 1px solid darken($athens-gray, 6);
+          padding-bottom: 7px;
+          margin-bottom: 16px;
+        }
+
+        .field-content {
+          font-size: rem-calc(13);
+          color: $manatee;
+          line-height: rem-calc(24);
+        }
       }
 
-      .pets {
-        @include pseudo-element('before', 9px, 12px, 'pets-icon.png', 'not-center');
-      }
-
-      .locker {
-        @include pseudo-element('before', 8px, 12px, 'locker-icon.png', 'not-center');
-      }
-
-      .parking {
-        @include pseudo-element('before', 11px, 10px, 'car-icon.png', 'not-center');
-      }
-
-    }
-
-    .views-field-field-ad-text--torcond {
-      margin-top: 32px;
-
-      .views-label {
-        font-size: rem-calc(18);
-        font-weight: bold;
-        display: block;
-        border-bottom: 1px solid darken($athens-gray, 6);
-        padding-bottom: 7px;
-        margin-bottom: 16px;
-      }
-
-      .field-content {
+      .views-field-field-extras--torcond,
+      .views-field-field-rltr--torcond,
+      .views-field-field-ml-num--torcond {
         font-size: rem-calc(13);
         color: $manatee;
         line-height: rem-calc(24);
+
+        .views-label {
+          font-weight: bold;
+          color: $ecstasy;
+          float: left;
+          text-transform: uppercase;
+          margin-right: 3px;
+        }
       }
-    }
 
-    .views-field-field-extras--torcond,
-    .views-field-field-rltr--torcond,
-    .views-field-field-ml-num--torcond {
-      font-size: rem-calc(13);
-      color: $manatee;
-      line-height: rem-calc(24);
-
-      .views-label {
-        font-weight: bold;
-        color: $ecstasy;
+      .views-field-field-rltr--torcond {
         float: left;
-        text-transform: uppercase;
-        margin-right: 3px;
+        white-space: nowrap;
       }
-    }
 
-    .views-field-field-rltr--torcond {
-      float: left;
-      white-space: nowrap;
-    }
-
-    .views-field-field-ml-num--torcond {
-      float: right;
+      .views-field-field-ml-num--torcond {
+        float: right;
+      }
     }
   }
 
@@ -168,41 +202,299 @@
       left: inherit;
     }
   }
+
+  .condo-right-side {
+    padding-left: 0;
+    padding-right: 1.55rem;
+    background: $alabaster;
+
+    .inside {
+      padding: 0;
+      background: $white;
+    }
+
+    .pane-drealty-listing-field-lp-dol-torcond {
+      .pane-title {
+        display: none;
+      }
+
+      .field-name-field-lp-dol--torcond {
+        background: $flamingo;
+        font-size: rem-calc(18);
+        color: $white;
+        font-weight: bold;
+        text-align: right;
+        line-height: 44px;
+        padding-right: 14px;
+
+        .field-label {
+          background: $ecstasy;
+          font-size: rem-calc(14);
+          font-weight: 100;
+          padding: 17px 50px 22px 14px;
+          line-height: 12px;
+          position: relative;
+
+          &:after {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            right: -30px;
+            width: 0;
+            height: 0;
+            border-top: 50px solid $ecstasy;
+            border-right: 30px solid transparent;
+          }
+        }
+      }
+    }
+
+    .pane-book-a-viewing-form {
+      border: 1px solid darken($athens-gray, 6);
+      border-top: none;
+      border-bottom: none;
+      padding: 0 14px;
+
+      label {
+        color: $mirage;
+        font-family: "Raleway", sans-serif;
+        font-size: rem-calc(11);
+      }
+
+      input[type='text'] {
+        height: 31px;
+        box-shadow: none;
+        border-color: darken($athens-gray, 6);
+        font-size: rem-calc(12);
+        margin-bottom: 0;
+
+        &:focus {
+          background: $white;
+        }
+      }
+
+      button.form-submit,
+      .field-name-field-buy-now-button a {
+        display: block;
+        width: 100%;
+        font-family: "Raleway",sans-serif;
+        font-weight: bold;
+        font-size: rem-calc(12);
+        text-transform: uppercase;
+        text-align: center;
+        color: $white;
+        padding: 13px 0;
+        margin-bottom: 11px;
+        @include transition(box-shadow .3s ease-in-out);
+        line-height: 1;
+
+        &:hover {
+          box-shadow: 0 0 10px rgba(0,0,0,.2);
+          @include transition(box-shadow .3s ease-in-out);
+        }
+      }
+
+      .button.form-submit {
+        background: $ecstasy;
+      }
+
+      .field-name-field-buy-now-button a {
+        background: $ebony-clay;
+        margin-bottom: 0;
+      }
+
+      .form-item {
+        &:first-child {
+          margin: 0;
+          padding-top: 15px;
+        }
+      }
+    }
+
+    .pane-drealty-listing {
+      text-align: center;
+      border: 1px solid darken($athens-gray, 6);
+      border-top: none;
+      padding: 10px 0 15px;
+
+      a {
+        color: $ecstasy;
+        font-family: "Raleway", sans-serif;
+        font-size: rem-calc(12);
+        text-decoration: underline;
+      }
+    }
+
+    .pane-addtoany-addtoany-button {
+      display: block;
+      max-width: 137px;
+      width: 100%;
+      margin: 6px auto;
+
+      .pane-title {
+        font-size: rem-calc(12);
+        float: left;
+        padding: 4px 7px;
+        margin-right: 5px;
+      }
+
+      .pane-content {
+        float: left;
+
+        a {
+          padding: 0;
+        }
+
+        .a2a_svg {
+          width: 20px !important;
+          height: 20px !important;
+          line-height: 20px !important;
+          background-size: 20px !important;
+        }
+
+        .a2a_s_twitter {
+          background: url(../images/twitter-icon.png) 0 0 no-repeat;
+        }
+
+        .a2a_s_facebook {
+          background: url(../images/facebook-icon.png) 0 0 no-repeat;
+        }
+
+        .a2a_s_google_plus {
+          background: url(../images/google-icon.png) 0 0 no-repeat;
+        }
+      }
+    }
+  }
+
+  .condo-center {
+    background: $alabaster;
+    border-left: 1px solid darken($athens-gray, 6);
+
+    fieldset {
+      border: none;
+      margin: 20px 0;
+      padding: 0 16px;
+
+      legend {
+        font-weight: bold;
+        font-size: rem-calc(18);
+        color: $ebony-clay;
+        background: none;
+        border-bottom: 1px solid darken($athens-gray, 6);
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 6px 0;
+        margin-bottom: 18px;
+      }
+
+      &.top-center-fieldset,
+      &.amentities-fieldset {
+        width: 49%;
+        display: inline-block;
+        vertical-align: top;
+        font-size: rem-calc(14);
+        color: $manatee;
+      }
+
+      &.top-center-fieldset {
+        .views-field-nothing-2 {
+          .field-content {
+            font-weight: bold;
+          }
+        }
+
+        .views-field {
+          clear: both;
+          overflow: auto;
+          margin-bottom: 3px;
+        }
+
+        .views-label {
+          float: left;
+          font-weight: bold;
+        }
+
+        .field-content {
+          float: right;
+        }
+      }
+
+      &.amentities-fieldset {
+        .views-field {
+          margin-bottom: 10px;
+          display: block;
+        }
+
+        span {
+          font-weight: bold;
+        }
+
+        .field-content {
+          &.pets {
+            @include pseudo-element('before', 13px, 16px, 'pets-icon.png', 'not-center');
+            &:before {
+              background-size: 13px;
+              margin-right: 12px;
+            }
+          }
+
+          &.parking {
+            @include pseudo-element('before', 13px, 9px, 'car-icon.png', 'not-center');
+            &:before {
+              background-size: 13px;
+              margin-right: 12px;
+            }
+          }
+
+          &.locker {
+            @include pseudo-element('before', 13px, 20px, 'locker-icon.png', 'not-center');
+            &:before {
+              background-size: 13px;
+              margin-right: 12px;
+            }
+          }
+
+          &.fireplace {
+            @include pseudo-element('before', 13px, 19px, 'fireplace-icon.png', 'not-center');
+            &:before {
+              background-size: 13px;
+              margin-right: 12px;
+            }
+          }
+
+          &.washer {
+            @include pseudo-element('before', 13px, 22px, 'bath-icon.png', 'not-center');
+            &:before {
+              background-size: 11px;
+              margin-right: 12px;
+            }
+          }
+
+          &.kitchen {
+            @include pseudo-element('before', 13px, 19px, 'kitchen-icon.png', 'not-center');
+            &:before {
+              background-size: 13px;
+              margin-right: 12px;
+            }
+          }
+
+          &.stove {
+            @include pseudo-element('before', 13px, 19px, 'stove-icon.png', 'not-center');
+            &:before {
+              background-size: 13px;
+              margin-right: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
+//Temporary styles
 .button-group {
   display: none;
-}
-
-.panel-flexible .panel-separator {
-  display: none;
-  visibility: hidden;
-}
-
-.condo-gallery {
-  margin-bottom: -6px;
-}
-
-.condo-page-gallery {
-  width: 78.5%;
-  display: inline-block;
-  float: left;
-
-  .pane-content {
-    height: 700px;
-  }
-}
-
-.condo-page-pagination {
-  width: 21.5%;
-  display: inline-block;
-  padding: 0 25px;
-  background: $ebony-clay;
-
-  .pane-content {
-    height: 700px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-  }
-
 }

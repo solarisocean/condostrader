@@ -159,3 +159,26 @@ function condor_form_views_exposed_form_alter(&$form, &$form_state) {
       break;
   }
 }
+
+/**
+ * Implements template_preprocess_field().
+ */
+function condor_preprocess_field(&$variables) {
+
+  //Have added dollar symbol to field.
+  if ($variables['element']['#field_name'] == 'field_lp_dol__torcond') {
+    $variables['items'][0]['#prefix'] = '<span class="dol">$</span>';
+  }
+}
+
+/**
+ * Implements template_preprocess_flag().
+ */
+function condor_preprocess_flag(&$variables) {
+  $args = arg();
+
+  //Have added text to the flag link on condo page.
+  if (!empty($args[0]) && $args[0] == 'drealty_listing') {
+    $variables['link_text'] = t('Add this listing to my favourites');
+  }
+}
