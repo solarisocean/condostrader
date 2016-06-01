@@ -1082,6 +1082,8 @@ function ctf_views_single_condo_view_views_default_views() {
   $handler->display->display_options['fields']['views_conditional_7']['table'] = 'views_conditional';
   $handler->display->display_options['fields']['views_conditional_7']['field'] = 'views_conditional';
   $handler->display->display_options['fields']['views_conditional_7']['label'] = '';
+  $handler->display->display_options['fields']['views_conditional_7']['element_type'] = 'span';
+  $handler->display->display_options['fields']['views_conditional_7']['element_class'] = 'condo-info-element washer';
   $handler->display->display_options['fields']['views_conditional_7']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['views_conditional_7']['if'] = 'field_ens_lndry__torcond';
   $handler->display->display_options['fields']['views_conditional_7']['condition'] = '2';
