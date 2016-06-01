@@ -2445,12 +2445,42 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           }
         }
       },
-      "field_search_point_string" : {
+      "field_price_per_sqft_lease" : {
         "entity_types" : [ "drealty_listing" ],
-        "indexes" : { "format" : [ "format" ] },
-        "settings" : { "max_length" : 50 },
+        "indexes" : [],
+        "settings" : { "decimal_separator" : ".", "precision" : 10, "scale" : 2 },
         "translatable" : "0",
+        "foreign keys" : [],
+        "field_name" : "field_price_per_sqft_lease",
+        "type" : "number_decimal",
+        "module" : "number",
+        "active" : "1",
+        "locked" : "0",
+        "cardinality" : "1",
+        "deleted" : "0",
+        "columns" : { "value" : { "type" : "numeric", "precision" : 10, "scale" : 2, "not null" : false } }
+      },
+      "field_price_per_sqft_sale" : {
+        "entity_types" : [ "drealty_listing" ],
+        "indexes" : [],
+        "settings" : { "decimal_separator" : ".", "precision" : 10, "scale" : 2 },
+        "translatable" : "0",
+        "foreign keys" : [],
+        "field_name" : "field_price_per_sqft_sale",
+        "type" : "number_decimal",
+        "module" : "number",
+        "active" : "1",
+        "locked" : "0",
+        "cardinality" : "1",
+        "deleted" : "0",
+        "columns" : { "value" : { "type" : "numeric", "precision" : 10, "scale" : 2, "not null" : false } }
+      },
+      "field_search_point_string" : {
+        "translatable" : "0",
+        "entity_types" : [ "drealty_listing" ],
+        "settings" : { "max_length" : "50" },
         "foreign keys" : { "format" : { "table" : "filter_format", "columns" : { "format" : "format" } } },
+        "indexes" : { "format" : [ "format" ] },
         "field_name" : "field_search_point_string",
         "type" : "text",
         "module" : "text",
@@ -2459,50 +2489,8 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
         "cardinality" : "1",
         "deleted" : "0",
         "columns" : {
-          "value" : { "type" : "varchar", "length" : 50, "not null" : false },
+          "value" : { "type" : "varchar", "length" : "50", "not null" : false },
           "format" : { "type" : "varchar", "length" : 255, "not null" : false }
-        }
-      },
-      "field_price_per_sqft_sale" : {
-        "translatable" : "0",
-        "entity_types" : [ "drealty_listing" ],
-        "settings" : { "precision" : "10", "scale" : "2", "decimal_separator" : "." },
-        "foreign keys" : [],
-        "indexes" : [],
-        "field_name" : "field_price_per_sqft_sale",
-        "type" : "number_decimal",
-        "module" : "number",
-        "active" : "1",
-        "locked" : "0",
-        "cardinality" : "1",
-        "deleted" : "0",
-        "columns" : { "value" : {
-            "type" : "numeric",
-            "precision" : "10",
-            "scale" : "2",
-            "not null" : false
-          }
-        }
-      },
-      "field_price_per_sqft_lease" : {
-        "translatable" : "0",
-        "entity_types" : [ "drealty_listing" ],
-        "settings" : { "precision" : "10", "scale" : "2", "decimal_separator" : "." },
-        "foreign keys" : [],
-        "indexes" : [],
-        "field_name" : "field_price_per_sqft_lease",
-        "type" : "number_decimal",
-        "module" : "number",
-        "active" : "1",
-        "locked" : "0",
-        "cardinality" : "1",
-        "deleted" : "0",
-        "columns" : { "value" : {
-            "type" : "numeric",
-            "precision" : "10",
-            "scale" : "2",
-            "not null" : false
-          }
         }
       }
     },
@@ -2539,9 +2527,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "image",
           "settings" : { "preview_image_style" : "thumbnail", "progress_indicator" : "throbber" },
           "type" : "image_image",
-          "weight" : "1"
+          "weight" : 1
         },
-        "id" : "650",
+        "id" : "547",
         "field_id" : "291",
         "field_name" : "field_toronto_gallery",
         "entity_type" : "drealty_listing",
@@ -2576,13 +2564,8 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "suffix" : "",
           "user_register_form" : false
         },
-        "widget" : {
-          "module" : "number",
-          "settings" : [],
-          "type" : "number",
-          "weight" : "20"
-        },
-        "id" : "651",
+        "widget" : { "module" : "number", "settings" : [], "type" : "number", "weight" : 20 },
+        "id" : "548",
         "field_id" : "310",
         "field_name" : "field_maint__torcond",
         "entity_type" : "drealty_listing",
@@ -2610,9 +2593,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "22"
+          "weight" : 22
         },
-        "id" : "652",
+        "id" : "549",
         "field_id" : "311",
         "field_name" : "field_comel_inc__torcond",
         "entity_type" : "drealty_listing",
@@ -2640,9 +2623,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "23"
+          "weight" : 23
         },
-        "id" : "653",
+        "id" : "550",
         "field_id" : "312",
         "field_name" : "field_cond_txinc__torcond",
         "entity_type" : "drealty_listing",
@@ -2670,9 +2653,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "24"
+          "weight" : 24
         },
-        "id" : "654",
+        "id" : "551",
         "field_id" : "313",
         "field_name" : "field_condo_corp__torcond",
         "entity_type" : "drealty_listing",
@@ -2700,9 +2683,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "25"
+          "weight" : 25
         },
-        "id" : "655",
+        "id" : "552",
         "field_id" : "314",
         "field_name" : "field_condo_exp__torcond",
         "entity_type" : "drealty_listing",
@@ -2730,9 +2713,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "26"
+          "weight" : 26
         },
-        "id" : "656",
+        "id" : "553",
         "field_id" : "315",
         "field_name" : "field_constr1_out__torcond",
         "entity_type" : "drealty_listing",
@@ -2760,9 +2743,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "27"
+          "weight" : 27
         },
-        "id" : "657",
+        "id" : "554",
         "field_id" : "316",
         "field_name" : "field_constr2_out__torcond",
         "entity_type" : "drealty_listing",
@@ -2797,13 +2780,8 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "suffix" : "",
           "user_register_form" : false
         },
-        "widget" : {
-          "module" : "number",
-          "settings" : [],
-          "type" : "number",
-          "weight" : "28"
-        },
-        "id" : "658",
+        "widget" : { "module" : "number", "settings" : [], "type" : "number", "weight" : 28 },
+        "id" : "555",
         "field_id" : "317",
         "field_name" : "field_corp_num__torcond",
         "entity_type" : "drealty_listing",
@@ -2831,9 +2809,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "29"
+          "weight" : 29
         },
-        "id" : "659",
+        "id" : "556",
         "field_id" : "318",
         "field_name" : "field_county__torcond",
         "entity_type" : "drealty_listing",
@@ -2861,9 +2839,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "30"
+          "weight" : 30
         },
-        "id" : "660",
+        "id" : "557",
         "field_id" : "319",
         "field_name" : "field_cross_st__torcond",
         "entity_type" : "drealty_listing",
@@ -2891,9 +2869,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "31"
+          "weight" : 31
         },
-        "id" : "661",
+        "id" : "558",
         "field_id" : "320",
         "field_name" : "field_elevator__torcond",
         "entity_type" : "drealty_listing",
@@ -2921,9 +2899,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "32"
+          "weight" : 32
         },
-        "id" : "662",
+        "id" : "559",
         "field_id" : "321",
         "field_name" : "field_ens_lndry__torcond",
         "entity_type" : "drealty_listing",
@@ -2951,9 +2929,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "33"
+          "weight" : 33
         },
-        "id" : "663",
+        "id" : "560",
         "field_id" : "322",
         "field_name" : "field_extras__torcond",
         "entity_type" : "drealty_listing",
@@ -2981,9 +2959,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "34"
+          "weight" : 34
         },
-        "id" : "664",
+        "id" : "561",
         "field_id" : "323",
         "field_name" : "field_fpl_num__torcond",
         "entity_type" : "drealty_listing",
@@ -3011,9 +2989,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "35"
+          "weight" : 35
         },
-        "id" : "665",
+        "id" : "562",
         "field_id" : "324",
         "field_name" : "field_fuel__torcond",
         "entity_type" : "drealty_listing",
@@ -3041,9 +3019,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "36"
+          "weight" : 36
         },
-        "id" : "666",
+        "id" : "563",
         "field_id" : "325",
         "field_name" : "field_furnished__torcond",
         "entity_type" : "drealty_listing",
@@ -3078,13 +3056,8 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "suffix" : "",
           "user_register_form" : false
         },
-        "widget" : {
-          "module" : "number",
-          "settings" : [],
-          "type" : "number",
-          "weight" : "37"
-        },
-        "id" : "667",
+        "widget" : { "module" : "number", "settings" : [], "type" : "number", "weight" : 37 },
+        "id" : "564",
         "field_id" : "326",
         "field_name" : "field_gar__torcond",
         "entity_type" : "drealty_listing",
@@ -3112,9 +3085,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "39"
+          "weight" : 39
         },
-        "id" : "668",
+        "id" : "565",
         "field_id" : "327",
         "field_name" : "field_heat_inc__torcond",
         "entity_type" : "drealty_listing",
@@ -3142,9 +3115,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "40"
+          "weight" : 40
         },
-        "id" : "669",
+        "id" : "566",
         "field_id" : "328",
         "field_name" : "field_heating__torcond",
         "entity_type" : "drealty_listing",
@@ -3172,9 +3145,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "41"
+          "weight" : 41
         },
-        "id" : "670",
+        "id" : "567",
         "field_id" : "329",
         "field_name" : "field_hydro_inc__torcond",
         "entity_type" : "drealty_listing",
@@ -3202,9 +3175,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "42"
+          "weight" : 42
         },
-        "id" : "671",
+        "id" : "568",
         "field_id" : "330",
         "field_name" : "field_insur_bldg__torcond",
         "entity_type" : "drealty_listing",
@@ -3232,9 +3205,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "43"
+          "weight" : 43
         },
-        "id" : "672",
+        "id" : "569",
         "field_id" : "331",
         "field_name" : "field_kit_plus__torcond",
         "entity_type" : "drealty_listing",
@@ -3262,9 +3235,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "44"
+          "weight" : 44
         },
-        "id" : "673",
+        "id" : "570",
         "field_id" : "332",
         "field_name" : "field_mmap_page__torcond",
         "entity_type" : "drealty_listing",
@@ -3299,13 +3272,8 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "suffix" : "",
           "user_register_form" : false
         },
-        "widget" : {
-          "module" : "number",
-          "settings" : [],
-          "type" : "number",
-          "weight" : "53"
-        },
-        "id" : "674",
+        "widget" : { "module" : "number", "settings" : [], "type" : "number", "weight" : 53 },
+        "id" : "571",
         "field_id" : "341",
         "field_name" : "field_yr__torcond",
         "entity_type" : "drealty_listing",
@@ -3333,9 +3301,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "54"
+          "weight" : 54
         },
-        "id" : "675",
+        "id" : "572",
         "field_id" : "342",
         "field_name" : "field_yr_built__torcond",
         "entity_type" : "drealty_listing",
@@ -3363,9 +3331,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "55"
+          "weight" : 55
         },
-        "id" : "676",
+        "id" : "573",
         "field_id" : "343",
         "field_name" : "field_zip__torcond",
         "entity_type" : "drealty_listing",
@@ -3393,9 +3361,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "56"
+          "weight" : 56
         },
-        "id" : "677",
+        "id" : "574",
         "field_id" : "344",
         "field_name" : "field_zoning__torcond",
         "entity_type" : "drealty_listing",
@@ -3423,9 +3391,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "57"
+          "weight" : 57
         },
-        "id" : "678",
+        "id" : "575",
         "field_id" : "345",
         "field_name" : "field_a_c__torcond",
         "entity_type" : "drealty_listing",
@@ -3453,9 +3421,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "58"
+          "weight" : 58
         },
-        "id" : "679",
+        "id" : "576",
         "field_id" : "346",
         "field_name" : "field_prop_feat3_out__torcond",
         "entity_type" : "drealty_listing",
@@ -3483,9 +3451,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "59"
+          "weight" : 59
         },
-        "id" : "680",
+        "id" : "577",
         "field_id" : "347",
         "field_name" : "field_prop_feat4_out__torcond",
         "entity_type" : "drealty_listing",
@@ -3513,9 +3481,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "60"
+          "weight" : 60
         },
-        "id" : "681",
+        "id" : "578",
         "field_id" : "348",
         "field_name" : "field_prop_feat5_out__torcond",
         "entity_type" : "drealty_listing",
@@ -3543,9 +3511,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "61"
+          "weight" : 61
         },
-        "id" : "682",
+        "id" : "579",
         "field_id" : "349",
         "field_name" : "field_prop_feat6_out__torcond",
         "entity_type" : "drealty_listing",
@@ -3580,13 +3548,8 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "suffix" : "",
           "user_register_form" : false
         },
-        "widget" : {
-          "module" : "number",
-          "settings" : [],
-          "type" : "number",
-          "weight" : "62"
-        },
-        "id" : "683",
+        "widget" : { "module" : "number", "settings" : [], "type" : "number", "weight" : 62 },
+        "id" : "580",
         "field_id" : "350",
         "field_name" : "field_rm9_len__torcond",
         "entity_type" : "drealty_listing",
@@ -3621,13 +3584,8 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "suffix" : "",
           "user_register_form" : false
         },
-        "widget" : {
-          "module" : "number",
-          "settings" : [],
-          "type" : "number",
-          "weight" : "63"
-        },
-        "id" : "684",
+        "widget" : { "module" : "number", "settings" : [], "type" : "number", "weight" : 63 },
+        "id" : "581",
         "field_id" : "351",
         "field_name" : "field_rm9_wth__torcond",
         "entity_type" : "drealty_listing",
@@ -3655,9 +3613,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "64"
+          "weight" : 64
         },
-        "id" : "685",
+        "id" : "582",
         "field_id" : "352",
         "field_name" : "field_pets__torcond",
         "entity_type" : "drealty_listing",
@@ -3685,9 +3643,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "65"
+          "weight" : 65
         },
-        "id" : "686",
+        "id" : "583",
         "field_id" : "353",
         "field_name" : "field_prkg_inc__torcond",
         "entity_type" : "drealty_listing",
@@ -3715,9 +3673,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "66"
+          "weight" : 66
         },
-        "id" : "687",
+        "id" : "584",
         "field_id" : "354",
         "field_name" : "field_prop_feat1_out__torcond",
         "entity_type" : "drealty_listing",
@@ -3745,9 +3703,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "67"
+          "weight" : 67
         },
-        "id" : "688",
+        "id" : "585",
         "field_id" : "355",
         "field_name" : "field_prop_feat2_out__torcond",
         "entity_type" : "drealty_listing",
@@ -3775,9 +3733,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "68"
+          "weight" : 68
         },
-        "id" : "689",
+        "id" : "586",
         "field_id" : "356",
         "field_name" : "field_pvt_ent__torcond",
         "entity_type" : "drealty_listing",
@@ -3805,9 +3763,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "69"
+          "weight" : 69
         },
-        "id" : "690",
+        "id" : "587",
         "field_id" : "357",
         "field_name" : "field_retirement__torcond",
         "entity_type" : "drealty_listing",
@@ -3835,9 +3793,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "70"
+          "weight" : 70
         },
-        "id" : "691",
+        "id" : "588",
         "field_id" : "358",
         "field_name" : "field_rltr__torcond",
         "entity_type" : "drealty_listing",
@@ -3865,9 +3823,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "73"
+          "weight" : 73
         },
-        "id" : "692",
+        "id" : "589",
         "field_id" : "361",
         "field_name" : "field_ml_num__torcond",
         "entity_type" : "drealty_listing",
@@ -3895,9 +3853,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "86"
+          "weight" : 86
         },
-        "id" : "693",
+        "id" : "590",
         "field_id" : "374",
         "field_name" : "field_spec_des6_out__torcond",
         "entity_type" : "drealty_listing",
@@ -3925,9 +3883,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "88"
+          "weight" : 88
         },
-        "id" : "694",
+        "id" : "591",
         "field_id" : "376",
         "field_name" : "field_st__torcond",
         "entity_type" : "drealty_listing",
@@ -3955,9 +3913,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "89"
+          "weight" : 89
         },
-        "id" : "695",
+        "id" : "592",
         "field_id" : "377",
         "field_name" : "field_st_dir__torcond",
         "entity_type" : "drealty_listing",
@@ -3985,9 +3943,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "90"
+          "weight" : 90
         },
-        "id" : "696",
+        "id" : "593",
         "field_id" : "378",
         "field_name" : "field_st_num__torcond",
         "entity_type" : "drealty_listing",
@@ -4015,9 +3973,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "91"
+          "weight" : 91
         },
-        "id" : "697",
+        "id" : "594",
         "field_id" : "379",
         "field_name" : "field_st_sfx__torcond",
         "entity_type" : "drealty_listing",
@@ -4045,9 +4003,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "92"
+          "weight" : 92
         },
-        "id" : "698",
+        "id" : "595",
         "field_id" : "380",
         "field_name" : "field_status__torcond",
         "entity_type" : "drealty_listing",
@@ -4075,9 +4033,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "93"
+          "weight" : 93
         },
-        "id" : "699",
+        "id" : "596",
         "field_id" : "381",
         "field_name" : "field_stories__torcond",
         "entity_type" : "drealty_listing",
@@ -4105,9 +4063,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "96"
+          "weight" : 96
         },
-        "id" : "700",
+        "id" : "597",
         "field_id" : "384",
         "field_name" : "field_tour_url__torcond",
         "entity_type" : "drealty_listing",
@@ -4135,9 +4093,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "97"
+          "weight" : 97
         },
-        "id" : "701",
+        "id" : "598",
         "field_id" : "385",
         "field_name" : "field_community_code__torcond",
         "entity_type" : "drealty_listing",
@@ -4165,9 +4123,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "98"
+          "weight" : 98
         },
-        "id" : "702",
+        "id" : "599",
         "field_id" : "386",
         "field_name" : "field_area_code__torcond",
         "entity_type" : "drealty_listing",
@@ -4195,9 +4153,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "102"
+          "weight" : 102
         },
-        "id" : "703",
+        "id" : "600",
         "field_id" : "390",
         "field_name" : "field_uffi__torcond",
         "entity_type" : "drealty_listing",
@@ -4225,9 +4183,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "103"
+          "weight" : 103
         },
-        "id" : "704",
+        "id" : "601",
         "field_id" : "391",
         "field_name" : "field_unit_num__torcond",
         "entity_type" : "drealty_listing",
@@ -4255,9 +4213,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "105"
+          "weight" : 105
         },
-        "id" : "705",
+        "id" : "602",
         "field_id" : "393",
         "field_name" : "field_water_inc__torcond",
         "entity_type" : "drealty_listing",
@@ -4285,9 +4243,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "113"
+          "weight" : 113
         },
-        "id" : "706",
+        "id" : "603",
         "field_id" : "401",
         "field_name" : "field_mmap_row__torcond",
         "entity_type" : "drealty_listing",
@@ -4326,9 +4284,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "number",
           "settings" : [],
           "type" : "number",
-          "weight" : "114"
+          "weight" : 114
         },
-        "id" : "707",
+        "id" : "604",
         "field_id" : "402",
         "field_name" : "field_num_kit__torcond",
         "entity_type" : "drealty_listing",
@@ -4356,9 +4314,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "116"
+          "weight" : 116
         },
-        "id" : "708",
+        "id" : "605",
         "field_id" : "403",
         "field_name" : "field_parcel_id__torcond",
         "entity_type" : "drealty_listing",
@@ -4397,9 +4355,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "number",
           "settings" : [],
           "type" : "number",
-          "weight" : "117"
+          "weight" : 117
         },
-        "id" : "709",
+        "id" : "606",
         "field_id" : "404",
         "field_name" : "field_park_chgs__torcond",
         "entity_type" : "drealty_listing",
@@ -4427,9 +4385,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "118"
+          "weight" : 118
         },
-        "id" : "710",
+        "id" : "607",
         "field_id" : "405",
         "field_name" : "field_park_desig__torcond",
         "entity_type" : "drealty_listing",
@@ -4457,9 +4415,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "119"
+          "weight" : 119
         },
-        "id" : "711",
+        "id" : "608",
         "field_id" : "406",
         "field_name" : "field_park_desig_2__torcond",
         "entity_type" : "drealty_listing",
@@ -4487,9 +4445,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "120"
+          "weight" : 120
         },
-        "id" : "712",
+        "id" : "609",
         "field_id" : "407",
         "field_name" : "field_park_fac__torcond",
         "entity_type" : "drealty_listing",
@@ -4517,9 +4475,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "121"
+          "weight" : 121
         },
-        "id" : "713",
+        "id" : "610",
         "field_id" : "408",
         "field_name" : "field_park_lgl_desc1__torcond",
         "entity_type" : "drealty_listing",
@@ -4547,9 +4505,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "122"
+          "weight" : 122
         },
-        "id" : "714",
+        "id" : "611",
         "field_id" : "409",
         "field_name" : "field_park_lgl_desc2__torcond",
         "entity_type" : "drealty_listing",
@@ -4577,9 +4535,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "123"
+          "weight" : 123
         },
-        "id" : "715",
+        "id" : "612",
         "field_id" : "410",
         "field_name" : "field_park_spc1__torcond",
         "entity_type" : "drealty_listing",
@@ -4618,9 +4576,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "number",
           "settings" : [],
           "type" : "number",
-          "weight" : "125"
+          "weight" : 125
         },
-        "id" : "716",
+        "id" : "613",
         "field_id" : "411",
         "field_name" : "field_park_spcs__torcond",
         "entity_type" : "drealty_listing",
@@ -4648,9 +4606,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "150"
+          "weight" : 150
         },
-        "id" : "717",
+        "id" : "614",
         "field_id" : "436",
         "field_name" : "field_outof_area__torcond",
         "entity_type" : "drealty_listing",
@@ -4678,9 +4636,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "194"
+          "weight" : 194
         },
-        "id" : "718",
+        "id" : "615",
         "field_id" : "479",
         "field_name" : "field_den_fr__torcond",
         "entity_type" : "drealty_listing",
@@ -4708,9 +4666,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "195"
+          "weight" : 195
         },
-        "id" : "719",
+        "id" : "616",
         "field_id" : "480",
         "field_name" : "field_disp_addr__torcond",
         "entity_type" : "drealty_listing",
@@ -4738,9 +4696,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "197"
+          "weight" : 197
         },
-        "id" : "720",
+        "id" : "617",
         "field_id" : "482",
         "field_name" : "field_area__torcond",
         "entity_type" : "drealty_listing",
@@ -4768,9 +4726,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "198"
+          "weight" : 198
         },
-        "id" : "721",
+        "id" : "618",
         "field_id" : "483",
         "field_name" : "field_community__torcond",
         "entity_type" : "drealty_listing",
@@ -4798,9 +4756,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "199"
+          "weight" : 199
         },
-        "id" : "722",
+        "id" : "619",
         "field_id" : "484",
         "field_name" : "field_municipality_code__torcond",
         "entity_type" : "drealty_listing",
@@ -4828,9 +4786,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "200"
+          "weight" : 200
         },
-        "id" : "723",
+        "id" : "620",
         "field_id" : "485",
         "field_name" : "field_municipality_district__tor",
         "entity_type" : "drealty_listing",
@@ -4858,9 +4816,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "201"
+          "weight" : 201
         },
-        "id" : "724",
+        "id" : "621",
         "field_id" : "486",
         "field_name" : "field_municipality__torcond",
         "entity_type" : "drealty_listing",
@@ -4888,9 +4846,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "205"
+          "weight" : 205
         },
-        "id" : "725",
+        "id" : "622",
         "field_id" : "490",
         "field_name" : "field_addr__torcond",
         "entity_type" : "drealty_listing",
@@ -4918,9 +4876,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "206"
+          "weight" : 206
         },
-        "id" : "726",
+        "id" : "623",
         "field_id" : "491",
         "field_name" : "field_all_inc__torcond",
         "entity_type" : "drealty_listing",
@@ -4948,9 +4906,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "207"
+          "weight" : 207
         },
-        "id" : "727",
+        "id" : "624",
         "field_id" : "492",
         "field_name" : "field_apt_num__torcond",
         "entity_type" : "drealty_listing",
@@ -4989,9 +4947,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "number",
           "settings" : [],
           "type" : "number",
-          "weight" : "208"
+          "weight" : 208
         },
-        "id" : "728",
+        "id" : "625",
         "field_id" : "493",
         "field_name" : "field_ass_year__torcond",
         "entity_type" : "drealty_listing",
@@ -5030,9 +4988,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "number",
           "settings" : [],
           "type" : "number",
-          "weight" : "209"
+          "weight" : 209
         },
-        "id" : "729",
+        "id" : "626",
         "field_id" : "494",
         "field_name" : "field_bath_tot__torcond",
         "entity_type" : "drealty_listing",
@@ -5060,9 +5018,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "210"
+          "weight" : 210
         },
-        "id" : "730",
+        "id" : "627",
         "field_id" : "495",
         "field_name" : "field_bldg_amen1_out__torcond",
         "entity_type" : "drealty_listing",
@@ -5090,9 +5048,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "211"
+          "weight" : 211
         },
-        "id" : "731",
+        "id" : "628",
         "field_id" : "496",
         "field_name" : "field_bldg_amen2_out__torcond",
         "entity_type" : "drealty_listing",
@@ -5120,9 +5078,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "212"
+          "weight" : 212
         },
-        "id" : "732",
+        "id" : "629",
         "field_id" : "497",
         "field_name" : "field_bldg_amen3_out__torcond",
         "entity_type" : "drealty_listing",
@@ -5150,9 +5108,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "213"
+          "weight" : 213
         },
-        "id" : "733",
+        "id" : "630",
         "field_id" : "498",
         "field_name" : "field_bldg_amen4_out__torcond",
         "entity_type" : "drealty_listing",
@@ -5180,9 +5138,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "214"
+          "weight" : 214
         },
-        "id" : "734",
+        "id" : "631",
         "field_id" : "499",
         "field_name" : "field_bldg_amen5_out__torcond",
         "entity_type" : "drealty_listing",
@@ -5210,9 +5168,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "215"
+          "weight" : 215
         },
-        "id" : "735",
+        "id" : "632",
         "field_id" : "500",
         "field_name" : "field_bldg_amen6_out__torcond",
         "entity_type" : "drealty_listing",
@@ -5240,9 +5198,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "218"
+          "weight" : 218
         },
-        "id" : "736",
+        "id" : "633",
         "field_id" : "503",
         "field_name" : "field_bsmt1_out__torcond",
         "entity_type" : "drealty_listing",
@@ -5270,9 +5228,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "219"
+          "weight" : 219
         },
-        "id" : "737",
+        "id" : "634",
         "field_id" : "504",
         "field_name" : "field_cable__torcond",
         "entity_type" : "drealty_listing",
@@ -5300,9 +5258,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "220"
+          "weight" : 220
         },
-        "id" : "738",
+        "id" : "635",
         "field_id" : "505",
         "field_name" : "field_cac_inc__torcond",
         "entity_type" : "drealty_listing",
@@ -5330,9 +5288,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "221"
+          "weight" : 221
         },
-        "id" : "739",
+        "id" : "636",
         "field_id" : "506",
         "field_name" : "field_central_vac__torcond",
         "entity_type" : "drealty_listing",
@@ -5371,9 +5329,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "number",
           "settings" : [],
           "type" : "number",
-          "weight" : "222"
+          "weight" : 222
         },
-        "id" : "740",
+        "id" : "637",
         "field_id" : "507",
         "field_name" : "field_mmap_col__torcond",
         "entity_type" : "drealty_listing",
@@ -5401,9 +5359,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "223"
+          "weight" : 223
         },
-        "id" : "741",
+        "id" : "638",
         "field_id" : "508",
         "field_name" : "field_gar_type__torcond",
         "entity_type" : "drealty_listing",
@@ -5431,9 +5389,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "224"
+          "weight" : 224
         },
-        "id" : "742",
+        "id" : "639",
         "field_id" : "509",
         "field_name" : "field_rm2_dc1_out__torcond",
         "entity_type" : "drealty_listing",
@@ -5461,9 +5419,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "225"
+          "weight" : 225
         },
-        "id" : "743",
+        "id" : "640",
         "field_id" : "510",
         "field_name" : "field_bsmt2_out__torcond",
         "entity_type" : "drealty_listing",
@@ -5491,9 +5449,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "rows" : 5 },
           "type" : "text_textarea",
-          "weight" : "226"
+          "weight" : 226
         },
-        "id" : "744",
+        "id" : "641",
         "field_id" : "511",
         "field_name" : "field_ad_text__torcond",
         "entity_type" : "drealty_listing",
@@ -5540,9 +5498,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
             "year_range" : "-3:+3"
           },
           "type" : "date_select",
-          "weight" : "227"
+          "weight" : 227
         },
-        "id" : "745",
+        "id" : "642",
         "field_id" : "512",
         "field_name" : "field_vtour_updt__torcond",
         "entity_type" : "drealty_listing",
@@ -5589,9 +5547,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
             "year_range" : "-3:+3"
           },
           "type" : "date_select",
-          "weight" : "228"
+          "weight" : 228
         },
-        "id" : "746",
+        "id" : "643",
         "field_id" : "513",
         "field_name" : "field_timestamp_sql__torcond",
         "entity_type" : "drealty_listing",
@@ -5638,9 +5596,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
             "year_range" : "-3:+3"
           },
           "type" : "date_select",
-          "weight" : "229"
+          "weight" : 229
         },
-        "id" : "747",
+        "id" : "644",
         "field_id" : "514",
         "field_name" : "field_idx_dt__torcond",
         "entity_type" : "drealty_listing",
@@ -5687,9 +5645,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
             "year_range" : "-3:+3"
           },
           "type" : "date_select",
-          "weight" : "230"
+          "weight" : 230
         },
-        "id" : "748",
+        "id" : "645",
         "field_id" : "515",
         "field_name" : "field_pix_updt__torcond",
         "entity_type" : "drealty_listing",
@@ -5749,9 +5707,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
             }
           },
           "type" : "geocoder",
-          "weight" : "231"
+          "weight" : 231
         },
-        "id" : "749",
+        "id" : "646",
         "field_id" : "516",
         "field_name" : "field_test_geofilld",
         "entity_type" : "drealty_listing",
@@ -5781,9 +5739,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "options",
           "settings" : [],
           "type" : "options_select",
-          "weight" : "233"
+          "weight" : 233
         },
-        "id" : "750",
+        "id" : "647",
         "field_id" : "519",
         "field_name" : "field_city_region__torcond",
         "entity_type" : "drealty_listing",
@@ -5822,9 +5780,9 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "232"
+          "weight" : 232
         },
-        "id" : "751",
+        "id" : "648",
         "field_id" : "518",
         "field_name" : "field_address_full__torcond",
         "entity_type" : "drealty_listing",
@@ -5860,11 +5818,97 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "entityreference",
           "settings" : { "match_operator" : "CONTAINS", "path" : "", "size" : 60 },
           "type" : "entityreference_autocomplete",
-          "weight" : "234"
+          "weight" : 234
         },
-        "id" : "752",
-        "field_id" : "535",
+        "id" : "649",
+        "field_id" : "533",
         "field_name" : "field_reference_to_condo",
+        "entity_type" : "drealty_listing",
+        "deleted" : "0"
+      },
+      "field_price_per_sqft_lease" : {
+        "default_value" : null,
+        "description" : "",
+        "display" : {
+          "default" : {
+            "label" : "above",
+            "module" : "number",
+            "settings" : {
+              "decimal_separator" : ".",
+              "prefix_suffix" : true,
+              "scale" : 2,
+              "thousand_separator" : ""
+            },
+            "type" : "number_decimal",
+            "weight" : 236
+          },
+          "gallery" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 },
+          "list" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 },
+          "search" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 }
+        },
+        "drealty" : { "hash_exclude" : 0 },
+        "label" : "Price per sqft lease",
+        "required" : 0,
+        "settings" : {
+          "max" : "",
+          "min" : "",
+          "prefix" : "",
+          "suffix" : "",
+          "user_register_form" : false
+        },
+        "widget" : {
+          "active" : 0,
+          "module" : "number",
+          "settings" : [],
+          "type" : "number",
+          "weight" : 238
+        },
+        "id" : "658",
+        "field_id" : "541",
+        "field_name" : "field_price_per_sqft_lease",
+        "entity_type" : "drealty_listing",
+        "deleted" : "0"
+      },
+      "field_price_per_sqft_sale" : {
+        "default_value" : null,
+        "description" : "",
+        "display" : {
+          "default" : {
+            "label" : "above",
+            "module" : "number",
+            "settings" : {
+              "decimal_separator" : ".",
+              "prefix_suffix" : true,
+              "scale" : 2,
+              "thousand_separator" : ""
+            },
+            "type" : "number_decimal",
+            "weight" : 235
+          },
+          "gallery" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 },
+          "list" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 },
+          "search" : { "label" : "above", "settings" : [], "type" : "hidden", "weight" : 0 }
+        },
+        "drealty" : { "hash_exclude" : 0 },
+        "label" : "Price per sqft sale",
+        "required" : 0,
+        "settings" : {
+          "max" : "",
+          "min" : "",
+          "prefix" : "",
+          "suffix" : "",
+          "user_register_form" : false
+        },
+        "widget" : {
+          "active" : 0,
+          "module" : "number",
+          "settings" : [],
+          "type" : "number",
+          "weight" : 237
+        },
+        "id" : "659",
+        "field_id" : "542",
+        "field_name" : "field_price_per_sqft_sale",
         "entity_type" : "drealty_listing",
         "deleted" : "0"
       },
@@ -5892,97 +5936,11 @@ function ctf_content_types_toronto_building_default_drealty_listing_type() {
           "module" : "text",
           "settings" : { "size" : 60 },
           "type" : "text_textfield",
-          "weight" : "236"
+          "weight" : 236
         },
-        "id" : "761",
-        "field_id" : "542",
+        "id" : "660",
+        "field_id" : "540",
         "field_name" : "field_search_point_string",
-        "entity_type" : "drealty_listing",
-        "deleted" : "0"
-      },
-      "field_price_per_sqft_sale" : {
-        "label" : "Price per sqft sale",
-        "widget" : {
-          "weight" : "237",
-          "type" : "number",
-          "module" : "number",
-          "active" : 0,
-          "settings" : []
-        },
-        "settings" : {
-          "min" : "",
-          "max" : "",
-          "prefix" : "",
-          "suffix" : "",
-          "user_register_form" : false
-        },
-        "display" : {
-          "default" : {
-            "label" : "above",
-            "type" : "number_decimal",
-            "settings" : {
-              "thousand_separator" : "",
-              "decimal_separator" : ".",
-              "scale" : 2,
-              "prefix_suffix" : true
-            },
-            "module" : "number",
-            "weight" : 235
-          },
-          "search" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 },
-          "list" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 },
-          "gallery" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 }
-        },
-        "required" : 0,
-        "description" : "",
-        "drealty" : { "hash_exclude" : 0 },
-        "default_value" : null,
-        "id" : "762",
-        "field_id" : "543",
-        "field_name" : "field_price_per_sqft_sale",
-        "entity_type" : "drealty_listing",
-        "deleted" : "0"
-      },
-      "field_price_per_sqft_lease" : {
-        "label" : "Price per sqft lease",
-        "widget" : {
-          "weight" : "238",
-          "type" : "number",
-          "module" : "number",
-          "active" : 0,
-          "settings" : []
-        },
-        "settings" : {
-          "min" : "",
-          "max" : "",
-          "prefix" : "",
-          "suffix" : "",
-          "user_register_form" : false
-        },
-        "display" : {
-          "default" : {
-            "label" : "above",
-            "type" : "number_decimal",
-            "settings" : {
-              "thousand_separator" : "",
-              "decimal_separator" : ".",
-              "scale" : 2,
-              "prefix_suffix" : true
-            },
-            "module" : "number",
-            "weight" : 236
-          },
-          "search" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 },
-          "list" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 },
-          "gallery" : { "type" : "hidden", "label" : "above", "settings" : [], "weight" : 0 }
-        },
-        "required" : 0,
-        "description" : "",
-        "drealty" : { "hash_exclude" : 0 },
-        "default_value" : null,
-        "id" : "763",
-        "field_id" : "544",
-        "field_name" : "field_price_per_sqft_lease",
         "entity_type" : "drealty_listing",
         "deleted" : "0"
       }
