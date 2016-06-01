@@ -372,6 +372,7 @@ function _ctrader_map_region_taxonomy_form($form, &$form_state) {
  * _ctrader_map_region_taxonomy_form submit function.
  */
 function _ctrader_map_region_taxonomy_form_submit($form, &$form_state) {
+  unset($_SESSION['neighbourhood_json']);
   _ctrader_map_taxonomy_create($form_state['values']['vocab_name']);
 }
 
