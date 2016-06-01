@@ -134,6 +134,7 @@
   .pane-nearby-listings {
     background: $alabaster;
     position: relative;
+    border-top: 1px solid darken($athens-gray, 6);
 
     .pane-title {
       padding: 41px 0 25px;
@@ -185,6 +186,7 @@
 .condo-page-gallery {
   width: 78.5%;
   display: inline-block;
+  float: left;
 
   .pane-content {
     height: 700px;
@@ -192,9 +194,8 @@
 }
 
 .condo-page-pagination {
-  width: 21.553%;
+  width: 21.5%;
   display: inline-block;
-  margin-left: -5px;
   padding: 0 25px;
   background: $ebony-clay;
 
@@ -204,8 +205,4 @@
     padding-bottom: 30px;
   }
 
-  img {
-    //height: 160px !important;
-    //margin-top: calc(-79% - 5px);
-  }
 }

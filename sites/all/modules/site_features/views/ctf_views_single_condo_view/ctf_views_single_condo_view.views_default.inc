@@ -91,7 +91,7 @@ function ctf_views_single_condo_view_views_default_views() {
   $handler->display->display_options['fields']['field_br__torcond']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_br__torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_br__torcond']['alter']['text'] = '[field_br__torcond][field_br_plus__torcond]';
-  $handler->display->display_options['fields']['field_br__torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_br__torcond']['empty'] = '-';
   $handler->display->display_options['fields']['field_br__torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_br__torcond']['settings'] = array(
     'thousand_separator' => '',
@@ -112,7 +112,7 @@ function ctf_views_single_condo_view_views_default_views() {
   $handler->display->display_options['fields']['field_bath_tot__torcond']['field'] = 'field_bath_tot__torcond';
   $handler->display->display_options['fields']['field_bath_tot__torcond']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_bath_tot__torcond']['alter']['text'] = '[field_bath_tot__torcond] Bath';
-  $handler->display->display_options['fields']['field_bath_tot__torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_bath_tot__torcond']['empty'] = '-';
   $handler->display->display_options['fields']['field_bath_tot__torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_bath_tot__torcond']['settings'] = array(
     'thousand_separator' => '',
@@ -564,7 +564,7 @@ function ctf_views_single_condo_view_views_default_views() {
   $handler->display->display_options['fields']['field_br__torcond']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_br__torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_br__torcond']['alter']['text'] = '[field_br__torcond][field_br_plus__torcond]';
-  $handler->display->display_options['fields']['field_br__torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_br__torcond']['empty'] = '-';
   $handler->display->display_options['fields']['field_br__torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_br__torcond']['settings'] = array(
     'thousand_separator' => '',
@@ -585,7 +585,7 @@ function ctf_views_single_condo_view_views_default_views() {
   $handler->display->display_options['fields']['field_bath_tot__torcond']['field'] = 'field_bath_tot__torcond';
   $handler->display->display_options['fields']['field_bath_tot__torcond']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_bath_tot__torcond']['alter']['text'] = '[field_bath_tot__torcond] Bath';
-  $handler->display->display_options['fields']['field_bath_tot__torcond']['empty'] = 'no results text';
+  $handler->display->display_options['fields']['field_bath_tot__torcond']['empty'] = '-';
   $handler->display->display_options['fields']['field_bath_tot__torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_bath_tot__torcond']['settings'] = array(
     'thousand_separator' => '',
@@ -750,6 +750,149 @@ function ctf_views_single_condo_view_views_default_views() {
   $handler->display->display_options['fields']['field_ml_num__torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_ml_num__torcond']['alter']['text'] = 'MLS# [field_ml_num__torcond]';
   $handler->display->display_options['fields']['field_ml_num__torcond']['element_label_colon'] = FALSE;
+  /* Field: Drealty Listing: Lp_dol */
+  $handler->display->display_options['fields']['field_lp_dol__torcond']['id'] = 'field_lp_dol__torcond';
+  $handler->display->display_options['fields']['field_lp_dol__torcond']['table'] = 'field_data_field_lp_dol__torcond';
+  $handler->display->display_options['fields']['field_lp_dol__torcond']['field'] = 'field_lp_dol__torcond';
+  $handler->display->display_options['fields']['field_lp_dol__torcond']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_lp_dol__torcond']['settings'] = array(
+    'thousand_separator' => ',',
+    'decimal_separator' => '.',
+    'scale' => '0',
+    'prefix_suffix' => 1,
+  );
+  $handler->display->display_options['path'] = 'single-condo-view/%';
+
+  /* Display: Details */
+  $handler = $view->new_display('page', 'Details', 'page_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Single condo view details';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Drealty Listing: Drealty Listing Id */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'drealty_listing';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  $handler->display->display_options['fields']['id']['exclude'] = TRUE;
+  /* Field: Drealty Listing: Sqft */
+  $handler->display->display_options['fields']['field_sqft__torcond']['id'] = 'field_sqft__torcond';
+  $handler->display->display_options['fields']['field_sqft__torcond']['table'] = 'field_data_field_sqft__torcond';
+  $handler->display->display_options['fields']['field_sqft__torcond']['field'] = 'field_sqft__torcond';
+  $handler->display->display_options['fields']['field_sqft__torcond']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_sqft__torcond']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_sqft__torcond']['alter']['text'] = '[field_sqft__torcond] sqft';
+  /* Field: Drealty Listing: Br_plus */
+  $handler->display->display_options['fields']['field_br_plus__torcond']['id'] = 'field_br_plus__torcond';
+  $handler->display->display_options['fields']['field_br_plus__torcond']['table'] = 'field_data_field_br_plus__torcond';
+  $handler->display->display_options['fields']['field_br_plus__torcond']['field'] = 'field_br_plus__torcond';
+  $handler->display->display_options['fields']['field_br_plus__torcond']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_br_plus__torcond']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_br_plus__torcond']['alter']['text'] = '+[field_br_plus__torcond]';
+  $handler->display->display_options['fields']['field_br_plus__torcond']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_br_plus__torcond']['empty_zero'] = TRUE;
+  $handler->display->display_options['fields']['field_br_plus__torcond']['settings'] = array(
+    'thousand_separator' => '',
+    'decimal_separator' => '.',
+    'scale' => '0',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Drealty Listing: Br */
+  $handler->display->display_options['fields']['field_br__torcond']['id'] = 'field_br__torcond';
+  $handler->display->display_options['fields']['field_br__torcond']['table'] = 'field_data_field_br__torcond';
+  $handler->display->display_options['fields']['field_br__torcond']['field'] = 'field_br__torcond';
+  $handler->display->display_options['fields']['field_br__torcond']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_br__torcond']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_br__torcond']['alter']['text'] = '[field_br__torcond][field_br_plus__torcond]';
+  $handler->display->display_options['fields']['field_br__torcond']['empty'] = '-';
+  $handler->display->display_options['fields']['field_br__torcond']['empty_zero'] = TRUE;
+  $handler->display->display_options['fields']['field_br__torcond']['settings'] = array(
+    'thousand_separator' => '',
+    'decimal_separator' => '.',
+    'scale' => '0',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
+  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_1']['label'] = 'Bed';
+  $handler->display->display_options['fields']['nothing_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '[field_br__torcond] Bed';
+  /* Field: Drealty Listing: Bath_tot */
+  $handler->display->display_options['fields']['field_bath_tot__torcond']['id'] = 'field_bath_tot__torcond';
+  $handler->display->display_options['fields']['field_bath_tot__torcond']['table'] = 'field_data_field_bath_tot__torcond';
+  $handler->display->display_options['fields']['field_bath_tot__torcond']['field'] = 'field_bath_tot__torcond';
+  $handler->display->display_options['fields']['field_bath_tot__torcond']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_bath_tot__torcond']['alter']['text'] = '[field_bath_tot__torcond] Bath';
+  $handler->display->display_options['fields']['field_bath_tot__torcond']['empty'] = '-';
+  $handler->display->display_options['fields']['field_bath_tot__torcond']['empty_zero'] = TRUE;
+  $handler->display->display_options['fields']['field_bath_tot__torcond']['settings'] = array(
+    'thousand_separator' => '',
+    'decimal_separator' => '.',
+    'scale' => '0',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Bath info 1 */
+  $handler->display->display_options['fields']['nothing_6']['id'] = 'nothing_6';
+  $handler->display->display_options['fields']['nothing_6']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_6']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_6']['ui_name'] = 'Bath info 1';
+  $handler->display->display_options['fields']['nothing_6']['label'] = 'Baths (info 1)';
+  $handler->display->display_options['fields']['nothing_6']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nothing_6']['alter']['text'] = '[field_bath_tot__torcond] Bath';
+  /* Field: Drealty Listing: Pets */
+  $handler->display->display_options['fields']['field_pets__torcond']['id'] = 'field_pets__torcond';
+  $handler->display->display_options['fields']['field_pets__torcond']['table'] = 'field_data_field_pets__torcond';
+  $handler->display->display_options['fields']['field_pets__torcond']['field'] = 'field_pets__torcond';
+  $handler->display->display_options['fields']['field_pets__torcond']['exclude'] = TRUE;
+  /* Field: Views: Views Conditional */
+  $handler->display->display_options['fields']['views_conditional']['id'] = 'views_conditional';
+  $handler->display->display_options['fields']['views_conditional']['table'] = 'views_conditional';
+  $handler->display->display_options['fields']['views_conditional']['field'] = 'views_conditional';
+  $handler->display->display_options['fields']['views_conditional']['label'] = '';
+  $handler->display->display_options['fields']['views_conditional']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['views_conditional']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['views_conditional']['if'] = 'field_pets__torcond';
+  $handler->display->display_options['fields']['views_conditional']['condition'] = '1';
+  $handler->display->display_options['fields']['views_conditional']['equalto'] = 'N';
+  $handler->display->display_options['fields']['views_conditional']['then'] = 'No';
+  $handler->display->display_options['fields']['views_conditional']['or'] = 'Yes';
+  $handler->display->display_options['fields']['views_conditional']['strip_tags'] = 0;
+  /* Field: Drealty Listing: Locker */
+  $handler->display->display_options['fields']['field_locker__torcond']['id'] = 'field_locker__torcond';
+  $handler->display->display_options['fields']['field_locker__torcond']['table'] = 'field_data_field_locker__torcond';
+  $handler->display->display_options['fields']['field_locker__torcond']['field'] = 'field_locker__torcond';
+  $handler->display->display_options['fields']['field_locker__torcond']['exclude'] = TRUE;
+  /* Field: Views: Views Conditional */
+  $handler->display->display_options['fields']['views_conditional_1']['id'] = 'views_conditional_1';
+  $handler->display->display_options['fields']['views_conditional_1']['table'] = 'views_conditional';
+  $handler->display->display_options['fields']['views_conditional_1']['field'] = 'views_conditional';
+  $handler->display->display_options['fields']['views_conditional_1']['label'] = '';
+  $handler->display->display_options['fields']['views_conditional_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['views_conditional_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['views_conditional_1']['if'] = 'field_locker__torcond';
+  $handler->display->display_options['fields']['views_conditional_1']['condition'] = '1';
+  $handler->display->display_options['fields']['views_conditional_1']['equalto'] = 'None';
+  $handler->display->display_options['fields']['views_conditional_1']['then'] = 'No';
+  $handler->display->display_options['fields']['views_conditional_1']['or'] = 'Yes';
+  $handler->display->display_options['fields']['views_conditional_1']['strip_tags'] = 0;
+  /* Field: Drealty Listing: Prkg_inc */
+  $handler->display->display_options['fields']['field_prkg_inc__torcond']['id'] = 'field_prkg_inc__torcond';
+  $handler->display->display_options['fields']['field_prkg_inc__torcond']['table'] = 'field_data_field_prkg_inc__torcond';
+  $handler->display->display_options['fields']['field_prkg_inc__torcond']['field'] = 'field_prkg_inc__torcond';
+  $handler->display->display_options['fields']['field_prkg_inc__torcond']['exclude'] = TRUE;
+  /* Field: Views: Views Conditional */
+  $handler->display->display_options['fields']['views_conditional_2']['id'] = 'views_conditional_2';
+  $handler->display->display_options['fields']['views_conditional_2']['table'] = 'views_conditional';
+  $handler->display->display_options['fields']['views_conditional_2']['field'] = 'views_conditional';
+  $handler->display->display_options['fields']['views_conditional_2']['label'] = '';
+  $handler->display->display_options['fields']['views_conditional_2']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['views_conditional_2']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['views_conditional_2']['if'] = 'field_prkg_inc__torcond';
+  $handler->display->display_options['fields']['views_conditional_2']['condition'] = '1';
+  $handler->display->display_options['fields']['views_conditional_2']['equalto'] = 'N';
+  $handler->display->display_options['fields']['views_conditional_2']['then'] = 'No';
+  $handler->display->display_options['fields']['views_conditional_2']['or'] = 'Yes';
+  $handler->display->display_options['fields']['views_conditional_2']['strip_tags'] = 0;
   /* Field: Drealty Listing: Lp_dol */
   $handler->display->display_options['fields']['field_lp_dol__torcond']['id'] = 'field_lp_dol__torcond';
   $handler->display->display_options['fields']['field_lp_dol__torcond']['table'] = 'field_data_field_lp_dol__torcond';
@@ -945,6 +1088,34 @@ function ctf_views_single_condo_view_views_default_views() {
   $handler->display->display_options['fields']['views_conditional_7']['equalto'] = 'Y';
   $handler->display->display_options['fields']['views_conditional_7']['or'] = 'Washer/Dryer';
   $handler->display->display_options['fields']['views_conditional_7']['strip_tags'] = 0;
+  $handler->display->display_options['path'] = 'single-condo-view-details/%';
+
+  /* Display: Mortgage */
+  $handler = $view->new_display('page', 'Mortgage', 'page_2');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Mortgage';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Drealty Listing: Drealty Listing Id */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'drealty_listing';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  $handler->display->display_options['fields']['id']['exclude'] = TRUE;
+  /* Field: Drealty Listing: Lp_dol */
+  $handler->display->display_options['fields']['field_lp_dol__torcond']['id'] = 'field_lp_dol__torcond';
+  $handler->display->display_options['fields']['field_lp_dol__torcond']['table'] = 'field_data_field_lp_dol__torcond';
+  $handler->display->display_options['fields']['field_lp_dol__torcond']['field'] = 'field_lp_dol__torcond';
+  $handler->display->display_options['fields']['field_lp_dol__torcond']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_lp_dol__torcond']['settings'] = array(
+    'thousand_separator' => '',
+    'decimal_separator' => '.',
+    'scale' => '2',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Drealty Listing: S_r */
+  $handler->display->display_options['fields']['field_s_r__torcond']['id'] = 'field_s_r__torcond';
+  $handler->display->display_options['fields']['field_s_r__torcond']['table'] = 'field_data_field_s_r__torcond';
+  $handler->display->display_options['fields']['field_s_r__torcond']['field'] = 'field_s_r__torcond';
+  $handler->display->display_options['fields']['field_s_r__torcond']['exclude'] = TRUE;
   /* Field: Global: Fieldset */
   $handler->display->display_options['fields']['fieldset_3']['id'] = 'fieldset_3';
   $handler->display->display_options['fields']['fieldset_3']['table'] = 'views';
@@ -960,7 +1131,7 @@ function ctf_views_single_condo_view_views_default_views() {
   $handler->display->display_options['fields']['mortgage_calculator']['label'] = '';
   $handler->display->display_options['fields']['mortgage_calculator']['alter']['alter_text'] = 1;
   $handler->display->display_options['fields']['mortgage_calculator']['element_label_colon'] = FALSE;
-  $handler->display->display_options['path'] = 'single-condo-view/%';
+  $handler->display->display_options['path'] = 'single-condo-view-mortgage/%';
   $export['single_condo_view'] = $view;
 
   return $export;
