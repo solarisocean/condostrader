@@ -242,6 +242,25 @@ function ctf_pages_main_page_default_page_manager_pages() {
     $display->content['new-9947cb7c-ea49-44a9-bf1c-1c4d156a14ad'] = $pane;
     $display->panels['blog'][0] = 'new-9947cb7c-ea49-44a9-bf1c-1c4d156a14ad';
     $pane = new stdClass();
+    $pane->pid = 'new-2350e68a-e317-4c4a-a7cc-79f8973541cf';
+    $pane->panel = 'center';
+    $pane->type = 'nearby_listings';
+    $pane->subtype = 'nearby_listings';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '2350e68a-e317-4c4a-a7cc-79f8973541cf';
+    $display->content['new-2350e68a-e317-4c4a-a7cc-79f8973541cf'] = $pane;
+    $display->panels['center'][0] = 'new-2350e68a-e317-4c4a-a7cc-79f8973541cf';
+    $pane = new stdClass();
     $pane->pid = 'new-8d1038b3-92d9-4531-ac75-2ba5f63aa294';
     $pane->panel = 'center';
     $pane->type = 'views';
@@ -274,11 +293,11 @@ function ctf_pages_main_page_default_page_manager_pages() {
       'css_class' => 'centering newly-listed',
     );
     $pane->extras = array();
-    $pane->position = 0;
+    $pane->position = 1;
     $pane->locks = array();
     $pane->uuid = '8d1038b3-92d9-4531-ac75-2ba5f63aa294';
     $display->content['new-8d1038b3-92d9-4531-ac75-2ba5f63aa294'] = $pane;
-    $display->panels['center'][0] = 'new-8d1038b3-92d9-4531-ac75-2ba5f63aa294';
+    $display->panels['center'][1] = 'new-8d1038b3-92d9-4531-ac75-2ba5f63aa294';
     $pane = new stdClass();
     $pane->pid = 'new-4a61666d-46df-4cda-a96e-d8f5aaafea84';
     $pane->panel = 'center_';

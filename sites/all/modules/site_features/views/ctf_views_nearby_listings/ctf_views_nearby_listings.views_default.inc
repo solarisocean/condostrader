@@ -459,8 +459,12 @@ function ctf_views_nearby_listings_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = 'toronto_condo';
 
-  /* Display: Comparable nearby listings */
-  $handler = $view->new_display('page', 'Comparable nearby listings', 'page_1');
+  /* Display: Facets block */
+  $handler = $view->new_display('search_api_views_facets_block', 'Facets block', 'search_api_views_facets_block_1');
+  $handler->display->display_options['pager']['type'] = 'some';
+
+  /* Display: Comparable nearby page */
+  $handler = $view->new_display('page', 'Comparable nearby page', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = '<b>Comparable</b> nearby listings';
   $handler->display->display_options['defaults']['css_class'] = FALSE;
@@ -812,12 +816,10 @@ function ctf_views_nearby_listings_views_default_views() {
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
 
-  /* Display: Facets block */
-  $handler = $view->new_display('search_api_views_facets_block', 'Facets block', 'search_api_views_facets_block_1');
-  $handler->display->display_options['pager']['type'] = 'some';
-
-  /* Display: Block */
-  $handler = $view->new_display('block', 'Block', 'block_1');
+  /* Display: Comparable nearby block */
+  $handler = $view->new_display('block', 'Comparable nearby block', 'block_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Comparable nearby listings';
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'nearby-listed-slider swiper-container';
   $handler->display->display_options['defaults']['pager'] = FALSE;
@@ -830,6 +832,18 @@ function ctf_views_nearby_listings_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Location: LatLong Pair (indexed) */
+  $handler->display->display_options['arguments']['field_test_geofilld_latlon']['id'] = 'field_test_geofilld_latlon';
+  $handler->display->display_options['arguments']['field_test_geofilld_latlon']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['arguments']['field_test_geofilld_latlon']['field'] = 'field_test_geofilld_latlon';
+  $handler->display->display_options['arguments']['field_test_geofilld_latlon']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['field_test_geofilld_latlon']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_test_geofilld_latlon']['default_argument_options']['argument'] = '43.70635259304132,-79.42205429077148';
+  $handler->display->display_options['arguments']['field_test_geofilld_latlon']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_test_geofilld_latlon']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['field_test_geofilld_latlon']['not'] = 0;
+  $handler->display->display_options['arguments']['field_test_geofilld_latlon']['radius'] = '1';
   $export['nearby_listings_view'] = $view;
 
   return $export;
