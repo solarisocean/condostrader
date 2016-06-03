@@ -438,8 +438,53 @@ function _ctrader_saf_blocks_content_function($delta) {
           if (strpos($value, $beds_field_name) !== FALSE) {
             $value = str_replace("{$beds_field_name}:", '', $value);
             if (is_numeric($value)) {
-              $search_button_form['beds']['#value'] = "{$beds_field_name}:{$value}";
+              $search_button_form['beds']['#value'] = $value;
             }
+          }
+        }
+      }
+
+      // TYPE facet selectlist.
+      $type_field_name = 'field_style__torcond';
+      if (isset($_GET['f'][0])) {
+        foreach ($_GET['f'] as $value) {
+          if (strpos($value, $type_field_name) !== FALSE) {
+            $value = str_replace("{$type_field_name}:", '', $value);
+            $search_button_form['type']['#value'] = $value;
+          }
+        }
+      }
+
+      // PRICE facet slider.
+      $price_field_name = 'field_lp_dol__torcond';
+      if (isset($_GET['f'][0])) {
+        foreach ($_GET['f'] as $value) {
+          if (strpos($value, $price_field_name) !== FALSE) {
+            $value = str_replace(array(
+              "{$price_field_name}:[",
+              " TO",
+              "]"
+            ), '', $value);
+            $value = explode(' ', $value);
+            $search_button_form['price_min']['#value'] = $value[0];
+            $search_button_form['price_max']['#value'] = $value[1];
+          }
+        }
+      }
+
+      // SIZE facet slider.
+      $size_field_name = 'field_sqft_range_max__torcond';
+      if (isset($_GET['f'][0])) {
+        foreach ($_GET['f'] as $value) {
+          if (strpos($value, $size_field_name) !== FALSE) {
+            $value = str_replace(array(
+              "{$size_field_name}:[",
+              " TO",
+              "]"
+            ), '', $value);
+            $value = explode(' ', $value);
+            $search_button_form['size_min']['#value'] = $value[0];
+            $search_button_form['size_max']['#value'] = $value[1];
           }
         }
       }
@@ -570,44 +615,56 @@ function _ctrader_saf_search_button_form_submit($form, &$form_state) {
     $tids = implode('-', $tids_array);
     $query['neighbourhoods'] = $tids;
   }
-  /****************************************************************************/
-  /****************************************************************************/
+
+
   // SALE-RENT facet checkboxes.
   $lease_rent_field_name = 'field_s_r__torcond';
   if (strpos($form_state['values']['sale_rent'], $lease_rent_field_name) !== FALSE) {
     $facet_url = drupal_parse_url($form_state['values']['sale_rent']);
     $query['f'][] = array_pop($facet_url['query']['f']);
   }
-  /****************************************************************************/
-  /****************************************************************************/
+
   // PETS facet checkboxes.
   $pets_field_name = 'field_pets__torcond';
   if ($form_state['values']['pets']) {
     $query['f'][] = "{$pets_field_name}:Restrict";
   }
-  /****************************************************************************/
-  /****************************************************************************/
+
   // LOCKER facet checkboxes.
   $locker_field_name = 'field_locker__torcond';
   if ($form_state['values']['locker']) {
     $query['f'][] = "{$locker_field_name}:Owned";
   }
-  /****************************************************************************/
-  /****************************************************************************/
+
   // PARKING facet checkboxes.
   $parking_field_name = 'field_prkg_inc__torcond';
   if ($form_state['values']['parking']) {
     $query['f'][] = "{$parking_field_name}:Y";
   }
-  /****************************************************************************/
-  /****************************************************************************/
+
   // BEDS facet checkboxes.
   $beds_field_name = 'field_br__torcond';
   if (is_numeric($form_state['values']['beds'])) {
     $query['f'][] = "{$beds_field_name}:{$form_state['values']['beds']}";
   }
-  /****************************************************************************/
 
+  // TYPE facet selectlist.
+  $type_field_name = 'field_style__torcond';
+  if ($form_state['values']['type']) {
+    $query['f'][] = "{$type_field_name}:{$form_state['values']['type']}";
+  }
+
+  // PRICE facet slider.
+  $price_field_name = 'field_lp_dol__torcond';
+  if ($form_state['values']['price_min']) {
+    $query['f'][] = "{$price_field_name}:[{$form_state['values']['price_min']} TO {$form_state['values']['price_max']}]";
+  }
+
+  // SIZE facet slider.
+  $size_field_name = 'field_sqft_range_max__torcond';
+  if ($form_state['values']['size_min']) {
+    $query['f'][] = "{$size_field_name}:[{$form_state['values']['size_min']} TO {$form_state['values']['size_max']}]";
+  }
 
   $url = url($path, array(
     'query' => $query,
