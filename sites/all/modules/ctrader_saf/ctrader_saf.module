@@ -390,6 +390,59 @@ function _ctrader_saf_search_button_form($form, &$form_state) {
     '#type' => 'hidden',
   );
 
+  //Have added hidden inputs for facet filter.
+  $form['sale_rent'] = array(
+    '#type' => 'hidden',
+  );
+
+  $form['region'] = array(
+    '#type' => 'hidden',
+  );
+
+  $form['region_1'] = array(
+    '#type' => 'hidden',
+  );
+
+  $form['region_2'] = array(
+    '#type' => 'hidden',
+  );
+
+  $form['parking'] = array(
+    '#type' => 'hidden',
+  );
+
+  $form['price_min'] = array(
+    '#type' => 'hidden',
+  );
+
+  $form['price_max'] = array(
+    '#type' => 'hidden',
+  );
+
+  $form['size_min'] = array(
+    '#type' => 'hidden',
+  );
+
+  $form['size_max'] = array(
+    '#type' => 'hidden',
+  );
+
+  $form['pets'] = array(
+    '#type' => 'hidden',
+  );
+
+  $form['type'] = array(
+    '#type' => 'hidden',
+  );
+
+  $form['locker'] = array(
+    '#type' => 'hidden',
+  );
+
+  $form['beds'] = array(
+    '#type' => 'hidden',
+  );
+
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'ctrader_saf') . '/js/rewritten_facetapi.js',
   );
@@ -399,6 +452,7 @@ function _ctrader_saf_search_button_form($form, &$form_state) {
 
 function _ctrader_saf_search_button_form_submit($form, &$form_state) {
 //  $query = drupal_http_build_query($_SESSION['search_link_calculate']['f'],'f');
+  drupal_set_message('<pre>' . print_r($form_state, TRUE) . '</pre>');
   $path = '/' . CTRADER_SEARCH_RESULT_PAGE;
   $query = $_SESSION['search_link_calculate'];
 

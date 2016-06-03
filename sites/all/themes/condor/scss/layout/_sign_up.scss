@@ -1,0 +1,128 @@
+.page-user-register {
+  .l-main {
+    background: $alabaster;
+  }
+
+  .register-form-title {
+    margin: 70px auto 67px;
+    max-width: 990px;
+    width: 100%;
+
+    h1 {
+      font-size: rem-calc(30);
+      color: $ebony-clay;
+      margin-bottom: 22px;
+
+      span {
+        font-weight: bold;
+      }
+    }
+
+    p {
+      color: $ebony-clay;
+      font-size: rem-calc(14);
+    }
+  }
+
+  form#user-register-form {
+
+    > div {
+      border: 1px solid darken($athens-gray, 6);
+      max-width: 960px;
+      width: 100%;
+      margin: 0 auto 10rem;
+      background: white;
+      overflow: auto;
+      padding: 12px 30px;
+    }
+
+    fieldset {
+      border: none;
+      margin: 0;
+      padding: 0;
+
+      legend {
+        display: none;
+      }
+    }
+
+    label {
+      font-family: "Raleway", sans-serif;
+      font-size: rem-calc(11);
+      text-transform: uppercase;
+    }
+
+    .sign_up_left {
+      display: inline-block;
+      width: 31%;
+      vertical-align: top;
+      margin-right: 30px;
+    }
+
+    .sign_up_right {
+      display: inline-block;
+      width: 65.6%;
+      vertical-align: top;
+    }
+
+    .form-submit {
+      display: block;
+      width: 100%;
+      @extend %condo-more-button;
+      margin: 23px 0 30px;
+    }
+
+    .form-type-checkbox {
+      margin: 0;
+
+      label {
+        position: relative;
+        margin: 0;
+        cursor: pointer;
+        padding: 0;
+        font-family: "OpenSans", sans-serif;
+        text-transform: none;
+        font-size: rem-calc(12);
+
+        &:before {
+          content: '';
+          margin-right: 10px;
+          display: inline-block;
+          vertical-align: text-top;
+          width: 13px;
+          height: 13px;
+          background: $white;
+          border: 1px solid darken($athens-gray, 6);
+          border-radius: 4px;
+        }
+      }
+
+      input[type=checkbox] {
+        position: absolute;
+        opacity: 0;
+
+        &:checked + label:before {
+          background: url(../images/check-icon.jpg) 1px 2px no-repeat;
+        }
+      }
+    }
+
+    .hierarchical-select {
+      select {
+        display: none !important;
+        visibility: hidden;
+      }
+    }
+
+    .chosen-container {
+      height: 31px;
+      margin-bottom: 5px;
+      width: 280px !important;
+      display: block;
+
+      &:first-of-type {
+        margin-top: 1px;
+      }
+    }
+  }
+}
