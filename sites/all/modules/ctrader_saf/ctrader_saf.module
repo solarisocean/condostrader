@@ -373,7 +373,23 @@ function _ctrader_saf_blocks_content_function($delta) {
           );
         }
       }
-      return drupal_get_form('_ctrader_saf_search_button_form');
+      $search_button_form = drupal_get_form('_ctrader_saf_search_button_form');
+
+      // Map input.
+      //
+      if (isset($_GET['polygon'])) {
+        // $search_button_form['geo_loc']['#value'] = "POLYGON(({$_GET['polygon']}))";
+      }
+      elseif (isset($_GET['neighbourhoods'])) {
+        $neighb_array = explode('-', $_GET['neighbourhoods']);
+        foreach($neighb_array as $key => $value) {
+          $neighb_array[$key] = 'tid' . $value;
+        }
+        $search_button_form['geo_loc']['#value'] = implode(', ', $neighb_array);
+      }
+
+
+      return $search_button_form;
   }
 }
 
@@ -452,9 +468,9 @@ function _ctrader_saf_search_button_form($form, &$form_state) {
 
 function _ctrader_saf_search_button_form_submit($form, &$form_state) {
 //  $query = drupal_http_build_query($_SESSION['search_link_calculate']['f'],'f');
-  drupal_set_message('<pre>' . print_r($form_state, TRUE) . '</pre>');
+  //  $query = $_SESSION['search_link_calculate'];
   $path = '/' . CTRADER_SEARCH_RESULT_PAGE;
-  $query = $_SESSION['search_link_calculate'];
+  $query = array();
 
   if (strpos($form_state['values']['geo_loc'], 'POLYGON') === 0) {
     $polygon_string = str_replace(array(
@@ -475,6 +491,26 @@ function _ctrader_saf_search_button_form_submit($form, &$form_state) {
   elseif (strpos($form_state['values']['geo_loc'], 'tid') === 0) {
     $tids = str_replace('tid', '', $form_state['values']['geo_loc']);
     $tids = str_replace(', ', '-', $tids);
+
+    // Checks if it is duplicates in neighbourhoods search input.
+    // And if there are duplicates - delete those tids from query.
+    $tids_array = explode('-', $tids);
+    $duplicates = array();
+    $new_tids = array();
+    foreach ($tids_array as $key => $value) {
+      if (in_array($value, $new_tids)) {
+        $duplicates[] = $value;
+      }
+      else {
+        $new_tids[] = $value;
+      }
+    }
+    foreach ($tids_array as $key => $value) {
+      if (in_array($value, $duplicates)) {
+        unset($tids_array[$key]);
+      }
+    }
+    $tids = implode('-', $tids_array);
     $query['neighbourhoods'] = $tids;
   }
 
@@ -482,10 +518,9 @@ function _ctrader_saf_search_button_form_submit($form, &$form_state) {
     'query' => $query,
     'absolute' => TRUE
   ));
-  $_SESSION['stored_search_options'] = $_SESSION['search_link_calculate'];
+//  $_SESSION['stored_search_options'] = $_SESSION['search_link_calculate'];
   unset($_SESSION['search_link_calculate']);
   $form_state['redirect'] = $url;
-
 }
 
 
@@ -783,7 +818,7 @@ function _ctrader_saf_facetapi_select_facet_form($form, &$form_state, $variables
  */
 function _ctrader_saf_facetapi_select_facet_form_submit($form, &$form_state) {
   $parsed_url = drupal_parse_url($form_state['values']['facets']);
-  drupal_goto($parsed_url['path'], array('query' => $parsed_url['query']));
+//  drupal_goto($parsed_url['path'], array('query' => $parsed_url['query']));
 }
 
 
