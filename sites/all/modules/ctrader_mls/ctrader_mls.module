@@ -15,7 +15,7 @@ define('TORONTO_CONDO', 'toronto_condo');
  * Implements hook_init().
  */
 function ctrader_mls_init() {
-
+  _ctrader_mls_detect_user_geolocation();
 }
 
 /**
@@ -607,4 +607,67 @@ function ctrader_mls_ctools_plugin_directory($owner, $plugin_type) {
  */
 function ctrader_mls_flag_alter(&$flag) {
 
+}
+
+
+/**
+ * Detects user geoloc from user ip and stores data to SESSION.
+ */
+function _ctrader_mls_detect_user_geolocation() {
+  $default_ip = '192.206.151.131';
+  if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+    $ip = $_SERVER['HTTP_CLIENT_IP'];
+  }
+  elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+  }
+  else {
+    $ip = $_SERVER['REMOTE_ADDR'];
+  }
+  if (!isset($_SESSION['user_geoloc_detect']) || empty($_SESSION['user_geoloc_detect']['location']['ip']) || $_SESSION['user_geoloc_detect']['location']['ip'] != $ip) {
+    $current_time = time();
+
+    // Does not detect if last detection was less than 10 minutes ago.
+    if (isset($_SESSION['user_geoloc_detect']['creation_timestamp']) && ($current_time - $_SESSION['user_geoloc_detect']['creation_timestamp']) < 600) {
+      return NULL;
+    }
+
+    if (!is_string($ip) || strlen($ip) < 1 || $ip == '127.0.0.1' || $ip == 'localhost') {
+//      $_SESSION['user_geoloc_detect']['location']  = array(
+//        'ip' => '192.206.151.131',
+//        'country_code' => 'CA',
+//        'country_name' => 'Canada',
+//        'region_code' => 'ON',
+//        'region_name' => 'Ontario',
+//        'city' => 'Toronto',
+//        'zip_code' => 'M6G',
+//        'time_zone' => 'America/Toronto',
+//        'latitude' => 43.66667,
+//        'longitude' => -79.4168,
+//        'metro_code' => 0,
+//      );
+//      $_SESSION['user_geoloc_detect']['creation_timestamp'] = time();
+
+      $ip = $default_ip;
+    }
+
+//    $url = 'http://freegeoip.net/json/' . urlencode($ip);
+    $url2 = 'http://www.geoplugin.net/php.gp?ip=' . urlencode($ip);
+    $location = file_get_contents($url2);
+    $location = unserialize($location);
+    $_SESSION['user_geoloc_detect']['location'] = array(
+      'ip' => $location['geoplugin_request'],
+      'country_code' => $location['geoplugin_countryCode'],
+      'country' => 'Canada',
+      'region_code' => $location['geoplugin_regionCode'],
+      'region' => $location['geoplugin_regionName'],
+      'city' => $location['geoplugin_city'],
+      'zip_code' => '',
+      'time_zone' => 'America/Toronto',
+      'latitude' => $location['geoplugin_latitude'],
+      'longitude' => $location['geoplugin_longitude'],
+      'metro_code' => $location['geoplugin_areaCode'],
+    );
+    $_SESSION['user_geoloc_detect']['creation_timestamp'] = time();
+  }
 }
