@@ -689,10 +689,11 @@ function ctf_views_single_condo_view_views_default_views() {
     0 => 'nothing_7',
     1 => 'nothing_8',
     2 => 'nothing',
-    3 => 'field_ad_text__torcond',
-    4 => 'field_extras__torcond',
-    5 => 'field_rltr__torcond',
-    6 => 'field_ml_num__torcond',
+    3 => 'nothing_2',
+    4 => 'field_ad_text__torcond',
+    5 => 'field_extras__torcond',
+    6 => 'field_rltr__torcond',
+    7 => 'field_ml_num__torcond',
   );
   $handler->display->display_options['fields']['fieldset']['fieldset']['type'] = 'div';
   $handler->display->display_options['fields']['fieldset']['fieldset']['classes'] = 'info-fieldset fieldset-left';
@@ -727,6 +728,16 @@ function ctf_views_single_condo_view_views_default_views() {
         class="condo-info-element parking"><span></span>[views_conditional_2]</span>
     </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_2']['id'] = 'nothing_2';
+  $handler->display->display_options['fields']['nothing_2']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_2']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_2']['label'] = '';
+  $handler->display->display_options['fields']['nothing_2']['alter']['text'] = '<a class="buy-now">Buy now</a>
+<a class="book-viewing">Book a viewing</a>';
+  $handler->display->display_options['fields']['nothing_2']['element_type'] = 'div';
+  $handler->display->display_options['fields']['nothing_2']['element_class'] = 'condo-buttons buttons';
+  $handler->display->display_options['fields']['nothing_2']['element_label_colon'] = FALSE;
   /* Field: Drealty Listing: Ad_text */
   $handler->display->display_options['fields']['field_ad_text__torcond']['id'] = 'field_ad_text__torcond';
   $handler->display->display_options['fields']['field_ad_text__torcond']['table'] = 'field_data_field_ad_text__torcond';
