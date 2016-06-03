@@ -36,8 +36,7 @@ function nearby_listings_content_type_render($subtype, $conf, $args, $context) {
       $view_title = '<h2 class="pane-title changed-view-title">' . t('<span>Condos</span> near me') . " <span class='current-place'>({$current_place})</span>" . '</h2>';
     }
     else {
-//      $latlon = NULL;
-      return NULL;
+      $latlon = NULL;
     }
   }
   else {
@@ -54,6 +53,7 @@ function nearby_listings_content_type_render($subtype, $conf, $args, $context) {
   $view_output = $view->preview();
   if (empty($view->result)) {
     $view_title = '';
+    return NULL;
   }
   $block->content = $view_title . $view_output;
   return $block;
