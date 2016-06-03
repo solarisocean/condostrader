@@ -937,7 +937,7 @@ function ctf_views_single_condo_view_views_default_views() {
   $handler->display->display_options['fields']['days_on_market_2']['id'] = 'days_on_market_2';
   $handler->display->display_options['fields']['days_on_market_2']['table'] = 'drealty_listing';
   $handler->display->display_options['fields']['days_on_market_2']['field'] = 'days_on_market';
-  $handler->display->display_options['fields']['days_on_market_2']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['days_on_market_2']['alter']['alter_text'] = 0;
   /* Field: Drealty Listing: Taxes */
   $handler->display->display_options['fields']['field_taxes__torcond']['id'] = 'field_taxes__torcond';
   $handler->display->display_options['fields']['field_taxes__torcond']['table'] = 'field_data_field_taxes__torcond';

@@ -23,6 +23,9 @@ class views_handler_field_ctrader_daysonmarket extends views_handler_field {
   public function render($values) {
     $mls_created = strtotime($values->_field_data['id']['entity']->field_timestamp_sql__torcond[LANGUAGE_NONE][0]['value']);
     $days_on_market = round((time() - $mls_created) / (24 * 60 * 60));
+    if ($days_on_market >= 0 && $days_on_market < 1) {
+      $days_on_market = t('today');
+    }
     return $days_on_market;
   }
 }
