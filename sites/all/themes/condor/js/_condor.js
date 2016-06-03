@@ -1,6 +1,6 @@
 /* Implement custom javascript here */
 (function ($, Drupal) {
-    
+
     /*
      * Toggle class on click search button.
      */
@@ -134,7 +134,7 @@
                 });
 
             };
-            
+
             radioCheck($('.facetapi-facet-field-br--torcond input:checkbox'));
             radioCheck($('.facetapi-facet-field-s-r--torcond input:checkbox'));
 
@@ -168,15 +168,71 @@
                 }
             });
 
-            $('.facetapi-facetapi-select-dropdowns select, .result-filter-block select').chosen({
+            $('.facetapi-facet-field-style--torcond select').chosen({
                 "disable_search": true
             });
+
+            //***********************************************************************//
+
+            if ($('.facet-search-block')) {
+                var form = '#-ctrader-saf-search-button-form';
+
+                //Set default values.
+                $(form + ' input[name="sale_rent"]').val($('.facetapi-facet-field-s-r--torcond  .active-region-facet a.facetapi-checkbox').attr('href'));
+                // $(form + ' input[name="region"]').val($('.pane-ctrader-saf-neighbourhoods-hs select')[0].value);
+
+                //Reset values on change.
+                $('.pane-ctrader-saf-neighbourhoods-hs select').each(function() {
+                    $(this).change(function() {
+                        switch ($(this).attr('id').slice(-1)) {
+                            case '0':
+                                $(form + ' input[name="region"]').val($(this).val());
+                                break;
+                            case '1':
+                                $(form + ' input[name="region_1"]').val($(this).val());
+                                break;
+                            case '2':
+                                $(form + ' input[name="region_2"]').val($(this).val());
+                                break;
+                        }
+                    });
+                });
+
+                $('.facetapi-facet-field-s-r--torcond .facetapi-facet a').on('click', function() {
+                    $(form + ' input[name="sale_rent"]').val($(this).parent().find('a.facetapi-checkbox').attr('href'));
+                });
+
+                var _facetCkeckboxToInput = function(facet, input) {
+                    var _input =  form + " input[name='" + input + "']";
+                    $(facet + ' a').on('click', function() {
+                        if ($(_input).val() == 1) {
+                            $(_input).val(0);
+                        } else {
+                            $(_input).val(1);
+                        }
+                    });
+                };
+
+                _facetCkeckboxToInput('.facetapi-facet-field-locker--torcond', 'locker');
+                _facetCkeckboxToInput('.facetapi-facet-field-pets--torcond', 'pets');
+                _facetCkeckboxToInput('.facetapi-facet-field-prkg-inc--torcond', 'parking');
+
+                $('.field_style__torcond.form-select').change(function(){
+                    $(form + ' input[name="type"]').val($(this).val());
+                });
+                
+                $('.facetapi-facet-field-br--torcond a').on('click', function() {
+                    $(form + ' input[name="beds"]').val($(this).text());
+                });
+                
+
+            }
 
         }
     };
 
     /**
-     * Make view search results ajax load. 
+     * Make view search results ajax load.
      */
     Drupal.behaviors.viewsAuto = {
         attach: function (context, settings) {
@@ -312,9 +368,11 @@
                 $('.condo-page-gallery .field-name-field-toronto-gallery, .condo-page-pagination .field-name-field-toronto-gallery').addClass('swiper-wrapper');
                 $('.condo-page-gallery .field-name-field-toronto-gallery img, .condo-page-pagination .field-name-field-toronto-gallery img').addClass('swiper-slide');
 
+                $('.condo-page-gallery .pane-content').append('<div class="gallery-slider-button-next swiper-button-next"></div><div class="gallery-slider-button-prev swiper-button-prev"></div>');
+
                 var galleryTop = new Swiper('.condo-page-gallery .pane-content', {
-                    nextButton: '.swiper-button-next',
-                    prevButton: '.swiper-button-prev',
+                    nextButton: '.gallery-slider-button-next',
+                    prevButton: '.gallery-slider-button-prev',
                     onSlideChangeEnd: function(swiper){
                         var activeIndex = swiper.activeIndex;
                         $(galleryThumbs.slides).removeClass('is-selected');
@@ -345,8 +403,38 @@
                 });
 
                 $('.page-drealty-listing .condo-right-side').height($('.page-drealty-listing .condo-center').height());
+
+                $('.condo-buttons a.buy-now').on('click', function(e) {
+                    e.preventDefault();
+                    $('.field-name-field-buy-now-button a')[0].click();
+                });
+
+                $('.condo-buttons a.book-viewing').on('click', function(e) {
+                    e.preventDefault();
+                    $('.form-item-field-e-mail-und-0-email input').addClass('alert-form');
+                });
+
+                $('.form-item-field-e-mail-und-0-email input').on('click', function() {
+                    if ($(this).hasClass('alert-form')) {
+                        $(this).removeClass('alert-form');
+                    }
+                });
+
             });
 
+
+        }
+    };
+
+    /**
+     * Sign up page scripts.
+     */
+    Drupal.behaviors.signUpPage = {
+        attach: function (context, settings) {
+
+            $('.hierarchical-select .selects select').chosen({
+                "disable_search": true
+            });
 
         }
     };

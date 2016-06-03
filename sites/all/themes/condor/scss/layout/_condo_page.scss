@@ -22,6 +22,35 @@
     .pane-content {
       height: 700px;
     }
+
+    .gallery-slider-button-next,
+    .gallery-slider-button-prev {
+      width: 19px !important;
+      height: 58px !important;
+      top: 42.5%;
+
+
+      &:before {
+        width: 19px;
+        height: 58px;
+      }
+    }
+
+    .gallery-slider-button-next {
+      right: 28px;
+
+      &:before {
+        background: url(../images/gallery-next.png) 0 0 no-repeat;
+      }
+    }
+
+    .gallery-slider-button-prev {
+      left: 28px;
+
+      &:before {
+        background: url(../images/gallery-prev.png) 0 0 no-repeat;
+      }
+    }
   }
 
   .condo-page-pagination {
@@ -52,6 +81,27 @@
       padding: 6px 15px;
       display: inline-block;
       font-size: rem-calc(18);
+    }
+  }
+
+  .condo-buttons {
+    margin-top: 20px;
+
+    a {
+      font-family: "Raleway", sans-serif;
+      font-weight: bold;
+      font-size: rem-calc(12);
+      text-transform: uppercase;
+      color: $white;
+      padding: 13px;
+    }
+
+    .buy-now {
+      background: $ebony-clay;
+    }
+
+    .book-viewing {
+      background: $ecstasy;
     }
   }
 
@@ -256,6 +306,27 @@
       border-bottom: none;
       padding: 0 14px;
 
+      @keyframes flicker {
+        10% {
+          box-shadow: 0 0 10px rgba(255,0,0,.0);
+        }
+
+        50% {
+          box-shadow: 0 0 10px rgba(255,0,0,.5);
+        }
+
+        100% {
+          box-shadow: 0 0 10px rgba(255,0,0,.0);
+        }
+      }
+
+      .alert-form {
+        -webkit-animation: flicker 2s ease-in-out infinite;
+        -moz-animation: flicker 2s ease-in-out infinite;
+        -o-animation: flicker 2s ease-in-out infinite;
+        animation: flicker 2s ease-in-out infinite;
+      }
+
       label {
         color: $mirage;
         font-family: "Raleway", sans-serif;
@@ -391,7 +462,8 @@
       }
 
       &.top-center-fieldset,
-      &.amentities-fieldset {
+      &.amentities-fieldset,
+      &.mortgage-calculator {
         width: 49%;
         display: inline-block;
         vertical-align: top;
@@ -434,7 +506,7 @@
 
         .field-content {
           &.pets {
-            @include pseudo-element('before', 13px, 16px, 'pets-icon.png', 'not-center');
+            @include pseudo-element('before', 13px, 14px, 'pets-icon-big.png', 'not-center');
             &:before {
               background-size: 13px;
               margin-right: 12px;
@@ -442,7 +514,7 @@
           }
 
           &.parking {
-            @include pseudo-element('before', 13px, 9px, 'car-icon.png', 'not-center');
+            @include pseudo-element('before', 13px, 10px, 'car-icon-big.png', 'not-center');
             &:before {
               background-size: 13px;
               margin-right: 12px;
@@ -450,7 +522,7 @@
           }
 
           &.locker {
-            @include pseudo-element('before', 13px, 20px, 'locker-icon.png', 'not-center');
+            @include pseudo-element('before', 13px, 20px, 'locker-icon-big.png', 'not-center');
             &:before {
               background-size: 13px;
               margin-right: 12px;
@@ -466,7 +538,7 @@
           }
 
           &.washer {
-            @include pseudo-element('before', 13px, 22px, 'bath-icon.png', 'not-center');
+            @include pseudo-element('before', 13px, 19px, 'washer-icon.png', 'not-center');
             &:before {
               background-size: 11px;
               margin-right: 12px;
@@ -490,11 +562,35 @@
           }
         }
       }
-    }
-  }
-}
 
-//Temporary styles
-.button-group {
-  display: none;
+      &.mortgage-calculator {
+        width: 44%;
+        label {
+          text-transform: uppercase;
+          font-size: rem-calc(11);
+        }
+
+        legend {
+          margin-bottom: 15px;
+        }
+
+        .form-item {
+          margin-bottom: 4px;
+          margin-top: 4px;
+        }
+
+        .form-submit {
+          font-family: "Raleway", sans-serif;
+          font-size: rem-calc(12);
+          display: block;
+          width: 100%;
+          margin: 20px 0;
+          @extend %condo-more-button;
+        }
+      }
+
+    }
+
+
+  }
 }

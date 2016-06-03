@@ -1,5 +1,5 @@
 form[id*=user-register-form] > div {
-  width: 400px;
+  /*width: 400px;*/
 }
 
 .register-form-title {
