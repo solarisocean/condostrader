@@ -76,6 +76,13 @@
 
   .form-item {
     margin-top: 0;
+    margin-bottom: 12px;
+  }
+
+  .panel-separator {
+    margin: 0;
+    padding: 0;
+    clear: both;
   }
 
   .panels-flexible-region-inside {
@@ -294,11 +301,17 @@
     clear: both;
 
     li {
-      margin: 0;
-      width: calc((100% / 4.96));
+      margin: 0 0 13px;
+      width: calc((100% / 5));
       display: inline-block;
       text-align: center;
-      margin-right: -5px;
+      float: left;
+
+      &:nth-child(5n+1) {
+        .facetapi-facet {
+          border-left: 1px solid $ecstasy !important;
+        }
+      }
 
       .facetapi-facet {
         border: 1px solid $ecstasy;
@@ -381,6 +394,19 @@
           @include transition(background .3s ease-in-out);
         }
       }
+    }
+  }
+
+  .hierarchical-select {
+    .chosen-container {
+      width: 228px !important;
+      margin-bottom: 6px;
+    }
+    select {
+      display: none !important;
+      visibility: hidden;
+      height: 0 !important;
+      margin: 0 !important;
     }
   }
 }

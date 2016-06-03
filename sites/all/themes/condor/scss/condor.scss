@@ -97,6 +97,7 @@
 // Styling for elements.
 // Optional.
  @import "base/fonts";
+ @import "base/elements";
 
 // Layout
 // Each section of the document has it's own partial seperated out to improve
@@ -108,6 +109,7 @@
 @import "layout/front";
 @import "layout/result_page";
 @import "layout/condo_page";
+@import "layout/sign_up";
 
 // Modules
 // @import "modules/block";
