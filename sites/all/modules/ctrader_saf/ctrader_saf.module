@@ -373,21 +373,76 @@ function _ctrader_saf_blocks_content_function($delta) {
           );
         }
       }
+
       $search_button_form = drupal_get_form('_ctrader_saf_search_button_form');
 
       // Map input.
-      //
       if (isset($_GET['polygon'])) {
         // $search_button_form['geo_loc']['#value'] = "POLYGON(({$_GET['polygon']}))";
       }
       elseif (isset($_GET['neighbourhoods'])) {
         $neighb_array = explode('-', $_GET['neighbourhoods']);
-        foreach($neighb_array as $key => $value) {
+        foreach ($neighb_array as $key => $value) {
           $neighb_array[$key] = 'tid' . $value;
         }
         $search_button_form['geo_loc']['#value'] = implode(', ', $neighb_array);
       }
 
+      // SALE-RENT facet checkboxes.
+      $lease_rent_field_name = 'field_s_r__torcond';
+      if (isset($_GET['f'][0])) {
+        $lease_rent_facet_query = '';
+        $lease_rent_facet_path = '/' . $_GET['q'];
+        foreach ($_GET['f'] as $value) {
+          if (strpos($value, $lease_rent_field_name) !== FALSE) {
+            $lease_rent_facet_query['f'][] = $value;
+            $search_button_form['sale_rent']['#value'] = "{$lease_rent_facet_path}?f[0]={$value}";
+          }
+        }
+      }
+
+      // PETS facet checkboxes.
+      $pets_field_name = 'field_pets__torcond';
+      if (isset($_GET['f'][0])) {
+        foreach ($_GET['f'] as $value) {
+          if (strpos($value, $pets_field_name) !== FALSE) {
+            $search_button_form['pets']['#value'] = '1';
+          }
+        }
+      }
+
+      // LOCKER facet checkboxes.
+      $locker_field_name = 'field_locker__torcond';
+      if (isset($_GET['f'][0])) {
+        foreach ($_GET['f'] as $value) {
+          if (strpos($value, $locker_field_name) !== FALSE) {
+            $search_button_form['locker']['#value'] = '1';
+          }
+        }
+      }
+
+      // PARKING facet checkboxes.
+      $parking_field_name = 'field_prkg_inc__torcond';
+      if (isset($_GET['f'][0])) {
+        foreach ($_GET['f'] as $value) {
+          if (strpos($value, $parking_field_name) !== FALSE) {
+            $search_button_form['parking']['#value'] = '1';
+          }
+        }
+      }
+
+      // BEDS facet checkboxes.
+      $beds_field_name = 'field_br__torcond';
+      if (isset($_GET['f'][0])) {
+        foreach ($_GET['f'] as $value) {
+          if (strpos($value, $beds_field_name) !== FALSE) {
+            $value = str_replace("{$beds_field_name}:", '', $value);
+            if (is_numeric($value)) {
+              $search_button_form['beds']['#value'] = "{$beds_field_name}:{$value}";
+            }
+          }
+        }
+      }
 
       return $search_button_form;
   }
@@ -472,6 +527,8 @@ function _ctrader_saf_search_button_form_submit($form, &$form_state) {
   $path = '/' . CTRADER_SEARCH_RESULT_PAGE;
   $query = array();
 
+  /****************************************************************************/
+  // Map search.
   if (strpos($form_state['values']['geo_loc'], 'POLYGON') === 0) {
     $polygon_string = str_replace(array(
       'POLYGON((',
@@ -513,6 +570,44 @@ function _ctrader_saf_search_button_form_submit($form, &$form_state) {
     $tids = implode('-', $tids_array);
     $query['neighbourhoods'] = $tids;
   }
+  /****************************************************************************/
+  /****************************************************************************/
+  // SALE-RENT facet checkboxes.
+  $lease_rent_field_name = 'field_s_r__torcond';
+  if (strpos($form_state['values']['sale_rent'], $lease_rent_field_name) !== FALSE) {
+    $facet_url = drupal_parse_url($form_state['values']['sale_rent']);
+    $query['f'][] = array_pop($facet_url['query']['f']);
+  }
+  /****************************************************************************/
+  /****************************************************************************/
+  // PETS facet checkboxes.
+  $pets_field_name = 'field_pets__torcond';
+  if ($form_state['values']['pets']) {
+    $query['f'][] = "{$pets_field_name}:Restrict";
+  }
+  /****************************************************************************/
+  /****************************************************************************/
+  // LOCKER facet checkboxes.
+  $locker_field_name = 'field_locker__torcond';
+  if ($form_state['values']['locker']) {
+    $query['f'][] = "{$locker_field_name}:Owned";
+  }
+  /****************************************************************************/
+  /****************************************************************************/
+  // PARKING facet checkboxes.
+  $parking_field_name = 'field_prkg_inc__torcond';
+  if ($form_state['values']['parking']) {
+    $query['f'][] = "{$parking_field_name}:Y";
+  }
+  /****************************************************************************/
+  /****************************************************************************/
+  // BEDS facet checkboxes.
+  $beds_field_name = 'field_br__torcond';
+  if (is_numeric($form_state['values']['beds'])) {
+    $query['f'][] = "{$beds_field_name}:{$form_state['values']['beds']}";
+  }
+  /****************************************************************************/
+
 
   $url = url($path, array(
     'query' => $query,
