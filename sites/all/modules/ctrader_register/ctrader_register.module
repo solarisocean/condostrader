@@ -67,6 +67,48 @@ function ctrader_register_form_user_register_form_alter(&$form, &$form_state) {
                           </p>
                       </div>";
 
+  //Have created left and right containersto reaarange form items.
+  $form['sign_up_left'] = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'class' => array (
+        'sign_up_left',
+      ),
+    ),
+  );
+
+  $form['sign_up_right'] = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'class' => array (
+        'sign_up_right',
+      ),
+    ),
+  );
+
+  //Have added iems to containers.
+  $form['sign_up_left']['user_first_name'] = $form['field_user_first_name'];
+  $form['sign_up_left']['user_last_name'] = $form['field_user_last_name'];
+  $form['sign_up_left']['user_mail'] = $form['account']['mail'];
+  $form['sign_up_left']['user_mail']['#weight'] = 10;
+  $form['sign_up_left']['user_pass'] = $form['account']['pass'];
+  $form['sign_up_left']['user_pass']['#weight'] = 12;
+  $form['sign_up_left']['user_terms'] = $form['terms_of_use'];
+  $form['sign_up_left']['user_terms']['#weight'] = 14;
+  $form['sign_up_left']['user_submit'] = $form['actions'];
+
+  $form['sign_up_right']['user_region'] = $form['field_user_region'];
+  $form['sign_up_right']['user_map'] = $form['form_map'];
+
+  //Unset old items.
+  unset($form['field_user_first_name']);
+  unset($form['field_user_last_name']);
+  unset($form['account']['mail']);
+  unset($form['account']['pass']);
+  unset($form['terms_of_use']);
+  unset($form['actions']);
+  unset($form['field_user_region']);
+  unset($form['form_map']);
 
 //  $form['terms'] = array(
 //    '#type' => 'checkbox',
