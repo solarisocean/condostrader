@@ -21,7 +21,6 @@ function ctrader_map_menu() {
  */
 function ctrader_map_init() {
 //  unset($_SESSION['neighbourhood_json']);
-//  $kml_to_xml = _ctrader_map_kml_to_xml();
 }
 
 

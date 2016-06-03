@@ -26,17 +26,18 @@ function nearby_listings_content_type_render($subtype, $conf, $args, $context) {
 
   if (drupal_is_front_page()) {
     $current_place = '';
-    $current_place .= isset($_SESSION['smart_ip']['location']['city']) ? $_SESSION['smart_ip']['location']['city'] : '';
-    $current_place .= isset($_SESSION['smart_ip']['location']['region']) ? ' ' . $_SESSION['smart_ip']['location']['region'] : '';
+    $current_place .= isset($_SESSION['user_geoloc_detect']['location']['city']) ? $_SESSION['user_geoloc_detect']['location']['city'] : '';
+    $current_place .= isset($_SESSION['user_geoloc_detect']['location']['region']) ? ' ' . $_SESSION['user_geoloc_detect']['location']['region'] : '';
     if (empty($current_place)) {
       $current_place = t('not detected');
     }
-    if (isset($_SESSION['smart_ip']['location']['latitude']) && isset($_SESSION['smart_ip']['location']['longitude'])) {
-      $latlon = $_SESSION['smart_ip']['location']['latitude'] . ',' . $_SESSION['smart_ip']['location']['longitude'];
+    if (isset($_SESSION['user_geoloc_detect']['location']['latitude']) && isset($_SESSION['user_geoloc_detect']['location']['longitude'])) {
+      $latlon = $_SESSION['user_geoloc_detect']['location']['latitude'] . ',' . $_SESSION['user_geoloc_detect']['location']['longitude'];
       $view_title = '<h2 class="pane-title changed-view-title">' . t('<span>Condos</span> near me') . " <span class='current-place'>({$current_place})</span>" . '</h2>';
     }
     else {
-      $latlon = NULL;
+//      $latlon = NULL;
+      return NULL;
     }
   }
   else {
