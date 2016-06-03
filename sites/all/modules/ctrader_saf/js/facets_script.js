@@ -4,9 +4,14 @@
     attach: function (context) {
 
       setTimeout(function () {
-        $("#mapid").height($('.main').outerHeight());
+        if ($('body').hasClass('page-search-results')) {
+          $("#mapid").height($('.main').outerHeight());
+        }
       }, 1);
 
+        if ($('body').hasClass('page-user-register')) {
+          $("#mapid").height(380);
+        }
     }
   };
 
