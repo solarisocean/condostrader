@@ -104,7 +104,7 @@
         var autoSubmitDelay = widget.find('input[name=delay]').val();
         if (autoSubmitDelay != undefined && autoSubmitDelay != 0) {
           submitTimeout = setTimeout(function() {
-            widget.find('button[id*=edit-submit]').trigger("mousedown"); // good decision for form with ajax.
+            //widget.find('button[id*=edit-submit]').trigger("mousedown"); // good decision for form with ajax.
             /**
              *   widget.find('form').submit(); // bad decision - page would be reloaded.
              */

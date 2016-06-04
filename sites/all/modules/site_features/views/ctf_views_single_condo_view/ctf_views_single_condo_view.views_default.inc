@@ -1096,10 +1096,12 @@ function ctf_views_single_condo_view_views_default_views() {
   $handler->display->display_options['fields']['views_conditional_7']['element_type'] = 'span';
   $handler->display->display_options['fields']['views_conditional_7']['element_class'] = 'condo-info-element washer';
   $handler->display->display_options['fields']['views_conditional_7']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['views_conditional_7']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['views_conditional_7']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['views_conditional_7']['if'] = 'field_ens_lndry__torcond';
-  $handler->display->display_options['fields']['views_conditional_7']['condition'] = '2';
+  $handler->display->display_options['fields']['views_conditional_7']['condition'] = '1';
   $handler->display->display_options['fields']['views_conditional_7']['equalto'] = 'Y';
-  $handler->display->display_options['fields']['views_conditional_7']['or'] = 'Washer/Dryer';
+  $handler->display->display_options['fields']['views_conditional_7']['then'] = 'Washer/Dryer';
   $handler->display->display_options['fields']['views_conditional_7']['strip_tags'] = 0;
   $handler->display->display_options['path'] = 'single-condo-view-details/%';
 

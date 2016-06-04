@@ -25,3 +25,50 @@
   margin: 0;
   line-height: 1px;
 }
+
+#condo-map .leaflet-top.leaflet-left .leaflet-control {
+  display: inline-block;
+  float: left;
+  clear: none;
+}
+
+#condo-map .info.legend.leaflet-control {
+  margin-top: 35px;
+}
+
+#condo-map .single-condo-map-legend {
+  width: 300px;
+  height: 200px;
+  background: #fff;
+
+}
+
+.single-condo-map-legend {
+  margin: auto;
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  padding-top: 15px;
+}
+
+.single-condo-map-legend div {
+  margin: 10px;
+}
+
+.single-condo-map-legend div p {
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.single-condo-map-legend div h4 {
+  font-family: "Raleway", sans-serif;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.single-condo-map-legend div a {
+  color: #F47820;
+  font-family: "Raleway", sans-serif;
+  font-size: .75rem;
+  text-decoration: underline;
+}
