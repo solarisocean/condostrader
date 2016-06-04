@@ -23,21 +23,55 @@ function single_condo_map_content_type_render($subtype, $conf, $args, $context) 
   drupal_add_js(drupal_get_path('module', 'ctrader_map') . '/js/single-condo-map.js');
 
   $entity = entity_load_single(DREALTY_ENTITY_TYPE, $args[0]);
+  $listing = $entity->wrapper();
+
   $geo_point = array(
-    $entity->field_test_geofilld[LANGUAGE_NONE][0]['lat'],
-    $entity->field_test_geofilld[LANGUAGE_NONE][0]['lon'],
+    $listing->field_test_geofilld->lat->value(),
+    $listing->field_test_geofilld->lon->value(),
   );
+
   drupal_add_js(array('singleCondoPoint' => $geo_point), 'setting');
 
   if (!isset($_SESSION['neighbourhood_json'])) {
     _ctrader_map_prepare_neighbourhoods_json();
   }
-  foreach ($_SESSION['neighbourhood_json'] as $key => $value) {
-    if ($value['id'] == $entity->field_city_region__torcond[LANGUAGE_NONE][0]['tid']) {
-      $term_polygon = $value;
-      drupal_add_js(array('singleCondoNeighbourhood' => $term_polygon), 'setting');
+
+  $map_legend_variables = array();
+  if ($listing->field_city_region__torcond->value()) {
+    foreach ($_SESSION['neighbourhood_json'] as $key => $value) {
+      if ($value['id'] == $listing->field_city_region__torcond[0]->tid->value()) {
+
+        $term_polygon = $value;
+        drupal_add_js(array('singleCondoNeighbourhood' => $term_polygon), 'setting');
+
+        $neighbourhood_term = taxonomy_term_load($value['id']);
+        $neighbourhood_uri = taxonomy_term_uri($neighbourhood_term);
+        $neighbourhood_link = l('Neighbourhood', url($neighbourhood_uri['path']));
+
+        $parent_terms = taxonomy_get_parents_all($value['id']);
+        $city_term = array_pop($parent_terms);
+        $city_uri = taxonomy_term_uri($city_term);
+        $city_link = l($city_term->name, url($city_uri['path']));
+
+        $map_legend_variables = array(
+          'neighbourhood_name' => $term_polygon['properties']['name'],
+          'neighbourhood_link' => $neighbourhood_link,
+          'city_name' => $city_term->name,
+          'city_link' => $city_link,
+        );
+      }
     }
   }
+  $address = NULL;
+  if ($listing->field_addr__torcond->value()) {
+    $map_legend_variables['address'] = $listing->field_addr__torcond->value() . ', ';
+  }
+  $country_region = NULL;
+  if ($listing->field_county__torcond->value()) {
+    $map_legend_variables['country_region'] = $listing->field_county__torcond->value() . ', ';
+  }
+  $map_legend_html = theme('ctrader_single_condo_map_legend', $map_legend_variables);
+  drupal_add_js(array('mapLegend' => $map_legend_html), 'setting');
 
   $block = new stdClass();
   $block->title = '';

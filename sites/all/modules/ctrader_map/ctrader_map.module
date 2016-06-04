@@ -256,6 +256,26 @@ function ctrader_map_ctools_plugin_directory($owner, $plugin_type) {
 
 
 /**
+ * Implements hook_theme().
+ */
+function ctrader_map_theme($existing, $type, $theme, $path) {
+  $themes = array();
+  $themes['ctrader_single_condo_map_legend'] = array(
+    'variables' => array(
+      'neighbourhood_name' => 'Ontario',
+      'neighbourhood_link' => NULL,
+      'city_name' => NULL,
+      'city_link' => NULL,
+      'address' => NULL,
+      'country_region' => NULL,
+    ),
+    'template' => 'theme/single-condo-map-legend',
+  );
+  return $themes;
+}
+
+
+/**
  * Creates json with Toronto neighbourhoods coordinates.
  */
 function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = array(), $points_array = array()) {

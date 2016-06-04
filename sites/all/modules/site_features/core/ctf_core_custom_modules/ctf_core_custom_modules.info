@@ -30,6 +30,7 @@ dependencies[] = ctf_views_result_page
 dependencies[] = ctf_views_search_results_ctrader
 dependencies[] = ctf_views_single_condo_view
 dependencies[] = ctf_views_toronto_condo_search_page
+dependencies[] = ctf_views_toronto_condos_list
 dependencies[] = ctf_views_users_wish_list
 dependencies[] = ctrader_fct
 dependencies[] = ctrader_map

@@ -8,6 +8,7 @@
           $('#condo-map').height(600);
           var condoPoint = Drupal.settings.singleCondoPoint;
           var neighbourhoodPolygon = Drupal.settings.singleCondoNeighbourhood;
+          var mapLegend = Drupal.settings.mapLegend;
           var neighbourhoodsStyle = {
             "color": "#B9760B",
             "weight": 2,
@@ -27,6 +28,14 @@
             fillOpacity: 0.3
           }).addTo(mymap);
 
+          // Added map legend to single condo map.
+          legend = L.control({position: 'topleft'});
+          legend.onAdd = function (mymap) {
+            var div = L.DomUtil.create('div', 'info legend');
+            div.innerHTML = mapLegend;
+            return div;
+          };
+          legend.addTo(mymap);
         });
       }, 1);
     }
