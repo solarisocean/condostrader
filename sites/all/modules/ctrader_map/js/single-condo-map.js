@@ -15,13 +15,27 @@
             "opacity": 1,
             "fillOpacity": 0.3
           };
-          var mymap = L.map('condo-map').setView(condoPoint, 16);
+          var mymap = L.map('condo-map');
           L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           }).addTo(mymap);
-          var marker = L.marker(condoPoint).addTo(mymap);
+
+          if (neighbourhoodPolygon == null) {
+            // default Toronto coordinates.
+            mymap.setView([43.760, -79.390], 10);
+            return;
+          }
+
           var polygon = L.geoJson(neighbourhoodPolygon, {style: neighbourhoodsStyle}).addTo(mymap);
-          var circle = L.circle(condoPoint, 250, {
+
+          if (condoPoint != null) {
+            L.marker(condoPoint).addTo(mymap);
+          }
+          else {  // if listing has no address. Calculate region center point.
+            condoPoint = polygon.getBounds().getCenter();
+          }
+          mymap.setView(condoPoint, 16);
+          L.circle(condoPoint, 250, {
             color: '#000',
             weight: 1,
             fillColor: '#0082FF',
@@ -29,7 +43,7 @@
           }).addTo(mymap);
 
           // Added map legend to single condo map.
-          legend = L.control({position: 'topleft'});
+          var legend = L.control({position: 'topleft'});
           legend.onAdd = function (mymap) {
             var div = L.DomUtil.create('div', 'info legend');
             div.innerHTML = mapLegend;

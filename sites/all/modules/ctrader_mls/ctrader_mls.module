@@ -556,8 +556,7 @@ function ctrader_mls_form_alter(&$form, &$form_state, $form_id) {
       $form['field_extra_notes'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = 'Integer ante arcu accumsan a ...';
       $form['field_phone_number'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = t('example: @number', array('@number' => '555-777-9999'));
       $form['field_buy_now_button']['#weight'] = '401';
-      $arg = arg();
-      $form['field_buy_now_button'][LANGUAGE_NONE][0]['markup']['#markup'] = l(t('buy now'), "{$arg[1]}/buy-now");
+      $form['field_buy_now_button'][LANGUAGE_NONE][0]['markup']['#markup'] = l(t('buy now'), drupal_get_path_alias() . "/buy");
       break;
     case 'drealty_listing_edit_form':
       $form['actions']['delete']['#submit'][0] = '_ctrader_mls_drealty_listing_delete';

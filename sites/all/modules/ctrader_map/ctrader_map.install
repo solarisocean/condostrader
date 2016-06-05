@@ -77,3 +77,22 @@ function ctrader_map_update_7000(&$sandbox) {
   // In case of an error, simply throw an exception with an error message.
   throw new DrupalUpdateException('Something went wrong.');
 }
+
+/**
+ * Fix neighbourhoods name.
+ * For example: 'Church St. Corridor' would be renamed as 'Church-Yonge Corridor'.
+ */
+function ctrader_map_update_7001() {
+  $terms_to_change = array(
+    'Church St. Corridor' => 'Church-Yonge Corridor',
+  );
+  foreach ($terms_to_change as $old_term_name => $new_term_name) {
+    $term_to_change = taxonomy_get_term_by_name($old_term_name);
+    if ($term_to_change) {
+      $term_to_change = reset($term_to_change);
+      $term_to_change->name = $new_term_name;
+      taxonomy_term_save($term_to_change);
+    }
+  }
+  return t('All neighbourhoods names have been changed.');
+}
