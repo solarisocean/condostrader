@@ -1228,17 +1228,25 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['nothing_2']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Indexed Drealty Listing: Drealty Active Status */
+  $handler->display->display_options['filters']['active']['id'] = 'active';
+  $handler->display->display_options['filters']['active']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['filters']['active']['field'] = 'active';
+  $handler->display->display_options['filters']['active']['value'] = '1';
+  $handler->display->display_options['filters']['active']['group'] = 1;
   /* Filter criterion: Indexed Drealty Listing: Timestamp_sql */
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['id'] = 'field_timestamp_sql_torcond';
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['table'] = 'search_api_index_toronto_condo_index';
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['field'] = 'field_timestamp_sql_torcond';
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['operator'] = 'not empty';
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['value'] = 'now + 1 day';
+  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['group'] = 1;
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['year_range'] = '-0:+0';
   /* Filter criterion: Indexed Drealty Listing: text search field */
   $handler->display->display_options['filters']['search_api_aggregation_1']['id'] = 'search_api_aggregation_1';
   $handler->display->display_options['filters']['search_api_aggregation_1']['table'] = 'search_api_index_toronto_condo_index';
   $handler->display->display_options['filters']['search_api_aggregation_1']['field'] = 'search_api_aggregation_1';
+  $handler->display->display_options['filters']['search_api_aggregation_1']['group'] = 1;
   $handler->display->display_options['filters']['search_api_aggregation_1']['exposed'] = TRUE;
   $handler->display->display_options['filters']['search_api_aggregation_1']['expose']['operator_id'] = 'search_api_aggregation_1_op';
   $handler->display->display_options['filters']['search_api_aggregation_1']['expose']['label'] = 'Search by keywords:';
@@ -1254,6 +1262,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'search_api_index_toronto_condo_index';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = 'toronto_condo';
+  $handler->display->display_options['filters']['type']['group'] = 1;
   $handler->display->display_options['path'] = 'c-r-p';
 
   /* Display: Building results page */
