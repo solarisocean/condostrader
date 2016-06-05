@@ -27,7 +27,236 @@ function ctf_views_toronto_condos_list_views_default_views() {
   $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
-  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
+  $handler->display->display_options['exposed_form']['options']['bef'] = array(
+    'general' => array(
+      'allow_secondary' => 0,
+      'secondary_label' => 'Advanced options',
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
+    ),
+    'type' => array(
+      'bef_format' => 'bef',
+      'more_options' => array(
+        'bef_select_all_none' => FALSE,
+        'bef_collapsible' => 0,
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+            'secondary_label' => NULL,
+            'collapsible_label' => NULL,
+            'combine_rewrite' => NULL,
+            'reset_label' => NULL,
+            'bef_filter_description' => NULL,
+            'any_label' => NULL,
+            'filter_rewrite_values' => NULL,
+          ),
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
+          'filter_rewrite_values' => NULL,
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
+        ),
+        'secondary_label' => NULL,
+        'collapsible_label' => NULL,
+        'combine_rewrite' => NULL,
+        'reset_label' => NULL,
+        'filter_rewrite_values' => NULL,
+      ),
+      'secondary_label' => NULL,
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
+    ),
+    'field_ml_num__torcond_value' => array(
+      'bef_format' => 'default',
+      'more_options' => array(
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+            'secondary_label' => NULL,
+            'collapsible_label' => NULL,
+            'combine_rewrite' => NULL,
+            'reset_label' => NULL,
+            'bef_filter_description' => NULL,
+            'any_label' => NULL,
+            'filter_rewrite_values' => NULL,
+          ),
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
+          'filter_rewrite_values' => NULL,
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
+        ),
+        'secondary_label' => NULL,
+        'collapsible_label' => NULL,
+        'combine_rewrite' => NULL,
+        'reset_label' => NULL,
+        'filter_rewrite_values' => NULL,
+      ),
+      'secondary_label' => NULL,
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
+    ),
+    'id' => array(
+      'bef_format' => 'default',
+      'slider_options' => array(
+        'bef_slider_min' => '0',
+        'bef_slider_max' => '99999',
+        'bef_slider_step' => '1',
+        'bef_slider_animate' => '',
+        'bef_slider_orientation' => 'horizontal',
+        'secondary_label' => NULL,
+        'collapsible_label' => NULL,
+        'combine_rewrite' => NULL,
+        'reset_label' => NULL,
+        'bef_filter_description' => NULL,
+        'any_label' => NULL,
+        'filter_rewrite_values' => NULL,
+      ),
+      'more_options' => array(
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+            'secondary_label' => NULL,
+            'collapsible_label' => NULL,
+            'combine_rewrite' => NULL,
+            'reset_label' => NULL,
+            'bef_filter_description' => NULL,
+            'any_label' => NULL,
+            'filter_rewrite_values' => NULL,
+          ),
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
+          'filter_rewrite_values' => NULL,
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
+        ),
+        'secondary_label' => NULL,
+        'collapsible_label' => NULL,
+        'combine_rewrite' => NULL,
+        'reset_label' => NULL,
+        'filter_rewrite_values' => NULL,
+      ),
+      'secondary_label' => NULL,
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
+    ),
+    'field_address_full__torcond_value' => array(
+      'bef_format' => 'default',
+      'more_options' => array(
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+            'secondary_label' => NULL,
+            'collapsible_label' => NULL,
+            'combine_rewrite' => NULL,
+            'reset_label' => NULL,
+            'bef_filter_description' => NULL,
+            'any_label' => NULL,
+            'filter_rewrite_values' => NULL,
+          ),
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
+          'filter_rewrite_values' => NULL,
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
+        ),
+        'secondary_label' => NULL,
+        'collapsible_label' => NULL,
+        'combine_rewrite' => NULL,
+        'reset_label' => NULL,
+        'filter_rewrite_values' => NULL,
+      ),
+      'secondary_label' => NULL,
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
+    ),
+    'secondary_label' => NULL,
+    'collapsible_label' => NULL,
+    'combine_rewrite' => NULL,
+    'reset_label' => NULL,
+    'bef_filter_description' => NULL,
+    'any_label' => NULL,
+    'filter_rewrite_values' => NULL,
+  );
+  $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
+  $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'filtered_html';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '50';
   $handler->display->display_options['style_plugin'] = 'table';
@@ -201,7 +430,7 @@ function ctf_views_toronto_condos_list_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = 'toronto_condo';
   $handler->display->display_options['filters']['type']['exposed'] = TRUE;
   $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
-  $handler->display->display_options['filters']['type']['expose']['label'] = 'Drealty Listing Type';
+  $handler->display->display_options['filters']['type']['expose']['label'] = 'Listing Type:';
   $handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
   $handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
   $handler->display->display_options['filters']['type']['expose']['remember_roles'] = array(
@@ -211,16 +440,33 @@ function ctf_views_toronto_condos_list_views_default_views() {
   );
   $handler->display->display_options['filters']['type']['expose']['autocomplete_items'] = '10';
   $handler->display->display_options['filters']['type']['expose']['autocomplete_min_chars'] = '0';
+  $handler->display->display_options['filters']['type']['expose']['autocomplete_field'] = 'type';
   $handler->display->display_options['filters']['type']['expose']['autocomplete_raw_suggestion'] = 1;
   $handler->display->display_options['filters']['type']['expose']['autocomplete_raw_dropdown'] = 1;
   $handler->display->display_options['filters']['type']['expose']['autocomplete_dependent'] = 0;
+  $handler->display->display_options['filters']['type']['is_grouped'] = TRUE;
+  $handler->display->display_options['filters']['type']['group_info']['label'] = 'Listing Type:';
+  $handler->display->display_options['filters']['type']['group_info']['identifier'] = 'type';
+  $handler->display->display_options['filters']['type']['group_info']['widget'] = 'radios';
+  $handler->display->display_options['filters']['type']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => 'condo',
+      'operator' => '=',
+      'value' => 'toronto_condo',
+    ),
+    2 => array(
+      'title' => 'building',
+      'operator' => '=',
+      'value' => 'toronto_building',
+    ),
+  );
   /* Filter criterion: Drealty Listing: Ml_num (field_ml_num__torcond) */
   $handler->display->display_options['filters']['field_ml_num__torcond_value']['id'] = 'field_ml_num__torcond_value';
   $handler->display->display_options['filters']['field_ml_num__torcond_value']['table'] = 'field_data_field_ml_num__torcond';
   $handler->display->display_options['filters']['field_ml_num__torcond_value']['field'] = 'field_ml_num__torcond_value';
   $handler->display->display_options['filters']['field_ml_num__torcond_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_ml_num__torcond_value']['expose']['operator_id'] = 'field_ml_num__torcond_value_op';
-  $handler->display->display_options['filters']['field_ml_num__torcond_value']['expose']['label'] = 'MLS #';
+  $handler->display->display_options['filters']['field_ml_num__torcond_value']['expose']['label'] = 'MLS #:';
   $handler->display->display_options['filters']['field_ml_num__torcond_value']['expose']['operator'] = 'field_ml_num__torcond_value_op';
   $handler->display->display_options['filters']['field_ml_num__torcond_value']['expose']['identifier'] = 'field_ml_num__torcond_value';
   $handler->display->display_options['filters']['field_ml_num__torcond_value']['expose']['remember_roles'] = array(
@@ -228,13 +474,19 @@ function ctf_views_toronto_condos_list_views_default_views() {
     1 => 0,
     3 => 0,
   );
+  $handler->display->display_options['filters']['field_ml_num__torcond_value']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['field_ml_num__torcond_value']['expose']['autocomplete_min_chars'] = '0';
+  $handler->display->display_options['filters']['field_ml_num__torcond_value']['expose']['autocomplete_field'] = 'field_ml_num__torcond';
+  $handler->display->display_options['filters']['field_ml_num__torcond_value']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['field_ml_num__torcond_value']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['field_ml_num__torcond_value']['expose']['autocomplete_dependent'] = 0;
   /* Filter criterion: Drealty Listing: Drealty Listing Id */
   $handler->display->display_options['filters']['id']['id'] = 'id';
   $handler->display->display_options['filters']['id']['table'] = 'drealty_listing';
   $handler->display->display_options['filters']['id']['field'] = 'id';
   $handler->display->display_options['filters']['id']['exposed'] = TRUE;
   $handler->display->display_options['filters']['id']['expose']['operator_id'] = 'id_op';
-  $handler->display->display_options['filters']['id']['expose']['label'] = 'Drealty Listing Id';
+  $handler->display->display_options['filters']['id']['expose']['label'] = 'Listing Id:';
   $handler->display->display_options['filters']['id']['expose']['operator'] = 'id_op';
   $handler->display->display_options['filters']['id']['expose']['identifier'] = 'id';
   $handler->display->display_options['filters']['id']['expose']['remember_roles'] = array(
@@ -273,6 +525,26 @@ function ctf_views_toronto_condos_list_views_default_views() {
       ),
     ),
   );
+  /* Filter criterion: Drealty Listing: Full address (field_address_full__torcond) */
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['id'] = 'field_address_full__torcond_value';
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['table'] = 'field_data_field_address_full__torcond';
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['field'] = 'field_address_full__torcond_value';
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['expose']['operator_id'] = 'field_address_full__torcond_value_op';
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['expose']['label'] = 'Full address (contains):';
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['expose']['operator'] = 'field_address_full__torcond_value_op';
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['expose']['identifier'] = 'field_address_full__torcond_value';
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+  );
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['expose']['autocomplete_min_chars'] = '0';
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['expose']['autocomplete_dependent'] = 0;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
