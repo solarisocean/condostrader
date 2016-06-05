@@ -1,5 +1,7 @@
 <?php
 /**
  * @file
- * Drupal needs this blank file.
+ * Code for the CT Features: Taxonomy vocabularies: Neighbourhoods feature.
  */
+
+include_once 'ctf_taxonomy_vocabularies_neighbourhoods.features.inc';

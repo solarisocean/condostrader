@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CT Features: Pages: Drealty listing buy now feature.
+ */
+
+include_once 'ctf_pages_drealty_listing_buy_now.features.inc';

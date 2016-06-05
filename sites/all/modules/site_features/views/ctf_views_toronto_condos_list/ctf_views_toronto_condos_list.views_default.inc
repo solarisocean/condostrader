@@ -266,12 +266,13 @@ function ctf_views_toronto_condos_list_views_default_views() {
     'field_ml_num__torcond' => 'field_ml_num__torcond',
     'label' => 'label',
     'field_addr__torcond' => 'field_addr__torcond',
+    'type' => 'type',
     'field_timestamp_sql__torcond' => 'field_timestamp_sql__torcond',
     'field_toronto_gallery' => 'field_toronto_gallery',
     'id_1' => 'id_1',
     'nothing' => 'nothing',
   );
-  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['default'] = 'id';
   $handler->display->display_options['style_options']['info'] = array(
     'views_bulk_operations' => array(
       'align' => '',
@@ -288,33 +289,40 @@ function ctf_views_toronto_condos_list_views_default_views() {
     'field_ml_num__torcond' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
-      'align' => '',
+      'align' => 'views-align-center',
       'separator' => '',
       'empty_column' => 0,
     ),
     'label' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
-      'align' => '',
+      'align' => 'views-align-center',
       'separator' => '',
       'empty_column' => 0,
     ),
     'field_addr__torcond' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
-      'align' => '',
+      'align' => 'views-align-center',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'type' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => 'views-align-center',
       'separator' => '',
       'empty_column' => 0,
     ),
     'field_timestamp_sql__torcond' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
-      'align' => '',
+      'align' => 'views-align-center',
       'separator' => '',
       'empty_column' => 0,
     ),
     'field_toronto_gallery' => array(
-      'align' => '',
+      'align' => 'views-align-center',
       'separator' => '',
       'empty_column' => 0,
     ),
@@ -326,7 +334,7 @@ function ctf_views_toronto_condos_list_views_default_views() {
       'empty_column' => 0,
     ),
     'nothing' => array(
-      'align' => '',
+      'align' => 'views-align-center',
       'separator' => '',
       'empty_column' => 0,
     ),
@@ -410,6 +418,7 @@ function ctf_views_toronto_condos_list_views_default_views() {
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = 'EDIT';
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing']['alter']['path'] = '/drealty_listing/[id_1]/edit';

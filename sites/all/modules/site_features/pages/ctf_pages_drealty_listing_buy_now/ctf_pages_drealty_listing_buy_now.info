@@ -1,0 +1,9 @@
+name = CT Features: Pages: Drealty listing buy now
+description = Provides '/condo/{id}/buy' page.
+core = 7.x
+package = CT Features: Pages
+dependencies[] = ctools
+dependencies[] = page_manager
+features[ctools][] = page_manager:pages_default:1
+features[features_api][] = api:2
+features[page_manager_pages][] = drealty_listing_buy_now
