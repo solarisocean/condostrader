@@ -452,7 +452,6 @@ function _ctrader_saf_search_button_form($form, &$form_state) {
 
 function _ctrader_saf_search_button_form_submit($form, &$form_state) {
 //  $query = drupal_http_build_query($_SESSION['search_link_calculate']['f'],'f');
-  drupal_set_message('<pre>' . print_r($form_state, TRUE) . '</pre>');
   $path = '/' . CTRADER_SEARCH_RESULT_PAGE;
   $query = $_SESSION['search_link_calculate'];
 
