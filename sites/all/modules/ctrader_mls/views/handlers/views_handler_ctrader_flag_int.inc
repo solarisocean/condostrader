@@ -28,9 +28,17 @@ class views_handler_ctrader_flag_int extends views_handler_field {
   public function render($values) {
     global $user;
 
+    $entity_id = NULL;
+    if (isset($values->_entity_properties['search_api_id'])) {
+      $entity_id = $values->_entity_properties['search_api_id'];
+    }
+    elseif (isset($values->_field_data['drealty_listing_field_data_field_reference_to_condo_id']['entity']->id)) {
+      $entity_id = $values->_field_data['drealty_listing_field_data_field_reference_to_condo_id']['entity']->id;
+    }
+    
     $flag = flag_get_flag('drealty_flag');
-    $flag_link = flag_create_link('drealty_flag', $values->_entity_properties['search_api_id']);
-    if ($flag->is_flagged($values->_entity_properties['search_api_id'], $user->uid)) {
+    $flag_link = flag_create_link('drealty_flag', $entity_id);
+    if ($flag->is_flagged($entity_id, $user->uid)) {
       return $flag_link;
     }
     elseif (user_is_anonymous()) {

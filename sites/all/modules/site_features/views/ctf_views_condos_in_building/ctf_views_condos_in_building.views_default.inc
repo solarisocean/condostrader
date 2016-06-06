@@ -30,6 +30,11 @@ function ctf_views_condos_in_building_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  $handler->display->display_options['header']['result']['content'] = 'Sale (@total)';
   /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_reference_to_condo_target_id']['id'] = 'field_reference_to_condo_target_id';
   $handler->display->display_options['relationships']['field_reference_to_condo_target_id']['table'] = 'field_data_field_reference_to_condo';
@@ -331,9 +336,32 @@ function ctf_views_condos_in_building_views_default_views() {
   $handler->display->display_options['arguments']['id']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['id']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['id']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Drealty Listing: S_r (field_s_r__torcond) */
+  $handler->display->display_options['filters']['field_s_r__torcond_value']['id'] = 'field_s_r__torcond_value';
+  $handler->display->display_options['filters']['field_s_r__torcond_value']['table'] = 'field_data_field_s_r__torcond';
+  $handler->display->display_options['filters']['field_s_r__torcond_value']['field'] = 'field_s_r__torcond_value';
+  $handler->display->display_options['filters']['field_s_r__torcond_value']['relationship'] = 'field_reference_to_condo_target_id';
+  $handler->display->display_options['filters']['field_s_r__torcond_value']['value'] = 'Sale';
 
-  /* Display: Block */
-  $handler = $view->new_display('block', 'Block', 'block_1');
+  /* Display: Sale */
+  $handler = $view->new_display('block', 'Sale', 'block_1');
+
+  /* Display: Rent */
+  $handler = $view->new_display('block', 'Rent', 'block_2');
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  $handler->display->display_options['header']['result']['content'] = 'Rent (@total)';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Drealty Listing: S_r (field_s_r__torcond) */
+  $handler->display->display_options['filters']['field_s_r__torcond_value']['id'] = 'field_s_r__torcond_value';
+  $handler->display->display_options['filters']['field_s_r__torcond_value']['table'] = 'field_data_field_s_r__torcond';
+  $handler->display->display_options['filters']['field_s_r__torcond_value']['field'] = 'field_s_r__torcond_value';
+  $handler->display->display_options['filters']['field_s_r__torcond_value']['relationship'] = 'field_reference_to_condo_target_id';
+  $handler->display->display_options['filters']['field_s_r__torcond_value']['value'] = 'Lease';
   $export['condos_in_building'] = $view;
 
   return $export;
