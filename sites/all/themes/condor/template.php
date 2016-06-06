@@ -193,7 +193,4 @@ function condor_menu_local_task($variables) {
   } else {
     return '<li' . (!empty($variables['element']['#active']) ? ' class="active"' : '') . '>' . l($link_text, $link['href'], $link['localized_options']) . "</li>\n";
   }
-
-
-
 }

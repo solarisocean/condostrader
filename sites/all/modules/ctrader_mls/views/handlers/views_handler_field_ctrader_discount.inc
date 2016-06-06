@@ -35,7 +35,7 @@ class views_handler_field_ctrader_discount extends views_handler_field {
       if (!empty($values->_entity_properties['entity object']->field_old_price_value__torcond[LANGUAGE_NONE])) {
         $old_prices_array = $values->_entity_properties['entity object']->field_old_price_value__torcond[LANGUAGE_NONE];
         $old_prices_array = array_reverse($old_prices_array);
-        $old_price = isset($old_prices_array[1]) ? $old_prices_array[1] : NULL;
+        $old_price = isset($old_prices_array[1]['value']) ? $old_prices_array[1]['value'] : NULL;
       }
     }
     else {
@@ -44,7 +44,7 @@ class views_handler_field_ctrader_discount extends views_handler_field {
       if (!empty($values->_field_data['id']['entity']->field_old_price_value__torcond[LANGUAGE_NONE])) {
         $old_prices_array = $values->_field_data['id']['entity']->field_old_price_value__torcond[LANGUAGE_NONE];
         $old_prices_array = array_reverse($old_prices_array);
-        $old_price = isset($old_prices_array[1]) ? $old_prices_array[1] : NULL;
+        $old_price = isset($old_prices_array[1]['value']) ? $old_prices_array[1]['value'] : NULL;
       }
     }
 
