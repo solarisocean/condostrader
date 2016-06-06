@@ -341,6 +341,8 @@ function ctf_views_single_condo_view_views_default_views() {
   $handler->display->display_options['fields']['field_maint__torcond']['label'] = 'Maint Fees';
   $handler->display->display_options['fields']['field_maint__torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_maint__torcond']['alter']['text'] = '$[field_maint__torcond]';
+  $handler->display->display_options['fields']['field_maint__torcond']['empty'] = '-';
+  $handler->display->display_options['fields']['field_maint__torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_maint__torcond']['settings'] = array(
     'thousand_separator' => ',',
     'decimal_separator' => '.',
@@ -970,6 +972,8 @@ function ctf_views_single_condo_view_views_default_views() {
   $handler->display->display_options['fields']['field_maint__torcond']['label'] = 'Maint Fees';
   $handler->display->display_options['fields']['field_maint__torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_maint__torcond']['alter']['text'] = '$[field_maint__torcond]';
+  $handler->display->display_options['fields']['field_maint__torcond']['empty'] = '-';
+  $handler->display->display_options['fields']['field_maint__torcond']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_maint__torcond']['settings'] = array(
     'thousand_separator' => ',',
     'decimal_separator' => '.',
@@ -999,6 +1003,7 @@ function ctf_views_single_condo_view_views_default_views() {
   $handler->display->display_options['fields']['field_patio_ter__torcond']['table'] = 'field_data_field_patio_ter__torcond';
   $handler->display->display_options['fields']['field_patio_ter__torcond']['field'] = 'field_patio_ter__torcond';
   $handler->display->display_options['fields']['field_patio_ter__torcond']['label'] = 'Balcony';
+  $handler->display->display_options['fields']['field_patio_ter__torcond']['empty'] = '-';
   /* Field: Drealty Listing: Fpl_num */
   $handler->display->display_options['fields']['field_fpl_num__torcond']['id'] = 'field_fpl_num__torcond';
   $handler->display->display_options['fields']['field_fpl_num__torcond']['table'] = 'field_data_field_fpl_num__torcond';

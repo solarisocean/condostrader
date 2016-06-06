@@ -57,3 +57,15 @@ function ctrader_mls_views_data_alter(&$data) {
     'handler' => 'SearchApiViewsHandlerSort',
   );
 }
+
+
+/**
+ * Implements hook_field_views_data_alter().
+ */
+function ctrader_mls_field_views_data_alter(&$result, $field, $module) {
+  switch ($field['field_name']) {
+    case 'field_old_price_value__torcond':
+      $result['field_data_field_old_price_value__torcond']['field_old_price_value__torcond']['field']['handler'] = 'views_handler_field_ctrader_discount';
+      break;
+  }
+}
