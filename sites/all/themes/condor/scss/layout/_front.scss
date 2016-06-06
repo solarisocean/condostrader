@@ -24,7 +24,7 @@
     }
 
     .pane-title {
-      padding: 22px 0 25px;
+      padding: 45px 0 25px;
       margin-top: 0;
     }
 
@@ -35,6 +35,47 @@
 
       .view-footer {
         @extend %condo-more;
+      }
+    }
+  }
+
+  .nearby-listed {
+    position: relative;
+
+    .nearby-listed-slider-button-next,
+    .nearby-listed-slider-button-prev {
+      top: 5% !important;
+    }
+
+    .nearby-listed-slider-button-next {
+      right: 25px !important;
+    }
+
+    .nearby-listed-slider-button-prev {
+      right: 60px !important;
+      left: inherit;
+    }
+
+    .pane-title {
+      padding: 45px 0 25px;
+      margin-top: 0;
+
+      .current-place {
+        font-size: rem-calc(14);
+        font-weight: 100;
+        text-transform: capitalize;
+      }
+    }
+
+    .views-row {
+      @extend %condos-item;
+    }
+
+    .view-footer {
+      @extend %condo-more;
+
+      a {
+        margin: 45px 0 10px;
       }
     }
   }
