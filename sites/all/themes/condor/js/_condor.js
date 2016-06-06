@@ -65,25 +65,30 @@
         attach: function (context, settings) {
             $('.newly-listed-slider .view-content, .recent-blog-post .view-content').addClass('swiper-wrapper');
 
-            $('.newly-listed').prepend('<div class="newly-listed-slider-button-next swiper-button-next"></div><div class="newly-listed-slider-button-prev swiper-button-prev"></div>');
-            $('.recent-post-front').prepend('<div class="recent-post-front-slider-button-next swiper-button-next"></div><div class="recent-post-front-slider-button-prev swiper-button-prev"></div>');
+            $('body').once(function() {
+                if ($('.newly-listed-slider .view-content .views-row').length >= 5) {
+                    $('.newly-listed').prepend('<div class="newly-listed-slider-button-next swiper-button-next"></div><div class="newly-listed-slider-button-prev swiper-button-prev"></div>');
+                    var newlyListedSlider = new Swiper('.newly-listed-slider', {
+                        slidesPerView: 4,
+                        slidesPerColumn: 2,
+                        paginationClickable: true,
+                        spaceBetween: 25,
+                        nextButton: '.newly-listed-slider-button-next',
+                        prevButton: '.newly-listed-slider-button-prev'
+                    });
+                }
 
-            var newlyListedSlider = new Swiper('.newly-listed-slider', {
-                slidesPerView: 4,
-                slidesPerColumn: 2,
-                paginationClickable: true,
-                spaceBetween: 25,
-                nextButton: '.newly-listed-slider-button-next',
-                prevButton: '.newly-listed-slider-button-prev'
-            });
-
-            var recentBlogPost = new Swiper('.recent-blog-post', {
-                slidesPerView: 4,
-                slidesPerColumn: 1,
-                paginationClickable: true,
-                spaceBetween: 25,
-                nextButton: '.recent-post-front-slider-button-next',
-                prevButton: '.recent-post-front-slider-button-prev'
+                if ($('.recent-blog-post .view-content .views-row').length >= 5) {
+                    $('.recent-post-front').prepend('<div class="recent-post-front-slider-button-next swiper-button-next"></div><div class="recent-post-front-slider-button-prev swiper-button-prev"></div>');
+                    var recentBlogPost = new Swiper('.recent-blog-post', {
+                        slidesPerView: 4,
+                        slidesPerColumn: 1,
+                        paginationClickable: true,
+                        spaceBetween: 25,
+                        nextButton: '.recent-post-front-slider-button-next',
+                        prevButton: '.recent-post-front-slider-button-prev'
+                    });
+                }
             });
         }
     };
@@ -94,14 +99,16 @@
     Drupal.behaviors.scrollBar = {
         attach: function (context, settings) {
 
-            $('.view-lowest-price-block, .view-highest-price-block, .view-most-viewed-block').mCustomScrollbar({
-                setHeight: "404px",
-                theme: "inset-2"
-            });
+            $('body').once(function() {
+                $('.view-lowest-price-block, .view-highest-price-block, .view-most-viewed-block').mCustomScrollbar({
+                    setHeight: "404px",
+                    theme: "inset-2"
+                });
 
-            $('.page-search-results .view-search-results-ctrader .view-content').mCustomScrollbar({
-                setHeight: "675px",
-                theme: "inset-2"
+                $('.page-search-results .view-search-results-ctrader .view-content').mCustomScrollbar({
+                    setHeight: "675px",
+                    theme: "inset-2"
+                });
             });
 
         }
@@ -113,78 +120,78 @@
     Drupal.behaviors.facetFix = {
         attach: function (context, settings) {
 
-            var radioCheck = function(elem){
-                elem.each(function() {
-                    if($(this).attr('checked')) {
-                        $(this).parent().addClass('active-region-facet');
+            $('body').once(function() {
+                var radioCheck = function(elem){
+                    elem.each(function() {
+                        if($(this).attr('checked')) {
+                            $(this).parent().addClass('active-region-facet');
+                        }
+                    });
+
+                    elem.parent().find('a').on('click', function(e) {
+                        e.preventDefault();
+                        $(this).closest('ul').removeClass('facetapi-disabled');
+                        $(this).parent().removeClass('facetapi-inactive');
+                        $(this).parent().find('input:checkbox').attr('disabled', false);
+                        elem.parent().removeClass('active-region-facet');
+                        $(this).parent().addClass('active-region-facet').find('input:checkbox').trigger('click');
+                    });
+
+                    elem.on('change', function() {
+                        elem.not(this).prop('checked', false);
+                    });
+
+                };
+
+                radioCheck($('.facetapi-facet-field-br--torcond input:checkbox'));
+                radioCheck($('.facetapi-facet-field-s-r--torcond input:checkbox'));
+
+                var checkboxes = [
+                    '.facetapi-facet-field-locker--torcond input:checkbox',
+                    '.facetapi-facet-field-prkg-inc--torcond input:checkbox',
+                    '.facetapi-facet-field-pets--torcond input:checkbox'
+                ];
+
+                for (var i = 0; i < checkboxes.length; i++) {
+                    if ($(checkboxes[i]).attr('checked')) {
+                        //Added class to checked checkbox.
+                        $(checkboxes[i]).parent().find('a').addClass('checked-facet');
+                    }
+                }
+
+                $('.facetapi-facet-field-locker--torcond a, .facetapi-facet-field-prkg-inc--torcond a, .facetapi-facet-field-pets--torcond a').on('click', function (e) {
+                    var chbxInput = $(this).parent().find('input');
+
+                    e.preventDefault();
+                    var _this = $(this);
+                    $(this).closest('.facetapi-facetapi-checkbox-links').removeClass('facetapi-disabled');
+                    chbxInput.attr('disabled', false).parent();
+                    if (chbxInput.attr('checked')) {
+                        _this.removeClass('checked-facet');
+                        chbxInput.trigger('click');
+                    }
+                    else {
+                        _this.addClass('checked-facet');
+                        chbxInput.trigger('click');
                     }
                 });
 
-                elem.parent().find('a').on('click', function(e) {
-                    e.preventDefault();
-                    $(this).closest('ul').removeClass('facetapi-disabled');
-                    $(this).parent().removeClass('facetapi-inactive');
-                    $(this).parent().find('input:checkbox').attr('disabled', false);
-                    elem.parent().removeClass('active-region-facet');
-                    $(this).parent().addClass('active-region-facet').find('input:checkbox').trigger('click');
+                $('.facetapi-facet-field-style--torcond select, .views-widget-sort-sort_bef_combine .form-select').chosen({
+                    "disable_search": true
                 });
-
-                elem.on('change', function() {
-                    elem.not(this).prop('checked', false);
-                });
-
-            };
-
-            radioCheck($('.facetapi-facet-field-br--torcond input:checkbox'));
-            radioCheck($('.facetapi-facet-field-s-r--torcond input:checkbox'));
-
-            var checkboxes = [
-                '.facetapi-facet-field-locker--torcond input:checkbox',
-                '.facetapi-facet-field-prkg-inc--torcond input:checkbox',
-                '.facetapi-facet-field-pets--torcond input:checkbox'
-            ];
-
-            for (var i = 0; i < checkboxes.length; i++) {
-                if ($(checkboxes[i]).attr('checked')) {
-                    //Added class to checked checkbox.
-                    $(checkboxes[i]).parent().find('a').addClass('checked-facet');
-                }
-            }
-
-            $('.facetapi-facet-field-locker--torcond a, .facetapi-facet-field-prkg-inc--torcond a, .facetapi-facet-field-pets--torcond a').on('click', function (e) {
-                var chbxInput = $(this).parent().find('input');
-
-                e.preventDefault();
-                var _this = $(this);
-                $(this).closest('.facetapi-facetapi-checkbox-links').removeClass('facetapi-disabled');
-                chbxInput.attr('disabled', false).parent();
-                if (chbxInput.attr('checked')) {
-                    _this.removeClass('checked-facet');
-                    chbxInput.trigger('click');
-                }
-                else {
-                    _this.addClass('checked-facet');
-                    chbxInput.trigger('click');
-                }
             });
 
-            $('.facetapi-facet-field-style--torcond select').chosen({
-                "disable_search": true
-            });
 
             //***********************************************************************//
 
             if ($('.facet-search-block')) {
                 var form = '#-ctrader-saf-search-button-form';
 
-                //Set default values.
-                $(form + ' input[name="sale_rent"]').val($('.facetapi-facet-field-s-r--torcond  .active-region-facet a.facetapi-checkbox').attr('href'));
-                // $(form + ' input[name="region"]').val($('.pane-ctrader-saf-neighbourhoods-hs select')[0].value);
-
                 //Reset values on change.
                 $('.pane-ctrader-saf-neighbourhoods-hs select').each(function() {
                     $(this).change(function() {
-                        switch ($(this).attr('id').slice(-1)) {
+
+                        switch ($(this).attr('name').charAt($(this).attr('name').length - 2)) {
                             case '0':
                                 $(form + ' input[name="region"]').val($(this).val());
                                 break;
@@ -195,6 +202,22 @@
                                 $(form + ' input[name="region_2"]').val($(this).val());
                                 break;
                         }
+
+                        switch ($(this).val()) {
+                            case 'label_0':
+                                $(form + ' input[name="region"]').val('');
+                                $(form + ' input[name="region_1"]').val('');
+                                $(form + ' input[name="region_2"]').val('');
+                                break;
+                            case 'label_1':
+                                $(form + ' input[name="region_1"]').val('');
+                                $(form + ' input[name="region_2"]').val('');
+                                break;
+                            case 'label_2':
+                                $(form + ' input[name="region_2"]').val('');
+                                break;
+                        }
+
                     });
                 });
 
@@ -220,11 +243,10 @@
                 $('.field_style__torcond.form-select').change(function(){
                     $(form + ' input[name="type"]').val($(this).val());
                 });
-                
+
                 $('.facetapi-facet-field-br--torcond a').on('click', function() {
                     $(form + ' input[name="beds"]').val($(this).text());
                 });
-                
 
             }
 
@@ -353,16 +375,19 @@
             $('body').once(function() {
                 $('.nearby-listed-slider .view-content').addClass('swiper-wrapper');
 
-                $('.pane-nearby-listings').prepend('<div class="nearby-listed-slider-button-next swiper-button-next"></div><div class="nearby-listed-slider-button-prev swiper-button-prev"></div>');
+                if ($('.nearby-listed-slider .view-content .views-row').length >= 6) {
+                    $('.pane-nearby-listings').prepend('<div class="nearby-listed-slider-button-next swiper-button-next"></div><div class="nearby-listed-slider-button-prev swiper-button-prev"></div>');
 
-                var nearbyListedSlider = new Swiper('.nearby-listed-slider', {
-                    slidesPerView: 5,
-                    slidesPerColumn: 1,
-                    paginationClickable: true,
-                    spaceBetween: 25,
-                    nextButton: '.nearby-listed-slider-button-next',
-                    prevButton: '.nearby-listed-slider-button-prev'
-                });
+                    var nearbyListedSlider = new Swiper('.nearby-listed-slider', {
+                        slidesPerView: 5,
+                        slidesPerColumn: 1,
+                        paginationClickable: true,
+                        spaceBetween: 25,
+                        nextButton: '.nearby-listed-slider-button-next',
+                        prevButton: '.nearby-listed-slider-button-prev'
+                    });
+                }
+
 
                 $('.condo-page-gallery .pane-content, .condo-page-pagination .pane-content').addClass('swiper-container');
                 $('.condo-page-gallery .field-name-field-toronto-gallery, .condo-page-pagination .field-name-field-toronto-gallery').addClass('swiper-wrapper');
@@ -389,7 +414,8 @@
                     touchRatio: 0.2,
                     direction: 'vertical',
                     onClick: function (swiper, event){
-                        var clicked = swiper.clickedIndex
+                        console.log('bu');
+                        var clicked = swiper.clickedIndex;
                         swiper.activeIndex = clicked;
                         swiper.updateClasses();
                         $(swiper.slides).removeClass('is-selected');
@@ -432,8 +458,21 @@
     Drupal.behaviors.signUpPage = {
         attach: function (context, settings) {
 
-            $('.hierarchical-select .selects select').chosen({
+            $('#edit-user-looking-und').chosen({
                 "disable_search": true
+            });
+
+        }
+    };
+
+    /**
+     * Condo page flag fix.
+     */
+    Drupal.behaviors.condoPage = {
+        attach: function (context, settings) {
+
+            $('body').once(function() {
+                $('.pane-drealty-listing a.flag').text('Add this listing to my favourites');
             });
 
         }
