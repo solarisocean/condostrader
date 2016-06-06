@@ -48,8 +48,8 @@ class views_handler_field_ctrader_discount extends views_handler_field {
       }
     }
 
-    if (!empty($old_price) && !empty($current_price)) {
-      $discount = (($old_price - $current_price) / $old_price);
+    if ($old_price > 0 && $current_price > 0) {
+      $discount = ($old_price - $current_price) / $old_price;
       if ($discount > 0.009 && $discount < 1) {
         $discount = round(($discount * 100));
         return $discount;
