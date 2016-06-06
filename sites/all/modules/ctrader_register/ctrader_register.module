@@ -85,16 +85,25 @@ function ctrader_register_form_user_register_form_alter(&$form, &$form_state) {
       ),
     ),
   );
+  
+  // Unset field_mobile_phone_number placeholder.
+  unset($form['field_mobile_phone_number'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder']);
 
   //Have added iems to containers.
   $form['sign_up_left']['user_first_name'] = $form['field_user_first_name'];
   $form['sign_up_left']['user_last_name'] = $form['field_user_last_name'];
   $form['sign_up_left']['user_mail'] = $form['account']['mail'];
   $form['sign_up_left']['user_mail']['#weight'] = 10;
+  $form['sign_up_left']['user_tel'] = $form['field_mobile_phone_number'];
+  $form['sign_up_left']['user_tel']['#weight'] = 12;
   $form['sign_up_left']['user_pass'] = $form['account']['pass'];
-  $form['sign_up_left']['user_pass']['#weight'] = 12;
+  $form['sign_up_left']['user_pass']['#weight'] = 14;
+  $form['sign_up_left']['user_looking'] = $form['field_looking_to'];
+  $form['sign_up_left']['user_looking']['#weight'] = 16;
   $form['sign_up_left']['user_terms'] = $form['terms_of_use'];
-  $form['sign_up_left']['user_terms']['#weight'] = 14;
+  $form['sign_up_left']['user_terms']['#weight'] = 18;
+  $form['sign_up_left']['user_newsletters'] = $form['field_receive_newsletters'];
+  $form['sign_up_left']['user_newsletters']['#weight'] = 20;
   $form['sign_up_left']['user_submit'] = $form['actions'];
 
   $form['sign_up_right']['user_region'] = $form['field_user_region'];
@@ -109,6 +118,9 @@ function ctrader_register_form_user_register_form_alter(&$form, &$form_state) {
   unset($form['actions']);
   unset($form['field_user_region']);
   unset($form['form_map']);
+  unset($form['field_mobile_phone_number']);
+  unset($form['field_looking_to']);
+  unset($form['field_receive_newsletters']);
 
 //  $form['terms'] = array(
 //    '#type' => 'checkbox',

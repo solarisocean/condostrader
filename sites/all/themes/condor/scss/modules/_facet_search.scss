@@ -353,6 +353,9 @@
 
   .facet-map-block {
     clear: both;
+    margin-bottom: 11px;
+    display: inline-block;
+    margin-top: -1px;
 
     button {
       font-size: rem-calc(12);
@@ -398,15 +401,41 @@
   }
 
   .hierarchical-select {
-    .chosen-container {
-      width: 228px !important;
-      margin-bottom: 6px;
+    .form-type-hierarchical-select {
+      label {
+        font-family: "Raleway", sans-serif;
+        font-size: rem-calc(11);
+        -webkit-font-smoothing: antialiased;
+        text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+        display: inline-block;
+        float: left;
+        font-weight: 100;
+        text-transform: uppercase;
+      }
     }
-    select {
-      display: none !important;
-      visibility: hidden;
-      height: 0 !important;
-      margin: 0 !important;
+
+    .selects {
+      select {
+        display: block;
+        overflow: hidden;
+        padding: 0 0 0 8px;
+        height: 29px;
+        border: 1px solid #e3e6eb;
+        color: #192030;
+        text-decoration: none;
+        white-space: nowrap;
+        line-height: 30px;
+        font-size: 12px;
+        background-color: $white;
+        max-width: 228px;
+        width: 100%;
+        outline: none;
+        float: none;
+
+        &:not(:last-child) {
+          margin-bottom: 7px;
+        }
+      }
     }
   }
 }

@@ -172,13 +172,28 @@ function condor_preprocess_field(&$variables) {
 }
 
 /**
- * Implements template_preprocess_flag().
+ * Implements template_menu_local_task().
  */
-function condor_preprocess_flag(&$variables) {
+function condor_menu_local_task($variables) {
   $args = arg();
+  $link = $variables['element']['#link'];
+  $link_text = $link['title'];
+  $link['localized_options']['attributes'] = array(
+    'class' => array(
+      'small',
+      'button',
+      'secondary',
+    ),
+  );
+  $link['localized_options']['html'] = TRUE;
 
-  //Have added text to the flag link on condo page.
-  if (!empty($args[0]) && $args[0] == 'drealty_listing') {
-    $variables['link_text'] = t('Add this listing to my favourites');
+  //Hide menu local task on register page.
+  if (!empty($args[0]) && !empty($args[0]) && $args[1] == 'register') {
+    return '';
+  } else {
+    return '<li' . (!empty($variables['element']['#active']) ? ' class="active"' : '') . '>' . l($link_text, $link['href'], $link['localized_options']) . "</li>\n";
   }
+
+
+
 }
