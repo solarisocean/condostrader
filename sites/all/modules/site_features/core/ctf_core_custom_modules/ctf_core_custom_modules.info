@@ -23,6 +23,7 @@ dependencies[] = ctf_pages_result_page
 dependencies[] = ctf_pages_toronto_condos_search_with_map
 dependencies[] = ctf_taxonomy_vocabularies_neighbourhoods
 dependencies[] = ctf_views_blog_post_view
+dependencies[] = ctf_views_condos_in_building
 dependencies[] = ctf_views_homepage_view_blocks
 dependencies[] = ctf_views_map
 dependencies[] = ctf_views_nearby_listings

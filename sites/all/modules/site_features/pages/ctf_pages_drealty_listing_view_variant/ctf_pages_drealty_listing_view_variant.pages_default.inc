@@ -19,7 +19,7 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
   $handler->handler = 'panel_context';
   $handler->weight = 0;
   $handler->conf = array(
-    'title' => 'Panel',
+    'title' => 'Single condo Panel',
     'no_blocks' => 1,
     'pipeline' => 'standard',
     'body_classes_to_remove' => '',
@@ -580,6 +580,216 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
   $export['drealty_listing__panel_context_960e634e-03ce-48ff-ad36-3e71d90a36c2'] = $handler;
+
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'drealty_listing__panel_context_f36f85d6-d09d-496b-8e0d-77563b7e1172';
+  $handler->task = 'drealty_listing';
+  $handler->subtask = '';
+  $handler->handler = 'panel_context';
+  $handler->weight = 1;
+  $handler->conf = array(
+    'title' => 'Building Panel',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'name' => '',
+    'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'entity_bundle:drealty_listing',
+          'settings' => array(
+            'type' => array(
+              'toronto_building' => 'toronto_building',
+            ),
+          ),
+          'context' => 'argument_entity_id:drealty_listing_1',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
+  );
+  $display = new panels_display();
+  $display->layout = 'flexible';
+  $display->layout_settings = array(
+    'items' => array(
+      'canvas' => array(
+        'type' => 'row',
+        'contains' => 'column',
+        'children' => array(
+          0 => 'main',
+        ),
+        'parent' => NULL,
+      ),
+      'main' => array(
+        'type' => 'column',
+        'width' => 100,
+        'width_type' => '%',
+        'children' => array(
+          0 => 'main-row',
+          1 => 1,
+        ),
+        'parent' => 'canvas',
+      ),
+      'main-row' => array(
+        'type' => 'row',
+        'contains' => 'region',
+        'children' => array(
+          0 => 'building_info',
+        ),
+        'parent' => 'main',
+      ),
+      1 => array(
+        'type' => 'row',
+        'contains' => 'region',
+        'children' => array(
+          0 => 'condos_in_building',
+        ),
+        'parent' => 'main',
+        'class' => '',
+        'hide_empty' => 0,
+      ),
+      'building_info' => array(
+        'type' => 'region',
+        'title' => 'Building info',
+        'width' => 100,
+        'width_type' => '%',
+        'parent' => 'main-row',
+        'class' => '',
+        'hide_empty' => 0,
+      ),
+      'condos_in_building' => array(
+        'type' => 'region',
+        'title' => 'Condos in building',
+        'width' => 100,
+        'width_type' => '%',
+        'parent' => '1',
+        'class' => '',
+        'hide_empty' => 0,
+      ),
+    ),
+  );
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'center' => NULL,
+      'building_info' => NULL,
+      'condos_in_building' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '';
+  $display->uuid = 'a4075876-d23f-41a9-871f-eb0ad33ad4f4';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-16234290-6c9b-4dd2-9d8f-9dda30cdaa41';
+    $pane->panel = 'building_info';
+    $pane->type = 'entity_field';
+    $pane->subtype = 'drealty_listing:field_toronto_gallery';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'label' => 'inline',
+      'formatter' => 'image',
+      'delta_limit' => '1',
+      'delta_offset' => '0',
+      'delta_reversed' => 0,
+      'formatter_settings' => array(
+        'slideshow_image_style' => '',
+        'slideshow_link' => '',
+        'slideshow_colorbox_image_style' => '',
+        'slideshow_colorbox_slideshow' => '',
+        'slideshow_colorbox_slideshow_speed' => '4000',
+        'slideshow_colorbox_transition' => 'elastic',
+        'slideshow_colorbox_speed' => '350',
+        'slideshow_caption' => '',
+        'slideshow_caption_link' => '',
+        'slideshow_fx' => 'fade',
+        'slideshow_speed' => '1000',
+        'slideshow_timeout' => '4000',
+        'slideshow_order' => '',
+        'slideshow_controls' => 1,
+        'slideshow_controls_pause' => 1,
+        'slideshow_controls_position' => 'after',
+        'slideshow_pause' => 0,
+        'slideshow_start_on_hover' => 0,
+        'slideshow_pager' => '',
+        'slideshow_pager_position' => 'after',
+        'slideshow_pager_image_style' => '',
+        'slideshow_carousel_image_style' => '',
+        'slideshow_carousel_visible' => '3',
+        'slideshow_carousel_scroll' => '1',
+        'slideshow_carousel_speed' => '500',
+        'slideshow_carousel_vertical' => 1,
+        'slideshow_carousel_circular' => 1,
+        'slideshow_carousel_follow' => 0,
+        'slideshow_carousel_skin' => '',
+        'image_style' => '',
+        'image_link' => '',
+      ),
+      'context' => 'argument_entity_id:drealty_listing_1',
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '16234290-6c9b-4dd2-9d8f-9dda30cdaa41';
+    $display->content['new-16234290-6c9b-4dd2-9d8f-9dda30cdaa41'] = $pane;
+    $display->panels['building_info'][0] = 'new-16234290-6c9b-4dd2-9d8f-9dda30cdaa41';
+    $pane = new stdClass();
+    $pane->pid = 'new-98900a44-f258-48cd-9216-871f858281fa';
+    $pane->panel = 'condos_in_building';
+    $pane->type = 'views';
+    $pane->subtype = 'condos_in_building';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_pager_settings' => 0,
+      'use_pager' => 1,
+      'nodes_per_page' => '0',
+      'pager_id' => '0',
+      'offset' => '0',
+      'more_link' => 0,
+      'feed_icons' => 0,
+      'panel_args' => 1,
+      'link_to_view' => 0,
+      'args' => 'arg2',
+      'url' => '',
+      'display' => 'block_1',
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '98900a44-f258-48cd-9216-871f858281fa';
+    $display->content['new-98900a44-f258-48cd-9216-871f858281fa'] = $pane;
+    $display->panels['condos_in_building'][0] = 'new-98900a44-f258-48cd-9216-871f858281fa';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = '0';
+  $handler->conf['display'] = $display;
+  $export['drealty_listing__panel_context_f36f85d6-d09d-496b-8e0d-77563b7e1172'] = $handler;
 
   return $export;
 }

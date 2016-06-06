@@ -1,0 +1,9 @@
+name = CT Features: Views: Condos in building
+description = Show referenced condos on building page.
+core = 7.x
+package = CT Features: Views
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[views_view][] = condos_in_building
+features_exclude[dependencies][ctools] = ctools
