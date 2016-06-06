@@ -109,8 +109,21 @@
 
     .hierarchical-select {
       select {
-        display: none !important;
-        visibility: hidden;
+        display: block;
+        overflow: hidden;
+        padding: 0 0 0 8px;
+        height: 29px;
+        border: 1px solid #e3e6eb;
+        color: #192030;
+        text-decoration: none;
+        white-space: nowrap;
+        line-height: 30px;
+        font-size: 12px;
+        background-color: $white;
+        width: 230px;
+        outline: none;
+        float: none;
+        margin-bottom: 7px;
       }
     }
 
