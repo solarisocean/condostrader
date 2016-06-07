@@ -26,6 +26,8 @@
             return;
           }
 
+          mymap.scrollWheelZoom.disable();
+
           var polygon = L.geoJson(neighbourhoodPolygon, {style: neighbourhoodsStyle}).addTo(mymap);
 
           if (condoPoint != null) {

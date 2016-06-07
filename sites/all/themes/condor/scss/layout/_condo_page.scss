@@ -65,6 +65,25 @@
       padding-bottom: 30px;
     }
 
+    img {
+      width: 87%;
+    }
+
+    .swiper-scrollbar {
+      right: 2px;
+      top: 4%;
+      width: 10px;
+      border: 1px solid darken($athens-gray, 6);
+      height: 92%;
+
+      .swiper-scrollbar-drag {
+        width: 60%;
+        background: $ecstasy;
+        left: 2px;
+        top: 0;
+        cursor: pointer;
+      }
+    }
   }
 
   .panels-flexible-row {
