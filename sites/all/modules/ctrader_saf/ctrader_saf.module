@@ -393,6 +393,7 @@ function _ctrader_saf_blocks_content_function($delta) {
         $search_button_form['geo_loc']['#value'] = implode(', ', $neighb_array);
       }
 
+      /* @see _ctrader_saf_search_button_form_submit */
       // SALE-RENT facet checkboxes.
       $lease_rent_field_name = 'field_s_r__torcond';
       if (isset($_GET['f'][0])) {
@@ -516,6 +517,10 @@ function _ctrader_saf_search_button_form($form, &$form_state) {
     '#type' => 'hidden',
   );
 
+  if (drupal_is_front_page()) {
+    $form['sale_rent']['#default_value'] = '/?f[0]=field_s_r__torcond:Sale';
+  }
+
   $form['region'] = array(
     '#type' => 'hidden',
   );
@@ -577,7 +582,7 @@ function _ctrader_saf_search_button_form_submit($form, &$form_state) {
   $path = '/' . CTRADER_SEARCH_RESULT_PAGE;
   $query = array();
 
-  /****************************************************************************/
+  /* @see _ctrader_saf_blocks_content_function */
   // Map search.
   if (strpos($form_state['values']['geo_loc'], 'POLYGON') === 0) {
     $polygon_string = str_replace(array(
@@ -620,7 +625,6 @@ function _ctrader_saf_search_button_form_submit($form, &$form_state) {
     $tids = implode('-', $tids_array);
     $query['neighbourhoods'] = $tids;
   }
-
 
   // SALE-RENT facet checkboxes.
   $lease_rent_field_name = 'field_s_r__torcond';
