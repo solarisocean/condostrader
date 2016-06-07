@@ -104,6 +104,7 @@ dependencies[] = panels
 dependencies[] = panels_ipe
 dependencies[] = panels_mini
 dependencies[] = panels_node
+dependencies[] = panels_tabs
 dependencies[] = path
 dependencies[] = pathauto
 dependencies[] = phone
