@@ -700,6 +700,9 @@ function hierarchical_select_neighbourhoods_vocabulary_form($form, &$form_state)
   );
 
   $vocab = taxonomy_vocabulary_machine_name_load('neighbourhoods');
+  // There are some hidden terms by js. @see facets_script.js
+
+
   $vid = $vocab->vid;
 
   $form['hierarchical_select']['select_subject'] = array(
