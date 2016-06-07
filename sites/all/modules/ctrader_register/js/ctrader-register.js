@@ -1,28 +1,76 @@
 (function ($) {
 
-  Drupal.behaviors.addMap = {
+  Drupal.behaviors.addSingUpMap = {
     attach: function (context) {
+      var mymap;
+      var neighbourhoodsData;
+      var neighbourhoodsStyle = {
+        "color": "#B9760B",
+        "weight": 2,
+        "opacity": 1,
+        "fillOpacity": 0.3
+      };
+      function onEachFeature(feature, layer) {
+        // does this feature have a property named popupContent?
+        if (feature.properties && feature.properties.popupContent) {
+          layer.bindPopup(feature.properties.popupContent);
+        }
+      }
+
+      $('.page-user-register .selects select').change(function() {
+
+        console.log('Form change!');
+
+        $.ajax({
+          type: 'POST',
+          //url: window.location.pathname,
+          url: '/js-singup-map',
+          data: {
+            'signUpLoc': $(this).val()
+          },
+          //dataType: 'json',
+          success: function(data){
+            console.log(data);
+            //console.log('fdf', msg);
+            //alert(data);
+            neighbourhoodsData = data;
+
+            var nLayer = L.geoJson(data, {
+              style: neighbourhoodsStyle,
+              onEachFeature: onEachFeature
+            });
+
+            //console.log(mymap.hasLayer(nLayer));
+            if (mymap.hasLayer(nLayer)) {
+              mymap.removeLayer(nLayer);
+            }
+
+            mymap.addLayer(nLayer);
+
+
+
+          }
+        });
+
+      });
+
       $('body').once(function () {
-        var mymap = L.map('mapid').setView([43.73, -79.34], 9);
+
+
+
+        mymap = L.map('mapid').setView([43.73, -79.34], 9);
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
           attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(mymap);
 
-        function onEachFeature(feature, layer) {
-          // does this feature have a property named popupContent?
-          if (feature.properties && feature.properties.popupContent) {
-            layer.bindPopup(feature.properties.popupContent);
-          }
-        }
 
-        var neighbourhoodsData = Drupal.settings.neighbourhoodsMapData;
-        var neighbourhoodsStyle = {
-          "color": "#B9760B",
-          "weight": 2,
-          "opacity": 1,
-          "fillOpacity": 0.3
-        };
-        L.geoJson(neighbourhoodsData, {
+
+        //neighbourhoodsData = Drupal.settings.neighbourhoodsMapData;
+
+        //console.log(neighbourhoodsData);
+
+
+        var nLayer = L.geoJson(neighbourhoodsData, {
           style: neighbourhoodsStyle,
           onEachFeature: onEachFeature
         }).addTo(mymap);

@@ -31,6 +31,21 @@ function ctrader_register_init() {
 
 
 /**
+ * Implements hook_menu().
+ */
+function ctrader_register_menu() {
+  $items = array();
+  $items['js-singup-map'] = array(
+    'title' => 'Search link calculating page',
+    'page callback' => '_js_singup_map_page_callback',
+    'access callback' => TRUE,
+    'delivery callback' => 'drupal_json_output',
+  );
+  return $items;
+}
+
+
+/**
  * Implements hook_form_FORM_ID_alter() for the registration form.
  */
 function ctrader_register_form_user_register_form_alter(&$form, &$form_state) {
@@ -149,3 +164,17 @@ function ctrader_register_element_info_alter(&$types) {
 }
 
 
+/**
+ * Page callback function.
+ * @see
+ * @return null|void
+ */
+function _js_singup_map_page_callback() {
+  if (isset($_POST['signUpLoc'])) {
+    foreach ($_SESSION['neighbourhood_json'] as $value) {
+      if ($value['id'] == $_POST['signUpLoc']) {
+        drupal_json_output($value);
+      }
+    }
+  }
+}
