@@ -467,14 +467,6 @@
             $('#edit-user-looking-und').chosen({
                 "disable_search": true
             });
-
-            $('.page-user-register .selects select').change(function() {
-                $.ajax({
-                    type: 'POST',
-                    url: window.location.pathname,
-                    data: $(this).val() 
-                });
-            });
         }
     };
 
