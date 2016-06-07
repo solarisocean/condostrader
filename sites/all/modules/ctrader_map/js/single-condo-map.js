@@ -16,6 +16,7 @@
             "fillOpacity": 0.3
           };
           var mymap = L.map('condo-map');
+          L.Icon.Default.imagePath = '/sites/all/libraries/leaflet/images';
           L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           }).addTo(mymap);
