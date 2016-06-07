@@ -18,6 +18,8 @@
                         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     }).addTo(mymap);
 
+                    L.Icon.Default.imagePath = '/sites/all/libraries/leaflet/images';
+
                     var inputRes = $('#-ctrader-saf-search-button-form input[name="geo_loc"]');
                     var labelOptions = {
                       className: 'leaflet-label-other',
