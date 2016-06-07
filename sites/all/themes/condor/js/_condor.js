@@ -194,9 +194,12 @@
                         switch ($(this).attr('name').charAt($(this).attr('name').length - 2)) {
                             case '0':
                                 $(form + ' input[name="region"]').val($(this).val());
+                                $(form + ' input[name="region_1"]').val('');
+                                $(form + ' input[name="region_2"]').val('');
                                 break;
                             case '1':
                                 $(form + ' input[name="region_1"]').val($(this).val());
+                                $(form + ' input[name="region_2"]').val('');
                                 break;
                             case '2':
                                 $(form + ' input[name="region_2"]').val($(this).val());
@@ -393,6 +396,7 @@
                 $('.condo-page-gallery .field-name-field-toronto-gallery, .condo-page-pagination .field-name-field-toronto-gallery').addClass('swiper-wrapper');
                 $('.condo-page-gallery .field-name-field-toronto-gallery img, .condo-page-pagination .field-name-field-toronto-gallery img').addClass('swiper-slide');
 
+                $('.condo-page-pagination .pane-content').append('<div class="swiper-scrollbar"></div>');
                 $('.condo-page-gallery .pane-content').append('<div class="gallery-slider-button-next swiper-button-next"></div><div class="gallery-slider-button-prev swiper-button-prev"></div>');
 
                 var galleryTop = new Swiper('.condo-page-gallery .pane-content', {
@@ -407,6 +411,9 @@
                 });
 
                 var galleryThumbs = new Swiper('.condo-page-pagination .pane-content', {
+                    scrollbar: '.swiper-scrollbar',
+                    scrollbarHide: false,
+                    scrollbarDraggable: true,
                     spaceBetween: 30,
                     freeMode: false,
                     centeredSlides: false,
@@ -414,7 +421,6 @@
                     touchRatio: 0.2,
                     direction: 'vertical',
                     onClick: function (swiper, event){
-                        console.log('bu');
                         var clicked = swiper.clickedIndex;
                         swiper.activeIndex = clicked;
                         swiper.updateClasses();
@@ -462,6 +468,13 @@
                 "disable_search": true
             });
 
+            $('.page-user-register .selects select').change(function() {
+                $.ajax({
+                    type: 'POST',
+                    url: window.location.pathname,
+                    data: $(this).val() 
+                });
+            });
         }
     };
 
