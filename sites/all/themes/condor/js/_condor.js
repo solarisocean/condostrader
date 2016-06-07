@@ -467,6 +467,7 @@
             $('#edit-user-looking-und').chosen({
                 "disable_search": true
             });
+
         }
     };
 
