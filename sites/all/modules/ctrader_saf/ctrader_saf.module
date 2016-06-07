@@ -126,14 +126,6 @@ function ctrader_saf_search_api_ranges_minmax_alter(&$variables, &$order) {
 
 
 /**
- * Implements hook_entity_presave().
- */
-function ctrader_saf_entity_presave($entity, $type) {
-
-}
-
-
-/**
  * Implements hook_search_api_solr_query_alter().
  */
 function ctrader_saf_search_api_solr_query_alter(array &$call_args, SearchApiQueryInterface $query) {
@@ -354,6 +346,7 @@ function ctrader_saf_block_view($delta = '') {
   return $block;
 }
 
+
 function _ctrader_saf_blocks_content_function($delta) {
   switch ($delta) {
     case 'ctrader_search_button':
@@ -498,6 +491,7 @@ function _ctrader_saf_blocks_content_function($delta) {
       return $search_button_form;
   }
 }
+
 
 /**
  * Form wit "SEARCH" button on homepage.
@@ -673,6 +667,27 @@ function _ctrader_saf_search_button_form_submit($form, &$form_state) {
   $size_field_name = 'field_sqft_range_max__torcond';
   if ($form_state['values']['size_min']) {
     $query['f'][] = "{$size_field_name}:[{$form_state['values']['size_min']} TO {$form_state['values']['size_max']}]";
+  }
+
+  // REGION facet selectlist.
+  $region_field_name = 'field_city_region__torcond%3Aparents_all';
+  $region_term_id = '';
+  if (!empty($form_state['values']['region'])) {
+    $region_term_id .= $form_state['values']['region'];
+    if (!empty($form_state['values']['region_1'])) {
+      $region_term_id .= ' AND ' . $form_state['values']['region_1'];
+      if (!empty($form_state['values']['region_2'])) {
+        $region_term_id .= ' AND ' . $form_state['values']['region_2'];
+      }
+    }
+  }
+  if($region_term_id && !$form_state['values']['geo_loc']) {
+    if (stripos($region_term_id, 'AND') === FALSE) {
+      $query['f'][] = "{$region_field_name}:{$region_term_id}";
+    }
+    else {
+      $query['f'][] = "{$region_field_name}:({$region_term_id})";
+    }
   }
 
   $url = url($path, array(
@@ -945,6 +960,7 @@ function ctrader_saf_forms($form_id) {
   }
   return $forms;
 }
+
 
 function _ctrader_saf_facetapi_select_facet_form($form, &$form_state, $variables) {
   if (!empty($variables['options'])) {
