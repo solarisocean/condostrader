@@ -188,7 +188,7 @@ function ctrader_saf_search_api_solr_query_alter(array &$call_args, SearchApiQue
     }
   }
 
-  if (isset($_GET['polygon'])) {
+  if (isset($_GET['polygon'])) { //Draw polygon on map.
     foreach ($call_args['params']['fq'] as $key => $value) {
       if (strpos($value, 'rpts_field_search_point_string:"Intersects(') === 0) {
         $call_args['params']['fq'][$key] = 'rpts_field_search_point_string:"Intersects(POLYGON((' . $_GET['polygon'] . ')))"';
@@ -199,9 +199,13 @@ function ctrader_saf_search_api_solr_query_alter(array &$call_args, SearchApiQue
       $call_args['params']['fq'][] = 'rpts_field_search_point_string:"Intersects(POLYGON((' . $_GET['polygon'] . ')))"';
     }
   }
-  elseif (isset($_GET['neighbourhoods'])) {
+  elseif (isset($_GET['neighbourhoods'])) { //Neighbourhood's polygon select on map.
     $neib_query = '(' . str_replace('-', ' OR ', $_GET['neighbourhoods']) . ')';
     $call_args['params']['fq'][] = 'im_field_city_region__torcond:' . $neib_query;
+  }
+  elseif (isset($_GET['region'])) { //Regions selectlist (hierarchical select).
+    $region_query = '(' . str_replace('>', ' AND ', $_GET['region']) . ')';
+    $call_args['params']['fq'][] = 'im_field_city_region__torcond$parents_all:' . $region_query;
   }
 }
 
@@ -384,6 +388,14 @@ function _ctrader_saf_blocks_content_function($delta) {
           $neighb_array[$key] = 'tid' . $value;
         }
         $search_button_form['geo_loc']['#value'] = implode(', ', $neighb_array);
+      }
+
+      // REGION hierarchical selectlist.
+      if (isset($_GET['region'])) {
+        $regions = explode('>', $_GET['region']);
+        $search_button_form['region']['#value'] = isset($regions[0]) ? $regions[0] : NULL;
+        $search_button_form['region_1']['#value'] = isset($regions[1]) ? $regions[1] : NULL;
+        $search_button_form['region_2']['#value'] = isset($regions[2]) ? $regions[2] : NULL;
       }
 
       /* @see _ctrader_saf_search_button_form_submit */
@@ -670,24 +682,20 @@ function _ctrader_saf_search_button_form_submit($form, &$form_state) {
   }
 
   // REGION facet selectlist.
+  /* @see ctrader_saf_search_api_solr_query_alter */
   $region_field_name = 'field_city_region__torcond%3Aparents_all';
   $region_term_id = '';
   if (!empty($form_state['values']['region'])) {
     $region_term_id .= $form_state['values']['region'];
     if (!empty($form_state['values']['region_1'])) {
-      $region_term_id .= ' AND ' . $form_state['values']['region_1'];
+      $region_term_id .= '>' . $form_state['values']['region_1'];
       if (!empty($form_state['values']['region_2'])) {
-        $region_term_id .= ' AND ' . $form_state['values']['region_2'];
+        $region_term_id .= '>' . $form_state['values']['region_2'];
       }
     }
   }
-  if($region_term_id && !$form_state['values']['geo_loc']) {
-    if (stripos($region_term_id, 'AND') === FALSE) {
-      $query['f'][] = "{$region_field_name}:{$region_term_id}";
-    }
-    else {
-      $query['f'][] = "{$region_field_name}:({$region_term_id})";
-    }
+  if ($region_term_id && !$form_state['values']['geo_loc']) {
+    $query['region'] = $region_term_id;
   }
 
   $url = url($path, array(
