@@ -4124,7 +4124,7 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
     'prefix' => '$',
     'suffix' => '',
     'auto-submit-delay' => '10',
-    'slider-step' => '100',
+    'slider-step' => '10000',
     'round-precision' => '100',
     'range_simple' => 10,
     'range_advanced' => '',
