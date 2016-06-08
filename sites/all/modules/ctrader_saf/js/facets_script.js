@@ -19,20 +19,18 @@
     attach: function (context) {
       var parent = $('.neighbourhoods-hierarchical select:first-child option');
       parent.each(function () {
-        if ($(this).attr('value') == 577 || $(this).attr('value') == 579) {
-          $(this).remove();
-        }
 
-        if ($(this).html().match("^grandparent_0") || $(this).html().match("^grandparent_5")) {
-          $(this).remove();
+        // Hides all cities options except few and 'any' label.
+        var cities = ['Toronto', 'York', 'York Region', 'Peel', 'Halton'];
+        if($.inArray($(this).html(), cities) === -1) {
+          if($(this).val() != 'label_0') {
+            $(this).hide();
+          }
         }
       });
 
-      //  $('.neighbourhoods-hierarchical .form-select').chosen({
-      //    'disable_search': true
-      //  });
-      //
-      //  $('.neighbourhoods-hierarchical .selects').css('width', '200px');
+      // Hides third level on hierarchical select.
+      $('.neighbourhoods-hierarchical .selects select.form-select:nth-child(3)').remove();
     }
   };
 
