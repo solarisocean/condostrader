@@ -730,7 +730,7 @@ function hierarchical_select_neighbourhoods_vocabulary_form($form, &$form_state)
 
   $form['hierarchical_select']['select_subject'] = array(
     '#type' => 'hierarchical_select',
-    '#title' => t('Region:'),
+    '#title' => t('Location:'),
     '#size' => 1,
     '#config' => array(
       'module' => 'hs_taxonomy',
@@ -745,9 +745,9 @@ function hierarchical_select_neighbourhoods_vocabulary_form($form, &$form_state)
       'level_labels' => array(
         'status' => 1,
         'labels' => array(
-          0 => t('-- city --'),
-          1 => t('-- region --'),
-          2 => t('-- neighbourhood --'),
+          0 => t('All Cities'),
+          1 => t('All Regions'),
+          2 => t('All Communities'),
         ),
       ),
       'dropbox' => array(
