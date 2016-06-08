@@ -312,7 +312,7 @@ function _hierarchical_select_create_export_code($config) {
       foreach ($count as $delta => $bundles) {
         $output .= "          '$delta' => array(\n";
         foreach ($bundles as $delta => $bundle) {
-          $output .= "            '$delta' => $bundle,\n";
+          $output .= "            '$delta' => '$bundle',\n";
         }
         $output .= "          ),\n";
       }
