@@ -136,12 +136,14 @@ class SearchApiCtraderRangesWidgetUISlider extends FacetapiWidget {
     );
 
     // Query the min/max values for the range slider
-    $min_value = search_api_ranges_minmax($variables, 'ASC');
+//    $min_value = search_api_ranges_minmax($variables, 'ASC');
+    $min_value = 0;
     $max_value = search_api_ranges_minmax($variables, 'DESC');
 
     // Kill widget if there is nothing to do
     if (empty($min_value) && empty($max_value)) {
-      $min_value = db_query("SELECT MIN({$variables['range_field']}_value) FROM {field_data_{$variables['range_field']}}")->fetchField();
+//      $min_value = db_query("SELECT MIN({$variables['range_field']}_value) FROM {field_data_{$variables['range_field']}}")->fetchField();
+      $min_value = 0;
       $max_value = db_query("SELECT MAX({$variables['range_field']}_value) FROM {field_data_{$variables['range_field']}}")->fetchField();
 //      return array();
     };

@@ -62,6 +62,7 @@ function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
       'callback' => '_ctrader_saf_range_ajax_form_submit',
       'effect' => 'fade',
     );
+    $form['#attached']['js'][] = drupal_get_path('module', 'ctrader_saf') . '/js/jquery.price_format.2.0.js';
     foreach ($form['#attached']['js'] as $key => $value) {
       if (is_string($value) && strpos($value, '/search_api_ranges/search_api_ranges.js')) {
         $form['#attached']['js'][$key] = drupal_get_path('module', 'ctrader_saf') . '/js/rewritten_search_api_ranges.js';
