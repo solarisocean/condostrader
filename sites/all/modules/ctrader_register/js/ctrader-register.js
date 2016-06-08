@@ -1,121 +1,69 @@
 (function ($) {
-
   Drupal.behaviors.addSingUpMap = {
-    attach: function (context) {
-      var mymap;
-      var neighbourhoodsData;
-      var neighbourhoodsStyle = {
-        "color": "#B9760B",
-        "weight": 2,
-        "opacity": 1,
-        "fillOpacity": 0.3
-      };
-      function onEachFeature(feature, layer) {
-        // does this feature have a property named popupContent?
-        if (feature.properties && feature.properties.popupContent) {
-          layer.bindPopup(feature.properties.popupContent);
-        }
-      }
-
-      $('.page-user-register .selects select').change(function() {
-
-        console.log('Form change!');
-
-        $.ajax({
-          type: 'POST',
-          //url: window.location.pathname,
-          url: '/js-singup-map',
-          data: {
-            'signUpLoc': $(this).val()
-          },
-          //dataType: 'json',
-          success: function(data){
-            console.log(data);
-            //console.log('fdf', msg);
-            //alert(data);
-            neighbourhoodsData = data;
-
-            var nLayer = L.geoJson(data, {
-              style: neighbourhoodsStyle,
-              onEachFeature: onEachFeature
-            });
-
-            //console.log(mymap.hasLayer(nLayer));
-            if (mymap.hasLayer(nLayer)) {
-              mymap.removeLayer(nLayer);
-            }
-
-            mymap.addLayer(nLayer);
-
-
-
-          }
-        });
-
-      });
+    attach: function (context, settings) {
+      var mymap,  
+            nLayer;
 
       $('body').once(function () {
-
-
-
         mymap = L.map('mapid').setView([43.73, -79.34], 9);
+        
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
           attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(mymap);
+        
+        nLayer = L.geoJson().addTo(mymap);
 
+        settings.mymap = mymap;
+        settings.mymapLayer = nLayer;
+      });
+    }
+  };
 
+  Drupal.behaviors.rewriteLayer = {
+    attach: function (context, settings) {
+      $('.page-user-register .selects select').change(function () {
+        var selectName = $(this).attr('name').charAt($(this).attr('name').length - 2);
+        var neighbourhoodsStyle = {
+          "color": "#B9760B",
+          "weight": 2,
+          "opacity": 1,
+          "fillOpacity": 0.3
+        };
 
-        //neighbourhoodsData = Drupal.settings.neighbourhoodsMapData;
-
-        //console.log(neighbourhoodsData);
-
-
-        var nLayer = L.geoJson(neighbourhoodsData, {
-          style: neighbourhoodsStyle,
-          onEachFeature: onEachFeature
-        }).addTo(mymap);
-
-        // draw tools
-        var drawnItems = new L.FeatureGroup();
-        mymap.addLayer(drawnItems);
-        var drawControl = new L.Control.Draw({
-          position: 'topright',
-          draw: {
-            polygon: {
-              shapeOptions: {
-                color: '#2DA56F',
-                weight: 1,
-                opacity: .7,
-                dashArray: '20,3',
-                lineJoin: 'round'
-              }
+        if ($(this).val() === 'label_0') {
+          settings.mymapLayer.clearLayers();
+        }
+        else if ($(this).val() !== 'label_1' && $(this).val() !== 'label_2') {
+          $.ajax({
+            type: 'POST',
+            url: '/js-singup-map',
+            data: {
+              'signUpLoc': $(this).val()
             },
-            polyline: {
-              shapeOptions: {
-                color: 'green'
+            success: function(data){
+              settings.mymapLayer.clearLayers();
+              settings.mymapLayer.addData(data).bindPopup(data.properties.popupContent).setStyle(neighbourhoodsStyle);
+              settings.mymapLayer.on({
+                click: function() {
+                  settings.mymapLayer.openPopup();
+                }
+              });
+              switch (selectName) {
+                case '0':
+                  settings.mymap.setView(settings.mymapLayer.getBounds().getCenter(), 9);
+                  break;
+                case '1':
+                  settings.mymap.setView(settings.mymapLayer.getBounds().getCenter(), 10);
+                  break;
+                case '2':
+                  settings.mymap.setView(settings.mymapLayer.getBounds().getCenter(), 14);
+                  break;
               }
-            },
-            rect: {
-              shapeOptions: {
-                color: 'steelblue'
-              }
-            },
-            circle: {
-              shapeOptions: {
-                color: 'green'
-              }
+
             }
-          },
-          edit: {
-            featureGroup: drawnItems
-          }
-        });
-        mymap.addControl(drawControl);
-        mymap.on('draw:created', function (e) {
-          var type = e.layerType,
-            layer = e.layer;
-          drawnItems.addLayer(layer);
-        });
+          });
+        }
+
       });
     }
   };
