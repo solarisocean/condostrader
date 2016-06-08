@@ -113,6 +113,13 @@ function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
       }
     }
   }
+
+  // Sets default value for regions hierarchical select in facets-mini-panel.
+  if ($form_id == 'hierarchical_select_neighbourhoods_vocabulary_form') {
+    if (isset($_GET['region'])) {
+      $form['hierarchical_select']['select_subject']['#default_value'] = explode('>', $_GET['region']);
+    }
+  }
 }
 
 
