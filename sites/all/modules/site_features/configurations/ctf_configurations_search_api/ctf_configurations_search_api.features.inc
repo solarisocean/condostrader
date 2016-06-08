@@ -42,7 +42,7 @@ function ctf_configurations_search_api_default_search_api_index() {
     "options" : {
       "datasource" : { "bundles" : [ "toronto_condo", "toronto_building" ] },
       "index_directly" : 0,
-      "cron_limit" : "50",
+      "cron_limit" : "12",
       "fields" : {
         "active" : { "type" : "integer" },
         "field_a_c__torcond" : { "type" : "string" },
