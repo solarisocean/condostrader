@@ -1111,7 +1111,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['views_conditional']['exclude'] = TRUE;
   $handler->display->display_options['fields']['views_conditional']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['views_conditional']['if'] = 'field_locker_torcond';
-  $handler->display->display_options['fields']['views_conditional']['condition'] = '2';
+  $handler->display->display_options['fields']['views_conditional']['condition'] = '1';
   $handler->display->display_options['fields']['views_conditional']['equalto'] = 'None';
   $handler->display->display_options['fields']['views_conditional']['then'] = 'No';
   $handler->display->display_options['fields']['views_conditional']['or'] = 'Yes';
@@ -1559,7 +1559,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['views_conditional']['exclude'] = TRUE;
   $handler->display->display_options['fields']['views_conditional']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['views_conditional']['if'] = 'field_locker_torcond';
-  $handler->display->display_options['fields']['views_conditional']['condition'] = '2';
+  $handler->display->display_options['fields']['views_conditional']['condition'] = '1';
   $handler->display->display_options['fields']['views_conditional']['equalto'] = 'None';
   $handler->display->display_options['fields']['views_conditional']['then'] = 'No';
   $handler->display->display_options['fields']['views_conditional']['or'] = 'Yes';

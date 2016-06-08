@@ -175,15 +175,37 @@ function ctrader_saf_search_api_solr_query_alter(array &$call_args, SearchApiQue
   }
 
   if (!empty($facet_item) && isset($facet_item[0]) && is_object($facet_item[0])) {
-    $facet_item = $facet_item[0]->getFilters();
+    foreach ($facet_item as $f_item) {
+      if (is_object($f_item)) {
+        $f_item = $f_item->getFilters();
 
-    // Changes query for item 'Owned' in field:locker facet.
-    // Makes one checkbox for all possible options (except 'None').
-    if (!empty($facet_item[0]) && is_array($facet_item[0]) && $facet_item[0][0] == 'field_locker__torcond') {
-      if (!empty($facet_item[0][1])) {
-        $facet_item = $facet_item[0][1];
-        if ($facet_item !== 'None') {
-          $call_args['params']['fq'][0] = '{!tag=facet:field_locker__torcond}((ss_field_locker__torcond:"Owned") OR (ss_field_locker__torcond:"Exclusive") OR (ss_field_locker__torcond:"Ensuite") OR (ss_field_locker__torcond:"Ensuite+Owned") OR (ss_field_locker__torcond:"Common") OR (ss_field_locker__torcond:"Ensuite+Exclusive"))';
+        // Changes query for item 'Owned' in field:locker facet.
+        // Makes one checkbox for all possible options (except 'None').
+        if (!empty($f_item[0]) && is_array($f_item[0]) && $f_item[0][0] == 'field_locker__torcond') {
+          if (!empty($f_item[0][1])) {
+            $f_item = $f_item[0][1];
+            if ($f_item !== 'None') {
+              foreach ($call_args['params']['fq'] as $key => $value) {
+                if (stripos($value, '{!tag=facet:field_locker__torcond}') !== FALSE) {
+                  $call_args['params']['fq'][$key] = '{!tag=facet:field_locker__torcond}ss_field_locker__torcond:("Owned" OR "Exclusive" OR "Ensuite" OR "Ensuite+Owned" OR "Common" OR "Ensuite+Exclusive")';
+                }
+              }
+            }
+          }
+        }
+
+        // Change facet query for field 'field_br__torcond'.
+        if (!empty($f_item[0]) && is_array($f_item[0]) && $f_item[0][0] == 'field_br__torcond') {
+          if (!empty($f_item[0][1])) {
+            $f_item = $f_item[0][1];
+            if ($f_item == 5) {
+              foreach ($call_args['params']['fq'] as $key => $value) {
+                if (stripos($value, '{!tag=facet:field_br__torcond}') !== FALSE) {
+                  $call_args['params']['fq'][$key] = '{!tag=facet:field_br__torcond}is_field_br__torcond:["5" TO *]';
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -257,10 +279,12 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
       $facet = facetapi_facet_load($settings->facet, $settings->searcher);
       $items = $adapter->getActiveItems($facet);
       $item_values = array();
-
       foreach ($build as $key => $build_item) {
         $build[$key]['#html'] = TRUE;
         $build[$key]['#markup'] = l(t($build_item['#markup']), '');
+        if ($build_item['#indexed_value'] > 5) {
+          unset($build[$key]);
+        }
       }
 
       foreach ($items as $item) {

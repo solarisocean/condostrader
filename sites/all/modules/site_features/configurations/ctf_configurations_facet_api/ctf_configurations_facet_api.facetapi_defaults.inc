@@ -39,8 +39,6 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
     'default_true' => '1',
     'facet_search_ids' => array(
       'search_api_views:search_results_ctrader:page_2' => 'search_api_views:search_results_ctrader:page_2',
-      'search_api_views:search_results_ctrader:page_3' => 'search_api_views:search_results_ctrader:page_3',
-      'search_api_views:search_results_ctrader:page_4' => 'search_api_views:search_results_ctrader:page_4',
     ),
     'exclude' => 0,
     'pretty_paths_alias' => 'field_br__torcond',
