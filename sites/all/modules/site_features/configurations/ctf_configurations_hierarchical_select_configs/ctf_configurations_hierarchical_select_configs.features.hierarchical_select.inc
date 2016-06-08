@@ -17,9 +17,9 @@ $config = array(
   'level_labels' => array(
     'status' => 1,
     'labels' => array(
-      0 => 'City',
-      1 => 'Region',
-      2 => 'Neighbourhood',
+      0 => 'All Cities',
+      1 => 'All Regions',
+      2 => 'All Communities',
     ),
   ),
   'dropbox' => array(
@@ -45,10 +45,22 @@ $config = array(
     'max_levels'       => 2,
   ),
   'entity_count' => array(
-    'enabled' => ,
-    'require_entity' => ,
+    'enabled' => 0,
+    'require_entity' => 0,
     'settings' => array(
-      'count_children' => ,
+      'count_children' => 0,
+      'entity_types' => array(
+        'node' => array(
+          'count_node' => array(
+            'article' => 'article',
+            'page' => 'page',
+            'blog_post' => 'blog_post',
+            'condo' => 'condo',
+            'panel' => 'panel',
+            'simplenews' => 'simplenews',
+            'webform' => 'webform',
+          ),
+        ),
       ),
     ),
   ),

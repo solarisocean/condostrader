@@ -112,6 +112,7 @@ function hierarchical_select_element_info() {
         'title'    => t('All selections'),
         'limit'    => 0,
         'reset_hs' => 1,
+        'sort'     => 1,
       ),
       'editability' => array(
         'status'           => 0,

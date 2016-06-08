@@ -378,7 +378,6 @@ should get you started.
       ),
       'save_lineage'    => 0,
       'enforce_deepest' => 0,
-      'entity_count'    => 0,
       'resizable'       => 1,
       'level_labels' => array(
         'status' => 0,
@@ -393,7 +392,7 @@ should get you started.
         'title'    => t('All selections'),
         'limit'    => 0,
         'reset_hs' => 1,
-        'sort' => 1,
+        'sort'     => 1,
       ),
       'editability' => array(
         'status'           => 0,
@@ -405,6 +404,14 @@ should get you started.
         ),
         'allow_new_levels' => 0,
         'max_levels'       => 3,
+      ),
+      'entity_count'    => array(
+        'enabled' => 0,
+        'require_entity' => 0,
+        'settings' => array(
+          'count_children' => 0,
+          'entity_types' => array(),
+        ),
       ),
       // These settings cannot be configured through the UI: they can only be
       // overridden through code.
