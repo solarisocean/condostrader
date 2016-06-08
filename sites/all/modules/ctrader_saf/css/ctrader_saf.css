@@ -72,3 +72,35 @@
   font-size: .75rem;
   text-decoration: underline;
 }
+
+.front .newly-listed .view-homepage-view-blocks .views-row .views-fieldset .views-field-nothing .field-content,
+.front .nearby-listed .views-row .views-fieldset .views-field-nothing .field-content,
+.page-search-results .view-search-results-ctrader .view-content .views-row .views-fieldset .views-field-nothing .field-content,
+.page-drealty-listing .pane-nearby-listings .views-row .views-fieldset .views-field-nothing .field-content {
+  font-size: .75rem;
+  color: #929191;
+  line-height: 10px;
+}
+
+.front .newly-listed .view-homepage-view-blocks .views-row .views-fieldset .views-field-nothing .field-content:before,
+.front .nearby-listed .views-row .views-fieldset .views-field-nothing .field-content:before,
+.page-search-results .view-search-results-ctrader .view-content .views-row .views-fieldset .views-field-nothing .field-content:before,
+.page-drealty-listing .pane-nearby-listings .views-row .views-fieldset .views-field-nothing .field-content:before {
+  margin-right: 4px;
+  float: left;
+}
+
+.front .view-lowest-price-block .views-row .views-fieldset .views-field-nothing .field-content,
+.front .view-highest-price-block .views-row .views-fieldset .views-field-nothing .field-content,
+.front .view-most-viewed-block .views-row .views-fieldset .views-field-nothing .field-content {
+  font-size: .75rem;
+  color: #929191;
+  line-height: 10px;
+}
+
+.front .view-lowest-price-block .views-row .views-fieldset .views-field-nothing .field-content:before,
+.front .view-highest-price-block .views-row .views-fieldset .views-field-nothing .field-content:before,
+.front .view-most-viewed-block .views-row .views-fieldset .views-field-nothing .field-content:before {
+  margin-right: 4px;
+  float: left;
+}
