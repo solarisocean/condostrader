@@ -703,14 +703,16 @@ function _ctrader_saf_search_button_form_submit($form, &$form_state) {
 
   // PRICE facet slider.
   $price_field_name = 'field_lp_dol__torcond';
-  if ($form_state['values']['price_min']) {
-    $query['f'][] = "{$price_field_name}:[{$form_state['values']['price_min']} TO {$form_state['values']['price_max']}]";
+  if ($form_state['values']['price_max']) {
+    $price_min_input = $form_state['values']['price_min'] ? $form_state['values']['price_min'] : 0;
+    $query['f'][] = "{$price_field_name}:[{$price_min_input} TO {$form_state['values']['price_max']}]";
   }
 
   // SIZE facet slider.
   $size_field_name = 'field_sqft_range_max__torcond';
-  if ($form_state['values']['size_min']) {
-    $query['f'][] = "{$size_field_name}:[{$form_state['values']['size_min']} TO {$form_state['values']['size_max']}]";
+  if ($form_state['values']['size_max']) {
+    $size_min_input = $form_state['values']['size_min'] ? $form_state['values']['size_min'] : 0;
+    $query['f'][] = "{$size_field_name}:[{$size_min_input} TO {$form_state['values']['size_max']}]";
   }
 
   // REGION facet selectlist.
