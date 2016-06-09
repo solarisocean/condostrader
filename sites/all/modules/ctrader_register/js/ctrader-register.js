@@ -50,13 +50,16 @@
               });
               switch (selectName) {
                 case '0':
-                  settings.mymap.setView(settings.mymapLayer.getBounds().getCenter(), 9);
+                  //settings.mymap.setView(settings.mymapLayer.getBounds().getCenter(), 9);
+                  settings.mymap.fitBounds(settings.mymapLayer.getBounds());
                   break;
                 case '1':
-                  settings.mymap.setView(settings.mymapLayer.getBounds().getCenter(), 10);
+                  //settings.mymap.setView(settings.mymapLayer.getBounds().getCenter(), 11);
+                  settings.mymap.fitBounds(settings.mymapLayer.getBounds());
                   break;
                 case '2':
-                  settings.mymap.setView(settings.mymapLayer.getBounds().getCenter(), 14);
+                  //settings.mymap.setView(settings.mymapLayer.getBounds().getCenter(), 14);
+                  settings.mymap.fitBounds(settings.mymapLayer.getBounds());
                   break;
               }
 
