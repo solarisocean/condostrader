@@ -86,7 +86,7 @@ function ctrader_register_form_user_register_form_alter(&$form, &$form_state) {
   $form['sign_up_left'] = array(
     '#type' => 'container',
     '#attributes' => array(
-      'class' => array (
+      'class' => array(
         'sign_up_left',
       ),
     ),
@@ -95,12 +95,12 @@ function ctrader_register_form_user_register_form_alter(&$form, &$form_state) {
   $form['sign_up_right'] = array(
     '#type' => 'container',
     '#attributes' => array(
-      'class' => array (
+      'class' => array(
         'sign_up_right',
       ),
     ),
   );
-  
+
   // Unset field_mobile_phone_number placeholder.
   unset($form['field_mobile_phone_number'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder']);
 
@@ -179,9 +179,20 @@ function _js_singup_map_page_callback() {
   }
 
   if (isset($_POST['locationSelect'])) {
+    $neighbourhood_json = variable_get('neighbourhood_json');
     $results_map_polygons = array();
-    foreach ($_SESSION['neighbourhood_json'] as $value) {
-      $stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
+    $location_select_polygon = array();
+    foreach ($neighbourhood_json as $value) {
+      if ($value['parent_id'] == $_POST['locationSelect']) {
+        $results_map_polygons[] = $value;
+      }
+      if ($value['id'] == $_POST['locationSelect']) {
+        $location_select_polygon = $value;
+      }
     }
+    if (!$results_map_polygons) {
+      $results_map_polygons[] = $location_select_polygon;
+    }
+    drupal_json_output($results_map_polygons);
   }
 }
