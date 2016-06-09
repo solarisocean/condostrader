@@ -351,6 +351,7 @@ function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = 
           }
           $coordinates[] = $pre_multi_coordinates;
         }
+        $term_parent_id = end($tax_term->parents);
         $terms_polygon_prejson[] = array(
           'geometry' => array(
             'coordinates' => $coordinates,
@@ -361,11 +362,13 @@ function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = 
             'popupContent' => $polygon_popup_content,
           ),
           'id' => $tax_term_id,
+          'parent_id' => $term_parent_id,
           'type' => 'Feature',
         );
       }
     }
     $_SESSION['neighbourhood_json'] = $terms_polygon_prejson;
+    variable_set('neighbourhood_json', $terms_polygon_prejson);
   }
   drupal_add_js(array('neighbourhoodsMapData' => $_SESSION['neighbourhood_json']), 'setting');
 

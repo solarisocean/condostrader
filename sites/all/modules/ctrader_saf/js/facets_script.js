@@ -41,7 +41,7 @@
         }
       });
       // Hides third level on hierarchical select.
-      $('.neighbourhoods-hierarchical .selects select.form-select:nth-child(3)').remove();
+      //$('.neighbourhoods-hierarchical .selects select.form-select:nth-child(3)').remove();
     }
   };
 
