@@ -241,6 +241,14 @@
       display: none;
       visibility: hidden;
     }
+
+    .view-empty {
+      padding: 25px 0;
+
+      p {
+        font-size: rem-calc(30);
+      }
+    }
   }
 
   .search-results-load-more {
