@@ -7,4 +7,13 @@
       text-transform: uppercase;
     }
   }
+
+  .view-header {
+    @extend %condo-heading;
+  }
+  .view-id-flaged_condos_ {
+    .views-row {
+      @extend %condos-item;
+    }
+  }
 }

@@ -3,3 +3,5 @@ description = Provide search block in main menu.
 core = 7.x
 package = Condos Traider
 version = 7.x-1.0
+
+scripts[] = js/ctrader_searchmenu.js
