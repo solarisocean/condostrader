@@ -177,4 +177,11 @@ function _js_singup_map_page_callback() {
       }
     }
   }
+
+  if (isset($_POST['locationSelect'])) {
+    $results_map_polygons = array();
+    foreach ($_SESSION['neighbourhood_json'] as $value) {
+      $stop_xdebug = "DELETE THIS LINE - THIS LINE NEEDS FOR X-DEBUG";
+    }
+  }
 }
