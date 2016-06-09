@@ -1,12 +1,14 @@
 <div class="single-condo-map-legend">
   <div>
-    <?php print $neighbourhood_link ?>
-  </div>
-  <div>
-    <h4><?php print $neighbourhood_name; ?></h4>
+    <h4><?php print $neighbourhood_link; ?></h4>
   </div>
   <div class="legend-location">
-    <p>Listing Location</p>
-    <?php print $address . $city_link . ', ' . $country_region . 'Canada'; ?>
+    <?php print $address . $unit . $neighbourhood_name . $country_region . 'Canada'; ?>
+  </div>
+  <div class="legend-location condo-community">
+    <?php print $community_link; ?>
+  </div>
+  <div class="legend-location condo-area">
+    <?php print $area_link; ?>
   </div>
 </div>

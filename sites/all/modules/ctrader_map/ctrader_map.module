@@ -20,6 +20,7 @@ function ctrader_map_menu() {
  * Implements hook_init().
  */
 function ctrader_map_init() {
+  drupal_add_css(drupal_get_path('module', 'ctrader_map') . '/css/ctrader-map.css');
 //  unset($_SESSION['neighbourhood_json']);
 }
 
@@ -268,6 +269,12 @@ function ctrader_map_theme($existing, $type, $theme, $path) {
       'city_link' => NULL,
       'address' => NULL,
       'country_region' => NULL,
+      'zip_code' => NULL,
+      'unit' => NULL,
+      'community_name' => NULL,
+      'community_link' => NULL,
+      'area_name' => NULL,
+      'area_link' => NULL,
     ),
     'template' => 'theme/single-condo-map-legend',
   );
