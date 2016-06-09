@@ -191,6 +191,25 @@
                 $('.pane-ctrader-saf-neighbourhoods-hs select').each(function() {
                     $(this).change(function() {
 
+                        if ($(this).val() !== 'label_1' && $(this).val() !== 'label_2') {
+                            $.ajax({
+                                type: 'POST',
+                                url: '/js-singup-map',
+                                data: {
+                                    'locationSelect': $(this).val()
+                                }
+                            });
+                        }
+                        else if ($(this).val() === 'label_1' || $(this).val() === 'label_2') {
+                            $.ajax({
+                                type: 'POST',
+                                url: '/js-singup-map',
+                                data: {
+                                    'locationSelect': $(this).prev().val()
+                                }
+                            });
+                        }
+
                         switch ($(this).attr('name').charAt($(this).attr('name').length - 2)) {
                             case '0':
                                 $(form + ' input[name="region"]').val($(this).val());

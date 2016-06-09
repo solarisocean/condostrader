@@ -9,3 +9,32 @@
     }
   }
 }
+
+.page-contact {
+  .main {
+    max-width: 500px;
+    width: 100%;
+    margin: 30px auto;
+    border: 1px solid darken($athens-gray, 6);
+    padding: 10px;
+    box-shadow:  0 0 4px rgba(0,0,0,.2);
+
+    .pane-title {
+      font-size: rem-calc(30);
+      text-transform: uppercase;
+    }
+
+    label {
+      font-size: rem-calc(11);
+      text-transform: uppercase;;
+    }
+
+    .form-submit {
+      @extend %condo-more-button;
+      max-width: 200px;
+      width: 100%;
+      margin: 10px auto;
+      display: block;
+    }
+  }
+}
