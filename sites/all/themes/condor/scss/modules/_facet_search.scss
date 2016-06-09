@@ -307,12 +307,6 @@
       text-align: center;
       float: left;
 
-      &:nth-child(5n+1) {
-        .facetapi-facet {
-          border-left: 1px solid $ecstasy !important;
-        }
-      }
-
       .facetapi-facet {
         border: 1px solid $ecstasy;
 
