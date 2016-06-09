@@ -48,21 +48,26 @@
                   settings.mymapLayer.openPopup();
                 }
               });
-              switch (selectName) {
-                case '0':
-                  //settings.mymap.setView(settings.mymapLayer.getBounds().getCenter(), 9);
-                  settings.mymap.fitBounds(settings.mymapLayer.getBounds());
-                  break;
-                case '1':
-                  //settings.mymap.setView(settings.mymapLayer.getBounds().getCenter(), 11);
-                  settings.mymap.fitBounds(settings.mymapLayer.getBounds());
-                  break;
-                case '2':
-                  //settings.mymap.setView(settings.mymapLayer.getBounds().getCenter(), 14);
-                  settings.mymap.fitBounds(settings.mymapLayer.getBounds());
-                  break;
-              }
-
+              settings.mymap.fitBounds(settings.mymapLayer.getBounds());
+            }
+          });
+        }
+        else if ($(this).val() === 'label_1' || $(this).val() === 'label_2') {
+          $.ajax({
+            type: 'POST',
+            url: '/js-singup-map',
+            data: {
+              'signUpLoc': $(this).prev().val()
+            },
+            success: function(data){
+              settings.mymapLayer.clearLayers();
+              settings.mymapLayer.addData(data).bindPopup(data.properties.popupContent).setStyle(neighbourhoodsStyle);
+              settings.mymapLayer.on({
+                click: function() {
+                  settings.mymapLayer.openPopup();
+                }
+              });
+              settings.mymap.fitBounds(settings.mymapLayer.getBounds());
             }
           });
         }
