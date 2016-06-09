@@ -77,7 +77,7 @@ function ctf_pages_contact_default_page_manager_pages() {
     $pane->access = array();
     $pane->configuration = array(
       'admin_title' => 'Title',
-      'title' => 'Contact us:',
+      'title' => '<b>Contact</b> us:',
       'title_heading' => 'h3',
       'body' => 'info@condostrader.ca
 tel. 416-828-4532',
