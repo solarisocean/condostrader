@@ -1,5 +1,7 @@
 <?php
 /**
  * @file
- * Drupal needs this blank file.
+ * Code for the CT Features: Core: Field bases feature.
  */
+
+include_once 'ctf_core_field_bases.features.inc';
