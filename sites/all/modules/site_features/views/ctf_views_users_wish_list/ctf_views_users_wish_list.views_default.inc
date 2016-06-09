@@ -325,6 +325,14 @@ function ctf_views_users_wish_list_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = '<b>Your Wish List is currently empty,</b> add listing to your Wish List to see them here.';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['path'] = 'user/wishlist';
   $export['flaged_condos_'] = $view;
 

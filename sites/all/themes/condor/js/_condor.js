@@ -337,7 +337,12 @@
                  */
                 var tabs = function (tabs, pager) {
                     for (var i = 0; i < tabs.length; i++) {
-                        $(pager).find('a' + tabs[i] + '-tab span').text($(tabs[i] + ' .total-quantity').text());
+                        if ($(tabs[i] + ' .total-quantity').text()) {
+                            $(pager).find('a' + tabs[i] + '-tab span').text($(tabs[i] + ' .total-quantity').text());
+                        } else {
+                            $(pager).find('a' + tabs[i] + '-tab span').text(0);
+                        }
+                        // console.log($(tabs[i] + ' .total-quantity').text() == true);
                         $(tabs[i]).not(tabs[0]).hide();
                     }
 
