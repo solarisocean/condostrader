@@ -5,7 +5,7 @@
 (function ($) {
 
     Drupal.behaviors.addMap = {
-        attach: function (context) {
+        attach: function (context, settings) {
 
             setTimeout(function () {
                 $('body').once(function () {
@@ -13,6 +13,8 @@
                         doubleClickZoom: true,
                         scrollWheelZoom: false
                     }).setView([43.73, -79.34], 9);
+
+                    settings.test = mymap;
 
                     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
                         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -23,7 +25,7 @@
                     var inputRes = $('#-ctrader-saf-search-button-form input[name="geo_loc"]');
                     var labelOptions = {
                       className: 'leaflet-label-other',
-                      direction: 'auto',
+                      direction: 'auto'
                     };
                     labelOptions.noHide = false;
                     labelOptions.pane = 'popupPane';
@@ -88,11 +90,24 @@
                         "opacity": 1,
                         "fillOpacity": 0.3
                     };
+                    var neighbourhoodsLayer;
 
-                    var neighbourhoodsLayer = L.geoJson(neighbourhoodsData, {
-                        style: neighbourhoodsStyle,
-                        onEachFeature: onEachFeature
-                    });
+                    if (settings.hasOwnProperty('userPolygonSearch')) {
+                        neighbourhoodsLayer = L.geoJson(settings.userPolygonSearch, {
+                            style: neighbourhoodsStyle,
+                            onEachFeature: onEachFeature
+                        });
+                        settings.test2= neighbourhoodsLayer;
+                        setTimeout(function() {
+                            mymap.fitBounds(neighbourhoodsLayer.getBounds());
+                        }, 500);
+                    } else {
+                        neighbourhoodsLayer = L.geoJson(neighbourhoodsData, {
+                            style: neighbourhoodsStyle,
+                            onEachFeature: onEachFeature
+                        });
+                        settings.test2= neighbourhoodsLayer;
+                    }
 
 
                     // freeDraw tools.
