@@ -186,6 +186,28 @@ function ctrader_map_block_view($delta = '') {
 
       drupal_add_js(drupal_get_path('module', 'ctrader_map') . '/js/custom_map.js');
 
+      // Sends data to js if it is polygon search.
+      if (isset($_GET['polygon'])) {
+        $pre_coordinates = explode(',', $_GET['polygon']);
+        $coordinates = array();
+        foreach ($pre_coordinates as $value) {
+          $coordinates[] = explode(' ', $value);
+        }
+        $user_polygon_search = array(
+          'geometry' => array(
+            'coordinates' => array(
+              $coordinates,
+            ),
+            'type' => 'Polygon'
+          ),
+          'properties' => array(
+            'name' => 'User search polygon',
+          ),
+          'type' => 'Feature',
+        );
+        drupal_add_js(array('userPolygonSearch' => $user_polygon_search), 'setting');
+      }
+
       $block['subject'] = 'Block with main map';
       $block['content'] = '<div id="mapid"></div>';
       break;
