@@ -40,6 +40,10 @@ function single_condo_map_content_type_render($subtype, $conf, $args, $context) 
   $map_legend_variables = array();
   $address = NULL;
   if ($listing->field_addr__torcond->value()) {
+    if ($listing->field_unit_num__torcond->value()) {
+      $map_legend_variables['unit'] = '#' . $listing->field_unit_num__torcond->value() . ', ';
+    }
+
     $map_legend_variables['address'] = $listing->field_addr__torcond->value() . ', ';
     if ($listing->field_city_region__torcond->value()) {
       foreach ($_SESSION['neighbourhood_json'] as $key => $value) {
@@ -51,18 +55,39 @@ function single_condo_map_content_type_render($subtype, $conf, $args, $context) 
   }
   else { // if listings has no address so condo has no point.
     drupal_add_js(array('singleCondoPoint' => NULL), 'setting');
-    if ($listing->field_community__torcond->value()) {
+    if ($listing->field_municipality_district__tor->value()) {
       foreach ($_SESSION['neighbourhood_json'] as $key => $value) {
-        if ($value['properties']['name'] == $listing->field_community__torcond->value()) {
+        if ($value['properties']['name'] == $listing->field_municipality_district__tor->value()) {
           prepare_map_legend($value, $map_legend_variables);
         }
       }
     }
   }
 
+  if ($listing->field_zip__torcond->value()) {
+    $map_legend_variables['zip_code'] = $listing->field_zip__torcond->value() . ', ';
+  }
   if ($listing->field_county__torcond->value()) {
     $map_legend_variables['country_region'] = $listing->field_county__torcond->value() . ', ';
   }
+
+  if ($listing->field_community__torcond->value()) {
+    $community_term = taxonomy_get_term_by_name($listing->field_community__torcond->value());
+    if ($community_term) {
+      $community_term = reset($community_term);
+      $community_uri = taxonomy_term_uri($community_term);
+      $map_legend_variables['community_link'] = 'Community: ' . l($listing->field_community__torcond->value(), url($community_uri['path']));
+    }
+  }
+  if ($listing->field_area__torcond->value()) {
+    $area_term = taxonomy_get_term_by_name($listing->field_area__torcond->value());
+    if ($area_term) {
+      $area_term = reset($area_term);
+      $area_uri = taxonomy_term_uri($area_term);
+      $map_legend_variables['area_link'] = 'Area: ' . l($listing->field_area__torcond->value(), url($area_uri['path']));
+    }
+  }
+
   $map_legend_html = theme('ctrader_single_condo_map_legend', $map_legend_variables);
   drupal_add_js(array('mapLegend' => $map_legend_html), 'setting');
 
@@ -84,7 +109,7 @@ function prepare_map_legend($value, &$map_legend_variables) {
 
   $neighbourhood_term = taxonomy_term_load($value['id']);
   $neighbourhood_uri = taxonomy_term_uri($neighbourhood_term);
-  $neighbourhood_link = l('Neighbourhood', url($neighbourhood_uri['path']));
+  $neighbourhood_link = l($term_polygon['properties']['name'], url($neighbourhood_uri['path']));
 
   $parent_terms = taxonomy_get_parents_all($value['id']);
   $city_term = array_pop($parent_terms);
@@ -92,7 +117,7 @@ function prepare_map_legend($value, &$map_legend_variables) {
   $city_link = l($city_term->name, url($city_uri['path']));
 
   $map_legend_variables += array(
-    'neighbourhood_name' => $term_polygon['properties']['name'],
+    'neighbourhood_name' => $term_polygon['properties']['name'] . ', ',
     'neighbourhood_link' => $neighbourhood_link,
     'city_name' => $city_term->name,
     'city_link' => $city_link,
