@@ -80,7 +80,17 @@
                                     });
                                 }
                             }
-                        })
+                        });
+                        
+                        if (settings.hasOwnProperty('locationSelect')) {
+                            for (var i = 0; i < settings.chosenNeighbourhoodsTermIds.length; i++) {
+                                if (feature.id === settings.chosenNeighbourhoodsTermIds[i]) {
+                                    layer.setStyle({
+                                        color: "#FF5000"
+                                    });
+                                }
+                            }
+                        }
                     }
 
                     var neighbourhoodsData = Drupal.settings.neighbourhoodsMapData;
@@ -99,9 +109,8 @@
                         });
                         settings.mymapLayer= neighbourhoodsLayer;
                         setTimeout(function() {
-                            mymap.fitBounds(neighbourhoodsLayer.getBounds());
                             mapButton.trigger('click');
-                        }, 500);
+                        }, 300);
                     } else if (settings.hasOwnProperty('locationSelect')) {
                         neighbourhoodsLayer = L.geoJson(settings.locationSelect, {
                             style: neighbourhoodsStyle,
@@ -115,6 +124,10 @@
                         });
                         settings.mymapLayer= neighbourhoodsLayer;
                     }
+
+                    setTimeout(function() {
+                        mymap.fitBounds(neighbourhoodsLayer.getBounds());
+                    }, 300);
 
 
                     // freeDraw tools.

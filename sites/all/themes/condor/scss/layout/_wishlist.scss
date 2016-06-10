@@ -1,0 +1,206 @@
+.page-user-wishlist {
+  .view-empty {
+    text-align: center;
+    padding: 10rem 0;
+    p {
+      font-size: rem-calc(22);
+      text-transform: uppercase;
+    }
+  }
+
+  .view-header {
+    @extend %condo-heading;
+    margin-top: 25px;
+  }
+
+  .view-id-flaged_condos_ {
+    @extend .centering;
+    background: $alabaster;
+    padding-bottom: 40px !important;
+
+    .wishlist-slider-button-next,
+    .wishlist-slider-button-prev {
+      top: 2% !important;
+    }
+
+    .wishlist-slider-button-next {
+      right: 25px;
+    }
+
+    .wishlist-slider-button-prev {
+      left: inherit;
+      right: 60px;
+    }
+
+    .views-row {
+      display: inline-block;
+      width: calc((100% / 4) - 22px);
+      margin-right: 25px;
+      color: #192030;
+
+      .views-field-nothing-2 {
+        .field-content {
+          position: relative;
+          display: inline-block;
+          width: 100%;
+
+          img {
+            min-width: 100%;
+          }
+
+          .price {
+            position: absolute;
+            left: 0;
+            bottom: 13px;
+            font-size: rem-calc(14);
+            color: $white;
+            display: inline-block;
+            max-width: 100px;
+            width: 100%;
+            padding: 7px 12px;
+            text-align: center;
+            @extend %gradient-background;
+
+            &:after {
+              content: '';
+              width: 0;
+              height: 0;
+              border-top: 36px solid #F26236;
+              border-right: 22px solid transparent;
+              position: absolute;
+              top: 0;
+              right: -22px;
+            }
+          }
+
+          .flag {
+            position: absolute;
+            right: 6px;
+            top: 3px;
+
+            .flag-throbber {
+              display: none;
+              visibility: hidden;
+            }
+
+            a {
+              &:before {
+                content: "";
+                display: inline-block;
+                width: 24px;
+                height: 20px;
+                background: url("../images/like.png") 0 0 no-repeat;
+                vertical-align: middle;
+              }
+            }
+          }
+
+          .discount {
+            position: absolute;
+            left: 0;
+            top: 11px;
+            background: rgba(0,0,0,.7);
+            color: $white;
+            font-size: rem-calc(11);
+            padding: 5px 13px;
+          }
+
+        }
+      }
+
+      .views-fieldset {
+        padding: 11px 12px;
+        font-size: rem-calc(12);
+        border: 1px solid darken($athens-gray, 1);
+        border-top: none;
+        background-color: $white;
+
+        .views-field-nothing-7{
+          font-family: "Raleway", sans-serif;
+          font-weight: bold;
+          font-size: rem-calc(14);
+          margin-bottom: 1px;
+        }
+
+        .views-field-nothing-8 {
+          line-height: 15px;
+
+          .field-content {
+            @include pseudo-element("before", 7px, 12px , "map-marker.png", "not-center");
+
+            &:before {
+              margin-right: 4px;
+            }
+
+            font-size: rem-calc(12);
+            color: $gray;
+            padding-right: 90px;
+          }
+        }
+
+        .views-field-field-maint--torcond {
+          border-bottom: 1px solid $athens-gray;
+          border-top: 1px solid $athens-gray;
+          margin: 8px 0 3px;
+          padding: 6px 0;
+
+          .views-label-field-maint--torcond {
+            color: $gray;
+            float: left;
+
+            @include pseudo-element("after", 7px, 7px, 'question-symbol.png', 'not-center');
+
+            &:after {
+              margin: 0 4px;
+            }
+          }
+
+          .field-content {
+            color: $mirage;
+          }
+        }
+
+        .views-field-nothing {
+          font-size: rem-calc(11);
+
+          .condo-info-line {
+            .condo-info-element {
+              margin-right: 10px;
+            }
+
+            &:first-child {
+              .condo-info-element {
+                margin-right: 25px;
+              }
+            }
+          }
+
+          .sqft {
+            @include pseudo-element("before", 14px, 11px, "area-icon.png", "not-center");
+          }
+
+          .bed {
+            @include pseudo-element("before", 16px, 11px, "bed-icon.png", "not-center");
+          }
+
+          .bath {
+            @include pseudo-element("before", 9px, 11px, "bath-icon.png", "not-center");
+          }
+
+          .pets {
+            @include pseudo-element("before", 13px, 12px, "pets-icon.png", "not-center");
+          }
+
+          .locker {
+            @include pseudo-element("before", 12px, 11px, "locker-icon.png", "not-center");
+          }
+
+          .parking {
+            @include pseudo-element("before", 15px, 10px, "car-icon.png", "not-center");
+          }
+        }
+      }
+    }
+
+  }
+}

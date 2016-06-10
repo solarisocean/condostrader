@@ -81,6 +81,11 @@
         right: 6px;
         top: 3px;
 
+        .flag-throbber {
+          display: none;
+          visibility: hidden;
+        }
+
         a {
           @include pseudo-element('before', 24px, 20px, 'like.png', "not-center");
           opacity: 1;
@@ -127,7 +132,7 @@
     }
 
     .views-field-nothing {
-      line-height: 0;
+      line-height: 15px;
 
       .field-content {
         @include pseudo-element("before", 7px, 12px , "map-marker.png", "not-center");
@@ -138,6 +143,7 @@
 
         font-size: rem-calc(12);
         color: $gray;
+        padding-right: 90px;
       }
     }
 
@@ -247,6 +253,11 @@
         right: 6px;
         top: 3px;
 
+        .flag-throbber {
+          display: none;
+          visibility: hidden;
+        }
+
         a {
           @include pseudo-element('before', 24px, 20px, 'like.png', "not-center");
           opacity: 1;
@@ -298,7 +309,7 @@
     }
 
     .views-field-nothing {
-      line-height: 0;
+      line-height: 15px;
 
       .field-content {
         @include pseudo-element("before", 7px, 12px , "map-marker.png", "not-center");
