@@ -155,6 +155,9 @@ function ctrader_map_block_view($delta = '') {
         }
         sort($condos_neighbourhood_names);
       }
+
+      $all_neighbourhoods_json = _ctrader_map_prepare_neighbourhoods_json();
+
       drupal_add_js(array('condosMapData' => $array_json), 'setting');
       _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names, $array_json);
 
@@ -208,6 +211,25 @@ function ctrader_map_block_view($delta = '') {
           'type' => 'Feature',
         );
         drupal_add_js(array('userPolygonSearch' => $user_polygon_search), 'setting');
+      }
+
+      // Sends data to js if it is location select.
+      if (isset($_GET['region'])) {
+        $regions = explode('>', $_GET['region']);
+        $results_map_polygons = array();
+        $location_select_polygon = array();
+        foreach ($all_neighbourhoods_json as $value) {
+          if ($value['parent_id'] == end($regions)) {
+            $results_map_polygons[] = $value;
+          }
+          if ($value['id'] == $_POST['locationSelect']) {
+            $location_select_polygon = $value;
+          }
+        }
+        if (!$results_map_polygons) {
+          $results_map_polygons[] = $location_select_polygon;
+        }
+        drupal_add_js(array('locationSelect' => $results_map_polygons), 'setting');
       }
 
       $block['subject'] = 'Block with main map';
