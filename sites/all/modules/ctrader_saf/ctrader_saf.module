@@ -233,7 +233,7 @@ function ctrader_saf_search_api_solr_query_alter(array &$call_args, SearchApiQue
     $neib_query = '(' . str_replace('-', ' OR ', $_GET['neighbourhoods']) . ')';
     $call_args['params']['fq'][] = 'im_field_city_region__torcond:' . $neib_query;
   }
-  elseif (isset($_GET['region'])) { //Regions selectlist (hierarchical select).
+  if (isset($_GET['region'])) { //Regions selectlist (hierarchical select).
     $region_query = '(' . str_replace('>', ' AND ', $_GET['region']) . ')';
     $call_args['params']['fq'][] = 'im_field_city_region__torcond$parents_all:' . $region_query;
   }
@@ -410,9 +410,10 @@ function _ctrader_saf_blocks_content_function($delta) {
 
       $search_button_form = drupal_get_form('_ctrader_saf_search_button_form');
 
+      /* @see ctrader_saf_search_api_solr_query_alter */
       // Map input.
       if (isset($_GET['polygon'])) {
-        // $search_button_form['geo_loc']['#value'] = "POLYGON(({$_GET['polygon']}))";
+         $search_button_form['geo_loc']['#value'] = "POLYGON(({$_GET['polygon']}))";
       }
       elseif (isset($_GET['neighbourhoods'])) {
         $neighb_array = explode('-', $_GET['neighbourhoods']);
@@ -728,7 +729,7 @@ function _ctrader_saf_search_button_form_submit($form, &$form_state) {
       }
     }
   }
-  if ($region_term_id && !$form_state['values']['geo_loc']) {
+  if ($region_term_id) {
     $query['region'] = $region_term_id;
   }
 
