@@ -1,0 +1,36 @@
+.page-user-wishlist {
+  .view-empty {
+    text-align: center;
+    padding: 10rem 0;
+    p {
+      font-size: rem-calc(22);
+      text-transform: uppercase;
+    }
+  }
+
+  .view-header {
+    @extend %condo-heading;
+
+    margin-top: 25px;
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .view-id-flaged_condos_ {
+    .views-row {
+      .views-field-nothing-2 {
+        .field-content {
+          position: relative;
+          display: inline-block;
+          width: 100%;
+
+          img {
+            min-width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
