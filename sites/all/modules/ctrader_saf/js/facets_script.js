@@ -10,7 +10,7 @@
       }, 1);
 
         if ($('body').hasClass('page-user-register')) {
-          $("#mapid").height(380);
+          $("#mapid").height(425);
         }
     }
   };

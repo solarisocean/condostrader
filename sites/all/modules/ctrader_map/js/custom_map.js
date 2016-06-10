@@ -14,7 +14,7 @@
                         scrollWheelZoom: false
                     }).setView([43.73, -79.34], 9);
 
-                    settings.test = mymap;
+                    settings.mymap = mymap;
 
                     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
                         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -97,16 +97,22 @@
                             style: neighbourhoodsStyle,
                             onEachFeature: onEachFeature
                         });
-                        settings.test2= neighbourhoodsLayer;
+                        settings.mymapLayer= neighbourhoodsLayer;
                         setTimeout(function() {
                             mymap.fitBounds(neighbourhoodsLayer.getBounds());
                         }, 500);
-                    } else {
+                    } else if (settings.hasOwnProperty('locationSelect')) {
+                        neighbourhoodsLayer = L.geoJson(settings.locationSelect, {
+                            style: neighbourhoodsStyle,
+                            onEachFeature: onEachFeature
+                        });
+                        settings.mymapLayer= neighbourhoodsLayer;
+                    } else  {
                         neighbourhoodsLayer = L.geoJson(neighbourhoodsData, {
                             style: neighbourhoodsStyle,
                             onEachFeature: onEachFeature
                         });
-                        settings.test2= neighbourhoodsLayer;
+                        settings.mymapLayer= neighbourhoodsLayer;
                     }
 
 
@@ -228,6 +234,69 @@
 
     Drupal.behaviors.addMarks = {
         attach: function (context) {
+        }
+    };
+
+    Drupal.behaviors.testTest = {
+        attach: function (context, settings) {
+            setTimeout(function () {
+                $('.page-search-results .selects select').change(function () {
+                    $('#-ctrader-saf-search-button-form input[name="geo_loc"]').val('');
+                    
+                    var selectName = $(this).attr('name').charAt($(this).attr('name').length - 2);
+                    var neighbourhoodsStyle = {
+                        "color": "#B9760B",
+                        "weight": 2,
+                        "opacity": 1,
+                        "fillOpacity": 0.3
+                    };
+
+                    if ($(this).val() === 'label_0') {
+                        settings.mymapLayer.clearLayers().addData(settings.neighbourhoodsMapData);
+                        settings.mymap.fitBounds(settings.mymapLayer.getBounds());
+                    }
+                    else if ($(this).val() !== 'label_1' && $(this).val() !== 'label_2') {
+                        $.ajax({
+                            type: 'POST',
+                            url: '/js-singup-map',
+                            data: {
+                                'signUpLoc': $(this).val()
+                            },
+                            success: function(data){
+                                settings.mymapLayer.clearLayers();
+                                settings.mymapLayer.addData(data).bindPopup(data.properties.popupContent).setStyle(neighbourhoodsStyle);
+                                settings.mymapLayer.on({
+                                    click: function() {
+                                        settings.mymapLayer.openPopup();
+                                    }
+                                });
+                                settings.mymap.fitBounds(settings.mymapLayer.getBounds());
+                            }
+                        });
+                    }
+                    else if ($(this).val() === 'label_1' || $(this).val() === 'label_2') {
+                        $.ajax({
+                            type: 'POST',
+                            url: '/js-singup-map',
+                            data: {
+                                'signUpLoc': $(this).prev().val()
+                            },
+                            success: function(data){
+                                settings.mymapLayer.clearLayers();
+                                settings.mymapLayer.addData(data).bindPopup(data.properties.popupContent).setStyle(neighbourhoodsStyle);
+                                settings.mymapLayer.on({
+                                    click: function() {
+                                        settings.mymapLayer.openPopup();
+                                    }
+                                });
+                                settings.mymap.fitBounds(settings.mymapLayer.getBounds());
+                            }
+                        });
+                    }
+
+                });
+            }, 1);
+
         }
     };
 

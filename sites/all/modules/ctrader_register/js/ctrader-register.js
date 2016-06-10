@@ -11,7 +11,14 @@
           attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(mymap);
         
-        nLayer = L.geoJson().addTo(mymap);
+        nLayer = L.geoJson(settings.neighbourhoodsMapData, {
+          "color": "#B9760B",
+          "weight": 2,
+          "opacity": 1,
+          "fillOpacity": 0.3
+        }).addTo(mymap);
+
+        mymap.fitBounds(nLayer.getBounds());
 
         settings.mymap = mymap;
         settings.mymapLayer = nLayer;
@@ -21,10 +28,6 @@
 
   Drupal.behaviors.rewriteLayer = {
     attach: function (context, settings) {
-      $('.page-user-register .selects select').change(function() {
-        console.log('dfd');
-      });
-      // console.log($('.page-user-register .selects select'));
       $('.page-user-register .selects select').change(function () {
         var selectName = $(this).attr('name').charAt($(this).attr('name').length - 2);
         var neighbourhoodsStyle = {
@@ -35,7 +38,8 @@
         };
 
         if ($(this).val() === 'label_0') {
-          settings.mymapLayer.clearLayers();
+          settings.mymapLayer.clearLayers().addData(settings.neighbourhoodsMapData);
+          settings.mymap.fitBounds(settings.mymapLayer.getBounds());
         }
         else if ($(this).val() !== 'label_1' && $(this).val() !== 'label_2') {
           $.ajax({
