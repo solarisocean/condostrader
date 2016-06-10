@@ -415,9 +415,9 @@ function ctf_pages_main_page_default_page_manager_pages() {
     $pane->access = array();
     $pane->configuration = array(
       'admin_title' => 'Header Block',
-      'title' => 'Welcome text goes here',
+      'title' => 'Find Your Dream Condo Today',
       'title_heading' => 'h2',
-      'body' => 'Lorem ipsum is simply dummy text of printing',
+      'body' => 'Your new perfect home is just a click away',
       'format' => 'filtered_html',
       'substitute' => TRUE,
     );
