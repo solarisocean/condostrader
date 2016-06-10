@@ -391,7 +391,7 @@ function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = 
         }
 
         $tax_depth = in_array($tax_term->name, $allowed_cities) ? $tax_term->depth : $tax_term->depth + 1;
-        $terms_polygon_prejson[$tax_term->tid] = array(
+        $terms_polygon_prejson[] = array(
           'geometry' => array(
             'coordinates' => $coordinates,
             'type' => $type,
@@ -399,11 +399,11 @@ function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = 
           'properties' => array(
             'name' => $tax_term_name,
             'popupContent' => $polygon_popup_content,
+            'parent_id' => $term_parent_id,
+            'depth' => $tax_depth,
+            'has_children' => $has_children,
           ),
           'id' => $tax_term_id,
-          'parent_id' => $term_parent_id,
-          'depth' => $tax_depth,
-          'has_children' => $has_children,
           'type' => 'Feature',
         );
       }
