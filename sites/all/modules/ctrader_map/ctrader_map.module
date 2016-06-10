@@ -8,8 +8,7 @@ function ctrader_map_menu() {
   $items = array();
   $items['create-terms'] = array(
     'title' => 'Create Toronto region terms',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('_ctrader_map_region_taxonomy_form'),
+    'page callback' => '_ctrader_map_create_terms_page_callback',
     'access arguments' => array('administer modules'),
   );
   return $items;
@@ -156,10 +155,9 @@ function ctrader_map_block_view($delta = '') {
         sort($condos_neighbourhood_names);
       }
 
-      $all_neighbourhoods_json = _ctrader_map_prepare_neighbourhoods_json();
-
       drupal_add_js(array('condosMapData' => $array_json), 'setting');
       _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names, $array_json);
+      $all_neighbourhoods_json = variable_get('ctrader_map_neighbourhood_json');
 
       $path = libraries_get_path('leaflet');
       drupal_add_js($path . '/leaflet-src.js');
@@ -222,7 +220,7 @@ function ctrader_map_block_view($delta = '') {
           if ($value['parent_id'] == end($regions)) {
             $results_map_polygons[] = $value;
           }
-          if ($value['id'] == $_POST['locationSelect']) {
+          if ($value['id'] == end($regions)) {
             $location_select_polygon = $value;
           }
         }
@@ -335,7 +333,15 @@ function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = 
   if (!variable_get('ctrader_map_neighbourhood_json')) {
     $vid = taxonomy_vocabulary_machine_name_load('neighbourhoods'); //Neighbourhoods vocabulary.
     $vid = $vid->vid;
-    $vocabulary_term_entities = taxonomy_get_tree($vid, 0, 3, TRUE);
+    $allowed_cities = array('York Region', 'York', 'Toronto', 'Peel', 'Halton');
+    $city_terms = taxonomy_get_tree($vid, 0, 1, TRUE);
+    $vocabulary_term_entities = array();
+    foreach ($city_terms as $value) {
+      if (in_array($value->name, $allowed_cities)) {
+        $vocabulary_term_entities += _ctrader_map_taxonomy_get_tree($vid, $value->tid, NULL, TRUE);
+        $vocabulary_term_entities[$value->tid] = $value;
+      }
+    }
     $terms_polygon_prejson = array();
     foreach ($vocabulary_term_entities as $tax_term) {
       $polygon = isset($tax_term->field_community_geolocation[LANGUAGE_NONE][0]['geom']) ? $tax_term->field_community_geolocation[LANGUAGE_NONE][0]['geom'] : NULL;
@@ -749,4 +755,159 @@ function _prepare_taxonomy_term($element, $vid, $tree) {
     }
   }
   taxonomy_term_save($term);
+}
+
+
+/**
+ * Callback function for page 'create-terms'.
+ * @return string
+ */
+function _ctrader_map_create_terms_page_callback() {
+  $output['create_term_form'] = drupal_get_form('_ctrader_map_region_taxonomy_form');
+  $output['update_json_form'] = drupal_get_form('_ctrader_map_update_neighbourhoods_json_form');
+
+  return $output;
+}
+
+
+/**
+ * Form for setting 'ctrader_map_neighbourhood_json' variable in DB.
+ *
+ */
+function _ctrader_map_update_neighbourhoods_json_form($form, &$form_state) {
+  $form = array();
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Update neighbourhoods json variable in DB'),
+//    '#disabled' => TRUE,
+  );
+  return $form;
+}
+
+function _ctrader_map_update_neighbourhoods_json_form_submit($form, &$form_state) {
+  variable_del('ctrader_map_neighbourhood_json');
+  _ctrader_map_prepare_neighbourhoods_json();
+  drupal_set_message(t('\'ctrader_map_neighbourhood_json\' has been updated.'));
+}
+
+
+/**
+ * Rewritten function from core.
+ * @see taxonomy_get_tree
+ *
+ * Create a hierarchical representation of a vocabulary.
+ *
+ * @param $vid
+ *   Which vocabulary to generate the tree for.
+ * @param $parent
+ *   The term ID under which to generate the tree. If 0, generate the tree
+ *   for the entire vocabulary.
+ * @param $max_depth
+ *   The number of levels of the tree to return. Leave NULL to return all levels.
+ * @param $load_entities
+ *   If TRUE, a full entity load will occur on the term objects. Otherwise they
+ *   are partial objects queried directly from the {taxonomy_term_data} table to
+ *   save execution time and memory consumption when listing large numbers of
+ *   terms. Defaults to FALSE.
+ *
+ * @return
+ *   An array of all term objects in the tree. Each term object is extended
+ *   to have "depth" and "parents" attributes in addition to its normal ones.
+ *   Results are statically cached. Term objects will be partial or complete
+ *   depending on the $load_entities parameter.
+ */
+function _ctrader_map_taxonomy_get_tree($vid, $parent = 0, $max_depth = NULL, $load_entities = FALSE) {
+  $children = &drupal_static(__FUNCTION__, array());
+  $parents = &drupal_static(__FUNCTION__ . ':parents', array());
+  $terms = &drupal_static(__FUNCTION__ . ':terms', array());
+
+  // We cache trees, so it's not CPU-intensive to call taxonomy_get_tree() on a
+  // term and its children, too.
+  if (!isset($children[$vid])) {
+    $children[$vid] = array();
+    $parents[$vid] = array();
+    $terms[$vid] = array();
+
+    $query = db_select('taxonomy_term_data', 't');
+    $query->join('taxonomy_term_hierarchy', 'h', 'h.tid = t.tid');
+    $result = $query
+      ->addTag('translatable')
+      ->addTag('term_access')
+      ->fields('t')
+      ->fields('h', array('parent'))
+      ->condition('t.vid', $vid)
+      ->orderBy('t.weight')
+      ->orderBy('t.name')
+      ->execute();
+
+    foreach ($result as $term) {
+      $children[$vid][$term->parent][] = $term->tid;
+      $parents[$vid][$term->tid][] = $term->parent;
+      $terms[$vid][$term->tid] = $term;
+    }
+  }
+
+  // Load full entities, if necessary. The entity controller statically
+  // caches the results.
+  if ($load_entities) {
+    $term_entities = taxonomy_term_load_multiple(array_keys($terms[$vid]));
+  }
+
+  $max_depth = (!isset($max_depth)) ? count($children[$vid]) : $max_depth;
+  $tree = array();
+
+  // Keeps track of the parents we have to process, the last entry is used
+  // for the next processing step.
+  $process_parents = array();
+  $process_parents[] = $parent;
+
+  // Loops over the parent terms and adds its children to the tree array.
+  // Uses a loop instead of a recursion, because it's more efficient.
+  while (count($process_parents)) {
+    $parent = array_pop($process_parents);
+    // The number of parents determines the current depth.
+    $depth = count($process_parents);
+    if ($max_depth > $depth && !empty($children[$vid][$parent])) {
+      $has_children = FALSE;
+      $child = current($children[$vid][$parent]);
+      do {
+        if (empty($child)) {
+          break;
+        }
+        $term = $load_entities ? $term_entities[$child] : $terms[$vid][$child];
+        if (isset($parents[$vid][$term->tid])) {
+          // Clone the term so that the depth attribute remains correct
+          // in the event of multiple parents.
+          $term = clone $term;
+        }
+        $term->depth = $depth;
+        unset($term->parent);
+        $term->parents = $parents[$vid][$term->tid];
+        $tree[$term->tid] = $term;
+        if (!empty($children[$vid][$term->tid])) {
+          $has_children = TRUE;
+
+          // We have to continue with this parent later.
+          $process_parents[] = $parent;
+          // Use the current term as parent for the next iteration.
+          $process_parents[] = $term->tid;
+
+          // Reset pointers for child lists because we step in there more often
+          // with multi parents.
+          reset($children[$vid][$term->tid]);
+          // Move pointer so that we get the correct term the next time.
+          next($children[$vid][$parent]);
+          break;
+        }
+      } while ($child = next($children[$vid][$parent]));
+
+      if (!$has_children) {
+        // We processed all terms in this hierarchy-level, reset pointer
+        // so that this function works the next time it gets called.
+        reset($children[$vid][$parent]);
+      }
+    }
+  }
+
+  return $tree;
 }
