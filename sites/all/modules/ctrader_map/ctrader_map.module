@@ -382,7 +382,16 @@ function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = 
           $coordinates[] = $pre_multi_coordinates;
         }
         $term_parent_id = end($tax_term->parents);
-        $terms_polygon_prejson[] = array(
+
+        $has_children = 0;
+        foreach ($vocabulary_term_entities as $value) {
+          if (end($value->parents) == $tax_term->tid) {
+            $has_children = 1;
+          }
+        }
+
+        $tax_depth = in_array($tax_term->name, $allowed_cities) ? $tax_term->depth : $tax_term->depth + 1;
+        $terms_polygon_prejson[$tax_term->tid] = array(
           'geometry' => array(
             'coordinates' => $coordinates,
             'type' => $type,
@@ -393,11 +402,12 @@ function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = 
           ),
           'id' => $tax_term_id,
           'parent_id' => $term_parent_id,
+          'depth' => $tax_depth,
+          'has_children' => $has_children,
           'type' => 'Feature',
         );
       }
     }
-//    $_SESSION['neighbourhood_json'] = $terms_polygon_prejson;
     variable_set('ctrader_map_neighbourhood_json', $terms_polygon_prejson);
   }
   $prepared_neighbourhoods_json = isset($terms_polygon_prejson) ? $terms_polygon_prejson : variable_get('ctrader_map_neighbourhood_json');
