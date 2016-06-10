@@ -184,7 +184,7 @@ function _js_singup_map_page_callback() {
     $results_map_polygons = array();
     $location_select_polygon = array();
     foreach ($all_neighbourhoods_json as $value) {
-      if ($value['parent_id'] == $_POST['locationSelect']) {
+      if ($value['properties']['parent_id'] == $_POST['locationSelect']) {
         $results_map_polygons[] = $value;
       }
       if ($value['id'] == $_POST['locationSelect']) {
