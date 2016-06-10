@@ -417,6 +417,7 @@ function _ctrader_saf_blocks_content_function($delta) {
       }
       elseif (isset($_GET['neighbourhoods'])) {
         $neighb_array = explode('-', $_GET['neighbourhoods']);
+        drupal_add_js(array('chosenNeighbourhoodsTermIds' => $neighb_array), 'setting');
         foreach ($neighb_array as $key => $value) {
           $neighb_array[$key] = 'tid' . $value;
         }
