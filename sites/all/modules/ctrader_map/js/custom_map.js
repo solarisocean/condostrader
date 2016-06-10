@@ -100,6 +100,7 @@
                         settings.mymapLayer= neighbourhoodsLayer;
                         setTimeout(function() {
                             mymap.fitBounds(neighbourhoodsLayer.getBounds());
+                            mapButton.trigger('click');
                         }, 500);
                     } else if (settings.hasOwnProperty('locationSelect')) {
                         neighbourhoodsLayer = L.geoJson(settings.locationSelect, {
@@ -181,7 +182,10 @@
                         $('.free-draw-tools').addClass('active');
                         neigButton.removeClass('active');
                         freeDrawLayer.addTo(mymap);
-                        mymap.removeLayer(neighbourhoodsLayer);
+                        if (!settings.hasOwnProperty('userPolygonSearch')) {
+                            mymap.removeLayer(neighbourhoodsLayer);
+                            $('select[name="select_subject[hierarchical_select][selects][0]"]').val('label_0').trigger('change');
+                        }
                         neighbourhoodsLayer.eachLayer(function(layer) {
                             if (layer.selected) {
                                 layer.selected = false;
@@ -197,8 +201,26 @@
                         $(this).addClass('active');
                         $('.free-draw-tools').removeClass('active');
                         mapButton.removeClass('active');
-                        mymap.removeLayer(freeDrawLayer);
+                        if (settings.hasOwnProperty('userPolygonSearch')) {
+                            delete settings.userPolygonSearch;
+                            neighbourhoodsLayer.clearLayers();
+                        } else {
+                            mymap.removeLayer(freeDrawLayer);
+                        }
+                        neighbourhoodsLayer = L.geoJson(neighbourhoodsData, {
+                            style: neighbourhoodsStyle,
+                            onEachFeature: onEachFeature
+                        });
+                        settings.mymapLayer= neighbourhoodsLayer;
+
                         neighbourhoodsLayer.addTo(mymap);
+                        mymap.fitBounds(neighbourhoodsLayer.getBounds());
+                    });
+
+                    $('select[name="select_subject[hierarchical_select][selects][0]"]').change(function() {
+                        if (settings.hasOwnProperty('userPolygonSearch')) {
+                            neigButton.trigger('click');
+                        }
                     });
 
                     //markers clusters
@@ -221,8 +243,6 @@
                     freeDrawLayer.on('markers', function getMarkers(eventData) {
                         var latLngs = eventData.latLngs;
                         inputRes.val(L.FreeDraw.Utilities.getMySQLPolygons(eventData.latLngs));
-                        // console.log(L.FreeDraw.Utilities.getMySQLMultiPolygon(eventData.latLngs));
-                         console.log(L.FreeDraw.Utilities.getMySQLPolygons(eventData.latLngs)[0]);
                     });
                     
                 });
@@ -233,23 +253,18 @@
 
 
     Drupal.behaviors.addMarks = {
-        attach: function (context) {
-        }
-    };
-
-    Drupal.behaviors.testTest = {
         attach: function (context, settings) {
             setTimeout(function () {
                 $('.page-search-results .selects select').change(function () {
                     $('#-ctrader-saf-search-button-form input[name="geo_loc"]').val('');
                     
-                    var selectName = $(this).attr('name').charAt($(this).attr('name').length - 2);
-                    var neighbourhoodsStyle = {
-                        "color": "#B9760B",
-                        "weight": 2,
-                        "opacity": 1,
-                        "fillOpacity": 0.3
-                    };
+                    // var selectName = $(this).attr('name').charAt($(this).attr('name').length - 2);
+                    // var neighbourhoodsStyle = {
+                    //     "color": "#B9760B",
+                    //     "weight": 2,
+                    //     "opacity": 1,
+                    //     "fillOpacity": 0.3
+                    // };
 
                     if ($(this).val() === 'label_0') {
                         settings.mymapLayer.clearLayers().addData(settings.neighbourhoodsMapData);
@@ -260,16 +275,18 @@
                             type: 'POST',
                             url: '/js-singup-map',
                             data: {
-                                'signUpLoc': $(this).val()
+                                'locationSelect': $(this).val()
                             },
                             success: function(data){
+                                // console.log(data);
                                 settings.mymapLayer.clearLayers();
-                                settings.mymapLayer.addData(data).bindPopup(data.properties.popupContent).setStyle(neighbourhoodsStyle);
-                                settings.mymapLayer.on({
-                                    click: function() {
-                                        settings.mymapLayer.openPopup();
-                                    }
-                                });
+                                settings.mymapLayer.addData(data);
+                                // settings.mymapLayer.addData(data).bindPopup(data.properties.popupContent).setStyle(neighbourhoodsStyle);
+                                // settings.mymapLayer.on({
+                                //     click: function() {
+                                //         settings.mymapLayer.openPopup();
+                                //     }
+                                // });
                                 settings.mymap.fitBounds(settings.mymapLayer.getBounds());
                             }
                         });
@@ -279,16 +296,17 @@
                             type: 'POST',
                             url: '/js-singup-map',
                             data: {
-                                'signUpLoc': $(this).prev().val()
+                                'locationSelect': $(this).prev().val()
                             },
                             success: function(data){
                                 settings.mymapLayer.clearLayers();
-                                settings.mymapLayer.addData(data).bindPopup(data.properties.popupContent).setStyle(neighbourhoodsStyle);
-                                settings.mymapLayer.on({
-                                    click: function() {
-                                        settings.mymapLayer.openPopup();
-                                    }
-                                });
+                                settings.mymapLayer.addData(data);
+                                // settings.mymapLayer.addData(data).bindPopup(data.properties.popupContent).setStyle(neighbourhoodsStyle);
+                                // settings.mymapLayer.on({
+                                //     click: function() {
+                                //         settings.mymapLayer.openPopup();
+                                //     }
+                                // });
                                 settings.mymap.fitBounds(settings.mymapLayer.getBounds());
                             }
                         });
