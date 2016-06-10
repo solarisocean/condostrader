@@ -194,6 +194,7 @@ function _js_singup_map_page_callback() {
     if (!$results_map_polygons) {
       $results_map_polygons[] = $location_select_polygon;
     }
-    drupal_json_output($results_map_polygons);
+    drupal_add_js(array('locationSelect' => $results_map_polygons), 'setting');
+//    drupal_json_output($results_map_polygons);
   }
 }
