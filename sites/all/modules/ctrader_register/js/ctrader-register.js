@@ -21,6 +21,10 @@
 
   Drupal.behaviors.rewriteLayer = {
     attach: function (context, settings) {
+      $('.page-user-register .selects select').change(function() {
+        console.log('dfd');
+      });
+      // console.log($('.page-user-register .selects select'));
       $('.page-user-register .selects select').change(function () {
         var selectName = $(this).attr('name').charAt($(this).attr('name').length - 2);
         var neighbourhoodsStyle = {

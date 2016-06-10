@@ -15,8 +15,8 @@ function searchmenu_form($form, &$form_state) {
   $form['query'] = array(
     '#type' => 'textfield',
     '#attributes' => array(
-      'class' => array(
-        'test'
+      'id' => array(
+        'searchmenu_form_input'
       ),
       'placeholder' => t('Type your search here...'),
     ),
