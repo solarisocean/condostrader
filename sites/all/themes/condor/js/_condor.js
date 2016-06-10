@@ -507,4 +507,28 @@
         }
     };
 
+    /**
+     * Wishlist slider initialize.
+     */
+    Drupal.behaviors.wishlistSlider = {
+        attach: function (context, settings) {
+
+            $('body').once(function() {
+                $('.wishlist-slider .view-content').addClass('swiper-wrapper');
+
+                if ($('.wishlist-slider .view-content .views-row').length >= 5) {
+                    $('.wishlist-slider').prepend('<div class="wishlist-slider-button-next swiper-button-next"></div><div class="wishlist-slider-button-prev swiper-button-prev"></div>');
+                    var newlyListedSlider = new Swiper('.wishlist-slider', {
+                        slidesPerView: 4,
+                        slidesPerColumn: 2,
+                        paginationClickable: true,
+                        spaceBetween: 25,
+                        nextButton: '.wishlist-slider-button-next',
+                        prevButton: '.wishlist-slider-button-prev'
+                    });
+                }
+            });
+        }
+    };
+
 })(jQuery, Drupal);
