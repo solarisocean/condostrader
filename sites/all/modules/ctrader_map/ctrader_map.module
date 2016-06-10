@@ -338,8 +338,8 @@ function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = 
     $vocabulary_term_entities = array();
     foreach ($city_terms as $value) {
       if (in_array($value->name, $allowed_cities)) {
-        $vocabulary_term_entities += _ctrader_map_taxonomy_get_tree($vid, $value->tid, NULL, TRUE);
         $vocabulary_term_entities[$value->tid] = $value;
+        $vocabulary_term_entities += _ctrader_map_taxonomy_get_tree($vid, $value->tid, NULL, TRUE);
       }
     }
     $terms_polygon_prejson = array();
