@@ -110,7 +110,7 @@ function ctf_forms_book_a_viewing_field_default_field_instances() {
     ),
     'entity_type' => 'entityform',
     'field_name' => 'field_extra_notes',
-    'label' => 'Extra notes:',
+    'label' => 'Comments:',
     'placeholder' => 'Pellentesque libero tortor tincidunt et ...',
     'required' => 0,
     'settings' => array(
@@ -123,7 +123,7 @@ function ctf_forms_book_a_viewing_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 10,
+        'rows' => 7,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -220,8 +220,8 @@ function ctf_forms_book_a_viewing_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Best time to contact you:');
   t('Buy now');
+  t('Comments:');
   t('E-mail:');
-  t('Extra notes:');
   t('Phone number:');
 
   return $field_instances;
