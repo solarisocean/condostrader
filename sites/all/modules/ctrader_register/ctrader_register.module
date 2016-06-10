@@ -170,8 +170,10 @@ function ctrader_register_element_info_alter(&$types) {
  * @return null|void
  */
 function _js_singup_map_page_callback() {
+  $all_neighbourhoods_json = _ctrader_map_prepare_neighbourhoods_json();
+
   if (isset($_POST['signUpLoc'])) {
-    foreach ($_SESSION['neighbourhood_json'] as $value) {
+    foreach ($all_neighbourhoods_json as $value) {
       if ($value['id'] == $_POST['signUpLoc']) {
         drupal_json_output($value);
       }
@@ -179,10 +181,9 @@ function _js_singup_map_page_callback() {
   }
 
   if (isset($_POST['locationSelect'])) {
-    $neighbourhood_json = variable_get('neighbourhood_json');
     $results_map_polygons = array();
     $location_select_polygon = array();
-    foreach ($neighbourhood_json as $value) {
+    foreach ($all_neighbourhoods_json as $value) {
       if ($value['parent_id'] == $_POST['locationSelect']) {
         $results_map_polygons[] = $value;
       }
