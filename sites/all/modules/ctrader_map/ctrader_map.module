@@ -217,7 +217,7 @@ function ctrader_map_block_view($delta = '') {
         $results_map_polygons = array();
         $location_select_polygon = array();
         foreach ($all_neighbourhoods_json as $value) {
-          if ($value['parent_id'] == end($regions)) {
+          if ($value['properties']['parent_id'] == end($regions)) {
             $results_map_polygons[] = $value;
           }
           if ($value['id'] == end($regions)) {
