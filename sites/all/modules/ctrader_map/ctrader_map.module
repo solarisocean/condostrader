@@ -21,7 +21,9 @@ function ctrader_map_menu() {
  */
 function ctrader_map_init() {
   drupal_add_css(drupal_get_path('module', 'ctrader_map') . '/css/ctrader-map.css');
-//  unset($_SESSION['neighbourhood_json']);
+
+  unset($_SESSION['neighbourhood_json']);
+  variable_del('neighbourhood_json');
 }
 
 
@@ -308,7 +310,7 @@ function ctrader_map_theme($existing, $type, $theme, $path) {
  * Creates json with Toronto neighbourhoods coordinates.
  */
 function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = array(), $points_array = array()) {
-  if (!isset($_SESSION['neighbourhood_json'])) {
+  if (!variable_get('ctrader_map_neighbourhood_json')) {
     $vid = taxonomy_vocabulary_machine_name_load('neighbourhoods'); //Neighbourhoods vocabulary.
     $vid = $vid->vid;
     $vocabulary_term_entities = taxonomy_get_tree($vid, 0, 3, TRUE);
@@ -367,12 +369,13 @@ function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = 
         );
       }
     }
-    $_SESSION['neighbourhood_json'] = $terms_polygon_prejson;
-    variable_set('neighbourhood_json', $terms_polygon_prejson);
+//    $_SESSION['neighbourhood_json'] = $terms_polygon_prejson;
+    variable_set('ctrader_map_neighbourhood_json', $terms_polygon_prejson);
   }
-  drupal_add_js(array('neighbourhoodsMapData' => $_SESSION['neighbourhood_json']), 'setting');
+  $prepared_neighbourhoods_json = isset($terms_polygon_prejson) ? $terms_polygon_prejson : variable_get('ctrader_map_neighbourhood_json');
+  drupal_add_js(array('neighbourhoodsMapData' => $prepared_neighbourhoods_json), 'setting');
 
-  return $_SESSION['neighbourhood_json'];
+  return $prepared_neighbourhoods_json;
 }
 
 function _ctrader_map_kml_to_xml() {

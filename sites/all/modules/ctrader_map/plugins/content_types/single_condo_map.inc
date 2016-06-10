@@ -32,10 +32,7 @@ function single_condo_map_content_type_render($subtype, $conf, $args, $context) 
 
   drupal_add_js(array('singleCondoPoint' => $geo_point), 'setting');
   drupal_add_js(array('singleCondoNeighbourhood' => NULL), 'setting');
-//  unset($_SESSION['neighbourhood_json']);
-  if (!isset($_SESSION['neighbourhood_json'])) {
-    _ctrader_map_prepare_neighbourhoods_json();
-  }
+  $all_neighbourhoods_json = _ctrader_map_prepare_neighbourhoods_json();
 
   $map_legend_variables = array();
   $address = NULL;
@@ -46,7 +43,7 @@ function single_condo_map_content_type_render($subtype, $conf, $args, $context) 
 
     $map_legend_variables['address'] = $listing->field_addr__torcond->value() . ', ';
     if ($listing->field_city_region__torcond->value()) {
-      foreach ($_SESSION['neighbourhood_json'] as $key => $value) {
+      foreach ($all_neighbourhoods_json as $key => $value) {
         if ($value['id'] == $listing->field_city_region__torcond[0]->tid->value()) {
           prepare_map_legend($value, $map_legend_variables);
         }
@@ -56,7 +53,7 @@ function single_condo_map_content_type_render($subtype, $conf, $args, $context) 
   else { // if listings has no address so condo has no point.
     drupal_add_js(array('singleCondoPoint' => NULL), 'setting');
     if ($listing->field_municipality_district__tor->value()) {
-      foreach ($_SESSION['neighbourhood_json'] as $key => $value) {
+      foreach ($all_neighbourhoods_json as $key => $value) {
         if ($value['properties']['name'] == $listing->field_municipality_district__tor->value()) {
           prepare_map_legend($value, $map_legend_variables);
         }
