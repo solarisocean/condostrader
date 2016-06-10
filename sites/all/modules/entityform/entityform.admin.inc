@@ -36,11 +36,11 @@ class EntityformUIController extends EntityDefaultUIController {
 
     // Change the overview menu type for the list of entityforms.
     $items[$this->path]['type'] = MENU_LOCAL_TASK;
-    $items['eform/submit/%entityform_empty'] = array(
+    $items['eform/submit/%entityform_type'] = array(
       'title callback' => 'entityform_page_title',
       'title arguments' => array(2, 1),
-      'page callback' => 'entityform_form_wrapper',
-      'page arguments' => array(2, 'submit'),
+      'page callback' => 'entityform_type_submit_page',
+      'page arguments' => array(2),
       'access callback' => 'entityform_access',
       'access arguments' => array('submit', 2),
       'file' => 'entityform.admin.inc',
@@ -191,7 +191,10 @@ class EntityformUIController extends EntityDefaultUIController {
 
 }
 
-
+function entityform_type_submit_page($entityform_type) {
+  $view = entity_view('entityform_type', array($entityform_type), 'full', NULL, TRUE);
+  return $view;
+}
 /**
  * Form callback wrapper: create or edit a entityform.
  *
@@ -210,9 +213,11 @@ class EntityformUIController extends EntityDefaultUIController {
  */
 function entityform_form_wrapper($entityform, $mode = 'submit', $form_context = 'page') {
   $make_form = TRUE;
+
   $entityform_type = entityform_type_load($entityform->type);
+
   if ($form_context == 'page') {
-    drupal_set_title($entityform_type->label);
+    drupal_set_title($entityform_type->getTranslation('label'));
   }
   if (!empty($entityform->is_new)) {
     $draft = FALSE;
@@ -261,7 +266,7 @@ function entityform_form_wrapper($entityform, $mode = 'submit', $form_context = 
   if (!empty($entityform_type->data['instruction_pre'])) {
     $output['intro'] = array(
       '#type' => 'markup',
-      '#markup' => "<div class='pre-instructions' >" . _entityform_format_text($entityform_type->data['instruction_pre'], array('entityform_type' => $entityform_type)) . "</div>",
+      '#markup' => "<div class='pre-instructions' >" . $entityform_type->get_prop('instruction_pre') . "</div>",
       '#weight' => -100,
     );
   }

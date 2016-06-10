@@ -147,12 +147,14 @@ function entityform_entity_info() {
   // The entity that holds information about the entity types
   $return['entityform_type'] = array(
     'label' => t('Entityform Type'),
+    'uri callback' => 'entity_class_uri',
     'entity class' => 'EntityformType',
     'controller class' => 'EntityformTypeController',
     'base table' => 'entityform_type',
     'fieldable' => FALSE,
     'bundle of' => 'entityform',
     'exportable' => TRUE,
+    'metatags' => TRUE,
     'entity keys' => array(
       'id' => 'id',
       'name' => 'type',
@@ -1120,6 +1122,11 @@ class Entityform extends Entity {
  * The class used for entityform type entities
  */
 class EntityformType extends Entity {
+  protected function defaultUri() {
+    return array(
+      'path' => 'eform/submit/' . str_replace('_', '-', $this->type),
+    );
+  }
 
   public $type;
   public $label;
@@ -1133,22 +1140,31 @@ class EntityformType extends Entity {
    * Get A path property for this EntityformType with tokens replaced
    */
   public function get_path_property($property, $entityform = NULL) {
-    $path = $this->data[$property];
+    $path = $this->getTranslation($property);
     if (empty($path)) {
       return '';
     }
-    if ($this->data[$property] == '<front>') {
-      return $this->data[$property];
+    if ($path == '<front>') {
+      return $path;
     }
-    $path = _entityform_format_text($path,
-      array('entityform_type' => $this, 'entityform' => $entityform));
+    $path = _entityform_format_text($path, array('entityform_type' => $this, 'entityform' => $entityform));
     $options = drupal_parse_url(decode_entities($path));
     return array($options['path'], array('query' => $options['query']));
   }
 
   public function get_prop($key, $entityform = NULL) {
     if (isset($this->data[$key])) {
-      $value = $this->data[$key];
+      if (is_array($this->data[$key]) && !empty($this->data[$key]['value'])) {
+        $value = array(
+          'value' => $this->getTranslation($key),
+        );
+        if (!empty($this->data[$key]['format'])) {
+          $value['format'] = $this->data[$key]['format'];
+        }
+      }
+      else {
+        $value = $this->getTranslation($key);
+      }
     }
     else {
       $value = '';
@@ -1174,6 +1190,41 @@ class EntityformType extends Entity {
     return _entityform_format_text($value, $token_types);
   }
 
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getTranslation($property, $langcode = NULL) {
+    $all_info = entity_get_all_property_info($this->entityType);
+    // Assign by reference to avoid triggering notices if metadata is missing.
+    $property_info = &$all_info[$property];
+    $property_value = isset($this->$property)
+      ? $this->$property
+      : (isset($this->data[$property])
+        ? $this->data[$property]
+        : NULL);
+
+    if (is_array($property_value) && isset($property_value['value'])) {
+      $property_value = $property_value['value'];
+    }
+    if (!empty($property_info['translatable'])) {
+      if (!empty($property_info['field'])) {
+        return field_get_items($this->entityType, $this, $property, $langcode);
+      }
+      elseif (module_exists('i18n_string') && !empty($property_info['i18n string'])) {
+        $name = $this->entityInfo['module'] . ':' . $this->entityType . ':' . $this->identifier() . ':' . $property;
+
+        $options = array(
+          'langcode' => $langcode,
+          'sanitize' => FALSE,
+        );
+        return html_entity_decode(i18n_string($name, $property_value, $options), ENT_QUOTES);
+      }
+    }
+    return $property_value;
+  }
+
+
   /**
    * Clears values default text values so global text values can be used.
    */
@@ -1183,6 +1234,13 @@ class EntityformType extends Entity {
       $this->data[$key] = '';
     }
   }
+  /**
+   * Return a list of property labels used for translation forms.
+   */
+  public function getLabelsForTranslation() {
+    return entity_get_controller('entityform_type')->get_text_labels();
+  }
+
 }
 
 
@@ -1301,8 +1359,11 @@ class EntityformTypeController extends EntityAPIControllerExportable {
     }
     else {
       if ($values['is_new']) {
-        $values['data']['submissions_view'] = 'default';
-        $values['data']['user_submissions_view'] = 'default';
+        // Don't override values even if is_new. Features will send values in for checking status.
+        $values['data'] += array(
+          'submissions_view' => 'default',
+          'user_submissions_view' => 'default',
+        );
       }
     }
     $entityform_type = parent::create($values);
@@ -1314,18 +1375,39 @@ class EntityformTypeController extends EntityAPIControllerExportable {
    */
   public function get_default_text_values() {
     return array(
+      'label' => '',
+      'instruction_pre' => '',
       'submit_confirm_msg' => t('Your submission has been saved.'),
       'submission_page_title' => t('Thank You.'),
       'draft_button_text' => t('Save Draft'),
       'submit_button_text' => t('Submit'),
-      'your_submissions' => t('Your Submissions: @label',
-        array('@label' => '[entityform_type:label]')),
+      'your_submissions' => t('Your Submissions: @label', array('@label' => '[entityform_type:label]')),
       'disallow_resubmit_msg' => t('You already submitted this form'),
-      'delete_confirm_msg' => t('Are you sure you want to delete this Submission for @label',
-        array('@label' => '[entityform_type:label]?')),
+      'delete_confirm_msg' =>  t('Are you sure you want to delete this Submission for @label', array('@label' => '[entityform_type:label]?')),
       'draft_save_text' => '',
-      'page_title_view' => t('Form Submission: @label',
-        array('@label' => '[entityform_type:label]')),
+      'page_title_view' => t('Form Submission: @label', array('@label' => '[entityform_type:label]')),
+      );
+     }
+
+  /**
+   * Returns text labels.
+   */
+  public function get_text_labels() {
+    return array(
+      'label' => t('Label'),
+      'draft_redirect_path' => t('Draft Redirect path'),
+      'draft_button_text' => t('Override draft button text'),
+      'draft_save_text' => t('Draft save text'),
+      'submit_button_text' => t('Submit Button Text'),
+      'submit_confirm_msg' => t('Submission Confirmation Text'),
+      'your_submissions' => t('Your Submissions Text'),
+      'disallow_resubmit_msg' => t('Form Disallow Resubmit Text'),
+      'delete_confirm_msg' => t('Submission Delete Text'),
+      'submission_page_title' => t('Thank You.'),
+      'page_title_view' => t('Submission View Title'),
+      'submission_text' => t('Submission reply'),
+      'redirect_path' => t('Redirect path'),
+      'instruction_pre' => t('Intro form instructions'),
     );
   }
 
@@ -1336,7 +1418,7 @@ class EntityformTypeController extends EntityAPIControllerExportable {
     $view = parent::view($entities, $view_mode, $langcode, $page);
     foreach ($entities as $entity_id => $entity) {
       module_load_include('inc', 'entityform', 'entityform.admin');
-      $view[$this->entityType][$entity->type]['form'] = entityform_form_wrapper(entityform_empty_load($entity->type), 'submit', 'embedded');
+      $view[$this->entityType][$entity->type]['form'] = entityform_form_wrapper(entityform_empty_load($entity->type), 'submit', ($page ? 'page':'embedded'));
     }
     return $view;
   }
@@ -1396,6 +1478,15 @@ class EntityformTypeController extends EntityAPIControllerExportable {
           }
         }
       }
+      // Delete all menu module links that point to this entityform type.
+      $submit_paths = array();
+      foreach ($entities as $id => $entity) {
+        $submit_paths[] = _entityform_type_get_submit_url($entity->type);
+      }
+      $result = db_query("SELECT mlid FROM {menu_links} WHERE link_path IN (:path) AND module = 'entityform'", array(':path' => $submit_paths), array('fetch' => PDO::FETCH_ASSOC));
+      foreach ($result as $m) {
+        menu_link_delete($m['mlid']);
+      }
       parent::delete($ids, $transaction);
 
       // Clear field info caches such that any changes to extra fields get
@@ -1448,34 +1539,60 @@ function _entityform_type_get_path_types($type) {
  *   2. All Fields will added if the if the show_display_id starts with "autofields_
  */
 function entityform_views_pre_view(&$view, &$display_id, &$args) {
-  if ($view->base_table == 'entityform' && strpos($display_id, 'autofields_') === 0) {
-    if (empty($view->display[$display_id]->entityform_settings['autofields'])) {
-      $type = $view->args[0];
-      _entityform_view_add_all_fields($view, $display_id, $type);
+  if ($view->base_table == 'entityform') {
+    $view_mode = _entityform_get_view_mode_for_view($view, $display_id);
+    if ($view_mode && empty($view->display[$display_id]->entityform_settings['autofields'])) {
+      // We have to have the Entityform Type as the first argument to this View to get this to work.
+      if (isset($view->args[0])) {
+        $type = $view->args[0];
+        _entityform_view_add_all_fields($view, $display_id, $type, $view_mode);
+      }
     }
-
   }
   return;
 }
 
 /**
+ * Get the Entity View Mode to use of adding field to a View.
+ *
+ *
+ * Current the display_id must have the 1 of 2 patterns
+ *   1. autofields_[TYPE]_[optional_extra]
+ *   2. autofields_vm__[VIEW_MODE]
+ * @param $view
+ * @param string $display_id
+ * @return string
+ */
+function _entityform_get_view_mode_for_view($view, $display_id = '') {
+  // Old method hardcoded display ids to view modes.
+  $display_id_parts = explode('_', $display_id);
+  if ($display_id_parts[0]  == 'autofields') {
+    switch ($display_id_parts[1]) {
+      case 'csv':
+      case 'xml':
+        return 'download';
+        break;
+      case 'table':
+        return 'table';
+        break;
+      case 'vm';
+        //autofield_vm__[VIEW_MODE]
+        $display_id_viewmode_parts = explode('__', $display_id);
+        return $display_id_viewmode_parts[1];
+        break;
+      default:
+        return 'default';
+    }
+  }
+  return '';
+}
+/**
  * Add automatically add all the fields for a Bundle to a View
  */
-function _entityform_view_add_all_fields(&$view, $display_id, $bundle_name) {
+function _entityform_view_add_all_fields(&$view, $display_id, $bundle_name, $view_mode) {
   $instances = field_info_instances('entityform', $bundle_name);
   $view_mode_settings = field_view_mode_settings('entityform', $bundle_name);
   // when adding autofields to view let view modes determine which fields should be include and in what order
-  switch ($display_id) {
-    case 'autofields_csv':
-    case 'autofields_xml':
-      $view_mode = 'download';
-      break;
-    case 'autofields_table':
-      $view_mode = 'table';
-      break;
-    default:
-      $view_mode = 'default';
-  }
   $autofields = array();
   foreach ($instances as $instance) {
     if (!empty($view_mode_settings[$view_mode]['custom_settings']) && isset($instance['display'][$view_mode])) {

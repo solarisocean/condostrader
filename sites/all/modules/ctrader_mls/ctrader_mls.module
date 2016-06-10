@@ -564,6 +564,9 @@ function ctrader_mls_form_alter(&$form, &$form_state, $form_id) {
     case 'drealty_listing_edit_form':
       $form['actions']['delete']['#submit'][0] = '_ctrader_mls_drealty_listing_delete';
       break;
+    case 'entityform_type_form':
+      
+      break;
   }
 }
 
