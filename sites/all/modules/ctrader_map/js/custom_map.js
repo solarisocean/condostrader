@@ -82,7 +82,7 @@
                             }
                         });
                         
-                        if (settings.hasOwnProperty('locationSelect') && settings.hasOwnProperty('chosenNeighbourhoodsTermIds')) {
+                        if (settings.hasOwnProperty('chosenNeighbourhoodsTermIds')) {
                             for (var i = 0; i < settings.chosenNeighbourhoodsTermIds.length; i++) {
                                 if (feature.id === settings.chosenNeighbourhoodsTermIds[i]) {
                                     layer.setStyle({
@@ -91,6 +91,7 @@
                                 }
                             }
                         }
+
                     }
 
                     var neighbourhoodsData = Drupal.settings.neighbourhoodsMapData;

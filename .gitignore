@@ -11,3 +11,7 @@ error_log
 
 #Ignore path that contain modules for develop theme.
 sites/all/modules/browsersync
+
+#Ignore performance modules for local development.
+sites/all/modules/redis
+sites/all/libraries/predis
