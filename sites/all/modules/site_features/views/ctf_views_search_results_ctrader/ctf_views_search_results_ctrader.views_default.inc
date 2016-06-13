@@ -945,17 +945,27 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['header']['result']['content'] = '<span class="total-quantity">@total</span>
 <div>Showing <span class="start"><b>@start</b></span> - <span class="end"><b>@end</b></span> of <span class="sum><b>@total</b></span> Results</div>';
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Indexed Drealty Listing: Drealty Listing Id */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  $handler->display->display_options['fields']['id']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['id']['separator'] = '';
+  $handler->display->display_options['fields']['id']['link_to_entity'] = 1;
   /* Field: Indexed Drealty Listing: Toronto gallery */
   $handler->display->display_options['fields']['field_toronto_gallery']['id'] = 'field_toronto_gallery';
   $handler->display->display_options['fields']['field_toronto_gallery']['table'] = 'search_api_index_toronto_condo_index';
   $handler->display->display_options['fields']['field_toronto_gallery']['field'] = 'field_toronto_gallery';
   $handler->display->display_options['fields']['field_toronto_gallery']['label'] = '';
   $handler->display->display_options['fields']['field_toronto_gallery']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_toronto_gallery']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_toronto_gallery']['alter']['path'] = 'drealty_listing/[id]';
+  $handler->display->display_options['fields']['field_toronto_gallery']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['field_toronto_gallery']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_toronto_gallery']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_toronto_gallery']['settings'] = array(
     'image_style' => '286x160',
-    'image_link' => 'content',
+    'image_link' => '',
   );
   $handler->display->display_options['fields']['field_toronto_gallery']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_toronto_gallery']['delta_offset'] = '0';
@@ -1208,6 +1218,9 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['field_community_torcond']['label'] = '';
   $handler->display->display_options['fields']['field_community_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_community_torcond']['alter']['text'] = '[field_addr_torcond] [field_unit_num_torcond][field_municipality_torcond]';
+  $handler->display->display_options['fields']['field_community_torcond']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_community_torcond']['alter']['path'] = 'drealty_listing/[id]';
+  $handler->display->display_options['fields']['field_community_torcond']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['field_community_torcond']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_community_torcond']['empty'] = '[field_area_torcond] Condo';
   $handler->display->display_options['fields']['field_community_torcond']['hide_alter_empty'] = FALSE;
@@ -1418,17 +1431,27 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['header']['result']['content'] = '<span class="total-quantity">@total</span>
 <div>Showing <span class="start"><b>@start</b></span> - <span class="end"><b>@end</b></span> of <span class="sum><b>@total</b></span> Results</div>';
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Indexed Drealty Listing: Drealty Listing Id */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  $handler->display->display_options['fields']['id']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['id']['separator'] = '';
+  $handler->display->display_options['fields']['id']['link_to_entity'] = 1;
   /* Field: Indexed Drealty Listing: Toronto gallery */
   $handler->display->display_options['fields']['field_toronto_gallery']['id'] = 'field_toronto_gallery';
   $handler->display->display_options['fields']['field_toronto_gallery']['table'] = 'search_api_index_toronto_condo_index';
   $handler->display->display_options['fields']['field_toronto_gallery']['field'] = 'field_toronto_gallery';
   $handler->display->display_options['fields']['field_toronto_gallery']['label'] = '';
   $handler->display->display_options['fields']['field_toronto_gallery']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_toronto_gallery']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_toronto_gallery']['alter']['path'] = 'drealty_listing/[id]';
+  $handler->display->display_options['fields']['field_toronto_gallery']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['field_toronto_gallery']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_toronto_gallery']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_toronto_gallery']['settings'] = array(
     'image_style' => '286x160',
-    'image_link' => 'content',
+    'image_link' => '',
   );
   $handler->display->display_options['fields']['field_toronto_gallery']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_toronto_gallery']['delta_offset'] = '0';
@@ -1642,8 +1665,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['fieldset']['children'] = array(
     0 => 'field_community_torcond',
     1 => 'nothing',
-    2 => 'field_maint_torcond',
-    3 => 'nothing_2',
+    2 => 'nothing_2',
   );
   $handler->display->display_options['fields']['fieldset']['fieldset']['type'] = 'div';
   /* Field: Building title (community or area) */
@@ -1654,6 +1676,9 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['field_community_torcond']['label'] = '';
   $handler->display->display_options['fields']['field_community_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_community_torcond']['alter']['text'] = '[field_community_torcond] Building';
+  $handler->display->display_options['fields']['field_community_torcond']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_community_torcond']['alter']['path'] = 'drealty_listing/[id]';
+  $handler->display->display_options['fields']['field_community_torcond']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['field_community_torcond']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_community_torcond']['empty'] = '[field_area_torcond] Condo';
   $handler->display->display_options['fields']['field_community_torcond']['hide_alter_empty'] = FALSE;
