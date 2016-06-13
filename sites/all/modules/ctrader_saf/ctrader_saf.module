@@ -781,8 +781,8 @@ function hierarchical_select_neighbourhoods_vocabulary_form($form, &$form_state)
       'level_labels' => array(
         'status' => 1,
         'labels' => array(
-          0 => t('All Cities'),
-          1 => t('All Regions'),
+          0 => t('All Areas'),
+          1 => t('All Municipalities'),
           2 => t('All Communities'),
         ),
       ),
