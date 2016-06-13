@@ -10,7 +10,10 @@
  * Build custom form for search menu.
  */
 function searchmenu_form($form, &$form_state) {
-  $form['#attributes']['class'] = 'right';
+  $form['#attributes']['class'] = array(
+    'right',
+    'search-box-header'
+  );
 
   $form['query'] = array(
     '#type' => 'textfield',
@@ -18,8 +21,10 @@ function searchmenu_form($form, &$form_state) {
       'id' => array(
         'searchmenu_form_input'
       ),
-      'placeholder' => t('Type your search here...'),
+      'placeholder' => t('Type address, MLS number, ZIP code, area or neighbourhood name'),
     ),
+    '#suffix' => '<span class="loader"></span>',
+    '#submit' => 'searchmenu_submit'
   );
   return $form;
 }
