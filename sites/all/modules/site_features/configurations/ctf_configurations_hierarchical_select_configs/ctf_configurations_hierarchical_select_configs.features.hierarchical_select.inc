@@ -17,8 +17,8 @@ $config = array(
   'level_labels' => array(
     'status' => 1,
     'labels' => array(
-      0 => 'All Cities',
-      1 => 'All Regions',
+      0 => 'All Areas',
+      1 => 'All Municipalities',
       2 => 'All Communities',
     ),
   ),
