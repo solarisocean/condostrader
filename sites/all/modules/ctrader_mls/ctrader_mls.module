@@ -355,9 +355,11 @@ function ctrader_mls_entity_presave($entity, $type) {
   switch ($type) {
     case DREALTY_ENTITY_TYPE:
       if ($entity->type == TORONTO_CONDO) {
+
+        // Adds value with current price to multiple old-price field.
+        // This needs for discount calculating.
         if (isset($entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value'])) {
           $key = count($entity->field_old_price_value__torcond[LANGUAGE_NONE]);
-//          drush_log(dt('$key'));
           if (empty($key)) {
             $entity->field_old_price_value__torcond[LANGUAGE_NONE][$key]['value'] = $entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value'];
           }
@@ -366,6 +368,7 @@ function ctrader_mls_entity_presave($entity, $type) {
           }
         }
 
+        // Creates fields value with min-max sqft for sqft range facet.
         $sqft_min = $sqft_max = 0;
         if (isset($entity->field_sqft__torcond[LANGUAGE_NONE][0]['value'])) {
           $sqft = $entity->field_sqft__torcond[LANGUAGE_NONE][0]['value'];
@@ -381,18 +384,82 @@ function ctrader_mls_entity_presave($entity, $type) {
         $entity->field_sqft_range_min__torcond[LANGUAGE_NONE][0]['value'] = $sqft_min;
         $entity->field_sqft_range_max__torcond[LANGUAGE_NONE][0]['value'] = $sqft_max;
 
+        // Calculates price per sqft.
         $price = isset($entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value']) ? intval($entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value']) : 0;
         $entity->field_price_per_sqft__torcond[LANGUAGE_NONE][0]['value'] = $sqft_max != 0 ? round(($price / $sqft_max), 2) : 0;
 
+        // Creates string value for search-point field (this field needs for solr polygon search).
+        $lat = isset($entity->field_test_geofilld[LANGUAGE_NONE][0]['lat']) ? $entity->field_test_geofilld[LANGUAGE_NONE][0]['lat'] : NULL;
+        $lon = isset($entity->field_test_geofilld[LANGUAGE_NONE][0]['lon']) ? $entity->field_test_geofilld[LANGUAGE_NONE][0]['lon'] : NULL;
+        if ($lat && $lon) {
+          $entity->field_search_point_string[LANGUAGE_NONE][0]['value'] = $lat . ',' . $lon;
+        }
+        else {
+          //default Toronto coordinates.
+          $entity->field_search_point_string[LANGUAGE_NONE][0]['value'] = '43.760,-79.390';
+        }
+
+        // Search listing point on neighbourhoods terms polygons and create reference.
+        if (!isset($entity->field_city_region__torcond[LANGUAGE_NONE][0]['tid'])) {
+          if (!isset($_SESSION['neighbourhoods_terms_polygons_data'])) {
+            $vid = taxonomy_vocabulary_machine_name_load('neighbourhoods'); //Neighbourhoods vocabulary.
+            $vid = $vid->vid;
+            $vocabulary_term_entities = taxonomy_get_tree($vid, 0, 3, TRUE);
+            $terms_polygon = array();
+            foreach ($vocabulary_term_entities as $tax_term) {
+              $tax_term_id = $tax_term->tid;
+              $polygon = isset($tax_term->field_community_geolocation[LANGUAGE_NONE][0]['geom']) ? $tax_term->field_community_geolocation[LANGUAGE_NONE][0]['geom'] : NULL;
+              if ($polygon !== NULL && $polygon != 'GEOMETRYCOLLECTION EMPTY') {
+                if (strrpos($tax_term->field_community_geolocation[LANGUAGE_NONE][0]['geom'], 'MULTIPOLYGON') === FALSE) {
+                  $polygon = $tax_term->field_community_geolocation[LANGUAGE_NONE][0]['geom'];
+                  $polygon = str_replace(array(
+                    'POLYGON ',
+                    '(',
+                    ')'
+                  ), '', $polygon);
+                  $polygon = explode(', ', $polygon);
+                }
+              }
+              $terms_polygon[$tax_term_id] = $polygon;
+              $polygon = NULL;
+              $tax_term_id = NULL;
+            }
+            $_SESSION['neighbourhoods_terms_polygons_data'] = $terms_polygon;
+          }
+          $terms_polygon = $_SESSION['neighbourhoods_terms_polygons_data'];
+          require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'ctrader_map') . '/classes/pointLocation.php';
+          $pointLocation = new pointLocation();
+          $point = $entity->field_test_geofilld[LANGUAGE_NONE][0]['lon'] . ' ' . $entity->field_test_geofilld[LANGUAGE_NONE][0]['lat'];
+          foreach ($terms_polygon as $term_id => $term_polygon) {
+            if (is_array($term_polygon)) {
+              $check = $pointLocation->pointInPolygon($point, $term_polygon);
+              if ($check == 'inside') {
+                $entity->field_city_region__torcond[LANGUAGE_NONE][0]['tid'] = $term_id;
+              }
+            }
+          }
+        }
+
+        // Sets images alt and removes title.
+        if (!empty($entity->field_toronto_gallery[LANGUAGE_NONE])) {
+          foreach ($entity->field_toronto_gallery[LANGUAGE_NONE] as $key => $value) {
+            $alt_mls_num = isset($entity->field_ml_num__torcond[LANGUAGE_NONE][0]['value']) ? 'MLS #' . $entity->field_ml_num__torcond[LANGUAGE_NONE][0]['value'] : '';
+            $alt_street = isset($entity->field_st__torcond[LANGUAGE_NONE][0]['value']) ? ' ' . $entity->field_st__torcond[LANGUAGE_NONE][0]['value'] : ' ';
+            $alt_street_sfx = isset($entity->field_st_sfx__torcond[LANGUAGE_NONE][0]['value']) ? ' ' . $entity->field_st_sfx__torcond[LANGUAGE_NONE][0]['value'] : ' ';
+            $alt_unit_num = isset($entity->field_unit_num__torcond[LANGUAGE_NONE][0]['value']) ? ' ' . $entity->field_unit_num__torcond[LANGUAGE_NONE][0]['value'] : ' ';
+            $alt_area = isset($entity->field_area__torcond[LANGUAGE_NONE][0]['value']) ? ' ' . $entity->field_area__torcond[LANGUAGE_NONE][0]['value'] : '';
+
+            $entity->field_toronto_gallery[LANGUAGE_NONE][$key]['alt'] = $alt_mls_num . $alt_street . $alt_street_sfx . $alt_unit_num . $alt_area;
+            $entity->field_toronto_gallery[LANGUAGE_NONE][$key]['title'] = '';
+          }
+        }
+
+        // Creates or updates building for listing.
         if (!$entity->is_new) {
           _ctrader_mls_create_building_and_reference($entity, $type);
         }
       }
 
-      if ($entity->type == TORONTO_CONDO || $entity->type == TORONTO_BUILDING) {
-        $entity->field_search_point_string[LANGUAGE_NONE][0]['value'] = $entity->field_test_geofilld[LANGUAGE_NONE][0]['lat'] . ',' . $entity->field_test_geofilld[LANGUAGE_NONE][0]['lon'];
-//        drush_log(dt("Info string (ubuntu terminal)"), "warning");
-      }
       break;
   }
 }
@@ -412,19 +479,19 @@ function ctrader_mls_entity_insert($entity, $type) {
 function _ctrader_mls_create_building_and_reference($entity, $type) {
   if ($type == DREALTY_ENTITY_TYPE && $entity->type == TORONTO_CONDO) {
     // Creates reference to condo marked as building.
-    if (!empty($entity->field_addr__torcond[LANGUAGE_NONE][0]['value'])) {
+    if (!empty($entity->field_search_point_string[LANGUAGE_NONE][0]['value'])) {
 
       // todo Have to change field name!!!!!
       $reference_field_name = 'field_reference_to_condo';
 
-      $building_with_this_addr = db_select('field_data_field_addr__torcond', 'ad')
-        ->fields('ad', array('entity_id',))
+      $building_with_same_coord = db_select('field_data_field_search_point_string', 'sps')
+        ->fields('sps', array('entity_id',))
         ->condition('bundle', TORONTO_BUILDING)
-        ->condition('field_addr__torcond_value', $entity->field_addr__torcond[LANGUAGE_NONE][0]['value'], '=')
+        ->condition('field_search_point_string_value', $entity->field_search_point_string[LANGUAGE_NONE][0]['value'], '=')
         ->orderBy('entity_id')
         ->execute()
         ->fetchCol();
-      if (empty($building_with_this_addr)) {
+      if (empty($building_with_same_coord)) {
         $entity_building = clone $entity;
         $entity_building->id = NULL;
         $entity_building->type = TORONTO_BUILDING;
@@ -438,11 +505,11 @@ function _ctrader_mls_create_building_and_reference($entity, $type) {
         entity_save(DREALTY_ENTITY_TYPE, $entity_building);
       }
       else {
-        $building = entity_load_single(DREALTY_ENTITY_TYPE, reset($building_with_this_addr));
+        $building = entity_load_single(DREALTY_ENTITY_TYPE, reset($building_with_same_coord));
 
         // Checks if this building has reference with this condo.
         $not_have_reference = TRUE;
-        if (isset($building->{$reference_field_name}[LANGUAGE_NONE][0])) {
+        if (!empty($building->{$reference_field_name}[LANGUAGE_NONE])) {
           foreach ($building->{$reference_field_name}[LANGUAGE_NONE] as $key => $value) {
             if ($value['target_id'] == $entity->id) {
               $not_have_reference = FALSE;
@@ -472,7 +539,7 @@ function _ctrader_mls_create_building_and_reference($entity, $type) {
  */
 function _ctrader_mls_count_average_pricepersqft(&$building, &$condo) {
   $building_condos = array();
-  if (!empty($building->field_reference_to_condo)) {
+  if (isset($building->field_reference_to_condo[LANGUAGE_NONE]) && !empty($building->field_reference_to_condo[LANGUAGE_NONE])) {
     $condo_ids = array();
     foreach ($building->field_reference_to_condo[LANGUAGE_NONE] as $key => $value) {
       $condo_ids[] = $value['target_id'];
@@ -480,9 +547,9 @@ function _ctrader_mls_count_average_pricepersqft(&$building, &$condo) {
     $building_condos = entity_load(DREALTY_ENTITY_TYPE, $condo_ids, array('active' => 1));
   }
 
-  if ($condo->active == 1) {
-    $building_condos[] = $condo;
-  }
+//  if ($condo->active == 1) {
+//    $building_condos[] = $condo;
+//  }
 
   // There we have all active condos in this building.
   // And now try to calculate avarage price per sqft for lease and sale.

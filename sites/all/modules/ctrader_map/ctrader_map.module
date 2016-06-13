@@ -244,47 +244,7 @@ function ctrader_map_block_view($delta = '') {
 function ctrader_map_entity_presave($entity, $type) {
   switch ($type) {
     case DREALTY_ENTITY_TYPE:
-      if (!isset($entity->field_city_region__torcond[LANGUAGE_NONE][0]['tid'])) {
-        if (!isset($_SESSION['neighbourhoods_terms_polygons_data'])) {
-          $vid = taxonomy_vocabulary_machine_name_load('neighbourhoods'); //Neighbourhoods vocabulary.
-          $vid = $vid->vid;
-          $vocabulary_term_entities = taxonomy_get_tree($vid, 0, 3, TRUE);
-          $terms_polygon = array();
-          foreach ($vocabulary_term_entities as $tax_term) {
-            $tax_term_id = $tax_term->tid;
-            $polygon = isset($tax_term->field_community_geolocation[LANGUAGE_NONE][0]['geom']) ? $tax_term->field_community_geolocation[LANGUAGE_NONE][0]['geom'] : NULL;
-            if ($polygon !== NULL && $polygon != 'GEOMETRYCOLLECTION EMPTY') {
-              if (strrpos($tax_term->field_community_geolocation[LANGUAGE_NONE][0]['geom'], 'MULTIPOLYGON') === FALSE) {
-                $polygon = $tax_term->field_community_geolocation[LANGUAGE_NONE][0]['geom'];
-                $polygon = str_replace(array(
-                  'POLYGON ',
-                  '(',
-                  ')'
-                ), '', $polygon);
-                $polygon = explode(', ', $polygon);
-              }
-            }
-            $terms_polygon[$tax_term_id] = $polygon;
 
-            $polygon = NULL;
-            $tax_term_id = NULL;
-          }
-          $_SESSION['neighbourhoods_terms_polygons_data'] = $terms_polygon;
-        }
-
-        $terms_polygon = $_SESSION['neighbourhoods_terms_polygons_data'];
-        require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'ctrader_map') . '/classes/pointLocation.php';
-        $pointLocation = new pointLocation();
-        $point = $entity->field_test_geofilld[LANGUAGE_NONE][0]['lon'] . ' ' . $entity->field_test_geofilld[LANGUAGE_NONE][0]['lat'];
-        foreach ($terms_polygon as $term_id => $term_polygon) {
-          if (is_array($term_polygon)) {
-            $check = $pointLocation->pointInPolygon($point, $term_polygon);
-            if ($check == 'inside') {
-              $entity->field_city_region__torcond[LANGUAGE_NONE][0]['tid'] = $term_id;
-            }
-          }
-        }
-      }
       break;
   }
 }

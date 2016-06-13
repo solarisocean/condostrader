@@ -9,7 +9,7 @@
 /**
  * Change taxonomy field value for every drealty_listing entity type.
  */
-function ctrader_map_update_7000(&$sandbox) {
+function ctrader_map_update_7002(&$sandbox) {
   if (!isset($_SESSION['neighbourhoods_terms_polygons_data'])) {
     $vid = taxonomy_vocabulary_machine_name_load('neighbourhoods'); //Neighbourhoods vocabulary.
     $vid = $vid->vid;

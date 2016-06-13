@@ -42,7 +42,7 @@ function ctrader_mls_requirements($phase) {
 /**
  * Delete all buildings.
  */
-function ctrader_mls_update_7000(&$sandbox) {
+function ctrader_mls_update_7001(&$sandbox) {
   $listings_per_pass = 10;
   if (!isset($sandbox['progress'])) {
     $sandbox['progress'] = 0;
@@ -64,10 +64,10 @@ function ctrader_mls_update_7000(&$sandbox) {
     ->fetchCol();
 
   if (!empty($records)) {
-//    $entities = entity_load(DREALTY_ENTITY_TYPE, array($records));
-//    foreach ($entities as $entity) {
-//      $entity->delete();
-//    }
+    $entities = entity_load(DREALTY_ENTITY_TYPE, array($records));
+    foreach ($entities as $entity) {
+      $entity->delete();
+    }
     $sandbox['current_id'] = end($records);
     $sandbox['progress'] += count($records);
     $sandbox['#finished'] = $sandbox['progress'] / $sandbox['max'];
