@@ -516,9 +516,11 @@
             $('body').once(function() {
                 $('.wishlist-slider .view-content').addClass('swiper-wrapper');
 
+                var newlyListedSlider;
+
                 if ($('.wishlist-slider .view-content .views-row').length >= 5) {
                     $('.wishlist-slider').prepend('<div class="wishlist-slider-button-next swiper-button-next"></div><div class="wishlist-slider-button-prev swiper-button-prev"></div>');
-                    var newlyListedSlider = new Swiper('.wishlist-slider', {
+                    newlyListedSlider = new Swiper('.wishlist-slider', {
                         slidesPerView: 4,
                         slidesPerColumn: 2,
                         paginationClickable: true,
@@ -527,6 +529,21 @@
                         prevButton: '.wishlist-slider-button-prev'
                     });
                 }
+
+                if ($('body').hasClass('page-user-wishlist')) {
+                    $('.flag a').on('click', function() {
+                        $(this).closest('.views-row').remove();
+                        console.log($('.wishlist-slider .view-content .views-row').length);
+                        if ($('.wishlist-slider .view-content .views-row').length > 5) {
+                            newlyListedSlider.params.slidesPerColumn = 1;
+                            console.log(newlyListedSlider.params);
+                        } else if ($('.wishlist-slider .view-content .views-row').length == 0) {
+                            window.location.reload(true);
+                        }
+                        newlyListedSlider.update(true);
+                    });
+                }
+
             });
         }
     };

@@ -1,7 +1,7 @@
 .page-user-wishlist {
   .view-empty {
     text-align: center;
-    padding: 10rem 0;
+    padding: 15rem 0;
     p {
       font-size: rem-calc(22);
       text-transform: uppercase;
@@ -20,7 +20,7 @@
 
     .wishlist-slider-button-next,
     .wishlist-slider-button-prev {
-      top: 2% !important;
+      top: 25px !important;
     }
 
     .wishlist-slider-button-next {
@@ -37,6 +37,7 @@
       width: calc((100% / 4) - 22px);
       margin-right: 25px;
       color: #192030;
+      margin-top: 25px;
 
       .views-field-nothing-2 {
         .field-content {
