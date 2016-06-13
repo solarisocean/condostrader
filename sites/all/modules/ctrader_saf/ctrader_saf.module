@@ -85,7 +85,7 @@ function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
     }
     elseif (drupal_is_front_page()) {
       $form['sorting']['#type'] = 'hidden';
-      $form['search_api_aggregation_1']['#attributes']['placeholder'] = t('Search by Neighbourhood, Condo Address or Name ...');
+      $form['search_api_aggregation_1']['#attributes']['placeholder'] = t('Type address, MLS number, ZIP code, area or neighbourhood name');
       $form['search_api_aggregation_1']['#size'] = 70;
     }
   }

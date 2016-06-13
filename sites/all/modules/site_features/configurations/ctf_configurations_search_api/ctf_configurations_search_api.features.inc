@@ -50,7 +50,7 @@ function ctf_configurations_search_api_default_search_api_index() {
         "field_addr__torcond" : { "type" : "text" },
         "field_all_inc__torcond" : { "type" : "string" },
         "field_apt_num__torcond" : { "type" : "string" },
-        "field_area__torcond" : { "type" : "string" },
+        "field_area__torcond" : { "type" : "text" },
         "field_area_code__torcond" : { "type" : "string" },
         "field_ass_year__torcond" : { "type" : "decimal" },
         "field_bath_tot__torcond" : { "type" : "decimal" },
@@ -292,7 +292,7 @@ function ctf_configurations_search_api_default_search_api_index() {
         "field_wcloset_t5lvl__torcond" : { "type" : "text" },
         "field_yr__torcond" : { "type" : "decimal" },
         "field_yr_built__torcond" : { "type" : "string" },
-        "field_zip__torcond" : { "type" : "string" },
+        "field_zip__torcond" : { "type" : "text" },
         "field_zoning__torcond" : { "type" : "string" },
         "id" : { "type" : "integer" },
         "inactive_date" : { "type" : "integer" },
@@ -328,11 +328,13 @@ function ctf_configurations_search_api_default_search_api_index() {
                 "name" : "text search field",
                 "type" : "fulltext",
                 "fields" : [
+                  "field_zip__torcond",
                   "field_ml_num__torcond",
+                  "field_area__torcond",
                   "field_addr__torcond",
                   "field_city_region__torcond:name"
                 ],
-                "description" : "A Fulltext aggregation of the following fields: Ml_num, Addr, City region \\u00bb Name."
+                "description" : "A Fulltext aggregation of the following fields: Zip, Ml_num, Area, Addr, City region \\u00bb Name."
               }
             }
           }
