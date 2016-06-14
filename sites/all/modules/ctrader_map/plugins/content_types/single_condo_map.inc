@@ -25,7 +25,7 @@ function single_condo_map_content_type_render($subtype, $conf, $args, $context) 
   $entity = entity_load_single(DREALTY_ENTITY_TYPE, $args[0]);
   $listing = $entity->wrapper();
 
-  if($listing->field_test_geofilld->lat->value() && $listing->field_test_geofilld->lon->value()) {
+  if($listing->field_test_geofilld->value()) {
     $geo_point = array(
       $listing->field_test_geofilld->lat->value(),
       $listing->field_test_geofilld->lon->value(),
