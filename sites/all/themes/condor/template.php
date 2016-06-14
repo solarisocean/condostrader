@@ -49,6 +49,7 @@ function condor_preprocess_page(&$variables) {
   $header_search_block = block_load('views', '-exp-search_results_ctrader-page_3');
   $header_search_block->title = '';
   $header_search_block->region = 'none';
+  $header_search_block->cache = DRUPAL_NO_CACHE;
   $header_search_block = _block_render_blocks(array($header_search_block));
   $header_search_block = _block_get_renderable_array($header_search_block);
   $header_search_block_output = drupal_render($header_search_block);
