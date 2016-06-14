@@ -45,9 +45,21 @@ function condor_preprocess_page(&$variables) {
   $variables['search_button'] = l('', '/', array('attributes' => array('class' => array('search', 'left'), 'id' => 'search-button')));
   $variables['menu_button'] = l('', '/', array('attributes' => array('class' => array('menu-button'))));
 
+
+  $header_search_block = block_load('views', '-exp-search_results_ctrader-page_3');
+  $header_search_block->title = '';
+  $header_search_block->region = 'none';
+  $header_search_block = _block_render_blocks(array($header_search_block));
+  $header_search_block = _block_get_renderable_array($header_search_block);
+  $header_search_block_output = drupal_render($header_search_block);
+
+
   // Custom search block from ctrader_searchmenu module..
+  /*
   $search_block = drupal_get_form('searchmenu_form');
   $variables['search_block'] = drupal_render($search_block);
+  */
+  $variables['search_block'] = $header_search_block_output;
 
   // Build custom menu tree.
   $menu = menu_build_tree('main-menu');
