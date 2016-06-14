@@ -46,21 +46,38 @@ function condor_preprocess_page(&$variables) {
   $variables['menu_button'] = l('', '/', array('attributes' => array('class' => array('menu-button'))));
 
 
-  $header_search_block = block_load('views', '-exp-search_results_ctrader-page_3');
-  $header_search_block->title = '';
-  $header_search_block->region = 'none';
-  $header_search_block->cache = DRUPAL_NO_CACHE;
-  $header_search_block = _block_render_blocks(array($header_search_block));
-  $header_search_block = _block_get_renderable_array($header_search_block);
-  $header_search_block_output = drupal_render($header_search_block);
+//  $header_search_block = block_load('views', '-exp-search_results_ctrader-page_3');
+//  $header_search_block->title = '';
+//  $header_search_block->region = 'none';
+//  $header_search_block->cache = DRUPAL_NO_CACHE;
+//  $header_search_block = _block_render_blocks(array($header_search_block));
+//  $header_search_block = _block_get_renderable_array($header_search_block);
+//  $header_search_block_output = render($header_search_block);
+
+
+  $view = views_get_view('search_results_ctrader');
+  $display_id = 'page_3';
+  $view->set_display($display_id);
+  $view->init_handlers();
+  $form_state = array(
+    'view' => $view,
+    'display' => $view->display_handler->display,
+    'exposed_form_plugin' => $view->display_handler->get_plugin('exposed_form'),
+    'method' => 'get',
+    'rerender' => TRUE,
+    'no_redirect' => TRUE,
+  );
+  $header_search_form = drupal_build_form('views_exposed_form', $form_state);
+  $header_search_form_output =  drupal_render($header_search_form);
 
 
   // Custom search block from ctrader_searchmenu module..
   /*
   $search_block = drupal_get_form('searchmenu_form');
   $variables['search_block'] = drupal_render($search_block);
+  //$variables['search_block'] = $header_search_block_output;
   */
-  $variables['search_block'] = $header_search_block_output;
+  $variables['search_block'] = $header_search_form_output;
 
   // Build custom menu tree.
   $menu = menu_build_tree('main-menu');
