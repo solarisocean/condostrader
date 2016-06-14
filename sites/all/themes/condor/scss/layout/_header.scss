@@ -56,8 +56,9 @@
           }
         }
 
-        #searchmenu-form {
+        #views-exposed-form-search-results-ctrader-page-3 {
           width: 0;
+          float: left;
           max-width: 260px;
           @include transition(all .3s ease-in-out);
 
@@ -66,7 +67,12 @@
             @include transition(all .3s ease-in-out);
           }
 
-          .form-item-query {
+          .views-exposed-widget {
+            float: none;
+            padding: 0;
+          }
+
+          .form-item {
             margin: 0;
             padding-right: 20px;
 
@@ -81,6 +87,31 @@
               font-size: rem-calc(13);
               @include placeholder {
                 color: $white;
+              }
+            }
+          }
+
+          .views-submit-button {
+            display: none;
+            visibility: hidden;
+          }
+
+          #autocomplete {
+            border: none;
+            top: 60px !important;
+            width: 260px !important;
+
+            li {
+              width: 100%;
+              background: $ecstasy;
+              display: inline-block;
+              clear: both;
+              color: $white;
+              font-size: rem-calc(13);
+              padding: 5px .5rem;
+
+              &.selected {
+                background: darken($ecstasy, 12);
               }
             }
           }

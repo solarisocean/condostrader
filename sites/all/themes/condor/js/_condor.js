@@ -9,7 +9,7 @@
 
             $('#search-button').on('click', function (e) {
                 e.preventDefault();
-                $('#searchmenu-form').toggleClass('search-visible');
+                $('#views-exposed-form-search-results-ctrader-page-3').toggleClass('search-visible');
             });
         }
     };
@@ -520,27 +520,43 @@
 
                 if ($('.wishlist-slider .view-content .views-row').length >= 5) {
                     $('.wishlist-slider').prepend('<div class="wishlist-slider-button-next swiper-button-next"></div><div class="wishlist-slider-button-prev swiper-button-prev"></div>');
-                    newlyListedSlider = new Swiper('.wishlist-slider', {
-                        slidesPerView: 4,
-                        slidesPerColumn: 2,
-                        paginationClickable: true,
-                        spaceBetween: 25,
-                        nextButton: '.wishlist-slider-button-next',
-                        prevButton: '.wishlist-slider-button-prev'
-                    });
+
+                    if ($('.wishlist-slider .view-content .views-row').length > 5) {
+                        newlyListedSlider = new Swiper('.wishlist-slider', {
+                            slidesPerView: 4,
+                            slidesPerColumn: 2,
+                            paginationClickable: true,
+                            spaceBetween: 25,
+                            nextButton: '.wishlist-slider-button-next',
+                            prevButton: '.wishlist-slider-button-prev'
+                        });
+                    }
+                    else if ($('.wishlist-slider .view-content .views-row').length <= 5) {
+                        newlyListedSlider = new Swiper('.wishlist-slider', {
+                            slidesPerView: 4,
+                            paginationClickable: true,
+                            spaceBetween: 25,
+                            nextButton: '.wishlist-slider-button-next',
+                            prevButton: '.wishlist-slider-button-prev'
+                        });
+                    }
                 }
 
                 if ($('body').hasClass('page-user-wishlist')) {
                     $('.flag a').on('click', function() {
                         $(this).closest('.views-row').remove();
-                        console.log($('.wishlist-slider .view-content .views-row').length);
-                        if ($('.wishlist-slider .view-content .views-row').length > 5) {
-                            newlyListedSlider.params.slidesPerColumn = 1;
-                            console.log(newlyListedSlider.params);
-                        } else if ($('.wishlist-slider .view-content .views-row').length == 0) {
-                            window.location.reload(true);
+                        slidesList = $('.wishlist-slider .view-content .views-row');
+
+
+                        if (slidesList.length == 0) {
+                            $('.view-flaged-condos-').children().remove();
+                            $('.view-flaged-condos-').append('<div class="view-empty"><p style="font-size: 1.375rem;">' + Drupal.t('<b>YOUR WISH LIST IS CURRENTLY EMPTY,</b> ADD LISTING TO YOUR WISH LIST TO SEE THEM HERE.') + '</p></div>')
                         }
-                        newlyListedSlider.update(true);
+
+                        if (newlyListedSlider !== undefined) {
+                            newlyListedSlider.update();
+                        }
+
                     });
                 }
 
