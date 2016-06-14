@@ -339,7 +339,7 @@ function ctrader_mls_field_attach_presave($entity_type, $entity) {
       if ($entity->type == TORONTO_CONDO) {
         if (isset($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'])) {
           $community = $entity->field_community__torcond[LANGUAGE_NONE][0]['value'] . ',';
-          $place = !empty($entity->field_addr__torcond[LANGUAGE_NONE][0]['value']) ? $entity->field_addr__torcond[LANGUAGE_NONE][0]['value'] : $community;
+          $place = !empty($entity->field_addr__torcond[LANGUAGE_NONE][0]['value']) ? $entity->field_addr__torcond[LANGUAGE_NONE][0]['value'] . ' ' . $community : $community;
           $entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'] = $place . ' ' . $entity->field_area__torcond[LANGUAGE_NONE][0]['value'] . ', ' . $entity->field_county__torcond[LANGUAGE_NONE][0]['value'] . ', Canada';
         }
       }
