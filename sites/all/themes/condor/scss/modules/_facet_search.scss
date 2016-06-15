@@ -435,3 +435,73 @@
     }
   }
 }
+
+.pane-facet-tabs {
+  margin: 0 auto;
+  display: block;
+  max-width: 300px;
+  width: 100%;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  font-size: rem-calc(12);
+  text-transform: uppercase;
+  padding-left: 20px;
+
+  a {
+    padding: 8px;
+    border-top-right-radius: 4px;
+    display: inline-block;
+    position: relative;
+
+    &:before {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      left: -20px;
+      top: 0;
+      width: 0;
+      height: 0;
+      border-bottom: 34px solid;
+      border-left: 20px solid transparent;
+    }
+  }
+
+  .find-condo-tab {
+    background: $white;
+    color: $ecstasy;
+    margin-right: 20px;
+    padding-left: 25px;
+    padding-right: 20px;
+
+    &:before {
+      border-bottom-color: $white;
+    }
+
+    @include pseudo-element('after', 12px, 12px, 'magnifing-glass.png', 'not-center');
+
+    &:after {
+      position: absolute;
+      left: 6px;
+      top: 10px;
+    }
+  }
+
+  .sell-condo-tab {
+    color: $black;
+    background: $ecstasy;
+    padding-left: 22px;
+    padding-right: 20px;
+
+    &:before {
+      border-bottom-color: $ecstasy;
+    }
+
+    @include pseudo-element('after', 6px, 12px, 'dollar.png', 'not-center');
+
+    &:after {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+    }
+  }
+}

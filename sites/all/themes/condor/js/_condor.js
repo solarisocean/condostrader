@@ -181,7 +181,6 @@
                 });
             });
 
-
             //***********************************************************************//
 
             if ($('.facet-search-block')) {
@@ -272,6 +271,10 @@
 
             }
 
+            $('.find-condo-tab a').on('click', function(e) {
+                e.preventDefault();
+            });
+            
         }
     };
 
@@ -418,6 +421,9 @@
 
                 $('.condo-page-gallery .pane-content, .condo-page-pagination .pane-content').addClass('swiper-container');
                 $('.condo-page-gallery .field-name-field-toronto-gallery, .condo-page-pagination .field-name-field-toronto-gallery').addClass('swiper-wrapper');
+
+                // $('.condo-page-gallery .field-name-field-toronto-gallery img').wrap('<div class="swiper-slide"></div>');
+
                 $('.condo-page-gallery .field-name-field-toronto-gallery img, .condo-page-pagination .field-name-field-toronto-gallery img').addClass('swiper-slide');
 
                 $('.condo-page-pagination .pane-content').append('<div class="swiper-scrollbar"></div>');
