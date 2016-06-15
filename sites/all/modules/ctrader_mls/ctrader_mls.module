@@ -398,6 +398,8 @@ function ctrader_mls_entity_presave($entity, $type) {
         else {
           //default Toronto coordinates.
           $entity->field_search_point_string[LANGUAGE_NONE][0]['value'] = '43.760,-79.390';
+          // marks listing for update.
+          $entity->hash = 0;
         }
 
         // Search listing point on neighbourhoods terms polygons and create reference.
