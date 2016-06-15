@@ -379,7 +379,7 @@ function ctf_pages_main_page_default_page_manager_pages() {
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'override_pager_settings' => 1,
+      'override_pager_settings' => 0,
       'use_pager' => 0,
       'nodes_per_page' => '20',
       'pager_id' => '0',
@@ -436,6 +436,25 @@ function ctf_pages_main_page_default_page_manager_pages() {
     $display->content['new-6a911481-856e-4bf4-97e5-cbebdaffad30'] = $pane;
     $display->panels['search_facets'][0] = 'new-6a911481-856e-4bf4-97e5-cbebdaffad30';
     $pane = new stdClass();
+    $pane->pid = 'new-a73b69b6-6a31-42d6-9a0d-ae1bda91b197';
+    $pane->panel = 'search_facets';
+    $pane->type = 'facet_tabs';
+    $pane->subtype = 'facet_tabs';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = 'a73b69b6-6a31-42d6-9a0d-ae1bda91b197';
+    $display->content['new-a73b69b6-6a31-42d6-9a0d-ae1bda91b197'] = $pane;
+    $display->panels['search_facets'][1] = 'new-a73b69b6-6a31-42d6-9a0d-ae1bda91b197';
+    $pane = new stdClass();
     $pane->pid = 'new-24ca7d81-0361-4af6-82ed-b4ecf1440037';
     $pane->panel = 'search_facets';
     $pane->type = 'panels_mini';
@@ -456,11 +475,11 @@ function ctf_pages_main_page_default_page_manager_pages() {
       'css_class' => 'facet-search-block',
     );
     $pane->extras = array();
-    $pane->position = 1;
+    $pane->position = 2;
     $pane->locks = array();
     $pane->uuid = '24ca7d81-0361-4af6-82ed-b4ecf1440037';
     $display->content['new-24ca7d81-0361-4af6-82ed-b4ecf1440037'] = $pane;
-    $display->panels['search_facets'][1] = 'new-24ca7d81-0361-4af6-82ed-b4ecf1440037';
+    $display->panels['search_facets'][2] = 'new-24ca7d81-0361-4af6-82ed-b4ecf1440037';
   $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = 'new-24ca7d81-0361-4af6-82ed-b4ecf1440037';
   $handler->conf['display'] = $display;

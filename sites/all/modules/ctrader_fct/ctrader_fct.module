@@ -3,59 +3,511 @@
 /**
  * Implements hook_form_alter().
  */
-function ctrader_fct_form_alter(&$form, &$form_state, $form_id) {
-  switch ($form_id) {
-    //Change price facet markup text.
-    case 'search_api_ranges_block_slider_view_form_field_lp_dol__torcond':
-      $form['text-range']['#markup'] = "<div class='facet-helper'><span id='price-min-value'>&#36;<span>" . $form_state['build_info']['args'][0]['from'] . "</span></span> - <span id='price-max-value'>&#36;<span>"  . $form_state['build_info']['args'][0]['to'] . "</span></span></div>";
-      break;
-    //Change price size facet markup text.
-    case 'search_api_ranges_block_slider_view_form_field_sqft_range_max__torcond':
-      $form['text-range']['#markup'] = "<div class='facet-helper'><span id='sqft-min-value'><span>" . $form_state['build_info']['args'][0]['from'] . "</span></span> - <span id='sqft-max-value'><span>"  . $form_state['build_info']['args'][0]['to'] . "</span></span>" . " " . t("SQFT") . "</div>";
-      break;
-  }
+function ctrader_fct_form_alter(&$form, &$form_state, $form_id)
+{
+    switch ($form_id) {
+        //Change price facet markup text.
+        case 'search_api_ranges_block_slider_view_form_field_lp_dol__torcond':
+            $form['text-range']['#markup'] = "<div class='facet-helper'><span id='price-min-value'>&#36;<span>" . $form_state['build_info']['args'][0]['from'] . "</span></span> - <span id='price-max-value'>&#36;<span>" . $form_state['build_info']['args'][0]['to'] . "</span></span></div>";
+            break;
+        //Change price size facet markup text.
+        case 'search_api_ranges_block_slider_view_form_field_sqft_range_max__torcond':
+            $form['text-range']['#markup'] = "<div class='facet-helper'><span id='sqft-min-value'><span>" . $form_state['build_info']['args'][0]['from'] . "</span></span> - <span id='sqft-max-value'><span>" . $form_state['build_info']['args'][0]['to'] . "</span></span>" . " " . t("SQFT") . "</div>";
+            break;
+    }
 }
 
 /**
  * Implements hook_block_info().
  */
-function ctrader_fct_block_info() {
-  //Create block to toggle map mode.
-  $blocks['facet_map'] = array(
-    'info' => t('Facet Map Block'),
-  );
+function ctrader_fct_block_info()
+{
+    //Create block to toggle map mode.
+    $blocks['facet_map'] = array(
+        'info' => t('Facet Map Block'),
+    );
 
-  $blocks['result_tabs'] = array(
-    'info' => t('Result Page Tabs Block'),
-  );
+    $blocks['result_tabs'] = array(
+        'info' => t('Result Page Tabs Block'),
+    );
 
-  return $blocks;
+    return $blocks;
 }
 
 /**
  * Implements hook_block_view().
  */
-function ctrader_fct_block_view($delta = '') {
-  $block = array();
+function ctrader_fct_block_view($delta = '')
+{
+    $block = array();
 
-  switch ($delta) {
-    //Create block to toggle map mode.
-    case 'facet_map':
-      $block['subject'] = '<h5 class="pane-title">' . t('Search by: ') . '</h5>';
-      $block['content'] = '<div class="facet-map-block">';
-      $block['content'] .= '<button class="facet-map-block-neighbourhood">' . t('Neighbourhood') . '</button>';
-      $block['content'] .= '<button class="facet-map-block-map-search">' . t('Map Search') . '</button>';
-      $block['content'] .= '</div>';
-      break;
+    switch ($delta) {
+        //Create block to toggle map mode.
+        case 'facet_map':
+            $block['subject'] = '<h5 class="pane-title">' . t('Search by: ') . '</h5>';
+            $block['content'] = '<div class="facet-map-block">';
+            $block['content'] .= '<button class="facet-map-block-neighbourhood">' . t('Neighbourhood') . '</button>';
+            $block['content'] .= '<button class="facet-map-block-map-search">' . t('Map Search') . '</button>';
+            $block['content'] .= '</div>';
+            break;
 
-    //Create Result Page Tabs Block.
-    case 'result_tabs':
-      $block['content'] = '<div id="result-page-tabs">';
-      $block['content'] .= l(t('Listings') . '<span></span>', '/', array('html' => TRUE, 'attributes' => array('id' => array('listing-result-page'), 'class' => array('listing-result-page-tab'))));
-      $block['content'] .= l(t('Buildings') . '<span></span>', '/', array('html' => TRUE, 'attributes' => array('id' => array('building-result-page'), 'class' => array('building-result-page-tab'))));
-      $block['content'] .= '</div>';
-      break;
-  }
+        //Create Result Page Tabs Block.
+        case 'result_tabs':
+            $block['content'] = '<div id="result-page-tabs">';
+            $block['content'] .= l(t('Listings') . '<span></span>', '/', array('html' => TRUE, 'attributes' => array('id' => array('listing-result-page'), 'class' => array('listing-result-page-tab'))));
+            $block['content'] .= l(t('Buildings') . '<span></span>', '/', array('html' => TRUE, 'attributes' => array('id' => array('building-result-page'), 'class' => array('building-result-page-tab'))));
+            $block['content'] .= '</div>';
+            break;
+    }
 
-  return $block;
+    return $block;
+}
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function ctrader_fct_ctools_plugin_directory($owner, $plugin_type)
+{
+    if ($owner == 'ctools' && $plugin_type == 'content_types') {
+        return 'plugins/' . $plugin_type;
+    }
+}
+
+
+function sell_a_condo_form($form, &$form_state) {
+    $form['about_you'] = array(
+        '#type' => 'container',
+        '#attributes' => array(
+            'class' => array(
+                'about-you',
+            ),
+        ),
+    );
+
+    $form['about_condo'] = array(
+        '#type' => 'container',
+        '#attributes' => array(
+            'class' => array(
+                'about-condo',
+            ),
+        ),
+    );
+
+    $form['about_you']['name'] = array(
+        '#type' => 'container',
+        '#attributes' => array(
+            'class' => array(
+                'about-you-name',
+            ),
+        ),
+    );
+
+    $form['about_you']['address'] = array(
+        '#type' => 'container',
+        '#attributes' => array(
+            'class' => array(
+                'about-you-address',
+            ),
+        ),
+    );
+
+    $form['about_condo']['address'] = array(
+        '#type' => 'container',
+        '#attributes' => array(
+            'class' => array(
+                'about-condo-address',
+            ),
+        ),
+    );
+
+    $form['about_condo']['condo_information'] = array(
+        '#type' => 'container',
+        '#attributes' => array(
+            'class' => array(
+                'about-condo-condo-information',
+            ),
+        ),
+    );
+
+    $form['about_condo']['measurements'] = array(
+        '#type' => 'container',
+        '#attributes' => array(
+            'class' => array(
+                'about-condo-measurements',
+            ),
+        ),
+    );
+
+    $form['about_you']['name']['you_name'] = array(
+        '#type' => 'textfield',
+        '#title' => t('You Name'),
+        '#size' => 60,
+        '#maxlength' => 128
+    );
+
+    $form['about_you']['name']['you_middle_name'] = array(
+        '#type' => 'textfield',
+        '#title' => t('You Middle Name'),
+        '#size' => 60,
+        '#maxlength' => 128
+    );
+
+    $form['about_you']['name']['you_last_name'] = array(
+        '#type' => 'textfield',
+        '#title' => t('You Last Name'),
+        '#size' => 60,
+        '#maxlength' => 128
+    );
+
+    $form['about_you']['address']['street_unit'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Street, Unit #'),
+        '#size' => 60,
+        '#maxlength' => 128
+    );
+
+    $form['about_you']['address']['city'] = array(
+        '#type' => 'textfield',
+        '#title' => t('City'),
+        '#size' => 60,
+        '#maxlength' => 128
+    );
+
+    $form['about_you']['address']['postal_code'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Postal Code'),
+        '#size' => 60,
+        '#maxlength' => 128
+    );
+
+    $form['about_you']['tel'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Tel'),
+        '#size' => 60,
+        '#maxlength' => 128
+    );
+
+    $form['about_you']['email'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Email'),
+        '#size' => 60,
+        '#maxlength' => 128
+    );
+
+    $form['about_you']['resident'] = array(
+        '#type' => 'radios',
+        '#options' => array(
+            t('Canadian Citizen'),
+            t('Resident'),
+            t('Non-Resident'),
+        ),
+    );
+
+    $form['about_you']['buyer'] = array(
+        '#type' => 'radios',
+        '#title' => t('Are in Buyer Representation with any Agent?'),
+        '#options' => array(
+            t('Yes'),
+            t('No'),
+        ),
+    );
+
+    $form['about_condo']['address']['street'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Street'),
+        '#size' => 60,
+        '#maxlength' => 128
+    );
+
+    $form['about_condo']['address']['unit'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Unit'),
+        '#size' => 60,
+        '#maxlength' => 128
+    );
+
+    $form['about_condo']['address']['level'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Level'),
+        '#size' => 60,
+        '#maxlength' => 128
+    );
+
+    $form['about_condo']['address']['city'] = array(
+        '#type' => 'textfield',
+        '#title' => t('City'),
+        '#size' => 60,
+        '#maxlength' => 128
+    );
+
+    $form['about_condo']['address']['postal_code'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Postal Code'),
+        '#size' => 60,
+        '#maxlength' => 128
+    );
+
+    $form['about_condo']['address']['main_intesection'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Main Intesection'),
+        '#size' => 60,
+        '#maxlength' => 128
+    );
+
+    $form['about_condo']['address']['locker'] = array(
+        '#type' => 'radios',
+        '#title' => t('Locker'),
+        '#options' => array(
+            t('Owned'),
+            t('Rented'),
+            t('No')
+        ),
+    );
+
+    $form['about_condo']['address']['garage'] = array(
+        '#type' => 'radios',
+        '#title' => t('Garage'),
+        '#options' => array(
+            t('Owned'),
+            t('Rented'),
+            t('No')
+        ),
+    );
+
+    $form['about_condo']['condo_information']['rooms_total'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Rooms total'),
+        '#size' => 60,
+        '#maxlength' => 128
+    );
+
+    $form['about_condo']['condo_information']['bedrooms_total'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Bedrooms total'),
+        '#size' => 60,
+        '#maxlength' => 128
+    );
+
+    $form['about_condo']['condo_information']['company_name'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Company Name'),
+        '#size' => 60,
+        '#maxlength' => 128
+    );
+
+    $form['about_condo']['condo_information']['kitchens'] = array(
+        '#type' => 'radios',
+        '#title' => t('Kitchens'),
+        '#options' => array(
+            '1',
+            '2',
+            '3'
+        ),
+    );
+
+    $form['about_condo']['condo_information']['family_room'] = array(
+        '#type' => 'radios',
+        '#title' => t('Family Room'),
+        '#options' => array(
+            t('Yes'),
+            t('No'),
+        ),
+    );
+
+    $form['about_condo']['condo_information']['basement'] = array(
+        '#type' => 'radios',
+        '#title' => t('Basement'),
+        '#options' => array(
+            t('Yes'),
+            t('No'),
+        ),
+    );
+
+    $form['about_condo']['condo_information']['fireplace'] = array(
+        '#type' => 'radios',
+        '#title' => t('Fireplace'),
+        '#options' => array(
+            t('Yes'),
+            t('No'),
+        ),
+    );
+
+    $form['about_condo']['condo_information']['heat'] = array(
+        '#type' => 'radios',
+        '#title' => t('Heat'),
+        '#options' => array(
+            t('Yes'),
+            t('No'),
+        ),
+    );
+
+    $form['about_condo']['condo_information']['approximate_age'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Approximate age'),
+        '#size' => 60,
+        '#maxlength' => 128
+    );
+
+    $form['about_condo']['condo_information']['approximate_square_feet'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Approximate square feet'),
+        '#size' => 60,
+        '#maxlength' => 128
+    );
+
+    $form['about_condo']['condo_information']['pets'] = array(
+        '#type' => 'radios',
+        '#title' => t('Pets permitted'),
+        '#options' => array(
+            t('Yes'),
+            t('No'),
+        ),
+    );
+
+    $form['about_condo']['condo_information']['fees_per_month'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Fees per month'),
+        '#size' => 60,
+        '#maxlength' => 128
+    );
+
+    $form['about_condo']['condo_information']['air_conditioner'] = array(
+        '#type' => 'radios',
+        '#title' => t('Pets permitted'),
+        '#options' => array(
+            t('none'),
+            t('central air'),
+            t('window unit'),
+            t('portable unit'),
+            t('wall unit'),
+        ),
+    );
+
+    $form['about_condo']['condo_information']['elevator'] = array(
+        '#type' => 'radios',
+        '#title' => t('Elevator'),
+        '#options' => array(
+            t('Yes'),
+            t('No'),
+        ),
+    );
+
+    $form['about_condo']['condo_information']['taxes'] = array(
+        '#type' => 'radios',
+        '#title' => t('Taxes Included'),
+        '#options' => array(
+            t('Yes'),
+            t('No'),
+        ),
+    );
+
+    $form['about_condo']['condo_information']['heat_included'] = array(
+        '#type' => 'radios',
+        '#title' => t('Heat included'),
+        '#options' => array(
+            t('Yes'),
+            t('No'),
+        ),
+    );
+
+    $form['about_condo']['condo_information']['water_included'] = array(
+        '#type' => 'radios',
+        '#title' => t('Water included'),
+        '#options' => array(
+            t('Yes'),
+            t('No'),
+        ),
+    );
+
+    $form['about_condo']['condo_information']['hydro_included'] = array(
+        '#type' => 'radios',
+        '#title' => t('Hydro included'),
+        '#options' => array(
+            t('Yes'),
+            t('No'),
+        ),
+    );
+
+    $form['about_condo']['condo_information']['cable_included'] = array(
+        '#type' => 'radios',
+        '#title' => t('Cable included'),
+        '#options' => array(
+            t('Yes'),
+            t('No'),
+        ),
+    );
+
+    $form['about_condo']['condo_information']['cac_included'] = array(
+        '#type' => 'radios',
+        '#title' => t('CAC included'),
+        '#options' => array(
+            t('Yes'),
+            t('No'),
+        ),
+    );
+
+    $form['about_condo']['condo_information']['bldg_ins_included'] = array(
+        '#type' => 'radios',
+        '#title' => t('Bldg ins included'),
+        '#options' => array(
+            t('Yes'),
+            t('No'),
+        ),
+    );
+
+    $form['about_condo']['condo_information']['prkg_included'] = array(
+        '#type' => 'radios',
+        '#title' => t('Prkg included'),
+        '#options' => array(
+            t('Yes'),
+            t('No'),
+        ),
+    );
+
+    $form['about_condo']['condo_information']['common_elements_included'] = array(
+        '#type' => 'radios',
+        '#title' => t('Common elements included'),
+        '#options' => array(
+            t('Yes'),
+            t('No'),
+        ),
+    );
+
+    $form['about_condo']['condo_information']['balcony'] = array(
+        '#type' => 'radios',
+        '#title' => t('Balcony'),
+        '#options' => array(
+            t('Open'),
+            t('Enclosed'),
+            t('No'),
+        ),
+    );
+
+    $form['about_condo']['condo_information']['ensuite_laundry'] = array(
+        '#type' => 'radios',
+        '#title' => t('Common elements included'),
+        '#options' => array(
+            t('Yes'),
+            t('No'),
+        ),
+    );
+
+    $form['about_condo']['condo_information']['exterior_finishing'] = array(
+        '#type' => 'radios',
+        '#title' => t('Exterior finishing'),
+        '#options' => array(
+            t('brick'),
+            t('stucco'),
+            t('concrete')
+        ),
+    );
+
+    $form['about_condo']['condo_information']['garage'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Garage'),
+        '#size' => 60,
+        '#maxlength' => 128
+    );
+
+    return $form;
 }
