@@ -735,8 +735,30 @@ function _prepare_taxonomy_term($element, $vid, $tree) {
 function _ctrader_map_create_terms_page_callback() {
   $output['create_term_form'] = drupal_get_form('_ctrader_map_region_taxonomy_form');
   $output['update_json_form'] = drupal_get_form('_ctrader_map_update_neighbourhoods_json_form');
+  $output['create_new_rebeccalang_term_form'] = drupal_get_form('_ctrader_map_create_new_community_terms_form');
 
   return $output;
+}
+
+/**
+ * Creates new taxonomy terms using data from http://www.rebeccalaing.ca/index.php?p=2
+ *
+ * @param $form
+ * @param $form_state
+ */
+function _ctrader_map_create_new_community_terms_form($form, &$form_state) {
+  $form = array();
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Create new terms (rebeccalaing.ca)'),
+//    '#disabled' => TRUE,
+  );
+  return $form;
+}
+
+function _ctrader_map_create_new_community_terms_form_submit($form, &$form_state) {
+  module_load_include('inc', 'ctrader_map', 'inc/ctrader_map_create_taxonomy');
+  new_taxonomy_polygons();
 }
 
 
