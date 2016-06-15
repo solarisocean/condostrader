@@ -1,0 +1,17 @@
+name = CT Features: Taxonomy vocabularies: Communities
+core = 7.x
+package = CT Features: Taxonomy vocabularies
+dependencies[] = ctools
+dependencies[] = features
+dependencies[] = geofield
+dependencies[] = leaflet
+dependencies[] = strongarm
+dependencies[] = taxonomy
+dependencies[] = text
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[field_base][] = field_community_code
+features[field_base][] = field_community_geopolygon
+features[field_instance][] = taxonomy_term-communities-field_community_code
+features[field_instance][] = taxonomy_term-communities-field_community_geopolygon
+features[taxonomy][] = communities

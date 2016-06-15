@@ -223,6 +223,7 @@ function new_taxonomy_polygons() {
     '01.E06.1310' => "Birchcliffe-Cliffside",
     '01.E06.1300' => "Oakridge",
 
+    '01.W05' => "W05",
     '01.W05.0220' => "Black Creek",
     '01.W05.0270' => "Downsview-Roding-CFB",
     '01.W05.0240' => "Glenfield-Jane Heights",
@@ -630,6 +631,9 @@ function new_taxonomy_polygons() {
   $polys = file_get_contents(DRUPAL_ROOT . '/' . drupal_get_path('module', 'ctrader_map') . '/rebeccalaing_ca/polygons.txt');
   $polys = json_decode($polys, TRUE);
 
+  $first_level_terms = array();
+  $second_level_terms = array();
+  $third_level_terms = array();
   $communities = array();
   foreach ($codes as $reg_code => $reg_name) {
     $community_polys = isset($polys[$reg_code]) ? $polys[$reg_code] : '';
@@ -666,5 +670,112 @@ function new_taxonomy_polygons() {
       'name' => $reg_name,
       'polygon' => $community_polys,
     );
+    $reg_code_array = explode('.', $reg_code);
+    $reg_code_array_count = count($reg_code_array);
+    switch($reg_code_array_count) {
+      case '1':
+        $first_level_terms[$reg_code] = $reg_name;
+        break;
+      case '2':
+        $second_level_terms[$reg_code] = $reg_name;
+        break;
+      case '3':
+        $third_level_terms[$reg_code] = $reg_name;
+        break;
+    }
   }
+
+
+
+
+
+/******************************************************************************/
+
+  $vid = taxonomy_vocabulary_machine_name_load('communities'); //Neighbourhoods vocabulary.
+      $vid = $vid->vid;
+
+//  if ($vid == FALSE) {
+//    drupal_set_message(t('Vocabulary does not exist.'), 'error');
+//    return;
+//  }
+//  else {
+//    $vid = $vid->vid;
+//  }
+//
+//  // Checks if vocabulary is empty.
+//  $check_vocab = taxonomy_get_tree($vid, 0, 1);
+//  if (!empty($check_vocab)) {
+//    drupal_set_message(t('Vocabulary is not empty.'), 'warning');
+//    drupal_set_message(t('You should clear Communities vocabulary before creating new taxonomy tree.'), 'warning');
+//    return;
+//  }
+
+
+  // Creates first level terms.
+  $tree = taxonomy_get_tree($vid, 0, NULL, TRUE);
+  foreach ($communities as $key => $element) {
+    if (in_array($element['name'], $first_level_terms)) {
+      _prepare_new_taxonomy_term($element, $vid, $tree);
+      unset($communities[$key]);
+    }
+  }
+
+  // Creates second level terms.
+  $tree = taxonomy_get_tree($vid, 0, NULL, TRUE);
+  $second_level_terms = array_flip($second_level_terms);
+  foreach ($communities as $key => $element) {
+    if (in_array($element['code'], $second_level_terms)) {
+      _prepare_new_taxonomy_term($element, $vid, $tree);
+      unset($communities[$key]);
+    }
+  }
+
+  // Creates third level terms.
+  $tree = taxonomy_get_tree($vid, 0, NULL, TRUE);
+  foreach ($communities as $key => $element) {
+    _prepare_new_taxonomy_term($element, $vid, $tree);
+    unset($communities[$key]);
+  }
+}
+
+
+/**
+ * Prepares term object and saves taxonomy term.
+ *
+ * @param $element - item from xml file.
+ * @param $vid - Neighbourhoods vocabulary id.
+ * @param $tree - tree of existed Neighbourhoods vocabulary taxonomy terms.
+ */
+function _prepare_new_taxonomy_term($element, $vid, $tree) {
+  $term = new stdClass();
+  $term->name = $element['name'];
+  $term->vid = $vid;
+  $term->field_community_code[LANGUAGE_NONE][0]['value'] = $element['code'];
+
+  //Creates json for geofield.
+  if ($element['polygon']) {
+    $polygon_json = json_encode($element['polygon']);
+    $term->field_community_geopolygon[LANGUAGE_NONE][0]['geom'] = $polygon_json;
+    $term->field_community_geopolygon[LANGUAGE_NONE][0]['input_format'] = 'json';
+  }
+
+  // Added parents if exists.
+  $parent_code = explode('.', $element['code']);
+  array_pop($parent_code);
+  if($parent_code) {
+    $parent_code = implode('.', $parent_code);
+    foreach ($tree as $value) {
+      if (isset($value->field_community_code[LANGUAGE_NONE][0]['value']) && $value->field_community_code[LANGUAGE_NONE][0]['value'] == $parent_code) {
+        if (!empty($value->parents)) {
+          $term->parent = $value->parents;
+          $term->parent[$value->tid] = $value->tid;
+          unset($term->parent[0]);
+        }
+        else {
+          $term->parent[$value->tid] = $value->tid;
+        }
+      }
+    }
+  }
+  taxonomy_term_save($term);
 }

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CT Features: Taxonomy vocabularies: Communities feature.
+ */
+
+include_once 'ctf_taxonomy_vocabularies_communities.features.inc';
