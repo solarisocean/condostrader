@@ -55,3 +55,10 @@
     @include transition(background $time $animation);
   }
 }
+
+@mixin transform($effect, $value) {
+  transform: $effect + "(" + $value + ")";
+  -webkit-transform: $effect + "(" + $value + ")";
+  -moz-transform: $effect + "(" + $value + ")";
+  -ms-transform: $effect + "(" + $value + ")";
+}
