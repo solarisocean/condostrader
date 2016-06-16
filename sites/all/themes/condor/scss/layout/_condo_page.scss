@@ -23,6 +23,22 @@
       height: 700px;
     }
 
+    .swiper-slide {
+      background: $ebony-clay;
+      text-align: center;
+
+      &:before {
+        content: ' ';
+        display: inline-block;
+        vertical-align: middle;
+        height: 100%;
+      }
+
+      img {
+        @include transform(scale, 1.5);
+      }
+    }
+
     .gallery-slider-button-next,
     .gallery-slider-button-prev {
       width: 19px !important;
@@ -225,7 +241,7 @@
 
       .views-field-field-rltr--torcond {
         float: left;
-        white-space: nowrap;
+        width: 75%;
       }
 
       .views-field-field-ml-num--torcond {
