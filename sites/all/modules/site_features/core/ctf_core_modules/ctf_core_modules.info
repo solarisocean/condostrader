@@ -110,6 +110,7 @@ dependencies[] = panels_tabs
 dependencies[] = path
 dependencies[] = pathauto
 dependencies[] = phone
+dependencies[] = queue_ui
 dependencies[] = realname
 dependencies[] = robotstxt
 dependencies[] = rules
