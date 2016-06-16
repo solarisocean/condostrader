@@ -100,9 +100,36 @@
         attach: function (context, settings) {
 
             $('body').once(function() {
-                $('.view-lowest-price-block, .view-highest-price-block, .view-most-viewed-block').mCustomScrollbar({
+                $('.view-lowest-price-block .view-content, .view-highest-price-block .view-content, .view-most-viewed-block .view-content').mCustomScrollbar({
                     setHeight: "404px",
-                    theme: "inset-2"
+                    theme: "inset-2",
+                    callbacks: {
+                        onTotalScroll:function(){
+                            var nextPage = $(this).parent().find('.item-list .pager-next a').attr('href'),
+                loadedBlockSelector =  '.' + $(this).parent().prop("classList")[4],
+                             loadedBlock = loadedBlockSelector + ' .view-content .views-row',
+                                       pager = loadedBlockSelector + ' .item-list .pager',
+                                      loader = loadedBlockSelector + ' .view-content',
+                                    scroller = $(this);
+
+                            $.ajax({
+                                url: nextPage,
+                                context: context,
+                                beforeSend: function() {
+                                    $(loader).append('<div class="auto-scroll-loader" style="margin-bottom: 50px"></div>');
+                                },
+                                success: function () {
+                                    $('.auto-scroll-loader').remove();
+                                }
+                            }).done(function(data) {
+                                $(data).find(loadedBlock).appendTo(loadedBlockSelector + ' .mCSB_container').hide().fadeIn("slow");
+                                $(pager).replaceWith($(data).find(pager));
+                                setTimeout(function() {
+                                    scroller.mCustomScrollbar('scrollTo','-=350');
+                                }, 10);
+                            });
+                        }
+                    }
                 });
 
                 $('.page-search-results .view-search-results-ctrader .view-content').mCustomScrollbar({
@@ -175,7 +202,6 @@
                         chbxInput.trigger('click');
                     }
                 });
-
                 $('.facetapi-facet-field-style--torcond select, .views-widget-sort-sort_bef_combine .form-select').chosen({
                     "disable_search": true
                 });
@@ -364,7 +390,6 @@
                         } else {
                             $(pager).find('a' + tabs[i] + '-tab span').text(0);
                         }
-                        // console.log($(tabs[i] + ' .total-quantity').text() == true);
                         $(tabs[i]).not(tabs[0]).hide();
                     }
 
@@ -422,9 +447,8 @@
                 $('.condo-page-gallery .pane-content, .condo-page-pagination .pane-content').addClass('swiper-container');
                 $('.condo-page-gallery .field-name-field-toronto-gallery, .condo-page-pagination .field-name-field-toronto-gallery').addClass('swiper-wrapper');
 
-                // $('.condo-page-gallery .field-name-field-toronto-gallery img').wrap('<div class="swiper-slide"></div>');
-
-                $('.condo-page-gallery .field-name-field-toronto-gallery img, .condo-page-pagination .field-name-field-toronto-gallery img').addClass('swiper-slide');
+                $('.condo-page-gallery .field-name-field-toronto-gallery img').wrap('<div class="swiper-slide"></div>');
+                $('.condo-page-pagination .field-name-field-toronto-gallery img').addClass('swiper-slide');
 
                 $('.condo-page-pagination .pane-content').append('<div class="swiper-scrollbar"></div>');
                 $('.condo-page-gallery .pane-content').append('<div class="gallery-slider-button-next swiper-button-next"></div><div class="gallery-slider-button-prev swiper-button-prev"></div>');
