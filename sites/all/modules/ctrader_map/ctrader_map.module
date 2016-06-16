@@ -291,9 +291,10 @@ function ctrader_map_theme($existing, $type, $theme, $path) {
  */
 function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = array(), $points_array = array()) {
   if (!variable_get('ctrader_map_neighbourhood_json')) {
-    $vid = taxonomy_vocabulary_machine_name_load('neighbourhoods'); //Neighbourhoods vocabulary.
+    $vocabulary_machine_name = 'neighbourhoods';
+    $vid = taxonomy_vocabulary_machine_name_load($vocabulary_machine_name); //Neighbourhoods vocabulary.
     $vid = $vid->vid;
-    $allowed_cities = array('York Region', 'York', 'Toronto', 'Peel', 'Halton');
+    $allowed_cities = array('York Region', 'York', 'Toronto', 'Peel', 'Halton', 'Durham');
     $city_terms = taxonomy_get_tree($vid, 0, 1, TRUE);
     $vocabulary_term_entities = array();
     foreach ($city_terms as $value) {
@@ -302,15 +303,16 @@ function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = 
         $vocabulary_term_entities += _ctrader_map_taxonomy_get_tree($vid, $value->tid, NULL, TRUE);
       }
     }
+    $geofield_name = 'field_community_geolocation';
     $terms_polygon_prejson = array();
     foreach ($vocabulary_term_entities as $tax_term) {
-      $polygon = isset($tax_term->field_community_geolocation[LANGUAGE_NONE][0]['geom']) ? $tax_term->field_community_geolocation[LANGUAGE_NONE][0]['geom'] : NULL;
+      $polygon = isset($tax_term->{$geofield_name}[LANGUAGE_NONE][0]['geom']) ? $tax_term->{$geofield_name}[LANGUAGE_NONE][0]['geom'] : NULL;
       if ($polygon !== NULL && $polygon != 'GEOMETRYCOLLECTION EMPTY') {
         $tax_term_id = $tax_term->tid;
         $tax_term_name = $tax_term->name;
         $polygon_popup_content = $tax_term_name;
         $coordinates = array();
-        if (strrpos($tax_term->field_community_geolocation[LANGUAGE_NONE][0]['geom'], 'MULTIPOLYGON') === FALSE) {
+        if (strrpos($tax_term->{$geofield_name}[LANGUAGE_NONE][0]['geom'], 'MULTIPOLYGON') === FALSE) {
           $type = 'Polygon';
           $polygon = str_replace(array('POLYGON ', '(', ')'), '', $polygon);
           $polygon = explode(', ', $polygon);

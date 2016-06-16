@@ -45,8 +45,8 @@ function ctf_taxonomy_vocabularies_communities_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'taxonomy_term-communities-field_community_geopolygon'.
-  $field_instances['taxonomy_term-communities-field_community_geopolygon'] = array(
+  // 'taxonomy_term-communities-field_community_geolocation'.
+  $field_instances['taxonomy_term-communities-field_community_geolocation'] = array(
     'bundle' => 'communities',
     'default_value' => NULL,
     'deleted' => 0,
@@ -56,7 +56,7 @@ function ctf_taxonomy_vocabularies_communities_field_default_field_instances() {
         'label' => 'above',
         'module' => 'leaflet',
         'settings' => array(
-          'height' => 700,
+          'height' => 800,
           'icon' => array(
             'html' => '',
             'htmlClass' => '',
@@ -110,8 +110,8 @@ function ctf_taxonomy_vocabularies_communities_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'taxonomy_term',
-    'field_name' => 'field_community_geopolygon',
-    'label' => 'Community geopolygon',
+    'field_name' => 'field_community_geolocation',
+    'label' => 'Community geolocation',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -121,14 +121,14 @@ function ctf_taxonomy_vocabularies_communities_field_default_field_instances() {
       'module' => 'geofield',
       'settings' => array(),
       'type' => 'geofield_geojson',
-      'weight' => 32,
+      'weight' => 33,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
   t('Community code');
-  t('Community geopolygon');
+  t('Community geolocation');
 
   return $field_instances;
 }

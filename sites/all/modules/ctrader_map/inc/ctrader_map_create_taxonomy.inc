@@ -755,8 +755,8 @@ function _prepare_new_taxonomy_term($element, $vid, $tree) {
   //Creates json for geofield.
   if ($element['polygon']) {
     $polygon_json = json_encode($element['polygon']);
-    $term->field_community_geopolygon[LANGUAGE_NONE][0]['geom'] = $polygon_json;
-    $term->field_community_geopolygon[LANGUAGE_NONE][0]['input_format'] = 'json';
+    $term->field_community_geolocation[LANGUAGE_NONE][0]['geom'] = $polygon_json;
+    $term->field_community_geolocation[LANGUAGE_NONE][0]['input_format'] = 'json';
   }
 
   // Added parents if exists.
