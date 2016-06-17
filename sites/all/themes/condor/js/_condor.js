@@ -297,7 +297,7 @@
 
             }
 
-            $('.find-condo-tab a').on('click', function(e) {
+            $('.find-condo-tab').on('click', function(e) {
                 e.preventDefault();
             });
             

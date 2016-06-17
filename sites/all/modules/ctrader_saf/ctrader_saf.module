@@ -10,6 +10,12 @@ define('CTRADER_SEARCH_RESULT_PAGE', 'search-results');
 function ctrader_saf_init() {
   drupal_add_css(drupal_get_path('module', 'ctrader_saf') . '/css/ctrader_saf.css');
   drupal_add_js(drupal_get_path('module', 'ctrader_saf') . '/js/facets_script.js');
+  
+  drupal_add_css(drupal_get_path('module', 'ctrader_saf') . '/css/nouislider.min.css');
+  drupal_add_js(drupal_get_path('module', 'ctrader_saf') . '/js/nouislider.min.js');
+
+  drupal_add_js(drupal_get_path('module', 'ctrader_saf') . '/js/rewritten_search_api_ranges.js');
+
   if (isset($_SESSION['stored_search_options']) || isset($_SESSION['search_link_calculate'])) {
     unset($_SESSION['neighbourhood_json']);
   }

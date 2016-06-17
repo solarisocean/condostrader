@@ -98,38 +98,76 @@
     padding-right: 1.3em;
   }
 
+  #search-api-ranges-field_lp_dol__torcond {
+    .facet-helper {
+      span {
+        &:before {
+          content: "$";
+        }
+      }
+    }
+  }
+
+  #search-api-ranges-field_sqft_range_max__torcond {
+    .facet-helper {
+      span {
+        &.max {
+          &:after {
+            content: "SQFT";
+            margin-left: 3px;
+          }
+        }
+      }
+    }
+  }
+
   .facet-helper {
     font-size: rem-calc(10);
     color: $ecstasy;
     text-align: right;
+
+    span {
+      &.min {
+        &:after {
+          content: "-";
+          margin-left: 3px;
+        }
+      }
+    }
   }
 
   .search-api-ranges-widget {
-    .range-box,
-    .form-submit {
-      display: none;
-      visibility: hidden;
+    height: 6px;
+    border: none;
+    background: $athens-gray;
+    box-shadow: none;
+    margin-bottom: 21px;
+    margin-top: 21px;
+
+    .noUi-connect {
+      @extend %gradient-background;
+      height: 6px;
     }
 
-    .range-slider {
-      height: 4px;
-      border: none;
-      background: $athens-gray;
+    .noUi-handle {
+      top: -5px;
+      background: $white;
+      box-shadow: 0 0 10px rgba(0,0,0,.2);
+      outline: none;
+      border: 1px solid $mirage;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      left: 0;
 
-      .ui-slider-range {
-        @extend %gradient-background;
-        height: 6px;
+      &.noUi-handle-upper {
+        left: -10px;
       }
 
-      .ui-slider-handle {
-        top: -5px;
-        background: $white;
-        box-shadow: 0 0 10px rgba(0,0,0,.2);
-        outline: none;
-        border: 1px solid $mirage;
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
+      &:before,
+      &:after {
+        display: none;
+        visibility: hidden;
       }
     }
   }
