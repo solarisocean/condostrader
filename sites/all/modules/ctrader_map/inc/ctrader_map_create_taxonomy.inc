@@ -685,10 +685,6 @@ function new_taxonomy_polygons() {
     }
   }
 
-
-
-
-
 /******************************************************************************/
 
   $vid = taxonomy_vocabulary_machine_name_load('neighbourhoods'); //Neighbourhoods vocabulary.
@@ -703,7 +699,7 @@ function new_taxonomy_polygons() {
   $check_vocab = taxonomy_get_tree($vid, 0, 1);
   if (!empty($check_vocab)) {
     drupal_set_message(t('Vocabulary is not empty.'), 'warning');
-    drupal_set_message(t('You should clear Communities vocabulary before creating new taxonomy tree.'), 'warning');
+    drupal_set_message(t('You should delete all terms in Neighbourhoods vocabulary before creating new taxonomy tree.'), 'warning');
     return;
   }
 

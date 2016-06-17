@@ -744,7 +744,7 @@ function _prepare_taxonomy_term($element, $vid, $tree) {
  * @return string
  */
 function _ctrader_map_create_terms_page_callback() {
-  $output['create_term_form'] = drupal_get_form('_ctrader_map_region_taxonomy_form');
+//  $output['create_term_form'] = drupal_get_form('_ctrader_map_region_taxonomy_form');
   $output['update_json_form'] = drupal_get_form('_ctrader_map_update_neighbourhoods_json_form');
   $output['create_new_rebeccalang_term_form'] = drupal_get_form('_ctrader_map_create_new_community_terms_form');
 

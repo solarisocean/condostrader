@@ -10,6 +10,9 @@ define('DREALTY_ENTITY_TYPE', 'drealty_listing');
 define('TORONTO_BUILDING', 'toronto_building');
 define('TORONTO_CONDO', 'toronto_condo');
 
+// alias for search result page.
+define('CTRADER_SEARCH_RESULT_PAGE', 'search-results');
+
 
 /**
  * Implements hook_init().

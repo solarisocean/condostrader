@@ -23,8 +23,12 @@ function ctf_views_toronto_condos_list_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Toronto condos list';
+  $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+  );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
@@ -268,9 +272,11 @@ function ctf_views_toronto_condos_list_views_default_views() {
     'field_addr__torcond' => 'field_addr__torcond',
     'type' => 'type',
     'field_timestamp_sql__torcond' => 'field_timestamp_sql__torcond',
+    'field_idx_dt__torcond' => 'field_idx_dt__torcond',
     'field_toronto_gallery' => 'field_toronto_gallery',
     'id_1' => 'id_1',
     'nothing' => 'nothing',
+    'field_search_point_string' => 'field_search_point_string',
   );
   $handler->display->display_options['style_options']['default'] = 'id';
   $handler->display->display_options['style_options']['info'] = array(
@@ -321,6 +327,13 @@ function ctf_views_toronto_condos_list_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'field_idx_dt__torcond' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'field_toronto_gallery' => array(
       'align' => 'views-align-center',
       'separator' => '',
@@ -338,7 +351,18 @@ function ctf_views_toronto_condos_list_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'field_search_point_string' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
   );
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
   /* Field: Bulk operations: Drealty Listing */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'drealty_listing';
@@ -355,6 +379,19 @@ function ctf_views_toronto_condos_list_views_default_views() {
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+    ),
+    'action::views_bulk_operations_modify_action' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+      'settings' => array(
+        'show_all_tokens' => 1,
+        'display_values' => array(
+          'hash' => 'hash',
+        ),
+      ),
     ),
   );
   /* Field: Drealty Listing: Drealty Listing Id */
@@ -397,6 +434,19 @@ function ctf_views_toronto_condos_list_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
+  /* Field: Drealty Listing: Idx_dt */
+  $handler->display->display_options['fields']['field_idx_dt__torcond']['id'] = 'field_idx_dt__torcond';
+  $handler->display->display_options['fields']['field_idx_dt__torcond']['table'] = 'field_data_field_idx_dt__torcond';
+  $handler->display->display_options['fields']['field_idx_dt__torcond']['field'] = 'field_idx_dt__torcond';
+  $handler->display->display_options['fields']['field_idx_dt__torcond']['label'] = 'Updated (Idx_dt)';
+  $handler->display->display_options['fields']['field_idx_dt__torcond']['settings'] = array(
+    'format_type' => 'short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
   /* Field: Drealty Listing: Toronto gallery */
   $handler->display->display_options['fields']['field_toronto_gallery']['id'] = 'field_toronto_gallery';
   $handler->display->display_options['fields']['field_toronto_gallery']['table'] = 'field_data_field_toronto_gallery';
@@ -423,6 +473,10 @@ function ctf_views_toronto_condos_list_views_default_views() {
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing']['alter']['path'] = '/drealty_listing/[id_1]/edit';
   $handler->display->display_options['fields']['nothing']['alter']['absolute'] = TRUE;
+  /* Field: Drealty Listing: Search point string */
+  $handler->display->display_options['fields']['field_search_point_string']['id'] = 'field_search_point_string';
+  $handler->display->display_options['fields']['field_search_point_string']['table'] = 'field_data_field_search_point_string';
+  $handler->display->display_options['fields']['field_search_point_string']['field'] = 'field_search_point_string';
   /* Sort criterion: Drealty Listing: Drealty Listing Id */
   $handler->display->display_options['sorts']['id']['id'] = 'id';
   $handler->display->display_options['sorts']['id']['table'] = 'drealty_listing';
@@ -557,6 +611,198 @@ function ctf_views_toronto_condos_list_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Drealty Listing: Drealty Listing Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'drealty_listing';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = 'toronto_condo';
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  $handler->display->display_options['filters']['type']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
+  $handler->display->display_options['filters']['type']['expose']['label'] = 'Listing Type:';
+  $handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
+  $handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
+  $handler->display->display_options['filters']['type']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+  );
+  $handler->display->display_options['filters']['type']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['type']['expose']['autocomplete_min_chars'] = '0';
+  $handler->display->display_options['filters']['type']['expose']['autocomplete_field'] = 'type';
+  $handler->display->display_options['filters']['type']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['type']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['type']['expose']['autocomplete_dependent'] = 0;
+  $handler->display->display_options['filters']['type']['is_grouped'] = TRUE;
+  $handler->display->display_options['filters']['type']['group_info']['label'] = 'Listing Type:';
+  $handler->display->display_options['filters']['type']['group_info']['identifier'] = 'type';
+  $handler->display->display_options['filters']['type']['group_info']['widget'] = 'radios';
+  $handler->display->display_options['filters']['type']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => 'condo',
+      'operator' => '=',
+      'value' => 'toronto_condo',
+    ),
+    2 => array(
+      'title' => 'building',
+      'operator' => '=',
+      'value' => 'toronto_building',
+    ),
+  );
+  /* Filter criterion: Drealty Listing: Drealty Active Status */
+  $handler->display->display_options['filters']['active']['id'] = 'active';
+  $handler->display->display_options['filters']['active']['table'] = 'drealty_listing';
+  $handler->display->display_options['filters']['active']['field'] = 'active';
+  $handler->display->display_options['filters']['active']['group'] = 1;
+  $handler->display->display_options['filters']['active']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['active']['expose']['operator_id'] = 'active_op';
+  $handler->display->display_options['filters']['active']['expose']['label'] = 'Drealty Active Status';
+  $handler->display->display_options['filters']['active']['expose']['operator'] = 'active_op';
+  $handler->display->display_options['filters']['active']['expose']['identifier'] = 'active';
+  $handler->display->display_options['filters']['active']['is_grouped'] = TRUE;
+  $handler->display->display_options['filters']['active']['group_info']['label'] = 'Active:';
+  $handler->display->display_options['filters']['active']['group_info']['identifier'] = 'active';
+  $handler->display->display_options['filters']['active']['group_info']['widget'] = 'radios';
+  $handler->display->display_options['filters']['active']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => 'yes',
+      'operator' => '=',
+      'value' => array(
+        'value' => '1',
+        'min' => '',
+        'max' => '',
+      ),
+    ),
+    2 => array(
+      'title' => 'no',
+      'operator' => '=',
+      'value' => array(
+        'value' => '0',
+        'min' => '',
+        'max' => '',
+      ),
+    ),
+    3 => array(
+      'title' => '',
+      'operator' => '=',
+      'value' => array(
+        'value' => '',
+        'min' => '',
+        'max' => '',
+      ),
+    ),
+  );
+  /* Filter criterion: Drealty Listing: Ml_num (field_ml_num__torcond) */
+  $handler->display->display_options['filters']['field_ml_num__torcond_value']['id'] = 'field_ml_num__torcond_value';
+  $handler->display->display_options['filters']['field_ml_num__torcond_value']['table'] = 'field_data_field_ml_num__torcond';
+  $handler->display->display_options['filters']['field_ml_num__torcond_value']['field'] = 'field_ml_num__torcond_value';
+  $handler->display->display_options['filters']['field_ml_num__torcond_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_ml_num__torcond_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_ml_num__torcond_value']['expose']['operator_id'] = 'field_ml_num__torcond_value_op';
+  $handler->display->display_options['filters']['field_ml_num__torcond_value']['expose']['label'] = 'MLS #:';
+  $handler->display->display_options['filters']['field_ml_num__torcond_value']['expose']['operator'] = 'field_ml_num__torcond_value_op';
+  $handler->display->display_options['filters']['field_ml_num__torcond_value']['expose']['identifier'] = 'field_ml_num__torcond_value';
+  $handler->display->display_options['filters']['field_ml_num__torcond_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+  );
+  $handler->display->display_options['filters']['field_ml_num__torcond_value']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['field_ml_num__torcond_value']['expose']['autocomplete_min_chars'] = '0';
+  $handler->display->display_options['filters']['field_ml_num__torcond_value']['expose']['autocomplete_field'] = 'field_ml_num__torcond';
+  $handler->display->display_options['filters']['field_ml_num__torcond_value']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['field_ml_num__torcond_value']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['field_ml_num__torcond_value']['expose']['autocomplete_dependent'] = 0;
+  /* Filter criterion: Drealty Listing: Drealty Listing Id */
+  $handler->display->display_options['filters']['id']['id'] = 'id';
+  $handler->display->display_options['filters']['id']['table'] = 'drealty_listing';
+  $handler->display->display_options['filters']['id']['field'] = 'id';
+  $handler->display->display_options['filters']['id']['group'] = 1;
+  $handler->display->display_options['filters']['id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['id']['expose']['operator_id'] = 'id_op';
+  $handler->display->display_options['filters']['id']['expose']['label'] = 'Listing Id:';
+  $handler->display->display_options['filters']['id']['expose']['operator'] = 'id_op';
+  $handler->display->display_options['filters']['id']['expose']['identifier'] = 'id';
+  $handler->display->display_options['filters']['id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+  );
+  $handler->display->display_options['filters']['id']['group_info']['label'] = 'Drealty Listing Id';
+  $handler->display->display_options['filters']['id']['group_info']['identifier'] = 'id';
+  $handler->display->display_options['filters']['id']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => '',
+      'operator' => '=',
+      'value' => array(
+        'value' => '',
+        'min' => '',
+        'max' => '',
+      ),
+    ),
+    2 => array(
+      'title' => '',
+      'operator' => '=',
+      'value' => array(
+        'value' => '',
+        'min' => '',
+        'max' => '',
+      ),
+    ),
+    3 => array(
+      'title' => '',
+      'operator' => '=',
+      'value' => array(
+        'value' => '',
+        'min' => '',
+        'max' => '',
+      ),
+    ),
+  );
+  /* Filter criterion: Drealty Listing: Full address (field_address_full__torcond) */
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['id'] = 'field_address_full__torcond_value';
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['table'] = 'field_data_field_address_full__torcond';
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['field'] = 'field_address_full__torcond_value';
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['expose']['operator_id'] = 'field_address_full__torcond_value_op';
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['expose']['label'] = 'Full address (contains):';
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['expose']['operator'] = 'field_address_full__torcond_value_op';
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['expose']['identifier'] = 'field_address_full__torcond_value';
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+  );
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['expose']['autocomplete_min_chars'] = '0';
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['field_address_full__torcond_value']['expose']['autocomplete_dependent'] = 0;
+  /* Filter criterion: Drealty Listing: Search point string (field_search_point_string) */
+  $handler->display->display_options['filters']['field_search_point_string_value']['id'] = 'field_search_point_string_value';
+  $handler->display->display_options['filters']['field_search_point_string_value']['table'] = 'field_data_field_search_point_string';
+  $handler->display->display_options['filters']['field_search_point_string_value']['field'] = 'field_search_point_string_value';
+  $handler->display->display_options['filters']['field_search_point_string_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_search_point_string_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_search_point_string_value']['expose']['operator_id'] = 'field_search_point_string_value_op';
+  $handler->display->display_options['filters']['field_search_point_string_value']['expose']['label'] = 'Search point string (field_search_point_string)';
+  $handler->display->display_options['filters']['field_search_point_string_value']['expose']['operator'] = 'field_search_point_string_value_op';
+  $handler->display->display_options['filters']['field_search_point_string_value']['expose']['identifier'] = 'field_search_point_string_value';
+  $handler->display->display_options['filters']['field_search_point_string_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+  );
+  $handler->display->display_options['filters']['field_search_point_string_value']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['field_search_point_string_value']['expose']['autocomplete_min_chars'] = '0';
+  $handler->display->display_options['filters']['field_search_point_string_value']['expose']['autocomplete_field'] = 'field_search_point_string';
+  $handler->display->display_options['filters']['field_search_point_string_value']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['field_search_point_string_value']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['field_search_point_string_value']['expose']['autocomplete_dependent'] = 0;
   $handler->display->display_options['path'] = 'toronto-condos-list';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Toronto condos list';
