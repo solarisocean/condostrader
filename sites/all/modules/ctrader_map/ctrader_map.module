@@ -216,8 +216,27 @@ function ctrader_map_block_view($delta = '') {
         $regions = explode('>', $_GET['region']);
         $results_map_polygons = array();
         $location_select_polygon = array();
+        $vocabulary_machine_name = 'neighbourhoods';
+        $vid = taxonomy_vocabulary_machine_name_load($vocabulary_machine_name); //Neighbourhoods vocabulary.
+        $vid = $vid->vid;
+        $children_terms = taxonomy_get_tree($vid, end($regions));
+        $children_terms_ids = array();
+        foreach ($children_terms as $children_term) {
+          $children_terms_ids[] = $children_term->tid;
+        }
+//        foreach ($all_neighbourhoods_json as $value) {
+//          if ($value['properties']['parent_id'] == end($regions)) {
+//            $results_map_polygons[] = $value;
+//          }
+//          if ($value['id'] == end($regions)) {
+//            $location_select_polygon = $value;
+//          }
+//        }
+//        if (!$results_map_polygons) {
+//          $results_map_polygons[] = $location_select_polygon;
+//        }
         foreach ($all_neighbourhoods_json as $value) {
-          if ($value['properties']['parent_id'] == end($regions)) {
+          if (in_array($value['id'], $children_terms_ids)) {
             $results_map_polygons[] = $value;
           }
           if ($value['id'] == end($regions)) {
