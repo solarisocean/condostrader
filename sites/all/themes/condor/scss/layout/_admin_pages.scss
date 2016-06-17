@@ -24,6 +24,21 @@
       text-transform: uppercase;
     }
 
+    .submitted {
+      margin-bottom: 20px;
+    }
+
+    .field {
+      margin-bottom: 10px;
+    }
+
+    .field-label {
+      font-weight: bold;
+      font-family: "Raleway", sans-serif;
+      text-transform: uppercase;
+      font-size: rem-calc(13);
+    }
+
     label {
       font-size: rem-calc(11);
       text-transform: uppercase;;
