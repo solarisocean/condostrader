@@ -698,9 +698,6 @@ function new_taxonomy_polygons() {
     drupal_set_message(t('Vocabulary does not exist.'), 'error');
     return;
   }
-  else {
-    $vid = $vid->vid;
-  }
 
   // Checks if vocabulary is empty.
   $check_vocab = taxonomy_get_tree($vid, 0, 1);
