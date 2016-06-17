@@ -21,6 +21,9 @@ function book_a_viewing_form_content_type_render($subtype, $conf, $args, $contex
   $entity_form_name = 'book_a_viewing';
   $render_estimate_form = entityform_form_wrapper(entityform_empty_load($entity_form_name), 'submit', 'embedded');
 
+  $render_estimate_form['field_listing_link'][LANGUAGE_NONE][0]['title']['#value'] = 'Listing link';
+  $render_estimate_form['field_listing_link'][LANGUAGE_NONE][0]['url']['#value'] = $_GET['q'];
+  $render_estimate_form['field_listing_link']['#attributes']['class'][] = 'element-invisible';
 
   $block = new stdClass();
   $block->title = '';
