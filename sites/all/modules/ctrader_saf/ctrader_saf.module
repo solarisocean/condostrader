@@ -1091,3 +1091,27 @@ function ctrader_saf_search_api_solr_field_mapping_alter(SearchApiIndex $index, 
     $fields[$field_name] = 'rpts_' . $field_name;
   }
 }
+
+
+/**
+ * @file
+ * Performs min/max queries through Search API
+ * and provides UI Slider display widget for Facet API
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function ctrader_saf_theme() {
+  $themes = array(
+    'ctrader_search_api_ranges_slider' => array(
+      'variables' => array('slider' => ''),
+      'file' => 'ctrader_search_api_ranges.theme.inc',
+    ),
+    'ctrader_search_api_ranges_block_slider_view_form' => array(
+      'template' => 'ctrader-search-api-ranges-block-slider-view-form',
+      'render element' => 'form',
+    ),
+  );
+  return $themes;
+}
