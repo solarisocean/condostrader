@@ -92,6 +92,11 @@
     .view-footer {
       @extend %condo-more;
     }
+
+    .item-list {
+      display: none;
+      visibility: hidden;
+    }
   }
 
   .pane-title {
