@@ -691,24 +691,24 @@ function new_taxonomy_polygons() {
 
 /******************************************************************************/
 
-  $vid = taxonomy_vocabulary_machine_name_load('communities'); //Neighbourhoods vocabulary.
-      $vid = $vid->vid;
+  $vid = taxonomy_vocabulary_machine_name_load('neighbourhoods'); //Neighbourhoods vocabulary.
+  $vid = $vid->vid;
 
-//  if ($vid == FALSE) {
-//    drupal_set_message(t('Vocabulary does not exist.'), 'error');
-//    return;
-//  }
-//  else {
-//    $vid = $vid->vid;
-//  }
-//
-//  // Checks if vocabulary is empty.
-//  $check_vocab = taxonomy_get_tree($vid, 0, 1);
-//  if (!empty($check_vocab)) {
-//    drupal_set_message(t('Vocabulary is not empty.'), 'warning');
-//    drupal_set_message(t('You should clear Communities vocabulary before creating new taxonomy tree.'), 'warning');
-//    return;
-//  }
+  if ($vid == FALSE) {
+    drupal_set_message(t('Vocabulary does not exist.'), 'error');
+    return;
+  }
+  else {
+    $vid = $vid->vid;
+  }
+
+  // Checks if vocabulary is empty.
+  $check_vocab = taxonomy_get_tree($vid, 0, 1);
+  if (!empty($check_vocab)) {
+    drupal_set_message(t('Vocabulary is not empty.'), 'warning');
+    drupal_set_message(t('You should clear Communities vocabulary before creating new taxonomy tree.'), 'warning');
+    return;
+  }
 
 
   // Creates first level terms.

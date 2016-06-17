@@ -352,6 +352,13 @@ function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = 
           }
         }
 
+        if (isset($tax_term->field_community_code[LANGUAGE_NONE][0]['value'])) {
+          $community_code = $tax_term->field_community_code[LANGUAGE_NONE][0]['value'];
+        }
+        else {
+          $community_code = '';
+        }
+
         $tax_depth = in_array($tax_term->name, $allowed_cities) ? $tax_term->depth : $tax_term->depth + 1;
         $terms_polygon_prejson[] = array(
           'geometry' => array(
@@ -364,6 +371,8 @@ function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = 
             'parent_id' => $term_parent_id,
             'depth' => $tax_depth,
             'has_children' => $has_children,
+            'community_code' => $community_code,
+
           ),
           'id' => $tax_term_id,
           'type' => 'Feature',
@@ -779,6 +788,9 @@ function _ctrader_map_update_neighbourhoods_json_form($form, &$form_state) {
 }
 
 function _ctrader_map_update_neighbourhoods_json_form_submit($form, &$form_state) {
+  if (isset($_SESSION['neighbourhoods_terms_polygons_data'])) {
+    unset($_SESSION['neighbourhoods_terms_polygons_data']);
+  }
   variable_del('ctrader_map_neighbourhood_json');
   _ctrader_map_prepare_neighbourhoods_json();
   drupal_set_message(t('\'ctrader_map_neighbourhood_json\' has been updated.'));
