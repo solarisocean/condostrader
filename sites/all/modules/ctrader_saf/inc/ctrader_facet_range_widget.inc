@@ -21,7 +21,7 @@ class SearchApiCtraderRangesWidgetUISlider extends FacetapiWidget {
     $step = isset($settings['slider-step']) ? $settings['slider-step'] : 1;
     $round_precision = isset($settings['round-precision']) ? (int) $settings['round-precision'] : 0;
     $element = array(
-      '#theme' => 'search_api_ranges_slider' . $theme_suffix,
+      '#theme' => 'ctrader_search_api_ranges_slider' . $theme_suffix,
       '#slider' => $this->_buildUISliderForm(),
       '#prefix' => '<div id="search-api-ranges-' . $this->facet['field alias'] . '">',
       '#suffix' => '</div>',

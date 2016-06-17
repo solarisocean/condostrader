@@ -170,31 +170,92 @@ function ctrader_register_element_info_alter(&$types) {
  * @return null|void
  */
 function _js_singup_map_page_callback() {
-  $all_neighbourhoods_json = _ctrader_map_prepare_neighbourhoods_json();
 
+
+  $all_neighbourhoods_json = _ctrader_map_prepare_neighbourhoods_json();
+  $vocabulary_machine_name = 'neighbourhoods';
+  $vid = taxonomy_vocabulary_machine_name_load($vocabulary_machine_name); //Neighbourhoods vocabulary.
+  $vid = $vid->vid;
+
+  // Sends polygons to user registration map.
   if (isset($_POST['signUpLoc'])) {
-    foreach ($all_neighbourhoods_json as $value) {
+    $found_polygon = FALSE;
+    foreach ($all_neighbourhoods_json as $key => $value) {
       if ($value['id'] == $_POST['signUpLoc']) {
         drupal_json_output($value);
+        $found_polygon = TRUE;
       }
+      $all_neighbourhoods_json_short[$key] = $value['id'];
+    }
+
+    $all_neighbourhoods_json_short_flip = array_flip($all_neighbourhoods_json_short);
+    if (!$found_polygon) {
+      $children_terms = taxonomy_get_tree($vid, $_POST['signUpLoc'], NULL, FALSE);
+      $get_all_children_polygons = array();
+      foreach ($children_terms as $value) {
+        if (in_array($value->tid, $all_neighbourhoods_json_short)) {
+          $all_neighbourhoods_json_key = $all_neighbourhoods_json_short_flip[$value->tid];
+          $get_all_children_polygons[] = $all_neighbourhoods_json[$all_neighbourhoods_json_key];
+        }
+      }
+      drupal_json_output($get_all_children_polygons);
     }
   }
 
+
+  // Sends polygons to search-results map.
   if (isset($_POST['locationSelect'])) {
-    $results_map_polygons = array();
-    $location_select_polygon = array();
-    foreach ($all_neighbourhoods_json as $value) {
-      if ($value['properties']['parent_id'] == $_POST['locationSelect']) {
-        $results_map_polygons[] = $value;
-      }
+    $found_polygon = FALSE;
+    foreach ($all_neighbourhoods_json as $key => $value) {
       if ($value['id'] == $_POST['locationSelect']) {
-        $location_select_polygon = $value;
+        drupal_json_output($value);
+        $found_polygon = TRUE;
       }
+      $all_neighbourhoods_json_short[$key] = $value['id'];
     }
-    if (!$results_map_polygons) {
-      $results_map_polygons[] = $location_select_polygon;
+    $all_neighbourhoods_json_short_flip = array_flip($all_neighbourhoods_json_short);
+    if (!$found_polygon) {
+      $children_terms = taxonomy_get_tree($vid, $_POST['locationSelect'], NULL, FALSE);
+      $get_all_children_polygons = array();
+      foreach ($children_terms as $value) {
+        if (in_array($value->tid, $all_neighbourhoods_json_short)) {
+          $all_neighbourhoods_json_key = $all_neighbourhoods_json_short_flip[$value->tid];
+          $get_all_children_polygons[] = $all_neighbourhoods_json[$all_neighbourhoods_json_key];
+        }
+      }
+      drupal_add_js(array('locationSelect' => $get_all_children_polygons), 'setting');
+      drupal_json_output($get_all_children_polygons);
     }
-    drupal_add_js(array('locationSelect' => $results_map_polygons), 'setting');
-    drupal_json_output($results_map_polygons);
   }
+
+
+
+
+//  $all_neighbourhoods_json = _ctrader_map_prepare_neighbourhoods_json();
+//
+//  if (isset($_POST['signUpLoc'])) {
+//    foreach ($all_neighbourhoods_json as $value) {
+//      if ($value['id'] == $_POST['signUpLoc']) {
+//        drupal_json_output($value);
+//      }
+//    }
+//  }
+//
+//  if (isset($_POST['locationSelect'])) {
+//    $results_map_polygons = array();
+//    $location_select_polygon = array();
+//    foreach ($all_neighbourhoods_json as $value) {
+//      if ($value['properties']['parent_id'] == $_POST['locationSelect']) {
+//        $results_map_polygons[] = $value;
+//      }
+//      if ($value['id'] == $_POST['locationSelect']) {
+//        $location_select_polygon = $value;
+//      }
+//    }
+//    if (!$results_map_polygons) {
+//      $results_map_polygons[] = $location_select_polygon;
+//    }
+//    drupal_add_js(array('locationSelect' => $results_map_polygons), 'setting');
+//    drupal_json_output($results_map_polygons);
+//  }
 }

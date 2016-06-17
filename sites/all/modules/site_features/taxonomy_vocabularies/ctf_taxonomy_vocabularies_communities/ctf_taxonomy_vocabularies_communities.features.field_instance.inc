@@ -1,19 +1,18 @@
 <?php
 /**
  * @file
- * ctf_taxonomy_vocabularies_neighbourhoods.features.field_instance.inc
+ * ctf_taxonomy_vocabularies_communities.features.field_instance.inc
  */
 
 /**
  * Implements hook_field_default_field_instances().
  */
-function ctf_taxonomy_vocabularies_neighbourhoods_field_default_field_instances() {
+function ctf_taxonomy_vocabularies_communities_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance:
-  // 'taxonomy_term-neighbourhoods-field_community_code'.
-  $field_instances['taxonomy_term-neighbourhoods-field_community_code'] = array(
-    'bundle' => 'neighbourhoods',
+  // Exported field_instance: 'taxonomy_term-communities-field_community_code'.
+  $field_instances['taxonomy_term-communities-field_community_code'] = array(
+    'bundle' => 'communities',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -23,7 +22,7 @@ function ctf_taxonomy_vocabularies_neighbourhoods_field_default_field_instances(
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'taxonomy_term',
@@ -41,15 +40,15 @@ function ctf_taxonomy_vocabularies_neighbourhoods_field_default_field_instances(
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 32,
+      'weight' => 31,
     ),
   );
 
   // Exported field_instance:
-  // 'taxonomy_term-neighbourhoods-field_community_geolocation'.
-  $field_instances['taxonomy_term-neighbourhoods-field_community_geolocation'] = array(
-    'bundle' => 'neighbourhoods',
-    'default_value' => array(),
+  // 'taxonomy_term-communities-field_community_geolocation'.
+  $field_instances['taxonomy_term-communities-field_community_geolocation'] = array(
+    'bundle' => 'communities',
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -57,7 +56,7 @@ function ctf_taxonomy_vocabularies_neighbourhoods_field_default_field_instances(
         'label' => 'above',
         'module' => 'leaflet',
         'settings' => array(
-          'height' => 500,
+          'height' => 800,
           'icon' => array(
             'html' => '',
             'htmlClass' => '',
@@ -82,22 +81,22 @@ function ctf_taxonomy_vocabularies_neighbourhoods_field_default_field_instances(
             ),
             'shadowUrl' => '',
           ),
-          'leaflet_map' => 'esri-world_street_map',
+          'leaflet_map' => 'google-high-res',
           'popup' => array(
             'show' => 0,
-            'text' => 'text',
+            'text' => '',
           ),
           'vector_display' => array(
-            'clickable' => 1,
-            'color' => '#8955A0',
+            'clickable' => 0,
+            'color' => '',
             'dashArray' => '',
-            'fill' => 1,
-            'fillColor' => '#584A55',
-            'fillOpacity' => 0.4,
+            'fill' => 0,
+            'fillColor' => '',
+            'fillOpacity' => '',
             'opacity' => '',
-            'stroke' => 1,
-            'stroke_override' => 1,
-            'weight' => 3,
+            'stroke' => 0,
+            'stroke_override' => 0,
+            'weight' => '',
           ),
           'zoom' => array(
             'initialZoom' => -1,
@@ -107,7 +106,7 @@ function ctf_taxonomy_vocabularies_neighbourhoods_field_default_field_instances(
           ),
         ),
         'type' => 'geofield_leaflet',
-        'weight' => 0,
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'taxonomy_term',
@@ -120,23 +119,9 @@ function ctf_taxonomy_vocabularies_neighbourhoods_field_default_field_instances(
     'widget' => array(
       'active' => 1,
       'module' => 'geofield',
-      'settings' => array(
-        'geocoder' => array(
-          'enabled' => 1,
-          'handler' => 'google',
-        ),
-        'map' => array(
-          'auto_center' => 1,
-          'base_url' => '//services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}.png',
-          'center' => array(
-            'lat' => 50,
-            'lng' => 70,
-          ),
-          'zoom' => 10,
-        ),
-      ),
+      'settings' => array(),
       'type' => 'geofield_geojson',
-      'weight' => 3,
+      'weight' => 33,
     ),
   );
 
