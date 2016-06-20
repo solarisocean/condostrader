@@ -340,28 +340,28 @@ function ctrader_mls_field_attach_presave($entity_type, $entity) {
   switch ($entity_type) {
     case DREALTY_ENTITY_TYPE:
       if ($entity->type == TORONTO_CONDO) {
-        if (isset($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value']) && strpos($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'], ', Canada') === FALSE) {
-          if (empty($entity->field_test_geofilld)) {
-            if (isset($entity->field_municipality__torcond[LANGUAGE_NONE][0]['value']) && $entity->field_municipality__torcond[LANGUAGE_NONE][0]['value'] != 'Toronto') {
-              $community = $entity->field_municipality__torcond[LANGUAGE_NONE][0]['value'] . ',';
-            }
-            elseif (isset($entity->field_community__torcond[LANGUAGE_NONE][0]['value'])) {
-              $community = $entity->field_community__torcond[LANGUAGE_NONE][0]['value'] . ',';
-            }
-            else {
-              $community = $entity->field_area__torcond[LANGUAGE_NONE][0]['value'];
-            }
-            $zip = isset($entity->field_zip__torcond[LANGUAGE_NONE][0]['value']) ? ' ' . $entity->field_zip__torcond[LANGUAGE_NONE][0]['value'] : '';
-            $place = !empty($entity->field_addr__torcond[LANGUAGE_NONE][0]['value']) ? $entity->field_addr__torcond[LANGUAGE_NONE][0]['value'] : '';
-            $entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'] = $place . ', ' . $community . ' ' . $entity->field_county__torcond[LANGUAGE_NONE][0]['value'] . $zip;
-          }
-        }
-        elseif (isset($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'])) {
+//        if (isset($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value']) && strpos($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'], ', Canada') === FALSE) {
+//          if (empty($entity->field_test_geofilld)) {
+//            if (isset($entity->field_municipality__torcond[LANGUAGE_NONE][0]['value']) && $entity->field_municipality__torcond[LANGUAGE_NONE][0]['value'] != 'Toronto') {
+//              $community = $entity->field_municipality__torcond[LANGUAGE_NONE][0]['value'] . ',';
+//            }
+//            elseif (isset($entity->field_community__torcond[LANGUAGE_NONE][0]['value'])) {
+//              $community = $entity->field_community__torcond[LANGUAGE_NONE][0]['value'] . ',';
+//            }
+//            else {
+//              $community = $entity->field_area__torcond[LANGUAGE_NONE][0]['value'];
+//            }
+//            $zip = isset($entity->field_zip__torcond[LANGUAGE_NONE][0]['value']) ? ' ' . $entity->field_zip__torcond[LANGUAGE_NONE][0]['value'] : '';
+//            $place = !empty($entity->field_addr__torcond[LANGUAGE_NONE][0]['value']) ? $entity->field_addr__torcond[LANGUAGE_NONE][0]['value'] : '';
+//            $entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'] = $place . ', ' . $community . ' ' . $entity->field_county__torcond[LANGUAGE_NONE][0]['value'] . $zip;
+//          }
+//        }
+//        elseif (isset($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'])) {
           $community = $entity->field_community__torcond[LANGUAGE_NONE][0]['value'] . ',';
           $zip = isset($entity->field_zip__torcond[LANGUAGE_NONE][0]['value']) ? ' ' . $entity->field_zip__torcond[LANGUAGE_NONE][0]['value'] : '';
           $place = !empty($entity->field_addr__torcond[LANGUAGE_NONE][0]['value']) ? $entity->field_addr__torcond[LANGUAGE_NONE][0]['value'] : $community;
           $entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'] = $place . ' ' . $entity->field_area__torcond[LANGUAGE_NONE][0]['value'] . ', ' . $entity->field_county__torcond[LANGUAGE_NONE][0]['value'] . $zip;
-        }
+//        }
       }
       break;
   }
