@@ -195,8 +195,10 @@ function ctrader_map_update_7003(&$sandbox) {
   if (!isset($sandbox['progress'])) {
     $sandbox['progress'] = 0;
     $sandbox['current_id'] = 0;
-    $sandbox['max'] = db_select('drealty_listing', 'dl')
-      ->fields('dl', array('id'))
+    $sandbox['max'] = db_select('field_data_field_search_point_string', 'ss')
+      ->fields('ss', array('entity_id'))
+      ->condition('entity_id', $sandbox['current_id'], '>')
+      ->condition('field_search_point_string_value', '43.760,-79.390', 'LIKE')
       ->execute()
       ->rowCount();
     db_truncate('cache_geocoder')->execute();
