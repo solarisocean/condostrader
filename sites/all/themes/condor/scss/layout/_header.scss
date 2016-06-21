@@ -74,7 +74,7 @@
 
           .form-item {
             margin: 0;
-            padding-right: 20px;
+            padding-right: 10px;
 
             input[type="text"] {
               max-width: 260px;
@@ -84,7 +84,7 @@
               border: none;
               box-shadow: none;
               color: white;
-              font-size: rem-calc(13);
+              font-size: rem-calc(11);
               @include placeholder {
                 color: $white;
               }

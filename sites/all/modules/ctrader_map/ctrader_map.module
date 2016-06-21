@@ -934,7 +934,7 @@ function _build_point_popup_page_callback() {
     $view_display = 'block_2';
     $view = views_embed_view($view_name, $view_display, $_POST['pointListingId']);
     if(in_array('administrator', $user->roles)) {
-      $view .= '<p>' . l('edit', '/drealty_listing/' . $_POST['pointListingId'] . '/edit', array('attributes' => array('target'=>'_blank'))) . '</p>';
+      $view .= '<p>' . l('edit', '/drealty_listing/' . $_POST['pointListingId'] . '/edit', array('attributes' => array('target'=>'_blank', 'class' => array('map-popup-edit')))) . '</p>';
     }
     drupal_json_output($view);
   }
