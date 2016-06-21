@@ -1,8 +1,5 @@
 <?php
 
-// alias for search result page.
-define('CTRADER_SEARCH_RESULT_PAGE', 'search-results');
-
 
 /**
  * Implements hook_init().

@@ -26,7 +26,7 @@ function ctf_forms_book_a_viewing_default_rules_configuration() {
             "from_name" : "[site:name]",
             "from_mail" : "[site:mail]",
             "subject" : "[entityform:type] ([entityform:user])",
-            "body" : "**********************************\\r\\n\\u003Cem\\u003E\\r\\n\\u003Ch3\\u003E\\r\\n[entityform:user]\\r\\n\\u003C\\/h3\\u003E\\r\\n[entityform:field_e_mail]\\r\\n[entityform:field_phone_number]\\r\\n\\u003Cp\\u003E\\r\\n[entityform:field_time_to_contact]\\r\\n\\u003C\\/p\\u003E\\r\\n\\u003Cb\\u003E\\r\\n[entityform:field_extra_notes]\\r\\n\\u003C\\/b\\u003E\\r\\n[entityform:entityform_id]\\r\\n\\u003C\\/em\\u003E\\r\\n*************************************",
+            "body" : "\\u003Cem\\u003E\\r\\n\\u003Ch3\\u003E\\r\\nUser: [entityform:user]\\r\\n\\u003C\\/h3\\u003E\\r\\n\\u003Cu\\u003E\\u003Cb\\u003EName:\\u003C\\/b\\u003E\\u003C\\/u\\u003E [entityform:field_name]\\r\\n\\u003Cu\\u003E\\u003Cb\\u003EE-mail:\\u003C\\/b\\u003E\\u003C\\/u\\u003E [entityform:field_e_mail]\\r\\n\\u003Cu\\u003E\\u003Cb\\u003EPhone:\\u003C\\/b\\u003E\\u003C\\/u\\u003E [entityform:field_phone_number]\\r\\n\\u003Cp\\u003E\\r\\n\\u003Cu\\u003E\\u003Cb\\u003ETime to contact:\\u003C\\/b\\u003E\\u003C\\/u\\u003E [entityform:field_time_to_contact]\\r\\n\\u003C\\/p\\u003E\\r\\n\\u003Cp\\u003E\\r\\n\\u003Cu\\u003E\\u003Cb\\u003EComment:\\u003C\\/b\\u003E\\u003C\\/u\\u003E [entityform:field_extra_notes]\\r\\n\\u003C\\/p\\u003E\\r\\n\\u003C\\/em\\u003E\\r\\n\\u003Cp\\u003E\\r\\n\\u003Cu\\u003E\\u003Cb\\u003EInterested listing:\\u003C\\/b\\u003E\\u003C\\/u\\u003E [entityform:field_listing_link]\\r\\n\\u003C\\/p\\u003E\\r\\n",
             "language" : [ "" ]
           }
         }

@@ -185,3 +185,55 @@ function ctrader_map_update_7002(&$sandbox) {
   // In case of an error, simply throw an exception with an error message.
   throw new DrupalUpdateException('Something went wrong.');
 }
+
+
+/**
+ * Resaves entities with default coordinates '43.760,-79.390'.
+ */
+function ctrader_map_update_7003(&$sandbox) {
+  $listings_per_pass = 10;
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['current_id'] = 0;
+    $sandbox['max'] = db_select('field_data_field_search_point_string', 'ss')
+      ->fields('ss', array('entity_id'))
+      ->condition('entity_id', $sandbox['current_id'], '>')
+      ->condition('field_search_point_string_value', '43.760,-79.390', 'LIKE')
+      ->execute()
+      ->rowCount();
+    db_truncate('cache_geocoder')->execute();
+  }
+
+  $records = db_select('field_data_field_search_point_string', 'ss')
+    ->fields('ss', array('entity_id'))
+    ->condition('entity_id', $sandbox['current_id'], '>')
+    ->condition('field_search_point_string_value', '43.760,-79.390', 'LIKE')
+    ->range(0, $listings_per_pass)
+    ->orderBy('entity_id')
+    ->execute()
+    ->fetchCol();
+
+  if (!empty($records)) {
+    $entities = entity_load(DREALTY_ENTITY_TYPE, array($records));
+
+    /**
+     * @see ctrader_map_entity_presave().
+     */
+    foreach ($entities as $entity) {
+      $entity->save();
+    }
+    $sandbox['current_id'] = end($records);
+    $sandbox['progress'] += count($records);
+    $sandbox['#finished'] = $sandbox['progress'] / $sandbox['max'];
+    if ($sandbox['#finished'] >= 1) {
+      $sandbox['#finished'] = 1;
+      unset($_SESSION['neighbourhoods_terms_polygons_data']);
+    }
+  }
+
+  // To display a message to the user when the update is completed, return it.
+  return t('Resaved entities with default coordinates \'43.760,-79.390\'.');
+
+  // In case of an error, simply throw an exception with an error message.
+  throw new DrupalUpdateException('Something went wrong.');
+}

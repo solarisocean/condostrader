@@ -19,7 +19,7 @@ function ctf_pages_contact_default_page_manager_pages() {
   $page->access = array();
   $page->menu = array(
     'type' => 'normal',
-    'title' => 'Contact',
+    'title' => 'Contact Us',
     'name' => 'main-menu',
     'weight' => '400',
     'parent' => array(

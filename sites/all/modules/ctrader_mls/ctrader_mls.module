@@ -10,6 +10,9 @@ define('DREALTY_ENTITY_TYPE', 'drealty_listing');
 define('TORONTO_BUILDING', 'toronto_building');
 define('TORONTO_CONDO', 'toronto_condo');
 
+// alias for search result page.
+define('CTRADER_SEARCH_RESULT_PAGE', 'search-results');
+
 
 /**
  * Implements hook_init().
@@ -337,7 +340,23 @@ function ctrader_mls_field_attach_presave($entity_type, $entity) {
   switch ($entity_type) {
     case DREALTY_ENTITY_TYPE:
       if ($entity->type == TORONTO_CONDO) {
-        if (isset($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'])) {
+        if (isset($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value']) && strpos($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'], ', Canada') === FALSE) {
+          if (empty($entity->field_test_geofilld)) {
+            if (isset($entity->field_municipality__torcond[LANGUAGE_NONE][0]['value']) && $entity->field_municipality__torcond[LANGUAGE_NONE][0]['value'] != 'Toronto') {
+              $community = $entity->field_municipality__torcond[LANGUAGE_NONE][0]['value'] . ',';
+            }
+            elseif (isset($entity->field_community__torcond[LANGUAGE_NONE][0]['value'])) {
+              $community = $entity->field_community__torcond[LANGUAGE_NONE][0]['value'] . ',';
+            }
+            else {
+              $community = $entity->field_area__torcond[LANGUAGE_NONE][0]['value'];
+            }
+            $zip = isset($entity->field_zip__torcond[LANGUAGE_NONE][0]['value']) ? ' ' . $entity->field_zip__torcond[LANGUAGE_NONE][0]['value'] : '';
+            $place = !empty($entity->field_addr__torcond[LANGUAGE_NONE][0]['value']) ? $entity->field_addr__torcond[LANGUAGE_NONE][0]['value'] : '';
+            $entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'] = $place . ', ' . $community . ' ' . $entity->field_county__torcond[LANGUAGE_NONE][0]['value'] . $zip;
+          }
+        }
+        elseif (isset($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'])) {
           $community = $entity->field_community__torcond[LANGUAGE_NONE][0]['value'] . ',';
           $zip = isset($entity->field_zip__torcond[LANGUAGE_NONE][0]['value']) ? ' ' . $entity->field_zip__torcond[LANGUAGE_NONE][0]['value'] : '';
           $place = !empty($entity->field_addr__torcond[LANGUAGE_NONE][0]['value']) ? $entity->field_addr__torcond[LANGUAGE_NONE][0]['value'] : $community;
@@ -404,7 +423,7 @@ function ctrader_mls_entity_presave($entity, $type) {
 
         // Search listing point on neighbourhoods terms polygons and create reference.
         if (TRUE) {
-          if (!$_SESSION['neighbourhoods_terms_polygons_data']) {
+          if (!isset($_SESSION['neighbourhoods_terms_polygons_data'])) {
             $vid = taxonomy_vocabulary_machine_name_load('communities'); //Neighbourhoods vocabulary.
             $vid = $vid->vid;
             $vocabulary_term_entities = taxonomy_get_tree($vid, 0, 3, TRUE);
@@ -666,9 +685,6 @@ function ctrader_mls_form_alter(&$form, &$form_state, $form_id) {
       $form['mortgage_rate_2']['#weight'] = 0.002;
       break;
     case 'book_a_viewing_entityform_edit_form':
-      $form['field_e_mail'][LANGUAGE_NONE][0]['email']['#attributes']['placeholder'] = 'example@mail.com';
-//      $form['field_extra_notes'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = 'Integer ante arcu accumsan a ...';
-      $form['field_phone_number'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = t('example: @number', array('@number' => '555-777-9999'));
       $form['field_buy_now_button']['#weight'] = '401';
       $form['field_buy_now_button'][LANGUAGE_NONE][0]['markup']['#markup'] = l(t('buy now'), drupal_get_path_alias() . "/buy");
       break;
