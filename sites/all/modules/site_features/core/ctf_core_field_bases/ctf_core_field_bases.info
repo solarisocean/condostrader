@@ -47,6 +47,7 @@ features[field_base][] = field_looking_to
 features[field_base][] = field_maint_fees
 features[field_base][] = field_mls_size
 features[field_base][] = field_mobile_phone_number
+features[field_base][] = field_name
 features[field_base][] = field_parking
 features[field_base][] = field_pets_allowed
 features[field_base][] = field_phone_number
