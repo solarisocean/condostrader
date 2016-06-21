@@ -34,7 +34,28 @@
                         // does this feature have a property named popupContent?
                         if (feature.properties && feature.properties.popupContent) {
                           if (feature.geometry.type == 'Point') {
-                            layer.bindPopup(feature.properties.popupContent);
+
+                            // Sends argument (listing id) and loads view block with listing short data.
+                            layer.bindPopup('Loading...');
+                            layer.on({
+                              click: function () {
+                                console.log(feature.id);
+                                $.ajax({
+                                  type: 'POST',
+                                  url: '/build-point-popup',
+                                  data: {
+                                    'pointListingId': feature.id
+                                  },
+                                  beforeSend: function() {
+                                    layer.setPopupContent('<span class="popup-loader"></span>');
+                                  },
+                                  success: function (data) {
+                                    layer.setPopupContent(data);
+                                  }
+                                });
+                              }
+                            });
+
                           }
                           else {
                             layer.bindLabel(feature.properties.popupContent, labelOptions);

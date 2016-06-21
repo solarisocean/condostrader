@@ -170,8 +170,6 @@ function ctrader_register_element_info_alter(&$types) {
  * @return null|void
  */
 function _js_singup_map_page_callback() {
-
-
   $all_neighbourhoods_json = _ctrader_map_prepare_neighbourhoods_json();
   $vocabulary_machine_name = 'neighbourhoods';
   $vid = taxonomy_vocabulary_machine_name_load($vocabulary_machine_name); //Neighbourhoods vocabulary.
