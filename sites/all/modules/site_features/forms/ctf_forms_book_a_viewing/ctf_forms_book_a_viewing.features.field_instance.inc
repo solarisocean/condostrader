@@ -42,7 +42,7 @@ function ctf_forms_book_a_viewing_field_default_field_instances() {
       'module' => 'markup',
       'settings' => array(),
       'type' => 'markup',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -71,6 +71,7 @@ function ctf_forms_book_a_viewing_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_e_mail',
     'label' => 'E-mail:',
+    'placeholder' => 'example@mail.com',
     'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -82,7 +83,7 @@ function ctf_forms_book_a_viewing_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 0,
+      'weight' => 1,
     ),
   );
 
@@ -127,7 +128,7 @@ function ctf_forms_book_a_viewing_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -178,7 +179,42 @@ function ctf_forms_book_a_viewing_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 5,
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'entityform-book_a_viewing-field_name'.
+  $field_instances['entityform-book_a_viewing-field_name'] = array(
+    'bundle' => 'book_a_viewing',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 6,
+      ),
+    ),
+    'entity_type' => 'entityform',
+    'field_name' => 'field_name',
+    'label' => 'Name:',
+    'placeholder' => '',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 0,
     ),
   );
 
@@ -207,6 +243,7 @@ function ctf_forms_book_a_viewing_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_phone_number',
     'label' => 'Phone number:',
+    'placeholder' => 'example: 555-777-9999',
     'required' => 0,
     'settings' => array(
       'ca_phone_parentheses' => 1,
@@ -221,7 +258,7 @@ function ctf_forms_book_a_viewing_field_default_field_instances() {
       'module' => 'phone',
       'settings' => array(),
       'type' => 'phone_textfield',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -263,7 +300,7 @@ function ctf_forms_book_a_viewing_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -274,6 +311,7 @@ function ctf_forms_book_a_viewing_field_default_field_instances() {
   t('Comments:');
   t('E-mail:');
   t('Listing link');
+  t('Name:');
   t('Phone number:');
 
   return $field_instances;
