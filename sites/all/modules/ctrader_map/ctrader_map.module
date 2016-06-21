@@ -11,6 +11,12 @@ function ctrader_map_menu() {
     'page callback' => '_ctrader_map_create_terms_page_callback',
     'access arguments' => array('administer modules'),
   );
+  $items['build-point-popup'] = array(
+    'title' => 'Builds popup for point on map',
+    'page callback' => '_build_point_popup_page_callback',
+    'access callback' => TRUE,
+    'delivery callback' => 'drupal_json_output',
+  );
   return $items;
 }
 
@@ -20,8 +26,6 @@ function ctrader_map_menu() {
  */
 function ctrader_map_init() {
   drupal_add_css(drupal_get_path('module', 'ctrader_map') . '/css/ctrader-map.css');
-
-  unset($_SESSION['neighbourhood_json']);
   variable_del('neighbourhood_json');
 }
 
@@ -48,15 +52,8 @@ function ctrader_map_search_api_solr_query_alter(array &$call_args, SearchApiQue
         $need_this_fields = array(
           'item_id',
           'score',
-          'ss_field_addr__torcond',
           'tm_label',
           'locs_field_test_geofilld$latlon',
-          'fs_field_lp_dol__torcond',
-          'ss_field_community__torcond',
-          'ss_field_community_code__torcond',
-          'ss_field_community__torcond',
-          'tm_field_ml_num__torcond',
-          'ss_field_ml_num__torcond',
         );
         $call_args['params']['fl'] = implode(',', $need_this_fields);
         break;
@@ -119,18 +116,7 @@ function ctrader_map_block_view($delta = '') {
             '-79.390' . rand(0, 9),
           );
         }
-        $popup_content = '';
-        $mls_num = isset($item['fields']['field_ml_num__torcond'][0]) ? '<br>MLS #: ' . $item['fields']['field_ml_num__torcond'][0] : '';
-        $popup_content .= 'id: ' . $item['fields']['search_api_id'] . $mls_num;
-        if (!empty($item['fields']['field_addr__torcond'][0])) {
-          $popup_content .= '<br>' . $item['fields']['field_addr__torcond'][0];
-        }
-        if (!empty($item['fields']['field_lp_dol__torcond'])) {
-          $popup_content .= '<br>$' . $item['fields']['field_lp_dol__torcond'];
-        }
-        if (!empty($item['fields']['field_community__torcond'][0])) {
-          $popup_content .= '<br>' . $item['fields']['field_community__torcond'][0];
-        }
+        $popup_content = 'id: ' . $item['fields']['search_api_id'];
 
         $prepared = array(
           'id' => $item['id'],
@@ -935,4 +921,21 @@ function _ctrader_map_taxonomy_get_tree($vid, $parent = 0, $max_depth = NULL, $l
   }
 
   return $tree;
+}
+
+
+/**
+ * Callback function for page 'build-point-popup'.
+ */
+function _build_point_popup_page_callback() {
+  global $user;
+  if (isset($_POST['pointListingId'])) {
+    $view_name = 'popup_content_for_point_on_map';
+    $view_display = 'block_2';
+    $view = views_embed_view($view_name, $view_display, $_POST['pointListingId']);
+    if(in_array('administrator', $user->roles)) {
+      $view .= '<p>' . l('edit', '/drealty_listing/' . $_POST['pointListingId'] . '/edit', array('attributes' => array('target'=>'_blank'))) . '</p>';
+    }
+    drupal_json_output($view);
+  }
 }

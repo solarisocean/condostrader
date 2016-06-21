@@ -125,7 +125,7 @@ function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
   // Header search input.
   if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-search-results-ctrader-page-3') {
     $form['#action'] = '/' . CTRADER_SEARCH_RESULT_PAGE;
-    $form['search_api_aggregation_1']['#attributes']['placeholder'] = t('Type address, MLS number, ZIP code, area or neighbourhood name');
+    $form['search_api_aggregation_1']['#attributes']['placeholder'] = t('Address, MLS #, ZIP, municipality, community');
     $form['search_api_aggregation_1']['#size'] = 50;
     /* @see https://www.drupal.org/node/2296135 #18 */
     $form['search_api_aggregation_1']['#id'] = "edit-search-api-aggregation-1-{$form_state['display']->id}";
