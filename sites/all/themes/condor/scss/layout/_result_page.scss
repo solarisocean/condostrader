@@ -283,4 +283,38 @@
       }
     }
   }
+
+  .pane-ctrader-map {
+    .view-popup-content-for-point-on-map {
+      .views-row {
+        width: 100%;
+        margin-top: 10px;
+        margin-right: 0;
+
+        @extend %condos-item;
+      }
+    }
+
+    .map-popup-edit {
+      background: $ecstasy;
+      padding: 6px 15px;
+      color: $white;
+      text-transform: lowercase;
+    }
+
+    .map-popup-loader {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 0 5px;
+      display: inline-block;
+      border: 3px solid $ecstasy;
+      border-top-color: transparent;
+      border-bottom-color: transparent;
+      border-radius: 50%;
+      -webkit-animation: rotate 1s ease-in-out infinite;
+      -moz-animation: rotate 1s ease-in-out infinite;
+      -o-animation: rotate 1s ease-in-out infinite;
+      animation: rotate 1s ease-in-out infinite;
+    }
+  }
 }

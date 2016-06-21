@@ -36,10 +36,10 @@
                           if (feature.geometry.type == 'Point') {
 
                             // Sends argument (listing id) and loads view block with listing short data.
-                            layer.bindPopup('Loading...');
+                            layer.bindPopup('Loading..');
                             layer.on({
                               click: function () {
-                                console.log(feature.id);
+                                // console.log(feature.id);
                                 $.ajax({
                                   type: 'POST',
                                   url: '/build-point-popup',
@@ -47,10 +47,10 @@
                                     'pointListingId': feature.id
                                   },
                                   beforeSend: function() {
-                                    layer.setPopupContent('<span class="popup-loader"></span>');
+                                    layer.setPopupContent('<span class="map-popup-loader"></span>');
                                   },
                                   success: function (data) {
-                                    layer.setPopupContent(data);
+                                      layer.setPopupContent(data);
                                   }
                                 });
                               }
@@ -70,8 +70,7 @@
                                     });
 
                                     layer.selected = true;
-
-                                    if (layer._spiderLeg === undefined) {
+                                    if (layer._spiderLeg === undefined && !layer.hasOwnProperty('_icon')) {
                                         layer.setStyle({
                                             color: "#FF5000"
                                         });
@@ -96,9 +95,12 @@
                                     });
 
                                     layer.selected = false;
-                                    layer.setStyle({
-                                        color: "#B9760B"
-                                    });
+
+                                    if (!layer.hasOwnProperty('_icon')) {
+                                        layer.setStyle({
+                                            color: "#B9760B"
+                                        });
+                                    }
                                 }
                             }
                         });
