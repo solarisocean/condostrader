@@ -83,6 +83,11 @@
 
     img {
       width: 87%;
+      cursor: pointer;
+
+      &:hover {
+        opacity: .8;
+      }
     }
 
     .swiper-scrollbar {
@@ -237,15 +242,6 @@
           text-transform: uppercase;
           margin-right: 3px;
         }
-      }
-
-      .views-field-field-rltr--torcond {
-        float: left;
-        width: 75%;
-      }
-
-      .views-field-field-ml-num--torcond {
-        float: right;
       }
     }
   }
