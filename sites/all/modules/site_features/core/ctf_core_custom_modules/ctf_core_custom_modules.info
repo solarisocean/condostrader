@@ -33,6 +33,7 @@ dependencies[] = ctf_views_homepage_view_blocks
 dependencies[] = ctf_views_map
 dependencies[] = ctf_views_nearby_listings
 dependencies[] = ctf_views_neighbourhoods_taxonomy_map
+dependencies[] = ctf_views_popup_content_for_point_on_map
 dependencies[] = ctf_views_result_page
 dependencies[] = ctf_views_search_results_ctrader
 dependencies[] = ctf_views_single_condo_view
