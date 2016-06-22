@@ -339,7 +339,7 @@ function large_xml_import_finished($success, $results, $operations) {
 function ctrader_mls_field_attach_presave($entity_type, $entity) {
   switch ($entity_type) {
     case DREALTY_ENTITY_TYPE:
-      if ($entity->type == TORONTO_CONDO) {
+      if ($entity->type == TORONTO_CONDO || $entity->type == TORONTO_BUILDING) {
         if (isset($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value']) && strpos($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'], ', Canada') === FALSE) {
           if (empty($entity->field_test_geofilld)) {
             if (isset($entity->field_municipality__torcond[LANGUAGE_NONE][0]['value']) && $entity->field_municipality__torcond[LANGUAGE_NONE][0]['value'] != 'Toronto') {
@@ -424,7 +424,7 @@ function ctrader_mls_entity_presave($entity, $type) {
         }
 
         // Search listing point on neighbourhoods terms polygons and create reference.
-        if (TRUE) {
+        if (!isset($entity->field_city_region__torcond[LANGUAGE_NONE]) || empty($entity->field_city_region__torcond[LANGUAGE_NONE])) {
           if (!isset($_SESSION['neighbourhoods_terms_polygons_data'])) {
             $vid = taxonomy_vocabulary_machine_name_load('communities'); //Neighbourhoods vocabulary.
             $vid = $vid->vid;
@@ -515,13 +515,14 @@ function ctrader_mls_entity_presave($entity, $type) {
         // Sets images alt and removes title.
         if (!empty($entity->field_toronto_gallery[LANGUAGE_NONE])) {
           foreach ($entity->field_toronto_gallery[LANGUAGE_NONE] as $key => $value) {
-            $alt_mls_num = isset($entity->field_ml_num__torcond[LANGUAGE_NONE][0]['value']) ? 'MLS #' . $entity->field_ml_num__torcond[LANGUAGE_NONE][0]['value'] : '';
+            $alt_mls_num = isset($entity->field_ml_num__torcond[LANGUAGE_NONE][0]['value']) ? 'MLS #' . $entity->field_ml_num__torcond[LANGUAGE_NONE][0]['value'] . ',' : '';
+            $alt_street_num = isset($entity->field_st_num__torcond[LANGUAGE_NONE][0]['value']) ? $entity->field_st_num__torcond['und'][0]['value'] : '';
             $alt_street = isset($entity->field_st__torcond[LANGUAGE_NONE][0]['value']) ? ' ' . $entity->field_st__torcond[LANGUAGE_NONE][0]['value'] : ' ';
             $alt_street_sfx = isset($entity->field_st_sfx__torcond[LANGUAGE_NONE][0]['value']) ? ' ' . $entity->field_st_sfx__torcond[LANGUAGE_NONE][0]['value'] : ' ';
-            $alt_unit_num = isset($entity->field_unit_num__torcond[LANGUAGE_NONE][0]['value']) ? ' ' . $entity->field_unit_num__torcond[LANGUAGE_NONE][0]['value'] : ' ';
-            $alt_area = isset($entity->field_area__torcond[LANGUAGE_NONE][0]['value']) ? ' ' . $entity->field_area__torcond[LANGUAGE_NONE][0]['value'] : '';
+            $alt_unit_num = isset($entity->field_unit_num__torcond[LANGUAGE_NONE][0]['value']) ? ', #' . $entity->field_unit_num__torcond[LANGUAGE_NONE][0]['value'] : ' ';
+            $alt_area = isset($entity->field_area__torcond[LANGUAGE_NONE][0]['value']) ? ', ' . $entity->field_area__torcond[LANGUAGE_NONE][0]['value'] : '';
 
-            $entity->field_toronto_gallery[LANGUAGE_NONE][$key]['alt'] = $alt_mls_num . $alt_street . $alt_street_sfx . $alt_unit_num . $alt_area;
+            $entity->field_toronto_gallery[LANGUAGE_NONE][$key]['alt'] = $alt_mls_num . $alt_street_num . $alt_street . $alt_street_sfx . $alt_unit_num . $alt_area;
             $entity->field_toronto_gallery[LANGUAGE_NONE][$key]['title'] = '';
           }
         }

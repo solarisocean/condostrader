@@ -237,3 +237,103 @@ function ctrader_map_update_7003(&$sandbox) {
   // In case of an error, simply throw an exception with an error message.
   throw new DrupalUpdateException('Something went wrong.');
 }
+
+
+/**
+ * Deletes buildings with bad full address field value (without zip, area, etc).
+ */
+function ctrader_mls_update_7004(&$sandbox) {
+  $listings_per_pass = 10;
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['current_id'] = 0;
+    $sandbox['max'] = db_select('field_data_field_address_full__torcond', 'fa')
+      ->fields('fa', array('entity_id'))
+      ->condition('bundle', 'toronto_building', '=')
+      ->condition('field_address_full__torcond_value', '%, Ontario%', 'NOT LIKE')
+      ->execute()
+      ->rowCount();
+    db_truncate('cache_geocoder')->execute();
+  }
+
+  $records = db_select('field_data_field_address_full__torcond', 'fa')
+    ->fields('fa', array('entity_id'))
+    ->condition('entity_id', $sandbox['current_id'], '>')
+    ->condition('bundle', 'toronto_building', '=')
+    ->condition('field_address_full__torcond_value', '%, Ontario%', 'NOT LIKE')
+    ->range(0, $listings_per_pass)
+    ->orderBy('entity_id')
+    ->execute()
+    ->fetchCol();
+
+  if (!empty($records)) {
+    $entities = entity_load(DREALTY_ENTITY_TYPE, array($records));
+    foreach ($entities as $entity) {
+      $entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'] .= ', Canada';
+      $entity->save();
+    }
+    $sandbox['current_id'] = end($records);
+    $sandbox['progress'] += count($records);
+    $sandbox['#finished'] = $sandbox['progress'] / $sandbox['max'];
+    if ($sandbox['#finished'] >= 1) {
+      $sandbox['#finished'] = 1;
+    }
+  }
+
+  // To display a message to the user when the update is completed, return it.
+  return t('Deleted buildings with bad full address field value (without zip, area, etc).');
+
+  // In case of an error, simply throw an exception with an error message.
+  throw new DrupalUpdateException('Something went wrong.');
+}
+
+
+/**
+ * Fixes full address field value. Adds community, county, zip code for better
+ * geocoding process.
+ */
+function ctrader_map_update_7005(&$sandbox) {
+  $listings_per_pass = 10;
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['current_id'] = 0;
+    $sandbox['max'] = db_select('field_data_field_address_full__torcond', 'fa')
+      ->fields('fa', array('entity_id'))
+      ->condition('bundle', 'toronto_condo', '=')
+      ->condition('field_address_full__torcond_value', '%, Ontario%', 'NOT LIKE')
+      ->execute()
+      ->rowCount();
+    db_truncate('cache_geocoder')->execute();
+  }
+
+  $records = db_select('field_data_field_address_full__torcond', 'fa')
+    ->fields('fa', array('entity_id'))
+    ->condition('entity_id', $sandbox['current_id'], '>')
+    ->condition('bundle', 'toronto_condo', '=')
+    ->condition('field_address_full__torcond_value', '%, Ontario%', 'NOT LIKE')
+    ->range(0, $listings_per_pass)
+    ->orderBy('entity_id')
+    ->execute()
+    ->fetchCol();
+
+  if (!empty($records)) {
+    $entities = entity_load(DREALTY_ENTITY_TYPE, array($records));
+    foreach ($entities as $entity) {
+      /* @see ctrader_mls_field_attach_presave() */
+      $entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'] .= ', Canada';
+      $entity->save();
+    }
+    $sandbox['current_id'] = end($records);
+    $sandbox['progress'] += count($records);
+    $sandbox['#finished'] = $sandbox['progress'] / $sandbox['max'];
+    if ($sandbox['#finished'] >= 1) {
+      $sandbox['#finished'] = 1;
+    }
+  }
+
+  // To display a message to the user when the update is completed, return it.
+  return t('Fixed full address field value. Added community, county, zip code for better geocoding process.');
+
+  // In case of an error, simply throw an exception with an error message.
+  throw new DrupalUpdateException('Something went wrong.');
+}
