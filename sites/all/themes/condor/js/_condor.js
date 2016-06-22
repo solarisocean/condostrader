@@ -99,43 +99,41 @@
     Drupal.behaviors.scrollBar = {
         attach: function (context, settings) {
 
-            $('body').once(function() {
-                $('.view-lowest-price-block .view-content, .view-highest-price-block .view-content, .view-most-viewed-block .view-content').mCustomScrollbar({
-                    setHeight: "404px",
-                    theme: "inset-2",
-                    callbacks: {
-                        onTotalScroll:function(){
-                            var nextPage = $(this).parent().find('.item-list .pager-next a').attr('href'),
-                loadedBlockSelector =  '.' + $(this).parent().prop("classList")[4],
-                             loadedBlock = loadedBlockSelector + ' .view-content .views-row',
-                                       pager = loadedBlockSelector + ' .item-list .pager',
-                                      loader = loadedBlockSelector + ' .view-content',
-                                    scroller = $(this);
+            $('.view-lowest-price-block .view-content, .view-highest-price-block .view-content, .view-most-viewed-block .view-content').mCustomScrollbar({
+                setHeight: "404px",
+                theme: "inset-2",
+                callbacks: {
+                    onTotalScroll:function(){
+                        var nextPage = $(this).parent().find('.item-list .pager-next a').attr('href'),
+            loadedBlockSelector =  '.' + $(this).parent().prop("classList")[4],
+                         loadedBlock = loadedBlockSelector + ' .view-content .views-row',
+                                   pager = loadedBlockSelector + ' .item-list .pager',
+                                  loader = loadedBlockSelector + ' .view-content',
+                                scroller = $(this);
 
-                            $.ajax({
-                                url: nextPage,
-                                context: context,
-                                beforeSend: function() {
-                                    $(loader).append('<div class="auto-scroll-loader" style="margin-bottom: 50px"></div>');
-                                },
-                                success: function () {
-                                    $('.auto-scroll-loader').remove();
-                                }
-                            }).done(function(data) {
-                                $(data).find(loadedBlock).appendTo(loadedBlockSelector + ' .mCSB_container').hide().fadeIn("slow");
-                                $(pager).replaceWith($(data).find(pager));
-                                setTimeout(function() {
-                                    scroller.mCustomScrollbar('scrollTo','-=350');
-                                }, 10);
-                            });
-                        }
+                        $.ajax({
+                            url: nextPage,
+                            context: context,
+                            beforeSend: function() {
+                                $(loader).append('<div class="auto-scroll-loader" style="margin-bottom: 50px"></div>');
+                            },
+                            success: function () {
+                                $('.auto-scroll-loader').remove();
+                            }
+                        }).done(function(data) {
+                            $(data).find(loadedBlock).appendTo(loadedBlockSelector + ' .mCSB_container').hide().fadeIn("slow");
+                            $(pager).replaceWith($(data).find(pager));
+                            setTimeout(function() {
+                                scroller.mCustomScrollbar('scrollTo','-=350');
+                            }, 10);
+                        });
                     }
-                });
+                }
+            });
 
-                $('.page-search-results .view-search-results-ctrader .view-content').mCustomScrollbar({
-                    setHeight: "675px",
-                    theme: "inset-2"
-                });
+            $('.page-search-results .view-search-results-ctrader .view-content').mCustomScrollbar({
+                setHeight: "675px",
+                theme: "inset-2"
             });
 
         }
@@ -147,64 +145,63 @@
     Drupal.behaviors.facetFix = {
         attach: function (context, settings) {
 
-            $('body').once(function() {
-                var radioCheck = function(elem){
-                    elem.each(function() {
-                        if($(this).attr('checked')) {
-                            $(this).parent().addClass('active-region-facet');
-                        }
-                    });
-
-                    elem.parent().find('a').on('click', function(e) {
-                        e.preventDefault();
-                        $(this).closest('ul').removeClass('facetapi-disabled');
-                        $(this).parent().removeClass('facetapi-inactive');
-                        $(this).parent().find('input:checkbox').attr('disabled', false);
-                        elem.parent().removeClass('active-region-facet');
-                        $(this).parent().addClass('active-region-facet').find('input:checkbox').trigger('click');
-                    });
-
-                    elem.on('change', function() {
-                        elem.not(this).prop('checked', false);
-                    });
-
-                };
-
-                radioCheck($('.facetapi-facet-field-br--torcond input:checkbox'));
-                radioCheck($('.facetapi-facet-field-s-r--torcond input:checkbox'));
-
-                var checkboxes = [
-                    '.facetapi-facet-field-locker--torcond input:checkbox',
-                    '.facetapi-facet-field-prkg-inc--torcond input:checkbox',
-                    '.facetapi-facet-field-pets--torcond input:checkbox'
-                ];
-
-                for (var i = 0; i < checkboxes.length; i++) {
-                    if ($(checkboxes[i]).attr('checked')) {
-                        //Added class to checked checkbox.
-                        $(checkboxes[i]).parent().find('a').addClass('checked-facet');
+            var radioCheck = function(elem){
+                elem.each(function() {
+                    if($(this).attr('checked')) {
+                        $(this).parent().addClass('active-region-facet');
                     }
-                }
+                });
 
-                $('.facetapi-facet-field-locker--torcond a, .facetapi-facet-field-prkg-inc--torcond a, .facetapi-facet-field-pets--torcond a').on('click', function (e) {
-                    var chbxInput = $(this).parent().find('input');
-
+                elem.parent().find('a').on('click', function(e) {
                     e.preventDefault();
-                    var _this = $(this);
-                    $(this).closest('.facetapi-facetapi-checkbox-links').removeClass('facetapi-disabled');
-                    chbxInput.attr('disabled', false).parent();
-                    if (chbxInput.attr('checked')) {
-                        _this.removeClass('checked-facet');
-                        chbxInput.trigger('click');
-                    }
-                    else {
-                        _this.addClass('checked-facet');
-                        chbxInput.trigger('click');
-                    }
+                    $(this).closest('ul').removeClass('facetapi-disabled');
+                    $(this).parent().removeClass('facetapi-inactive');
+                    $(this).parent().find('input:checkbox').attr('disabled', false);
+                    elem.parent().removeClass('active-region-facet');
+                    $(this).parent().addClass('active-region-facet').find('input:checkbox').trigger('click');
                 });
-                $('.facetapi-facet-field-style--torcond select, .views-widget-sort-sort_bef_combine .form-select').chosen({
-                    "disable_search": true
+
+                elem.on('change', function() {
+                    elem.not(this).prop('checked', false);
                 });
+
+            };
+
+            radioCheck($('.facetapi-facet-field-br--torcond input:checkbox'));
+            radioCheck($('.facetapi-facet-field-s-r--torcond input:checkbox'));
+
+            var checkboxes = [
+                '.facetapi-facet-field-locker--torcond input:checkbox',
+                '.facetapi-facet-field-prkg-inc--torcond input:checkbox',
+                '.facetapi-facet-field-pets--torcond input:checkbox'
+            ];
+
+            for (var i = 0; i < checkboxes.length; i++) {
+                if ($(checkboxes[i]).attr('checked')) {
+                    //Added class to checked checkbox.
+                    $(checkboxes[i]).parent().find('a').addClass('checked-facet');
+                }
+            }
+
+            $('.single-checkbox-facet').live('click', function (e) {
+                var chbxInput = $(this).parent().find('input');
+
+                e.preventDefault();
+                e.stopPropagation();
+                var $this = $(this);
+                $(this).closest('.facetapi-facetapi-checkbox-links').removeClass('facetapi-disabled');
+                chbxInput.attr('disabled', false).parent();
+                if (chbxInput.attr('checked')) {
+                    $this.removeClass('checked-facet');
+                }
+                else {
+                    $this.addClass('checked-facet');
+                }
+                chbxInput.trigger('click');
+            });
+
+            $('.facetapi-facet-field-style--torcond select, .views-widget-sort-sort_bef_combine .form-select').chosen({
+                "disable_search": true
             });
 
             //***********************************************************************//
@@ -274,7 +271,7 @@
 
                 var _facetCkeckboxToInput = function(facet, input) {
                     var _input =  form + " input[name='" + input + "']";
-                    $(facet + ' a').on('click', function() {
+                    $(facet + ' a').live('click', function() {
                         if ($(_input).val() == 1) {
                             $(_input).val(0);
                         } else {
@@ -294,7 +291,6 @@
                 $('.facetapi-facet-field-br--torcond a').on('click', function() {
                     $(form + ' input[name="beds"]').val($(this).text());
                 });
-
             }
 
             $('.find-condo-tab').on('click', function(e) {
@@ -319,7 +315,6 @@
 
                 button.on('click', function() {
                     var nextPage = $(block + ' .pager-next a').attr('href');
-
                     $.ajax({
                         url: nextPage,
                         context: context,

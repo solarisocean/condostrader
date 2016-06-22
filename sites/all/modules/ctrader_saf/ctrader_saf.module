@@ -292,7 +292,7 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
       foreach ($build as $key => $item) {
         switch ($key) {
           case $replace_this_facet:
-            $build[$replace_this_facet]['#markup'] = l(t('Require Locker'), '');
+            $build[$replace_this_facet]['#markup'] = l(t('Require Locker'), '', array('attributes' => array('class' => array('single-checkbox-facet'))));
             $build[$replace_this_facet]['#html'] = TRUE;
             $build[$replace_this_facet]['#indexed_value'] = t('Require Locker');
             break;
@@ -313,7 +313,7 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
       foreach ($build as $key => $item) {
         switch ($key) {
           case $replace_this_facet:
-            $build[$replace_this_facet]['#markup'] = l(t('Pets Allowed'), '');
+            $build[$replace_this_facet]['#markup'] = l(t('Pets Allowed'), '', array('attributes' => array('class' => array('single-checkbox-facet'))));
             $build[$replace_this_facet]['#html'] = TRUE;
             break;
           case 'N':
@@ -355,7 +355,7 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
       break;
     case 'field_prkg_inc__torcond':
       unset($build['N']);
-      $build['Y']['#markup'] = l(t('Require Parking'), '');
+      $build['Y']['#markup'] = l(t('Require Parking'), '', array('attributes' => array('class' => array('single-checkbox-facet'))));
       $build['Y']['#html'] = TRUE;
       break;
     case 'field_s_r__torcond':
