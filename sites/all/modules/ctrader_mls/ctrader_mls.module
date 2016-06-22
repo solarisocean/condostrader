@@ -362,7 +362,7 @@ function ctrader_mls_field_attach_presave($entity_type, $entity) {
             $entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'] = $house_number . $street_name . $street_suffix . $street_direction . ', ' . $community . $state . $zip . $country;
           }
         }
-        else {
+        elseif (!isset($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value']) && strpos($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'], ', Canada') === FALSE){
           // 2320 Gerrard St E, Toronto, ON M4E 2E1, Canada
           // House Number, Street Name, Street Suffix, Street Direction, City, State, Zip, Country
           $house_number = isset($entity->field_st_num__torcond[LANGUAGE_NONE][0]['value']) ? $entity->field_st_num__torcond[LANGUAGE_NONE][0]['value'] : '';
