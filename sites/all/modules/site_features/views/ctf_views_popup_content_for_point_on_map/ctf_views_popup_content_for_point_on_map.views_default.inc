@@ -179,7 +179,7 @@ function ctf_views_popup_content_for_point_on_map_views_default_views() {
   $handler->display->display_options['fields']['field_apt_num_torcond']['field'] = 'field_apt_num_torcond';
   $handler->display->display_options['fields']['field_apt_num_torcond']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_apt_num_torcond']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_apt_num_torcond']['alter']['text'] = '#[field_apt_num_torcond-value]';
+  $handler->display->display_options['fields']['field_apt_num_torcond']['alter']['text'] = '#[field_apt_num_torcond-value], ';
   $handler->display->display_options['fields']['field_apt_num_torcond']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_apt_num_torcond']['empty_zero'] = TRUE;
   /* Field: Indexed Drealty Listing: Area */
@@ -196,7 +196,7 @@ function ctf_views_popup_content_for_point_on_map_views_default_views() {
   $handler->display->display_options['fields']['field_municipality_torcond']['field'] = 'field_municipality_torcond';
   $handler->display->display_options['fields']['field_municipality_torcond']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_municipality_torcond']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_municipality_torcond']['alter']['text'] = ', [field_municipality_torcond]';
+  $handler->display->display_options['fields']['field_municipality_torcond']['alter']['text'] = '[field_municipality_torcond]';
   /* Field: Indexed Drealty Listing: County */
   $handler->display->display_options['fields']['field_county_torcond']['id'] = 'field_county_torcond';
   $handler->display->display_options['fields']['field_county_torcond']['table'] = 'search_api_index_toronto_condo_index';
