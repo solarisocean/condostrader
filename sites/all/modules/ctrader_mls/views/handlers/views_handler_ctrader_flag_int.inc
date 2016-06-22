@@ -42,8 +42,8 @@ class views_handler_ctrader_flag_int extends views_handler_field {
       return $flag_link;
     }
     elseif (user_is_anonymous()) {
-//      return '<a class="colorbox-inline flag-anonymous" href="?width=500&height=500&inline=true#user-login-form">Anonymous</a>';
-      return NULL;
+      return l('', '/user/register');
+//      return NULL;
     }
     else {
       return $flag_link;
