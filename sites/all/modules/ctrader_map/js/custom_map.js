@@ -59,52 +59,52 @@
                           }
                           else {
                             layer.bindLabel(feature.properties.popupContent, labelOptions);
+                            layer.on({
+                                  click: function () {
+                                      if (!layer.selected) {
+                                          inputRes.val(function(i, val) {
+                                              return val + (!val ? '' : ', ') + 'tid' + layer.feature.id;
+                                          });
+
+                                          layer.selected = true;
+                                          if (layer._spiderLeg === undefined && !layer.hasOwnProperty('_icon')) {
+                                              layer.setStyle({
+                                                  color: "#FF5000"
+                                              });
+                                          }
+                                      } else {
+                                          String.prototype.replaceBetween = function(start, end, what) {
+                                              return this.substring(0, start) + what + this.substring(end);
+                                          };
+
+                                          inputRes.val(function(i, val){
+                                              var regId = 'tid' + layer.feature.id;
+                                              var start = val.search(regId);
+                                              var end = val.search(regId) +regId.length;
+                                              if (val.charAt(start - 2) === ',') {
+                                                  return val.replaceBetween(start - 2, end, '');
+                                              } else if (val.charAt(end) == ',') {
+                                                  return val.replaceBetween(start, end +2, '');
+                                              } else {
+                                                  return val.replaceBetween(start, end, '');
+                                              }
+
+                                          });
+
+                                          layer.selected = false;
+
+                                          if (!layer.hasOwnProperty('_icon')) {
+                                              layer.setStyle({
+                                                  color: "#B9760B"
+                                              });
+                                          }
+                                      }
+                                  }
+                              });
+
                           }
                         }
 
-                        layer.on({
-                            click: function () {
-                                if (!layer.selected) {
-                                    inputRes.val(function(i, val) {
-                                        return val + (!val ? '' : ', ') + 'tid' + layer.feature.id;
-                                    });
-
-                                    layer.selected = true;
-                                    if (layer._spiderLeg === undefined && !layer.hasOwnProperty('_icon')) {
-                                        layer.setStyle({
-                                            color: "#FF5000"
-                                        });
-                                    }
-                                } else {
-                                    String.prototype.replaceBetween = function(start, end, what) {
-                                        return this.substring(0, start) + what + this.substring(end);
-                                    };
-
-                                    inputRes.val(function(i, val){
-                                        var regId = 'tid' + layer.feature.id;
-                                        var start = val.search(regId);
-                                        var end = val.search(regId) +regId.length;
-                                        if (val.charAt(start - 2) === ',') {
-                                            return val.replaceBetween(start - 2, end, '');
-                                        } else if (val.charAt(end) == ',') {
-                                            return val.replaceBetween(start, end +2, '');
-                                        } else {
-                                            return val.replaceBetween(start, end, '');
-                                        }
-
-                                    });
-
-                                    layer.selected = false;
-
-                                    if (!layer.hasOwnProperty('_icon')) {
-                                        layer.setStyle({
-                                            color: "#B9760B"
-                                        });
-                                    }
-                                }
-                            }
-                        });
-                        
                         if (settings.hasOwnProperty('chosenNeighbourhoodsTermIds')) {
                             for (var i = 0; i < settings.chosenNeighbourhoodsTermIds.length; i++) {
                                 if (feature.id === settings.chosenNeighbourhoodsTermIds[i]) {

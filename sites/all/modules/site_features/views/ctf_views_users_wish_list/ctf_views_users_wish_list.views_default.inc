@@ -139,11 +139,11 @@ function ctf_views_users_wish_list_views_default_views() {
   $handler->display->display_options['fields']['field_sqft__torcond']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_sqft__torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_sqft__torcond']['alter']['text'] = '[field_sqft__torcond] sqft';
-  /* Field: Drealty Listing: Unit_num */
-  $handler->display->display_options['fields']['field_unit_num__torcond']['id'] = 'field_unit_num__torcond';
-  $handler->display->display_options['fields']['field_unit_num__torcond']['table'] = 'field_data_field_unit_num__torcond';
-  $handler->display->display_options['fields']['field_unit_num__torcond']['field'] = 'field_unit_num__torcond';
-  $handler->display->display_options['fields']['field_unit_num__torcond']['exclude'] = TRUE;
+  /* Field: Drealty Listing: apt_num */
+  $handler->display->display_options['fields']['field_apt_num__torcond']['id'] = 'field_apt_num__torcond';
+  $handler->display->display_options['fields']['field_apt_num__torcond']['table'] = 'field_data_field_apt_num__torcond';
+  $handler->display->display_options['fields']['field_apt_num__torcond']['field'] = 'field_apt_num__torcond';
+  $handler->display->display_options['fields']['field_apt_num__torcond']['exclude'] = TRUE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
