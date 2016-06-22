@@ -242,7 +242,7 @@ function ctrader_map_update_7003(&$sandbox) {
 /**
  * Deletes buildings with bad full address field value (without zip, area, etc).
  */
-function ctrader_mls_update_7004(&$sandbox) {
+function ctrader_map_update_7004(&$sandbox) {
   $listings_per_pass = 10;
   if (!isset($sandbox['progress'])) {
     $sandbox['progress'] = 0;
