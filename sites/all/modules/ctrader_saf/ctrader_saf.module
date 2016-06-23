@@ -12,12 +12,6 @@ function ctrader_saf_init() {
   drupal_add_js(drupal_get_path('module', 'ctrader_saf') . '/js/nouislider.min.js');
 
   drupal_add_js(drupal_get_path('module', 'ctrader_saf') . '/js/rewritten_search_api_ranges.js');
-
-  if (isset($_SESSION['stored_search_options']) || isset($_SESSION['search_link_calculate'])) {
-    unset($_SESSION['neighbourhood_json']);
-  }
-  unset($_SESSION['stored_search_options']);
-  unset($_SESSION['search_link_calculate']);
 }
 
 
@@ -255,6 +249,35 @@ function ctrader_saf_search_api_solr_query_alter(array &$call_args, SearchApiQue
             }
           }
         }
+
+        // Change facet query for field 'field_style__torcond'.
+        if (!empty($f_item[0]) && is_array($f_item[0]) && $f_item[0][0] == 'field_style__torcond') {
+          if (!empty($f_item[0][1])) {
+            $f_item = $f_item[0][1];
+            foreach ($call_args['params']['fq'] as $key => $value) {
+              if (stripos($value, '{!tag=facet:field_style__torcond}') !== FALSE) {
+                $condo_styles = array($f_item);
+                switch ($f_item) {
+                  case 'Townhouse':
+                    $condo_styles = array(
+                      '2-Storey',
+                      '3-Storey',
+                      'Stacked Townhse',
+                      'Stacked Townhouse',
+                      'Bungalow',
+                      'Bungaloft',
+                    );
+                    break;
+                  case 'Apartment':
+                    $condo_styles = array('Apartment', 'Multi-Level');
+                    break;
+                }
+                $condo_styles = implode(' OR ', $condo_styles);
+                $call_args['params']['fq'][$key] = "{!tag=facet:field_style__torcond}ss_field_style__torcond:({$condo_styles})";
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -378,6 +401,82 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
       break;
     case 'field_style__torcond':
 
+      /*
+        - Townhouse (2 Storey, 3-Storey, Stacked Townhouse, Bungalow, Bungaloft)
+        - Loft
+        - Bachelor/Studio
+        - Apartment (Apartment, Multi-level)
+        - Parking Spot / Other (Other)
+      */
+
+      foreach ($build as $key => $value) {
+        switch ($key) {
+          case '2-Storey':
+          case '3-Storey':
+          case 'Stacked Townhse':
+          case 'Stacked Townhouse':
+          case 'Bungalow':
+          case 'Bungaloft':
+            if(isset($build['2-Storey'])) {
+              $build['2-Storey']['#markup'] = t('Townhouse');
+              if ($key != '2-Storey') {
+                $build['2-Storey']['#indexed_value'] = 'Townhouse';
+                unset($build[$key]);
+              }
+            }
+            elseif (isset($build['3-Storey'])) {
+              $build['2-Storey']['#markup'] = t('Townhouse');
+              if ($key != '3-Storey') {
+                $build['3-Storey']['#indexed_value'] = 'Townhouse';
+                unset($build[$key]);
+              }
+            }
+            elseif (isset($build['Stacked Townhse'])) {
+              $build['2-Storey']['#markup'] = t('Townhouse');
+              if ($key != 'Stacked Townhse') {
+                $build['Stacked Townhse']['#indexed_value'] = 'Townhouse';
+                unset($build[$key]);
+              }
+            }
+            elseif (isset($build['Stacked Townhouse'])) {
+              $build['2-Storey']['#markup'] = t('Townhouse');
+              if ($key != 'Stacked Townhouse') {
+                $build['Stacked Townhouse']['#indexed_value'] = 'Townhouse';
+                unset($build[$key]);
+              }
+            }
+            elseif (isset($build['Bungalow'])) {
+              $build['2-Storey']['#markup'] = t('Townhouse');
+              if ($key != 'Bungalow') {
+                $build['Bungalow']['#indexed_value'] = 'Townhouse';
+                unset($build[$key]);
+              }
+            }
+            elseif (isset($build['Bungaloft'])) {
+              $build['2-Storey']['#markup'] = t('Townhouse');
+              if ($key != 'Bungaloft') {
+                $build['Bungaloft']['#indexed_value'] = 'Townhouse';
+                unset($build[$key]);
+              }
+            }
+            break;
+          case 'Apartment':
+          case 'Multi-Level':
+            if (isset($build['Apartment'])) {
+              if (isset($build['Multi-Level'])) {
+                unset($build['Multi-Level']);
+              }
+            }
+            elseif (isset($build['Multi-Level']) && !isset($build['Apartment'])) {
+              $build['Multi-Level']['#markup'] = t('Apartment');
+              $build['Multi-Level']['#indexed_value'] = 'Apartment';
+            }
+            break;
+          case 'Other':
+            $build['Other']['#markup'] = t('Parking Spot / Other');
+            break;
+        }
+      }
       break;
   }
 }

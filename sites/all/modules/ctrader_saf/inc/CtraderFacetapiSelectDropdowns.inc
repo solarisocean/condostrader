@@ -179,7 +179,11 @@ class CtraderFacetapiSelectDropdowns extends FacetapiWidgetLinks {
         ));
       }
     }
-
+    if ($this->key == 'field_style__torcond') {
+      if (isset($variables['options']['reset'])) {
+        unset($variables['options']['reset']);
+      }
+    }
     return $variables;
   }
 
