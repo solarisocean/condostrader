@@ -25,6 +25,7 @@ function nearby_listings_content_type_render($subtype, $conf, $args, $context) {
   $block->title = '';
 
   if (drupal_is_front_page()) {
+    $view_display = 'block_1';
     $current_place = '';
     $current_place .= isset($_SESSION['user_geoloc_detect']['location']['city']) ? $_SESSION['user_geoloc_detect']['location']['city'] : '';
     $current_place .= isset($_SESSION['user_geoloc_detect']['location']['region']) ? ' ' . $_SESSION['user_geoloc_detect']['location']['region'] : '';
@@ -38,19 +39,36 @@ function nearby_listings_content_type_render($subtype, $conf, $args, $context) {
     else {
       $latlon = NULL;
     }
+
+    $view = views_get_view($view_machine_name);
+    $view->init();
+    $view->set_display($view_display);
+    $view->set_arguments(array($latlon,));
+    $view_output = $view->preview();
   }
   else {
+    $view_display = 'block_2';
     $listing_id = $args[0];
     $entity = entity_load_single(DREALTY_ENTITY_TYPE, $listing_id);
     $latlon = $entity->field_test_geofilld[LANGUAGE_NONE][0]['lat'] . ',' . $entity->field_test_geofilld[LANGUAGE_NONE][0]['lon'];
     $block->title = t('<span>Comparable</span> nearby listings');
+
+    $view = views_get_view($view_machine_name);
+    $view->init();
+
+    // Sets filters values.
+    $view->display['block_2']->display_options['filters']['field_s_r_torcond']['value'] = $entity->field_s_r__torcond[LANGUAGE_NONE][0]['value'];
+    $view->display['block_2']->display_options['filters']['field_br_torcond']['value'] = round($entity->field_br__torcond[LANGUAGE_NONE][0]['value']);
+    $view->display['block_2']->display_options['filters']['field_lp_dol_torcond']['value'] = round($entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value']) + 10000;
+    $view->display['block_2']->display_options['filters']['field_lp_dol_torcond_1']['value'] = round($entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value']) - 10000;
+    $view->display['block_2']->display_options['filters']['field_pets_torcond']['value'] = $entity->field_pets__torcond[LANGUAGE_NONE][0]['value'];
+    $view->display['block_2']->display_options['filters']['field_prkg_inc_torcond']['value'] = $entity->field_prkg_inc__torcond[LANGUAGE_NONE][0]['value'];
+
+    $view->set_display($view_display);
+    $view->set_arguments(array($latlon,));
+    $view_output = $view->preview();
   }
 
-  $view = views_get_view($view_machine_name);
-  $view->init();
-  $view->set_display($view_display);
-  $view->set_arguments(array($latlon,));
-  $view_output = $view->preview();
   if (empty($view->result)) {
     $view_title = '';
     return NULL;
