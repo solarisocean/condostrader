@@ -6,7 +6,37 @@
                     var slider = $(this).get(0),
                         facet = $(this).parent(),
                         range_all_sliders,
-                        startValue;
+                        startValue,
+                        form = '#-ctrader-saf-search-button-form',
+                        priceMin = $(form + ' input[name="price_min"]'),
+                        priceMax = $(form + ' input[name="price_max"]'),
+                        sizeMin = $(form + ' input[name="size_min"]'),
+                        sizeMax = $(form + ' input[name="size_max"]');
+
+                    //Function to divide number in thousand.
+                    var numberThousand = function (x) {
+                        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    };
+
+                    //Function for update values on slider change.
+                    var _updateValues = function(min, max, onSlide) {
+                        if (facet.attr('id') == 'search-api-ranges-field_lp_dol__torcond') {
+                            facet.find('.facet-helper .min').text(numberThousand(min));
+                            facet.find('.facet-helper .max').text(numberThousand(max));
+                            if (arguments[2] == true) {
+                                priceMin.val(min);
+                                priceMax.val(max);
+                            }
+                        }
+                        else if (facet.attr('id') == 'search-api-ranges-field_sqft_range_max__torcond') {
+                            facet.find('.facet-helper .min').text(numberThousand(min));
+                            facet.find('.facet-helper .max').text(numberThousand(max));
+                            if (arguments[2] == true) {
+                                sizeMin.val(min);
+                                sizeMax.val(max);
+                            }
+                        }
+                    };
 
                     switch (facet.attr('id')) {
                         case 'search-api-ranges-field_lp_dol__torcond':
@@ -29,6 +59,7 @@
                             break;
                     }
 
+                    //Initialize sliders.
                     noUiSlider.create(slider, {
                         start: startValue,
                         behaviour: 'drag-tap',
@@ -36,29 +67,30 @@
                         range: range_all_sliders
                     });
 
+                    //Set sliders positions when value not 0.
+                    if (priceMin.val() != '' && priceMax.val() != '') {
+                        if (slider.parentElement.id == 'search-api-ranges-field_lp_dol__torcond') {
+                            slider.noUiSlider.set([priceMin.val(), priceMax.val()]);
+                            $(slider).parent().find('.facet-helper .min').text(numberThousand(priceMin.val()));
+                            $(slider).parent().find('.facet-helper .max').text(numberThousand(priceMax.val()));
+                        }
+                    }
+
+                    if (sizeMin.val() != '' && sizeMax.val() != '') {
+                        if (slider.parentElement.id == 'search-api-ranges-field_sqft_range_max__torcond') {
+                            slider.noUiSlider.set([sizeMin.val(), sizeMax.val()]);
+                            $(slider).parent().find('.facet-helper .min').text(numberThousand(sizeMin.val()));
+                            $(slider).parent().find('.facet-helper .max').text(numberThousand(sizeMax.val()));
+                        }
+                    }
+
+                    //Update values on sliders change.
                     slider.noUiSlider.on('slide', function () {
-                        var form = '#-ctrader-saf-search-button-form',
-                            minVal = Math.round(slider.noUiSlider.get()[0]),
-                            maxVal = Math.round(slider.noUiSlider.get()[1]);
+                        minVal = Math.round(slider.noUiSlider.get()[0]),
+                        maxVal = Math.round(slider.noUiSlider.get()[1]);
 
-                        function numberThousand(x) {
-                            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        }
-
-                        if (facet.attr('id') == 'search-api-ranges-field_lp_dol__torcond') {
-                            facet.find('.facet-helper .min').text(numberThousand(minVal));
-                            facet.find('.facet-helper .max').text(numberThousand(maxVal));
-                            $(form + ' input[name="price_min"]').val(minVal);
-                            $(form + ' input[name="price_max"]').val(maxVal);
-                        }
-                        else if (facet.attr('id') == 'search-api-ranges-field_sqft_range_max__torcond') {
-                            facet.find('.facet-helper .min').text(numberThousand(minVal));
-                            facet.find('.facet-helper .max').text(numberThousand(maxVal));
-                            $(form + ' input[name="size_min"]').val(minVal);
-                            $(form + ' input[name="size_max"]').val(maxVal);
-                        }
+                        _updateValues(minVal, maxVal, true);
                     });
-
                 });
             });
         }
