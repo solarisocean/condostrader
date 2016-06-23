@@ -94,6 +94,15 @@ function condor_preprocess_page(&$variables) {
  * Implements template_preprocess_node.
  */
 function condor_preprocess_node(&$variables) {
+  if ($variables['type'] == 'blog_post') {
+    $variables['header_image'] = file_create_url($variables['field_blog_image'][0]['uri']);
+    $variables['submission_date'] = date('d F Y', $variables['created']);
+    if (!empty($variables['user']->name)) {
+      $variables['submission_author'] = $variables['user']->name;
+    } else {
+      $variables['submission_author'] =  $variables['user']->roles[1];
+    }
+  }
 }
 
 /**
