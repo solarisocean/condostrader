@@ -58,7 +58,7 @@ function ctf_pages_sell_a_condo_default_page_manager_pages() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-b06574b1-7ece-4320-a22b-af9e96d26562';
+    $pane->pid = 'new-a46f6c2a-2272-479d-9edc-8a7d821e8a75';
     $pane->panel = 'center';
     $pane->type = 'sell_condo';
     $pane->subtype = 'sell_condo';
@@ -73,9 +73,9 @@ function ctf_pages_sell_a_condo_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $pane->uuid = 'b06574b1-7ece-4320-a22b-af9e96d26562';
-    $display->content['new-b06574b1-7ece-4320-a22b-af9e96d26562'] = $pane;
-    $display->panels['center'][0] = 'new-b06574b1-7ece-4320-a22b-af9e96d26562';
+    $pane->uuid = 'a46f6c2a-2272-479d-9edc-8a7d821e8a75';
+    $display->content['new-a46f6c2a-2272-479d-9edc-8a7d821e8a75'] = $pane;
+    $display->panels['center'][0] = 'new-a46f6c2a-2272-479d-9edc-8a7d821e8a75';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
