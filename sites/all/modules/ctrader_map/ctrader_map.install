@@ -473,7 +473,7 @@ function ctrader_map_update_7007(&$sandbox) {
 /**
  * Resaves entities with default coordinates '43.760,-79.390'.
  */
-function ctrader_map_update_7008(&$sandbox) {
+function ctrader_map_update_7009(&$sandbox) {
   $listings_per_pass = 10;
   if (!isset($sandbox['progress'])) {
     $sandbox['progress'] = 0;
