@@ -688,7 +688,6 @@ function ctrader_mls_form_alter(&$form, &$form_state, $form_id) {
       foreach ($add_image_chunk_size_options as $key => $value) {
         $form['feed']['images']['image_chunk_size']['#options'][$key] = $value;
       }
-
       $add_query_chunk_size_options = array(
         15 => 15,
         30 => 30,
@@ -704,14 +703,12 @@ function ctrader_mls_form_alter(&$form, &$form_state, $form_id) {
       $form['field_buy_now_button']['#weight'] = '401';
       $form['field_buy_now_button'][LANGUAGE_NONE][0]['markup']['#markup'] = l(t('buy now'), drupal_get_path_alias() . "/buy");
       break;
-    case 'contact_us_form_entityform_edit_form':
-
-      break;
     case 'drealty_listing_edit_form':
       $form['actions']['delete']['#submit'][0] = '_ctrader_mls_drealty_listing_delete';
       break;
-    case 'entityform_type_form':
-
+    case 'taxonomy_manager_form':
+      drupal_set_message(t('Delete button disabled in ctrader_mls.module'), 'warning');
+      $form['delete']['#disabled'] = TRUE;
       break;
   }
 }
