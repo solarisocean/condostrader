@@ -53,3 +53,40 @@
     }
   }
 }
+
+.page-sell-a-condo {
+  .main {
+    max-width: 800px;
+    margin: 15px auto;
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+    padding: 0 15px;
+  }
+
+  input {
+    margin-bottom: 0;
+  }
+
+  #edit-submit {
+    margin: 30px auto;
+    display: block;
+
+    &:hover {
+      color: $white;
+    }
+
+    @extend %condo-more-button;
+  }
+}
+
+.page-eform-sell-a-condo-confirm {
+  .main {
+    text-align: center;
+    padding: 15rem 0;
+    background: $alabaster;
+
+    p {
+      font-size: 1.375rem;
+      text-transform: uppercase;
+    }
+  }
+}
