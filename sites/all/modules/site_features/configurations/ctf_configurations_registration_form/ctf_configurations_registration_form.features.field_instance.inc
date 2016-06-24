@@ -37,7 +37,7 @@ function ctf_configurations_registration_form_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 7,
+      'weight' => 10,
     ),
   );
 
@@ -53,7 +53,7 @@ function ctf_configurations_registration_form_field_default_field_instances() {
         'module' => 'phone',
         'settings' => array(),
         'type' => 'phone',
-        'weight' => 0,
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'user',
@@ -74,7 +74,7 @@ function ctf_configurations_registration_form_field_default_field_instances() {
       'module' => 'phone',
       'settings' => array(),
       'type' => 'phone_textfield',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -94,7 +94,7 @@ function ctf_configurations_registration_form_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 4,
+        'weight' => 6,
       ),
     ),
     'entity_type' => 'user',
@@ -111,7 +111,7 @@ function ctf_configurations_registration_form_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 8,
+      'weight' => 11,
     ),
   );
 
@@ -127,7 +127,7 @@ function ctf_configurations_registration_form_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'user',
@@ -145,7 +145,7 @@ function ctf_configurations_registration_form_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 3,
+      'weight' => 5,
     ),
   );
 
@@ -161,7 +161,7 @@ function ctf_configurations_registration_form_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 2,
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'user',
@@ -179,7 +179,7 @@ function ctf_configurations_registration_form_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 4,
+      'weight' => 6,
     ),
   );
 
@@ -195,7 +195,7 @@ function ctf_configurations_registration_form_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 3,
+        'weight' => 4,
       ),
     ),
     'entity_type' => 'user',
@@ -210,7 +210,7 @@ function ctf_configurations_registration_form_field_default_field_instances() {
       'module' => 'hs_taxonomy',
       'settings' => array(),
       'type' => 'taxonomy_hs',
-      'weight' => 0,
+      'weight' => 12,
     ),
   );
 

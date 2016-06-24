@@ -38,6 +38,7 @@
         };
 
         if ($(this).val() === 'label_0') {
+          console.log('buu');
           settings.mymapLayer.clearLayers().addData(settings.neighbourhoodsMapData);
           settings.mymap.fitBounds(settings.mymapLayer.getBounds());
         }
@@ -50,7 +51,7 @@
             },
             success: function(data){
               settings.mymapLayer.clearLayers();
-              settings.mymapLayer.addData(data).bindPopup(data.properties.popupContent).setStyle(neighbourhoodsStyle);
+              // settings.mymapLayer.addData(data).bindPopup(data.properties.popupContent).setStyle(neighbourhoodsStyle);
               settings.mymapLayer.on({
                 click: function() {
                   settings.mymapLayer.openPopup();
