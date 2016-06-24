@@ -83,15 +83,6 @@ function ctrader_register_form_user_register_form_alter(&$form, &$form_state) {
                       </div>";
 
   //Have created left and right containersto reaarange form items.
-  $form['sign_up_left'] = array(
-    '#type' => 'container',
-    '#attributes' => array(
-      'class' => array(
-        'sign_up_left',
-      ),
-    ),
-  );
-
   $form['sign_up_right'] = array(
     '#type' => 'container',
     '#attributes' => array(
@@ -105,44 +96,31 @@ function ctrader_register_form_user_register_form_alter(&$form, &$form_state) {
   unset($form['field_mobile_phone_number'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder']);
 
   //Have added iems to containers.
-  $form['sign_up_left']['user_first_name'] = $form['field_user_first_name'];
-  $form['sign_up_left']['user_last_name'] = $form['field_user_last_name'];
-  $form['sign_up_left']['user_mail'] = $form['account']['mail'];
-  $form['sign_up_left']['user_mail']['#weight'] = 10;
-  $form['sign_up_left']['user_tel'] = $form['field_mobile_phone_number'];
-  $form['sign_up_left']['user_tel']['#weight'] = 12;
-  $form['sign_up_left']['user_pass'] = $form['account']['pass'];
-  $form['sign_up_left']['user_pass']['#weight'] = 14;
-  $form['sign_up_left']['user_looking'] = $form['field_looking_to'];
-  $form['sign_up_left']['user_looking']['#weight'] = 16;
-  $form['sign_up_left']['user_terms'] = $form['terms_of_use'];
-  $form['sign_up_left']['user_terms']['#weight'] = 18;
-  $form['sign_up_left']['user_newsletters'] = $form['field_receive_newsletters'];
-  $form['sign_up_left']['user_newsletters']['#weight'] = 20;
-  $form['sign_up_left']['user_submit'] = $form['actions'];
-
   $form['sign_up_right']['user_region'] = $form['field_user_region'];
+  $form['sign_up_right']['user_region']['#weight'] = 10;
   $form['sign_up_right']['user_map'] = $form['form_map'];
+  $form['sign_up_right']['user_map']['#weight'] = 20;
 
   //Unset old items.
-  unset($form['field_user_first_name']);
-  unset($form['field_user_last_name']);
-  unset($form['account']['mail']);
-  unset($form['account']['pass']);
-  unset($form['terms_of_use']);
-  unset($form['actions']);
   unset($form['field_user_region']);
   unset($form['form_map']);
-  unset($form['field_mobile_phone_number']);
-  unset($form['field_looking_to']);
-  unset($form['field_receive_newsletters']);
+}
 
-//  $form['terms'] = array(
-//    '#type' => 'checkbox',
-//    '#title' => t("I agree with the website's terms and conditions."),
-//    '#required' => TRUE,
-//    '#weight' => 20,
-//  );
+/**
+ * Implement hook_field_group_build_pre_render_alter.
+ */
+function ctrader_register_field_group_build_pre_render_alter(&$element) {
+  //Rewrite register form.
+  if (isset($element['group_sign_up_left'])) {
+    $element['group_sign_up_left']['terms_of_use'] = $element['terms_of_use'];
+    $element['group_sign_up_left']['terms_of_use']['#weight'] = 30;
+    $element['group_sign_up_left']['actions'] = $element['actions'];
+    $element['form_build_id']['#weight'] = 50;
+    $element['form_id']['#weight'] = 60;
+
+    unset($element['actions']);
+    unset($element['terms_of_use']);
+  }
 }
 
 

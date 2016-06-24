@@ -2,6 +2,31 @@
   .header {
     text-align: center;
     color: $white;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .body {
+    max-width: 800px;
+    width: 100%;
+    margin: 25px auto;
+
+    p {
+      font-size: rem-calc(16);
+      color: $gray;
+      line-height: rem-calc(26);
+      text-align: justify;
+    }
+  }
+
+  .field-name-field-blog-image {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto 20px;
+
+    img {
+      min-width: 100%;
+    }
   }
 
   .blog-title {
