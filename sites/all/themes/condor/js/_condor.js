@@ -513,7 +513,7 @@
     Drupal.behaviors.signUpPage = {
         attach: function (context, settings) {
 
-            $('#edit-user-looking-und').chosen({
+            $('#edit-field-looking-to-und').chosen({
                 "disable_search": true
             });
         }
