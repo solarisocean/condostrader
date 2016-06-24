@@ -29,17 +29,64 @@ function ctrader_saf_init() {
  */
 function ctrader_saf_url_inbound_alter(&$path, $original_path, $path_language) {
   if (ENABLE_PRETTY_PATH_FOR_REGION_DROPDOWN_FACET === TRUE) {
+    $vocabulary_name = 'neighbourhoods';
     $path_array = explode('/', $path);
     if (array_shift($path_array) == 'search-results') {
       if (!empty($path_array)) {
         $region_query_array = array();
-        foreach ($path_array as $term_name) {
-          $term = taxonomy_get_term_by_name($term_name, 'neighbourhoods');
-          if (!empty($term)) {
-            $term = reset($term);
-            $region_query_array[] = $term->tid;
+        $term = taxonomy_get_term_by_name($path_array[0], $vocabulary_name);
+        if (!empty($term)) { // Gets first level tid for query.
+          $first_level_term = reset($term);
+          $region_query_array[] = $first_level_term->tid;
+          if (isset($path_array[1])) { // Gets second level tid for query.
+            $term = taxonomy_get_term_by_name($path_array[1], $vocabulary_name);
+            if (!empty($term) && count($term) == 1) {
+              $second_level_term = reset($term);
+              $region_query_array[] = $second_level_term->tid;
+            }
+            elseif (!empty($term) && count($term) > 1) {
+              foreach ($term as $value) {
+                $second_level_term_parent = taxonomy_get_parents($value->tid);
+                if ($second_level_term_parent) {
+                  $parent_tids = array_keys($second_level_term_parent);
+                  if (in_array($first_level_term->tid, $parent_tids)) {
+                    $second_level_term = $value;
+                    $region_query_array[] = $second_level_term->tid;
+                  }
+                }
+              }
+            }
+            if (isset($path_array[2])) { // Gets third level tid for query.
+              $term = taxonomy_get_term_by_name($path_array[2], $vocabulary_name);
+              if (!empty($term) && count($term) == 1) {
+                $third_level_term = reset($term);
+                $region_query_array[] = $third_level_term->tid;
+              }
+              elseif (!empty($term) && count($term) > 1) {
+                foreach ($term as $value) {
+                  $third_level_term_parent = taxonomy_get_parents($value->tid);
+                  if ($third_level_term_parent) {
+                    $parent_tids = array_keys($third_level_term_parent);
+                    if (isset($second_level_term)) {
+                      if (in_array($second_level_term->tid, $parent_tids)) {
+                        $region_query_array[] = $value->tid;
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
+
+//        foreach ($path_array as $term_name) {
+//          $term = taxonomy_get_term_by_name($term_name, $vocabulary_name);
+//          if (!empty($term)) {
+//            $term = reset($term);
+//            $region_query_array[] = $term->tid;
+//          }
+//        }
+
         if (!empty($region_query_array)) {
           $_GET['region'] = implode('>', $region_query_array);
         }
