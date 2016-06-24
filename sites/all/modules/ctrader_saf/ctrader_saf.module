@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * If TRUE - activates pretty path for region dropdown facet.
+ * ('?region=tid>tid>tid' becomes '/tname/tname/tname')
+ */
+define('ENABLE_PRETTY_PATH_FOR_REGION_DROPDOWN_FACET', TRUE);
 
 /**
  * Implements hook_init().
@@ -14,6 +19,34 @@ function ctrader_saf_init() {
   drupal_add_js(drupal_get_path('module', 'ctrader_saf') . '/js/rewritten_search_api_ranges.js');
 }
 
+/**
+ * Needs for rewrites query if it is arguments after 'search-results'.
+ * (something like pretty path for '?region=tid>tid>tid' query)
+ *
+ * @param $path
+ * @param $original_path
+ * @param $path_language
+ */
+function ctrader_saf_url_inbound_alter(&$path, $original_path, $path_language) {
+  if (ENABLE_PRETTY_PATH_FOR_REGION_DROPDOWN_FACET === TRUE) {
+    $path_array = explode('/', $path);
+    if (array_shift($path_array) == 'search-results') {
+      if (!empty($path_array)) {
+        $region_query_array = array();
+        foreach ($path_array as $term_name) {
+          $term = taxonomy_get_term_by_name($term_name, 'neighbourhoods');
+          if (!empty($term)) {
+            $term = reset($term);
+            $region_query_array[] = $term->tid;
+          }
+        }
+        if (!empty($region_query_array)) {
+          $_GET['region'] = implode('>', $region_query_array);
+        }
+      }
+    }
+  }
+}
 
 /**
  * Implements hook_js_alter().
@@ -68,7 +101,7 @@ function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
   }
   if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-search-results-ctrader-page-1') {
     $form['#action'] = '/' . CTRADER_SEARCH_RESULT_PAGE;
-    if (drupal_get_path_alias() == CTRADER_SEARCH_RESULT_PAGE) {
+    if (strpos(drupal_get_path_alias(), CTRADER_SEARCH_RESULT_PAGE) !== FALSE) {
 
       // Needs for notice error disabling.
       if (!isset($form_state['#combine_param'])) {
@@ -860,18 +893,38 @@ function _ctrader_saf_search_button_form_submit($form, &$form_state) {
   // REGION facet selectlist.
   /* @see ctrader_saf_search_api_solr_query_alter */
   $region_field_name = 'field_city_region__torcond%3Aparents_all';
-  $region_term_id = '';
-  if (!empty($form_state['values']['region'])) {
-    $region_term_id .= $form_state['values']['region'];
-    if (!empty($form_state['values']['region_1'])) {
-      $region_term_id .= '>' . $form_state['values']['region_1'];
-      if (!empty($form_state['values']['region_2'])) {
-        $region_term_id .= '>' . $form_state['values']['region_2'];
+  if (ENABLE_PRETTY_PATH_FOR_REGION_DROPDOWN_FACET === TRUE) {
+    $region_term_names = '';
+    if (!empty($form_state['values']['region'])) {
+      $term = taxonomy_term_load($form_state['values']['region']);
+      $region_term_names .= "/{$term->name}";
+      if (!empty($form_state['values']['region_1'])) {
+        $term = taxonomy_term_load($form_state['values']['region_1']);
+        $region_term_names .= "/{$term->name}";
+        if (!empty($form_state['values']['region_2'])) {
+          $term = taxonomy_term_load($form_state['values']['region_2']);
+          $region_term_names .= "/{$term->name}";
+        }
       }
     }
+    if ($region_term_names) {
+      $path .= $region_term_names;
+    }
   }
-  if ($region_term_id) {
-    $query['region'] = $region_term_id;
+  else {
+    $region_term_id = '';
+    if (!empty($form_state['values']['region'])) {
+      $region_term_id .= $form_state['values']['region'];
+      if (!empty($form_state['values']['region_1'])) {
+        $region_term_id .= '>' . $form_state['values']['region_1'];
+        if (!empty($form_state['values']['region_2'])) {
+          $region_term_id .= '>' . $form_state['values']['region_2'];
+        }
+      }
+    }
+    if ($region_term_id) {
+      $query['region'] = $region_term_id;
+    }
   }
 
   $url = url($path, array(
