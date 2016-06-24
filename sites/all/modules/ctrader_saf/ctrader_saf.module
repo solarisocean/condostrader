@@ -100,7 +100,7 @@ function ctrader_saf_url_inbound_alter(&$path, $original_path, $path_language) {
  */
 function ctrader_saf_js_alter(&$javascript) {
   $current_path = current_path();
-  if ($current_path == 'main-page' || $current_path == '' || $current_path == CTRADER_SEARCH_RESULT_PAGE) {
+  if ($current_path == 'main-page' || $current_path == '' || strpos($current_path, CTRADER_SEARCH_RESULT_PAGE) == 0) {
     if (isset($javascript['sites/all/modules/facetapi/facetapi.js']) && isset($javascript['sites/all/modules/ctrader_saf/js/rewritten_search_api_ranges.js'])) {
       unset($javascript['sites/all/modules/facetapi/facetapi.js']);
     }
@@ -148,7 +148,7 @@ function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
   }
   if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-search-results-ctrader-page-1') {
     $form['#action'] = '/' . CTRADER_SEARCH_RESULT_PAGE;
-    if (strpos(drupal_get_path_alias(), CTRADER_SEARCH_RESULT_PAGE) !== FALSE) {
+    if (strpos(drupal_get_path_alias(), CTRADER_SEARCH_RESULT_PAGE) == 0) {
 
       // Needs for notice error disabling.
       if (!isset($form_state['#combine_param'])) {
