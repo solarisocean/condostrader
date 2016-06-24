@@ -22,7 +22,7 @@ function ctf_content_types_blog_post_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -50,7 +50,7 @@ function ctf_content_types_blog_post_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 31,
+      'weight' => 4,
     ),
   );
 
@@ -68,7 +68,7 @@ function ctf_content_types_blog_post_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -100,7 +100,7 @@ function ctf_content_types_blog_post_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_miw',
-      'weight' => 32,
+      'weight' => 3,
     ),
   );
 

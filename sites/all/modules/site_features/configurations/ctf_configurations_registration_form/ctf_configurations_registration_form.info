@@ -14,7 +14,6 @@ dependencies[] = taxonomy
 dependencies[] = text
 features[ctools][] = field_group:field_group:1
 features[features_api][] = api:2
-features[field_group][] = group_sign_up_left|user|user|form
 features[field_instance][] = user-user-field_looking_to
 features[field_instance][] = user-user-field_mobile_phone_number
 features[field_instance][] = user-user-field_receive_newsletters
