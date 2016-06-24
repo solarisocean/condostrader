@@ -51,7 +51,8 @@
             },
             success: function(data){
               settings.mymapLayer.clearLayers();
-              // settings.mymapLayer.addData(data).bindPopup(data.properties.popupContent).setStyle(neighbourhoodsStyle);
+              //settings.mymapLayer.addData(data).bindPopup(data.properties.popupContent).setStyle(neighbourhoodsStyle);
+              settings.mymapLayer.addData(data).setStyle(neighbourhoodsStyle);
               settings.mymapLayer.on({
                 click: function() {
                   settings.mymapLayer.openPopup();
@@ -70,7 +71,8 @@
             },
             success: function(data){
               settings.mymapLayer.clearLayers();
-              settings.mymapLayer.addData(data).bindPopup(data.properties.popupContent).setStyle(neighbourhoodsStyle);
+              //settings.mymapLayer.addData(data).bindPopup(data.properties.popupContent).setStyle(neighbourhoodsStyle);
+              settings.mymapLayer.addData(data).setStyle(neighbourhoodsStyle);
               settings.mymapLayer.on({
                 click: function() {
                   settings.mymapLayer.openPopup();
