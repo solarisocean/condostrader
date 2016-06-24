@@ -21,7 +21,7 @@ function ctf_taxonomy_vocabularies_neighbourhoods_default_rules_configuration() 
       },
       "DO" : [
         { "drupal_message" : {
-            "message" : "Update neighbourhoods json variable in DB\\r\\n(\\u003Ca href=\\u0022[site:url]\\/create-terms\\u0022\\u003Ego to page with update button\\u003C\\/a\\u003E)",
+            "message" : "Update neighbourhoods json variable in DB\\r\\n(\\u003Ca href=\\u0022[site:url]create-terms\\u0022\\u003Ego to page with update button\\u003C\\/a\\u003E)",
             "type" : "warning",
             "repeat" : "0"
           }
