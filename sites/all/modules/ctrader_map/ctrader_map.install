@@ -520,3 +520,28 @@ function ctrader_map_update_7009(&$sandbox) {
   // In case of an error, simply throw an exception with an error message.
   throw new DrupalUpdateException('Something went wrong.');
 }
+
+/**
+ * Updates listing's taxonomy field because of recreation 'Lawrence Park South' term.
+ */
+function ctrader_map_update_7010() {
+  // Old Lawrence Park South tid.
+  $old_tid = 2131;
+
+  $listings = db_select('field_data_field_city_region__torcond', 'cr')
+    ->fields('cr', array('entity_id'))
+    ->condition('field_city_region__torcond_tid', $old_tid, 'LIKE')
+    ->orderBy('entity_id')
+    ->execute()
+    ->fetchCol();
+
+  $term = taxonomy_get_term_by_name('Lawrence Park South', 'neighbourhoods');
+  $term = reset($term);
+
+  $entities = entity_load(DREALTY_ENTITY_TYPE, $listings);
+  foreach ($entities as $entity) {
+    $entity->field_city_region__torcond[LANGUAGE_NONE][0]['tid'] = $term->tid;
+    $entity->save();
+  }
+  return t('Updated listing\'s taxonomy field because of recreation \'Lawrence Park South\' term.');
+}
