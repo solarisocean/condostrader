@@ -59,6 +59,7 @@ function ctf_configurations_registration_form_field_default_field_instances() {
     'entity_type' => 'user',
     'field_name' => 'field_mobile_phone_number',
     'label' => 'Mobile phone number',
+    'placeholder' => '',
     'required' => 0,
     'settings' => array(
       'ca_phone_parentheses' => 1,
@@ -66,7 +67,7 @@ function ctf_configurations_registration_form_field_default_field_instances() {
       'phone_country_code' => 1,
       'phone_default_country_code' => 1,
       'phone_int_max_length' => 15,
-      'user_register_form' => 1,
+      'user_register_form' => 0,
     ),
     'widget' => array(
       'active' => 0,
