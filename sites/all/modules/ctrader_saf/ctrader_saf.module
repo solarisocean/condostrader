@@ -100,7 +100,7 @@ function ctrader_saf_url_inbound_alter(&$path, $original_path, $path_language) {
  */
 function ctrader_saf_js_alter(&$javascript) {
   $current_path = current_path();
-  if ($current_path == 'main-page' || $current_path == '' || strpos($current_path, CTRADER_SEARCH_RESULT_PAGE) == 0) {
+  if ($current_path == 'main-page' || $current_path == '' || strpos($current_path, CTRADER_SEARCH_RESULT_PAGE) === 0) {
     if (isset($javascript['sites/all/modules/facetapi/facetapi.js']) && isset($javascript['sites/all/modules/ctrader_saf/js/rewritten_search_api_ranges.js'])) {
       unset($javascript['sites/all/modules/facetapi/facetapi.js']);
     }
@@ -146,9 +146,11 @@ function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
       }
     }
   }
+
+  $search_field_identifier = 'search';
   if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-search-results-ctrader-page-1') {
-    $form['#action'] = '/' . CTRADER_SEARCH_RESULT_PAGE;
-    if (strpos(drupal_get_path_alias(), CTRADER_SEARCH_RESULT_PAGE) == 0) {
+   $form['#action'] = '/' . CTRADER_SEARCH_RESULT_PAGE;
+    if (strpos(drupal_get_path_alias(), CTRADER_SEARCH_RESULT_PAGE) === 0) {
 
       // Needs for notice error disabling.
       if (!isset($form_state['#combine_param'])) {
@@ -157,13 +159,13 @@ function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
         $form_state['values']['sorting'] = '';
       }
 
-      $form['search_api_aggregation_1']['#type'] = 'hidden';
+      $form[$search_field_identifier]['#type'] = 'hidden';
       $form['#info']['filter-search_api_aggregation_1']['label'] = '';
     }
     elseif (drupal_is_front_page()) {
       $form['sorting']['#type'] = 'hidden';
-      $form['search_api_aggregation_1']['#attributes']['placeholder'] = t('Type address, MLS number, ZIP code, area or neighbourhood name');
-      $form['search_api_aggregation_1']['#size'] = 70;
+      $form[$search_field_identifier]['#attributes']['placeholder'] = t('Type address, MLS number, ZIP code, area or neighbourhood name');
+      $form[$search_field_identifier]['#size'] = 70;
     }
 
     // Change sorting labels.
@@ -199,10 +201,14 @@ function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
   // Header search input.
   if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-search-results-ctrader-page-3') {
     $form['#action'] = '/' . CTRADER_SEARCH_RESULT_PAGE;
-    $form['search_api_aggregation_1']['#attributes']['placeholder'] = t('Address, MLS #, ZIP, municipality, community');
-    $form['search_api_aggregation_1']['#size'] = 50;
+    $form[$search_field_identifier]['#attributes']['placeholder'] = t('Address, MLS #, ZIP, municipality, community');
+    $form[$search_field_identifier]['#size'] = 50;
     /* @see https://www.drupal.org/node/2296135 #18 */
-    $form['search_api_aggregation_1']['#id'] = "edit-search-api-aggregation-1-{$form_state['display']->id}";
+    $form[$search_field_identifier]['#id'] = "edit-search-api-aggregation-1-{$form_state['display']->id}";
+  }
+
+  if ($form_id == 'views_exposed_form' && strpos($form['#id'], 'views-exposed-form-homepage-view-blocks-page') === 0) {
+    $form['#action'] = '';
   }
 
   // Show only needed fields in index field form (problem with large data in POST).
@@ -247,6 +253,35 @@ function ctrader_saf_search_api_ranges_minmax_alter(&$variables, &$order) {
   }
 }
 
+/**
+ * Implements hook_views_pre_view().
+ */
+function ctrader_saf_views_pre_view(&$view, &$display_id, &$args) {
+  switch ($view->name) {
+    // Prettify exposed filter GET parameter (sale-rent).
+    case 'homepage_view_blocks':
+    case 'nearby_listings_view':
+      switch ($display_id) {
+        case 'page_1':
+        case 'page_2':
+        case 'page_3':
+        case 'page_4':
+        case 'block_1':
+          if (isset($view->display_handler->display->handler->options['filters']['field_s_r_torcond']['group_info']['group_items'])) {
+            $group_items = array();
+            foreach ($view->display_handler->display->handler->options['filters']['field_s_r_torcond']['group_info']['group_items'] as $key => $value) {
+              $group_items[$value['title']] = $value;
+              if ($view->display_handler->display->handler->options['filters']['field_s_r_torcond']['group_info']['default_group'] == $key) {
+                $view->display_handler->display->handler->options['filters']['field_s_r_torcond']['group_info']['default_group'] = $value['title'];
+              }
+            }
+            $view->display_handler->display->handler->options['filters']['field_s_r_torcond']['group_info']['group_items'] = $group_items;
+          }
+          break;
+      }
+      break;
+  }
+}
 
 /**
  * Implements hook_search_api_solr_query_alter().
@@ -1276,7 +1311,9 @@ function _ctrader_saf_facetapi_select_facet_form($form, &$form_state, $variables
  * Submit function for _ctrader_saf_facetapi_select_facet_form().
  */
 function _ctrader_saf_facetapi_select_facet_form_submit($form, &$form_state) {
-  $parsed_url = drupal_parse_url($form_state['values']['facets']);
+  if (isset($form_state['values']['facets'])) {
+    $parsed_url = drupal_parse_url($form_state['values']['facets']);
+  }
 //  drupal_goto($parsed_url['path'], array('query' => $parsed_url['query']));
 }
 

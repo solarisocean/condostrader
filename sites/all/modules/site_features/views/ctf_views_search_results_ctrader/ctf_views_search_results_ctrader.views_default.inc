@@ -111,8 +111,6 @@ function ctf_views_search_results_ctrader_views_default_views() {
     'combine_rewrite' => NULL,
     'reset_label' => NULL,
   );
-  $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
-  $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'filtered_html';
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -168,7 +166,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['field_addr_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_addr_torcond']['alter']['text'] = '[field_addr_torcond], ';
   $handler->display->display_options['fields']['field_addr_torcond']['hide_empty'] = TRUE;
-  /* Field: Indexed Drealty Listing: apt_num */
+  /* Field: Indexed Drealty Listing: Apt_num */
   $handler->display->display_options['fields']['field_apt_num_torcond']['id'] = 'field_apt_num_torcond';
   $handler->display->display_options['fields']['field_apt_num_torcond']['table'] = 'search_api_index_toronto_condo_index';
   $handler->display->display_options['fields']['field_apt_num_torcond']['field'] = 'field_apt_num_torcond';
@@ -547,7 +545,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['field_addr_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_addr_torcond']['alter']['text'] = '[field_addr_torcond], ';
   $handler->display->display_options['fields']['field_addr_torcond']['hide_empty'] = TRUE;
-  /* Field: Indexed Drealty Listing: apt_num */
+  /* Field: Indexed Drealty Listing: Apt_num */
   $handler->display->display_options['fields']['field_apt_num_torcond']['id'] = 'field_apt_num_torcond';
   $handler->display->display_options['fields']['field_apt_num_torcond']['table'] = 'search_api_index_toronto_condo_index';
   $handler->display->display_options['fields']['field_apt_num_torcond']['field'] = 'field_apt_num_torcond';
@@ -931,8 +929,6 @@ function ctf_views_search_results_ctrader_views_default_views() {
     'any_label' => NULL,
     'filter_rewrite_values' => NULL,
   );
-  $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
-  $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'filtered_html';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'mini';
   $handler->display->display_options['pager']['options']['items_per_page'] = '21';
@@ -995,7 +991,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['field_addr_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_addr_torcond']['alter']['text'] = '[field_addr_torcond], ';
   $handler->display->display_options['fields']['field_addr_torcond']['hide_empty'] = TRUE;
-  /* Field: Indexed Drealty Listing: apt_num */
+  /* Field: Indexed Drealty Listing: Apt_num */
   $handler->display->display_options['fields']['field_apt_num_torcond']['id'] = 'field_apt_num_torcond';
   $handler->display->display_options['fields']['field_apt_num_torcond']['table'] = 'search_api_index_toronto_condo_index';
   $handler->display->display_options['fields']['field_apt_num_torcond']['field'] = 'field_apt_num_torcond';
@@ -1286,10 +1282,11 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['filters']['search_api_aggregation_1']['expose']['operator_id'] = 'search_api_aggregation_1_op';
   $handler->display->display_options['filters']['search_api_aggregation_1']['expose']['label'] = 'Search by keywords:';
   $handler->display->display_options['filters']['search_api_aggregation_1']['expose']['operator'] = 'search_api_aggregation_1_op';
-  $handler->display->display_options['filters']['search_api_aggregation_1']['expose']['identifier'] = 'search_api_aggregation_1';
+  $handler->display->display_options['filters']['search_api_aggregation_1']['expose']['identifier'] = 'search';
   $handler->display->display_options['filters']['search_api_aggregation_1']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
+    4 => 0,
     3 => 0,
   );
   /* Filter criterion: Indexed Drealty Listing: Drealty Listing Type */
@@ -1417,8 +1414,6 @@ function ctf_views_search_results_ctrader_views_default_views() {
     'any_label' => NULL,
     'filter_rewrite_values' => NULL,
   );
-  $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
-  $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'filtered_html';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'mini';
   $handler->display->display_options['pager']['options']['items_per_page'] = '21';
@@ -1853,8 +1848,6 @@ function ctf_views_search_results_ctrader_views_default_views() {
     'any_label' => NULL,
     'filter_rewrite_values' => NULL,
   );
-  $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
-  $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'filtered_html';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '2';
@@ -1880,10 +1873,11 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['filters']['search_api_aggregation_1']['exposed'] = TRUE;
   $handler->display->display_options['filters']['search_api_aggregation_1']['expose']['operator_id'] = 'search_api_aggregation_1_op';
   $handler->display->display_options['filters']['search_api_aggregation_1']['expose']['operator'] = 'search_api_aggregation_1_op';
-  $handler->display->display_options['filters']['search_api_aggregation_1']['expose']['identifier'] = 'search_api_aggregation_1';
+  $handler->display->display_options['filters']['search_api_aggregation_1']['expose']['identifier'] = 'search';
   $handler->display->display_options['filters']['search_api_aggregation_1']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
+    4 => 0,
     3 => 0,
   );
   $handler->display->display_options['path'] = 'c-r-p';
