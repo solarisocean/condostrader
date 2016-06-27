@@ -1295,6 +1295,12 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = 'toronto_condo';
   $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Indexed Drealty Listing: Disp_addr */
+  $handler->display->display_options['filters']['field_disp_addr_torcond']['id'] = 'field_disp_addr_torcond';
+  $handler->display->display_options['filters']['field_disp_addr_torcond']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['filters']['field_disp_addr_torcond']['field'] = 'field_disp_addr_torcond';
+  $handler->display->display_options['filters']['field_disp_addr_torcond']['operator'] = '<>';
+  $handler->display->display_options['filters']['field_disp_addr_torcond']['value'] = 'N';
   $handler->display->display_options['path'] = 'c-r-p';
 
   /* Display: Building results page */
