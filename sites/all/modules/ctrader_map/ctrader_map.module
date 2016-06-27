@@ -274,6 +274,8 @@ function ctrader_map_theme($existing, $type, $theme, $path) {
     'variables' => array(
       'neighbourhood_name' => 'Ontario',
       'neighbourhood_link' => NULL,
+      'municipality_name' => NULL,
+      'municipality_link' => NULL,
       'city_name' => NULL,
       'city_link' => NULL,
       'address' => NULL,

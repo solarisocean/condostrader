@@ -6,7 +6,7 @@
     <?php print $address . $unit . $neighbourhood_name . $country_region . 'Canada'; ?>
   </div>
   <div class="legend-location condo-community">
-    <?php print $community_link; ?>
+    <?php print $municipality_link; ?>
   </div>
   <div class="legend-location condo-area">
     <?php print $area_link; ?>
