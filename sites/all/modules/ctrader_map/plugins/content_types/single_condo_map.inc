@@ -93,15 +93,27 @@ function prepare_map_legend($value, &$map_legend_variables) {
   $neighbourhood_link = l($term_polygon['properties']['name'], $neighbourhood_url);
 
   $parent_terms = taxonomy_get_parents_all($value['id']);
-  $city_term = array_pop($parent_terms);
+  $city_term = end($parent_terms);
   $city_uri = taxonomy_term_uri($city_term);
   $city_link = l($city_term->name, url($city_uri['path']));
+
+  $region_query_string = array();
+  $region_query_string[] = array_pop($parent_terms)->name;
+  $municipality_term = array_pop($parent_terms);
+  $region_query_string[] = $municipality_term->name;
+  $region_query_string = implode('/', $region_query_string);
+  $url = url(CTRADER_SEARCH_RESULT_PAGE . '/' . $region_query_string, array(
+    'absolute' => TRUE
+  ));
+  $municipality_link = l($municipality_term->name, $url);
 
   $map_legend_variables += array(
     'neighbourhood_name' => $term_polygon['properties']['name'] . ', ',
     'neighbourhood_link' => $neighbourhood_link,
     'city_name' => $city_term->name,
     'city_link' => $city_link,
+    'municipality_name' => $municipality_term->name,
+    'municipality_link' => "Municipality: {$municipality_link}",
   );
 }
 
@@ -110,23 +122,34 @@ function prepare_map_legend($value, &$map_legend_variables) {
  * @param $region_name
  * @return string url for region search.
  */
-function prepare_region_query_url($region_name) {
+function prepare_region_query_url($region_name, $second_level = FALSE) {
   $term = taxonomy_get_term_by_name($region_name);
   if ($term) {
     $term = reset($term);
     $parents = taxonomy_get_parents_all($term->tid);
     $parents = array_reverse($parents);
     $region_query_string = array();
-    foreach ($parents as $parent) {
-      $region_query_string[] = $parent->tid;
+    if (ENABLE_PRETTY_PATH_FOR_REGION_DROPDOWN_FACET) {
+      foreach ($parents as $parent) {
+        $region_query_string[] = $parent->name;
+      }
+      $region_query_string = implode('/', $region_query_string);
+      $url = url(CTRADER_SEARCH_RESULT_PAGE . '/' . $region_query_string, array(
+        'absolute' => TRUE
+      ));
+      return $url;
     }
-    $region_query_string = implode('>', $region_query_string);
-
-    $url = url(CTRADER_SEARCH_RESULT_PAGE, array(
-      'query' => array('region' => $region_query_string),
-      'absolute' => TRUE
-    ));
-    return $url;
+    else {
+      foreach ($parents as $parent) {
+        $region_query_string[] = $parent->tid;
+      }
+      $region_query_string = implode('>', $region_query_string);
+      $url = url(CTRADER_SEARCH_RESULT_PAGE, array(
+        'query' => array('region' => $region_query_string),
+        'absolute' => TRUE
+      ));
+      return $url;
+    }
   }
 }
 
