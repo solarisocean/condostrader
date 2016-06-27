@@ -349,7 +349,10 @@ function ctrader_saf_search_api_solr_query_alter(array &$call_args, SearchApiQue
                     );
                     break;
                   case 'Apartment':
-                    $condo_styles = array('Apartment', 'Multi-Level');
+                    $condo_styles = array(
+                      'Apartment',
+                      'Multi-Level',
+                    );
                     break;
                 }
                 $condo_styles = implode(' OR ', $condo_styles);
@@ -555,20 +558,14 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
           case 'Other':
             $build['Other']['#markup'] = t('Parking Spot / Other');
             break;
+          case 'Warehouse Loft':
+            unset($build[$key]);
+            break;
         }
       }
       break;
   }
 }
-
-
-/**
- * Implements hook_current_search_items().
- */
-function ctrader_saf_current_search_items() {
-
-}
-
 
 /**
  * Implements hook_block_info().
@@ -1276,7 +1273,7 @@ function _ctrader_saf_facetapi_select_facet_form($form, &$form_state, $variables
 }
 
 /**
- * Submit function for facetapi_select_form().
+ * Submit function for _ctrader_saf_facetapi_select_facet_form().
  */
 function _ctrader_saf_facetapi_select_facet_form_submit($form, &$form_state) {
   $parsed_url = drupal_parse_url($form_state['values']['facets']);
