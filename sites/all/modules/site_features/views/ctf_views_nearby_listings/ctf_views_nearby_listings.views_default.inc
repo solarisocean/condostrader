@@ -140,8 +140,6 @@ function ctf_views_nearby_listings_views_default_views() {
     'combine_rewrite' => NULL,
     'reset_label' => NULL,
   );
-  $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
-  $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'filtered_html';
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -871,6 +869,51 @@ function ctf_views_nearby_listings_views_default_views() {
   $handler->display->display_options['title'] = 'Comparable nearby listings';
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'nearby-listed-slider swiper-container';
+  $handler->display->display_options['defaults']['exposed_form'] = FALSE;
+  $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
+  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sort by:';
+  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'ASC';
+  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'DESC';
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
+  $handler->display->display_options['exposed_form']['options']['bef'] = array(
+    'general' => array(
+      'input_required' => 0,
+      'text_input_required' => array(
+        'text_input_required' => array(
+          'value' => 'Select any filter and click on Apply to see results',
+          'format' => 'filtered_html',
+        ),
+      ),
+      'allow_secondary' => 0,
+      'secondary_label' => 'Advanced options',
+      'secondary_collapse_override' => '0',
+    ),
+    'field_s_r_torcond' => array(
+      'bef_format' => 'bef_hidden',
+      'slider_options' => array(
+        'bef_slider_min' => '0',
+        'bef_slider_max' => '99999',
+        'bef_slider_step' => '1',
+        'bef_slider_animate' => '',
+        'bef_slider_orientation' => 'horizontal',
+      ),
+      'more_options' => array(
+        'bef_select_all_none' => FALSE,
+        'bef_collapsible' => 0,
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+          ),
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+        ),
+      ),
+    ),
+  );
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
@@ -1224,6 +1267,45 @@ function ctf_views_nearby_listings_views_default_views() {
   $handler->display->display_options['arguments']['field_test_geofilld_latlon']['break_phrase'] = 0;
   $handler->display->display_options['arguments']['field_test_geofilld_latlon']['not'] = 0;
   $handler->display->display_options['arguments']['field_test_geofilld_latlon']['radius'] = '10';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Indexed Drealty Listing: Drealty Listing Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = 'toronto_condo';
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Indexed Drealty Listing: S_r */
+  $handler->display->display_options['filters']['field_s_r_torcond']['id'] = 'field_s_r_torcond';
+  $handler->display->display_options['filters']['field_s_r_torcond']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['filters']['field_s_r_torcond']['field'] = 'field_s_r_torcond';
+  $handler->display->display_options['filters']['field_s_r_torcond']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_s_r_torcond']['expose']['operator_id'] = 'field_s_r_torcond_op';
+  $handler->display->display_options['filters']['field_s_r_torcond']['expose']['label'] = 'S_r';
+  $handler->display->display_options['filters']['field_s_r_torcond']['expose']['operator'] = 'field_s_r_torcond_op';
+  $handler->display->display_options['filters']['field_s_r_torcond']['expose']['identifier'] = 'field_s_r_torcond';
+  $handler->display->display_options['filters']['field_s_r_torcond']['is_grouped'] = TRUE;
+  $handler->display->display_options['filters']['field_s_r_torcond']['group_info']['label'] = 'S_r';
+  $handler->display->display_options['filters']['field_s_r_torcond']['group_info']['identifier'] = 'sale-rent';
+  $handler->display->display_options['filters']['field_s_r_torcond']['group_info']['widget'] = 'radios';
+  $handler->display->display_options['filters']['field_s_r_torcond']['group_info']['default_group'] = '1';
+  $handler->display->display_options['filters']['field_s_r_torcond']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => 'sale',
+      'operator' => '=',
+      'value' => 'Sale',
+    ),
+    2 => array(
+      'title' => 'rent',
+      'operator' => '=',
+      'value' => 'Lease',
+    ),
+    3 => array(
+      'title' => '',
+      'operator' => '=',
+      'value' => '',
+    ),
+  );
 
   /* Display: Nearby block (single condo) */
   $handler = $view->new_display('block', 'Nearby block (single condo)', 'block_2');

@@ -259,8 +259,6 @@ function ctf_views_toronto_condos_list_views_default_views() {
     'any_label' => NULL,
     'filter_rewrite_values' => NULL,
   );
-  $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
-  $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'filtered_html';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '50';
   $handler->display->display_options['style_plugin'] = 'table';
@@ -277,6 +275,9 @@ function ctf_views_toronto_condos_list_views_default_views() {
     'id_1' => 'id_1',
     'nothing' => 'nothing',
     'field_search_point_string' => 'field_search_point_string',
+    'field_status__torcond' => 'field_status__torcond',
+    'active' => 'active',
+    'inactive_date' => 'inactive_date',
   );
   $handler->display->display_options['style_options']['default'] = 'id';
   $handler->display->display_options['style_options']['info'] = array(
@@ -353,6 +354,27 @@ function ctf_views_toronto_condos_list_views_default_views() {
     ),
     'field_search_point_string' => array(
       'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_status__torcond' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'active' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'inactive_date' => array(
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -477,6 +499,18 @@ function ctf_views_toronto_condos_list_views_default_views() {
   $handler->display->display_options['fields']['field_search_point_string']['id'] = 'field_search_point_string';
   $handler->display->display_options['fields']['field_search_point_string']['table'] = 'field_data_field_search_point_string';
   $handler->display->display_options['fields']['field_search_point_string']['field'] = 'field_search_point_string';
+  /* Field: Drealty Listing: Status */
+  $handler->display->display_options['fields']['field_status__torcond']['id'] = 'field_status__torcond';
+  $handler->display->display_options['fields']['field_status__torcond']['table'] = 'field_data_field_status__torcond';
+  $handler->display->display_options['fields']['field_status__torcond']['field'] = 'field_status__torcond';
+  /* Field: Drealty Listing: Drealty Active Status */
+  $handler->display->display_options['fields']['active']['id'] = 'active';
+  $handler->display->display_options['fields']['active']['table'] = 'drealty_listing';
+  $handler->display->display_options['fields']['active']['field'] = 'active';
+  /* Field: Drealty Listing: Drealty Inactive Date */
+  $handler->display->display_options['fields']['inactive_date']['id'] = 'inactive_date';
+  $handler->display->display_options['fields']['inactive_date']['table'] = 'drealty_listing';
+  $handler->display->display_options['fields']['inactive_date']['field'] = 'inactive_date';
   /* Sort criterion: Drealty Listing: Drealty Listing Id */
   $handler->display->display_options['sorts']['id']['id'] = 'id';
   $handler->display->display_options['sorts']['id']['table'] = 'drealty_listing';
@@ -803,6 +837,26 @@ function ctf_views_toronto_condos_list_views_default_views() {
   $handler->display->display_options['filters']['field_search_point_string_value']['expose']['autocomplete_raw_suggestion'] = 1;
   $handler->display->display_options['filters']['field_search_point_string_value']['expose']['autocomplete_raw_dropdown'] = 1;
   $handler->display->display_options['filters']['field_search_point_string_value']['expose']['autocomplete_dependent'] = 0;
+  /* Filter criterion: Drealty Listing: Status (field_status__torcond) */
+  $handler->display->display_options['filters']['field_status__torcond_value']['id'] = 'field_status__torcond_value';
+  $handler->display->display_options['filters']['field_status__torcond_value']['table'] = 'field_data_field_status__torcond';
+  $handler->display->display_options['filters']['field_status__torcond_value']['field'] = 'field_status__torcond_value';
+  $handler->display->display_options['filters']['field_status__torcond_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_status__torcond_value']['expose']['operator_id'] = 'field_status__torcond_value_op';
+  $handler->display->display_options['filters']['field_status__torcond_value']['expose']['label'] = 'Status (field_status__torcond)';
+  $handler->display->display_options['filters']['field_status__torcond_value']['expose']['operator'] = 'field_status__torcond_value_op';
+  $handler->display->display_options['filters']['field_status__torcond_value']['expose']['identifier'] = 'field_status__torcond_value';
+  $handler->display->display_options['filters']['field_status__torcond_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+  );
+  $handler->display->display_options['filters']['field_status__torcond_value']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['field_status__torcond_value']['expose']['autocomplete_min_chars'] = '0';
+  $handler->display->display_options['filters']['field_status__torcond_value']['expose']['autocomplete_field'] = 'field_status__torcond';
+  $handler->display->display_options['filters']['field_status__torcond_value']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['field_status__torcond_value']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['field_status__torcond_value']['expose']['autocomplete_dependent'] = 0;
   $handler->display->display_options['path'] = 'toronto-condos-list';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Toronto condos list';

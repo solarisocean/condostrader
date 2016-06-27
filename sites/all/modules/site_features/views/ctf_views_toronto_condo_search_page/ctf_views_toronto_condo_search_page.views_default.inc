@@ -63,8 +63,6 @@ function ctf_views_toronto_condo_search_page_views_default_views() {
     'combine_rewrite' => NULL,
     'reset_label' => NULL,
   );
-  $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
-  $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'filtered_html';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '12';
   $handler->display->display_options['style_plugin'] = 'grid';

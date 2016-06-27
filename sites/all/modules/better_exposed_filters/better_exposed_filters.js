@@ -89,7 +89,12 @@
       // Check for and initialize datepickers
       var befSettings = Drupal.settings.better_exposed_filters;
       if (befSettings && befSettings.datepicker && befSettings.datepicker_options && $.fn.datepicker) {
-        var opt = befSettings.datepicker_options.dateformat ? {dateFormat: befSettings.datepicker_options.dateformat} : {};
+        var opt = [];
+        $.each(befSettings.datepicker_options, function(key, val) {
+          if (key && val) {
+            opt[key] = JSON.parse(val);
+          }
+        });
         $('.bef-datepicker').datepicker(opt);
       }
 
@@ -99,11 +104,22 @@
   Drupal.behaviors.betterExposedFiltersAllNoneNested = {
     attach:function (context, settings) {
       $('.form-checkboxes.bef-select-all-none-nested li').has('ul').once('bef-all-none-nested', function () {
-        $(this)
+        var $this = $(this);
+
+        // Prevent CTools autosubmit from firing until we've finished checking
+        // all the checkboxes.
+        var submitFunc = $this.parents('form').submit;
+        $this.parents('form').submit = null;
+
+        $this
           // To respect term depth, check/uncheck child term checkboxes.
           .find('input.form-checkboxes:first')
           .click(function() {
             $(this).parents('li:first').find('ul input.form-checkboxes').attr('checked', $(this).attr('checked'));
+
+            // Now we can trigger the autosubmit
+            $this.parents('form').submit = submitFunc;
+            $this.parents('form').trigger('submit');
           })
           .end()
           // When a child term is checked or unchecked, set the parent term's
@@ -128,8 +144,18 @@
       var befSettings = settings.better_exposed_filters;
       if (befSettings && befSettings.slider && befSettings.slider_options) {
         $.each(befSettings.slider_options, function(i, sliderOptions) {
+          var containing_parent = "#" + sliderOptions.viewId + " #edit-" + sliderOptions.id + "-wrapper .views-widget";
+          var $filter = $(containing_parent);
+
+          // If the filter is placed in a secondary fieldset, we may not have
+          // the usual wrapper element.
+          if (!$filter.length) {
+            containing_parent = "#" + sliderOptions.viewId + " .bef-slider-wrapper";
+            $filter = $(containing_parent);
+          }
+
           // Only make one slider per filter.
-          $("#" + sliderOptions.viewId + " #edit-" + sliderOptions.id + "-wrapper").once('slider-filter', function() {
+          $filter.once('slider-filter', function() {
             var $input = $(this).find('input[type=text]');
 
             // This is a "between" or "not between" filter with two values.
@@ -151,7 +177,7 @@
               $min.val(default_min);
               $max.val(default_max);
 
-              $min.parents('div.views-widget').after(
+              $min.parents(containing_parent).after(
                 $('<div class="bef-slider"></div>').slider({
                   range: true,
                   min: parseFloat(sliderOptions.min, 10),
@@ -202,7 +228,7 @@
               // Set the element value in case we are using the slider min.
               $input.val(default_value);
 
-              $input.parents('div.views-widget').after(
+              $input.parents(containing_parent).after(
                 $('<div class="bef-slider"></div>').slider({
                   min: parseFloat(sliderOptions.min, 10),
                   max: parseFloat(sliderOptions.max, 10),
@@ -329,13 +355,16 @@
           var $form_id = $element.parents('form').attr('id');
           if ($form_id == $id) {
             $uses_ajax = true;
-            return;
+            return false;
           }
         });
 
-        var $filter_name = $('input', this).attr('name').slice(0, -2);
-        if (Drupal.settings.better_exposed_filters.views[$view_name].displays[$view_display_id].filters[$filter_name].required && $('input:checked', this).length == 0) {
-          $('input', this).prop('checked', true);
+        //Check if we have any filters at all because of Views Selective Filter
+        if($('input', this).length > 0) {
+          var $filter_name = $('input', this).attr('name').slice(0, -2);
+          if (Drupal.settings.better_exposed_filters.views[$view_name].displays[$view_display_id].filters[$filter_name].required && $('input:checked', this).length == 0) {
+            $('input', this).prop('checked', true);
+          }
         }
       });
     }
