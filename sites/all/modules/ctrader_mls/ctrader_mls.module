@@ -821,3 +821,69 @@ function _ctrader_mls_detect_user_geolocation() {
     $_SESSION['user_geoloc_detect']['creation_timestamp'] = time();
   }
 }
+
+/**
+ * Implements hook_taxonomy_menu_path().
+ */
+function ctrader_mls_taxonomy_menu_path() {
+  $output = array(
+    '_ctrader_mls_taxonomy_menu_path_custom_explore_neighbourhoods' => t('CTrader regions menu path (explore neighbourhoods)'),
+    '_ctrader_mls_taxonomy_menu_path_custom_for_sale' => t('CTrader regions menu path (for sale)'),
+    '_ctrader_mls_taxonomy_menu_path_custom_for_rent' => t('CTrader regions menu path (for rent)'),
+
+  );
+  return $output;
+}
+
+/**
+ * Callback for hook_taxonomy_menu_path.
+ */
+function _ctrader_mls_taxonomy_menu_path_custom_explore_neighbourhoods($vid, $tid) {
+  $path = array(
+    CTRADER_SEARCH_RESULT_PAGE,
+  );
+
+  $all_parent_terms = taxonomy_get_parents_all($tid);
+  $all_parent_terms = array_reverse($all_parent_terms);
+  foreach ($all_parent_terms as $term) {
+    $path[] = $term->name;
+  }
+  $path = implode('/', $path);
+  return $path;
+}
+
+/**
+ * Callback for hook_taxonomy_menu_path.
+ */
+function _ctrader_mls_taxonomy_menu_path_custom_for_sale($vid, $tid) {
+  $path = array(
+    CTRADER_SEARCH_RESULT_PAGE,
+  );
+
+  $all_parent_terms = taxonomy_get_parents_all($tid);
+  $all_parent_terms = array_reverse($all_parent_terms);
+  foreach ($all_parent_terms as $term) {
+    $path[] = $term->name;
+  }
+  $path = implode('/', $path);
+  $path .= '?f[0]=field_s_r__torcond:Sale';
+  return $path;
+}
+
+/**
+ * Callback for hook_taxonomy_menu_path.
+ */
+function _ctrader_mls_taxonomy_menu_path_custom_for_rent($vid, $tid) {
+  $path = array(
+    CTRADER_SEARCH_RESULT_PAGE,
+  );
+
+  $all_parent_terms = taxonomy_get_parents_all($tid);
+  $all_parent_terms = array_reverse($all_parent_terms);
+  foreach ($all_parent_terms as $term) {
+    $path[] = $term->name;
+  }
+  $path = implode('/', $path);
+  $path .= '?f[0]=field_s_r__torcond:Lease';
+  return $path;
+}
