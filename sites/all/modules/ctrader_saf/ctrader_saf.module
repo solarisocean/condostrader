@@ -518,7 +518,6 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
 
       break;
     case 'field_style__torcond':
-
       /*
         - Townhouse (2 Storey, 3-Storey, Stacked Townhouse, Bungalow, Bungaloft)
         - Loft
@@ -526,7 +525,6 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
         - Apartment (Apartment, Multi-level)
         - Parking Spot / Other (Other)
       */
-
       foreach ($build as $key => $value) {
         switch ($key) {
           case '2-Storey':
@@ -598,6 +596,22 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
             break;
         }
       }
+      break;
+    case 'field_patio_ter__torcond':
+      foreach ($build as $key => $value) {
+        if ($key != 'Open') {
+          unset($build[$key]);
+        }
+        else {
+          $build[$key]['#markup'] = l(t('Open Balcony'), '', array('attributes' => array('class' => array('single-checkbox-facet'))));
+          $build[$key]['#html'] = TRUE;
+        }
+      }
+      break;
+    case 'field_ens_lndry__torcond':
+      unset($build['N']);
+      $build['Y']['#markup'] = l(t('Ensuite Laundry'), '', array('attributes' => array('class' => array('single-checkbox-facet'))));
+      $build['Y']['#html'] = TRUE;
       break;
   }
 }
@@ -724,6 +738,26 @@ function _ctrader_saf_blocks_content_function($delta) {
         foreach ($_GET['f'] as $value) {
           if (strpos($value, $parking_field_name) !== FALSE) {
             $search_button_form['parking']['#value'] = '1';
+          }
+        }
+      }
+
+      // BALCONY facet checkboxes.
+      $parking_field_name = 'field_patio_ter__torcond';
+      if (isset($_GET['f'][0])) {
+        foreach ($_GET['f'] as $value) {
+          if (strpos($value, $parking_field_name) !== FALSE) {
+            $search_button_form['balcony']['#value'] = '1';
+          }
+        }
+      }
+
+      // LAUNDRY facet checkboxes.
+      $parking_field_name = 'field_ens_lndry__torcond';
+      if (isset($_GET['f'][0])) {
+        foreach ($_GET['f'] as $value) {
+          if (strpos($value, $parking_field_name) !== FALSE) {
+            $search_button_form['laundry']['#value'] = '1';
           }
         }
       }
@@ -861,6 +895,14 @@ function _ctrader_saf_search_button_form($form, &$form_state) {
     '#type' => 'hidden',
   );
 
+  $form['balcony'] = array(
+    '#type' => 'hidden',
+  );
+
+  $form['laundry'] = array(
+    '#type' => 'hidden',
+  );
+
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'ctrader_saf') . '/js/rewritten_facetapi.js',
   );
@@ -870,7 +912,6 @@ function _ctrader_saf_search_button_form($form, &$form_state) {
 
 function _ctrader_saf_search_button_form_submit($form, &$form_state) {
 //  $query = drupal_http_build_query($_SESSION['search_link_calculate']['f'],'f');
-  //  $query = $_SESSION['search_link_calculate'];
   $path = '/' . CTRADER_SEARCH_RESULT_PAGE;
   $query = array();
 
@@ -940,6 +981,18 @@ function _ctrader_saf_search_button_form_submit($form, &$form_state) {
   // PARKING facet checkboxes.
   $parking_field_name = 'field_prkg_inc__torcond';
   if ($form_state['values']['parking']) {
+    $query['f'][] = "{$parking_field_name}:Y";
+  }
+
+  // BALCONY facet checkboxes.
+  $parking_field_name = 'field_patio_ter__torcond';
+  if ($form_state['values']['balcony']) {
+    $query['f'][] = "{$parking_field_name}:Open";
+  }
+
+  // LAUNDRY facet checkboxes.
+  $parking_field_name = 'field_ens_lndry__torcond';
+  if ($form_state['values']['laundry']) {
     $query['f'][] = "{$parking_field_name}:Y";
   }
 
