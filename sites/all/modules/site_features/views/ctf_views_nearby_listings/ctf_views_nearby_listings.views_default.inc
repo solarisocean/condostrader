@@ -491,6 +491,11 @@ function ctf_views_nearby_listings_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = 'toronto_condo';
   $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Indexed Drealty Listing: Drealty Active Status */
+  $handler->display->display_options['filters']['active']['id'] = 'active';
+  $handler->display->display_options['filters']['active']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['filters']['active']['field'] = 'active';
+  $handler->display->display_options['filters']['active']['value'] = '1';
 
   /* Display: Facets block */
   $handler = $view->new_display('search_api_views_facets_block', 'Facets block', 'search_api_views_facets_block_1');
@@ -1351,6 +1356,11 @@ function ctf_views_nearby_listings_views_default_views() {
       'value' => '',
     ),
   );
+  /* Filter criterion: Indexed Drealty Listing: Drealty Active Status */
+  $handler->display->display_options['filters']['active']['id'] = 'active';
+  $handler->display->display_options['filters']['active']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['filters']['active']['field'] = 'active';
+  $handler->display->display_options['filters']['active']['value'] = '1';
 
   /* Display: Nearby block (single condo) */
   $handler = $view->new_display('block', 'Nearby block (single condo)', 'block_2');
@@ -1771,6 +1781,11 @@ function ctf_views_nearby_listings_views_default_views() {
   $handler->display->display_options['filters']['field_prkg_inc_torcond']['field'] = 'field_prkg_inc_torcond';
   $handler->display->display_options['filters']['field_prkg_inc_torcond']['value'] = 'N';
   $handler->display->display_options['filters']['field_prkg_inc_torcond']['group'] = 1;
+  /* Filter criterion: Indexed Drealty Listing: Drealty Active Status */
+  $handler->display->display_options['filters']['active']['id'] = 'active';
+  $handler->display->display_options['filters']['active']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['filters']['active']['field'] = 'active';
+  $handler->display->display_options['filters']['active']['value'] = '1';
   $export['nearby_listings_view'] = $view;
 
   return $export;
