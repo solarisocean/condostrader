@@ -50,6 +50,15 @@ function ctf_views_users_wish_list_views_default_views() {
   $handler->display->display_options['relationships']['flag_content_rel']['table'] = 'drealty_listing';
   $handler->display->display_options['relationships']['flag_content_rel']['field'] = 'flag_content_rel';
   $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'drealty_flag';
+  /* Relationship: Drealty Listing: City region (field_city_region__torcond) */
+  $handler->display->display_options['relationships']['field_city_region__torcond_tid']['id'] = 'field_city_region__torcond_tid';
+  $handler->display->display_options['relationships']['field_city_region__torcond_tid']['table'] = 'field_data_field_city_region__torcond';
+  $handler->display->display_options['relationships']['field_city_region__torcond_tid']['field'] = 'field_city_region__torcond_tid';
+  /* Relationship: Taxonomy term: Parent term */
+  $handler->display->display_options['relationships']['parent']['id'] = 'parent';
+  $handler->display->display_options['relationships']['parent']['table'] = 'taxonomy_term_hierarchy';
+  $handler->display->display_options['relationships']['parent']['field'] = 'parent';
+  $handler->display->display_options['relationships']['parent']['relationship'] = 'field_city_region__torcond_tid';
   /* Field: Drealty Listing: Drealty Listing Id */
   $handler->display->display_options['fields']['id']['id'] = 'id';
   $handler->display->display_options['fields']['id']['table'] = 'drealty_listing';
@@ -85,6 +94,8 @@ function ctf_views_users_wish_list_views_default_views() {
   $handler->display->display_options['fields']['field_addr__torcond']['table'] = 'field_data_field_addr__torcond';
   $handler->display->display_options['fields']['field_addr__torcond']['field'] = 'field_addr__torcond';
   $handler->display->display_options['fields']['field_addr__torcond']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_addr__torcond']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_addr__torcond']['alter']['text'] = '[field_addr__torcond], ';
   /* Field: Drealty Listing: Area */
   $handler->display->display_options['fields']['field_area__torcond']['id'] = 'field_area__torcond';
   $handler->display->display_options['fields']['field_area__torcond']['table'] = 'field_data_field_area__torcond';
@@ -102,6 +113,8 @@ function ctf_views_users_wish_list_views_default_views() {
   $handler->display->display_options['fields']['field_county__torcond']['table'] = 'field_data_field_county__torcond';
   $handler->display->display_options['fields']['field_county__torcond']['field'] = 'field_county__torcond';
   $handler->display->display_options['fields']['field_county__torcond']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_county__torcond']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_county__torcond']['alter']['text'] = ', [field_county__torcond]';
   /* Field: Drealty Listing: Br_plus */
   $handler->display->display_options['fields']['field_br_plus__torcond']['id'] = 'field_br_plus__torcond';
   $handler->display->display_options['fields']['field_br_plus__torcond']['table'] = 'field_data_field_br_plus__torcond';
@@ -139,11 +152,15 @@ function ctf_views_users_wish_list_views_default_views() {
   $handler->display->display_options['fields']['field_sqft__torcond']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_sqft__torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_sqft__torcond']['alter']['text'] = '[field_sqft__torcond] sqft';
-  /* Field: Drealty Listing: apt_num */
+  /* Field: Drealty Listing: Apt_num */
   $handler->display->display_options['fields']['field_apt_num__torcond']['id'] = 'field_apt_num__torcond';
   $handler->display->display_options['fields']['field_apt_num__torcond']['table'] = 'field_data_field_apt_num__torcond';
   $handler->display->display_options['fields']['field_apt_num__torcond']['field'] = 'field_apt_num__torcond';
   $handler->display->display_options['fields']['field_apt_num__torcond']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_apt_num__torcond']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_apt_num__torcond']['alter']['text'] = '#[field_apt_num__torcond-value], ';
+  $handler->display->display_options['fields']['field_apt_num__torcond']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_apt_num__torcond']['empty_zero'] = TRUE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
@@ -234,6 +251,12 @@ function ctf_views_users_wish_list_views_default_views() {
   $handler->display->display_options['fields']['field_zip__torcond']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_zip__torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_zip__torcond']['alter']['text'] = ', [field_zip__torcond]';
+  /* Field: Taxonomy term: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'parent';
+  $handler->display->display_options['fields']['name']['exclude'] = TRUE;
   /* Field: Flags: Flag link */
   $handler->display->display_options['fields']['ops']['id'] = 'ops';
   $handler->display->display_options['fields']['ops']['table'] = 'flagging';
@@ -274,21 +297,21 @@ function ctf_views_users_wish_list_views_default_views() {
     3 => 'nothing',
   );
   $handler->display->display_options['fields']['fieldset']['fieldset']['type'] = 'div';
-  /* Field: Title */
+  /* Field: Title (address) */
   $handler->display->display_options['fields']['nothing_7']['id'] = 'nothing_7';
   $handler->display->display_options['fields']['nothing_7']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_7']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing_7']['ui_name'] = 'Title';
+  $handler->display->display_options['fields']['nothing_7']['ui_name'] = 'Title (address)';
   $handler->display->display_options['fields']['nothing_7']['label'] = '';
-  $handler->display->display_options['fields']['nothing_7']['alter']['text'] = '[field_community__torcond] Condo';
+  $handler->display->display_options['fields']['nothing_7']['alter']['text'] = '[field_addr__torcond] [field_apt_num__torcond][field_community__torcond]';
   $handler->display->display_options['fields']['nothing_7']['element_label_colon'] = FALSE;
-  /* Field: Address */
+  /* Field: Regions */
   $handler->display->display_options['fields']['nothing_8']['id'] = 'nothing_8';
   $handler->display->display_options['fields']['nothing_8']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_8']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing_8']['ui_name'] = 'Address';
+  $handler->display->display_options['fields']['nothing_8']['ui_name'] = 'Regions';
   $handler->display->display_options['fields']['nothing_8']['label'] = '';
-  $handler->display->display_options['fields']['nothing_8']['alter']['text'] = '[field_addr__torcond] [field_community__torcond][field_area__torcond][field_zip__torcond]';
+  $handler->display->display_options['fields']['nothing_8']['alter']['text'] = '[name][field_area__torcond][field_county__torcond]';
   $handler->display->display_options['fields']['nothing_8']['element_label_colon'] = FALSE;
   /* Field: Drealty Listing: Maint */
   $handler->display->display_options['fields']['field_maint__torcond']['id'] = 'field_maint__torcond';

@@ -181,15 +181,8 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['field_area_torcond']['field'] = 'field_area_torcond';
   $handler->display->display_options['fields']['field_area_torcond']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_area_torcond']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_area_torcond']['alter']['text'] = '[field_area_torcond]';
+  $handler->display->display_options['fields']['field_area_torcond']['alter']['text'] = ', [field_area_torcond]';
   $handler->display->display_options['fields']['field_area_torcond']['hide_empty'] = TRUE;
-  /* Field: Indexed Drealty Listing: Municipality */
-  $handler->display->display_options['fields']['field_municipality_torcond']['id'] = 'field_municipality_torcond';
-  $handler->display->display_options['fields']['field_municipality_torcond']['table'] = 'search_api_index_toronto_condo_index';
-  $handler->display->display_options['fields']['field_municipality_torcond']['field'] = 'field_municipality_torcond';
-  $handler->display->display_options['fields']['field_municipality_torcond']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_municipality_torcond']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_municipality_torcond']['alter']['text'] = '[field_municipality_torcond]';
   /* Field: Indexed Drealty Listing: County */
   $handler->display->display_options['fields']['field_county_torcond']['id'] = 'field_county_torcond';
   $handler->display->display_options['fields']['field_county_torcond']['table'] = 'search_api_index_toronto_condo_index';
@@ -340,6 +333,27 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['views_conditional_2']['then'] = 'No';
   $handler->display->display_options['fields']['views_conditional_2']['or'] = 'Yes';
   $handler->display->display_options['fields']['views_conditional_2']['strip_tags'] = 0;
+  /* Field: City region: Parent terms (indexed) */
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['id'] = 'field_city_region_torcond_parent';
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['field'] = 'field_city_region_torcond_parent';
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['alter']['text'] = ', [field_city_region_torcond_parent]';
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['list']['mode'] = 'first';
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['link_to_entity'] = 0;
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['view_mode'] = 'full';
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['bypass_access'] = 0;
+  /* Field: City region: All parent terms (indexed) */
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['id'] = 'field_city_region_torcond_parents_all';
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['field'] = 'field_city_region_torcond_parents_all';
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['alter']['text'] = '[field_city_region_torcond_parents_all]';
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['list']['mode'] = 'first';
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['link_to_entity'] = 0;
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['view_mode'] = 'full';
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['bypass_access'] = 0;
   /* Field: CTrader Flag integration: CTrader Flag */
   $handler->display->display_options['fields']['ctrader_flag_handler']['id'] = 'ctrader_flag_handler';
   $handler->display->display_options['fields']['ctrader_flag_handler']['table'] = 'ctrader';
@@ -390,7 +404,10 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['field_community_torcond']['ui_name'] = 'Condo title (address)';
   $handler->display->display_options['fields']['field_community_torcond']['label'] = '';
   $handler->display->display_options['fields']['field_community_torcond']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_community_torcond']['alter']['text'] = '[field_addr_torcond] [field_apt_num_torcond][field_municipality_torcond]';
+  $handler->display->display_options['fields']['field_community_torcond']['alter']['text'] = '[field_addr_torcond] [field_apt_num_torcond][field_city_region_torcond_parents_all]';
+  $handler->display->display_options['fields']['field_community_torcond']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_community_torcond']['alter']['path'] = 'drealty_listing/[id]';
+  $handler->display->display_options['fields']['field_community_torcond']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['field_community_torcond']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_community_torcond']['empty'] = '[field_area_torcond] Condo';
   $handler->display->display_options['fields']['field_community_torcond']['hide_alter_empty'] = FALSE;
@@ -403,7 +420,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['ui_name'] = 'Community, area';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_community_torcond_1][field_area_torcond][field_county_torcond]';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_city_region_torcond_parent][field_area_torcond][field_county_torcond]';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   /* Field: Indexed Drealty Listing: Maint */
   $handler->display->display_options['fields']['field_maint_torcond']['id'] = 'field_maint_torcond';
@@ -560,15 +577,8 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['field_area_torcond']['field'] = 'field_area_torcond';
   $handler->display->display_options['fields']['field_area_torcond']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_area_torcond']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_area_torcond']['alter']['text'] = '[field_area_torcond]';
+  $handler->display->display_options['fields']['field_area_torcond']['alter']['text'] = ', [field_area_torcond]';
   $handler->display->display_options['fields']['field_area_torcond']['hide_empty'] = TRUE;
-  /* Field: Indexed Drealty Listing: Municipality */
-  $handler->display->display_options['fields']['field_municipality_torcond']['id'] = 'field_municipality_torcond';
-  $handler->display->display_options['fields']['field_municipality_torcond']['table'] = 'search_api_index_toronto_condo_index';
-  $handler->display->display_options['fields']['field_municipality_torcond']['field'] = 'field_municipality_torcond';
-  $handler->display->display_options['fields']['field_municipality_torcond']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_municipality_torcond']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_municipality_torcond']['alter']['text'] = '[field_municipality_torcond]';
   /* Field: Indexed Drealty Listing: County */
   $handler->display->display_options['fields']['field_county_torcond']['id'] = 'field_county_torcond';
   $handler->display->display_options['fields']['field_county_torcond']['table'] = 'search_api_index_toronto_condo_index';
@@ -719,6 +729,27 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['views_conditional_2']['then'] = 'No';
   $handler->display->display_options['fields']['views_conditional_2']['or'] = 'Yes';
   $handler->display->display_options['fields']['views_conditional_2']['strip_tags'] = 0;
+  /* Field: City region: Parent terms (indexed) */
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['id'] = 'field_city_region_torcond_parent';
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['field'] = 'field_city_region_torcond_parent';
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['alter']['text'] = ', [field_city_region_torcond_parent]';
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['list']['mode'] = 'first';
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['link_to_entity'] = 0;
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['view_mode'] = 'full';
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['bypass_access'] = 0;
+  /* Field: City region: All parent terms (indexed) */
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['id'] = 'field_city_region_torcond_parents_all';
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['field'] = 'field_city_region_torcond_parents_all';
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['alter']['text'] = '[field_city_region_torcond_parents_all]';
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['list']['mode'] = 'first';
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['link_to_entity'] = 0;
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['view_mode'] = 'full';
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['bypass_access'] = 0;
   /* Field: CTrader Flag integration: CTrader Flag */
   $handler->display->display_options['fields']['ctrader_flag_handler']['id'] = 'ctrader_flag_handler';
   $handler->display->display_options['fields']['ctrader_flag_handler']['table'] = 'ctrader';
@@ -769,7 +800,10 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['field_community_torcond']['ui_name'] = 'Condo title (address)';
   $handler->display->display_options['fields']['field_community_torcond']['label'] = '';
   $handler->display->display_options['fields']['field_community_torcond']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_community_torcond']['alter']['text'] = '[field_addr_torcond] [field_apt_num_torcond][field_municipality_torcond]';
+  $handler->display->display_options['fields']['field_community_torcond']['alter']['text'] = '[field_addr_torcond] [field_apt_num_torcond][field_city_region_torcond_parents_all]';
+  $handler->display->display_options['fields']['field_community_torcond']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_community_torcond']['alter']['path'] = 'drealty_listing/[id]';
+  $handler->display->display_options['fields']['field_community_torcond']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['field_community_torcond']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_community_torcond']['empty'] = '[field_area_torcond] Condo';
   $handler->display->display_options['fields']['field_community_torcond']['hide_alter_empty'] = FALSE;
@@ -782,7 +816,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['ui_name'] = 'Community, area';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_community_torcond_1][field_area_torcond][field_county_torcond]';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_city_region_torcond_parent][field_area_torcond][field_county_torcond]';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   /* Field: Indexed Drealty Listing: Maint */
   $handler->display->display_options['fields']['field_maint_torcond']['id'] = 'field_maint_torcond';
@@ -1006,15 +1040,8 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['field_area_torcond']['field'] = 'field_area_torcond';
   $handler->display->display_options['fields']['field_area_torcond']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_area_torcond']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_area_torcond']['alter']['text'] = '[field_area_torcond]';
+  $handler->display->display_options['fields']['field_area_torcond']['alter']['text'] = ', [field_area_torcond]';
   $handler->display->display_options['fields']['field_area_torcond']['hide_empty'] = TRUE;
-  /* Field: Indexed Drealty Listing: Municipality */
-  $handler->display->display_options['fields']['field_municipality_torcond']['id'] = 'field_municipality_torcond';
-  $handler->display->display_options['fields']['field_municipality_torcond']['table'] = 'search_api_index_toronto_condo_index';
-  $handler->display->display_options['fields']['field_municipality_torcond']['field'] = 'field_municipality_torcond';
-  $handler->display->display_options['fields']['field_municipality_torcond']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_municipality_torcond']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_municipality_torcond']['alter']['text'] = '[field_municipality_torcond]';
   /* Field: Indexed Drealty Listing: County */
   $handler->display->display_options['fields']['field_county_torcond']['id'] = 'field_county_torcond';
   $handler->display->display_options['fields']['field_county_torcond']['table'] = 'search_api_index_toronto_condo_index';
@@ -1165,6 +1192,27 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['views_conditional_2']['then'] = 'No';
   $handler->display->display_options['fields']['views_conditional_2']['or'] = 'Yes';
   $handler->display->display_options['fields']['views_conditional_2']['strip_tags'] = 0;
+  /* Field: City region: Parent terms (indexed) */
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['id'] = 'field_city_region_torcond_parent';
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['field'] = 'field_city_region_torcond_parent';
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['alter']['text'] = ', [field_city_region_torcond_parent]';
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['list']['mode'] = 'first';
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['link_to_entity'] = 0;
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['view_mode'] = 'full';
+  $handler->display->display_options['fields']['field_city_region_torcond_parent']['bypass_access'] = 0;
+  /* Field: City region: All parent terms (indexed) */
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['id'] = 'field_city_region_torcond_parents_all';
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['field'] = 'field_city_region_torcond_parents_all';
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['alter']['text'] = '[field_city_region_torcond_parents_all]';
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['list']['mode'] = 'first';
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['link_to_entity'] = 0;
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['view_mode'] = 'full';
+  $handler->display->display_options['fields']['field_city_region_torcond_parents_all']['bypass_access'] = 0;
   /* Field: CTrader Flag integration: CTrader Flag */
   $handler->display->display_options['fields']['ctrader_flag_handler']['id'] = 'ctrader_flag_handler';
   $handler->display->display_options['fields']['ctrader_flag_handler']['table'] = 'ctrader';
@@ -1215,7 +1263,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['field_community_torcond']['ui_name'] = 'Condo title (address)';
   $handler->display->display_options['fields']['field_community_torcond']['label'] = '';
   $handler->display->display_options['fields']['field_community_torcond']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_community_torcond']['alter']['text'] = '[field_addr_torcond] [field_apt_num_torcond][field_municipality_torcond]';
+  $handler->display->display_options['fields']['field_community_torcond']['alter']['text'] = '[field_addr_torcond] [field_apt_num_torcond][field_city_region_torcond_parents_all]';
   $handler->display->display_options['fields']['field_community_torcond']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['field_community_torcond']['alter']['path'] = 'drealty_listing/[id]';
   $handler->display->display_options['fields']['field_community_torcond']['alter']['target'] = '_blank';
@@ -1231,7 +1279,7 @@ function ctf_views_search_results_ctrader_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['ui_name'] = 'Community, area';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_community_torcond_1][field_area_torcond][field_county_torcond]';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_city_region_torcond_parent][field_area_torcond][field_county_torcond]';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   /* Field: Indexed Drealty Listing: Maint */
   $handler->display->display_options['fields']['field_maint_torcond']['id'] = 'field_maint_torcond';
