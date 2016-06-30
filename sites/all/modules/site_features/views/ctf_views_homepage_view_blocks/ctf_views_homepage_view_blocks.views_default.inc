@@ -596,6 +596,15 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['field_addr_torcond']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_addr_torcond']['alter']['text'] = '[field_addr_torcond], ';
   $handler->display->display_options['fields']['field_addr_torcond']['hide_empty'] = TRUE;
+  /* Field: Indexed Drealty Listing: Apt_num */
+  $handler->display->display_options['fields']['field_apt_num_torcond']['id'] = 'field_apt_num_torcond';
+  $handler->display->display_options['fields']['field_apt_num_torcond']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['fields']['field_apt_num_torcond']['field'] = 'field_apt_num_torcond';
+  $handler->display->display_options['fields']['field_apt_num_torcond']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_apt_num_torcond']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_apt_num_torcond']['alter']['text'] = '#[field_apt_num_torcond-value], ';
+  $handler->display->display_options['fields']['field_apt_num_torcond']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_apt_num_torcond']['empty_zero'] = TRUE;
   /* Field: Indexed Drealty Listing: Area */
   $handler->display->display_options['fields']['field_area_torcond']['id'] = 'field_area_torcond';
   $handler->display->display_options['fields']['field_area_torcond']['table'] = 'search_api_index_toronto_condo_index';
