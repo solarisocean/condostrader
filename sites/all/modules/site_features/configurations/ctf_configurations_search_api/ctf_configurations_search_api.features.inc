@@ -311,16 +311,7 @@ function ctf_configurations_search_api_default_search_api_index() {
           "weight" : "-10",
           "settings" : { "default" : "1", "bundles" : [] }
         },
-        "search_api_alter_add_hierarchy" : {
-          "status" : 1,
-          "weight" : "0",
-          "settings" : { "fields" : {
-              "field_city_region__torcond:parent" : "field_city_region__torcond:parent",
-              "field_city_region__torcond:parents_all" : "field_city_region__torcond:parents_all",
-              "field_reference_to_condo:field_reference_to_condo" : "field_reference_to_condo:field_reference_to_condo"
-            }
-          }
-        },
+        "search_api_alter_add_hierarchy" : { "status" : 1, "weight" : "0", "settings" : { "fields" : [] } },
         "search_api_alter_add_aggregation" : {
           "status" : 1,
           "weight" : "0",
