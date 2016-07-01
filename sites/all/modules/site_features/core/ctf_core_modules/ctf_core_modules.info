@@ -41,6 +41,7 @@ dependencies[] = entity
 dependencies[] = entity2text
 dependencies[] = entity_panels
 dependencies[] = entity_rules
+dependencies[] = entity_statistics
 dependencies[] = entity_token
 dependencies[] = entityform
 dependencies[] = entityform_panels

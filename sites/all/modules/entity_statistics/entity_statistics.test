@@ -1,0 +1,127 @@
+<?php
+
+/**
+ * @file
+ * Tests for the EntityStatistics module.
+ */
+
+/**
+ * Tests that logging via entity_statistics_exit() works for all pages.
+ *
+ * We subclass DrupalWebTestCase rather than EntityStatisticsTestCase, because
+ * we want to test requests from an anonymous user.
+ */
+class EntityStatisticsLoggingTestCase extends DrupalWebTestCase {
+  /**
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Entity Statistics logging tests',
+      'description' => 'Tests request logging for cached and uncached pages.',
+      'group' => 'Entity Statistics',
+    );
+  }
+
+  /**
+   * Title used for test node.
+   *
+   * @return string
+   *   Node title.
+   */
+  public function randomNodeTitle() {
+    return 'Entity statistics node title';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    parent::setUp('entity_statistics');
+
+    $this->auth_user = $this->drupalCreateUser(
+      array(
+        'access content',
+        'create page content',
+        'edit own page content',
+      )
+    );
+
+    // Ensure we have a node page to access.
+    $this->node = $this->drupalCreateNode(array('title' => $this->randomNodeTitle(), 'uid' => $this->auth_user->uid));
+
+    // Enable page caching.
+    variable_set('cache', TRUE);
+
+    // Enable entity counter for nodes.
+    variable_set('entity_statistics_count_entity_views_entity_types', array('node'));
+    variable_set('entity_statistics_count_entity_views_ajax', 0);
+
+    db_truncate('entity_counter');
+  }
+
+  /**
+   * Verifies request logging for cached and uncached pages.
+   */
+  public function testLogging() {
+    $path = 'node/' . $this->node->nid;
+
+    // Verify logging of an uncached page.
+    $this->drupalGet($path);
+    $this->assertIdentical($this->drupalGetHeader('X-Drupal-Cache'), 'MISS', 'Testing an uncached page.');
+    $entity_counter = entity_statistics_get('node', $this->node->nid);
+    $this->assertIdentical($entity_counter['totalcount'], '1');
+
+    // Verify not logging of a cached page.
+    $this->drupalGet($path);
+    $this->assertIdentical($this->drupalGetHeader('X-Drupal-Cache'), 'HIT', 'Testing a cached page.');
+    $entity_counter = entity_statistics_get('node', $this->node->nid);
+    $this->assertIdentical($entity_counter['totalcount'], '1');
+
+    // Test logging from authenticated users.
+    $this->drupalLogin($this->auth_user);
+    $this->drupalGet($path);
+    $entity_counter = entity_statistics_get('node', $this->node->nid);
+    $this->assertIdentical($entity_counter['totalcount'], '2');
+
+    // Test that Ajax logging doesn't occur when disabled.
+    $post = http_build_query(array('entity_id' => $this->node->nid, 'entity_type' => 'node'));
+    $headers = array('Content-Type' => 'application/x-www-form-urlencoded');
+    global $base_url;
+    $stats_path = $base_url . '/' . drupal_get_path('module', 'entity_statistics') . '/entity_statistics.php';
+    drupal_http_request(
+      $stats_path,
+      array(
+        'method' => 'POST',
+        'data' => $post,
+        'headers' => $headers,
+        'timeout' => 10000,
+      )
+    );
+
+    $entity_counter = entity_statistics_get('node', $this->node->nid);
+    $this->assertIdentical($entity_counter['totalcount'], '2', 'Page request was not counted via Ajax.');
+
+    variable_set('entity_statistics_count_entity_views_ajax', 1);
+    // Test that Ajax logging occurs when enabled.
+    drupal_http_request(
+      $stats_path,
+      array(
+        'method' => 'POST',
+        'data' => $post,
+        'headers' => $headers,
+        'timeout' => 10000,
+      )
+    );
+    $entity_counter = entity_statistics_get('node', $this->node->nid);
+    $this->assertIdentical($entity_counter['totalcount'], '3', 'Page request was counted via Ajax.');
+    variable_set('entity_statistics_count_entity_views_ajax', 0);
+
+    // Test when entity is deleted statistics are deleted.
+    $nid = $this->node->nid;
+    node_delete($this->node->nid);
+    $entity_counter = entity_statistics_get('node', $nid);
+    $this->assertFalse($entity_counter, 'When node is deleted there are not statistics');
+  }
+
+}

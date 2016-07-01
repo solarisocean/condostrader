@@ -1,0 +1,216 @@
+<?php
+/**
+ * @file
+ * Logs and displays access entity_statistics for a site.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function entity_statistics_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#entity_statistics':
+      return t('Entity statistics is used to track entity views, storing daily viewsc, total views, and last time it was viewed.');
+  }
+}
+
+/**
+ * Implements hook_exit().
+ *
+ * Gathers entity_statistics for page accesses.
+ */
+function entity_statistics_exit() {
+  // When serving cached pages with the 'page_cache_without_database'
+  // configuration, system variables need to be loaded. This is a major
+  // performance decrease for non-database page caches, but with Statistics
+  // module, it is likely to also have 'entity_statistics_enable_access_log'
+  // enabled,
+  // in which case we need to bootstrap to the session phase anyway.
+  drupal_bootstrap(DRUPAL_BOOTSTRAP_VARIABLES);
+  if (!variable_get('entity_statistics_count_entity_views_ajax', 0)) {
+    require_once DRUPAL_ROOT . '/includes/common.inc';
+    $entity_types = entity_get_info();
+
+    // We are counting entity views.
+    $entity_type = arg(0);
+    if (isset($entity_types[$entity_type]) && is_numeric(arg(1)) && arg(2) == NULL && entity_statistics_entity_type_enabled($entity_type)) {
+      // A entity has been viewed, so update the entity's counters.
+      db_merge('entity_counter')->key(array('entity_id' => arg(1)))->fields(array(
+        'daycount' => 1,
+        'totalcount' => 1,
+        'timestamp' => REQUEST_TIME,
+        'entity_type' => $entity_type,
+      ))->expression('daycount', 'daycount + 1')->expression('totalcount', 'totalcount + 1')->execute();
+    }
+  }
+}
+
+/**
+ * Implements hook_permission().
+ */
+function entity_statistics_permission() {
+  return array(
+    'administer entity_statistics' => array(
+      'title' => t('Administer entity_statistics'),
+    ),
+    'view post access counter' => array(
+      'title' => t('View entity hits'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_entity_view().
+ */
+function entity_statistics_entity_view($entity, $type, $view_mode, $langcode) {
+  list($entity_id) = entity_extract_ids($type, $entity);
+  // Attach Ajax entity count entity_statistics if configured.
+  if (entity_statistics_entity_type_enabled($type)) {
+    if (variable_get('entity_statistics_count_entity_views_ajax', 0)) {
+      if ($entity_id && $view_mode == 'full' && empty($entity->in_preview)) {
+        $entity_statistics = drupal_get_path('module', 'entity_statistics') . '/js/entity_statistics.js';
+        $entity->content['#attached']['js'][$entity_statistics] = array(
+          'scope' => 'footer',
+        );
+        $settings = array(
+          'data' => array(
+            'entity_id' => $entity_id,
+            'entity_type' => $type,
+          ),
+          'url' => url(drupal_get_path('module', 'entity_statistics') . '/entity_statistics.php'),
+        );
+        $entity->content['#attached']['js'][] = array(
+          'data' => array('entity_statistics' => $settings),
+          'type' => 'setting',
+        );
+      }
+    }
+
+    if ($view_mode != 'rss') {
+      if (user_access('view post access counter')) {
+        $entity_statistics = entity_statistics_get($type, $entity_id);
+        if ($entity_statistics) {
+          $links['entity_statistics_counter']['title'] = format_plural($entity_statistics['totalcount'], '1 read', '@count reads');
+          $entity->content['links']['entity_statistics'] = array(
+            '#theme' => 'links__' . $type . '__entity_statistics',
+            '#links' => $links,
+            '#attributes' => array('class' => array('links', 'inline')),
+          );
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function entity_statistics_menu() {
+  $items['admin/config/system/entity-statistics'] = array(
+    'title' => 'Entity statistics',
+    'description' => 'Control details about what and how your site logs access entity_statistics.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('entity_statistics_settings_form'),
+    'access arguments' => array('administer entity_statistics'),
+    'file' => 'entity_statistics.admin.inc',
+    'weight' => -15,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_cron().
+ */
+function entity_statistics_cron() {
+  $entity_statistics_timestamp = variable_get('entity_statistics_day_timestamp', '');
+
+  if ((REQUEST_TIME - $entity_statistics_timestamp) >= 86400) {
+    // Reset day counts.
+    db_update('entity_counter')->fields(array('daycount' => 0))->execute();
+    variable_set('entity_statistics_day_timestamp', REQUEST_TIME);
+  }
+}
+
+/**
+ * Retrieves a entity's "view entity_statistics".
+ *
+ * @param string $type
+ *   The entity type.
+ * @param int $entity_id
+ *   The entity ID.
+ *
+ * @return array
+ *   An associative array containing:
+ *   - totalcount: Integer for the total number of times the entity has been
+ *     viewed.
+ *   - daycount: Integer for the total number of times
+ *     the entity has been viewed
+ *     "today". For the daycount to be reset, cron must be enabled.
+ *   - timestamp: Integer for the timestamp of when the entity was last viewed.
+ */
+function entity_statistics_get($type, $entity_id) {
+
+  if ($entity_id > 0) {
+    // Retrieve an array with both totalcount and daycount.
+    return db_query(
+      'SELECT totalcount, daycount, timestamp FROM {entity_counter} WHERE entity_type = :entity_type AND entity_id = :entity_id',
+      array(
+        ':entity_id' => $entity_id,
+        ':entity_type' => $type,
+      ),
+      array(
+        'target' => 'slave',
+      )
+    )->fetchAssoc();
+  }
+}
+
+/**
+ * Implements hook_entity_delete().
+ */
+function entity_statistics_entity_delete($entity, $type) {
+  // Clean up entity_statistics table when entity is deleted.
+  if (entity_statistics_entity_type_enabled($type)) {
+    list($entity_id) = entity_extract_ids($type, $entity);
+    db_delete('entity_counter')->condition('entity_id', $entity_id)->condition('entity_type', $type)->execute();
+  }
+}
+
+/**
+ * Check entity type is enabled for statistics.
+ *
+ * @param string $entity_type
+ *   Entity type.
+ *
+ * @return bool
+ *   Entity type enabled?
+ */
+function entity_statistics_entity_type_enabled($entity_type) {
+  return in_array($entity_type, entity_statistics_entity_types_enabled());
+}
+
+/**
+ * List of entity types enabled.
+ *
+ * @return array
+ *   Entity types enabled.
+ */
+function entity_statistics_entity_types_enabled() {
+  $entity_types_enabled_config = variable_get('entity_statistics_count_entity_views_entity_types', array());
+  $entity_types_enabled = array_filter($entity_types_enabled_config);
+  $entity_types_enabled_list = array_keys($entity_types_enabled);
+
+  // Alter.
+  drupal_alter('entity_statistics_entity_types_enabled', $entity_types_enabled_list);
+  return $entity_types_enabled_list;
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function entity_statistics_views_api() {
+  return array(
+    'api' => 3,
+  );
+}

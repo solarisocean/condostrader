@@ -337,6 +337,41 @@ function ctf_pages_main_page_default_page_manager_pages() {
     $display->content['new-4a61666d-46df-4cda-a96e-d8f5aaafea84'] = $pane;
     $display->panels['center_'][0] = 'new-4a61666d-46df-4cda-a96e-d8f5aaafea84';
     $pane = new stdClass();
+    $pane->pid = 'new-ec373553-1bd8-4fc5-b3e0-41c715b8f8fc';
+    $pane->panel = 'left';
+    $pane->type = 'views';
+    $pane->subtype = 'most_viewed';
+    $pane->shown = FALSE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_pager_settings' => 0,
+      'use_pager' => 1,
+      'nodes_per_page' => '6',
+      'pager_id' => '0',
+      'offset' => '0',
+      'more_link' => 0,
+      'feed_icons' => 0,
+      'panel_args' => 0,
+      'link_to_view' => 0,
+      'args' => '',
+      'url' => '',
+      'display' => 'page_1',
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'ec373553-1bd8-4fc5-b3e0-41c715b8f8fc';
+    $display->content['new-ec373553-1bd8-4fc5-b3e0-41c715b8f8fc'] = $pane;
+    $display->panels['left'][0] = 'new-ec373553-1bd8-4fc5-b3e0-41c715b8f8fc';
+    $pane = new stdClass();
     $pane->pid = 'new-8daaa5c6-59bc-4aa7-a87d-bf55e7cceec1';
     $pane->panel = 'left';
     $pane->type = 'views';
@@ -366,11 +401,11 @@ function ctf_pages_main_page_default_page_manager_pages() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 0;
+    $pane->position = 1;
     $pane->locks = array();
     $pane->uuid = '8daaa5c6-59bc-4aa7-a87d-bf55e7cceec1';
     $display->content['new-8daaa5c6-59bc-4aa7-a87d-bf55e7cceec1'] = $pane;
-    $display->panels['left'][0] = 'new-8daaa5c6-59bc-4aa7-a87d-bf55e7cceec1';
+    $display->panels['left'][1] = 'new-8daaa5c6-59bc-4aa7-a87d-bf55e7cceec1';
     $pane = new stdClass();
     $pane->pid = 'new-7a14b39d-90fc-46fe-b593-4bd56b7f0c38';
     $pane->panel = 'right';

@@ -1,0 +1,64 @@
+<?php
+/**
+ * @file
+ * Install, update, and uninstall functions for the Statistics module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function entity_statistics_uninstall() {
+  // Remove variables.
+  variable_del('entity_statistics_count_entity_views_ajax');
+  variable_del('entity_statistics_count_entity_views_entity_types');
+}
+
+/**
+ * Implements hook_schema().
+ */
+function entity_statistics_schema() {
+  $schema['entity_counter'] = array(
+    'description' => 'Access entity_statistics for {entity}s.',
+    'fields' => array(
+      'entity_id' => array(
+        'description' => 'The {entity}.entity_id for these entity_statistics.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'totalcount' => array(
+        'description' => 'The total number of times the {entity} has been viewed.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'big',
+      ),
+      'daycount' => array(
+        'description' => 'The total number of times the {entity} has been viewed today.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'medium',
+      ),
+      'timestamp' => array(
+        'description' => 'The most recent time the {entity} has been viewed.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'entity_type' => array(
+        'description' => 'The entity type.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+    ),
+    'primary key' => array('entity_id'),
+  );
+
+  return $schema;
+}
