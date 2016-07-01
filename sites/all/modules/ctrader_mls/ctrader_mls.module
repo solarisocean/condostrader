@@ -45,6 +45,13 @@ function ctrader_mls_menu() {
     'access arguments' => array('administer modules'),
     'file' => 'inc/ctrader_mls.rets_connection.inc',
   );
+  $items['check-inactive-listings'] = array(
+    'title' => 'RETS connection',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('_ctrader_mls_rets_check_inactive_listings_form'),
+    'access arguments' => array('administer modules'),
+    'file' => 'inc/ctrader_mls.rets_connection.inc',
+  );
 //  $items['rets-xml-parser'] = array(
 //    'title' => 'RETS xml parser',
 //    'page callback' => '_rets_xml_parser',
@@ -886,4 +893,21 @@ function _ctrader_mls_taxonomy_menu_path_custom_for_rent($vid, $tid) {
   $path = implode('/', $path);
   $path .= '?f[0]=field_s_r__torcond:Lease';
   return $path;
+}
+
+
+function _ctrader_mls_rets_check_inactive_listings_form() {
+
+}
+
+function _ctrader_mls_rets_check_inactive_listings_form_submit($form, &$form_state) {
+  $connections = entity_load('drealty_connection_entity');
+  $connection = NULL;
+  foreach ($connections as $value) {
+    if($value->active == 1) {
+      $connection = $value;
+    }
+  }
+  $test = new CtraderDrealtyDaemon;
+  $test_class = $test->CheckListingStatuses($connection);
 }

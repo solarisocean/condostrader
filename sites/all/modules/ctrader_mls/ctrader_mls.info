@@ -8,3 +8,4 @@ files[] = views/handlers/views_handler_field_ctrader_discount.inc
 files[] = views/handlers/views_handler_ctrader_flag_int.inc
 files[] = views/handlers/views_handler_field_ctrader_daysonmarket.inc
 files[] = views/handlers/views_handler_field_ctrader_mortgage_calculator.inc
+files[] = inc/CtraderDrealtyDaemon.inc
