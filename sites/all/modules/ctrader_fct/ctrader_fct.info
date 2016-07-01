@@ -1,5 +1,5 @@
-name = Condos Traider Facets Fixes
+name = Condos Trader Facets Fixes
 description = Provide Changes to Facets.
 core = 7.x
-package = Condos Traider
+package = Condos Trader
 version = 7.x-1.0

@@ -1,7 +1,7 @@
-name = Condos Traider Facets
+name = Condos Trader Facets
 description = Provide custom SearchApi facets.
 core = 7.x
-package = Condos Traider
+package = Condos Trader
 version = 7.x-1.0
 
 

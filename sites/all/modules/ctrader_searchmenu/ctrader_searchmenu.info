@@ -1,7 +1,7 @@
-name = Condos Traider Search Block in Menu
+name = Condos Trader Search Block in Menu
 description = Provide search block in main menu.
 core = 7.x
-package = Condos Traider
+package = Condos Trader
 version = 7.x-1.0
 
 stylesheets[all][] = css/ctrader_searchmenu.css

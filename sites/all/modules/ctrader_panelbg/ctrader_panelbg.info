@@ -1,5 +1,5 @@
-name = Condos Traider Panels Backgroung image.
+name = Condos Trader Panels Backgroung image.
 description = Provide backgroung image to panels.
 core = 7.x
-package = Condos Traider
+package = Condos Trader
 version = 7.x-1.0

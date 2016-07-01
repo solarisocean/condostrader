@@ -1,5 +1,5 @@
-name = Condos Traider Map
+name = Condos Trader Map
 description = Provide map with all condos in Toronto.
 core = 7.x
-package = Condos Traider
+package = Condos Trader
 version = 7.x-1.0
