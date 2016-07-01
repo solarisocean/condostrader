@@ -386,6 +386,27 @@
       }
     }
   }
+
+  @media #{$small-only} {
+    .views-fieldset {
+      padding: 5px;
+      border-left: 1px solid darken($athens-gray, 1);
+      border-top: none;
+    }
+
+    .views-field-nothing-1 {
+      float: none;
+      margin-right: 0;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .views-field-field-maint-torcond {
+      width: 100%;
+    }
+  }
 }
 
 %condo-heading {
@@ -418,6 +439,12 @@
       box-shadow: 0 0 10px rgba(0,0,0,.2);
     }
 
+  }
+
+  @media #{$small-only} {
+    a {
+      margin: 10px auto 50px;
+    }
   }
 }
 

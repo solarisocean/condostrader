@@ -110,6 +110,12 @@
       border-bottom: 1px solid $ecstasy;
       padding-bottom: 4px;
     }
+
+    @media #{$small-only} {
+      .panels-flexible-region {
+        width: 100%;
+      }
+    }
   }
 
   .recent-post-front {
