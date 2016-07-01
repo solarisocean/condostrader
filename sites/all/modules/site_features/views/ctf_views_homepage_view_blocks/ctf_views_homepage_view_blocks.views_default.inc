@@ -437,36 +437,6 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['filters']['type_1']['field'] = 'type';
   $handler->display->display_options['filters']['type_1']['value'] = 'toronto_condo';
   $handler->display->display_options['filters']['type_1']['group'] = 1;
-  /* Filter criterion: Indexed Drealty Listing: S_r */
-  $handler->display->display_options['filters']['field_s_r_torcond']['id'] = 'field_s_r_torcond';
-  $handler->display->display_options['filters']['field_s_r_torcond']['table'] = 'search_api_index_toronto_condo_index';
-  $handler->display->display_options['filters']['field_s_r_torcond']['field'] = 'field_s_r_torcond';
-  $handler->display->display_options['filters']['field_s_r_torcond']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_s_r_torcond']['expose']['operator_id'] = 'field_s_r_torcond_op';
-  $handler->display->display_options['filters']['field_s_r_torcond']['expose']['label'] = 'S_r';
-  $handler->display->display_options['filters']['field_s_r_torcond']['expose']['operator'] = 'field_s_r_torcond_op';
-  $handler->display->display_options['filters']['field_s_r_torcond']['expose']['identifier'] = 'field_s_r_torcond';
-  $handler->display->display_options['filters']['field_s_r_torcond']['is_grouped'] = TRUE;
-  $handler->display->display_options['filters']['field_s_r_torcond']['group_info']['label'] = 'S_r';
-  $handler->display->display_options['filters']['field_s_r_torcond']['group_info']['identifier'] = 'sale-rent';
-  $handler->display->display_options['filters']['field_s_r_torcond']['group_info']['default_group'] = '1';
-  $handler->display->display_options['filters']['field_s_r_torcond']['group_info']['group_items'] = array(
-    1 => array(
-      'title' => 'sale',
-      'operator' => '=',
-      'value' => 'Sale',
-    ),
-    2 => array(
-      'title' => 'rent',
-      'operator' => '=',
-      'value' => 'Lease',
-    ),
-    3 => array(
-      'title' => '',
-      'operator' => '=',
-      'value' => '',
-    ),
-  );
 
   /* Display: newly listed */
   $handler = $view->new_display('page', 'newly listed', 'page_1');
@@ -1336,6 +1306,12 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['nothing_2']['alter']['text'] = '<div class="condo-info-line"><span class="condo-info-element sqft"><span></span>[field_sqft_torcond]</span><span class="condo-info-element bed"><span></span>[nothing_3]</span><span class="condo-info-element bath"><span></span>[field_bath_tot_torcond]</span></div>
 <div class="condo-info-line"><span class="condo-info-element pets"><span></span>[views_conditional_1]</span><span class="condo-info-element locker"><span></span>[views_conditional]</span><span class="condo-info-element parking"><span></span>[views_conditional_2]</span></div>';
   $handler->display->display_options['fields']['nothing_2']['element_label_colon'] = FALSE;
+  /* Field: Broken/missing handler */
+  $handler->display->display_options['fields']['view_counter']['id'] = 'view_counter';
+  $handler->display->display_options['fields']['view_counter']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['fields']['view_counter']['field'] = 'view_counter';
+  $handler->display->display_options['fields']['view_counter']['label'] = 'View counter';
+  $handler->display->display_options['fields']['view_counter']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Indexed Drealty Listing: Drealty Active Status */
@@ -1344,14 +1320,6 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['filters']['active']['field'] = 'active';
   $handler->display->display_options['filters']['active']['value'] = '1';
   $handler->display->display_options['filters']['active']['group'] = 1;
-  /* Filter criterion: Indexed Drealty Listing: Timestamp_sql */
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['id'] = 'field_timestamp_sql_torcond';
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['table'] = 'search_api_index_toronto_condo_index';
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['field'] = 'field_timestamp_sql_torcond';
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['operator'] = 'not empty';
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['value'] = 'now + 1 day';
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['group'] = 1;
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['year_range'] = '-0:+0';
   /* Filter criterion: Indexed Drealty Listing: Drealty Listing Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'search_api_index_toronto_condo_index';
@@ -1771,14 +1739,6 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['filters']['active']['field'] = 'active';
   $handler->display->display_options['filters']['active']['value'] = '1';
   $handler->display->display_options['filters']['active']['group'] = 1;
-  /* Filter criterion: Indexed Drealty Listing: Timestamp_sql */
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['id'] = 'field_timestamp_sql_torcond';
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['table'] = 'search_api_index_toronto_condo_index';
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['field'] = 'field_timestamp_sql_torcond';
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['operator'] = 'not empty';
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['value'] = 'now + 1 day';
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['group'] = 1;
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['year_range'] = '-0:+0';
   /* Filter criterion: Indexed Drealty Listing: Drealty Listing Type */
   $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
   $handler->display->display_options['filters']['type_1']['table'] = 'search_api_index_toronto_condo_index';
@@ -2188,14 +2148,6 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['filters']['active']['field'] = 'active';
   $handler->display->display_options['filters']['active']['value'] = '1';
   $handler->display->display_options['filters']['active']['group'] = 1;
-  /* Filter criterion: Indexed Drealty Listing: Timestamp_sql */
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['id'] = 'field_timestamp_sql_torcond';
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['table'] = 'search_api_index_toronto_condo_index';
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['field'] = 'field_timestamp_sql_torcond';
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['operator'] = 'not empty';
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['value'] = 'now + 1 day';
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['group'] = 1;
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['year_range'] = '-0:+0';
   /* Filter criterion: Indexed Drealty Listing: Drealty Listing Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'search_api_index_toronto_condo_index';

@@ -1,0 +1,9 @@
+name = CT Features: Views: Most viewed
+core = 7.x
+package = CT Features: Views
+dependencies[] = better_exposed_filters
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[views_view][] = most_viewed
+features_exclude[dependencies][ctools] = ctools

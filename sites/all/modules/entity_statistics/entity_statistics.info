@@ -1,0 +1,13 @@
+name = Entity statistics
+description = Logs access entity statistics for your site.
+package = Entity statistics
+core = 7.x
+files[] = entity_statistics.test
+configure = admin/config/system/entity-statistics
+
+; Information added by Drupal.org packaging script on 2016-05-09
+version = "7.x-1.0"
+core = "7.x"
+project = "entity_statistics"
+datestamp = "1462805652"
+

@@ -261,8 +261,9 @@ function ctrader_saf_views_pre_view(&$view, &$display_id, &$args) {
     // Prettify exposed filter GET parameter (sale-rent).
     case 'homepage_view_blocks':
     case 'nearby_listings_view':
+    case 'most_viewed':
       switch ($display_id) {
-        case 'page_1':
+        case 'page_1': // Needs for homepage view blocks and most viewed.
         case 'page_2':
         case 'page_3':
         case 'page_4':
@@ -276,6 +277,16 @@ function ctrader_saf_views_pre_view(&$view, &$display_id, &$args) {
               }
             }
             $view->display_handler->display->handler->options['filters']['field_s_r_torcond']['group_info']['group_items'] = $group_items;
+          }
+          elseif (isset($view->display_handler->display->handler->options['filters']['field_s_r__torcond_value']['group_info']['group_items'])) {
+            $group_items = array();
+            foreach ($view->display_handler->display->handler->options['filters']['field_s_r__torcond_value']['group_info']['group_items'] as $key => $value) {
+              $group_items[$value['title']] = $value;
+              if ($view->display_handler->display->handler->options['filters']['field_s_r__torcond_value']['group_info']['default_group'] == $key) {
+                $view->display_handler->display->handler->options['filters']['field_s_r__torcond_value']['group_info']['default_group'] = $value['title'];
+              }
+            }
+            $view->display_handler->display->handler->options['filters']['field_s_r__torcond_value']['group_info']['group_items'] = $group_items;
           }
           break;
       }
