@@ -1,7 +1,7 @@
-name = Condos Traider MLS integration
+name = Condos Trader MLS integration
 description = Provide integration with http://www.torontomls.net for synchronization XML data.
 core = 7.x
-package = Condos Traider
+package = Condos Trader
 version = 7.x-1.0
 
 files[] = views/handlers/views_handler_field_ctrader_discount.inc

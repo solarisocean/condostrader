@@ -1,5 +1,5 @@
-name = Condos Traider Customer Registration
+name = Condos Trader Customer Registration
 description = Provide registration page with register form.
 core = 7.x
-package = Condos Traider
+package = Condos Trader
 version = 7.x-1.0

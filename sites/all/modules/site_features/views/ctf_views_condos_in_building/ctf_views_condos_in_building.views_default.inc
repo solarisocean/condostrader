@@ -295,7 +295,7 @@ function ctf_views_condos_in_building_views_default_views() {
   $handler->display->display_options['fields']['nothing_7']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_7']['ui_name'] = 'Title (address)';
   $handler->display->display_options['fields']['nothing_7']['label'] = '';
-  $handler->display->display_options['fields']['nothing_7']['alter']['text'] = '[field_addr__torcond] [field_apt_num__torcond][field_community__torcond]';
+  $handler->display->display_options['fields']['nothing_7']['alter']['text'] = '[field_addr__torcond] [field_apt_num__torcond][name]';
   $handler->display->display_options['fields']['nothing_7']['element_label_colon'] = FALSE;
   /* Field: Regions */
   $handler->display->display_options['fields']['nothing_8']['id'] = 'nothing_8';
@@ -303,7 +303,7 @@ function ctf_views_condos_in_building_views_default_views() {
   $handler->display->display_options['fields']['nothing_8']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_8']['ui_name'] = 'Regions';
   $handler->display->display_options['fields']['nothing_8']['label'] = '';
-  $handler->display->display_options['fields']['nothing_8']['alter']['text'] = '[name][field_area__torcond][field_county__torcond]';
+  $handler->display->display_options['fields']['nothing_8']['alter']['text'] = '[field_community__torcond][field_area__torcond][field_county__torcond]';
   $handler->display->display_options['fields']['nothing_8']['element_label_colon'] = FALSE;
   /* Field: Drealty Listing: Maint */
   $handler->display->display_options['fields']['field_maint__torcond']['id'] = 'field_maint__torcond';
