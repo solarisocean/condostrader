@@ -2,6 +2,28 @@
 (function ($, Drupal) {
 
     /*
+     * Global functions attached to Drupal settings.
+     */
+    Drupal.behaviors.globalFunc = {
+        attach: function (context, settings) {
+
+            var allFunction = settings.globalFunc = {};
+
+            // Function to detect mobile device.
+            allFunction.detectMob= function () {
+                return !!(navigator.userAgent.match(/Android/i)
+                || navigator.userAgent.match(/webOS/i)
+                || navigator.userAgent.match(/iPhone/i)
+                || navigator.userAgent.match(/iPad/i)
+                || navigator.userAgent.match(/iPod/i)
+                || navigator.userAgent.match(/BlackBerry/i)
+                || navigator.userAgent.match(/Windows Phone/i));
+            };
+
+        }
+    };
+    
+    /*
      * Toggle class on click search button.
      */
     Drupal.behaviors.searchButton = {
@@ -73,6 +95,14 @@
                         slidesPerColumn: 2,
                         paginationClickable: true,
                         spaceBetween: 25,
+                        breakpoints: {
+                            640 : {
+                                slidesPerView: 1
+                            },
+                            768: {
+                                slidesPerView: 3
+                            }
+                        },
                         nextButton: '.newly-listed-slider-button-next',
                         prevButton: '.newly-listed-slider-button-prev'
                     });
@@ -85,6 +115,14 @@
                         slidesPerColumn: 1,
                         paginationClickable: true,
                         spaceBetween: 25,
+                        breakpoints: {
+                            640 : {
+                              slidesPerView: 1
+                            },
+                            768: {
+                                slidesPerView: 3
+                            }
+                        },
                         nextButton: '.recent-post-front-slider-button-next',
                         prevButton: '.recent-post-front-slider-button-prev'
                     });
@@ -99,37 +137,40 @@
     Drupal.behaviors.scrollBar = {
         attach: function (context, settings) {
 
-            $('.view-lowest-price-block .view-content, .view-highest-price-block .view-content, .view-most-viewed-block .view-content').mCustomScrollbar({
-                setHeight: "404px",
-                theme: "inset-2",
-                callbacks: {
-                    onTotalScroll:function(){
-                        var nextPage = $(this).parent().find('.item-list .pager-next a').attr('href'),
-            loadedBlockSelector =  '.' + $(this).parent().prop("classList")[4],
-                         loadedBlock = loadedBlockSelector + ' .view-content .views-row',
-                                   pager = loadedBlockSelector + ' .item-list .pager',
-                                  loader = loadedBlockSelector + ' .view-content',
+            
+            if (!settings.globalFunc.detectMob()) {
+                $('.view-lowest-price-block .view-content, .view-highest-price-block .view-content, .view-most-viewed-block .view-content').mCustomScrollbar({
+                    setHeight: "404px",
+                    theme: "inset-2",
+                    callbacks: {
+                        onTotalScroll:function(){
+                            var nextPage = $(this).parent().find('.item-list .pager-next a').attr('href'),
+                                loadedBlockSelector =  '.' + $(this).parent().prop("classList")[4],
+                                loadedBlock = loadedBlockSelector + ' .view-content .views-row',
+                                pager = loadedBlockSelector + ' .item-list .pager',
+                                loader = loadedBlockSelector + ' .view-content',
                                 scroller = $(this);
 
-                        $.ajax({
-                            url: nextPage,
-                            context: context,
-                            beforeSend: function() {
-                                $(loader).append('<div class="auto-scroll-loader" style="margin-bottom: 50px"></div>');
-                            },
-                            success: function () {
-                                $('.auto-scroll-loader').remove();
-                            }
-                        }).done(function(data) {
-                            $(data).find(loadedBlock).appendTo(loadedBlockSelector + ' .mCSB_container').hide().fadeIn("slow");
-                            $(pager).replaceWith($(data).find(pager));
-                            setTimeout(function() {
-                                scroller.mCustomScrollbar('scrollTo','-=350');
-                            }, 10);
-                        });
+                            $.ajax({
+                                url: nextPage,
+                                context: context,
+                                beforeSend: function() {
+                                    $(loader).append('<div class="auto-scroll-loader" style="margin-bottom: 50px"></div>');
+                                },
+                                success: function () {
+                                    $('.auto-scroll-loader').remove();
+                                }
+                            }).done(function(data) {
+                                $(data).find(loadedBlock).appendTo(loadedBlockSelector + ' .mCSB_container').hide().fadeIn("slow");
+                                $(pager).replaceWith($(data).find(pager));
+                                setTimeout(function() {
+                                    scroller.mCustomScrollbar('scrollTo','-=350');
+                                }, 10);
+                            });
+                        }
                     }
-                }
-            });
+                });
+            }
 
             $('.page-search-results .view-search-results-ctrader .view-content').mCustomScrollbar({
                 setHeight: "675px",
@@ -433,6 +474,14 @@
                         slidesPerColumn: 1,
                         paginationClickable: true,
                         spaceBetween: 25,
+                        breakpoints: {
+                            640 : {
+                                slidesPerView: 1
+                            },
+                            768: {
+                                slidesPerView: 3
+                            }
+                        },
                         nextButton: '.nearby-listed-slider-button-next',
                         prevButton: '.nearby-listed-slider-button-prev'
                     });
