@@ -254,6 +254,25 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
     $display->content['new-e6f5c2fe-4a28-424a-87cf-c7f6139f164d'] = $pane;
     $display->panels['center'][0] = 'new-e6f5c2fe-4a28-424a-87cf-c7f6139f164d';
     $pane = new stdClass();
+    $pane->pid = 'new-4a6218ae-d4cc-4a90-9bf7-8be6c5a57a64';
+    $pane->panel = 'center';
+    $pane->type = 'sale_rent_label';
+    $pane->subtype = 'sale_rent_label';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '4a6218ae-d4cc-4a90-9bf7-8be6c5a57a64';
+    $display->content['new-4a6218ae-d4cc-4a90-9bf7-8be6c5a57a64'] = $pane;
+    $display->panels['center'][1] = 'new-4a6218ae-d4cc-4a90-9bf7-8be6c5a57a64';
+    $pane = new stdClass();
     $pane->pid = 'new-5069fa9a-845e-4b26-97d7-be9f80e94062';
     $pane->panel = 'center';
     $pane->type = 'views';
@@ -283,11 +302,11 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 1;
+    $pane->position = 2;
     $pane->locks = array();
     $pane->uuid = '5069fa9a-845e-4b26-97d7-be9f80e94062';
     $display->content['new-5069fa9a-845e-4b26-97d7-be9f80e94062'] = $pane;
-    $display->panels['center'][1] = 'new-5069fa9a-845e-4b26-97d7-be9f80e94062';
+    $display->panels['center'][2] = 'new-5069fa9a-845e-4b26-97d7-be9f80e94062';
     $pane = new stdClass();
     $pane->pid = 'new-15807c17-317e-444a-8cd3-ad212ace10f1';
     $pane->panel = 'details';

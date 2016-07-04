@@ -11,6 +11,7 @@ $plugin = array(
   'render callback' => 'nearby_listings_content_type_render',
   'defaults' => array(),
   'category' => array(t('CondosTrader')),
+  'required context' => new ctools_context_required(t('Drealty listing'), 'drealty_listing'),
 );
 
 /**
@@ -48,8 +49,7 @@ function nearby_listings_content_type_render($subtype, $conf, $args, $context) {
   }
   else {
     $view_display = 'block_2';
-    $listing_id = $args[0];
-    $entity = entity_load_single(DREALTY_ENTITY_TYPE, $listing_id);
+    $entity = $context->data;
     $latlon = $entity->field_test_geofilld[LANGUAGE_NONE][0]['lat'] . ',' . $entity->field_test_geofilld[LANGUAGE_NONE][0]['lon'];
     $block->title = t('<span>Comparable</span> nearby listings');
 

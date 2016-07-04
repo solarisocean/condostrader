@@ -11,6 +11,7 @@ $plugin = array(
   'render callback' => 'single_condo_map_content_type_render',
   'defaults' => array(),
   'category' => array(t('CondosTrader')),
+  'required context' => new ctools_context_required(t('Drealty listing'), 'drealty_listing'),
 );
 
 /**
@@ -22,7 +23,7 @@ function single_condo_map_content_type_render($subtype, $conf, $args, $context) 
   drupal_add_css($path . '/leaflet.css');
   drupal_add_js(drupal_get_path('module', 'ctrader_map') . '/js/single-condo-map.js');
 
-  $entity = entity_load_single(DREALTY_ENTITY_TYPE, $args[0]);
+  $entity = $context->data;
   $listing = $entity->wrapper();
 
   if ($listing->field_test_geofilld->value() && $listing->field_addr__torcond->value()) {
