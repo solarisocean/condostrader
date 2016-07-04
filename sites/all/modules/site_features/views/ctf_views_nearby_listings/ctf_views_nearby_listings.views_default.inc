@@ -1786,6 +1786,12 @@ function ctf_views_nearby_listings_views_default_views() {
   $handler->display->display_options['filters']['active']['table'] = 'search_api_index_toronto_condo_index';
   $handler->display->display_options['filters']['active']['field'] = 'active';
   $handler->display->display_options['filters']['active']['value'] = '1';
+  /* Filter criterion: Indexed Drealty Listing: Drealty Listing Id */
+  $handler->display->display_options['filters']['id']['id'] = 'id';
+  $handler->display->display_options['filters']['id']['table'] = 'search_api_index_toronto_condo_index';
+  $handler->display->display_options['filters']['id']['field'] = 'id';
+  $handler->display->display_options['filters']['id']['operator'] = '<>';
+  $handler->display->display_options['filters']['id']['value'] = '0';
   $export['nearby_listings_view'] = $view;
 
   return $export;
