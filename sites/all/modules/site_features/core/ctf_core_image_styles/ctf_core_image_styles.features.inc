@@ -19,6 +19,7 @@ function ctf_core_image_styles_image_default_styles() {
         'data' => array(
           'width' => 190,
           'height' => 120,
+          '#imageinfo_cache_effect_callback' => 'image_scale_and_crop_effect',
         ),
         'weight' => 1,
       ),
@@ -34,6 +35,7 @@ function ctf_core_image_styles_image_default_styles() {
         'data' => array(
           'width' => 286,
           'height' => 160,
+          '#imageinfo_cache_effect_callback' => 'image_scale_and_crop_effect',
         ),
         'weight' => 1,
       ),
@@ -49,6 +51,7 @@ function ctf_core_image_styles_image_default_styles() {
         'data' => array(
           'width' => 333,
           'height' => 176,
+          '#imageinfo_cache_effect_callback' => 'image_scale_and_crop_effect',
         ),
         'weight' => 1,
       ),
@@ -64,6 +67,7 @@ function ctf_core_image_styles_image_default_styles() {
         'data' => array(
           'width' => 365,
           'height' => 203,
+          '#imageinfo_cache_effect_callback' => 'image_scale_and_crop_effect',
         ),
         'weight' => 1,
       ),
