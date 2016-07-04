@@ -27,8 +27,7 @@ function ctrader_mls_init() {
 function ctrader_mls_menu() {
   $items['admin/config/mls'] = array(
     'title' => 'Mls integration page',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('ctrader_mls_form'),
+    'page callback' => '_ctrader_mls_mls_page_callback',
     'access arguments' => array('administer modules'),
     'type' => MENU_NORMAL_ITEM,
   );
@@ -61,6 +60,15 @@ function ctrader_mls_menu() {
 //    'menu_name' => 'main-menu',
 //  );
   return $items;
+}
+
+/**
+ * Callback function for 'admin/config/mls' page.
+ */
+function _ctrader_mls_mls_page_callback() {
+  $output['ctrader_mls_form'] = drupal_get_form('ctrader_mls_form');
+  $output['check_not_active_listings'] = drupal_get_form('_ctrader_mls_rets_check_not_active_listings_form');
+  return $output;
 }
 
 /**
@@ -886,4 +894,35 @@ function _ctrader_mls_taxonomy_menu_path_custom_for_rent($vid, $tid) {
   $path = implode('/', $path);
   $path .= '?f[0]=field_s_r__torcond:Lease';
   return $path;
+}
+
+
+/**
+ * Form for makes not active listings active if they are in result query.
+ */
+function _ctrader_mls_rets_check_not_active_listings_form() {
+  $form = array();
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Check not active listings'),
+    '#suffix' => t('Makes not active listings active if they are in result query.'),
+  );
+  return $form;
+}
+
+function _ctrader_mls_rets_check_not_active_listings_form_submit($form, &$form_state) {
+  $connections = entity_load('drealty_connection_entity');
+  $connection = NULL;
+  foreach ($connections as $value) {
+    if($value->active == 1) {
+      $connection = $value;
+    }
+  }
+  $test = new CtraderDrealtyDaemon;
+  $test_classes = $test->CheckListingStatuses($connection);
+  $output = '';
+  foreach($test_classes as $test_class) {
+    $output .= theme('item_list',  array('items' => $test_class, 'title' => 'Results:'));
+  }
+  drupal_set_message($output);
 }
