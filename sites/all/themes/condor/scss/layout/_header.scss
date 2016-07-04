@@ -240,4 +240,50 @@
       }
     }
   }
+
+  @media #{$small-only} {
+    .top-bar {
+      overflow: inherit;
+
+      .title-area {
+        display: none;
+        visibility: hidden;
+      }
+
+      .top-bar-section {
+        padding-right: 0;
+
+        .logo-container {
+          padding: 0 10px;
+
+          .logo {
+            max-width: 180px;
+          }
+        }
+
+        .user-links {
+          display: none;
+          visibility: hidden;
+        }
+
+        .user-buttons {
+          li {
+            &:not(:last-child) {
+              display: none;
+            }
+
+            &:last-child {
+              a {
+                background: $flamingo;
+              }
+            }
+          }
+        }
+
+        #main-menu-nav-tree {
+          width: 100%;
+        }
+      }
+    }
+  }
 }

@@ -471,6 +471,33 @@
       }
     }
   }
+
+  .facet-search-block-submit-button {
+    width: 29.7%;
+  }
+
+  @media #{$small-only} {
+    .panels-flexible-region {
+      width: 100%;
+
+      &>div {
+        padding-left: 0.9rem;
+        padding-right: 0.9rem;
+      }
+    }
+
+    .facet-search-block-submit-button {
+      width: 100%;
+    }
+
+    .hierarchical-select {
+      .selects {
+        select {
+          max-width: inherit;
+        }
+      }
+    }
+  }
 }
 
 .pane-facet-tabs {

@@ -6,3 +6,12 @@ html .ajax-progress-throbber {
   display: none !important;
   visibility: hidden !important;
 }
+
+body {
+  min-width: 320px;
+}
+
+.element-invisible {
+  display: none;
+  visibility: hidden;
+}
