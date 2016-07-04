@@ -7,6 +7,19 @@
     line-height: 20px;
     font-size: inherit;
   }
+
+  @media #{$small-only} {
+    text-align: center;
+
+    .left,
+    .right {
+      float: none !important;
+    }
+
+    .footer-top-block {
+      max-width: inherit !important;
+    }
+  }
 }
 
 .l-footer {
