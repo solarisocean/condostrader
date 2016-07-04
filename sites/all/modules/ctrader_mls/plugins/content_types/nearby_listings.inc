@@ -11,7 +11,7 @@ $plugin = array(
   'render callback' => 'nearby_listings_content_type_render',
   'defaults' => array(),
   'category' => array(t('CondosTrader')),
-  'required context' => new ctools_context_required(t('Drealty listing'), 'drealty_listing'),
+  'required context' => new ctools_context_required(t('Drealty listing'), DREALTY_ENTITY_TYPE),
 );
 
 /**
@@ -19,7 +19,6 @@ $plugin = array(
  */
 function nearby_listings_content_type_render($subtype, $conf, $args, $context) {
   $view_machine_name = 'nearby_listings_view';
-  $view_display = 'block_1';
   $view_title = '';
 
   $block = new stdClass();
@@ -49,47 +48,56 @@ function nearby_listings_content_type_render($subtype, $conf, $args, $context) {
   }
   else {
     $view_display = 'block_2';
-    $entity = $context->data;
-    $latlon = $entity->field_test_geofilld[LANGUAGE_NONE][0]['lat'] . ',' . $entity->field_test_geofilld[LANGUAGE_NONE][0]['lon'];
+    $listing = $context->data->wrapper();
+
+    $latlon = '';
+    if ($listing->field_test_geofilld->value()) {
+      $latlon = $listing->field_test_geofilld->lat->value() . ',' . $listing->field_test_geofilld->lon->value();
+    }
     $block->title = t('<span>Comparable</span> nearby listings');
 
     $view = views_get_view($view_machine_name);
     $view->init();
 
     // Sets filters values.
-    if (isset($entity->field_s_r__torcond[LANGUAGE_NONE][0]['value'])) {
-      $view->display['block_2']->display_options['filters']['field_s_r_torcond']['value'] = $entity->field_s_r__torcond[LANGUAGE_NONE][0]['value'];
+    if ($listing->field_s_r__torcond->value()) {
+      $view->display['block_2']->display_options['filters']['field_s_r_torcond']['value'] = $listing->field_s_r__torcond->value();
     }
     else {
       unset($view->display['block_2']->display_options['filters']['field_s_r_torcond']);
     }
-    if (isset($entity->field_br__torcond[LANGUAGE_NONE][0]['value'])) {
-      $view->display['block_2']->display_options['filters']['field_br_torcond']['value'] = round($entity->field_br__torcond[LANGUAGE_NONE][0]['value']);
+    if ($listing->field_br__torcond->value()) {
+      $view->display['block_2']->display_options['filters']['field_br_torcond']['value'] = round($listing->field_br__torcond->value());
     }
     else {
       unset($view->display['block_2']->display_options['filters']['field_br_torcond']);
     }
-    if (isset($entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value'])) {
-      $view->display['block_2']->display_options['filters']['field_lp_dol_torcond']['value'] = round($entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value']) + 10000;
-      $view->display['block_2']->display_options['filters']['field_lp_dol_torcond_1']['value'] = round($entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value']) - 10000;
+    if ($listing->field_lp_dol__torcond->value()) {
+      $view->display['block_2']->display_options['filters']['field_lp_dol_torcond']['value'] = round($listing->field_lp_dol__torcond->value()) + 10000;
+      $view->display['block_2']->display_options['filters']['field_lp_dol_torcond_1']['value'] = round($listing->field_lp_dol__torcond->value()) - 10000;
     }
     else {
       unset($view->display['block_2']->display_options['filters']['field_lp_dol_torcond']);
       unset($view->display['block_2']->display_options['filters']['field_lp_dol_torcond_1']);
     }
-    if (isset($entity->field_pets__torcond[LANGUAGE_NONE][0]['value'])) {
-      $view->display['block_2']->display_options['filters']['field_pets_torcond']['value'] = $entity->field_pets__torcond[LANGUAGE_NONE][0]['value'];
+    if ($listing->field_pets__torcond->value()) {
+      $view->display['block_2']->display_options['filters']['field_pets_torcond']['value'] = $listing->field_pets__torcond->value();
     }
     else {
       unset($view->display['block_2']->display_options['filters']['field_pets_torcond']);
     }
-    if (isset($entity->field_prkg_inc__torcond[LANGUAGE_NONE][0]['value'])) {
-      $view->display['block_2']->display_options['filters']['field_prkg_inc_torcond']['value'] = $entity->field_prkg_inc__torcond[LANGUAGE_NONE][0]['value'];
+    if ($listing->field_prkg_inc__torcond->value()) {
+      $view->display['block_2']->display_options['filters']['field_prkg_inc_torcond']['value'] = $listing->field_prkg_inc__torcond->value();
     }
     else {
       unset($view->display['block_2']->display_options['filters']['field_prkg_inc_torcond']);
     }
-
+    if ($listing->id->value()) {
+      $view->display['block_2']->display_options['filters']['id']['value'] = $listing->id->value();
+    }
+    else {
+      unset($view->display['block_2']->display_options['filters']['id']);
+    }
     $view->set_display($view_display);
     $view->set_arguments(array($latlon,));
     $view_output = $view->preview();
