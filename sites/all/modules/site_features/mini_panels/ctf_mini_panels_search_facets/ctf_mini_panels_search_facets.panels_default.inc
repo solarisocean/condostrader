@@ -39,6 +39,7 @@ function ctf_mini_panels_search_facets_default_panels_mini() {
         'children' => array(
           0 => 1,
           1 => 'main-row',
+          2 => 2,
         ),
         'parent' => 'canvas',
       ),
@@ -98,6 +99,25 @@ function ctf_mini_panels_search_facets_default_panels_mini() {
         'class' => '',
         'hide_empty' => 0,
       ),
+      2 => array(
+        'type' => 'row',
+        'contains' => 'region',
+        'children' => array(
+          0 => 'search_button_region',
+        ),
+        'parent' => 'main',
+        'class' => '',
+        'hide_empty' => 0,
+      ),
+      'search_button_region' => array(
+        'type' => 'region',
+        'title' => 'search button region',
+        'width' => 100,
+        'width_type' => '%',
+        'parent' => '2',
+        'class' => '',
+        'hide_empty' => 0,
+      ),
     ),
   );
   $display->panel_settings = array(
@@ -107,6 +127,7 @@ function ctf_mini_panels_search_facets_default_panels_mini() {
       'left' => NULL,
       'right' => NULL,
       'center_' => NULL,
+      'search_button_region' => NULL,
     ),
   );
   $display->cache = array();
@@ -352,29 +373,6 @@ function ctf_mini_panels_search_facets_default_panels_mini() {
     $display->content['new-d310594e-4027-430b-9ab9-a8851662d219'] = $pane;
     $display->panels['left'][2] = 'new-d310594e-4027-430b-9ab9-a8851662d219';
     $pane = new stdClass();
-    $pane->pid = 'new-d0c29e59-f17e-4a90-9b95-1a0ecd298fd4';
-    $pane->panel = 'left';
-    $pane->type = 'block';
-    $pane->subtype = 'ctrader_saf-ctrader_search_button';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'override_title' => 1,
-      'override_title_text' => ' ',
-      'override_title_heading' => 'h2',
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 3;
-    $pane->locks = array();
-    $pane->uuid = 'd0c29e59-f17e-4a90-9b95-1a0ecd298fd4';
-    $display->content['new-d0c29e59-f17e-4a90-9b95-1a0ecd298fd4'] = $pane;
-    $display->panels['left'][3] = 'new-d0c29e59-f17e-4a90-9b95-1a0ecd298fd4';
-    $pane = new stdClass();
     $pane->pid = 'new-bd8f6555-30e2-4c18-9588-508f61166971';
     $pane->panel = 'right';
     $pane->type = 'block';
@@ -489,6 +487,29 @@ function ctf_mini_panels_search_facets_default_panels_mini() {
     $pane->uuid = '4711e72e-cd19-46f9-8514-5a2b784ff921';
     $display->content['new-4711e72e-cd19-46f9-8514-5a2b784ff921'] = $pane;
     $display->panels['right'][4] = 'new-4711e72e-cd19-46f9-8514-5a2b784ff921';
+    $pane = new stdClass();
+    $pane->pid = 'new-d0c29e59-f17e-4a90-9b95-1a0ecd298fd4';
+    $pane->panel = 'search_button_region';
+    $pane->type = 'block';
+    $pane->subtype = 'ctrader_saf-ctrader_search_button';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => ' ',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'd0c29e59-f17e-4a90-9b95-1a0ecd298fd4';
+    $display->content['new-d0c29e59-f17e-4a90-9b95-1a0ecd298fd4'] = $pane;
+    $display->panels['search_button_region'][0] = 'new-d0c29e59-f17e-4a90-9b95-1a0ecd298fd4';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $mini->display = $display;
