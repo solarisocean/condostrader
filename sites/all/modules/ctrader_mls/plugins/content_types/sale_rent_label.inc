@@ -11,7 +11,7 @@ $plugin = array(
   'render callback' => 'sale_rent_label_content_type_render',
   'defaults' => array(),
   'category' => array(t('CondosTrader')),
-  'required context' => new ctools_context_required(t('Drealty listing'), 'drealty_listing'),
+  'required context' => new ctools_context_required(t('Drealty listing'), DREALTY_ENTITY_TYPE),
 );
 
 /**
