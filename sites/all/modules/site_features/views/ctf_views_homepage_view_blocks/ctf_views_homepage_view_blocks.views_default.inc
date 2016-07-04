@@ -1306,12 +1306,6 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['fields']['nothing_2']['alter']['text'] = '<div class="condo-info-line"><span class="condo-info-element sqft"><span></span>[field_sqft_torcond]</span><span class="condo-info-element bed"><span></span>[nothing_3]</span><span class="condo-info-element bath"><span></span>[field_bath_tot_torcond]</span></div>
 <div class="condo-info-line"><span class="condo-info-element pets"><span></span>[views_conditional_1]</span><span class="condo-info-element locker"><span></span>[views_conditional]</span><span class="condo-info-element parking"><span></span>[views_conditional_2]</span></div>';
   $handler->display->display_options['fields']['nothing_2']['element_label_colon'] = FALSE;
-  /* Field: Broken/missing handler */
-  $handler->display->display_options['fields']['view_counter']['id'] = 'view_counter';
-  $handler->display->display_options['fields']['view_counter']['table'] = 'search_api_index_toronto_condo_index';
-  $handler->display->display_options['fields']['view_counter']['field'] = 'view_counter';
-  $handler->display->display_options['fields']['view_counter']['label'] = 'View counter';
-  $handler->display->display_options['fields']['view_counter']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Indexed Drealty Listing: Drealty Active Status */
