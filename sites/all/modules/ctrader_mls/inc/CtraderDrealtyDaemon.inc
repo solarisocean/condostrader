@@ -17,7 +17,6 @@ class CtraderDrealtyDaemon extends drealtyDaemon {
         $classes = $connection->FetchClasses($resource);
         foreach ($classes as $class) {
           if ($class->enabled) {
-
             $in_db = db_select('drealty_listing', 'dl')
               ->fields('dl', array('id', 'rets_key', 'rets_id'))
               ->condition('conid', $connection->conid)
@@ -26,11 +25,10 @@ class CtraderDrealtyDaemon extends drealtyDaemon {
               ->orderBy('rets_key')
               ->execute()
               ->fetchAllAssoc('rets_key');
-
             $report_data[$class->cid]['bundle'] = $class->bundle;
 
             if($in_db)
-              $report_data[$class->cid]['in_db_count'] = count($in_db);
+              $report_data[$class->cid]['in_db_count'] = "Active listings in DB before force update:" . count($in_db);
 
             $fieldmappings = $connection->FetchFieldMappings($resource, $class);
             $key_field = $fieldmappings['rets_key']->systemname;
@@ -72,31 +70,40 @@ class CtraderDrealtyDaemon extends drealtyDaemon {
 
               if ($this->dc->connect($connection->conid)) {
                 $q = implode('),(', $query);
-
                 $optional_params = array(
                   'Format' => 'COMPACT-DECODED',
                 );
-
                 $search = $rets->SearchQuery($resource->systemname, $class->systemname, "($q)", $optional_params);
-
                 $in_rets_count = $rets->NumRows();
-                $report_data[$class->cid]['in_rets_count'] = $in_rets_count;
-
+                $report_data[$class->cid]['in_rets_count'] = "Active listings in RETS:" . $in_rets_count;
                 if ($in_rets_count > 0) {
+                  $listings_ids = array();
                   while ($listing = $rets->FetchRow($search)) {
                     $in_rets[$listing[$key_field]] = $listing[$id_field];
-
-                    db_update('drealty_listing')
-                      ->fields(array('active' => 1, 'inactive_date' => NULL))
-                      ->condition('rets_id', $listing[$id_field], '=')
-                      ->execute();
+                    $listings_ids[] = $listing[$id_field];
                   }
+                  db_update('drealty_listing')
+                    ->fields(array('active' => 1, 'inactive_date' => NULL))
+                    ->condition('rets_id', $listings_ids, 'IN')
+                    ->execute();
                 }
 
                 if ($error = $rets->Error()) {
                   watchdog('drealty_report', 'drealty encountered an error: (Type: @type Code: @code Msg: @text)', array("@type" => $error['type'], "@code" => $error['code'], "@text" => $error['text']), WATCHDOG_WARNING);
                 }
                 $rets->FreeResult($search);
+
+                $in_db_after_update = db_select('drealty_listing', 'dl')
+                  ->fields('dl', array('id', 'rets_key', 'rets_id'))
+                  ->condition('conid', $connection->conid)
+                  ->condition('class', $class->cid)
+                  ->condition('active', 1)
+                  ->orderBy('rets_key')
+                  ->execute()
+                  ->fetchAllAssoc('rets_key');
+
+                if($in_db_after_update)
+                  $report_data[$class->cid]['in_db_count_after_update'] = "Active listings in DB after force update:" . count($in_db_after_update);
               }
             }
           }
