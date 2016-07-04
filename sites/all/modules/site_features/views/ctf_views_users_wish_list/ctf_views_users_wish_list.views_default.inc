@@ -345,10 +345,6 @@ function ctf_views_users_wish_list_views_default_views() {
     class="condo-info-element parking"><span></span>[views_conditional_2]</span>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
-  /* Field: Entity statistics: Total views */
-  $handler->display->display_options['fields']['totalcount']['id'] = 'totalcount';
-  $handler->display->display_options['fields']['totalcount']['table'] = 'entity_counter';
-  $handler->display->display_options['fields']['totalcount']['field'] = 'totalcount';
   /* Filter criterion: Drealty Listing: Drealty Listing Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'drealty_listing';
