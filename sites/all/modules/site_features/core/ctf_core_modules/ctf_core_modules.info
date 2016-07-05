@@ -97,6 +97,7 @@ dependencies[] = location_search
 dependencies[] = mailsystem
 dependencies[] = markup
 dependencies[] = menu
+dependencies[] = menu_attributes
 dependencies[] = menu_editor
 dependencies[] = menu_import
 dependencies[] = mimemail
