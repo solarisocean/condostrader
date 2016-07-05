@@ -37,10 +37,13 @@ function add_active_trail($tree) {
  */
 function condor_preprocess_page(&$variables) {
   global $user;
-
   //Custom variables to header menu.
   $variables['sign_in_link'] = l(t('Sign Up'), '/user/register');
-  $variables['log_in_link'] = l(t('Log In'), '/user/login');
+  if (user_is_logged_in()) {
+    $variables['log_in_link'] = l(t('Log Out'), '/user/logout');
+  } else {
+    $variables['log_in_link'] = l(t('Log In'), '/user/login');
+  }
   $variables['like_button'] = l('', '/user/wishlist', array('attributes' => array('class' => array('wishlist'))));
   $variables['search_button'] = l('', '/', array('attributes' => array('class' => array('search', 'left'), 'id' => 'search-button')));
   $variables['menu_button'] = l('', '/', array('attributes' => array('class' => array('menu-button'))));
