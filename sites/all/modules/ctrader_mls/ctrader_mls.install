@@ -6,6 +6,16 @@
  */
 
 /**
+ * Implementation of hook_install
+ */
+function ctrader_mls_install() {
+  $schema = drupal_get_schema_unprocessed('system', 'cache');
+  $schema['description'] = "Cache table used to store drealty_listing entity records.";
+
+  db_create_table('cache_entity_drealty_listing', $schema);
+}
+
+/**
  * Implements hook_requirements().
  */
 function ctrader_mls_requirements($phase) {
@@ -81,4 +91,15 @@ function ctrader_mls_update_7001(&$sandbox) {
 
   // In case of an error, simply throw an exception with an error message.
   throw new DrupalUpdateException('Something went wrong.');
+}
+
+/**
+ * Creates table for drealty_listing entities caching.
+ */
+function  ctrader_mls_update_7002() {
+  $schema = drupal_get_schema_unprocessed('system', 'cache');
+  $schema['description'] = "Cache table used to store drealty_listing entity records.";
+
+  db_create_table('cache_entity_drealty_listing', $schema);
+  return t('Created table for drealty_listing entities caching.');
 }

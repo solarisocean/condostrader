@@ -495,7 +495,7 @@ function ctrader_mls_entity_presave($entity, $type) {
           $point = array_reverse($point);
           $point = implode(' ', $point);
           $found_correct_region = FALSE;
-          // If hasn't fount in  polygons and multipolygons.
+
           if (!$found_correct_region) {
             $entity_comm_code = $entity->field_community_code__torcond[LANGUAGE_NONE][0]['value'];
             foreach ($communities_vocabulary_data as $community_vocabulary_data) {
@@ -925,4 +925,16 @@ function _ctrader_mls_rets_check_not_active_listings_form_submit($form, &$form_s
     $output .= theme('item_list',  array('items' => $test_class, 'title' => 'Results:'));
   }
   drupal_set_message($output);
+}
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function ctrader_mls_entity_info_alter(&$entity_info) {
+  if (isset($entity_info['drealty_listing'])) {
+    $entity_info['drealty_listing'] += array(
+      'entity cache' => module_exists('entitycache'),
+      'field cache' => !module_exists('entitycache'),
+    );
+  }
 }
