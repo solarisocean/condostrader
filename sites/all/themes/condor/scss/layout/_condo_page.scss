@@ -1,3 +1,7 @@
+.alert-box.alert {
+  display: none;
+}
+
 .page-drealty-listing {
   color: $ebony-clay;
 
@@ -111,8 +115,22 @@
     padding: 0;
   }
 
+  .pane-sale-rent-label {
+    .pane-content {
+      background: $alabaster;
+      padding: 7px 15px;
+      display: inline-block;
+      font-size: 1.125rem;
+      border: 1px solid darken($athens-gray, 6);
+      color: $manatee;
+      line-height: 1.5rem;
+      border-top: none;
+    }
+  }
+
   .condo-price {
     padding-left: 25px;
+    float: left;
 
     .field {
       font-weight: bold;
@@ -623,5 +641,144 @@
     }
 
 
+  }
+
+  @media #{$medium-only} {
+    .condo-page-gallery {
+      width: 100%;
+
+      .pane-content {
+        height: inherit;
+      }
+
+      .swiper-slide {
+        img {
+          @include transform(scale, 1);
+        }
+      }
+
+      .gallery-slider-button-next,
+      .gallery-slider-button-prev {
+        top: 36.5%;
+      }
+
+      .gallery-slider-button-next {
+        right: 15px;
+      }
+
+      .gallery-slider-button-prev {
+        left: 15px;
+      }
+    }
+
+    .condo-page-pagination {
+      width: 100%;
+
+      .pane-content {
+        height: inherit;
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+
+      .swiper-scrollbar {
+        display: none;
+      }
+    }
+
+    .condo-center-row {
+      .panels-flexible-region {
+        width: 100%;
+      }
+    }
+
+    .condo-center {
+      fieldset {
+        &.amentities-fieldset,
+        &.top-center-fieldset {
+          width: 49%;
+        }
+
+        &.mortgage-calculator {
+          width: 100%;
+        }
+      }
+    }
+
+    .condo-right-side {
+      padding-right: 0;
+    }
+
+    .leaflet-container {
+      touch-action: inherit;
+      -ms-touch-action: inherit;
+    }
+  }
+
+  @media #{$small-only} {
+    .condo-page-gallery {
+      width: 100%;
+
+      .pane-content {
+        height: inherit;
+      }
+
+      .swiper-slide {
+        img {
+          @include transform(scale, 1);
+        }
+      }
+
+      .gallery-slider-button-next,
+      .gallery-slider-button-prev {
+        top: 36.5%;
+      }
+
+      .gallery-slider-button-next {
+        right: 15px;
+      }
+
+      .gallery-slider-button-prev {
+        left: 15px;
+      }
+    }
+
+    .condo-page-pagination {
+      width: 100%;
+
+      .pane-content {
+        height: inherit;
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+      
+      .swiper-scrollbar {
+        display: none;
+      }
+    }
+
+    .condo-center-row {
+      .panels-flexible-region {
+        width: 100%;
+      }
+    }
+
+    .condo-center {
+      fieldset {
+        &.amentities-fieldset,
+        &.top-center-fieldset,
+        &.mortgage-calculator {
+          width: 100%;
+        }
+      }
+    }
+
+    .condo-right-side {
+      padding-right: 0;
+    }
+
+    .leaflet-container {
+      touch-action: inherit;
+      -ms-touch-action: inherit;
+    }
   }
 }

@@ -241,6 +241,16 @@
     }
   }
 
+  @media #{$medium-up} {
+    .menu-logaut-item,
+    .menu-wishlist-item,
+    .menu-login-item,
+    .menu-register-item {
+      display: none;
+      visibility: hidden;
+    }
+  }
+
   @media #{$small-only} {
     .top-bar {
       overflow: inherit;
