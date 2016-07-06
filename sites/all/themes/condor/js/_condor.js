@@ -518,6 +518,24 @@
                     slidesPerView: 3.5,
                     touchRatio: 0.2,
                     direction: 'vertical',
+                    breakpoints: {
+                        320 : {
+                            direction: 'horizontal',
+                            slidesPerView: 2
+                        },
+                        568 : {
+                            direction: 'horizontal',
+                            slidesPerView: 3
+                        },
+                        768 : {
+                            direction: 'horizontal',
+                            slidesPerView: 5
+                        },
+                        1024 : {
+                            direction: 'horizontal',
+                            slidesPerView: 5
+                        }
+                    },
                     onClick: function (swiper, event){
                         var clicked = swiper.clickedIndex;
                         swiper.activeIndex = clicked;
@@ -532,7 +550,10 @@
                     'disable_search': true
                 });
 
-                $('.page-drealty-listing .condo-right-side').height($('.page-drealty-listing .condo-center').height());
+                if (!settings.globalFunc.detectMob()) {
+                    $('.page-drealty-listing .condo-right-side').height($('.page-drealty-listing .condo-center').height());
+                }
+
 
                 $('.condo-buttons a.buy-now').on('click', function(e) {
                     e.preventDefault();

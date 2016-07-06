@@ -1,7 +1,7 @@
 (function ($) {
 
   Drupal.behaviors.addSingleCondoMap = {
-    attach: function (context) {
+    attach: function (context, settings) {
 
       setTimeout(function () {
         $('body').once(function () {
@@ -15,7 +15,20 @@
             "opacity": 1,
             "fillOpacity": 0.3
           };
-          var mymap = L.map('condo-map');
+          var mymap;
+
+          if (settings.globalFunc.detectMob()) {
+            mymap = L.map('condo-map', {
+              scrollWheelZoom: false,
+              dragging: false,
+              tap: false
+            });
+          } else {
+            mymap = L.map('condo-map', {
+              scrollWheelZoom: false
+            });
+          }
+
           L.Icon.Default.imagePath = '/sites/all/libraries/leaflet/images';
           L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -26,8 +39,6 @@
             mymap.setView([43.760, -79.390], 10);
             return;
           }
-
-          mymap.scrollWheelZoom.disable();
 
           var polygon = L.geoJson(neighbourhoodPolygon, {style: neighbourhoodsStyle}).addTo(mymap);
 

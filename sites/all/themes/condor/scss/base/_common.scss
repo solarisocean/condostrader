@@ -387,11 +387,66 @@
     }
   }
 
+  @media #{$medium-only} {
+    .views-fieldset {
+      padding: 5px;
+      border-left: 1px solid darken($athens-gray, 1);
+      border-top: none;
+
+      .views-field-field-community-torcond {
+        display: table-cell;
+        vertical-align: middle;
+        height: 40px;
+      }
+
+      .views-field-field-maint-torcond {
+        width: 100%;
+      }
+    }
+
+    .views-field-nothing-1 {
+      margin-right: 0;
+      float: none;
+
+      img {
+        width: 100%;
+        height: auto;
+        max-height: 140px;
+      }
+    }
+
+    .views-fieldset {
+      .views-field-nothing-2 {
+        font-size: rem-calc(9);
+
+        .condo-info-line {
+          .condo-info-element {
+            margin-right: 15px !important;
+          }
+        }
+      }
+
+      .views-field-nothing {
+        position: relative;
+        height: 30px;
+
+        span {
+          position: absolute;
+          top: 35%;
+        }
+      }
+    }
+  }
+
   @media #{$small-only} {
     .views-fieldset {
       padding: 5px;
       border-left: 1px solid darken($athens-gray, 1);
       border-top: none;
+
+      .views-field-field-maint-torcond {
+        width: 100%;
+      }
     }
 
     .views-field-nothing-1 {
