@@ -244,7 +244,9 @@
 
   .facetapi-facet-field-locker--torcond,
   .facetapi-facet-field-prkg-inc--torcond,
-  .facetapi-facet-field-pets--torcond {
+  .facetapi-facet-field-pets--torcond,
+  .facetapi-facet-field-patio-ter--torcond,
+  .facetapi-facet-field-ens-lndry--torcond {
     li {
       margin: 0;
 
@@ -474,6 +476,11 @@
 
   .facet-search-block-submit-button {
     width: 29.7%;
+  }
+
+  .sale-rent-radio {
+    display: none;
+    visibility: hidden;
   }
 
   @media #{$small-only} {

@@ -214,7 +214,9 @@
             var checkboxes = [
                 '.facetapi-facet-field-locker--torcond input:checkbox',
                 '.facetapi-facet-field-prkg-inc--torcond input:checkbox',
-                '.facetapi-facet-field-pets--torcond input:checkbox'
+                '.facetapi-facet-field-pets--torcond input:checkbox',
+                '.facetapi-facet-field-patio-ter--torcond',
+                '.facetapi-facet-field-ens-lndry--torcond'
             ];
 
             for (var i = 0; i < checkboxes.length; i++) {
@@ -307,8 +309,19 @@
                 });
 
                 $('.facetapi-facet-field-s-r--torcond .facetapi-facet a').on('click', function() {
+                    $('.form-type-radio input[value="' + $(this).text().split(" ").reverse()[0] + '"]').trigger('click');
                     $(form + ' input[name="sale_rent"]').val($(this).parent().find('a.facetapi-checkbox').attr('href'));
                 });
+
+                $('.facetapi-facet-field-s-r--torcond .facetapi-facet a').not('.facetapi-checkbox').each(function() {
+                    if ($(this).text().split(" ").reverse()[0] == $('.form-type-radio input:checked').val()) {
+                        console.log($('.facetapi-facet-field-s-r--torcond .facetapi-facet.active-region-facet').removeClass('active-region-facet'));
+                        // $('.facetapi-facet-field-s-r--torcond .facetapi-facet').removeClass('active-region-facet').
+                        $(this).parent().addClass('active-region-facet');
+                    }
+                    // console.log($(this).text().split(" ").reverse()[0]);
+                });
+                // console.log($('.form-type-radio input:checked').val());
 
                 var _facetCkeckboxToInput = function(facet, input) {
                     var _input =  form + " input[name='" + input + "']";
@@ -324,6 +337,8 @@
                 _facetCkeckboxToInput('.facetapi-facet-field-locker--torcond', 'locker');
                 _facetCkeckboxToInput('.facetapi-facet-field-pets--torcond', 'pets');
                 _facetCkeckboxToInput('.facetapi-facet-field-prkg-inc--torcond', 'parking');
+                _facetCkeckboxToInput('.facetapi-facet-field-patio-ter--torcond', 'balcony');
+                _facetCkeckboxToInput('.facetapi-facet-field-ens-lndry--torcond', 'laundry');
 
                 $('.field_style__torcond.form-select').change(function(){
                     $(form + ' input[name="type"]').val($(this).val());

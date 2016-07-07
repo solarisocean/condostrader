@@ -264,7 +264,7 @@ function ctf_mini_panels_search_facets_default_panels_mini() {
     $pane->panel = 'center_';
     $pane->type = 'block';
     $pane->subtype = 'views-9ea7e31aa803b364710e15dcb5b51b66';
-    $pane->shown = FALSE;
+    $pane->shown = TRUE;
     $pane->access = array(
       'plugins' => array(
         0 => array(
@@ -284,7 +284,10 @@ function ctf_mini_panels_search_facets_default_panels_mini() {
     $pane->style = array(
       'settings' => NULL,
     );
-    $pane->css = array();
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'sale-rent-radio',
+    );
     $pane->extras = array();
     $pane->position = 2;
     $pane->locks = array();
@@ -446,7 +449,7 @@ function ctf_mini_panels_search_facets_default_panels_mini() {
     $pane->panel = 'right';
     $pane->type = 'block';
     $pane->subtype = 'facetapi-wxQrIQ0ioM7RJIewLhWNWJqhjxPJLREY';
-    $pane->shown = FALSE;
+    $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 1,
@@ -469,7 +472,7 @@ function ctf_mini_panels_search_facets_default_panels_mini() {
     $pane->panel = 'right';
     $pane->type = 'block';
     $pane->subtype = 'facetapi-hsCggDsq71sQtV7hiBNPCtjWH1g7f7wA';
-    $pane->shown = FALSE;
+    $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 1,
