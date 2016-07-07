@@ -36,6 +36,20 @@ function ctrader_mls_views_data() {
       'click sortable' => TRUE,
     ),
   );
+  $data['drealty_listing']['wrong_geopoint'] = array(
+    'title' => t('wrong_geopoint'),
+    'help' => t('wrong_geopoint'),
+    'field' => array(
+      'handler' => 'views_handler_wrong_geopoint',
+      'click sortable' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_string',
+    ),
+  );
 
   return $data;
 }
