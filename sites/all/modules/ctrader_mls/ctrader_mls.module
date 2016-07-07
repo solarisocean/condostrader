@@ -348,42 +348,44 @@ function ctrader_mls_field_attach_presave($entity_type, $entity) {
   switch ($entity_type) {
     case DREALTY_ENTITY_TYPE:
       if ($entity->type == TORONTO_CONDO) {
-        if (isset($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value']) && empty($entity->field_test_geofilld)) {
-          $house_number = isset($entity->field_st_num__torcond[LANGUAGE_NONE][0]['value']) ? $entity->field_st_num__torcond[LANGUAGE_NONE][0]['value'] : '';
-          $street_name = isset($entity->field_st__torcond[LANGUAGE_NONE][0]['value']) ? " {$entity->field_st__torcond[LANGUAGE_NONE][0]['value']}" : '';
-          $street_suffix = isset($entity->field_st_sfx__torcond[LANGUAGE_NONE][0]['value']) ? " {$entity->field_st_sfx__torcond[LANGUAGE_NONE][0]['value']}" : '';
-          $street_direction = isset($entity->field_st_dir__torcond[LANGUAGE_NONE][0]['value']) ? " {$entity->field_st_dir__torcond[LANGUAGE_NONE][0]['value']}" : '';
-          $city = isset($entity->field_area__torcond[LANGUAGE_NONE][0]['value']) ? ", {$entity->field_area__torcond[LANGUAGE_NONE][0]['value']}" : '';
-          $state = ', ON';
-          $zip = isset($entity->field_zip__torcond[LANGUAGE_NONE][0]['value']) ? " {entity->field_zip__torcond[LANGUAGE_NONE][0]['value']}" : '';
-          $country = ', Canada';
+        if (isset($entity->field_change_full_address_field[LANGUAGE_NONE][0]['value']) && $entity->field_change_full_address_field[LANGUAGE_NONE][0]['value'] == 0) {
+          if (isset($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value']) && empty($entity->field_test_geofilld)) {
+            $house_number = isset($entity->field_st_num__torcond[LANGUAGE_NONE][0]['value']) ? $entity->field_st_num__torcond[LANGUAGE_NONE][0]['value'] : '';
+            $street_name = isset($entity->field_st__torcond[LANGUAGE_NONE][0]['value']) ? " {$entity->field_st__torcond[LANGUAGE_NONE][0]['value']}" : '';
+            $street_suffix = isset($entity->field_st_sfx__torcond[LANGUAGE_NONE][0]['value']) ? " {$entity->field_st_sfx__torcond[LANGUAGE_NONE][0]['value']}" : '';
+            $street_direction = isset($entity->field_st_dir__torcond[LANGUAGE_NONE][0]['value']) ? " {$entity->field_st_dir__torcond[LANGUAGE_NONE][0]['value']}" : '';
+            $city = isset($entity->field_area__torcond[LANGUAGE_NONE][0]['value']) ? ", {$entity->field_area__torcond[LANGUAGE_NONE][0]['value']}" : '';
+            $state = ', ON';
+            $zip = isset($entity->field_zip__torcond[LANGUAGE_NONE][0]['value']) ? " {entity->field_zip__torcond[LANGUAGE_NONE][0]['value']}" : '';
+            $country = ', Canada';
 
-          if (isset($entity->field_municipality__torcond[LANGUAGE_NONE][0]['value']) && $entity->field_municipality__torcond[LANGUAGE_NONE][0]['value'] != 'Toronto') {
-            $community = " {$entity->field_municipality__torcond[LANGUAGE_NONE][0]['value']}";
-            $entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'] = $house_number . $street_name . $street_suffix . $street_direction . $community . $city . $country;
-          }
-          elseif (isset($entity->field_community__torcond[LANGUAGE_NONE][0]['value'])) {
-            $community = " {$entity->field_community__torcond[LANGUAGE_NONE][0]['value']}";
-            $entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'] = $house_number . $street_name . $street_suffix . $street_direction . $community . $city;
+            if (isset($entity->field_municipality__torcond[LANGUAGE_NONE][0]['value']) && $entity->field_municipality__torcond[LANGUAGE_NONE][0]['value'] != 'Toronto') {
+              $community = " {$entity->field_municipality__torcond[LANGUAGE_NONE][0]['value']}";
+              $entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'] = $house_number . $street_name . $street_suffix . $street_direction . $community . $city . $country;
+            }
+            elseif (isset($entity->field_community__torcond[LANGUAGE_NONE][0]['value'])) {
+              $community = " {$entity->field_community__torcond[LANGUAGE_NONE][0]['value']}";
+              $entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'] = $house_number . $street_name . $street_suffix . $street_direction . $community . $city;
+            }
+            else {
+              $community = " {$entity->field_area__torcond[LANGUAGE_NONE][0]['value']}";
+              $entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'] = $house_number . $street_name . $street_suffix . $street_direction . $community . $state . $zip . $country;
+            }
           }
           else {
-            $community = " {$entity->field_area__torcond[LANGUAGE_NONE][0]['value']}";
-            $entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'] = $house_number . $street_name . $street_suffix . $street_direction . $community . $state . $zip . $country;
-          }
-        }
-        else {
-          // 2320 Gerrard St E, Toronto, ON M4E 2E1, Canada
-          // House Number, Street Name, Street Suffix, Street Direction, City, State, Zip, Country
-          $house_number = isset($entity->field_st_num__torcond[LANGUAGE_NONE][0]['value']) ? $entity->field_st_num__torcond[LANGUAGE_NONE][0]['value'] : '';
-          $street_name = isset($entity->field_st__torcond[LANGUAGE_NONE][0]['value']) ? " {$entity->field_st__torcond[LANGUAGE_NONE][0]['value']}" : '';
-          $street_suffix = isset($entity->field_st_sfx__torcond[LANGUAGE_NONE][0]['value']) ? " {$entity->field_st_sfx__torcond[LANGUAGE_NONE][0]['value']}" : '';
-          $street_direction = isset($entity->field_st_dir__torcond[LANGUAGE_NONE][0]['value']) ? " {$entity->field_st_dir__torcond[LANGUAGE_NONE][0]['value']}" : '';
-          $city = isset($entity->field_area__torcond[LANGUAGE_NONE][0]['value']) ? ", {$entity->field_area__torcond[LANGUAGE_NONE][0]['value']}" : '';
-          $state = ', ON';
-          $zip = isset($entity->field_zip__torcond[LANGUAGE_NONE][0]['value']) ? " {$entity->field_zip__torcond[LANGUAGE_NONE][0]['value']}" : '';
-          $country = ', Canada';
+            // 2320 Gerrard St E, Toronto, ON M4E 2E1, Canada
+            // House Number, Street Name, Street Suffix, Street Direction, City, State, Zip, Country
+            $house_number = isset($entity->field_st_num__torcond[LANGUAGE_NONE][0]['value']) ? $entity->field_st_num__torcond[LANGUAGE_NONE][0]['value'] : '';
+            $street_name = isset($entity->field_st__torcond[LANGUAGE_NONE][0]['value']) ? " {$entity->field_st__torcond[LANGUAGE_NONE][0]['value']}" : '';
+            $street_suffix = isset($entity->field_st_sfx__torcond[LANGUAGE_NONE][0]['value']) ? " {$entity->field_st_sfx__torcond[LANGUAGE_NONE][0]['value']}" : '';
+            $street_direction = isset($entity->field_st_dir__torcond[LANGUAGE_NONE][0]['value']) ? " {$entity->field_st_dir__torcond[LANGUAGE_NONE][0]['value']}" : '';
+            $city = isset($entity->field_area__torcond[LANGUAGE_NONE][0]['value']) ? ", {$entity->field_area__torcond[LANGUAGE_NONE][0]['value']}" : '';
+            $state = ', ON';
+            $zip = isset($entity->field_zip__torcond[LANGUAGE_NONE][0]['value']) ? " {$entity->field_zip__torcond[LANGUAGE_NONE][0]['value']}" : '';
+            $country = ', Canada';
 
-          $entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'] = $house_number . $street_name . $street_suffix . $street_direction . $city . $state . $zip . $country;
+            $entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'] = $house_number . $street_name . $street_suffix . $street_direction . $city . $state . $zip . $country;
+          }
         }
       }
       break;
