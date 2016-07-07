@@ -25,6 +25,18 @@ function ctrader_map_menu() {
  * Implements hook_init().
  */
 function ctrader_map_init() {
+  $args = arg();
+
+  if ($args[0] == 'taxonomy' && $args[1] == 'term') {
+    $path = libraries_get_path('leaflet');
+    drupal_add_js($path . '/leaflet.js');
+    drupal_add_css($path . '/leaflet.css');
+    $path = libraries_get_path('Leaflet.draw');
+    drupal_add_js($path . '/dist/leaflet.draw.js');
+    drupal_add_css($path . '/dist/leaflet.draw.css');
+    drupal_add_js(drupal_get_path('module', 'ctrader_map') . '/js/taxonomy_map_edit.js');
+  }
+
   drupal_add_css(drupal_get_path('module', 'ctrader_map') . '/css/ctrader-map.css');
   variable_del('neighbourhood_json');
 }
