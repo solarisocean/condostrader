@@ -447,7 +447,7 @@ function ctrader_mls_entity_presave($entity, $type) {
         // Search listing point on neighbourhoods terms polygons and create reference.
         if (TRUE) {
           if (!isset($_SESSION['neighbourhoods_terms_polygons_data'])) {
-            $vid = taxonomy_vocabulary_machine_name_load('communities'); //Neighbourhoods vocabulary.
+            $vid = taxonomy_vocabulary_machine_name_load('neighbourhoods'); //Neighbourhoods vocabulary.
             $vid = $vid->vid;
             $vocabulary_term_entities = taxonomy_get_tree($vid, 0, 3, TRUE);
             $terms_polygon = array();
