@@ -320,9 +320,20 @@
                 });
 
                 $('.facetapi-facet-field-s-r--torcond .facetapi-facet a').not('.facetapi-checkbox').each(function() {
+
                     if ($(this).text().split(" ").reverse()[0] == $('.form-type-radio input:checked').val()) {
                         $('.facetapi-facet-field-s-r--torcond .facetapi-facet.active-region-facet').removeClass('active-region-facet');
-                        $(this).parent().addClass('active-region-facet');
+                        $(this).trigger('click');
+                    } else if ($(form + ' input[name="sale_rent"]').val() !== '' && !$('body').hasClass('front')){
+                        $('.facetapi-facet-field-s-r--torcond .facetapi-facet.active-region-facet').removeClass('active-region-facet');
+                        switch ($(form + ' input[name="sale_rent"]').val().split(":")[1]) {
+                            case 'Sale':
+                                $('.facetapi-facet-field-s-r--torcond .facetapi-facet a').not('.facetapi-checkbox').first().closest('div').addClass('active-region-facet');
+                                break;
+                            case 'Lease':
+                                $('.facetapi-facet-field-s-r--torcond .facetapi-facet a').not('.facetapi-checkbox').last().closest('div').addClass('active-region-facet');
+                                break;
+                        }
                     }
                 });
 

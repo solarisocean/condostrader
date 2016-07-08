@@ -61,6 +61,7 @@
                             layer.bindLabel(feature.properties.popupContent, labelOptions);
                             layer.on({
                                   click: function () {
+                                      $("#-ctrader-saf-search-button-form input[name='region'], #-ctrader-saf-search-button-form input[name='region_1'], #-ctrader-saf-search-button-form input[name='region_2']").val('');
                                       if (!layer.selected) {
                                           inputRes.val(function(i, val) {
                                               return val + (!val ? '' : ', ') + 'tid' + layer.feature.id;
@@ -315,7 +316,6 @@
                                 'locationSelect': $(this).val()
                             },
                             success: function(data){
-                                // console.log(data);
                                 settings.mymapLayer.clearLayers();
                                 settings.mymapLayer.addData(data);
                                 // settings.mymapLayer.addData(data).bindPopup(data.properties.popupContent).setStyle(neighbourhoodsStyle);
