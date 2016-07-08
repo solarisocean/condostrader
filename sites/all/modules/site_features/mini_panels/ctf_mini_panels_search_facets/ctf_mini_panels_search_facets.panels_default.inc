@@ -328,8 +328,8 @@ function ctf_mini_panels_search_facets_default_panels_mini() {
         0 => array(
           'name' => 'path_visibility',
           'settings' => array(
-            'visibility_setting' => '1',
-            'paths' => 'search-results',
+            'visibility_setting' => '0',
+            'paths' => '<front>',
           ),
           'context' => 'empty',
           'not' => FALSE,
