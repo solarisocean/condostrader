@@ -859,7 +859,7 @@ function ctf_views_homepage_view_blocks_views_default_views() {
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['table'] = 'search_api_index_toronto_condo_index';
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['field'] = 'field_timestamp_sql_torcond';
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['operator'] = '>';
-  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['value'] = 'now - 2 day';
+  $handler->display->display_options['filters']['field_timestamp_sql_torcond']['value'] = 'now - 10 day';
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['group'] = 1;
   $handler->display->display_options['filters']['field_timestamp_sql_torcond']['year_range'] = '-0:+0';
   /* Filter criterion: Indexed Drealty Listing: Drealty Listing Type */
