@@ -722,6 +722,15 @@ function ctrader_mls_form_alter(&$form, &$form_state, $form_id) {
         $form['delete']['#disabled'] = TRUE;
       }
       break;
+    case 'geocoder_admin_settings':
+      $form['geocoder_apikey_google']['#description'] .= "<ul>
+                                                            <p></p>
+                                                            <span>ScienteCraft delevoper's Google Geocoding API Keys</span>
+                                                            <li>#1: AIzaSyCQAdcHNROXSLuMTFeai3gzT8Aa2ePvdvA (n.s....@gmail.com)</li>
+                                                            <li>#2: AIzaSyAqGiN_hwQRMlNN9JxpTiiT7KgyCwIDgms (s..mo@gmail.com)</li>
+                                                            <p></p>
+                                                          </ul>";
+      break;
   }
 }
 
