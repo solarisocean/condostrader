@@ -382,7 +382,7 @@ function ctrader_mls_field_attach_presave($entity_type, $entity) {
             $state = ', ON';
             $country = ', Canada';
 
-            $entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'] = $house_number . $street_name . $street_suffix . $street_direction . $city . $state . $country;
+            $entity->field_address_full__torcond[LANGUAGE_NONE][0]['value'] = $house_number . $street_name . $street_suffix . $street_direction . $city . $country;
 
           }
           else {
