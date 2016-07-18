@@ -294,7 +294,7 @@ class CtraderFacetapiSelectDropdowns extends FacetapiWidgetLinks {
     );
 
     $form['#submit'] = empty($form['#submit']) ? array() : $form['#submit'];
-    $form['#submit'][] = '_ctrader_saf_facetapi_select_facet_form_submit';
+    $form['#submit'][] = '_ctrader_saf_facet_settings_form_submit';
   }
 
 }
