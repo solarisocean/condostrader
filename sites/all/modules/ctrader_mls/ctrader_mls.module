@@ -595,10 +595,7 @@ function _ctrader_mls_create_building_and_reference($entity, $type) {
   if ($type == DREALTY_ENTITY_TYPE && $entity->type == TORONTO_CONDO) {
     // Creates reference to condo marked as building.
     if (!empty($entity->field_search_point_string[LANGUAGE_NONE][0]['value'])) {
-
-      // todo Have to change field name!!!!!
       $reference_field_name = 'field_reference_to_condo';
-
       $building_with_same_coord = db_select('field_data_field_search_point_string', 'sps')
         ->fields('sps', array('entity_id',))
         ->condition('bundle', TORONTO_BUILDING)
@@ -617,6 +614,15 @@ function _ctrader_mls_create_building_and_reference($entity, $type) {
         $entity_building->label = $entity->field_addr__torcond[LANGUAGE_NONE][0]['value'] . ' ' . $entity->field_area__torcond[LANGUAGE_NONE][0]['value'];
 //        $entity_building->label = $entity_building->label . '--building';
         _ctrader_mls_count_average_pricepersqft($entity_building, $entity);
+
+        // Saves not more than two images.
+        if (isset($entity_building->field_toronto_gallery[LANGUAGE_NONE]) && count($entity_building->field_toronto_gallery[LANGUAGE_NONE]) > 2) {
+          foreach ($entity_building->field_toronto_gallery[LANGUAGE_NONE] as $key => $value) {
+            if ($key > 1) {
+              unset($entity_building->field_toronto_gallery[LANGUAGE_NONE][$key]);
+            }
+          }
+        }
         entity_save(DREALTY_ENTITY_TYPE, $entity_building);
       }
       else {
@@ -636,6 +642,15 @@ function _ctrader_mls_create_building_and_reference($entity, $type) {
         }
         if (empty($building->field_toronto_gallery)) {
           $building->field_toronto_gallery = $entity->field_toronto_gallery;
+
+          // Saves not more than two images.
+          if (isset($building->field_toronto_gallery[LANGUAGE_NONE]) && count($building->field_toronto_gallery[LANGUAGE_NONE]) > 2) {
+            foreach ($building->field_toronto_gallery[LANGUAGE_NONE] as $key => $value) {
+              if ($key > 1) {
+                unset($building->field_toronto_gallery[LANGUAGE_NONE][$key]);
+              }
+            }
+          }
         }
         _ctrader_mls_count_average_pricepersqft($building, $entity);
 
