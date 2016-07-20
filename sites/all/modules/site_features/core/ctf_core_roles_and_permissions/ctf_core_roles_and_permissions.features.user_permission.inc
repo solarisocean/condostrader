@@ -147,15 +147,6 @@ function ctf_core_roles_and_permissions_user_default_permissions() {
     'module' => 'user',
   );
 
-  // Exported permission: 'access xhprof data'.
-  $permissions['access xhprof data'] = array(
-    'name' => 'access xhprof data',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'xhprof',
-  );
-
   // Exported permission: 'admin queue_ui'.
   $permissions['admin queue_ui'] = array(
     'name' => 'admin queue_ui',
@@ -273,15 +264,6 @@ function ctf_core_roles_and_permissions_user_default_permissions() {
     'module' => 'elysia_cron',
   );
 
-  // Exported permission: 'administer entity cache loader'.
-  $permissions['administer entity cache loader'] = array(
-    'name' => 'administer entity cache loader',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'ecl',
-  );
-
   // Exported permission: 'administer entity_statistics'.
   $permissions['administer entity_statistics'] = array(
     'name' => 'administer entity_statistics',
@@ -361,24 +343,6 @@ function ctf_core_roles_and_permissions_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'mailsystem',
-  );
-
-  // Exported permission: 'administer masquerade'.
-  $permissions['administer masquerade'] = array(
-    'name' => 'administer masquerade',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'masquerade',
-  );
-
-  // Exported permission: 'administer memcache storage'.
-  $permissions['administer memcache storage'] = array(
-    'name' => 'administer memcache storage',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'memcache_storage',
   );
 
   // Exported permission: 'administer menu'.
@@ -631,15 +595,6 @@ function ctf_core_roles_and_permissions_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'user',
-  );
-
-  // Exported permission: 'administer varnish'.
-  $permissions['administer varnish'] = array(
-    'name' => 'administer varnish',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'varnish',
   );
 
   // Exported permission: 'administer views'.
@@ -1490,33 +1445,6 @@ function ctf_core_roles_and_permissions_user_default_permissions() {
     'module' => 'features',
   );
 
-  // Exported permission: 'masquerade as admin'.
-  $permissions['masquerade as admin'] = array(
-    'name' => 'masquerade as admin',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'masquerade',
-  );
-
-  // Exported permission: 'masquerade as any user'.
-  $permissions['masquerade as any user'] = array(
-    'name' => 'masquerade as any user',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'masquerade',
-  );
-
-  // Exported permission: 'masquerade as user'.
-  $permissions['masquerade as user'] = array(
-    'name' => 'masquerade as user',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'masquerade',
-  );
-
   // Exported permission: 'menu edit devel'.
   $permissions['menu edit devel'] = array(
     'name' => 'menu edit devel',
@@ -1819,15 +1747,6 @@ function ctf_core_roles_and_permissions_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'location',
-  );
-
-  // Exported permission: 'view memcache storage debug'.
-  $permissions['view memcache storage debug'] = array(
-    'name' => 'view memcache storage debug',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'memcache_storage',
   );
 
   // Exported permission: 'view node location table'.
