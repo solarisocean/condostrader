@@ -15,6 +15,7 @@ dependencies[] = ctf_content_types_blog_post
 dependencies[] = ctf_content_types_condo
 dependencies[] = ctf_core_field_bases
 dependencies[] = ctf_core_image_styles
+dependencies[] = ctf_core_roles_and_permissions
 dependencies[] = ctf_forms_book_a_viewing
 dependencies[] = ctf_forms_contact_us_form
 dependencies[] = ctf_forms_sell_a_condo
