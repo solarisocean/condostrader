@@ -133,6 +133,7 @@ dependencies[] = search_api_page
 dependencies[] = search_api_ranges
 dependencies[] = search_api_solr
 dependencies[] = search_api_views
+dependencies[] = search_krumo
 dependencies[] = simplenews
 dependencies[] = smart_trim
 dependencies[] = special_menu_items
