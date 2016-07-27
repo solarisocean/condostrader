@@ -36,58 +36,71 @@ function add_active_trail($tree) {
  * Implements template_preprocess_page.
  */
 function condor_preprocess_page(&$variables) {
-  global $user;
-  //Custom variables to header menu.
-  $variables['sign_in_link'] = l(t('Sign Up'), '/user/register');
-  $variables['sign_in_link'] = NULL;
-  if (user_is_logged_in()) {
-    $variables['log_in_link'] = l(t('Log Out'), '/user/logout');
+  //Custom variables to header.
+  $variables['condo_head']['sign_in_link'] = NULL;
+  $is_anonymous = !user_is_logged_in();
+
+  if (!$is_anonymous) {
+    $variables['condo_head']['log_in_link'] = l(t('Log Out'), '/user/logout');
   }
   else {
-    $variables['log_in_link'] = l(t('Log In'), '/user/login');
-    $variables['sign_in_link'] = l(t('Sign Up'), '/user/register');
+    $variables['condo_head']['log_in_link'] = l(t('Log In'), '/user/login');
+    $variables['condo_head']['sign_in_link'] = l(t('Sign Up'), '/user/register');
   }
-  $variables['like_button'] = l('', '/user/wishlist', array('attributes' => array('class' => array('wishlist'))));
-  $variables['search_button'] = l('', '/', array('attributes' => array('class' => array('search', 'left'), 'id' => 'search-button')));
-  $variables['menu_button'] = l('', '/', array('attributes' => array('class' => array('menu-button'))));
 
+  $condo_head_r = cache_get('condo_head_r');
+  if (!$condo_head_r) {
+    $variables['condo_head_r']['like_button'] = l('', '/user/wishlist', array('attributes' => array('class' => array('wishlist'))));
+    $variables['condo_head_r']['search_button'] = l('', '/', array(
+      'attributes' => array(
+        'class' => array(
+          'search',
+          'left'
+        ),
+        'id' => 'search-button'
+      )
+    ));
+    $variables['condo_head_r']['menu_button'] = l('', '/', array('attributes' => array('class' => array('menu-button'))));
+    cache_set('condo_head_r', $variables['condo_head_r']);
+  }
+  else {
+    $variables['condo_head_r'] = $condo_head_r->data;
+  }
 
-//  $header_search_block = block_load('views', '-exp-search_results_ctrader-page_3');
-//  $header_search_block->title = '';
-//  $header_search_block->region = 'none';
-//  $header_search_block->cache = DRUPAL_NO_CACHE;
-//  $header_search_block = _block_render_blocks(array($header_search_block));
-//  $header_search_block = _block_get_renderable_array($header_search_block);
-//  $header_search_block_output = render($header_search_block);
+  $header_search_form_output = cache_get('condo_head_search_results_ctrader');
+  if (!$header_search_form_output) {
+    $view = views_get_view('search_results_ctrader');
+    $display_id = 'page_3';
+    $view->set_display($display_id);
+    $view->init_handlers();
+    $form_state = array(
+      'view' => $view,
+      'display' => $view->display_handler->display,
+      'exposed_form_plugin' => $view->display_handler->get_plugin('exposed_form'),
+      'method' => 'get',
+      'rerender' => TRUE,
+      'no_redirect' => TRUE,
+    );
+    $header_search_form = drupal_build_form('views_exposed_form', $form_state);
+    $header_search_form_output = drupal_render($header_search_form);
 
+    $variables['search_block'] = $header_search_form_output;
+    cache_set('condo_head_search_results_ctrader', $header_search_form_output);
+  }
+  else {
+    $variables['search_block'] = $header_search_form_output->data;
+  }
 
-  $view = views_get_view('search_results_ctrader');
-  $display_id = 'page_3';
-  $view->set_display($display_id);
-  $view->init_handlers();
-  $form_state = array(
-    'view' => $view,
-    'display' => $view->display_handler->display,
-    'exposed_form_plugin' => $view->display_handler->get_plugin('exposed_form'),
-    'method' => 'get',
-    'rerender' => TRUE,
-    'no_redirect' => TRUE,
-  );
-  $header_search_form = drupal_build_form('views_exposed_form', $form_state);
-  $header_search_form_output =  drupal_render($header_search_form);
-
-
-  // Custom search block from ctrader_searchmenu module..
-  /*
-  $search_block = drupal_get_form('searchmenu_form');
-  $variables['search_block'] = drupal_render($search_block);
-  //$variables['search_block'] = $header_search_block_output;
-  */
-  $variables['search_block'] = $header_search_form_output;
-
-  // Build custom menu tree.
-  $menu = menu_build_tree('main-menu');
-  $variables['menu_tree'] = $menu_items = menu_tree_output($menu);
+  $condo_main_menu = cache_get('condo_main_menu');
+  if (!$condo_main_menu) {
+    // Build custom menu tree.
+    $menu = menu_build_tree('main-menu');
+    $variables['menu_tree'] = $menu_items = menu_tree_output($menu);
+    cache_set('condo_main_menu', $variables['menu_tree']);
+  }
+  else {
+    $variables['menu_tree'] = $condo_main_menu->data;
+  }
 
   // rewrites title for user/register page.
   $path = $_GET['q'];

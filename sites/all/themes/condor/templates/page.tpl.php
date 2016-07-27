@@ -24,14 +24,14 @@
               <li><?php print $log_in_link; ?></li>
             </ul>
             <ul class="user-buttons">
-              <li><?php print $like_button; ?></li>
+              <li><?php print $condo_head_r['like_button']; ?></li>
               <li>
                 <div class="search-menu-box">
-                  <?php print $search_button; ?>
+                  <?php print $condo_head_r['search_button']; ?>
                   <?php print $search_block?>
                 </div>
               </li>
-              <li><?php print $menu_button; ?></li>
+              <li><?php print $condo_head_r['menu_button']; ?></li>
             </ul>
           </div>
           <div id="main-menu-nav-tree">
