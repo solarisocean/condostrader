@@ -68,6 +68,7 @@ function ctrader_mls_menu() {
 function _ctrader_mls_mls_page_callback() {
   $output['ctrader_mls_form'] = drupal_get_form('ctrader_mls_form');
   $output['check_not_active_listings'] = drupal_get_form('_ctrader_mls_rets_check_not_active_listings_form');
+  $output['delete_inactive_listings_form'] = drupal_get_form('_delete_inactive_listings_form');
   return $output;
 }
 
@@ -982,4 +983,115 @@ function ctrader_mls_entity_info_alter(&$entity_info) {
       'field cache' => !module_exists('entitycache'),
     );
   }
+}
+
+/**
+ * Deletes inactive listings.
+ */
+function _delete_inactive_listings_form($form, $form_state) {
+  $form = array();
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Delete inactive listings'),
+//    '#disabled' => TRUE,
+  );
+  return $form;
+}
+
+/**
+ * Large XML import start.
+ */
+function _delete_inactive_listings_form_submit($form, &$form_state) {
+  $batch = array(
+    'operations' => array(
+      array('_delete_inactive_listings_operation', array()),
+    ),
+    'finished' => '_delete_inactive_listings_finished',
+    'title' => t('Delete all inactive listings and update buildings'),
+    'init_message' => t('Starting.'),
+    'progress_message' => t('Processed @current out of @total.'),
+    'error_message' => t('Batch has encountered an error.'),
+  );
+  batch_set($batch);
+}
+
+/**
+ * Large XML test operation.
+ */
+function _delete_inactive_listings_operation(&$context) {
+  $listings_per_pass = 5;
+  if (!isset($context['sandbox']['progress'])) {
+    $context['sandbox']['progress'] = 0;
+    $context['sandbox']['current_id'] = 0;
+    $context['sandbox']['max'] = db_select('drealty_listing', 'dl')
+      ->fields('dl', array('id'))
+      ->condition('type', 'toronto_condo')
+      ->condition('active', 0)
+      ->execute()
+      ->rowCount();
+  }
+
+  $records = db_select('drealty_listing', 'dl')
+    ->fields('dl', array('id'))
+    ->condition('type', 'toronto_condo')
+    ->condition('active', 0)
+    ->range(0, $listings_per_pass)
+    ->orderBy('id')
+    ->execute()
+    ->fetchCol();
+
+  if (!empty($records)) {
+    $entities = entity_load(DREALTY_ENTITY_TYPE, array($records));
+    foreach ($entities as $entity) {
+      $building_ids = db_select('field_data_field_reference_to_condo', 'rc')
+        ->fields('rc', array('entity_id'))
+        ->condition('bundle', 'toronto_building')
+        ->condition('field_reference_to_condo_target_id', $entity->id)
+        ->range(0, $listings_per_pass)
+        ->orderBy('entity_id')
+        ->execute()
+        ->fetchCol();
+      foreach($building_ids as $building_id) {
+        $building_entity = entity_load_single(DREALTY_ENTITY_TYPE, $building_id);
+        if (isset($building_entity->field_reference_to_condo[LANGUAGE_NONE]) && count($building_entity->field_reference_to_condo[LANGUAGE_NONE]) == 1) {
+          $building_entity->delete();
+        }
+//        elseif (isset($building_entity->field_reference_to_condo[LANGUAGE_NONE])) {
+//          foreach ($building_entity->field_reference_to_condo[LANGUAGE_NONE] as $key => $value) {
+//            if ($value['target_id'] == $entity->id) {
+//              unset($building_entity->field_reference_to_condo[LANGUAGE_NONE][$key]);
+//              sort($building_entity->field_reference_to_condo[LANGUAGE_NONE]);
+//            }
+//          }
+//          $building_entity->save();
+//        }
+      }
+      $entity->delete();
+    }
+    $context['sandbox']['current_id'] = end($records);
+    $context['sandbox']['progress'] += count($records);
+    $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
+    if ($context['finished'] >= 1) {
+      $context['finished'] = 1;
+    }
+  }
+
+  // To display a message to the user when the update is completed, return it.
+  return t('Deleted buildings with bad full address field value (without zip, area, etc).');
+
+  // In case of an error, simply throw an exception with an error message.
+  throw new DrupalUpdateException('Something went wrong.');
+}
+
+/**
+ * Batch finished callback.
+ */
+function _delete_inactive_listings_finished($success, $results, $operations) {
+  if ($success) {
+    $message = t('Batch operations finished.');
+  }
+  else {
+    $message = t('Finished with an error.');
+  }
+  drupal_set_message($message);
 }

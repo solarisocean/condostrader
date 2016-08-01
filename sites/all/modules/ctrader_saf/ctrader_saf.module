@@ -748,27 +748,27 @@ function _ctrader_saf_blocks_content_function($delta) {
       if (isset($_GET['f'][0])) {
         foreach ($_GET['f'] as $value) {
           if (strpos($value, $parking_field_name) !== FALSE) {
-            $search_button_form['parking']['#value'] = '1';
+            $search_button_form['prkg']['#value'] = '1';
           }
         }
       }
 
       // BALCONY facet checkboxes.
-      $parking_field_name = 'field_patio_ter__torcond';
+      $balcony_field_name = 'field_patio_ter__torcond';
       if (isset($_GET['f'][0])) {
         foreach ($_GET['f'] as $value) {
-          if (strpos($value, $parking_field_name) !== FALSE) {
-            $search_button_form['balcony']['#value'] = '1';
+          if (strpos($value, $balcony_field_name) !== FALSE) {
+            $search_button_form['patio']['#value'] = '1';
           }
         }
       }
 
       // LAUNDRY facet checkboxes.
-      $parking_field_name = 'field_ens_lndry__torcond';
+      $laundry_field_name = 'field_ens_lndry__torcond';
       if (isset($_GET['f'][0])) {
         foreach ($_GET['f'] as $value) {
-          if (strpos($value, $parking_field_name) !== FALSE) {
-            $search_button_form['laundry']['#value'] = '1';
+          if (strpos($value, $laundry_field_name) !== FALSE) {
+            $search_button_form['ens']['#value'] = '1';
           }
         }
       }
@@ -870,7 +870,7 @@ function _ctrader_saf_search_button_form($form, &$form_state) {
     '#type' => 'hidden',
   );
 
-  $form['parking'] = array(
+  $form['prkg'] = array(
     '#type' => 'hidden',
   );
 
@@ -906,11 +906,11 @@ function _ctrader_saf_search_button_form($form, &$form_state) {
     '#type' => 'hidden',
   );
 
-  $form['balcony'] = array(
+  $form['patio'] = array(
     '#type' => 'hidden',
   );
 
-  $form['laundry'] = array(
+  $form['ens'] = array(
     '#type' => 'hidden',
   );
 
@@ -991,20 +991,20 @@ function _ctrader_saf_search_button_form_submit($form, &$form_state) {
 
   // PARKING facet checkboxes.
   $parking_field_name = 'field_prkg_inc__torcond';
-  if ($form_state['values']['parking']) {
+  if ($form_state['values']['prkg']) {
     $query['f'][] = "{$parking_field_name}:Y";
   }
 
   // BALCONY facet checkboxes.
-  $parking_field_name = 'field_patio_ter__torcond';
-  if ($form_state['values']['balcony']) {
-    $query['f'][] = "{$parking_field_name}:Open";
+  $balcony_field_name = 'field_patio_ter__torcond';
+  if ($form_state['values']['patio']) {
+    $query['f'][] = "{$balcony_field_name}:Open";
   }
 
   // LAUNDRY facet checkboxes.
-  $parking_field_name = 'field_ens_lndry__torcond';
-  if ($form_state['values']['laundry']) {
-    $query['f'][] = "{$parking_field_name}:Y";
+  $laundry_field_name = 'field_ens_lndry__torcond';
+  if ($form_state['values']['ens']) {
+    $query['f'][] = "{$laundry_field_name}:Y";
   }
 
   // BEDS facet checkboxes.
@@ -1381,6 +1381,25 @@ function _ctrader_saf_facetapi_select_facet_form_submit($form, &$form_state) {
 //  drupal_goto($parsed_url['path'], array('query' => $parsed_url['query']));
 }
 
+/**
+ * Submit handlers for settings form of facet filters.
+ */
+function _ctrader_saf_facet_settings_form_submit($form, $form_state) {
+  $values = $form_state['values'];
+  if (empty($values['widget']) || $values['widget'] != 'ctrader_facetapi_select_dropdowns') {
+    return;
+  }
+  // Getting the Facet identifier.
+  $key = $form['#facetapi']['facet']['name'];
+
+  // Update the i18n string for the "Default Option" label.
+  $string = $values['default_option_label'];
+  CtraderFacetapiSelectDropdowns::updateLabelTranslation('default_option_label', $string, $key);
+
+  // Update the i18n string for the "Reset Option" label.
+  $string = $values['reset_option_label'];
+  CtraderFacetapiSelectDropdowns::updateLabelTranslation('reset_option_label', $string, $key);
+}
 
 /**
  * Implements hook_search_api_solr_field_mapping_alter().
@@ -1391,7 +1410,6 @@ function ctrader_saf_search_api_solr_field_mapping_alter(SearchApiIndex $index, 
     $fields[$field_name] = 'rpts_' . $field_name;
   }
 }
-
 
 /**
  * @file
