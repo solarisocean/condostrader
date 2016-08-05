@@ -227,7 +227,26 @@ function ctf_pages_main_page_default_page_manager_pages() {
       'override_title_text' => '',
       'override_title_heading' => 'h2',
     );
-    $pane->cache = array();
+    $pane->cache = array(
+      'method' => 'panels_hash_cache',
+      'settings' => array(
+        'lifetime' => '28800',
+        'granularity' => array(
+          'url' => 'url',
+          'args' => 0,
+          'context' => 0,
+          'path' => 0,
+          'user' => 0,
+          'user_role' => 0,
+        ),
+        'granularity_roles_as_anon' => array(
+          2 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        'granularity_role_selection' => 'all',
+      ),
+    );
     $pane->style = array(
       'settings' => NULL,
     );
@@ -249,7 +268,26 @@ function ctf_pages_main_page_default_page_manager_pages() {
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array();
-    $pane->cache = array();
+    $pane->cache = array(
+      'method' => 'panels_hash_cache',
+      'settings' => array(
+        'lifetime' => '28800',
+        'granularity' => array(
+          'url' => 'url',
+          'args' => 0,
+          'context' => 0,
+          'path' => 0,
+          'user' => 0,
+          'user_role' => 0,
+        ),
+        'granularity_roles_as_anon' => array(
+          2 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        'granularity_role_selection' => 'all',
+      ),
+    );
     $pane->style = array(
       'settings' => NULL,
     );
@@ -287,7 +325,26 @@ function ctf_pages_main_page_default_page_manager_pages() {
       'override_title_text' => '',
       'override_title_heading' => 'h2',
     );
-    $pane->cache = array();
+    $pane->cache = array(
+      'method' => 'panels_hash_cache',
+      'settings' => array(
+        'lifetime' => '28800',
+        'granularity' => array(
+          'url' => 'url',
+          'args' => 0,
+          'context' => 0,
+          'path' => 0,
+          'user' => 0,
+          'user_role' => 0,
+        ),
+        'granularity_roles_as_anon' => array(
+          2 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        'granularity_role_selection' => 'all',
+      ),
+    );
     $pane->style = array(
       'settings' => NULL,
     );
@@ -325,7 +382,26 @@ function ctf_pages_main_page_default_page_manager_pages() {
       'override_title_text' => '',
       'override_title_heading' => 'h2',
     );
-    $pane->cache = array();
+    $pane->cache = array(
+      'method' => 'panels_hash_cache',
+      'settings' => array(
+        'lifetime' => '28800',
+        'granularity' => array(
+          'url' => 'url',
+          'args' => 0,
+          'context' => 0,
+          'path' => 0,
+          'user' => 0,
+          'user_role' => 0,
+        ),
+        'granularity_roles_as_anon' => array(
+          2 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        'granularity_role_selection' => 'all',
+      ),
+    );
     $pane->style = array(
       'settings' => NULL,
     );
@@ -360,7 +436,26 @@ function ctf_pages_main_page_default_page_manager_pages() {
       'override_title_text' => '',
       'override_title_heading' => 'h2',
     );
-    $pane->cache = array();
+    $pane->cache = array(
+      'method' => 'panels_hash_cache',
+      'settings' => array(
+        'lifetime' => '28800',
+        'granularity' => array(
+          'url' => 'url',
+          'args' => 0,
+          'context' => 0,
+          'path' => 0,
+          'user' => 0,
+          'user_role' => 0,
+        ),
+        'granularity_roles_as_anon' => array(
+          2 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        'granularity_role_selection' => 'all',
+      ),
+    );
     $pane->style = array(
       'settings' => NULL,
     );
@@ -395,7 +490,26 @@ function ctf_pages_main_page_default_page_manager_pages() {
       'override_title_text' => '',
       'override_title_heading' => 'h2',
     );
-    $pane->cache = array();
+    $pane->cache = array(
+      'method' => 'panels_hash_cache',
+      'settings' => array(
+        'lifetime' => '28800',
+        'granularity' => array(
+          'url' => 'url',
+          'args' => 0,
+          'context' => 0,
+          'path' => 0,
+          'user' => 0,
+          'user_role' => 0,
+        ),
+        'granularity_roles_as_anon' => array(
+          2 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        'granularity_role_selection' => 'all',
+      ),
+    );
     $pane->style = array(
       'settings' => NULL,
     );
@@ -430,7 +544,26 @@ function ctf_pages_main_page_default_page_manager_pages() {
       'override_title_text' => 'TestTestTestTestTest',
       'override_title_heading' => 'h2',
     );
-    $pane->cache = array();
+    $pane->cache = array(
+      'method' => 'panels_hash_cache',
+      'settings' => array(
+        'lifetime' => '28800',
+        'granularity' => array(
+          'url' => 'url',
+          'args' => 0,
+          'context' => 0,
+          'path' => 0,
+          'user' => 0,
+          'user_role' => 0,
+        ),
+        'granularity_roles_as_anon' => array(
+          2 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        'granularity_role_selection' => 'all',
+      ),
+    );
     $pane->style = array(
       'settings' => NULL,
     );
@@ -501,7 +634,26 @@ function ctf_pages_main_page_default_page_manager_pages() {
       'override_title_text' => '',
       'override_title_heading' => 'h2',
     );
-    $pane->cache = array();
+    $pane->cache = array(
+      'method' => 'panels_hash_cache',
+      'settings' => array(
+        'lifetime' => '28800',
+        'granularity' => array(
+          'url' => 'url',
+          'args' => 0,
+          'context' => 0,
+          'path' => 0,
+          'user' => 0,
+          'user_role' => 0,
+        ),
+        'granularity_roles_as_anon' => array(
+          2 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        'granularity_role_selection' => 'all',
+      ),
+    );
     $pane->style = array(
       'settings' => NULL,
     );
