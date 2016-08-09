@@ -58,18 +58,12 @@
 
     .gallery-slider-button-next {
       right: 28px;
-
-      &:before {
-        background: url(../images/gallery-next.png) 0 0 no-repeat;
-      }
+      @include sprite-pseudo($gallery-next, 'before');
     }
 
     .gallery-slider-button-prev {
       left: 28px;
-
-      &:before {
-        background: url(../images/gallery-prev.png) 0 0 no-repeat;
-      }
+      @include sprite-pseudo($gallery-prev, 'before');
     }
   }
 
@@ -180,11 +174,12 @@
 
       .views-field-nothing-8 {
         .field-content {
-          @include pseudo-element("before", 9px, 17px, 'map-icon-big.png', 'not-center');
+          @include sprite-pseudo($map-icon-big, 'before');
           font-size: rem-calc(16);
 
           &:before {
             margin-right: 5px;
+            vertical-align: inherit;
           }
         }
       }
@@ -201,28 +196,34 @@
           }
         }
 
+        .condo-info-element {
+          &:before {
+            vertical-align: inherit !important;
+          }
+        }
+
         .sqft {
-          @include pseudo-element('before', 9px, 12px, 'area-icon.png', 'not-center');
+          @include sprite-pseudo($area-icon, 'before');
         }
 
         .bed {
-          @include pseudo-element('before', 13px, 12px, 'bed-icon.png', 'not-center');
+          @include sprite-pseudo($bed-icon, 'before');
         }
 
         .bath {
-          @include pseudo-element('before', 6px, 12px, 'bath-icon.png', 'not-center');
+          @include sprite-pseudo($bath-icon, 'before');
         }
 
         .pets {
-          @include pseudo-element('before', 9px, 12px, 'pets-icon.png', 'not-center');
+          @include sprite-pseudo($pets-icon, 'before');
         }
 
         .locker {
-          @include pseudo-element('before', 8px, 12px, 'locker-icon.png', 'not-center');
+          @include sprite-pseudo($locker-icon, 'before');
         }
 
         .parking {
-          @include pseudo-element('before', 11px, 10px, 'car-icon.png', 'not-center');
+          @include sprite-pseudo($car-icon, 'before');
         }
 
       }
@@ -467,22 +468,21 @@
         }
 
         .a2a_svg {
-          width: 20px !important;
+          width: 21px !important;
           height: 20px !important;
-          line-height: 20px !important;
-          background-size: 20px !important;
+          background-size: inherit !important;
         }
 
         .a2a_s_twitter {
-          background: url(../images/twitter-icon.png) 0 0 no-repeat;
+          @include sprite($twitter-icon);
         }
 
         .a2a_s_facebook {
-          background: url(../images/facebook-icon.png) 0 0 no-repeat;
+          @include sprite($facebook-icon);
         }
 
         .a2a_s_google_plus {
-          background: url(../images/google-icon.png) 0 0 no-repeat;
+          @include sprite($google-icon);
         }
       }
     }
@@ -555,58 +555,51 @@
 
         .field-content {
           &.pets {
-            @include pseudo-element('before', 13px, 14px, 'pets-icon-big.png', 'not-center');
+            @include sprite-pseudo($pets-icon-big, 'before');
             &:before {
-              background-size: 13px;
               margin-right: 12px;
             }
           }
 
           &.parking {
-            @include pseudo-element('before', 13px, 10px, 'car-icon-big.png', 'not-center');
+            @include sprite-pseudo($car-icon-big, 'before');
             &:before {
-              background-size: 13px;
-              margin-right: 12px;
+              margin-right: 10px;
             }
           }
 
           &.locker {
-            @include pseudo-element('before', 13px, 20px, 'locker-icon-big.png', 'not-center');
+            @include sprite-pseudo($locker-icon-big, 'before');
             &:before {
-              background-size: 13px;
-              margin-right: 12px;
+              margin-right: 15px;
             }
           }
 
           &.fireplace {
-            @include pseudo-element('before', 13px, 19px, 'fireplace-icon.png', 'not-center');
+            @include sprite-pseudo($fireplace-icon, 'before');
             &:before {
-              background-size: 13px;
-              margin-right: 12px;
+              margin-right: 13px;
             }
           }
 
           &.washer {
-            @include pseudo-element('before', 13px, 19px, 'washer-icon.png', 'not-center');
+            @include sprite-pseudo($washer-icon, 'before');
             &:before {
-              background-size: 11px;
-              margin-right: 12px;
+              margin-right: 15px;
             }
           }
 
           &.kitchen {
-            @include pseudo-element('before', 13px, 19px, 'kitchen-icon.png', 'not-center');
+            @include sprite-pseudo($kitchen-icon, 'before');
             &:before {
-              background-size: 13px;
-              margin-right: 12px;
+              margin-right: 14px;
             }
           }
 
           &.stove {
-            @include pseudo-element('before', 13px, 19px, 'stove-icon.png', 'not-center');
+            @include sprite-pseudo($stove-icon, 'before');
             &:before {
-              background-size: 13px;
-              margin-right: 12px;
+              margin-right: 14px;
             }
           }
         }

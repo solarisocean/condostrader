@@ -127,10 +127,11 @@
           line-height: 15px;
 
           .field-content {
-            @include pseudo-element("before", 7px, 12px , "map-marker.png", "not-center");
+            @include sprite-pseudo($map-marker, 'before');
 
             &:before {
               margin-right: 4px;
+              vertical-align: inherit;
             }
 
             font-size: rem-calc(12);
@@ -149,7 +150,7 @@
             color: $gray;
             float: left;
 
-            @include pseudo-element("after", 7px, 7px, 'question-symbol.png', 'not-center');
+            @include sprite-pseudo($question-symbol, 'after');
 
             &:after {
               margin: 0 4px;
@@ -176,28 +177,36 @@
             }
           }
 
+          .condo-info-element {
+            &:before {
+              vertical-align: inherit !important;
+              margin-right: 4px;
+              margin-top: 4px;
+             }
+          }
+
           .sqft {
-            @include pseudo-element("before", 14px, 11px, "area-icon.png", "not-center");
+            @include sprite-pseudo($area-icon, 'before');
           }
 
           .bed {
-            @include pseudo-element("before", 16px, 11px, "bed-icon.png", "not-center");
+            @include sprite-pseudo($bed-icon, 'before');
           }
 
           .bath {
-            @include pseudo-element("before", 9px, 11px, "bath-icon.png", "not-center");
+            @include sprite-pseudo($bath-icon, 'before');
           }
 
           .pets {
-            @include pseudo-element("before", 13px, 12px, "pets-icon.png", "not-center");
+            @include sprite-pseudo($pets-icon, 'before');
           }
 
           .locker {
-            @include pseudo-element("before", 12px, 11px, "locker-icon.png", "not-center");
+            @include sprite-pseudo($locker-icon, 'before');
           }
 
           .parking {
-            @include pseudo-element("before", 15px, 10px, "car-icon.png", "not-center");
+            @include sprite-pseudo($car-icon, 'before');
           }
         }
       }

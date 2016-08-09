@@ -1,7 +1,3 @@
-/**
- * Created on 21.04.16.
- */
-
 (function ($) {
 
     Drupal.behaviors.addMap = {
@@ -39,7 +35,6 @@
                             layer.bindPopup('Loading..');
                             layer.on({
                               click: function () {
-                                // console.log(feature.id);
                                 $.ajax({
                                   type: 'POST',
                                   url: '/build-point-popup',
@@ -55,10 +50,19 @@
                                 });
                               }
                             });
-
                           }
                           else {
                             layer.bindLabel(feature.properties.popupContent, labelOptions);
+                            layer.on("mouseover", function() {
+                                layer.setStyle({
+                                    color: "#FF5000"
+                                });
+                            });
+                            layer.on("mouseout", function() {
+                              layer.setStyle({
+                                  color: "#B9760B"
+                              });
+                            });
                             layer.on({
                                   click: function () {
                                       $("#-ctrader-saf-search-button-form input[name='region'], #-ctrader-saf-search-button-form input[name='region_1'], #-ctrader-saf-search-button-form input[name='region_2']").val('');

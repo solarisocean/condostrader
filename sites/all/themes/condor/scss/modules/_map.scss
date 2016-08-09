@@ -38,6 +38,18 @@
   .drawing-line {
     stroke: $ecstasy;
   }
+
+  .marker-cluster-small {
+    background: none;
+
+    div {
+      background-color: rgba(254, 113, 23, 0.88);
+    }
+
+    span {
+      color: $white;
+    }
+  }
 }
 
 .free-draw-tools {

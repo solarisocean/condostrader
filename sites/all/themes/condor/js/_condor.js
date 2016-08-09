@@ -229,7 +229,7 @@
             $('.single-checkbox-facet').once().on('click', function (e) {
                 var chbxInput = $(this).parent().find('input');
                 var _input = $("#-ctrader-saf-search-button-form input[name='" + $(this).closest('ul.facetapi-facetapi-checkbox-links').attr('class').split(" ")[1].split("-")[3] + "']");
-                if (_input.val() == 1) {
+                if (_input.val() === 1) {
                     _input.val(0);
                 } else {
                     _input.val(1);
@@ -321,7 +321,7 @@
 
                 $('.facetapi-facet-field-s-r--torcond .facetapi-facet a').not('.facetapi-checkbox').each(function() {
 
-                    if ($(this).text().split(" ").reverse()[0] == $('.form-type-radio input:checked').val()) {
+                    if ($(this).text().split(" ").reverse()[0] === $('.form-type-radio input:checked').val()) {
                         $('.facetapi-facet-field-s-r--torcond .facetapi-facet.active-region-facet').removeClass('active-region-facet');
                         $(this).trigger('click');
                     } else if ($(form + ' input[name="sale_rent"]').val() !== '' && !$('body').hasClass('front')){
@@ -411,7 +411,7 @@
         attach: function (context, settings) {
 
             $('.views-widget-sort-sort_bef_combine .form-select').change(function() {
-                if ($(this).val().length != 1) {
+                if ($(this).val().length !== 1) {
                     $(this).closest('.views-exposed-form').find('.form-submit').trigger('click');
                 }
             });
@@ -509,7 +509,10 @@
                 $('.condo-page-pagination .pane-content').append('<div class="swiper-scrollbar"></div>');
                 $('.condo-page-gallery .pane-content').append('<div class="gallery-slider-button-next swiper-button-next"></div><div class="gallery-slider-button-prev swiper-button-prev"></div>');
 
-                var galleryTop = new Swiper('.condo-page-gallery .pane-content', {
+                var galleryTop,
+                      galleryThumbs;
+                
+                galleryTop = new Swiper('.condo-page-gallery .pane-content', {
                     nextButton: '.gallery-slider-button-next',
                     prevButton: '.gallery-slider-button-prev',
                     onSlideChangeEnd: function(swiper){
@@ -520,7 +523,7 @@
                     }
                 });
 
-                var galleryThumbs = new Swiper('.condo-page-pagination .pane-content', {
+                galleryThumbs = new Swiper('.condo-page-pagination .pane-content', {
                     scrollbar: '.swiper-scrollbar',
                     scrollbarHide: false,
                     scrollbarDraggable: true,
@@ -531,30 +534,30 @@
                     touchRatio: 0.2,
                     direction: 'vertical',
                     breakpoints: {
-                        320 : {
+                        320: {
                             direction: 'horizontal',
                             slidesPerView: 2
                         },
-                        568 : {
+                        568: {
                             direction: 'horizontal',
                             slidesPerView: 3
                         },
-                        768 : {
+                        768: {
                             direction: 'horizontal',
                             slidesPerView: 5
                         },
-                        1024 : {
+                        1024: {
                             direction: 'horizontal',
                             slidesPerView: 5
                         }
                     },
-                    onClick: function (swiper, event){
+                    onClick: function (swiper, event) {
                         var clicked = swiper.clickedIndex;
                         swiper.activeIndex = clicked;
                         swiper.updateClasses();
                         $(swiper.slides).removeClass('is-selected');
                         $(swiper.clickedSlide).addClass('is-selected');
-                        galleryTop.slideTo(clicked,300, false);
+                        galleryTop.slideTo(clicked, 300, false);
                     }
                 });
 
@@ -655,9 +658,9 @@
                         slidesList = $('.wishlist-slider .view-content .views-row');
 
 
-                        if (slidesList.length == 0) {
+                        if (slidesList.length === 0) {
                             $('.view-flaged-condos-').children().remove();
-                            $('.view-flaged-condos-').append('<div class="view-empty"><p style="font-size: 1.375rem;">' + Drupal.t('<b>YOUR WISH LIST IS CURRENTLY EMPTY,</b> ADD LISTING TO YOUR WISH LIST TO SEE THEM HERE.') + '</p></div>')
+                            $('.view-flaged-condos-').append('<div class="view-empty"><p style="font-size: 1.375rem;">' + Drupal.t('<b>YOUR WISH LIST IS CURRENTLY EMPTY,</b> ADD LISTING TO YOUR WISH LIST TO SEE THEM HERE.') + '</p></div>');
                         }
 
                         if (newlyListedSlider !== undefined) {

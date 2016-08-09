@@ -8,9 +8,9 @@
 }
 
 .swiper-button-next {
-  @include pseudo-element("before", 32px, 31px, "slider-next.png", "not-center");
+  @include sprite-pseudo($slider-next, 'before');
 }
 
 .swiper-button-prev {
-  @include pseudo-element("before", 32px, 31px, "slider-prev.png", "not-center");
+  @include sprite-pseudo($slider-prev, 'before');
 }
