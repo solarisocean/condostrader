@@ -42,15 +42,16 @@
             }
 
             &.wishlist {
-              @include pseudo-element('before', 22px, 19px, 'wishlist.png', 'center');
+              @include sprite-pseudo-center($wishlist, 'before');
             }
 
             &.search {
-              @include pseudo-element('before', 19px, 19px, 'search-icon.png', 'center');
+              @include sprite-pseudo-center($search-icon, 'before');
+
             }
 
             &.menu-button {
-              @include pseudo-element('before', 20px, 19px, 'menu-icon.png', 'center');
+              @include sprite-pseudo-center($menu-icon, 'before');
             }
 
           }

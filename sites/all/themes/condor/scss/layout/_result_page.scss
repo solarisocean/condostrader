@@ -22,6 +22,30 @@
     padding: 0 28px 0 25px;
     margin: 0;
 
+    .facet-map-block {
+      overflow: auto;
+      display: block;
+
+      button {
+        &.facet-map-block-neighbourhood,
+        &.facet-map-block-map-search {
+          display: inline-block;
+          margin: 0 !important;
+          -ms-word-break: break-all;
+          word-break: break-all;
+          width: 48%;
+        }
+
+        &.facet-map-block-neighbourhood {
+          float: left;
+        }
+
+        &.facet-map-block-map-search {
+          float: right;
+        }
+      }
+    }
+
     .panels-flexible-region-inside {
       padding-left: 1em;
       padding-right: 1em;
@@ -37,6 +61,7 @@
 
     .facet-top {
       float: left;
+      width: 13%;
 
       .facetapi-facetapi-checkbox-links {
         &.facetapi-facet-field-s-r--torcond {
@@ -45,6 +70,8 @@
           padding-bottom: 0;
 
           li {
+            width: 100%;
+
             &.first,
             &.last {
               float: none;
@@ -52,7 +79,7 @@
 
             &.first {
               a {
-                @include pseudo-element("before", 35px, 23px, "for-sale-icon.png", "not-center");
+                @include sprite-pseudo($for-sale-icon, 'before');
                 &:before {
                   display: block;
                   margin: 0 auto;
@@ -63,7 +90,7 @@
 
             &.last {
               a {
-                @include pseudo-element("before", 35px, 23px, "for-rent-icon.png", "not-center");
+                @include sprite-pseudo($for-rent-icon, 'before');
                 &:before {
                   display: block;
                   margin: 0 auto;
@@ -74,7 +101,7 @@
 
             a {
               max-width: 118px;
-              width: 118px;
+              width: 100%;
               padding: 18px 0;
             }
           }
@@ -84,8 +111,7 @@
 
     .facet-bottom {
       float: right;
-      max-width: 780px;
-      width: 100%;
+      width: 84%;
       padding: 6px 0;
     }
 
@@ -103,6 +129,45 @@
 
     .hierarchical-select .selects select {
       max-width: 248px;
+    }
+
+    @media only screen and (max-width: 1200px) {
+      .facet-map-block {
+        button {
+          width: 100% !important;
+        }
+      }
+
+      .facet-top {
+        width: 100%;
+
+        .facetapi-facetapi-checkbox-links {
+          &.facetapi-facet-field-s-r--torcond {
+            max-width: 100%;
+
+            li {
+              width: 50%;
+
+              &.first {
+                float: left;
+              }
+
+              &.last {
+                float: right;
+              }
+
+              a {
+                max-width: 100%;
+                padding: 5px 0;
+              }
+            }
+          }
+        }
+      }
+
+      .facet-bottom {
+        width: 100%;
+      }
     }
   }
 
