@@ -12,6 +12,7 @@ dependencies[] = better_exposed_filters
 dependencies[] = block
 dependencies[] = block_class
 dependencies[] = boolean_formatter
+dependencies[] = ckeditor
 dependencies[] = clone
 dependencies[] = ctools
 dependencies[] = current_search
