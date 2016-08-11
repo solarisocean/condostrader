@@ -241,7 +241,8 @@
             $('.single-checkbox-facet').once().on('click', function (e) {
                 var chbxInput = $(this).parent().find('input');
                 var _input = $("#-ctrader-saf-search-button-form input[name='" + $(this).closest('ul.facetapi-facetapi-checkbox-links').attr('class').split(" ")[1].split("-")[3] + "']");
-                if (_input.val() === 1) {
+                console.log(_input.val());
+                if (_input.val() == 1) {
                     _input.val(0);
                 } else {
                     _input.val(1);
@@ -274,7 +275,7 @@
                 $('.pane-ctrader-saf-neighbourhoods-hs select').each(function() {
                     $(this).change(function() {
 
-                        if ($(this).val() !== 'label_1' && $(this).val() !== 'label_2') {
+                        if ($(this).val() != 'label_1' && $(this).val() != 'label_2') {
                             $.ajax({
                                 type: 'POST',
                                 url: '/js-singup-map',
@@ -283,7 +284,7 @@
                                 }
                             });
                         }
-                        else if ($(this).val() === 'label_1' || $(this).val() === 'label_2') {
+                        else if ($(this).val() == 'label_1' || $(this).val() == 'label_2') {
                             $.ajax({
                                 type: 'POST',
                                 url: '/js-singup-map',
@@ -333,7 +334,7 @@
 
                 $('.facetapi-facet-field-s-r--torcond .facetapi-facet a').not('.facetapi-checkbox').each(function() {
 
-                    if ($(this).text().split(" ").reverse()[0] === $('.form-type-radio input:checked').val()) {
+                    if ($(this).text().split(" ").reverse()[0] == $('.form-type-radio input:checked').val()) {
                         $('.facetapi-facet-field-s-r--torcond .facetapi-facet.active-region-facet').removeClass('active-region-facet');
                         $(this).trigger('click');
                     } else if ($(form + ' input[name="sale_rent"]').val() !== '' && !$('body').hasClass('front')){
@@ -670,7 +671,7 @@
                         slidesList = $('.wishlist-slider .view-content .views-row');
 
 
-                        if (slidesList.length === 0) {
+                        if (slidesList.length == 0) {
                             $('.view-flaged-condos-').children().remove();
                             $('.view-flaged-condos-').append('<div class="view-empty"><p style="font-size: 1.375rem;">' + Drupal.t('<b>YOUR WISH LIST IS CURRENTLY EMPTY,</b> ADD LISTING TO YOUR WISH LIST TO SEE THEM HERE.') + '</p></div>');
                         }
