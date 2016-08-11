@@ -191,7 +191,7 @@
   }
 
   .result-tab-block {
-    width: 69.5%;
+    width: 70%;
     background: $white;
     margin-right: -5px;
     border: 1px solid darken($athens-gray, 6);
@@ -258,6 +258,10 @@
     }
 
   }
+
+  .pane-search-results-ctrader {
+    clear: both;
+  } 
 
   .view-search-results-ctrader {
     .total-quantity {
