@@ -206,5 +206,11 @@
       }
     }
 
+    @media #{$small-only} {
+      .views-row {
+        width: 100%;
+      }
+    }
+
   }
 }

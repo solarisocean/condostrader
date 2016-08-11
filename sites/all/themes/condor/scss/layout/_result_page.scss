@@ -197,6 +197,8 @@
     border: 1px solid darken($athens-gray, 6);
     margin-left: 25px;
     padding: 2px 0 6px 0;
+    float: left;
+    margin-top: 17px;
 
     a {
       color: $mirage;
@@ -232,7 +234,8 @@
   .result-filter-block {
     width: 27.5%;
     padding-right: 32px;
-    padding-top: 17px;
+    margin-top: 17px;
+    float: right;
 
     .views-exposed-widget {
       float: none;
@@ -317,8 +320,6 @@
   }
 
   .search-results-load-more {
-    position: absolute;
-    bottom: 0;
     left: calc(50% - (148px / 2));
 
     @extend %condo-more-button;
@@ -380,6 +381,99 @@
       -moz-animation: rotate 1s ease-in-out infinite;
       -o-animation: rotate 1s ease-in-out infinite;
       animation: rotate 1s ease-in-out infinite;
+    }
+  }
+
+  @media #{$medium-only} {
+    .view-search-results-ctrader {
+      .view-content {
+        padding: 0;
+
+        .mCustomScrollBox {
+          padding: 0 25px;
+        }
+
+        .views-row {
+          width: 100%;
+          margin-right: 0;
+          display: block;
+        }
+      }
+    }
+
+    .result-tab-block {
+      width: 50%;
+      float: none;
+    }
+
+    .result-filter-block {
+      width: calc(50% - 50px);
+      padding-right: 0;
+      float: none;
+    }
+  }
+
+  @media #{$small-only} {
+    .main {
+      .panels-flexible-column-first {
+        width: 100%;
+      }
+    }
+
+    .view-search-results-ctrader {
+      .view-content {
+        padding: 0 20px;
+
+        .views-row {
+          width: 100%;
+          margin-right: 0;
+          display: block;
+        }
+      }
+    }
+
+    .facet-search-block {
+      padding: 0 25px;
+
+      .panels-flexible-region-inside {
+        padding: 0;
+      }
+
+      .hierarchical-select .selects select {
+        max-width: 100%;
+      }
+    }
+
+    .result-tab-block {
+      width: 53%;
+      margin: 0;
+      padding: 4px 0 4px 0;
+      float: left;
+      margin-left: 20px;
+      margin-top: 10px;
+
+      a {
+        padding: 10px 8px 8px;
+      }
+    }
+
+    .result-filter-block {
+      width: calc(47% - 40px);
+      padding: 0;
+      float: right;
+      margin-right: 20px;
+      margin-top: 10px;
+
+      select {
+        height: 34px;
+        background: $white;
+      }
+    }
+
+    .results-page-result {
+      .pane-search-results-ctrader {
+        clear: both;
+      }
     }
   }
 }

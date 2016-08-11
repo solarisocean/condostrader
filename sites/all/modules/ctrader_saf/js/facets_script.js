@@ -5,7 +5,11 @@
 
       setTimeout(function () {
         if ($('body').hasClass('page-search-results')) {
-          $("#mapid").height($('.main').outerHeight());
+          if ($(window).width() < 569) {
+            $("#mapid").height(300);
+          } else {
+            $("#mapid").height($('.main').outerHeight());
+          }
         }
       }, 1);
 
