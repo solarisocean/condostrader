@@ -1,0 +1,216 @@
+.section-building {
+  .tabs-processed {
+    border: none;
+
+    .ui-tabs-panel {
+      padding: 0;
+    }
+
+    .ui-tabs-nav {
+      border: none;
+      border-radius: 0;
+      background: $flamingo;
+
+      li {
+        border-radius: 0;
+      }
+    }
+  }
+
+  .view-id-condos_in_building {
+    @extend .centering;
+    background: $alabaster;
+    padding-bottom: 40px !important;
+
+    .view-header {
+      padding-top: 15px;
+    }
+
+    .views-row {
+      display: inline-block;
+      width: calc((100% / 4) - 22px);
+      margin-right: 25px;
+      color: #192030;
+      margin-top: 25px;
+
+      .views-field-nothing-2 {
+        .field-content {
+          position: relative;
+          display: inline-block;
+          width: 100%;
+
+          img {
+            min-width: 100%;
+          }
+
+          .price {
+            position: absolute;
+            left: 0;
+            bottom: 13px;
+            font-size: rem-calc(14);
+            color: $white;
+            display: inline-block;
+            max-width: 100px;
+            width: 100%;
+            padding: 7px 12px;
+            text-align: center;
+            @extend %gradient-background;
+
+            &:after {
+              content: '';
+              width: 0;
+              height: 0;
+              border-top: 36px solid #F26236;
+              border-right: 22px solid transparent;
+              position: absolute;
+              top: 0;
+              right: -22px;
+            }
+          }
+
+          .flag {
+            position: absolute;
+            right: 6px;
+            top: 3px;
+
+            .flag-throbber {
+              display: none;
+              visibility: hidden;
+            }
+
+            a {
+              &:before {
+                content: "";
+                display: inline-block;
+                width: 24px;
+                height: 20px;
+                background: url("../images/like.png") 0 0 no-repeat;
+                vertical-align: middle;
+              }
+            }
+          }
+
+          .discount {
+            position: absolute;
+            left: 0;
+            top: 11px;
+            background: rgba(0,0,0,.7);
+            color: $white;
+            font-size: rem-calc(11);
+            padding: 5px 13px;
+          }
+
+        }
+      }
+
+      .views-fieldset {
+        padding: 11px 12px;
+        font-size: rem-calc(12);
+        border: 1px solid darken($athens-gray, 1);
+        border-top: none;
+        background-color: $white;
+
+        .views-field-nothing-7{
+          font-family: "Raleway", sans-serif;
+          font-weight: bold;
+          font-size: rem-calc(14);
+          margin-bottom: 1px;
+        }
+
+        .views-field-nothing-8 {
+          line-height: 15px;
+
+          .field-content {
+            @include sprite-pseudo($map-marker, 'before');
+
+            &:before {
+              margin-right: 4px;
+              vertical-align: inherit;
+            }
+
+            font-size: rem-calc(12);
+            color: $gray;
+            padding-right: 90px;
+          }
+        }
+
+        .views-field-field-maint--torcond {
+          border-bottom: 1px solid $athens-gray;
+          border-top: 1px solid $athens-gray;
+          margin: 8px 0 3px;
+          padding: 6px 0;
+
+          .views-label-field-maint--torcond {
+            color: $gray;
+            float: left;
+
+            @include sprite-pseudo($question-symbol, 'after');
+
+            &:after {
+              margin: 0 4px;
+            }
+          }
+
+          .field-content {
+            color: $mirage;
+          }
+        }
+
+        .views-field-nothing {
+          font-size: rem-calc(11);
+
+          .condo-info-line {
+            .condo-info-element {
+              margin-right: 10px;
+            }
+
+            &:first-child {
+              .condo-info-element {
+                margin-right: 25px;
+              }
+            }
+          }
+
+          .condo-info-element {
+            &:before {
+              vertical-align: inherit !important;
+              margin-right: 4px;
+              margin-top: 4px;
+            }
+          }
+
+          .sqft {
+            @include sprite-pseudo($area-icon, 'before');
+          }
+
+          .bed {
+            @include sprite-pseudo($bed-icon, 'before');
+          }
+
+          .bath {
+            @include sprite-pseudo($bath-icon, 'before');
+          }
+
+          .pets {
+            @include sprite-pseudo($pets-icon, 'before');
+          }
+
+          .locker {
+            @include sprite-pseudo($locker-icon, 'before');
+          }
+
+          .parking {
+            @include sprite-pseudo($car-icon, 'before');
+          }
+        }
+      }
+    }
+
+    @media #{$small-only} {
+      .views-row {
+        width: 100%;
+      }
+    }
+
+  }
+}

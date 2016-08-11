@@ -172,10 +172,22 @@
                 });
             }
 
-            $('.page-search-results .view-search-results-ctrader .view-content').mCustomScrollbar({
-                setHeight: "675px",
-                theme: "inset-2"
-            });
+            if ($(window).width() > 568) {
+                $('.page-search-results .view-search-results-ctrader .view-content').mCustomScrollbar({
+                    setHeight: "675px",
+                    theme: "inset-2"
+                });
+            }
+
+            if ($(window).width() < 569) {
+                $('.facet-map-block').after(
+                    $('.page-search-results #mapid').closest('.panels-flexible-column').css({
+                        'width': '100%',
+                        'margin-bottom': '35px'
+                    })
+                );
+
+            }
 
         }
     };
