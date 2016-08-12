@@ -75,10 +75,8 @@ function ctrader_register_form_user_register_form_alter(&$form, &$form_state) {
   $form['#prefix'] = "<div class='register-form-title''>
                           <h1><span>sign up</span> for free</h1>
                           <p>
-                            Etiam suscipit tellus condimentum purus blandit, sed porttitor justo tristique.
-                            Maecenas eleifend lorem porta, placerat elit non, auctor nulla!
-                            Suspendisse et mi vel tellus fermentum dapibus.
-                            Vivamus ullamcorper nibh nec neque malesuada placerat?
+                            Create an account to use personalized Wish List, book viewing appointments and get alerts for your custom searches. 
+                            At <a href='http://condostrader.ca'>Conodostrader.ca</a> we take your privacy seriously. Your information is to be used only for the purpose of this website.
                           </p>
                       </div>";
 
