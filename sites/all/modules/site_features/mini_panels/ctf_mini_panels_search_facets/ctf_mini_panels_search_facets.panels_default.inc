@@ -376,6 +376,29 @@ function ctf_mini_panels_search_facets_default_panels_mini() {
     $display->content['new-d310594e-4027-430b-9ab9-a8851662d219'] = $pane;
     $display->panels['left'][2] = 'new-d310594e-4027-430b-9ab9-a8851662d219';
     $pane = new stdClass();
+    $pane->pid = 'new-bcc99212-b8d8-4cbb-8dbd-23abea5d7660';
+    $pane->panel = 'left';
+    $pane->type = 'block';
+    $pane->subtype = 'facetapi-DdYKvDmVAYuJT1BFV12JeMDZcgY6r4VA';
+    $pane->shown = FALSE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => 'Building Style',
+      'override_title_heading' => 'h5',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 3;
+    $pane->locks = array();
+    $pane->uuid = 'bcc99212-b8d8-4cbb-8dbd-23abea5d7660';
+    $display->content['new-bcc99212-b8d8-4cbb-8dbd-23abea5d7660'] = $pane;
+    $display->panels['left'][3] = 'new-bcc99212-b8d8-4cbb-8dbd-23abea5d7660';
+    $pane = new stdClass();
     $pane->pid = 'new-bd8f6555-30e2-4c18-9588-508f61166971';
     $pane->panel = 'right';
     $pane->type = 'block';

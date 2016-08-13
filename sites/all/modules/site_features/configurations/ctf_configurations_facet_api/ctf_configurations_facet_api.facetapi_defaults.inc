@@ -216,6 +216,38 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
   $facet->api_version = 1;
+  $facet->name = 'search_api@toronto_condo_index::field_ens_lndry__torcond';
+  $facet->searcher = 'search_api@toronto_condo_index';
+  $facet->realm = '';
+  $facet->facet = 'field_ens_lndry__torcond';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'and',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'reverse_dependency' => FALSE,
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+      'roles' => array(),
+      'bundle' => 'none',
+      'bundle_selected' => array(),
+    ),
+    'facet_mincount' => '0',
+    'facet_missing' => '0',
+    'flatten' => 0,
+    'individual_parent' => 0,
+    'query_type' => 'term',
+    'limit_active_items' => 0,
+    'default_true' => '1',
+    'facet_search_ids' => array(),
+    'exclude' => 0,
+  );
+  $export['search_api@toronto_condo_index::field_ens_lndry__torcond'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
   $facet->name = 'search_api@toronto_condo_index::field_locker__torcond';
   $facet->searcher = 'search_api@toronto_condo_index';
   $facet->realm = '';
@@ -283,6 +315,35 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
     'pretty_paths_alias' => 'field_lp_dol__torcond',
   );
   $export['search_api@toronto_condo_index::field_lp_dol__torcond'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@toronto_condo_index::field_patio_ter__torcond';
+  $facet->searcher = 'search_api@toronto_condo_index';
+  $facet->realm = '';
+  $facet->facet = 'field_patio_ter__torcond';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'and',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'reverse_dependency' => FALSE,
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+    ),
+    'facet_mincount' => '0',
+    'facet_missing' => '0',
+    'flatten' => 0,
+    'individual_parent' => 0,
+    'query_type' => 'term',
+    'limit_active_items' => 0,
+    'default_true' => '1',
+    'facet_search_ids' => array(),
+    'exclude' => 0,
+  );
+  $export['search_api@toronto_condo_index::field_patio_ter__torcond'] = $facet;
 
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
@@ -478,6 +539,40 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
     'exclude' => 0,
   );
   $export['search_api@toronto_condo_index::field_status__torcond'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@toronto_condo_index::field_stories__torcond';
+  $facet->searcher = 'search_api@toronto_condo_index';
+  $facet->realm = '';
+  $facet->facet = 'field_stories__torcond';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'and',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'reverse_dependency' => FALSE,
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+      'roles' => array(),
+      'bundle' => 'none',
+      'bundle_selected' => array(),
+    ),
+    'facet_mincount' => '0',
+    'facet_missing' => '0',
+    'flatten' => 0,
+    'individual_parent' => 0,
+    'query_type' => 'term',
+    'limit_active_items' => 1,
+    'default_true' => '1',
+    'facet_search_ids' => array(
+      'search_api_views:search_results_ctrader:page_2' => 'search_api_views:search_results_ctrader:page_2',
+    ),
+    'exclude' => 0,
+  );
+  $export['search_api@toronto_condo_index::field_stories__torcond'] = $facet;
 
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
@@ -1835,6 +1930,42 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
   $facet->api_version = 1;
+  $facet->name = 'search_api@toronto_condo_index:block:field_city_region__torcond:name';
+  $facet->searcher = 'search_api@toronto_condo_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_city_region__torcond:name';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@toronto_condo_index:block:field_city_region__torcond:name'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
   $facet->name = 'search_api@toronto_condo_index:block:field_city_region__torcond:parent';
   $facet->searcher = 'search_api@toronto_condo_index';
   $facet->realm = 'block';
@@ -2173,6 +2304,42 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
     'show_reset_link' => 0,
   );
   $export['search_api@toronto_condo_index:block:field_city_region__torcond:parents_all'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@toronto_condo_index:block:field_city_region__torcond:tid';
+  $facet->searcher = 'search_api@toronto_condo_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_city_region__torcond:tid';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@toronto_condo_index:block:field_city_region__torcond:tid'] = $facet;
 
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
@@ -5896,6 +6063,222 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
   $facet->api_version = 1;
+  $facet->name = 'search_api@toronto_condo_index:block:field_reference_to_condo';
+  $facet->searcher = 'search_api@toronto_condo_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_reference_to_condo';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@toronto_condo_index:block:field_reference_to_condo'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@toronto_condo_index:block:field_reference_to_condo:field_lp_dol__torcond';
+  $facet->searcher = 'search_api@toronto_condo_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_reference_to_condo:field_lp_dol__torcond';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@toronto_condo_index:block:field_reference_to_condo:field_lp_dol__torcond'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@toronto_condo_index:block:field_reference_to_condo:field_price_per_sqft__torcond';
+  $facet->searcher = 'search_api@toronto_condo_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_reference_to_condo:field_price_per_sqft__torcond';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@toronto_condo_index:block:field_reference_to_condo:field_price_per_sqft__torcond'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@toronto_condo_index:block:field_reference_to_condo:field_reference_to_condo';
+  $facet->searcher = 'search_api@toronto_condo_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_reference_to_condo:field_reference_to_condo';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@toronto_condo_index:block:field_reference_to_condo:field_reference_to_condo'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@toronto_condo_index:block:field_reference_to_condo:field_s_r__torcond';
+  $facet->searcher = 'search_api@toronto_condo_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_reference_to_condo:field_s_r__torcond';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@toronto_condo_index:block:field_reference_to_condo:field_s_r__torcond'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@toronto_condo_index:block:field_reference_to_condo:field_sqft__torcond';
+  $facet->searcher = 'search_api@toronto_condo_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_reference_to_condo:field_sqft__torcond';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@toronto_condo_index:block:field_reference_to_condo:field_sqft__torcond'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
   $facet->name = 'search_api@toronto_condo_index:block:field_retirement__torcond';
   $facet->searcher = 'search_api@toronto_condo_index';
   $facet->realm = 'block';
@@ -8799,6 +9182,42 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
   $facet->api_version = 1;
+  $facet->name = 'search_api@toronto_condo_index:block:field_search_point_string';
+  $facet->searcher = 'search_api@toronto_condo_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_search_point_string';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@toronto_condo_index:block:field_search_point_string'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
   $facet->name = 'search_api@toronto_condo_index:block:field_share_perc__torcond';
   $facet->searcher = 'search_api@toronto_condo_index';
   $facet->realm = 'block';
@@ -9605,32 +10024,161 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
   $facet->searcher = 'search_api@toronto_condo_index';
   $facet->realm = 'block';
   $facet->facet = 'field_stories__torcond';
-  $facet->enabled = FALSE;
+  $facet->enabled = TRUE;
   $facet->settings = array(
     'weight' => 0,
-    'widget' => 'facetapi_links',
-    'filters' => array(),
+    'widget' => 'ctrader_facetapi_select_dropdowns',
+    'filters' => array(
+      'active_items' => array(
+        'status' => 0,
+        'weight' => '-50',
+      ),
+      'exclude_items' => array(
+        'status' => 0,
+        'weight' => '-49',
+      ),
+      'rewrite_items' => array(
+        'status' => 1,
+        'weight' => '-48',
+      ),
+      'narrow_results' => array(
+        'status' => 0,
+        'weight' => '-47',
+      ),
+      'show_if_minimum_items' => array(
+        'status' => 0,
+        'weight' => '-46',
+      ),
+      'deepest_level_items' => array(
+        'status' => 0,
+        'weight' => '-45',
+      ),
+    ),
     'active_sorts' => array(
-      'active' => 'active',
-      'count' => 'count',
-      'display' => 'display',
+      'active' => 0,
+      'count' => 0,
+      'display' => 0,
+      'natural' => 0,
+      'indexed' => 0,
     ),
     'sort_weight' => array(
-      'active' => -50,
-      'count' => -49,
-      'display' => -48,
+      'active' => '-50',
+      'count' => '-49',
+      'display' => '-48',
+      'natural' => '0',
+      'indexed' => '0',
     ),
     'sort_order' => array(
-      'active' => 3,
-      'count' => 3,
-      'display' => 4,
+      'active' => '3',
+      'count' => '3',
+      'display' => '4',
+      'natural' => '4',
+      'indexed' => '4',
     ),
     'empty_behavior' => 'none',
     'facet_more_text' => 'Show more',
     'facet_fewer_text' => 'Show fewer',
-    'soft_limit' => 20,
+    'soft_limit' => '20',
     'nofollow' => 1,
     'show_expanded' => 0,
+    'checkboxes_update_results' => 1,
+    'checkboxes_show_reset_link' => 0,
+    'selectbox_update_results' => 1,
+    'selectbox_show_reset_link' => 0,
+    'links_update_results' => 1,
+    'links_show_reset_link' => 0,
+    'ranges_update_results' => 1,
+    'ranges_show_reset_link' => 0,
+    'name' => '',
+    'prefix' => '',
+    'suffix' => '',
+    'auto-submit-delay' => '1500',
+    'slider-step' => '1',
+    'round-precision' => '0',
+    'ranges' => array(
+      'past_hour' => array(
+        'label' => 'Past hour',
+        'machine_name' => 'past_hour',
+        'date_range_start_op' => '-',
+        'date_range_start_amount' => '1',
+        'date_range_start_unit' => 'HOUR',
+        'date_range_end_op' => 'NOW',
+        'date_range_end_amount' => '',
+        'date_range_end_unit' => 'HOUR',
+        'weight' => '0',
+        'delete' => 0,
+      ),
+      'past_24_hours' => array(
+        'label' => 'Past 24 hours',
+        'machine_name' => 'past_24_hours',
+        'date_range_start_op' => '-',
+        'date_range_start_amount' => '24',
+        'date_range_start_unit' => 'HOUR',
+        'date_range_end_op' => 'NOW',
+        'date_range_end_amount' => '',
+        'date_range_end_unit' => 'HOUR',
+        'weight' => '1',
+        'delete' => 0,
+      ),
+      'past_week' => array(
+        'label' => 'Past week',
+        'machine_name' => 'past_week',
+        'date_range_start_op' => '-',
+        'date_range_start_amount' => '7',
+        'date_range_start_unit' => 'DAY',
+        'date_range_end_op' => 'NOW',
+        'date_range_end_amount' => '',
+        'date_range_end_unit' => 'HOUR',
+        'weight' => '2',
+        'delete' => 0,
+      ),
+      'past_month' => array(
+        'label' => 'Past month',
+        'machine_name' => 'past_month',
+        'date_range_start_op' => '-',
+        'date_range_start_amount' => '1',
+        'date_range_start_unit' => 'MONTH',
+        'date_range_end_op' => 'NOW',
+        'date_range_end_amount' => '',
+        'date_range_end_unit' => 'HOUR',
+        'weight' => '3',
+        'delete' => 0,
+      ),
+      'past_year' => array(
+        'label' => 'Past year',
+        'machine_name' => 'past_year',
+        'date_range_start_op' => '-',
+        'date_range_start_amount' => '1',
+        'date_range_start_unit' => 'YEAR',
+        'date_range_end_op' => 'NOW',
+        'date_range_end_amount' => '',
+        'date_range_end_unit' => 'HOUR',
+        'weight' => '4',
+        'delete' => 0,
+      ),
+    ),
+    'range_simple' => 10,
+    'range_advanced' => '',
+    'default_option_label' => '',
+    'reset_option_label' => '',
+    'submit_page' => '',
+    'hide_facet_count' => 1,
+    'update_results' => 0,
+    'show_reset_link' => 0,
+    'date_ranges' => array(
+      'add_range' => 'Add a new date range',
+    ),
+    'keep_open' => 0,
+    'expand' => 1,
+    'collapsible_children' => 0,
+    'empty_text' => array(
+      'value' => '',
+      'format' => 'filtered_html',
+    ),
+    'exclude' => '',
+    'regex' => 0,
+    'show_minimum_items' => 2,
+    'rewrite_items' => 1,
   );
   $export['search_api@toronto_condo_index:block:field_stories__torcond'] = $facet;
 
@@ -11468,6 +12016,42 @@ function ctf_configurations_facet_api_facetapi_default_facet_settings() {
     'show_expanded' => 0,
   );
   $export['search_api@toronto_condo_index:block:rets_key'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@toronto_condo_index:block:search_api_aggregation_1';
+  $facet->searcher = 'search_api@toronto_condo_index';
+  $facet->realm = 'block';
+  $facet->facet = 'search_api_aggregation_1';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@toronto_condo_index:block:search_api_aggregation_1'] = $facet;
 
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */

@@ -59,7 +59,8 @@
   float: left;
 }
 
-.facetapi-ctrader-facetapi-select-dropdowns.facetapi-facet-field-style--torcond .ctrader-facetapi-select-submit {
+.facetapi-ctrader-facetapi-select-dropdowns.facetapi-facet-field-style--torcond .ctrader-facetapi-select-submit,
+.facetapi-ctrader-facetapi-select-dropdowns.facetapi-facet-field-stories--torcond .ctrader-facetapi-select-submit {
   font-size: 0;
   height: 0;
   width: 0;

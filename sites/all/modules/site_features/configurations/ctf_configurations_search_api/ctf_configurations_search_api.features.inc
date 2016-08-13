@@ -262,7 +262,7 @@ function ctf_configurations_search_api_default_search_api_index() {
         "field_st_num__torcond" : { "type" : "integer" },
         "field_st_sfx__torcond" : { "type" : "string" },
         "field_status__torcond" : { "type" : "string" },
-        "field_stories__torcond" : { "type" : "text" },
+        "field_stories__torcond" : { "type" : "string" },
         "field_style__torcond" : { "type" : "string" },
         "field_taxes__torcond" : { "type" : "decimal" },
         "field_test_geofilld:latlon" : { "type" : "string", "real_type" : "location" },

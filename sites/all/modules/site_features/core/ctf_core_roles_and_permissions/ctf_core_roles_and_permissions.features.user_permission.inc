@@ -57,24 +57,6 @@ function ctf_core_roles_and_permissions_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'access contextual links'.
-  $permissions['access contextual links'] = array(
-    'name' => 'access contextual links',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'contextual',
-  );
-
-  // Exported permission: 'access devel information'.
-  $permissions['access devel information'] = array(
-    'name' => 'access devel information',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'devel',
-  );
-
   // Exported permission: 'access drealty admin'.
   $permissions['access drealty admin'] = array(
     'name' => 'access drealty admin',
@@ -210,6 +192,15 @@ function ctf_core_roles_and_permissions_user_default_permissions() {
     'module' => 'block',
   );
 
+  // Exported permission: 'administer ckeditor'.
+  $permissions['administer ckeditor'] = array(
+    'name' => 'administer ckeditor',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'ckeditor',
+  );
+
   // Exported permission: 'administer content types'.
   $permissions['administer content types'] = array(
     'name' => 'administer content types',
@@ -334,6 +325,15 @@ function ctf_core_roles_and_permissions_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'image',
+  );
+
+  // Exported permission: 'administer lazyloader'.
+  $permissions['administer lazyloader'] = array(
+    'name' => 'administer lazyloader',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'lazyloader',
   );
 
   // Exported permission: 'administer mailsystem'.
@@ -615,6 +615,15 @@ function ctf_core_roles_and_permissions_user_default_permissions() {
     'module' => 'system',
   );
 
+  // Exported permission: 'bypass advanced aggregation'.
+  $permissions['bypass advanced aggregation'] = array(
+    'name' => 'bypass advanced aggregation',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'advagg',
+  );
+
   // Exported permission: 'bypass drealty access'.
   $permissions['bypass drealty access'] = array(
     'name' => 'bypass drealty access',
@@ -784,6 +793,15 @@ function ctf_core_roles_and_permissions_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'customize ckeditor'.
+  $permissions['customize ckeditor'] = array(
+    'name' => 'customize ckeditor',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'ckeditor',
   );
 
   // Exported permission: 'delete any article content'.
@@ -1246,13 +1264,11 @@ function ctf_core_roles_and_permissions_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
-  // Exported permission: 'execute php code'.
-  $permissions['execute php code'] = array(
-    'name' => 'execute php code',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'devel',
+  // Exported permission: 'execute elysia_cron'.
+  $permissions['execute elysia_cron'] = array(
+    'name' => 'execute elysia_cron',
+    'roles' => array(),
+    'module' => 'elysia_cron',
   );
 
   // Exported permission: 'flag bookmarks'.
@@ -1580,15 +1596,6 @@ function ctf_core_roles_and_permissions_user_default_permissions() {
     'module' => 'simplenews',
   );
 
-  // Exported permission: 'switch users'.
-  $permissions['switch users'] = array(
-    'name' => 'switch users',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'devel',
-  );
-
   // Exported permission: 'unflag bookmarks'.
   $permissions['unflag bookmarks'] = array(
     'name' => 'unflag bookmarks',
@@ -1738,6 +1745,13 @@ function ctf_core_roles_and_permissions_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'drealty',
+  );
+
+  // Exported permission: 'view elysia_cron'.
+  $permissions['view elysia_cron'] = array(
+    'name' => 'view elysia_cron',
+    'roles' => array(),
+    'module' => 'elysia_cron',
   );
 
   // Exported permission: 'view location directory'.

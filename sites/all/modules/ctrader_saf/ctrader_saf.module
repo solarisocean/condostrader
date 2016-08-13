@@ -544,7 +544,7 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
           case 'Stacked Townhouse':
           case 'Bungalow':
           case 'Bungaloft':
-            if(isset($build['2-Storey'])) {
+            if (isset($build['2-Storey'])) {
               $build['2-Storey']['#markup'] = t('Townhouse');
               if ($key != '2-Storey') {
                 $build['2-Storey']['#indexed_value'] = 'Townhouse';
@@ -624,6 +624,48 @@ function ctrader_saf_facet_items_alter(&$build, &$settings) {
       $build['Y']['#markup'] = l(t('Ensuite Laundry'), '', array('attributes' => array('class' => array('single-checkbox-facet'))));
       $build['Y']['#html'] = TRUE;
       break;
+    case 'field_stories__torcond':
+      $allowed_items = array(
+        'Bungalow',
+        'Low-rise',
+        'Mid-rise',
+        'High-rise'
+      );
+      foreach ($build as $key => $value) {
+        if (in_array(ucfirst($key), $allowed_items)) {
+          $build[$key]['#markup'] = ucfirst($build[$key]['#markup']);
+        }
+        else {
+          unset($build[$key]);
+        }
+      }
+
+      $adapter = facetapi_adapter_load($settings->searcher);
+      $facet = facetapi_facet_load($settings->facet, $settings->searcher);
+      $items = $adapter->getActiveItems($facet);
+      $item_values = array();
+      foreach ($items as $item) {
+        $item_values[] = $item['value'];
+      }
+      $is_all_link_active = count($items) == 0;
+      $all_link_path = $adapter->getFacetPath($facet, $item_values, TRUE);
+      $all_link_query = $adapter->getQueryString($facet, $item_values, TRUE);
+      $new_build['any'] = array(
+        '#markup' => t('All'),
+        '#path' => $all_link_path,
+        '#html' => TRUE,
+        '#count' => NULL,
+        '#indexed_value' => 0,
+        '#active' => $is_all_link_active,
+        '#item_parents' => array(),
+        '#item_children' => array(),
+        '#query' => $all_link_query,
+      );
+      $new_build['bungalow'] = $build['bungalow'];
+      $new_build['low-rise'] = $build['low-rise'];
+      $new_build['mid-rise'] = $build['mid-rise'];
+      $new_build['high-rise'] = $build['high-rise'];
+      $build = $new_build;
   }
 }
 
@@ -786,6 +828,17 @@ function _ctrader_saf_blocks_content_function($delta) {
         }
       }
 
+      // STORIES(BUILDING STYLE) facet selectlist.
+      $stories_field_name = 'field_stories__torcond';
+      if (isset($_GET['f'][0])) {
+        foreach ($_GET['f'] as $value) {
+          if (strpos($value, $stories_field_name) !== FALSE) {
+            $value = str_replace("{$stories_field_name}:", '', $value);
+            $search_button_form['type']['#value'] = $value;
+          }
+        }
+      }
+
       // TYPE facet selectlist.
       $type_field_name = 'field_style__torcond';
       if (isset($_GET['f'][0])) {
@@ -914,6 +967,10 @@ function _ctrader_saf_search_button_form($form, &$form_state) {
     '#type' => 'hidden',
   );
 
+  $form['stories'] = array(
+    '#type' => 'hidden',
+  );
+
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'ctrader_saf') . '/js/rewritten_facetapi.js',
   );
@@ -1011,6 +1068,12 @@ function _ctrader_saf_search_button_form_submit($form, &$form_state) {
   $beds_field_name = 'field_br__torcond';
   if (is_numeric($form_state['values']['beds'])) {
     $query['f'][] = "{$beds_field_name}:{$form_state['values']['beds']}";
+  }
+
+  // STORIES(BUILDING STYLE) facet selectlist.
+  $stories_field_name = 'field_stories__torcond';
+  if ($form_state['values']['stories'] && $form_state['values']['stories'] != 'All') {
+    $query['f'][] = "{$stories_field_name}:{$form_state['values']['stories']}";
   }
 
   // TYPE facet selectlist.
@@ -1432,4 +1495,45 @@ function ctrader_saf_theme() {
     ),
   );
   return $themes;
+}
+
+/**
+ * Implements hook_search_api_index_items_alter().
+ */
+function ctrader_saf_search_api_index_items_alter(array &$items, SearchApiIndex $index) {
+  switch ($index->machine_name) {
+    case 'toronto_condo_index':
+      // Rewrites field value before indexing.
+      foreach ($items as $key => $value) {
+        if (isset($value->field_stories__torcond[LANGUAGE_NONE][0]['value'])) {
+          /*
+              - All
+              - Bungalow ( db field value = 1)
+              - Low-rise 1 to 4 stories (db field value = 1 to 4)
+              - Mid-rise 5 to 10 stories (db field value = 5 to 10)
+              - High-rise 10 stories + (db field value 10+)
+          */
+          $field_val = $value->field_stories__torcond[LANGUAGE_NONE][0]['value'];
+          if (strpos($field_val, '/') === FALSE) {
+            $field_val_int = intval(filter_var($field_val, FILTER_SANITIZE_NUMBER_INT));
+            if ($field_val_int == 1) {
+              $items[$key]->field_stories__torcond[LANGUAGE_NONE][0]['value'] = 'Bungalow';
+            }
+            elseif ($field_val_int > 1 && $field_val_int < 5) {
+              $items[$key]->field_stories__torcond[LANGUAGE_NONE][0]['value'] = 'Low-rise';
+            }
+            elseif ($field_val_int >= 5 && $field_val_int <= 10) {
+              $items[$key]->field_stories__torcond[LANGUAGE_NONE][0]['value'] = 'Mid-rise';
+            }
+            elseif ($field_val_int >= 10) {
+              $items[$key]->field_stories__torcond[LANGUAGE_NONE][0]['value'] = 'High-rise';
+            }
+            else {
+//              $items[$key]->field_stories__torcond[LANGUAGE_NONE][0]['value'] = 'Else';
+            }
+          }
+        }
+      }
+      break;
+  }
 }

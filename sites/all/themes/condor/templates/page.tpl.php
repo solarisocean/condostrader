@@ -20,8 +20,8 @@
           </div>
           <div class="right">
             <ul class="user-links">
-              <li><?php print $sign_in_link; ?></li>
-              <li><?php print $log_in_link; ?></li>
+              <li><?php print $condo_head['sign_in_link']; ?></li>
+              <li><?php print $condo_head['log_in_link']; ?></li>
             </ul>
             <ul class="user-buttons">
               <li><?php print $condo_head_r['like_button']; ?></li>
