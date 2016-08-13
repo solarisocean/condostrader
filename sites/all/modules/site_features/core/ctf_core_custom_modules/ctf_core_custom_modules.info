@@ -9,6 +9,7 @@ dependencies[] = ctf_configurations_drealty_connections
 dependencies[] = ctf_configurations_facet_api
 dependencies[] = ctf_configurations_flag
 dependencies[] = ctf_configurations_hierarchical_select_configs
+dependencies[] = ctf_configurations_image_lazyloader_module
 dependencies[] = ctf_configurations_registration_form
 dependencies[] = ctf_configurations_search_api
 dependencies[] = ctf_content_types_blog_post

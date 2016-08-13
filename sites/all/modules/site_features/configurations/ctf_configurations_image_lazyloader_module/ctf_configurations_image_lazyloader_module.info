@@ -1,0 +1,14 @@
+name = CT Features: Configurations: Image Lazyloader module
+description = Configurations for Image Lazyloader module.
+core = 7.x
+package = CT Features: Configurations
+dependencies[] = ctools
+dependencies[] = strongarm
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[variable][] = lazyloader_distance
+features[variable][] = lazyloader_enabled
+features[variable][] = lazyloader_exclude_option
+features[variable][] = lazyloader_icon
+features[variable][] = lazyloader_paths
+features[variable][] = lazyloader_placeholder

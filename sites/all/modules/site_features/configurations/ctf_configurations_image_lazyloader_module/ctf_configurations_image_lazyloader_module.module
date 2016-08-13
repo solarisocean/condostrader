@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CT Features: Configurations: Image Lazyloader module feature.
+ */
+
+include_once 'ctf_configurations_image_lazyloader_module.features.inc';
