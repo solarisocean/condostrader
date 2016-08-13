@@ -10,6 +10,36 @@
 function ctf_configurations_registration_form_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'user-user-field_form_title'.
+  $field_instances['user-user-field_form_title'] = array(
+    'bundle' => 'user',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'markup',
+        'settings' => array(),
+        'type' => 'markup_default',
+        'weight' => 7,
+      ),
+    ),
+    'entity_type' => 'user',
+    'field_name' => 'field_form_title',
+    'label' => 'Form title',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => 1,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'markup',
+      'settings' => array(),
+      'type' => 'markup',
+      'weight' => 2,
+    ),
+  );
+
   // Exported field_instance: 'user-user-field_looking_to'.
   $field_instances['user-user-field_looking_to'] = array(
     'bundle' => 'user',
@@ -218,6 +248,7 @@ function ctf_configurations_registration_form_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t(' I am looking To:');
   t('First name');
+  t('Form title');
   t('Last name');
   t('Mobile phone number');
   t('Receive newsletters and exclusive sales reports from condostrader.ca');

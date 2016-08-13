@@ -405,6 +405,31 @@ function ctf_core_field_bases_field_default_field_bases() {
     'type' => 'list_boolean',
   );
 
+  // Exported field_base: 'field_form_title'.
+  $field_bases['field_form_title'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_form_title',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'markup',
+    'settings' => array(
+      'markup' => array(
+        'format' => 'full_html',
+        'value' => '<div class="register-form-title">
+<h1><strong>sign up</strong> for free</h1>
+
+<p>Create an account to use personalized Wish List, book viewing appointments and get alerts for your custom searches. At <a href="http://condostrader.ca">Conodostrader.ca</a> we take your privacy seriously. Your information is to be used only for the purpose of this website.</p>
+</div>
+',
+      ),
+    ),
+    'translatable' => 0,
+    'type' => 'markup',
+  );
+
   // Exported field_base: 'field_gallery'.
   $field_bases['field_gallery'] = array(
     'active' => 1,

@@ -39,6 +39,7 @@ features[field_base][] = field_exposure
 features[field_base][] = field_extra_notes
 features[field_base][] = field_extras
 features[field_base][] = field_fireplace
+features[field_base][] = field_form_title
 features[field_base][] = field_gallery
 features[field_base][] = field_image
 features[field_base][] = field_location

@@ -72,13 +72,9 @@ function ctrader_register_form_user_register_form_alter(&$form, &$form_state) {
     '#markup' => '<div id="mapid"></div>',
     '#weight' => 1,
   );
-  $form['#prefix'] = "<div class='register-form-title''>
-                          <h1><span>sign up</span> for free</h1>
-                          <p>
-                            Create an account to use personalized Wish List, book viewing appointments and get alerts for your custom searches. 
-                            At <a href='http://condostrader.ca'>Conodostrader.ca</a> we take your privacy seriously. Your information is to be used only for the purpose of this website.
-                          </p>
-                      </div>";
+
+  $form['#prefix'] = $form['field_form_title'][LANGUAGE_NONE][0]['markup']['#markup'];
+  unset($form['field_form_title']);
 
   //Have created left and right containersto reaarange form items.
   $form['sign_up_right'] = array(
