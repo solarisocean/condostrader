@@ -95,7 +95,7 @@ function condor_preprocess_page(&$variables) {
   if (!$condo_main_menu) {
     // Build custom menu tree.
     $menu = menu_build_tree('main-menu');
-    $variables['menu_tree'] = $menu_items = menu_tree_output($menu);
+    $variables['menu_tree'] = drupal_render(menu_tree_output($menu));
     cache_set('condo_main_menu', $variables['menu_tree']);
   }
   else {

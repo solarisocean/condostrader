@@ -35,7 +35,7 @@
             </ul>
           </div>
           <div id="main-menu-nav-tree">
-            <?php print drupal_render($menu_tree); ?>
+            <?php print $menu_tree; ?>
           </div>
         </section>
       </nav>

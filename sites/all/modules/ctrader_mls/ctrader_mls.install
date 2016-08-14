@@ -96,10 +96,68 @@ function ctrader_mls_update_7001(&$sandbox) {
 /**
  * Creates table for drealty_listing entities caching.
  */
-function  ctrader_mls_update_7002() {
+function ctrader_mls_update_7002() {
   $schema = drupal_get_schema_unprocessed('system', 'cache');
   $schema['description'] = "Cache table used to store drealty_listing entity records.";
 
   db_create_table('cache_entity_drealty_listing', $schema);
   return t('Created table for drealty_listing entities caching.');
+}
+
+/**
+ * Deletes main menu links below 'Condos for Sale' and 'Condos for Rent'.
+ */
+function ctrader_mls_update_7003(&$sandbox) {
+  $items_per_pass = 10;
+  if (!isset($sandbox['mlids'])) {
+    $menu = menu_build_tree('main-menu');
+    $menu_links = array();
+    foreach ($menu as $key => $value) {
+      if (strpos($key, 'Condos for Sale') !== FALSE || strpos($key, 'Condos for Rent') !== FALSE) {
+        if (!empty($value['below'])) {
+          $menu_links += $value['below'];
+        }
+      }
+    }
+    $menu_links += ctrader_mls_update_7003_below_to_array($menu_links);
+    $mlids = array();
+    foreach ($menu_links as $value) {
+      $mlids[] = $value['link']['mlid'];
+    }
+    sort($mlids);
+    $sandbox['mlids'] = $mlids;
+    $sandbox['progress'] = 0;
+    $sandbox['current'] = 0;
+    $sandbox['max'] = count($mlids);
+  }
+  for ($i = 0; $i < $items_per_pass; $i++) {
+    menu_link_delete(array_pop($sandbox['mlids']));
+  }
+  $sandbox['progress'] += $items_per_pass;
+  $sandbox['#finished'] = $sandbox['progress'] / $sandbox['max'];
+  if ($sandbox['#finished'] >= 1) {
+    $sandbox['#finished'] = 1;
+  }
+
+  return t('Deleted main menu links below \'Condos for Sale\' and \'Condos for Rent\'.');
+  throw new DrupalUpdateException('Something went wrong.');
+}
+
+/**
+ * Needs for ctrader_mls_update_7003
+ *
+ * @param $below
+ * @return array
+ */
+function ctrader_mls_update_7003_below_to_array($below) {
+  $links = array();
+  foreach ($below as $value) {
+    if (!empty($value['below'])) {
+      $links += $value['below'];
+    }
+  }
+  if (!empty(reset($links)['below'])) {
+    $links += ctrader_mls_update_7003_below_to_array($links);
+  }
+  return $links;
 }
