@@ -241,7 +241,6 @@
             $('.single-checkbox-facet').once().on('click', function (e) {
                 var chbxInput = $(this).parent().find('input');
                 var _input = $("#-ctrader-saf-search-button-form input[name='" + $(this).closest('ul.facetapi-facetapi-checkbox-links').attr('class').split(" ")[1].split("-")[3] + "']");
-                console.log(_input.val());
                 if (_input.val() == 1) {
                     _input.val(0);
                 } else {

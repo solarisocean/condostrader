@@ -314,31 +314,13 @@
 
   .facetapi-facet-field-patio-ter--torcond {
     a {
-      &:before {
-        content: "";
-        display: inline-block;
-        vertical-align: middle;
-        background-image: url(../images/balcony-icon.png);
-        width: 15px;
-        height: 12px;
-        background-repeat: no-repeat;
-        background-size: 15px;
-      }
+      @include sprite-pseudo($balcony-icon, 'before');
     }
   }
 
   .facetapi-facet-field-ens-lndry--torcond {
     a {
-      &:before {
-        content: "";
-        display: inline-block;
-        vertical-align: middle;
-        background-image: url(../images/laundry-icon.png);
-        width: 12px;
-        height: 12px;
-        background-repeat: no-repeat;
-        background-size: 10px;
-      }
+      @include sprite-pseudo($laundry-icon, 'before');
     }
   }
 
