@@ -271,14 +271,14 @@ function ctf_pages_main_page_default_page_manager_pages() {
     $pane->cache = array(
       'method' => 'panels_hash_cache',
       'settings' => array(
-        'lifetime' => '28800',
+        'lifetime' => '86400',
         'granularity' => array(
           'url' => 'url',
+          'user_role' => 'user_role',
           'args' => 0,
           'context' => 0,
           'path' => 0,
           'user' => 0,
-          'user_role' => 0,
         ),
         'granularity_roles_as_anon' => array(
           2 => 0,
@@ -331,11 +331,11 @@ function ctf_pages_main_page_default_page_manager_pages() {
         'lifetime' => '28800',
         'granularity' => array(
           'url' => 'url',
+          'user_role' => 'user_role',
           'args' => 0,
           'context' => 0,
           'path' => 0,
           'user' => 0,
-          'user_role' => 0,
         ),
         'granularity_roles_as_anon' => array(
           2 => 0,
@@ -385,14 +385,14 @@ function ctf_pages_main_page_default_page_manager_pages() {
     $pane->cache = array(
       'method' => 'panels_hash_cache',
       'settings' => array(
-        'lifetime' => '28800',
+        'lifetime' => '86400',
         'granularity' => array(
           'url' => 'url',
+          'user_role' => 'user_role',
           'args' => 0,
           'context' => 0,
           'path' => 0,
           'user' => 0,
-          'user_role' => 0,
         ),
         'granularity_roles_as_anon' => array(
           2 => 0,
@@ -439,14 +439,14 @@ function ctf_pages_main_page_default_page_manager_pages() {
     $pane->cache = array(
       'method' => 'panels_hash_cache',
       'settings' => array(
-        'lifetime' => '28800',
+        'lifetime' => '86400',
         'granularity' => array(
           'url' => 'url',
+          'user_role' => 'user_role',
           'args' => 0,
           'context' => 0,
           'path' => 0,
           'user' => 0,
-          'user_role' => 0,
         ),
         'granularity_roles_as_anon' => array(
           2 => 0,
@@ -493,14 +493,14 @@ function ctf_pages_main_page_default_page_manager_pages() {
     $pane->cache = array(
       'method' => 'panels_hash_cache',
       'settings' => array(
-        'lifetime' => '28800',
+        'lifetime' => '86400',
         'granularity' => array(
           'url' => 'url',
+          'user_role' => 'user_role',
           'args' => 0,
           'context' => 0,
           'path' => 0,
           'user' => 0,
-          'user_role' => 0,
         ),
         'granularity_roles_as_anon' => array(
           2 => 0,
@@ -547,14 +547,14 @@ function ctf_pages_main_page_default_page_manager_pages() {
     $pane->cache = array(
       'method' => 'panels_hash_cache',
       'settings' => array(
-        'lifetime' => '28800',
+        'lifetime' => '86400',
         'granularity' => array(
           'url' => 'url',
+          'user_role' => 'user_role',
           'args' => 0,
           'context' => 0,
           'path' => 0,
           'user' => 0,
-          'user_role' => 0,
         ),
         'granularity_roles_as_anon' => array(
           2 => 0,
@@ -637,7 +637,7 @@ function ctf_pages_main_page_default_page_manager_pages() {
     $pane->cache = array(
       'method' => 'panels_hash_cache',
       'settings' => array(
-        'lifetime' => '28800',
+        'lifetime' => '86400',
         'granularity' => array(
           'url' => 'url',
           'args' => 0,
