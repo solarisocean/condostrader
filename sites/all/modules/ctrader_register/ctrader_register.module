@@ -229,3 +229,44 @@ function _js_singup_map_page_callback() {
 //    drupal_json_output($results_map_polygons);
 //  }
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function ctrader_register_form_user_login_alter(&$form, &$form_state, $form_id) {
+  $form['#prefix'] = '<div class="register-form-title">
+    <h1 style="text-align:center;text-transform: uppercase;"><strong>Log In</strong></h1>
+    <p style="text-align:center">Aliquam faucibus ut purus quis rutrum. Curabitur et urna dictum, rhoncus mauris at, faucibus mauris. Integer massa massa, suscipit vel nulla quis, hendrerit accumsan nulla.</p>
+    </div>';
+
+  $form['reset_pas_link'] = array(
+    '#type' => 'item',
+    '#markup' => l(t('Reset password'), 'user/password'),
+  );
+
+  $form['#pre_render'][] = 'ctrader_map_user_form_pre_render';
+//  drupal_set_message('<pre>' . print_r($form, 1) . '</pre>');
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function ctrader_register_form_user_pass_alter(&$form, &$form_state, $form_id) {
+  $form['#prefix'] = '<div class="register-form-title">
+    <h1 style="text-align:center;text-transform: uppercase;"><strong>User password reset</strong></h1>
+    <p style="text-align:center">Aliquam faucibus ut purus quis rutrum. Curabitur et urna dictum, rhoncus mauris at, faucibus mauris. Integer massa massa, suscipit vel nulla quis, hendrerit accumsan nulla.</p>
+    </div>';
+}
+
+/**
+ * Prerender function for correct user login form.
+ * @param $form
+ * @return mixed
+ */
+function ctrader_map_user_form_pre_render($form) {
+  $form['name']['#description'] = '';
+  $form['pass']['#description'] = '';
+
+  return $form;
+}
+
