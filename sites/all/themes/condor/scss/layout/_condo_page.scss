@@ -1,5 +1,17 @@
-.alert-box.alert {
-  display: none;
+//.alert-box.alert {
+//  display: none;
+//}
+
+.l-messages.row {
+  .columns {
+    padding: 0;
+    .alert-box.alert {
+      margin-bottom: 0;
+      ul.no-bullet {
+        margin-bottom: 0;
+      }
+    }
+  }
 }
 
 .page-drealty-listing {

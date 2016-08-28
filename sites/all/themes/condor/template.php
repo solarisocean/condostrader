@@ -95,7 +95,12 @@ function condor_preprocess_page(&$variables) {
   if (!$condo_main_menu) {
     // Build custom menu tree.
     $menu = menu_build_tree('main-menu');
-    $variables['menu_tree'] = drupal_render(menu_tree_output($menu));
+    if (!empty($menu)) {
+      $menu_output = menu_tree_output($menu);
+      if (!empty($menu_output)) {
+        $variables['menu_tree'] = drupal_render($menut_output);
+      }
+    }
     cache_set('condo_main_menu', $variables['menu_tree']);
   }
   else {
@@ -106,6 +111,13 @@ function condor_preprocess_page(&$variables) {
   $path = $_GET['q'];
   if (strpos($path,'user/register') !== false) {
     drupal_set_title(t('Sing up for free'));
+  }
+
+  $args = arg();
+  if (isset($args[0]) && $args[0] == 'user') {
+    if (isset($args[1]) && $args[1] == 'password' || $args[1] == 'login') {
+      $variables['tabs'] = '';
+    }
   }
 }
 

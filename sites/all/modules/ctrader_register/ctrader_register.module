@@ -236,7 +236,6 @@ function _js_singup_map_page_callback() {
 function ctrader_register_form_user_login_alter(&$form, &$form_state, $form_id) {
   $form['#prefix'] = '<div class="register-form-title">
     <h1 style="text-align:center;text-transform: uppercase;"><strong>Log In</strong></h1>
-    <p style="text-align:center">Aliquam faucibus ut purus quis rutrum. Curabitur et urna dictum, rhoncus mauris at, faucibus mauris. Integer massa massa, suscipit vel nulla quis, hendrerit accumsan nulla.</p>
     </div>';
 
   $form['reset_pas_link'] = array(
@@ -254,7 +253,7 @@ function ctrader_register_form_user_login_alter(&$form, &$form_state, $form_id) 
 function ctrader_register_form_user_pass_alter(&$form, &$form_state, $form_id) {
   $form['#prefix'] = '<div class="register-form-title">
     <h1 style="text-align:center;text-transform: uppercase;"><strong>User password reset</strong></h1>
-    <p style="text-align:center">Aliquam faucibus ut purus quis rutrum. Curabitur et urna dictum, rhoncus mauris at, faucibus mauris. Integer massa massa, suscipit vel nulla quis, hendrerit accumsan nulla.</p>
+    <p style="text-align:center">Please enter your e-mail address associated with your account. Password reset instructions will be e-mailed to you right away.</p>
     </div>';
 }
 
