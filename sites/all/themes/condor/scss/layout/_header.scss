@@ -158,6 +158,15 @@
             color: $white;
           }
         }
+        .user-icon {
+          color: $alabaster;
+          i {
+            font-size: 38px;
+          }
+          a {
+            height: 60px;
+          }
+        }
 
       }
 
@@ -297,4 +306,5 @@
       }
     }
   }
+
 }

@@ -39,6 +39,7 @@ stylesheets[all][] = css/foundation.min.css
 stylesheets[all][] = css/swiper.min.css
 stylesheets[all][] = css/jquery.mCustomScrollbar.css
 stylesheets[all][] = css/chosen.min.css
+stylesheets[all][] = fonts/foundation-icons/foundation-icons.css
 
 ; Foundation JavaScript.
 

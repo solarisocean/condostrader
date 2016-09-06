@@ -20,6 +20,9 @@
           </div>
           <div class="right">
             <ul class="user-links">
+              <?php if (empty($condo_head['sign_in_link'])): ?>
+                <li class="user-icon"><a href="/user"><i class="fi-torso"></i></a></li>
+              <?php endif; ?>
               <li><?php print $condo_head['sign_in_link']; ?></li>
               <li><?php print $condo_head['log_in_link']; ?></li>
             </ul>
