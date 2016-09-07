@@ -4,6 +4,10 @@
  * Implements template_preprocess_html().
  */
 function condor_preprocess_html(&$variables) {
+  $args = arg();
+  if ($args[0] == 'user' && is_numeric($args[1])) {
+    $variables['classes_array'][] = 'user-page';
+  }
 }
 
 

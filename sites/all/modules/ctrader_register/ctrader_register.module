@@ -105,7 +105,7 @@ function ctrader_register_form_user_register_form_alter(&$form, &$form_state) {
  */
 function ctrader_register_field_group_build_pre_render_alter(&$element) {
   //Rewrite register form.
-  if (isset($element['group_sign_up_left'])) {
+  if (isset($element['group_sign_up_left'], $element['terms_of_use'])) {
     $element['group_sign_up_left']['terms_of_use'] = $element['terms_of_use'];
     $element['group_sign_up_left']['terms_of_use']['#weight'] = 30;
     $element['group_sign_up_left']['actions'] = $element['actions'];
@@ -268,4 +268,22 @@ function ctrader_map_user_form_pre_render($form) {
 
   return $form;
 }
-
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function ctrader_register_form_user_profile_form_alter(&$form, &$form_state, $form_id) {
+  $form['field_user_first_name']['#weight'] =     -23;
+  $form['field_user_last_name']['#weight'] =      -22;
+  $form['field_mobile_phone_number']['#weight'] = -21;
+  $form['account']['mail']['#weight'] =           -20;
+  unset($form['field_form_title']);
+}
+/**
+ * Implements hook_preprocess_page().
+ */
+//function ctrader_register_preprocess_page(&$vars, $hook) {
+//  global $user;
+//  if(arg(0) =='user' && arg(1) == $user->uid){
+//    $vars['title'] = t('User page');
+//  }
+//}

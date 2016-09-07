@@ -134,6 +134,16 @@
   <!--.l-main -->
   <main role="main" class="row l-main">
     <!-- .l-main region -->
+    <?php if (arg(0) == 'user' && is_numeric(arg(1)) && empty(arg(2))): ?>
+      <div class="register-form-title user-title">
+        <h1 style="text-align:center;text-transform: uppercase;"><strong>User page</strong></h1>
+      </div>
+    <?php endif; ?>
+    <?php if (arg(0) == 'user' && arg(2) == 'edit'): ?>
+      <div class="register-form-title user-title">
+        <h1 style="text-align:center;text-transform: uppercase;"><strong>User edit page</strong></h1>
+      </div>
+    <?php endif; ?>
     <div class="<?php print $main_grid; ?> main">
       <?php if (!empty($page['highlighted'])): ?>
         <div class="highlight panel callout">

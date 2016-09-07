@@ -1,0 +1,15 @@
+.page-user-edit {
+  .l-main {
+    .main {
+      .button-group, #edit-mimemail, #page-title {
+        display: none !important;
+      }
+      max-width: 960px !important;
+      width: 100%;
+      margin: 3rem auto 10rem !important;
+      button {
+        @include fire-button();
+      }
+    }
+  }
+}
