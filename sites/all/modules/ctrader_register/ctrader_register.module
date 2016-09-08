@@ -279,11 +279,11 @@ function ctrader_register_form_user_profile_form_alter(&$form, &$form_state, $fo
   unset($form['field_form_title']);
 }
 /**
- * Implements hook_preprocess_page().
+ * Implements hook_user_view_alter().
  */
-//function ctrader_register_preprocess_page(&$vars, $hook) {
-//  global $user;
-//  if(arg(0) =='user' && arg(1) == $user->uid){
-//    $vars['title'] = t('User page');
-//  }
-//}
+function ctrader_register_user_view_alter(&$build) {
+    $build['mimemail']['#title'] = 'email:';
+    $build['mimemail']['textonly']['#title'] = $build['#account']->mail;
+    $build['summary']['#title'] = 'history:';
+    $build['mimemail']['textonly']['#markup'] = '';
+}

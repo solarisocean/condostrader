@@ -17,17 +17,22 @@
       padding: 12px 30px;
       background: $white;
       border: 1px solid #dce0e6;
-      max-width: 1435px;
+      max-width: 960px;
       width: 100%;
       margin: 48px auto;
-      label, .field-label {
+      label, .field-label, h3 {
         font-family: "Raleway",sans-serif;
         font-size: .6875rem;
         text-transform: uppercase;
         font-weight: normal;
+        border: none;
+        margin: 0;
+        display: inline-block;
       }
-      .has-tip {
-        display: none;
+      dt, dl, dd {
+        margin: 0;
+        font-weight: normal;
+        display: inline-block;
       }
     }
   }

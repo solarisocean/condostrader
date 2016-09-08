@@ -1,10 +1,9 @@
 .page-user-edit {
   .l-main {
     .main {
-      .button-group, #edit-mimemail, #page-title {
+      .button-group, #edit-mimemail, #page-title, .has-tip {
         display: none !important;
       }
-      max-width: 960px !important;
       width: 100%;
       margin: 3rem auto 10rem !important;
       button {
