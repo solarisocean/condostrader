@@ -7,7 +7,14 @@
                 $('body').once(function () {
                     var mymap = L.map('mapid',  {
                         doubleClickZoom: true,
-                        scrollWheelZoom: false
+                        scrollWheelZoom: false,
+                        minZoom:9,
+                        maxBounds: [
+                            //south west
+                            [43.124230, -80.221427],
+                            //north east
+                            [45.116859, -78.179749]
+                    ]
                     }).setView([43.73, -79.34], 9);
 
                     settings.mymap = mymap;
@@ -15,7 +22,6 @@
                     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
                         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     }).addTo(mymap);
-
                     L.Icon.Default.imagePath = '/sites/all/libraries/leaflet/images';
 
                     var inputRes = $('#-ctrader-saf-search-button-form input[name="geo_loc"]');
@@ -276,17 +282,27 @@
                         var geoJsonLayer = L.geoJson(condosDataGeojson, {
                             onEachFeature: onEachFeature
                         });
+                        console.log('add after reload');
                         markers.addLayer(geoJsonLayer);
                         mymap.addLayer(markers);
+                        if ($('.pane-ctrader-saf-neighbourhoods-hs select').val() == 'label_0') {
+                            $('.pane-ctrader-saf-neighbourhoods-hs select').each(function() {
+                                $(this).change(function() {
+
+                                    if ($(this).val() !== 'label_0') {
+                                        console.log('remove after select');
+                                        mymap.removeLayer(markers);
+                                    }
+                                });
+                            });
+                        }
                         mymap.fitBounds(markers.getBounds());
                     }
-                    
-
                     freeDrawLayer.on('markers', function getMarkers(eventData) {
                         var latLngs = eventData.latLngs;
                         inputRes.val(L.FreeDraw.Utilities.getMySQLPolygons(eventData.latLngs));
                     });
-                    
+
                 });
             }, 1);
 
