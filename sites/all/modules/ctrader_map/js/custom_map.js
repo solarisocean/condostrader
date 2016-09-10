@@ -285,7 +285,7 @@
                         console.log('add after reload');
                         markers.addLayer(geoJsonLayer);
                         mymap.addLayer(markers);
-                        if ($('.pane-ctrader-saf-neighbourhoods-hs select').val() == 'label_0') {
+                        if ($('.pane-ctrader-saf-neighbourhoods-hs select').val() == 'label_0' || 'label_1') {
                             $('.pane-ctrader-saf-neighbourhoods-hs select').each(function() {
                                 $(this).change(function() {
 
