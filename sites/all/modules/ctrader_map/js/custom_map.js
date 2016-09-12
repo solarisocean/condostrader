@@ -282,7 +282,6 @@
                         var geoJsonLayer = L.geoJson(condosDataGeojson, {
                             onEachFeature: onEachFeature
                         });
-                        console.log('add after reload');
                         markers.addLayer(geoJsonLayer);
                         mymap.addLayer(markers);
                         if ($('.pane-ctrader-saf-neighbourhoods-hs select').val() == 'label_0' || 'label_1') {
@@ -290,7 +289,6 @@
                                 $(this).change(function() {
 
                                     if ($(this).val() !== 'label_0') {
-                                        console.log('remove after select');
                                         mymap.removeLayer(markers);
                                     }
                                 });
