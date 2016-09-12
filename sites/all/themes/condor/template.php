@@ -102,7 +102,7 @@ function condor_preprocess_page(&$variables) {
     if (!empty($menu)) {
       $menu_output = menu_tree_output($menu);
       if (!empty($menu_output)) {
-        $variables['menu_tree'] = drupal_render($menut_output);
+        $variables['menu_tree'] = drupal_render($menu_output);
       }
     }
     cache_set('condo_main_menu', $variables['menu_tree']);

@@ -2,16 +2,13 @@
     Drupal.behaviors.search_api_ranges = {
         attach: function (context, settings) {
             setTimeout(function(){
-                //console.log($('.facetapi-facet-field-s-r--torcond .facetapi-active.active-region-facet').parent().hasClass('first'));
-
-
                 $('body').once(function() {
                     $('div.search-api-ranges-widget').each(function () {
                         var slider = $(this).get(0),
                             facet = $(this).parent(),
                             range_all_sliders,
                             startValue,
-                            test = $('.facetapi-facet-field-s-r--torcond .facetapi-active.active-region-facet').parent().hasClass('first'),
+                            sale = $('.facetapi-facet-field-s-r--torcond .facetapi-active.active-region-facet').parent().hasClass('first'),
                             form = '#-ctrader-saf-search-button-form',
                             priceMin = $(form + ' input[name="price_min"]'),
                             priceMax = $(form + ' input[name="price_max"]'),
@@ -42,8 +39,7 @@
                             }
                         };
 
-                        if (test) {
-                            console.log('first');
+                        if (sale) {
                             if (facet.attr('id') == 'search-api-ranges-field_lp_dol__torcond') {
                                 startValue = [Number($(this).attr('min-value')), Number($(this).attr('max-value'))];
 
@@ -57,7 +53,6 @@
 
                         }
                         else {
-                            console.log('second');
                             if (facet.attr('id') == 'search-api-ranges-field_lp_dol__torcond') {
                                 $('#search-api-ranges-field_lp_dol__torcond span.max').text("10000");
                                 startValue = [Number($(this).attr('min-value')), 10000];
