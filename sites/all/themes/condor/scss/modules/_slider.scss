@@ -14,3 +14,13 @@
 .swiper-button-prev {
   @include sprite-pseudo($slider-prev, 'before');
 }
+.front {
+  .swiper-slide {
+    img {
+      height: 203px;
+    }
+    .lazyloader-icon {
+      height: auto;
+    }
+  }
+}
