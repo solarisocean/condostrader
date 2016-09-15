@@ -1,0 +1,154 @@
+.page-drealty-listing {
+  .panels-flexible-region {
+    width: 100%;
+    .inside, .tabs-processed {
+      padding: 0;
+    }
+  }
+  .view-id-condos_in_building {
+    padding: 0 !important;
+  }
+  .view-build {
+    width: 100%;
+    margin: 0 !important;
+    background: $white;
+    .views-field-field-toronto-gallery {
+      width: 78%;
+      display: inline-block;
+      float: left;
+      .top-container {
+        height: 700px;
+        .swiper-slide {
+          width: 1256px;
+          background: $ebony-clay;
+          text-align: center;
+          img {
+            transform: scale(1.5);
+            -webkit-transform: scale(1.5);
+          }
+          &:before {
+            content: ' ';
+            display: inline-block;
+            vertical-align: middle;
+            height: 100%;
+          }
+        }
+      }
+    }
+    .views-field-field-toronto-gallery-1 {
+      .swiper-scrollbar {
+        right: 2px;
+        top: 4%;
+        width: 10px;
+        border: 1px solid darken($athens-gray, 6);
+        height: 92%;
+
+        .swiper-scrollbar-drag {
+          width: 60%;
+          background: $ecstasy;
+          left: 2px;
+          top: 0;
+          cursor: pointer;
+        }
+      }
+      width: 22%;
+      display: inline-block;
+      padding: 0 25px;
+      background: $ebony-clay;
+      .thumb-container {
+        height: 700px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        img {
+          width: 87%;
+          &:hover {
+            opacity: .8;
+          }
+        }
+      }
+    }
+  }
+  .gallery-slider-button-next,
+  .gallery-slider-button-prev {
+    width: 19px !important;
+    height: 58px !important;
+    top: 42.5%;
+
+
+    &:before {
+      width: 19px;
+      height: 58px;
+    }
+  }
+
+  .gallery-slider-button-next {
+    right: 28px;
+    @include sprite-pseudo($gallery-next, 'before');
+  }
+
+  .gallery-slider-button-prev {
+    left: 28px;
+    @include sprite-pseudo($gallery-prev, 'before');
+  }
+  .build-info {
+    .build-title {
+      padding: 0 1.5625rem;
+      h1 {
+        font-size: 1.875rem;
+        color: $ebony-clay;
+        font-weight: bold;
+        margin-bottom: 0;
+      }
+      .build-address {
+        @include sprite-pseudo($map-icon-big, 'before');
+        font-size: rem-calc(16);
+
+        &:before {
+          margin-right: 5px;
+          vertical-align: baseline;
+        }
+      }
+    }
+    width: 100%;
+    vertical-align: top;
+    font-size: .875rem;
+    .build-info-fields-container {
+      color: $manatee;
+      background: $alabaster;
+      border-left: 1px solid #dce0e6;
+      .legend {
+        font-weight: bold;
+        font-size: 1.125rem;
+        color: $ebony-clay;
+        background: none;
+        border-bottom: 1px solid #dce0e6;
+        display: block;
+        width: 98%;
+        margin: 0;
+        margin-bottom: 18px;
+        margin-left: 13px;
+        padding: 20px 0 6px 0;
+      }
+      .build-info-fields {
+        width: 50%;
+        padding: 16px;
+        .build-info-field {
+          clear: both;
+          overflow: auto;
+          margin-bottom: 3px;
+          span:first-child {
+            float: left;
+            font-weight: bold;
+          }
+          span:last-child {
+            float: right;
+          }
+        }
+      }
+    }
+  }
+  .view-display-id-block_1,.view-display-id-block_2 {
+    padding: 0 1.5625rem 70px 1.5625rem !important;
+    border-left: 1px solid #dce0e6;
+  }
+}

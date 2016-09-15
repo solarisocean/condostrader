@@ -14,3 +14,13 @@ function ctrader_panelbg_ctools_plugin_directory($module, $plugin) {
     return 'plugins/' . $plugin;
   }
 }
+function ctrader_panelbg_views_pre_render($view) {
+  if ($view->name == 'condos_in_building') {
+    if ($view->current_display == 'block_1') {
+      $view->set_title($view->display['block_1']->display_title.' ('.$view->total_rows.')');
+    }
+    if ($view->current_display == 'block_2') {
+      $view->set_title($view->display['block_2']->display_title.' ('.$view->total_rows.')');
+    }
+  }
+}
