@@ -1024,7 +1024,9 @@ function _ctrader_saf_search_button_form_submit($form, &$form_state) {
       }
     }
     $tids = implode('-', $tids_array);
-    $query['neighbourhoods'] = $tids;
+    if (!empty($tids)) {
+      $query['neighbourhoods'] = $tids;
+    }
   }
 
   // SALE-RENT facet checkboxes.
