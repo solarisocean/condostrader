@@ -6,10 +6,20 @@
  */
 function ctrader_map_menu() {
   $items = array();
-  $items['create-terms'] = array(
+  $items['admin/config/ctrader'] = array(
+    'title' => t('CondosTrader settings'),
+    'description' => 'This is the parent item',
+    'position' => 'left',
+    'weight' => -100,
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('administer site configuration'),
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+  );
+  $items['admin/config/ctrader/create-terms'] = array(
     'title' => 'Create Toronto region terms',
     'page callback' => '_ctrader_map_create_terms_page_callback',
-    'access arguments' => array('administer modules'),
+    'access arguments' => array('administer site configuration'),
   );
   $items['build-point-popup'] = array(
     'title' => 'Builds popup for point on map',
@@ -154,8 +164,7 @@ function ctrader_map_block_view($delta = '') {
       }
 
       drupal_add_js(array('condosMapData' => $array_json), 'setting');
-      _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names, $array_json);
-      $all_neighbourhoods_json = variable_get('ctrader_map_neighbourhood_json');
+      $all_neighbourhoods_json = _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names, $array_json);
 
       $path = libraries_get_path('leaflet');
       drupal_add_js($path . '/leaflet-src.js');
@@ -244,6 +253,14 @@ function ctrader_map_block_view($delta = '') {
         if (!$results_map_polygons) {
           $results_map_polygons[] = $location_select_polygon;
         }
+
+        foreach ($results_map_polygons as $key => $value) {
+          if ($value['properties']['has_children'] == 1) {
+            unset($results_map_polygons[$key]);
+          }
+        }
+        sort($results_map_polygons);
+
         drupal_add_js(array('locationSelect' => $results_map_polygons), 'setting');
       }
 
@@ -391,7 +408,7 @@ function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = 
             'depth' => $tax_depth,
             'has_children' => $has_children,
             'community_code' => $community_code,
-
+            'well_known_text' => $tax_term->field_community_geolocation[LANGUAGE_NONE][0]['geom'],
           ),
           'id' => $tax_term_id,
           'type' => 'Feature',
@@ -401,7 +418,14 @@ function _ctrader_map_prepare_neighbourhoods_json($condos_neighbourhood_names = 
     variable_set('ctrader_map_neighbourhood_json', $terms_polygon_prejson);
   }
   $prepared_neighbourhoods_json = isset($terms_polygon_prejson) ? $terms_polygon_prejson : variable_get('ctrader_map_neighbourhood_json');
-  drupal_add_js(array('neighbourhoodsMapData' => $prepared_neighbourhoods_json), 'setting');
+  $prepared_neighbourhoods_json_deepest = array();
+  foreach ($prepared_neighbourhoods_json as $value) {
+    if (!$value['properties']['has_children']) {
+      $prepared_neighbourhoods_json_deepest[] = $value;
+    }
+  }
+//  drupal_add_js(array('neighbourhoodsMapData' => $prepared_neighbourhoods_json), 'setting');
+  drupal_add_js(array('neighbourhoodsMapData' => $prepared_neighbourhoods_json_deepest), 'setting');
 
   return $prepared_neighbourhoods_json;
 }
@@ -766,6 +790,7 @@ function _ctrader_map_create_terms_page_callback() {
 //  $output['create_term_form'] = drupal_get_form('_ctrader_map_region_taxonomy_form');
   $output['update_json_form'] = drupal_get_form('_ctrader_map_update_neighbourhoods_json_form');
   $output['create_new_rebeccalang_term_form'] = drupal_get_form('_ctrader_map_create_new_community_terms_form');
+  $output['json_geofield'] = drupal_get_form('_make_geofield_json_string');
 
   return $output;
 }
@@ -953,3 +978,65 @@ function _build_point_popup_page_callback() {
     drupal_json_output($view);
   }
 }
+
+/**
+ * Makes geofield json from coordinates json array.
+ * @param $form
+ * @param $form_state
+ * @return array
+ */
+function _make_geofield_json_string($form, &$form_state) {
+  $form = array();
+
+  $form['json_income'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Paste json array here'),
+    '#required' => TRUE,
+    '#description' => 'example: ["49.282812039212075,-123.13491582870483","49.28054440937235,-123.13852071762085","49.27634481950684,-123.13419163227081","49.27910958971883,-123.12917053699493"]',
+  );
+
+  $form['json_outcome'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Result'),
+    '#value' => isset($form_state['values']['json_outcome']) ? $form_state['values']['json_outcome'] : '',
+    '#attributes' => array(
+      'readonly' => TRUE,
+    ),
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Make'),
+//    '#disabled' => TRUE,
+  );
+
+  $form['resetbutton'] = array(
+    '#markup' => '<button type="reset">Reset</button>',
+    '#weight' => 1000
+  );
+  return $form;
+}
+
+/**
+ * Submit function for _make_geofield_json_string form.
+ * @param $form
+ * @param $form_state
+ */
+function _make_geofield_json_string_submit($form, &$form_state) {
+  $form_state['rebuild'] = TRUE;
+  $json = json_decode($form_state['values']['json_income']);
+  if ($json) {
+    if ($json[0] != end($json)) {
+//      array_pop($json);
+      $json[] = $json[0];
+    }
+    foreach ($json as &$value) {
+      $value = str_replace(', ', ',', $value);
+      $value = explode(',', $value);
+      $value = array_reverse($value);
+    }
+    $json_res = array('type' => 'Polygon', 'coordinates' => array($json),);
+    $form_state['values']['json_outcome'] = json_encode($json_res);
+  }
+}
+

@@ -25,20 +25,20 @@ function ctrader_mls_init() {
  * Implements hook_menu().
  */
 function ctrader_mls_menu() {
-  $items['admin/config/mls'] = array(
+  $items['admin/config/ctrader/mls'] = array(
     'title' => 'Mls integration page',
     'page callback' => '_ctrader_mls_mls_page_callback',
     'access arguments' => array('administer modules'),
     'type' => MENU_NORMAL_ITEM,
   );
-  $items['admin/config/rets'] = array(
+  $items['admin/config/ctrader/rets'] = array(
     'title' => 'RETS settings page',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('ctrader_mls_rets_data_form'),
     'access arguments' => array('administer modules'),
     'type' => MENU_NORMAL_ITEM,
   );
-  $items['rets-connection-test'] = array(
+  $items['admin/config/ctrader/rets-connection-test'] = array(
     'title' => 'RETS connection',
     'page callback' => '_rets_connection_test',
     'access arguments' => array('administer modules'),
@@ -76,14 +76,10 @@ function _ctrader_mls_mls_page_callback() {
  * Form for configure integration drupal and mls.
  */
 function ctrader_mls_form($form, &$form_state) {
-  $form['mls_username'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Username'),
-    '#default_value' => variable_get('mls_username', ''),
-  );
-  $form['mls_password'] = array(
-    '#type' => 'password',
-    '#title' => t('Password'),
+  $form['term_polygon_search'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Search by term polygon (not by term id)'),
+    '#default_value' => variable_get('term_polygon_search', TRUE),
   );
   return system_settings_form($form);
 }
@@ -349,7 +345,10 @@ function ctrader_mls_field_attach_presave($entity_type, $entity) {
   switch ($entity_type) {
     case DREALTY_ENTITY_TYPE:
       if ($entity->type == TORONTO_CONDO) {
-        if (isset($entity->field_change_full_address_field[LANGUAGE_NONE][0]['value']) && $entity->field_change_full_address_field[LANGUAGE_NONE][0]['value'] == 0) {
+        if (isset($entity->field_change_full_address_field[LANGUAGE_NONE][0]['value']) && $entity->field_change_full_address_field[LANGUAGE_NONE][0]['value']) {
+
+        }
+        else {
           if (isset($entity->field_address_full__torcond[LANGUAGE_NONE][0]['value']) && empty($entity->field_test_geofilld)) {
 //            $house_number = isset($entity->field_st_num__torcond[LANGUAGE_NONE][0]['value']) ? $entity->field_st_num__torcond[LANGUAGE_NONE][0]['value'] : '';
 //            $street_name = isset($entity->field_st__torcond[LANGUAGE_NONE][0]['value']) ? " {$entity->field_st__torcond[LANGUAGE_NONE][0]['value']}" : '';
@@ -397,6 +396,10 @@ function ctrader_mls_field_attach_presave($entity_type, $entity) {
             $state = ', ON';
             if (isset($entity->field_zip__torcond[LANGUAGE_NONE][0]['value'])) {
               $zip = str_replace(' ', '', $entity->field_zip__torcond[LANGUAGE_NONE][0]['value']);
+
+              $zip = str_split($zip, 3);
+              $zip = implode(' ', $zip);
+
               $zip = " {$zip}";
             }
             else {
@@ -423,8 +426,8 @@ function ctrader_mls_entity_presave($entity, $type) {
 
         // Adds value with current price to multiple old-price field.
         // This needs for discount calculating.
-        if (isset($entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value'])) {
-          $key = count($entity->field_old_price_value__torcond[LANGUAGE_NONE]);
+        if (isset($entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value']) && isset($entity->field_old_price_value__torcond[LANGUAGE_NONE])) {
+          $key = isset($entity->field_old_price_value__torcond[LANGUAGE_NONE]) ? count($entity->field_old_price_value__torcond[LANGUAGE_NONE]) : array();
           if (empty($key)) {
             $entity->field_old_price_value__torcond[LANGUAGE_NONE][$key]['value'] = $entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value'];
           }

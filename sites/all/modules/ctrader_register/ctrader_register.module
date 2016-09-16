@@ -121,7 +121,6 @@ function ctrader_register_field_group_build_pre_render_alter(&$element) {
 /**
  * Implements hook_element_info_alter().
  *
- *
  * Disable password strength checker.
  * Disable Drupal's built in password strength checker on the user
  * registration and user edit forms. Coder originally taken from
@@ -175,26 +174,38 @@ function _js_singup_map_page_callback() {
 
   // Sends polygons to search-results map.
   if (isset($_POST['locationSelect'])) {
+    $grand_parent_terms = array();
     $found_polygon = FALSE;
     foreach ($all_neighbourhoods_json as $key => $value) {
       if ($value['id'] == $_POST['locationSelect']) {
-        drupal_json_output($value);
-        $found_polygon = TRUE;
+        $found_polygon = $value;
+      }
+      if ($value['properties']['parent_id'] == 0) {
+        $grand_parent_terms[] = $value;
       }
       $all_neighbourhoods_json_short[$key] = $value['id'];
     }
     $all_neighbourhoods_json_short_flip = array_flip($all_neighbourhoods_json_short);
-    if (!$found_polygon) {
-      $children_terms = taxonomy_get_tree($vid, $_POST['locationSelect'], NULL, FALSE);
-      $get_all_children_polygons = array();
-      foreach ($children_terms as $value) {
-        if (in_array($value->tid, $all_neighbourhoods_json_short)) {
-          $all_neighbourhoods_json_key = $all_neighbourhoods_json_short_flip[$value->tid];
-          $get_all_children_polygons[] = $all_neighbourhoods_json[$all_neighbourhoods_json_key];
-        }
+    $children_terms = taxonomy_get_tree($vid, $_POST['locationSelect'], 1, FALSE);
+    $get_all_children_polygons = array();
+    foreach ($children_terms as $value) {
+      if (in_array($value->tid, $all_neighbourhoods_json_short)) {
+        $all_neighbourhoods_json_key = $all_neighbourhoods_json_short_flip[$value->tid];
+        $get_all_children_polygons[] = $all_neighbourhoods_json[$all_neighbourhoods_json_key];
       }
-      drupal_add_js(array('locationSelect' => $get_all_children_polygons), 'setting');
+    }
+    if (!empty($get_all_children_polygons) && is_numeric($_POST['locationSelect'])) {
       drupal_json_output($get_all_children_polygons);
+      drupal_add_js(array('locationSelect' => $get_all_children_polygons), 'setting');
+
+    }
+    elseif($found_polygon && is_numeric($_POST['locationSelect'])) {
+      drupal_json_output($found_polygon);
+      drupal_add_js(array('locationSelect' => $found_polygon), 'setting');
+    }
+    else {
+      drupal_json_output($grand_parent_terms);
+      drupal_add_js(array('locationSelect' => $grand_parent_terms), 'setting');
     }
   }
 

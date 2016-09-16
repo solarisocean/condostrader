@@ -299,6 +299,7 @@
                     freeDrawLayer.on('markers', function getMarkers(eventData) {
                         var latLngs = eventData.latLngs;
                         inputRes.val(L.FreeDraw.Utilities.getMySQLPolygons(eventData.latLngs));
+                        console.log(L.FreeDraw.Utilities.getMySQLPolygons(eventData.latLngs));
                     });
 
                 });
@@ -322,7 +323,7 @@
                     //     "fillOpacity": 0.3
                     // };
 
-                    if ($(this).val() === 'label_0') {
+                    if ($(this).val() === 'label_0_______') {
                         settings.mymapLayer.clearLayers().addData(settings.neighbourhoodsMapData);
                         settings.mymap.fitBounds(settings.mymapLayer.getBounds());
                     }
@@ -346,7 +347,7 @@
                             }
                         });
                     }
-                    else if ($(this).val() === 'label_1' || $(this).val() === 'label_2') {
+                    else if ($(this).val() === 'label_1' || $(this).val() === 'label_2' || $(this).val() === 'label_0') {
                         $.ajax({
                             type: 'POST',
                             url: '/js-singup-map',

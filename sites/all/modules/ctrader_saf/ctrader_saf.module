@@ -12,7 +12,7 @@ define('ENABLE_PRETTY_PATH_FOR_REGION_DROPDOWN_FACET', TRUE);
 function ctrader_saf_init() {
   drupal_add_css(drupal_get_path('module', 'ctrader_saf') . '/css/ctrader_saf.css');
   drupal_add_js(drupal_get_path('module', 'ctrader_saf') . '/js/facets_script.js');
-  
+
   drupal_add_css(drupal_get_path('module', 'ctrader_saf') . '/css/nouislider.min.css');
   drupal_add_js(drupal_get_path('module', 'ctrader_saf') . '/js/nouislider.min.js');
 
@@ -149,7 +149,7 @@ function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
 
   $search_field_identifier = 'search';
   if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-search-results-ctrader-page-1') {
-   $form['#action'] = '/' . CTRADER_SEARCH_RESULT_PAGE;
+    $form['#action'] = '/' . CTRADER_SEARCH_RESULT_PAGE;
     if (strpos(drupal_get_path_alias(), CTRADER_SEARCH_RESULT_PAGE) === 0) {
 
       // Needs for notice error disabling.
@@ -426,9 +426,28 @@ function ctrader_saf_search_api_solr_query_alter(array &$call_args, SearchApiQue
     $neib_query = '(' . str_replace('-', ' OR ', $_GET['neighbourhoods']) . ')';
     $call_args['params']['fq'][] = 'im_field_city_region__torcond:' . $neib_query;
   }
+
   if (isset($_GET['region'])) { //Regions selectlist (hierarchical select).
-    $region_query = '(' . str_replace('>', ' AND ', $_GET['region']) . ')';
-    $call_args['params']['fq'][] = 'im_field_city_region__torcond$parents_all:' . $region_query;
+    if (variable_get('term_polygon_search', TRUE)) {
+      $term = explode('>', $_GET['region']);
+      $term = end($term);
+      $neigbourhoods_json = variable_get('ctrader_map_neighbourhood_json');
+      foreach ($neigbourhoods_json as $value) {
+        if ($value['id'] == $term) {
+          $term_data = $value;
+        }
+      }
+      if (isset($term_data)) {
+        $call_args['params']['fq'][] = 'rpts_field_search_point_string:"Intersects(' . $term_data['properties']['well_known_text'] . ')"';
+      }
+      else {
+        drupal_set_message(t('Can\'t find region polygon. Search was canceled'), 'warning');
+      }
+    }
+    else {
+      $region_query = '(' . str_replace('>', ' AND ', $_GET['region']) . ')';
+      $call_args['params']['fq'][] = 'im_field_city_region__torcond$parents_all:' . $region_query;
+    }
   }
 }
 
@@ -732,7 +751,7 @@ function _ctrader_saf_blocks_content_function($delta) {
       /* @see ctrader_saf_search_api_solr_query_alter */
       // Map input.
       if (isset($_GET['polygon'])) {
-         $search_button_form['geo_loc']['#value'] = "POLYGON(({$_GET['polygon']}))";
+        $search_button_form['geo_loc']['#value'] = "POLYGON(({$_GET['polygon']}))";
       }
       elseif (isset($_GET['neighbourhoods'])) {
         $neighb_array = explode('-', $_GET['neighbourhoods']);

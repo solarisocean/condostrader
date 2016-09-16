@@ -13,7 +13,7 @@ function ctf_taxonomy_vocabularies_neighbourhoods_taxonomy_default_vocabularies(
       'name' => 'Neighbourhoods',
       'machine_name' => 'neighbourhoods',
       'description' => '',
-      'hierarchy' => 1,
+      'hierarchy' => 0,
       'module' => 'taxonomy',
       'weight' => 0,
     ),
