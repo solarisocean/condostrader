@@ -716,7 +716,7 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
     $pane->panel = 'building_info';
     $pane->type = 'entity_field';
     $pane->subtype = 'drealty_listing:field_address_full__torcond';
-    $pane->shown = TRUE;
+    $pane->shown = FALSE;
     $pane->access = array();
     $pane->configuration = array(
       'label' => 'inline',
@@ -753,6 +753,44 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
     $display->content['new-13748279-3929-4991-9b51-ebd836826cb1'] = $pane;
     $display->panels['building_info'][0] = 'new-13748279-3929-4991-9b51-ebd836826cb1';
     $pane = new stdClass();
+    $pane->pid = 'new-d3706c2f-c0fe-419c-b388-ff6418dbae9e';
+    $pane->panel = 'building_info';
+    $pane->type = 'views';
+    $pane->subtype = 'condos_in_building';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_pager_settings' => 0,
+      'use_pager' => 1,
+      'nodes_per_page' => '0',
+      'pager_id' => '0',
+      'offset' => '0',
+      'more_link' => 0,
+      'feed_icons' => 0,
+      'panel_args' => 1,
+      'link_to_view' => 0,
+      'args' => 'arg2',
+      'url' => '',
+      'display' => 'block_3',
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => '',
+    );
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = 'd3706c2f-c0fe-419c-b388-ff6418dbae9e';
+    $display->content['new-d3706c2f-c0fe-419c-b388-ff6418dbae9e'] = $pane;
+    $display->panels['building_info'][1] = 'new-d3706c2f-c0fe-419c-b388-ff6418dbae9e';
+    $pane = new stdClass();
     $pane->pid = 'new-98900a44-f258-48cd-9216-871f858281fa';
     $pane->panel = 'condos_in_building';
     $pane->type = 'views';
@@ -772,7 +810,7 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
       'args' => 'arg2',
       'url' => '',
       'display' => 'block_1',
-      'override_title' => 1,
+      'override_title' => 0,
       'override_title_text' => 'Sale',
       'override_title_heading' => 'h6',
     );
@@ -807,7 +845,7 @@ function ctf_pages_drealty_listing_view_variant_default_page_manager_handlers() 
       'args' => 'arg2',
       'url' => '',
       'display' => 'block_2',
-      'override_title' => 1,
+      'override_title' => 0,
       'override_title_text' => 'Rent',
       'override_title_heading' => 'h6',
     );

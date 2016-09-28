@@ -511,20 +511,34 @@
                     });
                 }
 
+                var galleryTop,
+                    galleryThumbs,
+                    topClass,
+                    thumbClass;
+
+                if ($('.build-top').length>0) {
+                    topClass = 'top-container';
+                    thumbClass = 'thumb-container';
+                    $('.build-top').wrap('<div class="swiper-container '+topClass+'"></div>' );
+                    $('.build-top img').wrap("<div class='swiper-slide'></div>" );
+                    $('.build-thumb').wrap('<div class="swiper-container '+thumbClass+'"></div>' );
+                    $('.build-thumb img').addClass('swiper-slide' );
+                }
+                else {
+                    topClass = 'condo-page-gallery .pane-content';
+                    thumbClass = 'condo-page-pagination .pane-content';
+                }
 
                 $('.condo-page-gallery .pane-content, .condo-page-pagination .pane-content').addClass('swiper-container');
-                $('.condo-page-gallery .field-name-field-toronto-gallery, .condo-page-pagination .field-name-field-toronto-gallery').addClass('swiper-wrapper');
 
+                $('.condo-page-gallery .field-name-field-toronto-gallery, .condo-page-pagination .field-name-field-toronto-gallery').addClass('swiper-wrapper');
                 $('.condo-page-gallery .field-name-field-toronto-gallery img').wrap('<div class="swiper-slide"></div>');
                 $('.condo-page-pagination .field-name-field-toronto-gallery img').addClass('swiper-slide');
+                $('.'+thumbClass).append('<div class="swiper-scrollbar"></div>');
 
-                $('.condo-page-pagination .pane-content').append('<div class="swiper-scrollbar"></div>');
-                $('.condo-page-gallery .pane-content').append('<div class="gallery-slider-button-next swiper-button-next"></div><div class="gallery-slider-button-prev swiper-button-prev"></div>');
+                $('.'+topClass).append('<div class="gallery-slider-button-next swiper-button-next"></div><div class="gallery-slider-button-prev swiper-button-prev"></div>');
 
-                var galleryTop,
-                      galleryThumbs;
-                
-                galleryTop = new Swiper('.condo-page-gallery .pane-content', {
+                galleryTop = new Swiper('.'+topClass, {
                     nextButton: '.gallery-slider-button-next',
                     prevButton: '.gallery-slider-button-prev',
                     onSlideChangeEnd: function(swiper){
@@ -535,7 +549,7 @@
                     }
                 });
 
-                galleryThumbs = new Swiper('.condo-page-pagination .pane-content', {
+                galleryThumbs = new Swiper('.'+thumbClass, {
                     scrollbar: '.swiper-scrollbar',
                     scrollbarHide: false,
                     scrollbarDraggable: true,
@@ -685,5 +699,4 @@
             });
         }
     };
-
 })(jQuery, Drupal);
