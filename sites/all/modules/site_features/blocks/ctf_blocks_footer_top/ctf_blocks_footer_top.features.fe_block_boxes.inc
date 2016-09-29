@@ -14,9 +14,9 @@ function ctf_blocks_footer_top_default_fe_block_boxes() {
   $fe_block_boxes->info = 'Footer Top';
   $fe_block_boxes->format = 'filtered_html';
   $fe_block_boxes->machine_name = 'footer_top_block';
-  $fe_block_boxes->body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis metus tempor, pharetra ligula non, scelerisque dolor. 
+  $fe_block_boxes->body = 'Copyright 2016 All rights reserved. Toronto Real Estate Board (TREB) assumes no responsibility for the accuracy of any information shown. 
 
-Proin sed ligula orci. In convallis dignissim egestas. Maecenas magna tortor, elementum ac accumsan vitae, cursus non turpis. ';
+All MLS® Listing data provided herein must only be used by consumers that have a bona fide interest in the purchase, sale or lease of real estate and may not be used for any commercial purpose or any other purpose.';
 
   $export['footer_top_block'] = $fe_block_boxes;
 
