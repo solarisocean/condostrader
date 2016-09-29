@@ -156,7 +156,8 @@ function ctrader_mls_update_7003_below_to_array($below) {
       $links += $value['below'];
     }
   }
-  if (!empty(reset($links)['below'])) {
+  $reset_links = reset($links);
+  if (!empty($reset_links['below'])) {
     $links += ctrader_mls_update_7003_below_to_array($links);
   }
   return $links;
