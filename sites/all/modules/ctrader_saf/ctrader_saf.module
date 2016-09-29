@@ -301,7 +301,8 @@ function ctrader_saf_search_api_solr_query_alter(array &$call_args, SearchApiQue
   $facet_item = $query->getFilter()->getFilters();
   foreach ($facet_item as $item) {
     if (is_object($item) && is_object(reset($item->getFilters()))) {
-      $filters = $item->getFilters()[0]->getFilters();
+      $filters = $item->getFilters();
+      $filters = $filters[0]->getFilters();
 
       // Changes query for range facet (field: sqft).
       // Makes one range form for two fields.
