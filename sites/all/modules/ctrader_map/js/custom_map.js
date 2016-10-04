@@ -24,6 +24,77 @@
                     }).addTo(mymap);
                     L.Icon.Default.imagePath = '/sites/all/libraries/leaflet/images';
 
+
+                  // Needs for editing neighbourhoods polygons on 'search-results'
+                  // page.
+                  //var drawnItems = new L.FeatureGroup();
+                  //mymap.addLayer(drawnItems);
+                  //var drawOptions = {
+                  //  position: 'topright',
+                  //  draw: {
+                  //    polyline: {
+                  //      shapeOptions: {
+                  //        color: '#f357a1',
+                  //        weight: 10
+                  //      }
+                  //    },
+                  //    polygon: {
+                  //      allowIntersection: false, // Restricts shapes to simple polygons
+                  //      drawError: {
+                  //        color: '#e1e100', // Color the shape will turn when intersects
+                  //        message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
+                  //      },
+                  //      showArea: false,
+                  //      shapeOptions: {
+                  //        stroke: true,
+                  //        color: '#0051F4',
+                  //        weight: 1,
+                  //        opacity: 1,
+                  //        fill: true,
+                  //        fillColor: null, //same as color by default
+                  //        fillOpacity: 0.2,
+                  //      }
+                  //    },
+                  //    circle: false, // Turns off this drawing tool
+                  //    rectangle: {
+                  //      shapeOptions: {
+                  //        clickable: false
+                  //      }
+                  //    }
+                  //  },
+                  //  edit: {
+                  //    featureGroup: drawnItems
+                  //  }
+                  //};
+                  //
+                  //var drawControl = new L.Control.Draw(drawOptions);
+                  //mymap.addControl(drawControl);
+                  //
+                  //mymap.on('draw:created', function (e) {
+                  //  var type = e.layerType,
+                  //    layer = e.layer;
+                  //  if (type === 'rectangle') {
+                  //    layer.on('mouseover', function () {
+                  //      alert(layer.getLatLngs());
+                  //    });
+                  //  }
+                  //  drawnItems.addLayer(layer);
+                  //  var polygonCoordinates = JSON.stringify(layer.toGeoJSON());
+                  //  console.log(layer.toGeoJSON());
+                  //  console.log(polygonCoordinates);
+                  //
+                  //});
+                  //
+                  //mymap.on('draw:edited', function (e) {
+                  //  var layers = e.layers;
+                  //  layers.eachLayer(function (layer) {
+                  //    if (layer instanceof L.Polygon) {
+                  //      var polygonCoordinates = JSON.stringify(layer.toGeoJSON());
+                  //      console.log('Edited: ' + polygonCoordinates);
+                  //    }
+                  //  });
+                  //});
+
                     var inputRes = $('#-ctrader-saf-search-button-form input[name="geo_loc"]');
                     var labelOptions = {
                       className: 'leaflet-label-other',

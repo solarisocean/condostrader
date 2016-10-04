@@ -177,6 +177,8 @@ function ctrader_map_block_view($delta = '') {
       $path = libraries_get_path('Leaflet.draw');
       drupal_add_js($path . '/dist/leaflet.draw.js');
       drupal_add_css($path . '/dist/leaflet.draw.css');
+      drupal_add_js(drupal_get_path('module', 'ctrader_map') . '/js/json2.js');
+
 
       //Leaflet Free Draw tool.
       $path = libraries_get_path('leafletFreeDraw');
