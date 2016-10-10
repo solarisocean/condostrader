@@ -306,6 +306,7 @@ function ctf_configurations_drealty_connections_field_group_info() {
       6 => 'field_old_price_value__torcond',
       7 => 'field_search_point_string',
       8 => 'field_change_full_address_field',
+      9 => 'field_change_coord_manually',
     ),
     'format_type' => 'tab',
     'format_settings' => array(

@@ -456,17 +456,25 @@ function ctrader_mls_entity_presave($entity, $type) {
         $price = isset($entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value']) ? intval($entity->field_lp_dol__torcond[LANGUAGE_NONE][0]['value']) : 0;
         $entity->field_price_per_sqft__torcond[LANGUAGE_NONE][0]['value'] = $sqft_max != 0 ? round(($price / $sqft_max), 2) : 0;
 
-        // Creates string value for search-point field (this field needs for solr polygon search).
-        $lat = isset($entity->field_test_geofilld[LANGUAGE_NONE][0]['lat']) ? $entity->field_test_geofilld[LANGUAGE_NONE][0]['lat'] : NULL;
-        $lon = isset($entity->field_test_geofilld[LANGUAGE_NONE][0]['lon']) ? $entity->field_test_geofilld[LANGUAGE_NONE][0]['lon'] : NULL;
-        if ($lat && $lon) {
-          $entity->field_search_point_string[LANGUAGE_NONE][0]['value'] = $lat . ',' . $lon;
+
+        if (isset($entity->field_change_coord_manually[LANGUAGE_NONE][0]['value']) && $entity->field_change_coord_manually[LANGUAGE_NONE][0]['value'] == 1) {
+          if (empty($entity->field_search_point_string[LANGUAGE_NONE][0]['value'])) {
+            $entity->field_search_point_string[LANGUAGE_NONE][0]['value'] = '43.760,-79.390';
+          }
         }
         else {
-          //default Toronto coordinates.
-          $entity->field_search_point_string[LANGUAGE_NONE][0]['value'] = '43.760,-79.390';
-          // marks listing for update.
-          $entity->hash = 0;
+          // Creates string value for search-point field (this field needs for solr polygon search).
+          $lat = isset($entity->field_test_geofilld[LANGUAGE_NONE][0]['lat']) ? $entity->field_test_geofilld[LANGUAGE_NONE][0]['lat'] : NULL;
+          $lon = isset($entity->field_test_geofilld[LANGUAGE_NONE][0]['lon']) ? $entity->field_test_geofilld[LANGUAGE_NONE][0]['lon'] : NULL;
+          if ($lat && $lon) {
+            $entity->field_search_point_string[LANGUAGE_NONE][0]['value'] = $lat . ',' . $lon;
+          }
+          else {
+            //default Toronto coordinates.
+            $entity->field_search_point_string[LANGUAGE_NONE][0]['value'] = '43.760,-79.390';
+            // marks listing for update.
+            $entity->hash = 0;
+          }
         }
 
         // Search listing point on neighbourhoods terms polygons and create reference.
@@ -644,7 +652,7 @@ function _ctrader_mls_create_building_and_reference($entity, $type) {
         if ($not_have_reference) {
           $building->{$reference_field_name}[LANGUAGE_NONE][] = array('target_id' => $entity->id);
         }
-        if (empty($building->field_toronto_gallery)) {
+        if (empty($building->field_toronto_gallery) || !isset($building->field_toronto_gallery)) {
           $building->field_toronto_gallery = $entity->field_toronto_gallery;
 
           // Saves not more than two images.
@@ -753,6 +761,55 @@ function ctrader_mls_form_alter(&$form, &$form_state, $form_id) {
       break;
     case 'drealty_listing_edit_form':
       $form['actions']['delete']['#submit'][0] = '_ctrader_mls_drealty_listing_delete';
+      $form['#validate'][] = '_ctrader_mls_listing_edit_form_validation';
+      if (isset($form['field_change_coord_manually'])) {
+        $form['field_change_coord_manually']['#suffix'] = theme('html_tag', array(
+          'element' => array(
+            '#tag' => 'div',
+            '#attributes' => array(
+              'class' => 'listing-edit-leaflet-map',
+//              'id' => 'listing-edit-map',
+            ),
+            '#value' => '',
+          )
+        ));
+        if ($form['field_change_coord_manually'][LANGUAGE_NONE]['#default_value'] == 1) {
+          $form['field_change_coord_manually']['#suffix'] = theme('html_tag', array(
+            'element' => array(
+              '#tag' => 'div',
+              '#attributes' => array(
+              'id' => 'listing-edit-map',
+              ),
+              '#value' => '',
+            )
+          ));
+        }
+
+        $form['field_change_coord_manually'][LANGUAGE_NONE]['#ajax'] = array(
+          'callback' => 'ajax_coordinates_change_callback',
+        );
+
+        if (isset($form['#entity']->field_search_point_string[LANGUAGE_NONE][0]['value'])
+          && !empty($form['#entity']->field_search_point_string[LANGUAGE_NONE][0]['value'])) {
+          $listing_point = explode(',', $form['#entity']->field_search_point_string[LANGUAGE_NONE][0]['value']);
+          drupal_add_js(array('listingPoint' => $listing_point), 'setting');
+        }
+
+        _ctrader_map_prepare_neighbourhoods_json();
+
+        $path = libraries_get_path('leaflet');
+        $form['#attached']['js'][] = $path . '/leaflet-src.js';
+        $form['#attached']['css'][] = $path . '/leaflet.css';
+
+        $path = libraries_get_path('leaflet_label');
+        $form['#attached']['js'][] = $path . '/dist/leaflet.label.js';
+        $form['#attached']['css'][] = $path . '/dist/leaflet.label.css';
+
+        $path = libraries_get_path('Leaflet.draw');
+        $form['#attached']['js'][] = $path . '/dist/leaflet.draw.js';
+        $form['#attached']['css'][] = $path . '/dist/leaflet.draw.css';
+        $form['#attached']['js'][] = drupal_get_path('module', 'ctrader_mls') . '/js/listing_edit_map.js';
+      }
       break;
     case 'taxonomy_manager_form':
       if (!isset($_GET[42])) {
@@ -769,6 +826,49 @@ function ctrader_mls_form_alter(&$form, &$form_state, $form_id) {
                                                             <p></p>
                                                           </ul>";
       break;
+  }
+}
+
+function ajax_coordinates_change_callback($form, &$form_state) {
+  $commands = array();
+  if ($form_state['values']['field_change_coord_manually']['und'][0]['value'] == 1) {
+    $commands[] = ajax_command_replace(".listing-edit-leaflet-map", '<div id="listing-edit-map"></div>');
+  }
+  return array('#type' => 'ajax', '#commands' => $commands);
+}
+
+/**
+ * Validation function for drealty listing edit form.
+ */
+function _ctrader_mls_listing_edit_form_validation($form, &$form_state) {
+  if (isset($form_state['values']['field_change_coord_manually'][LANGUAGE_NONE][0]['value'])
+    && !empty($form_state['values']['field_change_coord_manually'][LANGUAGE_NONE][0]['value'])
+  ) {
+    if (!isset($form_state['values']['field_search_point_string'][LANGUAGE_NONE][0]['value'])
+      || empty($form_state['values']['field_search_point_string'][LANGUAGE_NONE][0]['value'])
+    ) {
+      form_set_error('field_search_point_string', 'Could\'t be empty');
+    }
+    else {
+      $check_string = explode(',', $form_state['values']['field_search_point_string'][LANGUAGE_NONE][0]['value']);
+      if (count($check_string) != 2) {
+        form_set_error('field_search_point_string', 'Wrong format. Example: 43.760,-79.390');
+      }
+      else {
+        if (!is_numeric($check_string[0]) || !is_numeric($check_string[1])) {
+          form_set_error('field_search_point_string', 'Wrong format. Example: 43.760,-79.390');
+        }
+        if ($check_string[0] > 90 || $check_string[0] < -90) {
+          form_set_error('field_search_point_string', 'Wrong coordinates format. Example: 43.760,-79.390');
+        }
+        if ($check_string[1] > 180 || $check_string[1] < -180) {
+          form_set_error('field_search_point_string', 'Wrong coordinates format. Example: 43.760,-79.390');
+        }
+        if (strpos($check_string[0], ' ') !== FALSE || strpos($check_string[1], ' ') !== FALSE) {
+          form_set_error('field_search_point_string', 'Consists whitespace. Wrong format. Example: 43.760,-79.390');
+        }
+      }
+    }
   }
 }
 
