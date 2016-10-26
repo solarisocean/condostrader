@@ -5,17 +5,20 @@ package = Lazyloader
 description = "Automatically lazyload images on windows scroll, makes sites with multiple images load faster."
 core = "7.x"
 dependencies[] = image
+dependencies[] = libraries
 
 files[] = lazyloader.install
 files[] = lazyloader.module
 files[] = lazyloader.admin.inc
-scripts[] = jquery.lazyloader.js
+files[] = tests/lazyloader_test_base.test
+files[] = tests/lazyloader_exclude.test
+files[] = tests/lazyloader_theme.test
 stylesheets[all][] = lazyloader.css
 configure = admin/config/media/lazyloader
 
-; Information added by Drupal.org packaging script on 2015-03-29
-version = "7.x-1.4"
+; Information added by Drupal.org packaging script on 2015-10-21
+version = "7.x-2.0-alpha1+1-dev"
 core = "7.x"
 project = "lazyloader"
-datestamp = "1427654774"
+datestamp = "1445415540"
 

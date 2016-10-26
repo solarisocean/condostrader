@@ -26,7 +26,13 @@ function lazyloader_uninstall() {
     'lazyloader_placeholder',
     'lazyloader_icon',
     'lazyloader_paths',
-    'lazyloader_exclude_option',
+    'lazyloader_custom_icon_path',
+    'lazyloader_page_exclude_option',
+    'lazyloader_content_types',
+    'lazyloader_load_image_delay',
+    'lazyloader_debounce',
+    'lazyloader_unload',
+    'lazyloader_debugging',
   );
 
   foreach ($variables as $variable) {
@@ -37,7 +43,7 @@ function lazyloader_uninstall() {
 /**
  * Migrate settings.
  */
-function lazyloader_update_7001(){
+function lazyloader_update_7001() {
   $settings = variable_get('lazyloader', array());
 
   if  (isset($settings['enabled'])) {
@@ -61,4 +67,17 @@ function lazyloader_update_7001(){
   }
 
   variable_del('lazyloader');
+}
+
+/**
+ * Rename lazyloader_exclude_option to lazyloader_path_exclude_option.
+ */
+function lazyloader_update_7201() {
+  // Move the settings to their new variable if they differ from the default.
+  $val = variable_get('lazyloader_exclude_option', LAZYLOADER_PAGE_EXCLUDE_OPTION);
+  if ($val !== LAZYLOADER_PAGE_EXCLUDE_OPTION) {
+    variable_set('lazyloader_page_exclude_option', $val);
+  }
+  // Remove the old value.
+  variable_del('lazyloader_exclude_option');
 }
