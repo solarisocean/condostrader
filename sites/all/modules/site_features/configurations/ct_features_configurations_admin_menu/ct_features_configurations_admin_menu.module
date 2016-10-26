@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CT Features: Configurations: Admin Menu feature.
+ */
+
+include_once 'ct_features_configurations_admin_menu.features.inc';
