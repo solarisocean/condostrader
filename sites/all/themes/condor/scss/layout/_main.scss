@@ -18,6 +18,12 @@ body {
 
 .lazyloader-icon {
   min-width: 1% !important;
-  top: 30% !important;
-  left: 50% !important;
+  left: 50%;
+}
+
+.front-center-block {
+  .lazyloader-icon {
+    min-width: 1% !important;
+    top: 30% !important;
+  }
 }
