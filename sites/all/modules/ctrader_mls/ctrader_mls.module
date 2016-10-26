@@ -580,6 +580,10 @@ function ctrader_mls_entity_presave($entity, $type) {
             $entity->field_toronto_gallery[LANGUAGE_NONE][$key]['title'] = '';
           }
         }
+        else {
+          // Listing has no images. Marks for images process on next import.
+          $entity->process_images = 1;
+        }
 
         // Creates or updates building for listing.
         if (!$entity->is_new) {

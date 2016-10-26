@@ -130,16 +130,16 @@
                           }
                           else {
                             layer.bindLabel(feature.properties.popupContent, labelOptions);
-                            layer.on("mouseover", function() {
-                                layer.setStyle({
-                                    color: "#FF5000"
-                                });
-                            });
-                            layer.on("mouseout", function() {
-                              layer.setStyle({
-                                  color: "#B9760B"
-                              });
-                            });
+                            //layer.on("mouseover", function() {
+                            //    layer.setStyle({
+                            //        color: "#FF5000"
+                            //    });
+                            //});
+                            //layer.on("mouseout", function() {
+                            //  layer.setStyle({
+                            //      color: "#B9760B"
+                            //  });
+                            //});
                             layer.on({
                                   click: function () {
                                       $("#-ctrader-saf-search-button-form input[name='region'], #-ctrader-saf-search-button-form input[name='region_1'], #-ctrader-saf-search-button-form input[name='region_2']").val('');
@@ -150,9 +150,17 @@
 
                                           layer.selected = true;
                                           if (layer._spiderLeg === undefined && !layer.hasOwnProperty('_icon')) {
+                                            var layerColor = "#FF5000";
+                                            if (layer.options.color == layerColor) {
                                               layer.setStyle({
-                                                  color: "#FF5000"
+                                                color: "#B9760B"
                                               });
+                                            }
+                                            else {
+                                              layer.setStyle({
+                                                color: layerColor
+                                              });
+                                            }
                                           }
                                       } else {
                                           String.prototype.replaceBetween = function(start, end, what) {
@@ -370,7 +378,7 @@
                     freeDrawLayer.on('markers', function getMarkers(eventData) {
                         var latLngs = eventData.latLngs;
                         inputRes.val(L.FreeDraw.Utilities.getMySQLPolygons(eventData.latLngs));
-                        console.log(L.FreeDraw.Utilities.getMySQLPolygons(eventData.latLngs));
+                        //console.log(L.FreeDraw.Utilities.getMySQLPolygons(eventData.latLngs));
                     });
 
                 });
