@@ -1,0 +1,87 @@
+<?php
+
+
+/**
+ * Test case for typical lazyloader tests.
+ */
+abstract class LazyloaderTestBase extends DrupalWebTestCase {
+  protected $user;
+  protected $node;
+
+  public function setUp() {
+    parent::setUp(array('image', 'lazyloader', 'path'));
+    $user = $this->drupalCreateUser(array(
+      'create page content',
+      'edit own page content',
+      'administer lazyloader',
+      'administer url aliases',
+      'create url aliases'
+    ));
+    $this->drupalLogin($user);
+
+    // Add unlimited image field.
+    $field_info = array(
+      'type' => 'image',
+      'field_name' => 'field_images',
+      'cardinality' => -1,
+    );
+    field_create_field($field_info);
+
+    $instance_info = array(
+      'field_name' => 'field_images',
+      'entity_type' => 'node',
+      'bundle' => 'page',
+      'display' => array(
+        'default' => array(
+          'type' => 'image',
+          'settings' => array(
+            'image_style' => 'medium',
+          ),
+        ),
+      ),
+    );
+    field_create_instance($instance_info);
+
+    $images = $this->drupalGetTestFiles('image');
+    foreach ($images as $key => $image) {
+      $images[$key] = (array) file_save($image);
+    }
+
+    $settings = array(
+      'type' => 'page',
+      'field_images' => array(
+        LANGUAGE_NONE => $images,
+      ),
+      'path' => array(
+        'alias' => $this->randomName(),
+      ),
+    );
+
+    $this->node = $this->drupalCreateNode($settings);
+  }
+
+  function tearDown() {
+    parent::tearDown();
+    lazyloader_uninstall();
+  }
+
+  /**
+   * Asserts if lazyloader is enabled on the page.
+   * @param bool|TRUE $enabled
+   * @param string $message
+   */
+  protected function assertLazyloaderEnabled($enabled = TRUE, $message = '') {
+    if ($message === '') {
+      $message = $enabled ? 'Lazyloader is enabled' : 'Lazyloader is disabled';
+    }
+    $image_count = count($this->node->field_images[$this->node->language]);
+    $images = $this->xpath('//img[@data-echo]');
+
+    if ($enabled) {
+      $this->assertEqual(count($images), $image_count, $message);
+    }
+    else {
+      $this->assertFalse(count($images), $message);
+    }
+  }
+}

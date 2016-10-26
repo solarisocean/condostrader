@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * Tests lazyloader's theme function.
+ */
+class LazyloaderThemeTestCase extends LazyloaderTestBase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Lazyloader theme',
+      'description' => 'Ensure lazyloader correctly renders images.',
+      'group' => 'Lazyloader',
+    );
+  }
+
+  /**
+   * Tests theme_lazyloader_image() and lazyloader's override of theme_image().
+   */
+  function testThemeLazyloaderImage() {
+    $node = node_view($this->node);
+    $image = $node['field_images'][0]['#item'];
+    $path = preg_quote(file_create_url($image['uri']), '/');
+
+    foreach (array(TRUE, FALSE) as $module_enabled) {
+      variable_set('lazyloader_enabled', $module_enabled);
+
+      foreach (array('image', 'lazyloader_image') as $theme_key){
+        $render_array = array(
+          '#path' => $image['uri'],
+          '#theme' => $theme_key,
+        );
+
+        $result = render($render_array);
+        $match = preg_match('/<img.*data-echo="' . $path . '".*<noscript><img.*src="' . $path . '".*<\/noscript>/', $result);
+        if ($module_enabled || (!$module_enabled && $theme_key === 'lazyloader_image')) {
+          $module_state = $module_enabled ? 'enabled' : 'disabled';
+          $this->assertTrue($match, "#theme {$theme_key} renders a lazyloaded image when lazyloader is {$module_state}.");
+        }
+        else {
+          $this->assertFalse($match, "#theme {$theme_key} renders a non-lazyloaded image.");
+        }
+      }
+    }
+  }
+
+}
