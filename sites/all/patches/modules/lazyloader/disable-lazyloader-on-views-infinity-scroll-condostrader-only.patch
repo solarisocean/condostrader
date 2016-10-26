@@ -1,0 +1,15 @@
+diff --git sites/all/modules/lazyloader/lazyloader.module sites/all/modules/lazyloader/lazyloader.module
+index dd159f9..7f33b45 100644
+--- sites/all/modules/lazyloader/lazyloader.module
++++ sites/all/modules/lazyloader/lazyloader.module
+@@ -238,6 +238,10 @@ function _lazy_loader_enabled() {
+     }
+   }
+ 
++  if ((drupal_is_front_page() || drupal_get_path_alias() == 'search-result') && isset($_REQUEST['page'])) {
++    $enabled = FALSE;
++  }
++
+   return $enabled;
+ }
+ 

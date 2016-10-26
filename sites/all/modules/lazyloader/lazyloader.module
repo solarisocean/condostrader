@@ -238,6 +238,10 @@ function _lazy_loader_enabled() {
     }
   }
 
+  if ((drupal_is_front_page() || drupal_get_path_alias() == 'search-results') && isset($_REQUEST['page'])) {
+    $enabled = FALSE;
+  }
+
   return $enabled;
 }
 
