@@ -14,7 +14,6 @@
       };
 
       var checkboxValue = $('.form-item-field-change-coord-manually-und .form-checkbox').is(":checked");
-      console.log(checkboxValue);
 
       if ($("#listing-edit-map").length || checkboxValue) {
         $('body').once(function () {
@@ -28,6 +27,7 @@
           }
           mymap = L.map('listing-edit-map').setView(listingPointSet, 12);
 
+          L.Icon.Default.imagePath = '/sites/all/libraries/leaflet/images';
           L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           }).addTo(mymap);
@@ -79,7 +79,6 @@
           settings.mymapLayer = nLayer;
 
           var marker = L.marker(listingPointSet).addTo(mymap);
-          console.log(listingPointSet);
           L.circle(listingPointSet, 150, {
             color: 'red',
             fillColor: '#f03',
@@ -113,7 +112,6 @@
               var newCoordinates = JSON.stringify(markerGeo.geometry.coordinates.reverse());
               newCoordinates = newCoordinates.replace('[', '');
               newCoordinates = newCoordinates.replace(']', '');
-              //console.log(newCoordinates);
               $('.field-name-field-search-point-string input').val(newCoordinates);
             }
             drawnItems.addLayer(layer);
