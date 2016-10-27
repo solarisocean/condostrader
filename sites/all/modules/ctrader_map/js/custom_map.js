@@ -130,6 +130,18 @@
                           }
                           else {
                             layer.bindLabel(feature.properties.popupContent, labelOptions);
+
+                            if (settings.hasOwnProperty('chosenNeighbourhoodsTermIds')) {
+                              for (var i = 0; i < settings.chosenNeighbourhoodsTermIds.length; i++) {
+                                if (feature.id === settings.chosenNeighbourhoodsTermIds[i]) {
+                                  layer.setStyle({
+                                    color: "#FF5000"
+                                  });
+                                  layer.selected = true;
+                                }
+                              }
+                            }
+
                             //layer.on("mouseover", function() {
                             //    layer.setStyle({
                             //        color: "#FF5000"
@@ -140,6 +152,7 @@
                             //      color: "#B9760B"
                             //  });
                             //});
+
                             layer.on({
                                   click: function () {
                                       $("#-ctrader-saf-search-button-form input[name='region'], #-ctrader-saf-search-button-form input[name='region_1'], #-ctrader-saf-search-button-form input[name='region_2']").val('');
@@ -149,19 +162,13 @@
                                           });
 
                                           layer.selected = true;
+
                                           if (layer._spiderLeg === undefined && !layer.hasOwnProperty('_icon')) {
-                                            var layerColor = "#FF5000";
-                                            if (layer.options.color == layerColor) {
-                                              layer.setStyle({
-                                                color: "#B9760B"
-                                              });
-                                            }
-                                            else {
-                                              layer.setStyle({
-                                                color: layerColor
-                                              });
-                                            }
+                                            layer.setStyle({
+                                              color: "#FF5000"
+                                            });
                                           }
+
                                       } else {
                                           String.prototype.replaceBetween = function(start, end, what) {
                                               return this.substring(0, start) + what + this.substring(end);
@@ -191,20 +198,8 @@
                                       }
                                   }
                               });
-
                           }
                         }
-
-                        if (settings.hasOwnProperty('chosenNeighbourhoodsTermIds')) {
-                            for (var i = 0; i < settings.chosenNeighbourhoodsTermIds.length; i++) {
-                                if (feature.id === settings.chosenNeighbourhoodsTermIds[i]) {
-                                    layer.setStyle({
-                                        color: "#FF5000"
-                                    });
-                                }
-                            }
-                        }
-
                     }
 
                     var neighbourhoodsData = Drupal.settings.neighbourhoodsMapData;
