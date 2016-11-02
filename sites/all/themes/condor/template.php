@@ -5,7 +5,7 @@
  */
 function condor_preprocess_html(&$variables) {
   $args = arg();
-  if ($args[0] == 'user' && is_numeric($args[1])) {
+  if ($args[0] == 'user' &&  !empty($args[1]) && is_numeric($args[1])) {
     $variables['classes_array'][] = 'user-page';
   }
 }
@@ -262,7 +262,7 @@ function condor_menu_local_task($variables) {
   $link['localized_options']['html'] = TRUE;
 
   //Hide menu local task on register page.
-  if (!empty($args[0]) && !empty($args[0]) && $args[1] == 'register') {
+  if (!empty($args[0]) && !empty($args[1]) && $args[1] == 'register') {
     return '';
   } else {
     return '<li' . (!empty($variables['element']['#active']) ? ' class="active"' : '') . '>' . l($link_text, $link['href'], $link['localized_options']) . "</li>\n";

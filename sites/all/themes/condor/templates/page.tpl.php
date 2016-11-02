@@ -135,7 +135,7 @@
   <main role="main" class="row l-main">
     <!-- .l-main region -->
     <?php  $args = arg();?>
-    <?php if (!empty($args) && $args[0] == 'user' && is_numeric($args[1]) && empty($args[2])): ?>
+    <?php if (!empty($args) && !empty($args[1]) && $args[0] == 'user' && is_numeric($args[1]) && empty($args[2])): ?>
       <div class="register-form-title user-title">
         <h1 style="text-align:center;text-transform: uppercase;"><strong>User page</strong></h1>
       </div>
