@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall tasks.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function field_sql_norevisions_uninstall() {
+  variable_del('field_sql_norevisions_entities');
+}
+
+/**
+ * Rename variable and update settings structure.
+ */
+function field_sql_norevisions_update_7200() {
+  $old = variable_get('field_sql_norevisions_enabled_entities', array());
+  $new = variable_get('field_sql_norevisions_entities', array());
+  if (empty($new)) {
+    $entity_info = entity_get_info();
+    foreach ($entity_info as $entity_type => $entity) {
+      if (!$entity['fieldable']) {
+        continue;
+      }
+      foreach ($entity['bundles'] as $bundle_name => $bundle) {
+        if (!empty($old['field_sql_norevisions_' . $entity_type . '_' . $bundle_name . '_enabled'])) {
+          $new[$entity_type][$bundle_name] = 1;
+        }
+      }
+    }
+  }
+
+  if (!empty($new)) {
+    variable_set('field_sql_norevisions_entities', $new);
+  }
+  variable_del('field_sql_norevisions_enabled_entities');
+}

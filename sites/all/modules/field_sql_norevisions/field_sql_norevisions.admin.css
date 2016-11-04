@@ -1,0 +1,10 @@
+/**
+ * @file
+ * Styling for administration elements of the
+ * Field SQL norevisions module.
+ */
+
+.field-sql-norevisions-admin-form .select-all-wrapper {
+  display: inline;
+  text-transform: none;
+}

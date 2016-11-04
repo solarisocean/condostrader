@@ -8,6 +8,7 @@ dependencies[] = ctf_blocks_navigation
 dependencies[] = ctf_blocks_powered_by_drupal
 dependencies[] = ctf_configurations_drealty_connections
 dependencies[] = ctf_configurations_facet_api
+dependencies[] = ctf_configurations_field_sql_norevisions
 dependencies[] = ctf_configurations_flag
 dependencies[] = ctf_configurations_hierarchical_select_configs
 dependencies[] = ctf_configurations_image_lazyloader_module
