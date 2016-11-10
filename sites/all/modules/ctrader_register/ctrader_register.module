@@ -298,3 +298,52 @@ function ctrader_register_user_view_alter(&$build) {
     $build['summary']['#title'] = 'history:';
     $build['mimemail']['textonly']['#markup'] = '';
 }
+
+function ctrader_register_form_contact_us_form_entityform_edit_form_alter(&$form, &$form_state, $form_id) {
+  unset($form['#validate']);
+}
+
+function ctrader_register_token_info() {
+
+  $site['image_path'] = array(
+    'name' => t('field_photos_upload path'),
+    'description' => t('Custom token for image attachment.Do not use this token somewhere else'),
+  );
+
+  return array(
+    'tokens' => array(
+      'entityform' => $site,
+    ),
+  );
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function ctrader_register_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+  $link = array();
+  $form_id = db_select('entityform', 'e')
+    ->fields('e', array('entityform_id'))
+    ->orderBy('e.created', 'DESC')
+    ->execute()
+    ->fetchField();
+  $form = entityform_load($form_id);
+  if (!empty($form->field_photos_upload)) {
+    foreach ($form->field_photos_upload[LANGUAGE_NONE] as $item => $file) {
+      array_push($link, 'sites/default/files/' . $file['filename']);
+    }
+    $link = implode(" ", $link);
+  }
+  if ($type == 'entityform') {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'image_path':
+          $replacements[$original] = $link;
+          break;
+      }
+    }
+  }
+  return $replacements;
+}
+
