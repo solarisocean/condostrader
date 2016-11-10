@@ -1,0 +1,14 @@
+name = Field SQL no revisions storage
+description = Stores field data in an SQL database without duplicating the data in revisions tables.
+core = 7.x
+dependencies[] = field
+dependencies[] = field_sql_storage
+files[] = field_sql_norevisions.test
+configure = admin/config/system/field_sql_norevisions/settings
+
+; Information added by Drupal.org packaging script on 2016-02-09
+version = "7.x-2.1+12-dev"
+core = "7.x"
+project = "field_sql_norevisions"
+datestamp = "1455042241"
+
