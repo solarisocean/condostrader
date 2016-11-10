@@ -411,7 +411,7 @@ function hs_taxonomy_field_formatter_prepare_view($entity_type, $entities, $fiel
 
     foreach ($items[$id] as $delta => $item) {
       // Force the array key to prevent duplicates.
-      if ($item['tid'] != 'autocreate') {
+      if (!empty($item['tid']) && $item['tid'] != 'autocreate') {
         $selection[$item['tid']] = $item['tid'];
       }
     }

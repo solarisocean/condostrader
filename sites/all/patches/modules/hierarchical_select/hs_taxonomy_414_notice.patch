@@ -1,0 +1,13 @@
+diff --git a/sites/all/modules/hierarchical_select/modules/hs_taxonomy.module b/sites/all/modules/hierarchical_select/modules/hs_taxonomy.module
+index 7da8106..91e6471 100644
+--- a/sites/all/modules/hierarchical_select/modules/hs_taxonomy.module
++++ b/sites/all/modules/hierarchical_select/modules/hs_taxonomy.module
+@@ -411,7 +411,7 @@ function hs_taxonomy_field_formatter_prepare_view($entity_type, $entities, $fiel
+ 
+     foreach ($items[$id] as $delta => $item) {
+       // Force the array key to prevent duplicates.
+-      if ($item['tid'] != 'autocreate') {
++      if (!empty($item['tid']) && $item['tid'] != 'autocreate') {
+         $selection[$item['tid']] = $item['tid'];
+       }
+     }
