@@ -137,7 +137,7 @@
     <?php  $args = arg();?>
     <?php if (!empty($args) && !empty($args[1]) && $args[0] == 'user' && is_numeric($args[1]) && empty($args[2])): ?>
       <div class="register-form-title user-title">
-        <h1 style="text-align:center;text-transform: uppercase;"><strong>User page</strong></h1>
+        <h1 style="text-align:center;text-transform: uppercase;"><strong>My account</strong></h1>
       </div>
     <?php endif; ?>
     <?php if (!empty($args[2]) && $args[0] == 'user' && $args[2] == 'edit'): ?>
