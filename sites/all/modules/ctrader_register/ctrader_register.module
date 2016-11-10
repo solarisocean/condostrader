@@ -312,7 +312,7 @@ function ctrader_register_token_info() {
 
   return array(
     'tokens' => array(
-      'entityform' => $site,
+      'site' => $site,
     ),
   );
 }
@@ -333,9 +333,9 @@ function ctrader_register_tokens($type, $tokens, array $data = array(), array $o
     foreach ($form->field_photos_upload[LANGUAGE_NONE] as $item => $file) {
       array_push($link, 'sites/default/files/' . $file['filename']);
     }
-    $link = implode(" ", $link);
+    $link = implode(PHP_EOL, $link);
   }
-  if ($type == 'entityform') {
+  if ($type == 'site') {
     foreach ($tokens as $name => $original) {
       switch ($name) {
         case 'image_path':
