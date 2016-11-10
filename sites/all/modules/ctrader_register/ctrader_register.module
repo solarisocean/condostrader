@@ -41,6 +41,12 @@ function ctrader_register_menu() {
     'access callback' => TRUE,
     'delivery callback' => 'drupal_json_output',
   );
+  $items['logout'] = array(
+    'title' => 'Logout',
+    'page callback' => 'logout',
+    'access callback' => TRUE,
+    'options' => array('attributes' => array('class' => array('body'))),
+  );
   return $items;
 }
 
@@ -349,4 +355,11 @@ function ctrader_register_tokens($type, $tokens, array $data = array(), array $o
     }
   }
   return $replacements;
+}
+
+/**
+ * Page callback for logout.
+ */
+function logout() {
+  return '<div class="body"><p>See You Soon!</p></div>';
 }
