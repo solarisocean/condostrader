@@ -44,8 +44,7 @@ function ctrader_register_menu() {
   $items['logout'] = array(
     'title' => 'Logout',
     'page callback' => 'logout',
-    'access callback' => TRUE,
-    'options' => array('attributes' => array('class' => array('body'))),
+    'access callback' => 'user_is_anonymous',
   );
   return $items;
 }
