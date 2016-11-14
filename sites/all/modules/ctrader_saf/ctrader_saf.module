@@ -126,8 +126,8 @@ function ctrader_saf_menu() {
  * Implements hook_form_alter().
  */
 function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-search-results-ctrader-block-1') {
-//    $form['sort_bef_combine']['#default_value'] = '';
+  if ($form['#id'] == 'views-exposed-form-search-results-ctrader-page-1' && !empty($form['timestamp'])) {
+    $form['timestamp']['#type'] = 'hidden';
   }
   if ($form_id == 'search_api_ranges_block_slider_view_form_field_sqft_range_max__torcond') {
 //    $form['range-min']['#value'] = 0;
@@ -1000,7 +1000,9 @@ function _ctrader_saf_search_button_form($form, &$form_state) {
 
 function _ctrader_saf_search_button_form_submit($form, &$form_state) {
 //  $query = drupal_http_build_query($_SESSION['search_link_calculate']['f'],'f');
-  $form_state['input']['form_token'] = drupal_get_token($form['#token']);
+  if (!empty($form['#token'])) {
+    $form_state['input']['form_token'] = drupal_get_token($form['#token']);
+  }
   $path = '/' . CTRADER_SEARCH_RESULT_PAGE;
   $query = array();
 
@@ -1560,3 +1562,5 @@ function ctrader_saf_search_api_index_items_alter(array &$items, SearchApiIndex 
       break;
   }
 }
+
+
