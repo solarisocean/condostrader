@@ -1563,4 +1563,10 @@ function ctrader_saf_search_api_index_items_alter(array &$items, SearchApiIndex 
   }
 }
 
-
+function ctrader_saf_block_list_alter(&$blocks) {
+  global $user;
+  $args = arg();
+  if (!empty($args[1]) && ($args[1] !== $user->uid || !empty($args[2]))) {
+    unset($blocks[418]);
+  }
+}
