@@ -268,3 +268,9 @@ function condor_menu_local_task($variables) {
     return '<li' . (!empty($variables['element']['#active']) ? ' class="active"' : '') . '>' . l($link_text, $link['href'], $link['localized_options']) . "</li>\n";
   }
 }
+
+function condor_preprocess_entity(&$variables) {
+  if (!empty($variables['elements']['#bundle']) && $variables['elements']['#bundle'] == 'contact_us_form') {
+    unset($variables['content']['info']);
+  }
+}
