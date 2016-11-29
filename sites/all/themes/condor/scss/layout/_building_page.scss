@@ -7,13 +7,19 @@
   }
   .view-id-condos_in_building {
     padding: 0 !important;
+    .view-build {
+      width: 100%;
+      img {
+        width: 50%;
+      }
+    }
   }
   .view-build {
     width: 100%;
     margin: 0 !important;
     background: $white;
     .views-field-field-toronto-gallery {
-      width: 78%;
+      width: 100%;
       display: inline-block;
       float: left;
       .top-container {
@@ -152,3 +158,4 @@
     border-left: 1px solid #dce0e6;
   }
 }
+
