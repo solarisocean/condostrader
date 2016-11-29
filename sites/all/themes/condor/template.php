@@ -274,3 +274,41 @@ function condor_preprocess_entity(&$variables) {
     unset($variables['content']['info']);
   }
 }
+
+function condor_status_messages($variables) {
+  $args = arg();
+  $require_field = array();
+  $require_message = 'Please fill required fields below';
+  $display = $variables['display'];
+  $output = '';
+
+  $status_heading = array(
+    'status' => t('Status message'),
+    'error' => t('Error message'),
+    'warning' => t('Warning message'),
+  );
+  foreach (drupal_get_messages($display) as $type => $messages) {
+    $output .= "<div class=\"messages $type\">\n";
+    if (!empty($status_heading[$type])) {
+      $output .= '<h2 class="element-invisible">' . $status_heading[$type] . "</h2>\n";
+    }
+    if (count($messages) > 1) {
+      $output .= " <ul>\n";
+      foreach ($messages as $message) {
+        if ($args[0] == 'sell-a-condo' && empty($args[1]) && strpos($message, 'field is required.')) {
+          array_push($require_field, $message);
+        }
+        else {
+          $output .= '  <li>' . $message . "</li>\n";
+        }
+      }
+      $output .= !empty($require_field) ? '  <li>' . $require_message . "</li>\n" : '';
+      $output .= " </ul>\n";
+    }
+    else {
+      $output .= reset($messages);
+    }
+    $output .= "</div>\n";
+  }
+  return $output;
+}
