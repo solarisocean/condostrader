@@ -126,6 +126,9 @@ function ctrader_saf_menu() {
  * Implements hook_form_alter().
  */
 function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
+  if (!empty($form['#token']) && $form_id == '_ctrader_saf_search_button_form') {
+    unset($form['#token']);
+  }
   if ($form['#id'] == 'views-exposed-form-search-results-ctrader-page-1' && !empty($form['timestamp'])) {
     $form['timestamp']['#type'] = 'hidden';
   }
@@ -1000,9 +1003,6 @@ function _ctrader_saf_search_button_form($form, &$form_state) {
 
 function _ctrader_saf_search_button_form_submit($form, &$form_state) {
 //  $query = drupal_http_build_query($_SESSION['search_link_calculate']['f'],'f');
-  if (!empty($form['#token'])) {
-    $form_state['input']['form_token'] = drupal_get_token($form['#token']);
-  }
   $path = '/' . CTRADER_SEARCH_RESULT_PAGE;
   $query = array();
 
