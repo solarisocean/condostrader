@@ -170,35 +170,6 @@ function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
       $form[$search_field_identifier]['#attributes']['placeholder'] = t('Type address, MLS number, ZIP code, area or neighbourhood name');
       $form[$search_field_identifier]['#size'] = 70;
     }
-
-    // Change sorting labels.
-    $form['sorting']['#options']['field_timestamp_sql_torcond ASC'] = t('Days on Market: Low to High');
-    $form['sorting']['#options']['field_timestamp_sql_torcond DESC'] = t('Days on Market: High to Low');
-
-    $form['sorting']['#options']['field_lp_dol_torcond ASC'] = t('Price: Low to High');
-    $form['sorting']['#options']['field_lp_dol_torcond DESC'] = t('Price: High to Low');
-
-    $form['sorting']['#options']['field_sqft_range_min_torcond ASC'] = t('Size: Low to High');
-    $form['sorting']['#options']['field_sqft_range_min_torcond DESC'] = t('Size: High to Low');
-
-    $form['sorting']['#options']['field_br_torcond ASC'] = t('Beds: Low to High');
-    $form['sorting']['#options']['field_br_torcond DESC'] = t('Beds: High to Low');
-
-    $form['sorting']['#options']['field_bath_tot_torcond ASC'] = t('Baths: Low to High');
-    $form['sorting']['#options']['field_bath_tot_torcond DESC'] = t('Baths: High to Low');
-
-    $form['sorting']['#options']['field_price_per_sqft_torcond ASC'] = t('Price per SQFT: Low to High');
-    $form['sorting']['#options']['field_price_per_sqft_torcond DESC'] = t('Price per SQFT: High to Low');
-
-    $form['sorting']['#options']['field_maint_torcond ASC'] = t('Maintenance Fees: Low to High');
-    $form['sorting']['#options']['field_maint_torcond DESC'] = t('Maintenance Fees: High to Low');
-
-    $form['sorting']['#options']['field_st_torcond ASC'] = t('Street Name: A to Z');
-    $form['sorting']['#options']['field_st_torcond DESC'] = t('Street Name: Z to A');
-
-    $form['sorting']['#options']['field_st_num_torcond ASC'] = t('Street Number: Low to High');
-    $form['sorting']['#options']['field_st_num_torcond DESC'] = t('Street Number: High to Low');
-
   }
 
   // Header search input.

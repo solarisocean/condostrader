@@ -229,7 +229,7 @@ function condor_form_views_exposed_form_alter(&$form, &$form_state) {
   switch ($form['#id']) {
     case 'views-exposed-form-search-results-ctrader-block-1':
     case 'views-exposed-form-search-results-ctrader-page-1':
-      $form['sorting']['#default_value'] = 'field_timestamp_sql_torcond ASC';
+      $form['sorting']['#default_value'] = 'field_timestamp_sql_torcond DESC';
       break;
   }
 }
