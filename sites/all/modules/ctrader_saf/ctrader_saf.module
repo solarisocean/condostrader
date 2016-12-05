@@ -170,6 +170,22 @@ function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
       $form[$search_field_identifier]['#attributes']['placeholder'] = t('Type address, MLS number, ZIP code, area or neighbourhood name');
       $form[$search_field_identifier]['#size'] = 70;
     }
+
+    // Changed places ASC/DESC "Days on market" in selectlist.
+    $options = $form['sorting']['#options'];
+    if (array_key_exists("field_timestamp_sql_torcond ASC", $options) && array_key_exists("field_timestamp_sql_torcond DESC", $options)) {
+      $remove = array('field_timestamp_sql_torcond DESC', 'field_timestamp_sql_torcond ASC');
+      $day_index[] = array_search("field_timestamp_sql_torcond ASC", array_keys($options));
+      $day_index[] = array_search("field_timestamp_sql_torcond DESC", array_keys($options));
+      sort($day_index);
+      $new_order = array(
+        'field_timestamp_sql_torcond DESC' => $options['field_timestamp_sql_torcond DESC'],
+        'field_timestamp_sql_torcond ASC' => $options['field_timestamp_sql_torcond ASC'],
+      );
+      $options = array_diff_key($options, array_flip($remove));
+      $options = array_slice($options, 0, $day_index[0], TRUE) + $new_order + array_slice($options, $day_index[0], NULL, TRUE);
+      $form['sorting']['#options'] = $options;
+    }
   }
 
   // Header search input.
