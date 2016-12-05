@@ -170,6 +170,12 @@ function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
       $form[$search_field_identifier]['#attributes']['placeholder'] = t('Type address, MLS number, ZIP code, area or neighbourhood name');
       $form[$search_field_identifier]['#size'] = 70;
     }
+    $new_values = array_values($form['sorting']['#options']);
+    $new_keys = array_values(array_flip($form['sorting']['#options']));
+    $key_temp = $new_keys[1];
+    $new_keys[1] = $new_keys[2];
+    $new_keys[2] = $key_temp;
+    $form['sorting']['#options'] = array_combine($new_keys, $new_values);
   }
 
   // Header search input.
