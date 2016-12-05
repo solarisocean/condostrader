@@ -760,8 +760,10 @@ function ctrader_mls_form_alter(&$form, &$form_state, $form_id) {
       $form['mortgage_rate_2']['#weight'] = 0.002;
       break;
     case 'book_a_viewing_entityform_edit_form':
+      $form['field_phone_number'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = 'example: 5557779999';
       $form['field_buy_now_button']['#weight'] = '401';
       $form['field_buy_now_button'][LANGUAGE_NONE][0]['markup']['#markup'] = l(t('buy now'), drupal_get_path_alias() . "/buy");
+      unset($form['#validate'][0]);
       break;
     case 'drealty_listing_edit_form':
       $form['actions']['delete']['#submit'][0] = '_ctrader_mls_drealty_listing_delete';
