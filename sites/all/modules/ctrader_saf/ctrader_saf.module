@@ -189,9 +189,11 @@ function ctrader_saf_form_alter(&$form, &$form_state, $form_id) {
 
     $new_values = array_values($form['sorting']['#options']);
     $new_keys = array_values(array_flip($form['sorting']['#options']));
-    $key_temp = $new_keys[1];
-    $new_keys[1] = $new_keys[2];
-    $new_keys[2] = $key_temp;
+    $asc = array_search('field_timestamp_sql_torcond ASC', $new_keys);
+    $desc = array_search('field_timestamp_sql_torcond DESC', $new_keys);
+    $key_temp = $new_keys[$desc];
+    $new_keys[$desc] = $new_keys[$asc];
+    $new_keys[$asc] = $key_temp;
     $form['sorting']['#options'] = array_combine($new_keys, $new_values);
   }
 
