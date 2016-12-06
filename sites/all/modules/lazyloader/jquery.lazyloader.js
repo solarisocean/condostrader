@@ -40,6 +40,10 @@
       loadActualImages(images, settings);
     });
 
+    $( ".swiper-button-next" ).click(function() {
+      loadActualImages(images, settings);
+    });
+
     return this;
   };
 
