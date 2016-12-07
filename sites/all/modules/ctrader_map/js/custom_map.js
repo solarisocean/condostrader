@@ -329,11 +329,13 @@
                         } else {
                             mymap.removeLayer(freeDrawLayer);
                         }
-                        neighbourhoodsLayer = L.geoJson(neighbourhoodsData, {
-                            style: neighbourhoodsStyle,
-                            onEachFeature: onEachFeature
-                        });
-                        settings.mymapLayer= neighbourhoodsLayer;
+                        if (!$(this).hasClass('active')) {
+                            neighbourhoodsLayer = L.geoJson(neighbourhoodsData, {
+                                style: neighbourhoodsStyle,
+                                onEachFeature: onEachFeature
+                            });
+                        }
+                        settings.mymapLayer = neighbourhoodsLayer;
 
                         neighbourhoodsLayer.addTo(mymap);
                         mymap.fitBounds(neighbourhoodsLayer.getBounds());
