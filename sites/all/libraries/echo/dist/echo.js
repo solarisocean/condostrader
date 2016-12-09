@@ -43,9 +43,13 @@
     }, delay);
   };
 
+
   echo.init = function (opts) {
     opts = opts || {};
-    var mcustomscrollbar = document.getElementsByClassName("mCustomScrollbar");
+
+    // the code to be called when the dom has loaded
+    // #document has its nodes
+
     var offsetAll = opts.offset || 0;
     var offsetVertical = opts.offsetVertical || offsetAll;
     var offsetHorizontal = opts.offsetHorizontal || offsetAll;
@@ -67,7 +71,16 @@
       root.addEventListener('scroll', debounceOrThrottle, false);
       root.addEventListener('load', debounceOrThrottle, false);
       root.addEventListener('click', debounceOrThrottle, false);
-      mcustomscrollbar.addEventListener('scroll', debounceOrThrottle, false);
+      (function(window, document, undefined){
+        window.onload = init;
+        function init(){
+          var mcustomscrollbar = document.getElementById("mCSB_1_container");
+          for (var i = 0; i < mcustomscrollbar.children.length; i++) {
+            var childElement = mcustomscrollbar.children[i];
+            childElement.addEventListener('wheel', debounceOrThrottle, false);
+          }
+        }
+      })(window, document, undefined);
     } else {
       root.attachEvent('onscroll', debounceOrThrottle);
       root.attachEvent('onload', debounceOrThrottle);
