@@ -45,6 +45,7 @@
 
   echo.init = function (opts) {
     opts = opts || {};
+    var mcustomscrollbar = document.getElementsByClassName("mCustomScrollbar");
     var offsetAll = opts.offset || 0;
     var offsetVertical = opts.offsetVertical || offsetAll;
     var offsetHorizontal = opts.offsetHorizontal || offsetAll;
@@ -65,6 +66,8 @@
     if (document.addEventListener) {
       root.addEventListener('scroll', debounceOrThrottle, false);
       root.addEventListener('load', debounceOrThrottle, false);
+      root.addEventListener('click', debounceOrThrottle, false);
+      mcustomscrollbar.addEventListener('scroll', debounceOrThrottle, false);
     } else {
       root.attachEvent('onscroll', debounceOrThrottle);
       root.attachEvent('onload', debounceOrThrottle);
