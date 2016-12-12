@@ -67,6 +67,11 @@
     unload = !!opts.unload;
     callback = opts.callback || callback;
     echo.render();
+    //add event listener 'wheel' for sbcontainer element.
+    function wheelLoad(sbcontainer) {
+      var mcustomscrollbar = document.getElementById(sbcontainer);
+      mcustomscrollbar.addEventListener('wheel', debounceOrThrottle, false);
+    }
     if (document.addEventListener) {
       root.addEventListener('scroll', debounceOrThrottle, false);
       root.addEventListener('load', debounceOrThrottle, false);
@@ -74,11 +79,8 @@
       (function(window, document, undefined){
         window.onload = init;
         function init(){
-          var mcustomscrollbar = document.getElementById("mCSB_1_container");
-          for (var i = 0; i < mcustomscrollbar.children.length; i++) {
-            var childElement = mcustomscrollbar.children[i];
-            childElement.addEventListener('wheel', debounceOrThrottle, false);
-          }
+          wheelLoad('mCSB_1_container');
+          wheelLoad('mCSB_2_container');
         }
       })(window, document, undefined);
     } else {
