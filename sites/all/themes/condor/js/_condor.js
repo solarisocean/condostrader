@@ -532,12 +532,19 @@
                 $('.condo-page-gallery .pane-content, .condo-page-pagination .pane-content').addClass('swiper-container');
 
                 $('.condo-page-gallery .field-name-field-toronto-gallery, .condo-page-pagination .field-name-field-toronto-gallery').addClass('swiper-wrapper');
-                $('.condo-page-gallery .field-name-field-toronto-gallery img').wrap('<div class="swiper-slide"></div>');
+                $('.condo-page-gallery .field-name-field-toronto-gallery img').wrap('<div class="swiper-slide"></div>').addClass('swiper-lazy').append('<div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>');
                 $('.condo-page-pagination .field-name-field-toronto-gallery img').addClass('swiper-slide');
                 $('.'+thumbClass).append('<div class="swiper-scrollbar"></div>');
 
                 $('.'+topClass).append('<div class="gallery-slider-button-next swiper-button-next"></div><div class="gallery-slider-button-prev swiper-button-prev"></div>');
 
+                $('.condo-page-gallery .field-name-field-toronto-gallery img').each(function() {
+                    var $attr = $(this);
+                    $attr
+                        .attr('data-src',  $attr.attr('src'))
+                        .removeAttr('src')
+                    ;
+                });
                 galleryTop = new Swiper('.'+topClass, {
                     nextButton: '.gallery-slider-button-next',
                     prevButton: '.gallery-slider-button-prev',
@@ -546,7 +553,9 @@
                         $(galleryThumbs.slides).removeClass('is-selected');
                         $(galleryThumbs.slides).eq(activeIndex).addClass('is-selected');
                         galleryThumbs.slideTo(activeIndex,300, false);
-                    }
+                    },
+                    preloadImages: false,
+                    lazyLoading: true
                 });
 
                 galleryThumbs = new Swiper('.'+thumbClass, {
