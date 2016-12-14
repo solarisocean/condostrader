@@ -515,6 +515,13 @@
                     galleryThumbs,
                     topClass,
                     thumbClass;
+                function datasrc() {
+                    var $attr = $(this);
+                    $attr
+                        .attr('data-src',  $attr.attr('src'))
+                        .removeAttr('src')
+                    ;
+                }
 
                 if ($('.build-top').length>0) {
                     topClass = 'top-container';
@@ -532,19 +539,13 @@
                 $('.condo-page-gallery .pane-content, .condo-page-pagination .pane-content').addClass('swiper-container');
 
                 $('.condo-page-gallery .field-name-field-toronto-gallery, .condo-page-pagination .field-name-field-toronto-gallery').addClass('swiper-wrapper');
-                $('.condo-page-gallery .field-name-field-toronto-gallery img').wrap('<div class="swiper-slide"></div>').addClass('swiper-lazy').append('<div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>');
-                $('.condo-page-pagination .field-name-field-toronto-gallery img').addClass('swiper-slide');
+                $('.page-drealty-listing .field-name-field-toronto-gallery img').wrap('<div class="swiper-slide"></div>').addClass('swiper-lazy').append('<div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>').each(datasrc);
+                //$('.condo-page-pagination .field-name-field-toronto-gallery img').addClass('swiper-slide');
                 $('.'+thumbClass).append('<div class="swiper-scrollbar"></div>');
 
                 $('.'+topClass).append('<div class="gallery-slider-button-next swiper-button-next"></div><div class="gallery-slider-button-prev swiper-button-prev"></div>');
 
-                $('.condo-page-gallery .field-name-field-toronto-gallery img').each(function() {
-                    var $attr = $(this);
-                    $attr
-                        .attr('data-src',  $attr.attr('src'))
-                        .removeAttr('src')
-                    ;
-                });
+                //$('.condo-page-gallery .field-name-field-toronto-gallery img').each(datasrc);
                 galleryTop = new Swiper('.'+topClass, {
                     nextButton: '.gallery-slider-button-next',
                     prevButton: '.gallery-slider-button-prev',
@@ -566,6 +567,8 @@
                     freeMode: false,
                     centeredSlides: false,
                     slidesPerView: 3.5,
+                    watchSlidesVisibility: true,
+                    lazyLoadingOnTransitionStart: true,
                     touchRatio: 0.2,
                     direction: 'vertical',
                     breakpoints: {
@@ -593,7 +596,9 @@
                         $(swiper.slides).removeClass('is-selected');
                         $(swiper.clickedSlide).addClass('is-selected');
                         galleryTop.slideTo(clicked, 300, false);
-                    }
+                    },
+                    preloadImages: false,
+                    lazyLoading: true
                 });
 
                 $('#edit-field-time-to-contact-und').chosen({
