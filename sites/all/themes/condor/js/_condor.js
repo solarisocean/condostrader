@@ -539,13 +539,10 @@
                 $('.condo-page-gallery .pane-content, .condo-page-pagination .pane-content').addClass('swiper-container');
 
                 $('.condo-page-gallery .field-name-field-toronto-gallery, .condo-page-pagination .field-name-field-toronto-gallery').addClass('swiper-wrapper');
-                $('.page-drealty-listing .field-name-field-toronto-gallery img').wrap('<div class="swiper-slide"></div>').addClass('swiper-lazy').append('<div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>').each(datasrc);
-                //$('.condo-page-pagination .field-name-field-toronto-gallery img').addClass('swiper-slide');
+                $('.page-drealty-listing .field-name-field-toronto-gallery img').wrap('<div class="swiper-slide"></div>').addClass('swiper-lazy').after('<div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>').each(datasrc);
                 $('.'+thumbClass).append('<div class="swiper-scrollbar"></div>');
-
                 $('.'+topClass).append('<div class="gallery-slider-button-next swiper-button-next"></div><div class="gallery-slider-button-prev swiper-button-prev"></div>');
 
-                //$('.condo-page-gallery .field-name-field-toronto-gallery img').each(datasrc);
                 galleryTop = new Swiper('.'+topClass, {
                     nextButton: '.gallery-slider-button-next',
                     prevButton: '.gallery-slider-button-prev',
@@ -560,6 +557,7 @@
                 });
 
                 galleryThumbs = new Swiper('.'+thumbClass, {
+                    mousewheelControl: true,
                     scrollbar: '.swiper-scrollbar',
                     scrollbarHide: false,
                     scrollbarDraggable: true,

@@ -52,6 +52,10 @@
 
       img {
         @include transform(scale, 1.5);
+        &[src=''],
+        &:not([src]) {
+          opacity: 0;
+        }
       }
     }
 
@@ -94,7 +98,7 @@
     img {
       width: 87%;
       cursor: pointer;
-
+      height: 100%;
       &:hover {
         opacity: .8;
       }
@@ -659,6 +663,9 @@
       .swiper-slide {
         img {
           @include transform(scale, 1);
+
+
+
         }
       }
 
