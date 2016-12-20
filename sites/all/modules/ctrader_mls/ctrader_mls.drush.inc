@@ -14,5 +14,5 @@ function ctrader_mls_drush_command() {
  * Callback for the delete-inactive-listings command
  */
 function drush_ctrader_mls_delete_inactive_listings() {
-  _delete_inactive_listings_form_submit($form = NULL, $form_state = NULL);
+  _delete_inactive_listings_operation($context);
 }
